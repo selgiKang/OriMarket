@@ -18,7 +18,7 @@ public class LoginController {
 
     @GetMapping("/")
     public String login() {
-        return "user/main";
+        return "order/order_paymentPage";
     }
 
     @PostMapping("/login")
