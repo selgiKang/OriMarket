@@ -14,6 +14,7 @@ import javax.persistence.Table;
 @Table(name = "test")
 @Getter
 @Setter
+//생성자
 @AllArgsConstructor
 @NoArgsConstructor
 public class User {
