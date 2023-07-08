@@ -9,7 +9,7 @@
 </head>
 <body>
 로그인입니다.
-마구너ㅏ아암내안맹
+마구너ㅏ아암내안맹 바깟지렁
 <form method="post" action="/login">
     ID :<input type="text" name="userId"><br>
     PASSWORD :<input type="text" name="pw"><br>
