@@ -1,4 +1,4 @@
-* 폰트 */
+/* 폰트 */
 	@font-face {
 		font-family: 'LINESeedKR-Bd';
 		src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/LINESeedKR-Bd.woff2') format('woff2');
@@ -243,10 +243,10 @@ body{
 }
 
 .heart.filled {
-  content: url('img/filled_heart.png');
+  content: url('../../../../resources/static/img/store/filled_heart.png');
 }
 .heart:hover {
-  content: url('img/filled_heart.png');
+  content: url('../../../../resources/static/img/store/filled_heart.png');
 }
 .like-container {
   position: relative;
