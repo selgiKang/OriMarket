@@ -172,47 +172,67 @@
             margin: 20px;
         }
 
-        .storecare_logo img {
-            width: 80px;
+        .board {
+            width: 270px;
+            background-color: #f0f8ff;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
         }
 
-        .storecare_noticebox {
-            background-color: #c8f7c5;
-            border-radius: 5px;
-            height: 30px;
-            margin: 10px;
-            width: 50px;
+        .board .title {
             display: flex;
             align-items: center;
-            justify-content: flex-start;
         }
 
-        .date {
-            white-space: nowrap;
-        }
-
-        .notice {
-            white-space: nowrap;
-            margin-right: 5px;
-        }
-
-        .storecare_noticebox p {
-            color: #008000;
+        .board .title .notice {
+            width: 50px;
+            height: 50px;
+            background-color: #008000;
+            color: #fff;
+            text-align: center;
+            line-height: 50px;
             font-weight: bold;
-            margin: 10px;
+            margin-right: 10px;
         }
 
-        .storecare_noticebox h6 {
-            white-space: nowrap;
+        .board .title .date {
+            color: gray;
         }
 
-        .storecare_notice {
-            background-color: #eee;
-            border-radius: 1px;
+        .board .content {
+            margin-top: 20px;
         }
 
-        .notice_picture img {
-            width: 300px;
+        .board .content img {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 10px;
+        }
+
+        .board .content textarea {
+            width: 100%;
+            height: 100px;
+            margin-bottom: 10px;
+            resize: vertical;
+        }
+
+        .board .buttons {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .board .buttons button {
+            padding: 10px 20px;
+            background-color: #333;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .storecare_logo img{
+            width: 80px;
         }
 
     </style>
@@ -341,25 +361,20 @@
 
             <h4>사장님 공지사항</h4>
 
-            <div class="storecare_noticebox">
-                <div class="storecare_notice">
-                    <div class="notice">
-                        <p>공지</p>
-                    </div>
-
-                    <div class="date">
-                        <h6>2023-07-08 03:15 작성</h6>
-                    </div>
+            <div class="board">
+                <div class="title">
+                    <div class="notice">공지</div>
+                    <div class="date">2023-07-09 12:34</div>
                 </div>
-
-                <div class="notice_picture">
-                    <img src="../../../../resources/static/img/store/tomato.jpg" alt="사장님 공지사항 사진"> <!-- alt 속성 추가 -->
+                <div class="content">
+                    <img src="사진주소" alt="게시글 사진">
+                    <textarea placeholder="게시글 내용"></textarea>
                 </div>
-
-                <div class="storecare_writenotice">
-                    <p>안녕하세요. 피자헛입니다.</p>
+                <div class="buttons">
+                    <button>업로드</button>
+                    <button>수정</button>
+                    <button>취소</button>
                 </div>
-
             </div>
 
         </div>
