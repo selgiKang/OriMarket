@@ -13,9 +13,9 @@ public class LoginService {
     @Autowired
     private final UserRepository userRepository;
 
-    public boolean login(User user) {
+    public boolean login(Member user) {
 
-        User findUser = userRepository.findByUserId(user.getUserId());
+        Member findUser = userRepository.findByUserId(user.getUserId());
 
         if(findUser == null){
             return false;
