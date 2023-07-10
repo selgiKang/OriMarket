@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 @RequiredArgsConstructor
 @Slf4j
-public class mainController {
+public class MainController {
 
     @Autowired
     private final LoginService loginService;
