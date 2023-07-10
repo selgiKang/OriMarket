@@ -1,7 +1,6 @@
 package com.choongang.OriMarket.footer;
 
 import com.choongang.OriMarket.user.LoginService;
-import com.choongang.OriMarket.user.User;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -13,15 +13,15 @@ public class LoginService {
     @Autowired
     private final UserRepository userRepository;
 
-    public boolean login(User user) {
+    public boolean login(Member user) {
 
-        User findUser = userRepository.findByUserId(user.getUserId());
+        Member findUser = userRepository.findByUserId(user.getUser_id());
 
         if(findUser == null){
             return false;
         }
 
-        if(!findUser.getPw().equals(user.getPw())){
+        if(!findUser.getUser_password().equals(user.getUser_password())){
             return false;
         }
 
