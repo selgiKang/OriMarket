@@ -28,9 +28,9 @@
             <a href="#" style="color:white">1:1문의</a>
         </div>
         <div class="links">
-            <a href="#" style="color:white">로그인</a>
-            <a href="#" style="color:white">회원가입</a>
-            <a href="#" style="color:white">마이페이지</a>
+            <a href="/login" style="color:white">로그인</a>
+            <a href="/join" style="color:white">회원가입</a>
+            <a href="/mypage" style="color:white">마이페이지</a>
         </div>
         <div class="links">
             <a href="#"><img src="../../img/footer/footer_instagram_icon.png" alt="instagram"></a>
