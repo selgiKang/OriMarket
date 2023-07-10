@@ -6,12 +6,15 @@
     font-style: normal;
 }
 
-body {
-    margin: 10px;
-    font-family: 'LINESeedKR-Bd', sans-serif;
-}
 
+
+body{
+    margin:10px;
+
+
+}
 /* 메인 컨테이너 스타일 */
+
 .main-container {
     width: 375px;
     height: 812px;
@@ -21,25 +24,28 @@ body {
     justify-content: flex-start;
     align-items: flex-start;
     background-color: #eee;
-    overflow: auto;
-    overflow-x: hidden;
-    font-family: 'LINESeedKR-Bd', sans-serif;
+    overflow: auto; /* 스크롤 가능하도록 수정 */
+    overflow-x: hidden; /* 가로 스크롤 금지 */
+    font-family: LINESeedKR-Bd;
 }
+
+
 
 .main-container::-webkit-scrollbar {
     display: none;
 }
 
 /* 헤더 스타일 */
+
 header {
     text-align: center;
 }
 
-header h1 {
+header h1{
     text-align: left;
 }
 
-header p {
+header p{
     text-align: left;
 }
 
@@ -49,11 +55,13 @@ header img {
 }
 
 /* 섹션 스타일 */
+
 section {
     padding: 20px;
 }
 
 /* 버튼 스타일 */
+
 button {
     display: block;
     margin: 10px auto;
@@ -66,6 +74,7 @@ button {
 }
 
 /* 링크 스타일 */
+
 a {
     display: inline-block;
     margin-left: 10px;
@@ -77,22 +86,26 @@ a {
 .coupon-container {
     display: flex;
     padding: 10px 0;
-    overflow-x: hidden;
+    overflow-x: hidden; /* 가로 스크롤 시, 쿠폰 이미지들을 숨김 */
     cursor: pointer;
-    flex-wrap: nowrap;
+    flex-wrap: nowrap; /* 이미지가 한 줄에 표시되도록 설정 */
 }
+
+
 
 .coupon-container::-webkit-scrollbar {
     display: none;
 }
 
 /* 쿠폰 이미지 스타일 */
+
 .coupon {
     max-width: 700px;
     height: auto;
-    margin-right: 10px;
+    margin-right: 10px; /* 이미지 사이의 여백 추가 */
     cursor: pointer;
     width: 300px;
+    height: auto;
 }
 
 /* 모바일 버튼 스타일 */
@@ -122,6 +135,7 @@ a {
     padding: 20px;
 }
 
+
 .menu-image {
     text-align: right;
     width: 200px;
@@ -134,17 +148,19 @@ a {
     width: 100%;
     height: auto;
 }
-
 .menu span {
     padding: 5px;
     cursor: pointer;
 }
 
 .mainslidemenu {
-    margin-bottom: 10px;
+    margin-bottom: 10px; /* 위쪽 간격 조절 */
 }
 
+
+
 /* 라인 스타일 */
+
 .line {
     width: 0;
     height: 3px;
@@ -153,6 +169,7 @@ a {
 }
 
 /* 컨테이너 스타일 */
+
 .container {
     margin-top: -80px;
     text-align: center;
@@ -169,18 +186,22 @@ a {
     margin: 5px 0;
 }
 
-.container h5 {
+.container h5{
     font-size: 12px;
     color: gray;
     margin: 0;
 }
 
-.container h4 {
+.container h4{
     font-size: 16px;
     margin: 0;
 }
 
+
+
+
 /* 오른쪽 이미지 스타일 */
+
 .right-image {
     max-width: 100%;
     height: auto;
@@ -195,13 +216,14 @@ a {
 
 /* 추가된 스타일 */
 .active {
-    color: #0f0;
+    color: #0f0; /* 초록색으로 변경 */
 }
 
 .line.active {
-    width: 100%;
-    background-color: #0f0;
+    width: 100%; /* 100% 너비로 변경 */
+    background-color: #0f0; /* 초록색으로 변경 */
 }
+
 
 .heart {
     width: 30px;
@@ -221,17 +243,17 @@ a {
 }
 
 .heart.filled {
-    content: url('../../../../resources/static/img/store/filled_heart.png');
+    content: url('img/filled_heart.png');
 }
-
 .heart:hover {
-    content: url('../../../../resources/static/img/store/filled_heart.png');
+    content: url('img/filled_heart.png');
 }
-
 .like-container {
     position: relative;
     display: inline-block;
 }
+
+
 
 /* 메뉴 */
 .clear {
@@ -247,7 +269,7 @@ a {
     max-width: 700px;
     margin: 50px auto;
     overflow: hidden;
-    white-space: nowrap;
+    white-space: nowrap; /* 추가 */
 }
 
 .slidemenu label {
@@ -256,6 +278,9 @@ a {
     display: inline-block;
     color: #333;
     opacity: 0.2;
+    white-space: nowrap;
+    width: calc(100% / 5);
+
 }
 
 .slidemenu label:hover {
@@ -267,6 +292,7 @@ a {
     display: block;
     padding: 10px;
     font-size: 14px;
+
 }
 
 .slidemenu label .icon {
@@ -278,9 +304,16 @@ a {
     display: block;
     margin: 0 auto;
     line-height: 50px;
+    border-radius: 50%;
+
 }
 
+
+
+
+
 /* Bar Style */
+
 .slider {
     width: 100%;
     height: 5px;
@@ -297,6 +330,7 @@ a {
 }
 
 /* Animations */
+
 .slidemenu label,
 .slider .bar {
     transition: all 500ms ease-in-out;
@@ -304,36 +338,35 @@ a {
     -moz-transition: all 500ms ease-in-out;
 }
 
-
 /* Toggle */
 
 .slidemenu .slide-toggle:checked + label {
-  opacity: 1;
+    opacity: 1;
 }
 
 .slidemenu #slide-item-1:checked ~ .slider .bar {
-  margin-left: 0;
-  width: 15%;
+    margin-left: 0;
+    width: 15%;
 }
 
 .slidemenu #slide-item-2:checked ~ .slider .bar {
-  margin-left: 25%;
-  width: 15%;
+    margin-left: 25%;
+    width: 15%;
 }
 
 .slidemenu #slide-item-3:checked ~ .slider .bar {
-  margin-left: 45%;
-  width: 15%;
+    margin-left: 45%;
+    width: 15%;
 }
 
 .slidemenu #slide-item-4:checked ~ .slider .bar {
-  margin-left: 65%;
-  width: 15%;
+    margin-left: 65%;
+    width: 15%;
 }
 
 .slidemenu #slide-item-5:checked ~ .slider .bar {
-  margin-left: 85%;
-  width: 15%;
+    margin-left: 85%;
+    width: 15%;
 }
 
 
