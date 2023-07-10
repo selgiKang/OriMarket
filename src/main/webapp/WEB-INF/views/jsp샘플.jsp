@@ -7,7 +7,7 @@
     <title>title</title>
 </head>
 <body>
-    <h2>이것은 샘플입니당.</h2>
+
 </form>
 </body>
 </html>
