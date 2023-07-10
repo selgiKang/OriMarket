@@ -7,7 +7,7 @@
     <title>title</title>
 </head>
 <body>
-<a href="#">kokoko</a>
+
 </form>
 </body>
 </html>
