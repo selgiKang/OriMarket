@@ -243,10 +243,10 @@ a {
 }
 
 .heart.filled {
-    content: url('img/filled_heart.png');
+    content: url('../../img/store/filled_heart.png');
 }
 .heart:hover {
-    content: url('img/filled_heart.png');
+    content: url('../../img/store/filled_heart.png');
 }
 .like-container {
     position: relative;
@@ -273,7 +273,6 @@ a {
 }
 
 .slidemenu label {
-    width: 20%;
     text-align: center;
     display: inline-block;
     color: #333;
