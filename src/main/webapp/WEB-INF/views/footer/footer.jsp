@@ -18,8 +18,8 @@
     </div>
     <div class="links-container">
         <div class="links">
-            <a href="#" style="color:white">홈</a>
-            <a href="#" style="color:white">주문</a>
+            <a href="/" style="color:white">홈</a>
+            <a href="/order" style="color:white">주문</a>
             <a href="#" style="color:white">상품</a>
         </div>
         <div class="links">
