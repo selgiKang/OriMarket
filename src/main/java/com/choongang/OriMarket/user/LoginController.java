@@ -31,6 +31,11 @@ public class LoginController {
         return "user/mypage";
     }
 
+    @GetMapping("/cart")
+    public String cart() {
+        return "user/cart";
+    }
+
     @PostMapping("/login")
     public String loginId(@ModelAttribute User userVo) {
         boolean isTrue = loginService.login(userVo);
