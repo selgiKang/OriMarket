@@ -11,11 +11,11 @@ import org.springframework.stereotype.Service;
 public class UserService {
 
     @Autowired
-    private final UserRepository MemberRepository;
+    private final UserRepository userRepository;
 
     public boolean login(User member) {
 
-        User findUser = MemberRepository.findByUserId(member.getUserId());
+        User findUser = userRepository.findByUserId(member.getUserId());
 
         if(findUser == null){
             return false;
@@ -28,5 +28,17 @@ public class UserService {
         return true;
 
     }
+
+   public boolean join(User user){
+
+       User savedUser = userRepository.save(user);
+
+       if(savedUser == null){
+           return false;
+       }else {
+           return true;
+       }
+
+   }
 
 };
