@@ -55,7 +55,7 @@
 			<table id="orderDelivery_table_3">
 				<tr><td class="orderDelivery_table3_td_1">요청사항</td><td class="orderDelivery_table3_td_1">아보카도는 숙성이 많이 된 걸로 주세요</td>
 				<tr><td class="orderDelivery_table3_td_1">배달 기사님께</td><td class="orderDelivery_table3_td_1">집 앞에서 연락주세요.</td></tr>
-				<tr><td id="orderDelivery_table3_total_td_1">총 금액</td><td id="orderDelivery_table3_total_td_2">23,000원</td></tr>
+				<tr><td id="orderDelivery_table3_total_td_1">총 금액</td><td id="orderDelivery_table3_total_td_2">23,000원666</td></tr>
 			</table>
 			
 		</div>
