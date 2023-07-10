@@ -5,7 +5,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
-<link rel="stylesheet" type="text/css" href="../../../../resources/static/css/store/menuclick_style.css">
+<link rel="stylesheet" type="text/css" href="../../css/store/menuclick_style.css">
 <link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/paper/bootstrap.min.css" rel="stylesheet"/>
 
 </head>
@@ -13,7 +13,6 @@
 body{
 	background-color: #eef;
 }
-
 .selected_menu {
       width: 315px;
       height: 812px;
@@ -103,7 +102,7 @@ body{
 <body>
 	<div class="selected_menu">
 	   <div class="mainfood">
-	   	<img alt="mainfoodpic" src="../../../../resources/static/img/store/kal.jpg">
+	   	<img alt="mainfoodpic" src="../../img/store/kal.jpg">
 	   	<p>위 사진은 연출된 사진으로 실제와 다를 수 있습니다.</p>
 	      </div>
 	

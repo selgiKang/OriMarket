@@ -18,7 +18,22 @@ public class LoginController {
 
     @GetMapping("/")
     public String login() {
-        return "user/login";
+        return "store/store_menu_search";
+    }
+
+    @GetMapping("/join")
+    public String join() {
+        return "user/join";
+    }
+
+    @GetMapping("/footer")
+    public String footer() {
+        return "footer/footer";
+    }
+
+    @GetMapping("/nav_footer")
+    public String nav_footer() {
+        return "footer/nav_footer";
     }
 
     @PostMapping("/login")
