@@ -8,20 +8,20 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 @Slf4j
-public class LoginService {
+public class UserService {
 
     @Autowired
-    private final UserRepository userRepository;
+    private final UserRepository MemberRepository;
 
-    public boolean login(Member user) {
+    public boolean login(User member) {
 
-        Member findUser = userRepository.findByUserId(user.getUser_id());
+        User findUser = MemberRepository.findByUserId(member.getUserId());
 
         if(findUser == null){
             return false;
         }
 
-        if(!findUser.getUser_password().equals(user.getUser_password())){
+        if(!findUser.getUserPassword().equals(member.getUserPassword())){
             return false;
         }
 

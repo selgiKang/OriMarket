@@ -16,29 +16,29 @@ import javax.persistence.Table;
 //생성자
 @AllArgsConstructor
 @NoArgsConstructor
-public class Member {
+public class User {
     @Id
     @Column(name = "seq", nullable = false)
-    private Long user_seq;
+    private Long userSeq;
 
     @Column(unique = true)
-    private String user_id;
+    private String userId;
 
     @Column
-    private String user_password;
+    private String userPassword;
 
     @Column
-    private String user_name;
+    private String userName;
 
     @Column
-    private String user_nickname;
+    private String userNickname;
 
     @Column
-    private String user_phone;
+    private String userPhone;
 
     @Column
-    private String user_email;
+    private String userEmail;
 
     @Column
-    private String user_address;
+    private String userAddress;
 }
