@@ -11,17 +11,17 @@ import org.springframework.stereotype.Service;
 public class UserService {
 
     @Autowired
-    private final UserRepository userRepository;
+    private final UserRepository MemberRepository;
 
-    public boolean login(User user) {
+    public boolean login(User member) {
 
-        User findUser = userRepository.findByUserId(user.getUser_id());
+        User findUser = MemberRepository.findByUserId(member.getUserId());
 
         if(findUser == null){
             return false;
         }
 
-        if(!findUser.getUser_password().equals(user.getUser_password())){
+        if(!findUser.getUserPassword().equals(member.getUserPassword())){
             return false;
         }
 

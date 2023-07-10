@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class UserController {
 
     @Autowired
-    private final UserService loginService;
+    private final UserService UserService;
 
     @GetMapping("/login")
     public String login() {
@@ -25,6 +25,19 @@ public class UserController {
     public String join() {
         return "user/join";
     }
+    @GetMapping("/update")
+    public String update() {
+        return "user/update";
+    }
+    @GetMapping("/delete")
+    public String delete() {
+        return "user/delete";
+    }
+    @GetMapping("/list")
+    public String list() {
+        return "user/list";
+    }
+
 
     @GetMapping("/mypage")
     public String mypage() {
@@ -37,7 +50,7 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public String loginId(@ModelAttribute User memberVo) {
+    public String loginId(@ModelAttribute Member memberVo) {
         boolean isTrue = loginService.login(memberVo);
         if(isTrue){
             return "user/loginsuccess";
