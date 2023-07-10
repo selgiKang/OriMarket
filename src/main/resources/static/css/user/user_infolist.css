@@ -1,0 +1,48 @@
+@charset "UTF-8";
+@font-face {
+    font-family: 'LINESeedKR-Bd';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/LINESeedKR-Bd.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+}
+
+/* 메인 */
+#infolist_main{
+    font-family: "LINESeedKR-Bd",sans-serif;
+    font-size: 16px;
+    margin:0 auto;
+    width: 375px;
+}
+/* 제목 */
+#infolist_main>h2{
+    font-weight: bolder;
+    text-align: center;
+}
+/* 테이블 명 */
+.infolist_table_td_1{
+    width: 100px;
+    text-align: left;
+    font-size: 14px;
+}
+.infolist_table_td_2>input{
+    outline: none;
+    border: none;
+    background-color: #eeeeee;
+}
+
+/* 테이블 2 */
+#infolist_table_2{
+    align-items: center;
+    text-align: center;
+}
+/* 버튼 */
+#infolist_btn_edit,#infolist_btn_delete{
+    width: 150px;
+    text-align: center;
+    border: none;
+    color: #eeeeee;
+    font-weight: bolder;
+    background-color: #46A973;
+    height: 20px;
+}
+

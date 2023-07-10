@@ -48,10 +48,14 @@ public class UserController {
     public String cart() {
         return "user/cart";
     }
+    @GetMapping("/infolist")
+    public String userlist() {
+        return "user/user_infolist";
+    }
 
     @PostMapping("/login")
-    public String loginId(@ModelAttribute Member memberVo) {
-        boolean isTrue = loginService.login(memberVo);
+    public String loginId(@ModelAttribute User memberVo) {
+        boolean isTrue = UserService.login(memberVo);
         if(isTrue){
             return "user/loginsuccess";
         }
