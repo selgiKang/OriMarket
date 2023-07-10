@@ -54,7 +54,7 @@ public class UserController {
 
     @PostMapping("/login")
     public String loginId(@ModelAttribute User uservo) {
-        boolean isTrue = UserService.login(uservo);
+        boolean isTrue = userService.login(uservo);
         if(isTrue){
             return "user/loginsuccess";
         }

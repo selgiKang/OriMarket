@@ -7,7 +7,6 @@
   <link rel="stylesheet" type="text/css" href="../../css/user/join.css">
 
   <script src="../../js/user/join.js"></script>
-
 </head>
 
 
