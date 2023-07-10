@@ -14,8 +14,12 @@ public class OrderController {
     @Autowired
     private final OrderService orderService;
 
-    @GetMapping("/order")
-    public String order(){return "order/order_paymentPage";}
+    @GetMapping("/order_delivery")
+    public String order(){return "order/order_delivery";}
+    @GetMapping("/order_paymentPage")
+    public String order_paymentPage(){return "order/order_paymentPage";}
+    @GetMapping("/order_receipt")
+    public String order_receipt(){return "order/order_receipt";}
 
 
 }
