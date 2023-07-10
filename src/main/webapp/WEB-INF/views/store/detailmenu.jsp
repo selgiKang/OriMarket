@@ -13,7 +13,9 @@
 body{
 	background-color: #eef;
 }
-
+test{
+	backdrop-filter: blur();
+}
 .selected_menu {
       width: 315px;
       height: 812px;
