@@ -1,109 +1,109 @@
 @charset "UTF-8";
-   .selected_menu {
-      width: 315px;
-      height: 812px;
-      background-color: #46A973;
-      text-align: center;
-      position: static;
-      overflow-y: scroll; /* 세로 스크롤바 활성화 */
-      -ms-overflow-style: none; /* 인터넷 익스플로러 및 엣지에서 스크롤바 숨기기 */
-      scrollbar-width: none; /* 파이어폭스에서 스크롤바 숨기기 */
-   }
+.selected_menu {
+    width: 315px;
+    height: 812px;
+    background-color: #46A973;
+    text-align: center;
+    position: static;
+    overflow-y: scroll; /* 세로 스크롤바 활성화 */
+    -ms-overflow-style: none; /* 인터넷 익스플로러 및 엣지에서 스크롤바 숨기기 */
+    scrollbar-width: none; /* 파이어폭스에서 스크롤바 숨기기 */
+}
 
-   .selected_menu::-webkit-scrollbar {
-      /* 크롬 및 사파리에서 스크롤바 숨기기 */
-      display: none;
-   }
-   
-  
+.selected_menu::-webkit-scrollbar {
+    /* 크롬 및 사파리에서 스크롤바 숨기기 */
+    display: none;
+}
 
-   .address {
-      display: flex;
-      align-items: center;
-      justify-content: flex-start;
-   }
-   
-   .address p {
-      color: white;
-   }
 
-   .address img {
-      margin-right: 10px;
-      width: 15px;
-   }
-   
-   .search-bar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 10px;
-      background-color: #ffffff;
-      border-radius: 25px;
-      margin: 10px;
-   }
 
-   .search-input {
-      flex: 1;
-      padding: 5px;
-      border: none;
-      border-radius: 30px;
-      outline: none; /* Remove outline on focus */
-   }
+.address {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
 
-   .search-button {
-      background-color: transparent;
-      border: none;
-      cursor: pointer;
-   }
+.address p {
+    color: white;
+}
 
-   .search-icon {
-      font-size: 20px;
-      color: #000000; /* Set icon color to black */
-   }
-   
-   .mainmenulist {
-      background-color: white;
-      border-radius: 20px 20px 0 0;
-   }
-   
-   .topmenubar{
-   	  display: flex;
-      flex-direction: row; /* 가로로 아이템 나열 */
-      padding: 20px;
-      overflow-x: scroll; /* 가로 스크롤바 활성화 */
-      -ms-overflow-style: none; /* 인터넷 익스플로러 및 엣지에서 스크롤바 숨기기 */
-      scrollbar-width: none; /* 파이어폭스에서 스크롤바 숨기기 */
-      scroll-behavior: smooth; /* 부드러운 스크롤링 효과 추가 */
-      -webkit-overflow-scrolling: touch; /* iOS 기기에서 부드러운 스크롤링 활성화 */	
-   }
+.address img {
+    margin-right: 10px;
+    width: 15px;
+}
 
-   .topmenubar::-webkit-scrollbar {
-     
-      display: none;
-   }
-   
-    .detailmenu {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      margin-bottom: 10px;
-      margin-right: 15px;
-      
-   }
-   
-   .detailmenu img {
-      width: 40px;
-      margin-bottom: 5px;
-   }
-   
-   .detailmenu p {
-      margin: 0;
-      line-height: 1; /* 텍스트의 줄 간격을 조정 */
-   }
-   
-   
-   
-   .storeormenu {
+.search-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    background-color: #ffffff;
+    border-radius: 25px;
+    margin: 10px;
+}
+
+.search-input {
+    flex: 1;
+    padding: 5px;
+    border: none;
+    border-radius: 30px;
+    outline: none; /* Remove outline on focus */
+}
+
+.search-button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.search-icon {
+    font-size: 20px;
+    color: #000000; /* Set icon color to black */
+}
+
+.mainmenulist {
+    background-color: white;
+    border-radius: 20px 20px 0 0;
+}
+
+.topmenubar{
+    display: flex;
+    flex-direction: row; /* 가로로 아이템 나열 */
+    padding: 20px;
+    overflow-x: scroll; /* 가로 스크롤바 활성화 */
+    -ms-overflow-style: none; /* 인터넷 익스플로러 및 엣지에서 스크롤바 숨기기 */
+    scrollbar-width: none; /* 파이어폭스에서 스크롤바 숨기기 */
+    scroll-behavior: smooth; /* 부드러운 스크롤링 효과 추가 */
+    -webkit-overflow-scrolling: touch; /* iOS 기기에서 부드러운 스크롤링 활성화 */
+}
+
+.topmenubar::-webkit-scrollbar {
+
+    display: none;
+}
+
+.detailmenu {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 10px;
+    margin-right: 15px;
+
+}
+
+.detailmenu img {
+    width: 40px;
+    margin-bottom: 5px;
+}
+
+.detailmenu p {
+    margin: 0;
+    line-height: 1; /* 텍스트의 줄 간격을 조정 */
+}
+
+
+
+.storeormenu {
     border-radius: 15px;
     background-color: white;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
@@ -111,7 +111,7 @@
     width: 120px; /* 원하는 크기로 조정 */
     height: 200px;
     margin: 5px; /* 원하는 여백으로 조정 */
-    
+
 
 }
 
@@ -128,7 +128,7 @@
 
 
 .store-info{
-text-align: left;
+    text-align: left;
 }
 .storeormenu .store-info {
     margin-left: 10px;
@@ -149,10 +149,9 @@ text-align: left;
     margin-bottom: -5px;
 }
 .storeormenu_container {
-   display: grid;
-   grid-template-columns: repeat(2, 1fr); /* 두 개의 열을 생성 */
-   grid-gap: 5px; /* 요소 사이의 간격 설정 */
-   justify-items: start; /* 왼쪽으로 정렬 */
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 두 개의 열을 생성 */
+    grid-gap: 5px; /* 요소 사이의 간격 설정 */
+    justify-items: start; /* 왼쪽으로 정렬 */
 }
 
-   
