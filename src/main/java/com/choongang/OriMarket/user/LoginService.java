@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 @Slf4j
 public class LoginService {
+
     @Autowired
     private final UserRepository userRepository;
 
@@ -18,7 +19,6 @@ public class LoginService {
 
         if(findUser == null){
             return false;
-
         }
 
         if(!findUser.getPw().equals(user.getPw())){
