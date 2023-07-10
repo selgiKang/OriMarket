@@ -16,9 +16,19 @@ public class LoginController {
     @Autowired
     private final LoginService loginService;
 
-    @GetMapping("/")
+    @GetMapping("/login")
     public String login() {
         return "user/login";
+    }
+
+    @GetMapping("/join")
+    public String join() {
+        return "user/join";
+    }
+
+    @GetMapping("/mypage")
+    public String mypage() {
+        return "user/mypage";
     }
 
     @PostMapping("/login")
