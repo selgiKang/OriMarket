@@ -14,7 +14,8 @@ hr{width: 375px;}
 	margin:0 auto;
 	width: 375px;
 }
-
+#paymentpage_title{display: flex;flex-flow: row;margin-top: 20px;}
+#paymentpage_title_inner{width: 150px;}
 #paymentpage_section_1{display: flex; flex-flow: row ; margin-top: 20px;}
 #paymentpage_address{width: 91%;}
 #paymentpage_btn_address_edit>a{text-align: right; color: #46a973;}
