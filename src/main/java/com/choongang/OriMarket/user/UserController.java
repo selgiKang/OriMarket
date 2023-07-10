@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 @RequiredArgsConstructor
 @Slf4j
-public class LoginController {
+public class UserController {
 
     @Autowired
-    private final LoginService loginService;
+    private final UserService loginService;
 
     @GetMapping("/login")
     public String login() {
@@ -37,7 +37,7 @@ public class LoginController {
     }
 
     @PostMapping("/login")
-    public String loginId(@ModelAttribute Member memberVo) {
+    public String loginId(@ModelAttribute User memberVo) {
         boolean isTrue = loginService.login(memberVo);
         if(isTrue){
             return "user/loginsuccess";
