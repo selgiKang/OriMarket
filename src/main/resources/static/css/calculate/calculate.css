@@ -32,6 +32,10 @@ a:hover {cursor: pointer;}
     color: #eeeeee;
     font-weight: bolder;
 }
+
+/* 오른쪽 화살표 */
+#calculate_search_rightArrow{color: #CACCCE;}
+
 /*총 수입*/
 #calculate_main_totalIncome{text-align: center;width: 100%;}
 #calculate_main_totalIncome_title{color: #666666;}

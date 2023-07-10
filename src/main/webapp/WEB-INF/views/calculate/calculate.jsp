@@ -17,15 +17,17 @@
             내 수입
         </div>
         <%--정산 날짜 출력--%>
-        <div id="calculate_date">
-            <%--왼쪽 화살표--%>
-            <a href="#"><i class="fas fa-regular fa-angle-left" style="color: #f5f5f5;"></i></a>
-                <input type="date" id="calculate_search_start_date">
-                &nbsp - &nbsp
-                <input type="date" id="calculate_search_end_date">
-            <%--오른쪽 화살표--%>
-            <a id="calculate_right_arrow" href="#"><i id="calculate_search_rightArrow" class="fas fa-solid fa-angle-right" style="color: #ffffff;"></i></a>
-        </div>
+        <form action="" method="get">
+            <div id="calculate_date">
+                <%--왼쪽 화살표--%>
+                <a href="#"><i class="fas fa-regular fa-angle-left" style="color: #f5f5f5;"></i></a>
+                    <input type="date" id="calculate_search_start_date">
+                    &nbsp - &nbsp
+                    <input type="date" id="calculate_search_end_date">
+                <%--오른쪽 화살표--%>
+                <a id="calculate_right_arrow" href="#"><i id="calculate_search_rightArrow" class="fas fa-solid fa-angle-right"></i></a>
+            </div>
+        </form>
     </header>
     <main>
         <div id="calculate_main_totalIncome">

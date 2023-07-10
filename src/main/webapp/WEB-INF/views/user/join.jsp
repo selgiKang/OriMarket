@@ -17,7 +17,7 @@
       
       <span class="logo-text">Ori Market</span>
     </div>
-    <form>
+    <form action="/join" method="post">
       <div class="form_field">
         <label for="id">ID</label>
         <div class="input_container">

@@ -23,7 +23,7 @@
 				<li class="orderDelivery_li_1">상품 준비중</li>
 			</c:if>
 			<c:if test="${sessionScope.rts_order_ing eq 1 }">
-				<li><i class="fa-sharp fa-regular fa-circle" style="color: #b8b8b8;"></i></li>
+				<li><i class="fa-sharp fa-regular fa-circle" style="color: #46A973;"></i></li>
 				<li class="orderDelivery_li_1">상품 준비중</li>
 			</c:if>
 			<!-- 픽업중 -->

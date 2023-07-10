@@ -13,6 +13,11 @@
 <body>
 	<div id= "paymentpage_main">
 		<form action="" name="">
+			<div id="paymentpage_title">
+				<%-- 전 페이지 돌아가기--%>
+				<a href="#"><i class="fas fa-solid fa-arrow-left" style="color: #46a973;"></i></a>
+				<div id="paymentpage_title_inner">주문하기</div>
+			</div>
 			<div id= "paymentpage_section_1">
 				<div id= "paymentpage_address">주소 출력 위치</div>
 				<div id= "paymentpage_btn_address_edit"><a>수정</a></div>
@@ -65,13 +70,13 @@
 			</div>
 			<hr>
 			<!-- 2023_07_02 나중에 스크립트로 slide-up, down 적용하고 화살표 변경되도록 적용 -->
+			<%-- 적용 완료 --%>
 			<div id="paymentpage_btn_section_3"><a class="order_paymentPage_btn_filter2"><i class="fa-solid fa-caret-up" style="color: #ee9820;"></i></a></div>
 			<div id="paymentpage_section_4">
 				<p>요청사항</p>
 				<div><input class="payment_section_4_input" type="text" placeholder="요청 사항을 입력해주세요."></div>
 				<p>배달 기사님께</p>
 				<div><input class="payment_section_4_input" type="text" placeholder="배달 기사님께 전달할 메세지를 입력해주세요."></div>
-
 			</div>
 			<hr>
 			<div style="text-align: right;"><a class="order_paymentPage_btn_filter3"><i class="fa-solid fa-caret-up" style="color: #ee9820;"></i></a></div>
@@ -114,7 +119,7 @@
 					배송이 진행됩니다.
 				</div>
 			</div>
-			<button id="paymentpage_btn_pay">총 6,500원 결제하기</button>
+			<button id="paymentpage_btn_pay" type="button">총 6,500원 결제하기</button>
 		</form>
 	</div>
 </body>

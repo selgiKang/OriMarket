@@ -18,11 +18,27 @@ public class LoginController {
 
     @GetMapping("/")
     public String login() {
-        return "calculate/calculate";
+        return "order/order_paymentPage";
     }
+
+    @GetMapping("/join")
+    public String join() {
+        return "user/join";
+    }
+
+
+
 
     @PostMapping("/login")
     public String loginId(@ModelAttribute User userVo) {
+        boolean isTrue = loginService.login(userVo);
+        if(isTrue){
+            return "user/loginsuccess";
+        }
+        return "user/login";
+    }
+    @PostMapping("/join")
+    public String JoinId(@ModelAttribute User userVo) {
         boolean isTrue = loginService.login(userVo);
         if(isTrue){
             return "user/loginsuccess";

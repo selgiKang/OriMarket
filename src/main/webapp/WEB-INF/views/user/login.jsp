@@ -12,8 +12,7 @@
     ID :<input type="text" name="userId"><br>
     PASSWORD :<input type="text" name="pw"><br>
     <button type="submit">제출</button>
-
-        이희태
+        <A HREF="/join">회원가입</A>
 </form>
 </body>
 </html>
