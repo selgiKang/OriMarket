@@ -37,8 +37,8 @@ public class LoginController {
     }
 
     @PostMapping("/login")
-    public String loginId(@ModelAttribute Member userVo) {
-        boolean isTrue = loginService.login(userVo);
+    public String loginId(@ModelAttribute Member memberVo) {
+        boolean isTrue = loginService.login(memberVo);
         if(isTrue){
             return "user/loginsuccess";
         }
