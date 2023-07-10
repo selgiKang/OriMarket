@@ -21,6 +21,23 @@ public class LoginController {
         return "user/login";
     }
 
+    @GetMapping("/join")
+    public String join() {
+        return "user/join";
+    }
+
+    @GetMapping("/order_paymentPage")
+    public String order_paymentPage() {
+        return "order/order_paymentPage";
+    }
+
+
+
+    @GetMapping("/order_list")
+    public String order_list() {
+        return "user/order_list";
+    }
+
     @PostMapping("/login")
     public String loginId(@ModelAttribute User userVo) {
         boolean isTrue = loginService.login(userVo);
