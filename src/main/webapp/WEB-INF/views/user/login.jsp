@@ -13,7 +13,7 @@
     PASSWORD :<input type="text" name="pw"><br>
     <button type="submit">제출</button>
 
-        이희태
+
 </form>
 </body>
 </html>
