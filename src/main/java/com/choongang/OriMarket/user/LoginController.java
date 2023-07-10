@@ -17,7 +17,7 @@ public class LoginController {
     private final LoginService loginService;
 
     @GetMapping("/")
-    public String login() {return "user/marketmap";}
+    public String login() {return "user/login";}
 
     @PostMapping("/login")
     public String loginId(@ModelAttribute User userVo) {
