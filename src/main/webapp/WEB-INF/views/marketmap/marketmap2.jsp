@@ -8,16 +8,23 @@
     <script src="https://kit.fontawesome.com/1cfe6d92db.js" crossorigin="anonymous"></script>
     <style>
         body{margin:0 auto; font-size:16px;}
-        div.map_wrap{width:375px; height:712px; border:3px solid #333; background-color:#eee;}
+        div.map_wrap{width:375px; height:712px; border:3px solid #333; background-color:#eee; position:relative;}
 
         <!-- 지도이동버튼 -->
-        div.arrow_wrap{width:375px; height:712px; border:3px solid #333; position:relative;}
-        .arrow_wrap>a{position:absolute; width:375px; height:712px; cursor: pointer; z-index:99999;}
+        div.arrow_wrap{width:375px; height:712px; border:3px solid #333; box-sizing: border-box;}
+        .arrow_wrap>a{position:absolute; width:30px; height:30px; cursor: pointer; z-index:99999;}
+        a.fa-up{top:2%; left:44%;}
+        a.fa-down{bottom:2%; left:44%;}
+        a.fa-left{top:50%; left:2%;}
+        a.fa-right{top:50%; right:2%;}
+
+        a.fa-up:hover i , a.fa-down:hover i , a.fa-left:hover i , a.fa-right:hover i {opacity:1;}
+
         i{font-size:36px; color:#000; opacity:0.4;}
         i.fa-circle-chevron-left{position:absolute; top:50%; left:2%;}
         i.fa-circle-chevron-right{position:absolute; top:50%; right:2%;}
-        i.fa-circle-chevron-up{position:absolute; top:2%; left:46%;}
-        i.fa-circle-chevron-down{position:absolute; bottom:2%; left:46%;}
+        i.fa-circle-chevron-up{position:absolute; top:2%; left:44%;}
+        i.fa-circle-chevron-down{position:absolute; bottom:2%; left:44%;}
 
         <!-- 지도bg -->
         div.map_bg_wrap{width:375px; height:712px; box-sizing:border-box;}
@@ -28,39 +35,60 @@
 
         <!-- 영광마트 -->
         .map_bg_content3_icon{width:90px; height:90px; position:absolute; cursor: pointer;}
-        .store_ygmart_box{position:absolute; top:1%; left:58%;  text-align:center;}
+        .store_ygmart_icon{transition: all 0.2s linear; cursor: pointer;}
+        .store_ygmart_icon:hover {transform: scale(1.1);}
+        .store_ygmart_box{position:absolute; top:1%; left:58%; width:90px; height:90px;  text-align:center;}
         img.mart{width:55px; height:55px;}
         p.store_ygmart_txt{margin:0; font-size: 14px; font-weight: 800;}
 
         <!-- 신림기름집 -->
         .map_bg_content3_icon{width:90px; height:90px; position:absolute; cursor: pointer;}
-        .store_shinrimoil_box{position:absolute; top:5%; left:75%;  text-align:center;}
+        .store_shinrimoil_icon{transition: all 0.2s linear; cursor: pointer;}
+        .store_shinrimoil_icon:hover {transform: scale(1.1);}
+        .store_shinrimoil_box{position:absolute; top:5%; left:75%; width:90px; height:90px;  text-align:center;}
         img.oil{width:35px; height:75px;}
         p.store_shinrimoil_txt{margin:0; font-size: 14px; font-weight: 800;}
 
         <!-- 오떡순 -->
         .map_bg_content3_icon{width:90px; height:90px; position:absolute; cursor: pointer;}
-        .store_odducksun_box{position:absolute; top:53%; left:75%;  text-align:center;}
+        .store_odducksun_icon{transition: all 0.2s linear; cursor: pointer;}
+        .store_odducksun_icon:hover {transform: scale(1.1);}
+        .store_odducksun_box{position:absolute; top:53%; left:75%; width:90px; height:90px; text-align:center;}
         img.snackbar{width:90px; height:70px;}
         p.store_odducksun_txt{margin:0; font-size: 14px; font-weight: 800;}
 
         <!-- 김치천국 -->
         .map_bg_content3_icon{width:90px; height:90px; position:absolute; cursor: pointer;}
-        .store_kimchiheven_box{position:absolute; top:68%; left:74%;  text-align:center;}
+        .store_kimchiheven_icon{transition: all 0.2s linear; cursor: pointer;}
+        .store_kimchiheven_icon:hover {transform: scale(1.1);}
+        .store_kimchiheven_box{position:absolute; top:68%; left:74%; width:90px; height:90px; text-align:center;}
         img.kimchi{width:70px; height:55px;}
         p.store_kimchiheven_txt{margin:0; font-size: 14px; font-weight: 800;}
 
         <!-- 신림즉석두부 -->
-        .map_bg_content3_icon{width:90px; height:90px; position:absolute; cursor: pointer;}
-        .store_shinrimtofu_box{position:absolute; top:79%; left:74%;  text-align:center;}
+        .map_bg_content3_icon{width:90px; height:90px; position:absolute; cursor: pointer; }
+        .store_shinrimtofu_icon{transition: all 0.2s linear; cursor: pointer;}
+        .store_shinrimtofu_icon:hover {transform: scale(1.1);}
+        .store_shinrimtofu_box{position:absolute; top:79%; left:74%; width:90px; height:90px; text-align:center;}
         img.tofu{width:60px; height:50px;}
         p.store_shinrimtofu_txt{margin:0; font-size: 14px; font-weight: 800;}
 
         <!-- 못난이꽈배기 -->
         .map_bg_content3_icon{width:90px; height:90px; position:absolute; cursor: pointer;}
-        .store_uglypretzel_box{position:absolute; top:90%; left:75%;  text-align:center;}
+        .store_uglypretzel_icon{transition: all 0.2s linear; cursor: pointer;}
+        .store_uglypretzel_icon:hover {transform: scale(1.1);}
+        .store_uglypretzel_box{position:absolute; top:90%; left:75%; width:90px; height:90px; text-align:center;}
         img.pretzel{width:65px; height:45px;}
         p.store_uglypretzel_txt{margin:0; font-size: 14px; font-weight: 800;}
+
+
+        <!-- 중국슈퍼 -->
+        .map_bg_content3_icon{width:90px; height:90px; position:absolute; cursor: pointer;}
+        .store_chinamart_icon{transition: all 0.2s linear; cursor: pointer;}
+        .store_chinamart_icon:hover {transform: scale(1.1);}
+        .store_chinamart_box{position:absolute; top:89%; left:50%; width:90px; height:90px; text-align:center;}
+        img.mart{width:55px; height:55px;}
+        p.store_chinamart_txt{margin:0; font-size: 14px; font-weight: 800;}
 
     </style>
 </head>
@@ -117,7 +145,7 @@
                 </div>
 
                 <!-- 신림즉석두부 -->
-                <div class="map_bg_content3_icon store_shinrimtofu_box" onclick="location.href='../store/store.jsp'">
+                <div class="map_bg_content3_icon store_shinrimtofu_box" onclick="location.href='/store'">
                     <img class="store_shinrimtofu_icon tofu" src="../../img/marketmap/tofu.png">
                     <p class="store_shinrimtofu_txt">신림즉석두부</p>
                 </div>
@@ -127,6 +155,15 @@
                     <img class="store_uglypretzel_icon pretzel" src="../../img/marketmap/pretzel.png">
                     <p class="store_uglypretzel_txt">못난이꽈배기</p>
                 </div>
+
+                <!-- 중국 슈퍼 -->
+                <div class="map_bg_content3_icon store_chinamart_box" onclick="">
+                    <img class="store_chinamart_icon mart" src="../../img/marketmap/mart.png">
+                    <p class="store_chinamart_txt">중국슈퍼</p>
+                </div>
+
+                <!-- 배달 안되는 상점(지도표시용 텍스트) -->
+
             </div>
             <!--4번째 분할-->
             <div class="map_bg_content4_box"></div>

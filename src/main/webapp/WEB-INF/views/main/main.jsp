@@ -50,7 +50,7 @@
         </div>
 
         <div id="marketmap">
-        <a href="/marketmap">마켓맵</a>
+        <a href="/marketmap2">마켓맵</a>
         </div>
 
 
