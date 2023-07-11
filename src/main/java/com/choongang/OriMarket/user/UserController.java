@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.thymeleaf.model.IModel;
 
+import javax.servlet.http.HttpSession;
+
 @Controller
 @RequiredArgsConstructor
 @Slf4j
@@ -51,7 +53,7 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public String loginId(@ModelAttribute User user, Model model,HttpSession session) {
+    public String loginId(@ModelAttribute User user, Model model, HttpSession session) {
         boolean isTrue = userService.login(user,session);
         if(isTrue){
             model.addAttribute("userId", user.getUserId());
