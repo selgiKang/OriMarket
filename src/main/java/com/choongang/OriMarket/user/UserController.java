@@ -46,6 +46,11 @@ public class UserController {
         return "user/cart";
     }
 
+    @GetMapping("/order_list")
+    public String order_list() {
+        return "user/order_list";
+    }
+
     @PostMapping("/login")
     public String loginId(@ModelAttribute User user, Model model, HttpSession session) {
         boolean isTrue = userService.login(user,session);
