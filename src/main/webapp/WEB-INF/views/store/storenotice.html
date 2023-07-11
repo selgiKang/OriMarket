@@ -178,6 +178,7 @@
             padding: 20px;
             border: 1px solid #ccc;
             border-radius: 5px;
+            margin-top: 5px;
         }
 
         .board .title {
@@ -202,6 +203,8 @@
 
         .board .content {
             margin-top: 20px;
+            background-color: #fff;
+            padding: 10px;
         }
 
         .board .content img {
@@ -353,32 +356,115 @@
 
 
     <div class="storecare_container">
-
         <div class="storecare">
             <h3>공지 사항</h3>
-
             <div class="line"></div>
-
             <h4>사장님 공지사항</h4>
-
             <div class="board">
-                <div class="title">
-                    <div class="notice">공지</div>
-                    <div class="date">2023-07-09 12:34</div>
-                </div>
                 <div class="content">
-                    <img src="../../../../resources/static/img/store/pizza.jpg" alt="게시글 사진">
+                    <input type="file" accept="image/*" id="image-upload" onchange="previewImage(event)" />
+                    <div id="image-preview"></div>
                     <textarea placeholder="게시글 내용"></textarea>
                 </div>
                 <div class="buttons">
-                    <button>업로드</button>
+                    <button onclick="uploadPost()">업로드</button>
                     <button>수정</button>
                     <button>취소</button>
                 </div>
             </div>
-
         </div>
     </div>
+
+    <script>
+        var posts = []; // 게시글 정보를 저장할 배열
+
+        function previewImage(event) {
+            var imageUpload = event.target;
+            var imageFile = imageUpload.files[0];
+            var imagePreview = document.getElementById("image-preview");
+
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                var img = document.createElement("img");
+                img.src = e.target.result;
+                img.style.maxWidth = "100%";
+                img.style.height = "auto";
+                imagePreview.innerHTML = "";
+                imagePreview.appendChild(img);
+            };
+
+            reader.readAsDataURL(imageFile);
+        }
+
+        function uploadPost() {
+            var imageUpload = document.getElementById("image-upload");
+            var imageFile = imageUpload.files[0];
+            var postContent = document.querySelector(".board .content textarea").value;
+
+            var post = {
+                content: postContent,
+                image: imageFile,
+                date: new Date(),
+                isNotice: true, // 최신 게시글은 공지로 표시
+            };
+
+            posts.unshift(post); // 배열의 맨 앞에 게시글 정보 추가
+
+            // 게시글을 생성하여 화면에 표시
+            var boardDiv = document.querySelector(".storecare .board");
+            var newPostDiv = document.createElement("div");
+            newPostDiv.className = "post";
+
+            var titleDiv = document.createElement("div");
+            titleDiv.className = "title";
+
+            if (post.isNotice) {
+                var noticeDiv = document.createElement("div");
+                noticeDiv.className = "notice";
+                noticeDiv.innerText = "공지";
+                titleDiv.appendChild(noticeDiv);
+            }
+
+            var dateDiv = document.createElement("div");
+            dateDiv.className = "date";
+            dateDiv.innerText = post.date.toLocaleString();
+            titleDiv.appendChild(dateDiv);
+
+            newPostDiv.appendChild(titleDiv);
+
+            var contentDiv = document.createElement("div");
+            contentDiv.className = "content";
+
+            if (imageFile) {
+                var img = document.createElement("img");
+                img.src = URL.createObjectURL(imageFile);
+                img.style.maxWidth = "100%";
+                img.style.height = "auto";
+                contentDiv.appendChild(img);
+            }
+
+            contentDiv.innerHTML += postContent;
+            newPostDiv.appendChild(contentDiv);
+            boardDiv.prepend(newPostDiv);
+
+            // 게시글 업로드 후 입력 내용 초기화
+            imageUpload.value = "";
+            document.querySelector(".board .content textarea").value = "";
+            document.getElementById("image-preview").innerHTML = "";
+
+            // 이전 게시글에서 공지 표시 제거
+            for (var i = 1; i < posts.length; i++) {
+                var otherPostElement = document.querySelectorAll(".storecare .board .post")[i];
+                var otherNoticeDiv = otherPostElement.querySelector(".notice");
+                if (otherNoticeDiv) {
+                    otherNoticeDiv.remove();
+                }
+            }
+        }
+
+    </script>
+
+
 
 
 
