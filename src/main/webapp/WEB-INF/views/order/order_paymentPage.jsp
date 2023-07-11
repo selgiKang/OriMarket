@@ -12,14 +12,18 @@
 </head>
 <body>
 	<div id= "paymentpage_main">
-		<form action="/kakaoPay" method="post">
+		<form action="/order_delivery" method="post">
+			<input type="hidden" name="orderUserId" value="1 ${userId}">
 			<div id="paymentpage_title">
 				<%-- 전 페이지 돌아가기--%>
 				<a href="#"><i class="fas fa-solid fa-arrow-left" style="color: #46a973;"></i></a>
 				<div id="paymentpage_title_inner">주문하기</div>
 			</div>
 			<div id= "paymentpage_section_1">
-				<div id= "paymentpage_address">주소 출력 위치</div>
+				<div id= "paymentpage_address">
+					주소 출력 위치 >> 주소번호?
+					<input type="text" name="orderAddressNumber" value="2 ${userAddress+userAddressDetail}">
+				</div>
 				<div id= "paymentpage_btn_address_edit"><a>수정</a></div>
 			</div>
 			<hr>
@@ -29,20 +33,12 @@
 					<!-- 2023_07_02 같은 가게 물건이면?? 반복문 출력 고민 -->
 					<!-- 반복문 출력 위치 -->
 					<tr class= "paymentpage_tr_1">
-						<th colspan= "3">생생 야채 가게</th>
+						<th colspan= "3"><input type="text" name = "orderStoreName" value="카트 가게 이름 받기" readonly></th>
 					</tr>
 					<tr class= "paymentpage_tr_2">
-						<td class= "paymentpage_td_1">대파</td>
-						<td style= "text-align: center;">3,000원</td>
-						<td style= "text-align: right;">1개</td>
-					</tr>
-					<tr class= "paymentpage_tr_1">
-						<th colspan= "3">가게이름</th>
-					</tr>
-					<tr class= "paymentpage_tr_2">
-						<td class= "paymentpage_td_1">양파</td>
-						<td style= "text-align: center;">1,500원</td>
-						<td style= "text-align: right;">1개</td>
+						<td class= "paymentpage_td_1"><input type="text" name="orderGoodsName" value="카트 물건이름 받기${}" readonly></td>
+						<td style= "text-align: center;"><input type="text" name="orderGoodsPrice" value="카트 가격 받기${}" readonly></td>
+						<td style= "text-align: right;"><input type="text" name="orderGoodsNum" value="카트 물건개수 받기${}" readonly></td>
 					</tr>
 					<!-- 반복문 출력 끝 -->
 					<tr align="center">
@@ -54,17 +50,17 @@
 				<table id= "paymentpage_table_2">
 					<tr class= "paymentpage_tr_3">
 						<th colspan= "2">물건 금액</th>
-						<td class= "paymentpage_td_3">4,500원</td>
+						<td class= "paymentpage_td_3"><input type="text" name="orderGoodsTotalPrice" value="3 ${}" readonly></td>
 					</tr>
 					<tr class= "paymentpage_tr_3" >
 						<th colspan= "2">배달비</th>
-						<td class= "paymentpage_td_3">2,000원</td>
+						<td class= "paymentpage_td_3"><input type="text" name="orderDeliveryPrice" value="4 ${cartDeliveryPrice}" readonly></td>
 					</tr>
 				</table>
 				<table id= "paymentpage_table_3">
 					<tr class= "paymentpage_tr_4">
 						<th colspan= "2">총 결제 금액</th>
-						<td class= "paymentpage_td_4">6,500원</td>
+						<td class= "paymentpage_td_4"><input type="text" value="orderTotalPrice" value="5 ${cartTotalPrice}" readonly></td>
 					</tr>
 				</table>
 			</div>
@@ -74,9 +70,9 @@
 			<div id="paymentpage_btn_section_3"><a class="order_paymentPage_btn_filter2"><i class="fa-solid fa-caret-up" style="color: #ee9820;"></i></a></div>
 			<div id="paymentpage_section_4">
 				<p>요청사항</p>
-				<div><input class="payment_section_4_input" type="text" placeholder="요청 사항을 입력해주세요."></div>
+				<div><input class="payment_section_4_input" name="orderRequests" type="text" placeholder="요청 사항을 입력해주세요."></div>
 				<p>배달 기사님께</p>
-				<div><input class="payment_section_4_input" type="text" placeholder="배달 기사님께 전달할 메세지를 입력해주세요."></div>
+				<div><input class="payment_section_4_input" name="forRider" type="text" placeholder="배달 기사님께 전달할 메세지를 입력해주세요."></div>
 			</div>
 			<hr>
 			<div style="text-align: right;"><a class="order_paymentPage_btn_filter3"><i class="fa-solid fa-caret-up" style="color: #ee9820;"></i></a></div>
@@ -119,7 +115,7 @@
 					배송이 진행됩니다.
 				</div>
 			</div>
-			<button id="paymentpage_btn_pay" type="button"><a href="/order_delivery">총 6,500원 결제하기</a></button>
+			<button id="paymentpage_btn_pay" type="button">총 6,500원 결제하기</button>
 		</form>
 	</div>
 </body>
