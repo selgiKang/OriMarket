@@ -198,7 +198,7 @@
 		 </div>
 		<br>
 		<div id="cart_footer">
-			<input type="submit" value="주문하기">
+			<a href="/order_paymentPage"><input type="submit" value="주문하기"></a>
 		</div>
 	</div>
 

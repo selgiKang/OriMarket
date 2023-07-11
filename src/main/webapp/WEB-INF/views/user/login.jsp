@@ -13,7 +13,6 @@
     PASSWORD :<input type="text" name="userPassword"><br>
     <button type="submit">제출</button>
     <a href="/join">회원가입</a>
-
 </form>
 </body>
 </html>

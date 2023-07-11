@@ -19,13 +19,13 @@
 <body>
 
 <div class="header_wrap">
-    <div class="logo">LOGO</div>
+    <div class="logo">Ori Market</div>
 
     <div class="nav">
         <span><a href="#">주소검색</a></span>
-        <a href="#"><i class="fa-solid fa-cart-shopping"></i></a>
+        <a href="/cart"><i class="fa-solid fa-cart-shopping"></i></a>
         <a href="#"><i class="fa-solid fa-bell"></i></a>
-        <a href="#"><i class="fa-solid fa-circle-user"></i></a>
+        <a href="/mypage"><i class="fa-solid fa-circle-user"></i></a>
     </div>
 </div>
 

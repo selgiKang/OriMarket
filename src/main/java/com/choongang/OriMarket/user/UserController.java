@@ -30,11 +30,7 @@ public class UserController {
     }
     @GetMapping("/update")
     public String update() {
-        return "user/update";
-    }
-    @GetMapping("/delete")
-    public String delete() {
-        return "user/delete";
+        return "user/user_infolist_edit";
     }
     @GetMapping("/infolist")
     public String list() {
@@ -52,6 +48,11 @@ public class UserController {
         return "user/cart";
     }
 
+    @GetMapping("/order_list")
+    public String order_list() {
+        return "user/order_list";
+    }
+
     @PostMapping("/login")
     public String loginId(@ModelAttribute User user, Model model, HttpSession session) {
         boolean isTrue = userService.login(user,session);
@@ -63,18 +64,30 @@ public class UserController {
     }
 
     @PostMapping("/join")
-    public String joinUser(@ModelAttribute User user) {
+    public String joinUser(@ModelAttribute User user, HttpSession session) {
 
-        if(userService.join(user)){
+        if(userService.join(user,session)){
             return "user/loginsuccess";
         }
         return "user/join";
     }
 
+    @PostMapping("/update")
+    public String updateUser(@ModelAttribute User user, HttpSession session){
 
-    @GetMapping("/order_list")
-    public String order_page() {
-        return "user/order_list";
+        if(userService.join(user,session)){
+            return "user/user_infolist";
+        }
+        return "user/user_infolist_edit";
     }
+
+    @PostMapping("/delete")
+    public String deleteUser(@ModelAttribute User user){
+        System.out.println(user.getUserSeq());
+        userService.delete(user.getUserSeq());
+        return "user/login";
+    }
+
+
 
 };
