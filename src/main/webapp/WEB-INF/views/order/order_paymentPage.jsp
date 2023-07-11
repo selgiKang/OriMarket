@@ -119,7 +119,7 @@
 					배송이 진행됩니다.
 				</div>
 			</div>
-			<button id="paymentpage_btn_pay" type="button">총 6,500원 결제하기</button>
+			<button id="paymentpage_btn_pay" type="button"><a href="/order_delivery">총 6,500원 결제하기</a></button>
 		</form>
 	</div>
 </body>
