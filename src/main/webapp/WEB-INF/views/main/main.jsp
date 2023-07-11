@@ -59,7 +59,7 @@
 
 
         <div id="footer">
-        <jsp:include page="../footer/nav_footer.jsp" />
+        <jsp:include page="../footer/footer.jsp" />
         </div>
     </div>
 
