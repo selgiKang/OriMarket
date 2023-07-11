@@ -40,4 +40,7 @@ public class User {
 
     @Column
     private String userAddress;
+
+    @Column
+    private String userAddressDetail;
 }

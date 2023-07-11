@@ -11,9 +11,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.thymeleaf.model.IModel;
 
 import javax.servlet.http.HttpSession;
-import java.security.Principal;
-import java.util.List;
-import java.util.Optional;
 
 @Controller
 @RequiredArgsConstructor
@@ -33,7 +30,7 @@ public class UserController {
     }
     @GetMapping("/update")
     public String update() {
-        return "user/update";
+        return "user/user_infolist_edit";
     }
     @GetMapping("/delete")
     public String delete() {
@@ -56,29 +53,31 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public String loginId(@ModelAttribute User user, Model model) {
-        boolean isTrue = userService.login(user,model);
+    public String loginId(@ModelAttribute User user, Model model, HttpSession session) {
+        boolean isTrue = userService.login(user,session);
         if(isTrue){
-            model.addAttribute("userId",user.getUserId());
+            model.addAttribute("userId", user.getUserId());
             return "user/loginsuccess";
         }
         return "user/login";
     }
 
     @PostMapping("/join")
-    public String joinUser(@ModelAttribute User user) {
+    public String joinUser(@ModelAttribute User user, HttpSession session) {
 
-        if(userService.join(user)){
+        if(userService.join(user,session)){
             return "user/loginsuccess";
         }
         return "user/join";
     }
 
-    @GetMapping("/Alllist")
-    public String getUserList(Model model) {
-        List<User> userList = userService.getAllUsers();
-        model.addAttribute("users", userList);
-        return "user/Alllist";
+    @PostMapping("/update")
+    public String updateUser(@ModelAttribute User user, HttpSession session){
+
+        if(userService.join(user,session)){
+            return "user/user_infolist";
+        }
+        return "user/user_infolist_edit";
     }
 
 };
