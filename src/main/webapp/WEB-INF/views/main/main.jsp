@@ -50,10 +50,10 @@
         </div>
 
         <div id="marketmap">
-            <a href="/marketmap2">단골시장등록</a><br>
-            <a href="/marketmap2">단골시장등록</a><br>
-            <a href="/marketmap2">단골시장등록</a><br>
-            <a href="/marketmap2">단골시장등록</a><br>
+            <a href="/marketmap">단골시장등록</a><br>
+            <a href="/marketmap">단골시장등록</a><br>
+            <a href="/marketmap">단골시장등록</a><br>
+            <a href="/marketmap">단골시장등록</a><br>
         </div>
 
 
