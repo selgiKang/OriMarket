@@ -12,7 +12,7 @@ public class MarketMapController {
 
     @GetMapping("/marketmap")
     public String footer() {
-        return "marketmap/marketmap";
+        return "marketmap/marketmap2";
     }
 
 

@@ -19,7 +19,7 @@
 <body>
 
 <div class="header_wrap">
-    <div class="logo">LOGO</div>
+    <div class="logo">Ori Market</div>
 
     <div class="nav">
         <span><a href="#">주소검색</a></span>
