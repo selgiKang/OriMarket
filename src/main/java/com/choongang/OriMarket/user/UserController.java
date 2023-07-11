@@ -74,5 +74,11 @@ public class UserController {
         return "user/join";
     }
 
+    @GetMapping("/Alllist")
+    public String getUserList(Model model) {
+        List<User> userList = userService.getAllUsers();
+        model.addAttribute("users", userList);
+        return "user/Alllist";
+    }
 
 };

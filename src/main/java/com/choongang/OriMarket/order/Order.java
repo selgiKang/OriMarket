@@ -15,8 +15,8 @@ public class Order {
 
     @Id
     @Column(name = "order_number", nullable = false)
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String orderNumber;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long orderNumber;
 
     @Column(name="order_menu_name")
     private String orderMenuName;
