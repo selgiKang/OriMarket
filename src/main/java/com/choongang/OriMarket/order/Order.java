@@ -14,8 +14,9 @@ import java.util.Date;
 public class Order {
 
     @Id
-    @Column(nullable = false)
-    private String orderNumber;
+    @Column(name = "order_number", nullable = false)
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long orderNumber;
 
     @Column
     private String orderMenuName;
