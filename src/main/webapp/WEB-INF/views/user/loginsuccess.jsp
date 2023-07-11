@@ -16,5 +16,6 @@
         }
     </script>
     <h3>${userName}님 환영합니다.</h3>
+    <a href="/mypage">회원 정보</a>
 </body>
 </html>
