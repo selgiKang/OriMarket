@@ -12,10 +12,10 @@
     <header>&lt; 헤더 &gt;</header>
     <div id="mypqge1">
         <c:if test="${empty userId}">
-         <h2 id="mypage1_h2">로그인을 해주세요...</h2><img id="img1" src="" width="30px" height="30px">
+         <a href="/login"><h2 id="mypage1_h2">로그인을 해주세요...</h2><img id="img1" src="" width="30px" height="30px"></a>
         </c:if>
         <c:if test="${not empty userId}">
-        <h2 id="mypage1_h2"><a href="/infolist">${userNickname}</a></h2>
+            <a href="/infolist">${userNickname}</a>
             <small id="mypage1_small">&lt;회원등급&gt;</small>
         </c:if>
         <hr>
