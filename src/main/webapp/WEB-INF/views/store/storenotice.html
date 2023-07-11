@@ -427,6 +427,7 @@
 
             var dateDiv = document.createElement("div");
             dateDiv.className = "date";
+            dateDiv.style.float = "right";
             dateDiv.innerText = post.date.toLocaleString();
             titleDiv.appendChild(dateDiv);
 
@@ -442,6 +443,7 @@
                 img.style.height = "auto";
                 contentDiv.appendChild(img);
             }
+
 
             contentDiv.innerHTML += postContent;
             newPostDiv.appendChild(contentDiv);
