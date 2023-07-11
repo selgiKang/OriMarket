@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Insert title here</title>
-    <link href="pastorder.css" rel="stylesheet" media="all">
+    <link href="../../css/order/order_pastorder.css" rel="stylesheet" media="all">
 </head>
 <body>
 <div id="order">

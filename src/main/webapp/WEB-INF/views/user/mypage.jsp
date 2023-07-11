@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Insert title here</title>
-    <link href="mypage.css" rel="stylesheet" media="all">
+    <link href="../../css/user/mypage.css" rel="stylesheet" media="all">
 </head>
 <body style=" font-family: 'omyu_pretty';">
 <div id="mypage">
@@ -80,5 +80,5 @@
 </div>
 
 </body>
-<script src="mypage.js"></script>
+<script src="../../js/user/mypage.js"></script>
 </html>

@@ -21,7 +21,7 @@ public class OrderController {
     @GetMapping("/order_receipt")
     public String order_receipt(){return "order/order_receipt";}
     @GetMapping("/order_pastorder")
-    public String order_lastorder(){return "order/order_lastorder";}
+    public String order_pastorder(){return "order/order_pastorder";}
 
 
 }
