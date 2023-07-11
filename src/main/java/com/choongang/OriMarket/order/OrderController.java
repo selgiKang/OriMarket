@@ -20,7 +20,7 @@ public class OrderController {
     public String order_paymentPage(){return "order/order_paymentPage";}
     @GetMapping("/order_receipt")
     public String order_receipt(){return "order/order_receipt";}
-    @GetMapping("/order_lastorder")
+    @GetMapping("/order_pastorder")
     public String order_lastorder(){return "order/order_lastorder";}
 
 
