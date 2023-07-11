@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Slf4j
 public class StoreController {
 
-    @GetMapping("/store_detailmenu")
+    @GetMapping("/detailmenu")
     public String store_detailmenu() {
         return "store/detailmenu";
     }

@@ -11,9 +11,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class MarketMapController {
 
     @GetMapping("/marketmap")
-    public String footer() {
-        return "marketmap/marketmap2";
+    public String marketmap() {
+        return "marketmap/marketmap";
     }
 
+    @GetMapping("/marketmap2")
+    public String marketmap2() {
+        return "marketmap/marketmap2";
+    }
 
 };
