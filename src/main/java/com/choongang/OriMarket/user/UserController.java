@@ -10,6 +10,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.thymeleaf.model.IModel;
 
+import javax.servlet.http.HttpSession;
+import java.security.Principal;
+import java.util.List;
+import java.util.Optional;
+
 @Controller
 @RequiredArgsConstructor
 @Slf4j
@@ -34,9 +39,9 @@ public class UserController {
     public String delete() {
         return "user/delete";
     }
-    @GetMapping("/list")
+    @GetMapping("/infolist")
     public String list() {
-        return "user/list";
+        return "user/user_infolist";
     }
 
 
@@ -49,16 +54,12 @@ public class UserController {
     public String cart() {
         return "user/cart";
     }
-    @GetMapping("/infolist")
-    public String userlist() {
-        return "user/user_infolist";
-    }
 
     @PostMapping("/login")
     public String loginId(@ModelAttribute User user, Model model) {
-        boolean isTrue = userService.login(user);
+        boolean isTrue = userService.login(user,model);
         if(isTrue){
-            model.addAttribute("userId", user.getUserId());
+            model.addAttribute("userId",user.getUserId());
             return "user/loginsuccess";
         }
         return "user/login";
@@ -72,5 +73,6 @@ public class UserController {
         }
         return "user/join";
     }
+
 
 };

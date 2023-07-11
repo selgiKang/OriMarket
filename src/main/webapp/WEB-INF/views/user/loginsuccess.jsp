@@ -8,6 +8,7 @@
 </head>
 <body>
     <h2>로그인성공</h2>
+    <a href="/infolist">회원정보보기</a>
     <script>
         window.onload = function() {
             var userId = "<%= request.getAttribute("userId") %>"; // 모델에 담긴 닉네임 값을 가져옴

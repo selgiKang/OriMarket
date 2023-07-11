@@ -4,6 +4,10 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
+
+import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -13,20 +17,17 @@ public class UserService {
     @Autowired
     private final UserRepository userRepository;
 
-    public boolean login(User member) {
+    public boolean login(User user, Model model) {
+        Optional<User> findUserOptional = userRepository.findByUserId(user.getUserId());
 
-        User findUser = userRepository.findByUserId(member.getUserId());
-
-        if(findUser == null){
-            return false;
+        if (findUserOptional.isPresent()) { // isPresent 값이 존재하는지 확인하는거 존재하면 true 존재하지않으면 false 반환
+            User findUser = findUserOptional.get();
+            if (findUser.getUserPassword().equals(user.getUserPassword())) {
+                model.addAttribute("user",findUser);
+                return true;
+            }
         }
-
-        if(!findUser.getUserPassword().equals(member.getUserPassword())){
-            return false;
-        }
-
-        return true;
-
+        return false;
     }
 
    public boolean join(User user){
