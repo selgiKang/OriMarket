@@ -58,7 +58,7 @@ public class UserController {
     public String loginId(@ModelAttribute User user, Model model) {
         boolean isTrue = userService.login(user);
         if(isTrue){
-            model.addAttribute("nickname", user.getUserNickname());
+            model.addAttribute("userId", user.getUserId());
             return "user/loginsuccess";
         }
         return "user/login";
