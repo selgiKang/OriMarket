@@ -114,9 +114,9 @@
         </div>
     </div>
 
-    //수락버튼을 누르기전에 처리탭에 아무것도 안보이게
+    <%--수락버튼을 누르기전에 처리탭에 아무것도 안보이게--%>
     <div class="order-item" data-status="processing" style="display: none;"></div>
-    //거절버튼을 누르기전에 거절탭에 아무것도 안보이게
+    <%--거절버튼을 누르기전에 거절탭에 아무것도 안보이게--%>
     <div class="order-item" data-status="rejected" style="display: none;"></div>
 </div>
 
@@ -158,11 +158,11 @@
             const currentStatus = orderItem.getAttribute('data-status');
 
             if (currentStatus === 'pending') {
-                const processingTab = document.querySelector('.tab-link[data-tab="processing"]');
+                const processingTab = document.querySelector('.tab-link[data-tab="processing"]');   //처리중 탭 선택
                 processingTab.click();
-                orderItem.setAttribute('data-status', 'processing');
+                orderItem.setAttribute('data-status', 'processing');    // 주문 메뉴 상태를 처리중으로 업데이트
 
-                //처리중 탭에 즉시 업데이트 되도록
+                //처리중 탭에 즉시 업데이트 되도록 setTimeout
                 setTimeout(() => {
                     processingTab.click();
                 }, 0);
@@ -176,6 +176,7 @@
             const orderItem = button.closest('.order-item');
             const currentStatus = orderItem.getAttribute('data-status');
 
+            //주문메뉴 상태가 주문대기일때
             if (currentStatus === 'pending') {
                 const rejectedTab = document.querySelector('.tab-link[data-tab="rejected"]');
                 rejectedTab.click();
