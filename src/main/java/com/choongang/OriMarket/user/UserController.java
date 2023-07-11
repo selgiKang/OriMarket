@@ -5,9 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import org.thymeleaf.model.IModel;
 
 import javax.servlet.http.HttpSession;
@@ -31,10 +29,6 @@ public class UserController {
     @GetMapping("/update")
     public String update() {
         return "user/user_infolist_edit";
-    }
-    @GetMapping("/delete")
-    public String delete() {
-        return "user/delete";
     }
     @GetMapping("/infolist")
     public String list() {
@@ -84,5 +78,14 @@ public class UserController {
         }
         return "user/user_infolist_edit";
     }
+
+    @PostMapping("/delete")
+    public String deleteUser(@ModelAttribute User user){
+        System.out.println(user.getUserSeq());
+        userService.delete(user.getUserSeq());
+        return "user/login";
+    }
+
+
 
 };

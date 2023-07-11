@@ -50,16 +50,16 @@
         </div>
 
         <div id="marketmap">
-            <a href="/marketmap">단골시장등록</a><br>
-            <a href="/marketmap">단골시장등록</a><br>
-            <a href="/marketmap">단골시장등록</a><br>
-            <a href="/marketmap">단골시장등록</a><br>
+            <a href="/marketmap2">단골시장등록</a><br>
+            <a href="/marketmap2">단골시장등록</a><br>
+            <a href="/marketmap2">단골시장등록</a><br>
+            <a href="/marketmap2">단골시장등록</a><br>
         </div>
 
 
 
         <div id="footer">
-        <jsp:include page="../footer/nav_footer.jsp" />
+        <jsp:include page="../footer/footer.jsp" />
         </div>
     </div>
 
