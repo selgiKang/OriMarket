@@ -29,7 +29,8 @@ public class OrderService {
 
 
 
-       /* public Order kakaoPayReady() {
+       /*
+       public Order kakaoPayReady() {
 
 
             RestTemplate restTemplate = new RestTemplate();
@@ -67,4 +68,5 @@ public class OrderService {
            return order;
 
         }
+        */
 }
