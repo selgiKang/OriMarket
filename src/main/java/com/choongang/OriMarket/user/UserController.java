@@ -81,4 +81,11 @@ public class UserController {
         return "user/Alllist";
     }
 
+
+    @GetMapping("/order_list")
+    public String order_list() {
+        return "user/order_list";
+    }
+
+
 };
