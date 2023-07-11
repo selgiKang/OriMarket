@@ -17,11 +17,11 @@ public class OrderController {
     @GetMapping("/order_delivery")
     public String order(){return "order/order_delivery";}
     @GetMapping("/order_paymentPage")
-    public String order_paymentPage(){return "order/order_paymentPage";}
+    public String orderPaymentPage(){return "order/order_paymentPage";}
     @GetMapping("/order_receipt")
-    public String order_receipt(){return "order/order_receipt";}
+    public String orderReceipt(){return "order/order_receipt";}
     @GetMapping("/order_pastorder")
-    public String order_pastorder(){return "order/order_pastorder";}
+    public String orderPastorder(){return "order/order_pastorder";}
 
 
 }

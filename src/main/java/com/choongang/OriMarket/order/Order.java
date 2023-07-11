@@ -18,25 +18,25 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long orderNumber;
 
-    @Column(name="order_menu_name")
+    @Column
     private String orderMenuName;
 
-    @Column(name="order_user_id")
+    @Column
     private String orderUserId;
 
-    @Column(name="oder_address_number")
+    @Column
     private Integer orderAddressNumber;
 
-    @Column(name="order_totalPrice")
+    @Column
     private Integer orderTotalPrice;
 
-    @Column(name="order_date")
+    @Column
     private Date orderDate;
 
-    @Column(name="order_type")
+    @Column
     private String orderType;
 
-    @Column(name="order_requests")
+    @Column
     private String orderRequests;
 
 
