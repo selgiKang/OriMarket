@@ -19,11 +19,11 @@
 			<!-- 2023-07-07 if문으로 색상 변경: -->
 			<!-- 상품 준비중 -->
 			<c:if test="${sessionScope.rts_order_ing eq 0 }">
-				<li><i class="fa-sharp fa-regular fa-circle" style="color: #b8b8b8;"></i></li>
+				<li><i class="fa-sharp fa-regular fa-circle" style="color: #46A973;"></i></li>
 				<li class="orderDelivery_li_1">상품 준비중</li>
 			</c:if>
 			<c:if test="${sessionScope.rts_order_ing eq 1 }">
-				<li><i class="fa-sharp fa-regular fa-circle" style="color: #b8b8b8;"></i></li>
+				<li><i class="fa-sharp fa-regular fa-circle" style="color: #46A973;"></i></li>
 				<li class="orderDelivery_li_1">상품 준비중</li>
 			</c:if>
 			<!-- 픽업중 -->
@@ -55,9 +55,10 @@
 			<table id="orderDelivery_table_3">
 				<tr><td class="orderDelivery_table3_td_1">요청사항</td><td class="orderDelivery_table3_td_1">아보카도는 숙성이 많이 된 걸로 주세요</td>
 				<tr><td class="orderDelivery_table3_td_1">배달 기사님께</td><td class="orderDelivery_table3_td_1">집 앞에서 연락주세요.</td></tr>
-				<tr><td id="orderDelivery_table3_total_td_1">총 금액</td><td id="orderDelivery_table3_total_td_2">23,000원</td></tr>
+				<tr><td id="orderDelivery_table3_total_td_1">총 금액</td><td id="orderDelivery_table3_total_td_2">23,000원666</td></tr>
 			</table>
 			
 		</div>
 	</main>
 </body>
+</html>

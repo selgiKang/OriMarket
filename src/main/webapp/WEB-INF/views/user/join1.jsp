@@ -7,7 +7,8 @@
     <title>title</title>
 </head>
 <body>
-
+    <inpu></inpu>
 </form>
+
 </body>
 </html>
