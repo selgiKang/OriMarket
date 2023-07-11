@@ -2,13 +2,13 @@ package com.choongang.OriMarket.order;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.client.RestTemplate;
 
 import javax.servlet.http.HttpSession;
@@ -19,7 +19,7 @@ import java.net.URI;
 @RequiredArgsConstructor
 //추상화 역할 라이브러리
 @Slf4j
-public class OrderServic(HttpSession session) {
+public class OrderService {
 
     @Autowired
     private  final OrderRepository orderRepository;
@@ -29,7 +29,7 @@ public class OrderServic(HttpSession session) {
 
 
 
-        public Order kakaoPayReady() {
+       /* public Order kakaoPayReady() {
 
 
             RestTemplate restTemplate = new RestTemplate();
@@ -63,8 +63,9 @@ public class OrderServic(HttpSession session) {
            order = restTemplate.postForObject(
                    "https://kapi.kakao.com/v1/payment/ready",
                    requestEntity,
-                   KakaoReadyResponse.class);
+                   orderRepository.class);
            return order;
 
-        }
+        }*/
 }
+
