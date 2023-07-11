@@ -7,7 +7,6 @@
   <link rel="stylesheet" type="text/css" href="../../css/user/join.css">
 
   <script src="../../js/user/join.js"></script>
-
 </head>
 
 
@@ -21,11 +20,11 @@
   </div>
 
 
-  <form>
+  <form action="/join" method="post">
     <div class="form_field">
       <label for="id">아이디</label>
       <div class="input_container">
-        <input type="text" id="id" name="id" required>
+        <input type="text" id="id" name="userId" required>
         <div class="btn_container">
           <button type="button" class="btn_round" onclick="checkDuplicate()"
                   style="border-radius: 20px;
@@ -40,26 +39,30 @@
     </div>
     <div class="form_field">
       <label for="password">비밀번호</label>
-      <input type="password" id="password" name="password" required>
+      <input type="password" id="password" name="userPassword" required>
     </div>
     <div class="form_field">
       <label for="name">이름</label>
-      <input type="text" id="name" name="name" required>
+      <input type="text" id="name" name="userName" required>
+    </div>
+    <div class="form_field">
+      <label for="name">닉네임</label>
+      <input type="text" id="nickname" name="userNickname" required>
     </div>
     <div class="form_field">
       <label for="phone">휴대폰</label>
-      <input type="tel" id="phone" name="phone" required>
+      <input type="tel" id="phone" name="userPhone" required>
     </div>
     <div class="form_field">
       <label for="email">이메일</label>
-      <input type="email" id="email" name="email" required>
+      <input type="email" id="email" name="userEmail" required>
     </div>
 
 
     <div class="form_field">
-      <label for="address">주소</label>
+      <label for="address_kakao">주소</label>
       <div class="input_container">
-        <input type="text" id="address_kakao" name="address" required>
+        <input type="text" id="address_kakao" name="userAddress" required>
         <div class="btn_container">
           <button type="button" class="btn_round" onclick="searchAddress()"
                   style="border-radius: 20px; padding: 5px 10px; background-color: #ffbf41; color: white; border: none; font-size: 14px; cursor: pointer; font-family: 'omyu pretty', Arial, sans-serif;">주소검색
@@ -70,7 +73,7 @@
 
     <div class="form_field">
       <label for="address_detail"></label>
-      <input type="text" id="address_detail" name="address_detail" placeholder="상세주소를 입력해주세요" required>
+      <input type="text" id="address_detail" name="userAddressDetail" placeholder="상세주소를 입력해주세요" required>
     </div>
 
 

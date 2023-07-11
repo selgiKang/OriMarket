@@ -12,7 +12,7 @@
 </head>
 <body>
 	<div id= "paymentpage_main">
-		<form action="" name="">
+		<form action="/kakaoPay" method="post">
 			<div id="paymentpage_title">
 				<%-- 전 페이지 돌아가기--%>
 				<a href="#"><i class="fas fa-solid fa-arrow-left" style="color: #46a973;"></i></a>
@@ -123,3 +123,4 @@
 		</form>
 	</div>
 </body>
+</html>

@@ -2,14 +2,11 @@ package com.choongang.OriMarket.order;
 
 import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "order")
+@Table(name = "orders")
 @Getter
 @Setter
 @AllArgsConstructor
@@ -18,28 +15,30 @@ public class Order {
 
     @Id
     @Column(name = "order_number", nullable = false)
-    private String order_number;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long orderNumber;
 
-    @Column(name="order_menu_name")
-    private String order_menu_name;
+    @Column
+    private String orderMenuName;
 
-    @Column(name="order_user_id")
-    private String order_user_id;
+    @Column
+    private String orderUserId;
 
-    @Column(name="oder_address_number")
-    private Integer order_address_number;
+    @Column
+    private Integer orderAddressNumber;
 
-    @Column(name="order_totalPrice")
-    private Integer order_totalPrice;
+    @Column
+    private Integer orderTotalPrice;
 
-    @Column(name="order_date")
-    private Date order_date;
+    @Column
+    private Date orderDate;
 
-    @Column(name="order_type")
-    private String order_type;
+    @Column
+    private String orderType;
 
-    @Column(name="order_requests")
-    private String order_requests;
+    @Column
+    private String orderRequests;
 
-
+    @Transient
+    private String next_redirect_pc_url;
 }

@@ -10,10 +10,9 @@
 <body>
     <form method="post" action="/login">
     ID :<input type="text" name="userId"><br>
-    PASSWORD :<input type="text" name="pw"><br>
+    PASSWORD :<input type="text" name="userPassword"><br>
     <button type="submit">제출</button>
     <a href="/join">회원가입</a>
-
 </form>
 </body>
 </html>
