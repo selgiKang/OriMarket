@@ -10,9 +10,10 @@
     <h2>로그인성공</h2>
     <script>
         window.onload = function() {
-            var userId = "<%= request.getAttribute("userId") %>"; // 모델에 담긴 닉네임 값을 가져옴
-            alert(userId + "님 환영합니다!");
+            var userId = "<%= session.getAttribute("userId") %>"; // 모델에 담긴 닉네임 값을 가져옴
+            alert(${userName} + "님 환영합니다!");
         }
     </script>
+    <h3>${userName}님 환영합니다.</h3>
 </body>
 </html>

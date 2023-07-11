@@ -5,6 +5,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpSession;
+
 @Service
 @RequiredArgsConstructor
 @Slf4j
@@ -13,7 +15,7 @@ public class UserService {
     @Autowired
     private final UserRepository userRepository;
 
-    public boolean login(User member) {
+    public boolean login(User member,HttpSession session) {
 
         User findUser = userRepository.findByUserId(member.getUserId());
 
@@ -24,21 +26,21 @@ public class UserService {
         if(!findUser.getUserPassword().equals(member.getUserPassword())){
             return false;
         }
-
+        session.setAttribute("userName",findUser.getUserName());
         return true;
 
     }
 
-   public boolean join(User user){
+   public boolean join(User user) {
 
        User savedUser = userRepository.save(user);
 
-       if(savedUser == null){
+       if (savedUser == null) {
            return false;
-       }else {
+       } else {
            return true;
        }
-
    }
+
 
 };
