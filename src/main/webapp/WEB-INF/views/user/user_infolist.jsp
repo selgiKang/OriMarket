@@ -42,7 +42,7 @@
             </table>
             <table id="infolist_table_2">
                 <td><button id="infolist_btn_edit">회원 정보 수정</button></td>
-                <td><button id="infolist_btn_delete">회원 탈퇴</button></td>
+                <td><button id="infolist_btn_delete" onclick="">회원 탈퇴</button></td>
             </table>
         </div>
     </form>

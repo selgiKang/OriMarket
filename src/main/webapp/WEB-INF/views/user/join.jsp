@@ -73,7 +73,7 @@
 
     <div class="form_field">
       <label for="address_detail"></label>
-      <input type="text" id="address_detail" name="user_address_detail" placeholder="상세주소를 입력해주세요" required>
+      <input type="text" id="address_detail" name="userAddressDetail" placeholder="상세주소를 입력해주세요" required>
     </div>
 
 

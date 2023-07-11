@@ -32,6 +32,12 @@ public class UserService {
         session.setAttribute("userName",findUser.getUserName());
         session.setAttribute("userID",findUser.getUserId());
         session.setAttribute("userPassword",findUser.getUserPassword());
+        session.setAttribute("userNickname",findUser.getUserNickname());
+        session.setAttribute("userPhone",findUser.getUserPhone());
+        session.setAttribute("userEmail",findUser.getUserEmail());
+        session.setAttribute("userAddress",findUser.getUserAddress());
+        session.setAttribute("userAddressDetail",findUser.getUserAddressDetail());
+
         return true;
 
     }
