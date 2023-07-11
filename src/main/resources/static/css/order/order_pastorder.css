@@ -97,3 +97,6 @@ small{
     width: 0;
     height: 0;
 }
+#order_pastorder:hover {
+    cursor: pointer;
+}

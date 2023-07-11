@@ -19,7 +19,10 @@ public class OrderController {
     @GetMapping("/order_paymentPage")
     public String orderPaymentPage(){return "order/order_paymentPage";}
     @GetMapping("/order_receipt")
-    public String orderReceipt(){return "order/order_receipt";}
+    public String orderReceipt(){
+
+        return "order/order_receipt";
+    }
     @GetMapping("/order_pastorder")
     public String orderPastorder(){return "order/order_pastorder";}
 

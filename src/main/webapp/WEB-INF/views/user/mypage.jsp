@@ -29,7 +29,7 @@
                 </div>
             </div>
             <span class="separator"></span> <!-- Separator -->
-            <div>
+            <div id="order_pastorder" onclick="location.href='/order_pastorder'">
                 <div class="main_box_icon">
                     <img src="" width="50px" height="50px">
                 </div>

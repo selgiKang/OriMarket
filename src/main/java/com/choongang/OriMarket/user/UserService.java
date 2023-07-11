@@ -28,7 +28,7 @@ public class UserService {
         if(!findUser.getUserPassword().equals(member.getUserPassword())){
             return false;
         }
-
+        session.setAttribute("userSeq",findUser.getUserSeq());
         session.setAttribute("userName",findUser.getUserName());
         session.setAttribute("userId",findUser.getUserId());
         session.setAttribute("userPassword",findUser.getUserPassword());
@@ -49,6 +49,7 @@ public class UserService {
 
            return false;
        } else {
+           session.setAttribute("userSeq",savedUser.getUserSeq());
            session.setAttribute("userName",savedUser.getUserName());
            session.setAttribute("userId",savedUser.getUserId());
            session.setAttribute("userPassword",savedUser.getUserPassword());
