@@ -71,4 +71,10 @@ public class UserController {
         return "user/join";
     }
 
+
+    @GetMapping("/order_list")
+    public String order_page() {
+        return "user/order_list";
+    }
+
 };
