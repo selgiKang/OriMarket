@@ -39,5 +39,6 @@ public class Order {
     @Column
     private String orderRequests;
 
-
+    @Transient
+    private String next_redirect_pc_url;
 }
