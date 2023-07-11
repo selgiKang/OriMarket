@@ -15,13 +15,14 @@
         <div id="infolist_main">
             <h2>${userNickname}님 회원 정보</h2>
             <table id="infolist_table_1">
+                <input type="hidden" name="userSeq" value="${userSeq}">
                 <tr>
                     <td class="infolist_table_td_1">아 이 디</td>
-                    <td class="infolist_table_td_2"><input type="text" name="userId" value="${userId}" disabled></td>
+                    <td class="infolist_table_td_2"><input type="text" name="userId" value="${userId}" readonly></td>
                 </tr>
                 <tr>
                     <td class="infolist_table_td_1">이 름</td>
-                    <td class="infolist_table_td_2"><input type="text" name="userName" value="${userName}" disabled></td>
+                    <td class="infolist_table_td_2"><input type="text" name="userName" value="${userName}" readonly></td>
                 </tr>
                 <tr>
                     <td class="infolist_table_td_1">닉 네 임</td>
