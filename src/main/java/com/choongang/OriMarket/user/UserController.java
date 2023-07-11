@@ -30,7 +30,7 @@ public class UserController {
     }
     @GetMapping("/update")
     public String update() {
-        return "user/update";
+        return "user/user_infolist_edit";
     }
     @GetMapping("/delete")
     public String delete() {
@@ -63,12 +63,21 @@ public class UserController {
     }
 
     @PostMapping("/join")
-    public String joinUser(@ModelAttribute User user) {
+    public String joinUser(@ModelAttribute User user, HttpSession session) {
 
-        if(userService.join(user)){
+        if(userService.join(user,session)){
             return "user/loginsuccess";
         }
         return "user/join";
+    }
+
+    @PostMapping("/update")
+    public String updateUser(@ModelAttribute User user, HttpSession session){
+
+        if(userService.join(user,session)){
+            return "user/user_infolist";
+        }
+        return "user/user_infolist_edit";
     }
 
 };

@@ -30,7 +30,7 @@ public class UserService {
         }
 
         session.setAttribute("userName",findUser.getUserName());
-        session.setAttribute("userID",findUser.getUserId());
+        session.setAttribute("userId",findUser.getUserId());
         session.setAttribute("userPassword",findUser.getUserPassword());
         session.setAttribute("userNickname",findUser.getUserNickname());
         session.setAttribute("userPhone",findUser.getUserPhone());
@@ -39,19 +39,30 @@ public class UserService {
         session.setAttribute("userAddressDetail",findUser.getUserAddressDetail());
 
         return true;
-
     }
 
-   public boolean join(User user) {
+   public boolean join(User user, HttpSession session) {
 
        User savedUser = userRepository.save(user);
 
        if (savedUser == null) {
+
            return false;
        } else {
+           session.setAttribute("userName",savedUser.getUserName());
+           session.setAttribute("userId",savedUser.getUserId());
+           session.setAttribute("userPassword",savedUser.getUserPassword());
+           session.setAttribute("userNickname",savedUser.getUserNickname());
+           session.setAttribute("userPhone",savedUser.getUserPhone());
+           session.setAttribute("userEmail",savedUser.getUserEmail());
+           session.setAttribute("userAddress",savedUser.getUserAddress());
+           session.setAttribute("userAddressDetail",savedUser.getUserAddressDetail());
+
            return true;
        }
    }
+
+
 
 
 };
