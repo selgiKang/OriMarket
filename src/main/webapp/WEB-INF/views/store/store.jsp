@@ -69,7 +69,7 @@
     </section>
 
     <section class="container">
-        <div class="menu">
+        <div class="menu" onclick="location.href='/detailmenu'">
             <div class="menu-content">
                 <h2>칼국수</h2>
                 <h6>인공 조미료를 쓰지 않고 순수 천연재료로 만들어 시원한 바다맛을 느낄 수 있는 착한 생 칼국수 대표 메뉴!</h6>

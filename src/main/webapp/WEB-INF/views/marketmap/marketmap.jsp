@@ -62,7 +62,7 @@
         <img src="../../img/marketmap/singsing.png">
         <span>싱싱과일나라2</span>
     </a>
-    <a class="store3" href="#">
+    <a class="store3" href="/store">
         <img src="../../img/marketmap/singsing.png">
         <span>싱싱과일나라3</span>
     </a>
