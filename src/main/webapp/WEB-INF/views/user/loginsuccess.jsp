@@ -8,5 +8,11 @@
 </head>
 <body>
     <h2>로그인성공</h2>
+    <script>
+        window.onload = function() {
+            var nickname = "${nickname}"; // 모델에 담긴 닉네임 값을 가져옴
+            alert(nickname + "님 환영합니다!");
+        }
+    </script>
 </body>
 </html>
