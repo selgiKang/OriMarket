@@ -29,7 +29,7 @@
         </ul>
         <h3 style="text-align: left;">합계: 1000만원</h3>
         <div id="div1">재주문하기...</div>
-        <div id="div2" onclick="location.href='/order_receipt.jsp'">영수증 보기</div>
+        <div id="div2" onclick="location.href='/order_receipt'">영수증 보기</div>
     </div>
 
     <div id="order_1">

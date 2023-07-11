@@ -20,7 +20,7 @@ import java.net.URI;
 //추상화 역할 라이브러리
 @Slf4j
 public class OrderService {
-    /*(HttpSession session)*/
+
     @Autowired
     private  final OrderRepository orderRepository;
     static final String cid = "TC0ONETIME";
@@ -28,8 +28,9 @@ public class OrderService {
     private  Order order;
 
 
-/*
-        public Order kakaoPayReady() {
+
+       /*
+       public Order kakaoPayReady() {
 
 
             RestTemplate restTemplate = new RestTemplate();
@@ -66,5 +67,5 @@ public class OrderService {
                    KakaoReadyResponse.class);
            return order;
 
-        }*/
+        }
 }

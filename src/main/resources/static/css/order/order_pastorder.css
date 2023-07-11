@@ -6,6 +6,7 @@
     padding: 0;
 }
 #order {
+    margin: 0 auto;
     width: 315px;
     height: 772px;
     background-color: rgb(245,245,245);
@@ -87,6 +88,7 @@ footer{
     top: 772px;
     text-align: center;
     height: 40px;
+    left: auto;
 }
 small{
     color: red;
