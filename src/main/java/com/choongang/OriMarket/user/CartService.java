@@ -1,3 +1,4 @@
+/*
 package com.choongang.OriMarket.user;
 
 import com.choongang.OriMarket.order.OrderService;
@@ -17,6 +18,7 @@ public class CartService {
     private final CartItemRepository cartItemRepository;
     private final OrderService orderService;
     //private final ItemRepsitory itemRepository;
+*/
 /*
     public Long addCart(CartItem cartItem, String userId){
        아이템레포지토리에서 해당아이템id, 유저레포지토리에서 해당 유저id검색
@@ -28,5 +30,7 @@ public class CartService {
 
     }
 
- */
+ *//*
+
 }
+*/

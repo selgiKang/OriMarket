@@ -1,3 +1,4 @@
+/*
 package com.choongang.OriMarket.RealTimeStatus;
 
 import lombok.RequiredArgsConstructor;
@@ -27,3 +28,4 @@ public class RealTimeService {
     }
 
 }
+*/

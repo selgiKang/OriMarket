@@ -1,3 +1,4 @@
+/*
 package com.choongang.OriMarket.RealTimeStatus;
 
 import lombok.*;
@@ -38,3 +39,4 @@ public class RealTimeStatus {
     private int rtsRiderFinish=0;
 
 }
+*/
