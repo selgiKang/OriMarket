@@ -10,6 +10,10 @@
 <link rel= "stylesheet" href= "../../css/order/order_delivery.css">
 </head>
 <body>
+	<FORM action="/accept" method="post">
+		<INPUT TYPE="hidden" name="orderNumber" value="${orderNumber}">
+		<input type="submit" value="주문수락">
+	</FORM>
 	<main id="orderDelivery_main">
 		<div id="orderDelivery_btn_cancel"><a href="#"><i class="fas fa-regular fa-xmark"></i></a></div>
 		<h2>실시간 주문 내역</h2>

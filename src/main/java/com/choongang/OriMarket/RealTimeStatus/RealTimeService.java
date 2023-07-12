@@ -3,8 +3,10 @@ package com.choongang.OriMarket.RealTimeStatus;
 import com.choongang.OriMarket.order.Order;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.aspectj.weaver.ast.Or;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
 import javax.servlet.http.HttpSession;
 
@@ -27,14 +29,19 @@ public class RealTimeService {
         }
     }
 
-    public boolean update1(HttpSession session){
-
-        RealTimeStatus a = rtsRepository.findByorderNumber(String.valueOf(session.getAttribute("orderNumber")));
+    public boolean update1(Order order, Model model,HttpSession session){
+        RealTimeStatus a = rtsRepository.findByorderNumber(order);
         a.setRtsOrderIng(1);
-        if(rtsRepository.save(a) == null){
+        RealTimeStatus save = rtsRepository.save(a);
+        if(save == null){
+
             return false;
+        }else {
+            session.setAttribute("a",save.getRtsOrderIng());
+            return true;
         }
-        return true;
+
+
     }
    /* public void update2(RealTimeStatus orderNumber){
         RealTimeStatus a = rtsRepository.findByorderNumber();

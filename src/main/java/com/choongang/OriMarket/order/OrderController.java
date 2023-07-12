@@ -3,6 +3,7 @@ package com.choongang.OriMarket.order;
 
 import com.choongang.OriMarket.RealTimeStatus.RealTimeService;
 import com.choongang.OriMarket.RealTimeStatus.RealTimeStatus;
+import com.choongang.OriMarket.RealTimeStatus.RealTimeStatusDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -41,7 +42,7 @@ public class OrderController {
     public String orderPastorder(){return "order/order_pastorder";}
 
     @PostMapping("/order_paymentPage")
-    public String orderDelivery(@ModelAttribute Order order, @ModelAttribute RealTimeStatus rts, HttpSession session, @RequestParam("orderNumber")String orderNumberStr, Model model){
+    public String orderDelivery(@ModelAttribute Order order, @ModelAttribute RealTimeStatus rts, HttpSession session, @RequestParam("orderNumber")String orderNumberStr, Model model, RealTimeStatusDto dto){
 
         order.setOrderNumber(orderNumberStr);
         session.setAttribute("orderNumber",orderNumberStr);
@@ -56,7 +57,8 @@ public class OrderController {
             
             //배달 내역 db에 저장
             if (realTimeService.insertRts(rts)){
-                model.addAttribute("rtsOrderIng",rts.getRtsOrderIng());
+                dto.setRtsOrderIng(rts.getRtsOrderIng());
+                model.addAttribute("rtsOrderIng",dto.getRtsOrderIng());
                 return "order/order_delivery";
             }else{
                 return "order/order_paymentPage";

@@ -1,4 +1,5 @@
 package com.choongang.OriMarket.user;
+/*
 
 import ch.qos.logback.core.encoder.EchoEncoder;
 import lombok.RequiredArgsConstructor;
@@ -35,13 +36,21 @@ public class CartController {
    @GetMapping("/cart/{userId}")
     public String cartPage(@RequestParam("userId") String id, HttpSession session,Model model) {
 
-       /*로그인되어있는 유저에 해당하는 장바구니 가져오기*/
+       */
+/*로그인되어있는 유저에 해당하는 장바구니 가져오기*//*
 
-       /*장바구니에 들어있는 아이템 모두 가져오기*/
 
-       /*장바구니에 들어있는 상품들의 총 가격*/
+       */
+/*장바구니에 들어있는 아이템 모두 가져오기*//*
 
-       /*model.addAttribute 로 가격,수량,cartItems,user 저장*/
+
+       */
+/*장바구니에 들어있는 상품들의 총 가격*//*
+
+
+       */
+/*model.addAttribute 로 가격,수량,cartItems,user 저장*//*
+
 
        return "user/cart";
    }
@@ -51,7 +60,9 @@ public class CartController {
     @PostMapping(value = "/cart")
     public @ResponseBody ResponseEntity addCartItem(@RequestBody @Valid CartItem cartItem, BindingResult bindingResult, HttpSession session){
 
-       /*장바구니에 담을 상품 정보를 받는 cartItem객체에 데이터바인딩시 에러가 있는지 검사*/
+       */
+/*장바구니에 담을 상품 정보를 받는 cartItem객체에 데이터바인딩시 에러가 있는지 검사*//*
+
         if (bindingResult.hasErrors()){
             StringBuilder sb = new StringBuilder();
             List<FieldError> fieldErrors = bindingResult.getFieldErrors();
@@ -60,7 +71,9 @@ public class CartController {
             }
             return new ResponseEntity<String>(sb.toString(), HttpStatus.BAD_REQUEST);
         }
-        /*현재 로그인한 회원의 정보를 변수에 저장 */
+        */
+/*현재 로그인한 회원의 정보를 변수에 저장 *//*
+
         String userId = (String)session.getAttribute("userId");
         Long cartItemId;
 
@@ -73,4 +86,4 @@ public class CartController {
     }
 
 
-}
+}*/

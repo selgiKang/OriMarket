@@ -6,7 +6,7 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "orders")
+@Table (name = "orders")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -54,7 +54,7 @@ public class Order {
     //물건 총 가격
     @Column
     private String orderGoodsTotalPrice;
-    
+
     //배송비
     @Column
     private  String orderDeliveryPrice;
@@ -66,7 +66,7 @@ public class Order {
     //배달기사 요청사항
     @Column
     private String forRider;
-    
+
     @Transient
     private String next_redirect_pc_url;
 }

@@ -1,3 +1,4 @@
+/*
 package com.choongang.OriMarket.user;
 
 import com.choongang.OriMarket.order.OrderService;
@@ -20,13 +21,15 @@ public class CartService {
     private final OrderService orderService;
     private final ItemRepository itemRepository;
 
+*/
 /*
        ItemRepository에서 해당Itemid, UserRepository에서 해당 Userid검색
         * CartRepository에서 Userid로 검색해서 만약 카트가 null이라면 >>> createcart
 
         CartItemRepository에서 저장된 카트아이템검색(CartId,Itemid)
         * 저장된 카트아이템이 null이 아니라면 addCount, null이라면 createCartItem
- */
+ *//*
+
 
 
 
@@ -39,15 +42,19 @@ public class CartService {
         if(cart ==null){
             cart = Cart.createCart(user);
 
-            /*save() 트랜잭션커밋시점에 파라미터 엔티티의 값과 1차 캐시에 저장되어 있는 엔티티의 값을 비교하여
-            * 다른 점이 있을 경우 UPDATE쿼리가 발생, DB에 해당 값이 없을 경우 INSERT쿼리발생. */
+            */
+/*save() 트랜잭션커밋시점에 파라미터 엔티티의 값과 1차 캐시에 저장되어 있는 엔티티의 값을 비교하여
+            * 다른 점이 있을 경우 UPDATE쿼리가 발생, DB에 해당 값이 없을 경우 INSERT쿼리발생. *//*
+
             cartRepository.save(cart);
         }
         CartItem savedCartItem = cartItemRepository.findByCartIdAndCartItemId(cart.getCartId(),item.getItemId());
 
 
 
-/*장바구니에 기존 상품이 존재할 경우*/
+*/
+/*장바구니에 기존 상품이 존재할 경우*//*
+
 
         if(savedCartItem != null){
             savedCartItem.addCount(cItem.getCount());
@@ -67,3 +74,4 @@ public class CartService {
 
 
 }
+*/
