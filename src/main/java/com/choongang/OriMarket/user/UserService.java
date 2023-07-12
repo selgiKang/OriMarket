@@ -63,6 +63,10 @@ public class UserService {
        }
    }
 
+    public void delete(User user) {
+        User byUserId = userRepository.findByUserId(user.getUserId());
+        userRepository.delete(byUserId);
+    }
 
 
 
