@@ -21,7 +21,6 @@
 
         body {
             margin: 0 auto;
-            margin: 10px;
         }
 
         .line {
@@ -187,25 +186,8 @@
             margin-top: 5px;
         }
 
-        .board .title {
-            display: flex;
-            align-items: center;
-        }
 
-        .board .title .notice {
-            width: 50px;
-            height: 50px;
-            background-color: #008000;
-            color: #fff;
-            text-align: center;
-            line-height: 50px;
-            font-weight: bold;
-            margin-right: 10px;
-        }
 
-        .board .title .date {
-            color: gray;
-        }
 
         .board .content {
             margin-top: 20px;
@@ -323,14 +305,15 @@
 
             <div class="storecare_logo">
                 <h3>로고</h3>
-                <img src="../../../../resources/static/img/store/logo.jpg" alt="로고"> <!-- alt 속성 추가 -->
+                <input type="file" accept="image/*" id="logo-upload" onchange="previewLogo(event)" />
+                <div id="logo-preview"></div>
             </div>
 
             <div class="line"></div>
 
             <div class="storecare_name">
                 <h3>가게 이름</h3>
-                <h4>피자헛</h4>
+                <input type="text" id="store-name-input" placeholder="가게 이름">
                 <h6>※변경이 필요한 경우 고객센터로 문의해주세요.</h6>
             </div>
 
@@ -338,22 +321,26 @@
 
             <div class="storecare_storenumber">
                 <h3>가게 번호</h3>
-                <h4>1956077</h4>
+                <input type="text" id="store-number-input" placeholder="가게 번호"/>
             </div>
 
             <div class="line"></div>
 
             <div class="storecare_category">
                 <h3>가게 카테고리</h3>
-                <h4>피자</h4>
+                <input type="text" id="store-category-input" placeholder="가게 카테고리"/>
             </div>
 
             <div class="line"></div>
 
-            <div class="storecare_loacation">
+            <div class="storecare_location">
                 <h3>실제 위치</h3>
-                <h4>서울시 관악구 어쩌구 저쩌구 12-66</h4>
+                <input type="text" id="store-location-input" placeholder="실제 위치">
             </div>
+
+            <!-- 수정 버튼으로 변경 -->
+            <div class="line"></div>
+            <button onclick="showInputData()">입력</button>
         </div>
     </div>
 
@@ -374,8 +361,6 @@
                 </div>
                 <div class="buttons">
                     <button onclick="uploadPost()">업로드</button>
-                    <button>수정</button>
-                    <button>취소</button>
                 </div>
             </div>
         </div>
@@ -470,9 +455,79 @@
             }
         }
 
+
+
+
+
+
+
+        function showInputData() {
+            var logoUpload = document.getElementById("logo-upload");
+            var storeNameInput = document.getElementById("store-name-input");
+            var storeNumberInput = document.getElementById("store-number-input");
+            var storeCategoryInput = document.getElementById("store-category-input");
+            var storeLocationInput = document.getElementById("store-location-input");
+
+            var logoPreview = document.getElementById("logo-preview");
+            var storeName = storeNameInput.value;
+            var storeNumber = storeNumberInput.value;
+            var storeCategory = storeCategoryInput.value;
+            var storeLocation = storeLocationInput.value;
+
+            // 첨부한 로고 이미지만 표시하고, 텍스트 박스는 보이지 않게 함
+            logoUpload.style.display = "none";
+            storeNameInput.style.display = "none";
+            storeNumberInput.style.display = "none";
+            storeCategoryInput.style.display = "none";
+            storeLocationInput.style.display = "none";
+
+            logoPreview.style.display = "block";
+            logoPreview.style.marginBottom = "10px";
+
+            // 입력한 데이터만 표시
+            logoPreview.innerText = ""; // 기존에 보여주던 로고 이미지 삭제
+            if (logoPreview.firstChild) {
+                logoPreview.removeChild(logoPreview.firstChild);
+            }
+
+            if (logoUpload.files.length > 0) {
+                var img = document.createElement("img");
+                img.src = URL.createObjectURL(logoUpload.files[0]);
+                img.style.maxWidth = "100%";
+                img.style.height = "auto";
+                logoPreview.appendChild(img);
+            }
+
+            // 텍스트 박스의 값을 표시하기 위해 새로운 엘리먼트를 생성하여 추가
+            var storeNameText = document.createElement("h4");
+            storeNameText.innerText = storeName;
+            storeNameInput.parentNode.appendChild(storeNameText);
+
+            var storeNumberText = document.createElement("h4");
+            storeNumberText.innerText = storeNumber;
+            storeNumberInput.parentNode.appendChild(storeNumberText);
+
+            var storeCategoryText = document.createElement("h4");
+            storeCategoryText.innerText = storeCategory;
+            storeCategoryInput.parentNode.appendChild(storeCategoryText);
+
+            var storeLocationText = document.createElement("h4");
+            storeLocationText.innerText = storeLocation;
+            storeLocationInput.parentNode.appendChild(storeLocationText);
+
+            // 텍스트 박스는 삭제
+            storeNameInput.parentNode.removeChild(storeNameInput);
+            storeNumberInput.parentNode.removeChild(storeNumberInput);
+            storeCategoryInput.parentNode.removeChild(storeCategoryInput);
+            storeLocationInput.parentNode.removeChild(storeLocationInput);
+
+            // 수정 버튼으로 변경
+            var editButton = document.querySelector(".storecare button");
+            editButton.innerText = "수정";
+        }
+
+
     </script>
-
-
 
 
 

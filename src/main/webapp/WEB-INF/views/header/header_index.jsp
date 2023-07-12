@@ -13,7 +13,7 @@
         .nav>span{float:left; margin:5px;}
         .nav>span>a{text-decoration:none; color:#eee;}
         i{color:#ffbf41; font-size:22px; margin:3px;}
-        .logo{width:100px; height:40px; margin:auto; background-color:#eee; text-align:center; font-size:28px;}
+        .logo{width:100px; height:40px; margin:auto; background-color:#eee; text-align:center; font-size:20px;}
     </style>
 </head>
 <body>
