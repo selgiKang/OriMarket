@@ -1,6 +1,6 @@
-/*
 package com.choongang.OriMarket.RealTimeStatus;
 
+import com.choongang.OriMarket.order.Order;
 import lombok.*;
 
 import javax.persistence.*;
@@ -14,13 +14,14 @@ import javax.persistence.*;
 public class RealTimeStatus {
 
     @Id
-    @Column(name="rts_number",nullable = false)
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name="order_number",nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long rtsNumber;
 
     //주문번호
-    @Column
-    private String rtsorderNumber;
+    @OneToOne
+    @JoinColumn(name="order_number")
+    private Order orderNumber;
 
 
     //픽업중
@@ -38,5 +39,11 @@ public class RealTimeStatus {
     @Builder.Default
     private int rtsRiderFinish=0;
 
+    public void setOrderNumber(Order orderNumber){
+        this.orderNumber=orderNumber;
+    }
 }
-*/
+
+
+
+

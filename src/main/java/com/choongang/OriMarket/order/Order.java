@@ -15,11 +15,10 @@ public class Order {
 
     @Id
     @Column(name = "order_number", nullable = false)
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long orderNumber;
+    private String orderNumber;
 
     @Column
-    private String orderMenuName;
+    private String orderMarketName;
 
     @Column
     private String orderUserId;
@@ -31,12 +30,13 @@ public class Order {
     private Integer orderTotalPrice;
 
     @Column
-    private Date orderDate;
+    private String orderDate;
 
     @Column
     private String orderType;
 
     //가게 이름
+    @Column
     private String orderStoreName;
 
     //물건 이름
