@@ -88,8 +88,24 @@
             border: none;
         }
 
+        .complete-button {
+            background-color: #4caf50;
+            color: white;
+            border: none;
+        }
+
         .tab-content:not(.active) .order-item {
             display: none;
+        }
+
+        .rejected-text {
+            font-size: 12px;
+            color: red;
+        }
+
+        .completed-text {
+            font-size: 12px;
+            color: #4caf50;
         }
     </style>
 </head>
@@ -98,7 +114,7 @@
     <div class="tab">
         <span class="tab-link active" data-tab="pending">주문대기</span>
         <span class="tab-link" data-tab="processing">처리중</span>
-        <span class="tab-link" data-tab="rejected">거절</span>
+        <span class="tab-link" data-tab="completed">완료</span>
     </div>
 
     <div class="order-item" data-status="pending">
@@ -114,29 +130,24 @@
         </div>
     </div>
 
-    <%--수락버튼을 누르기전에 처리탭에 아무것도 안보이게--%>
     <div class="order-item" data-status="processing" style="display: none;"></div>
-    <%--거절버튼을 누르기전에 거절탭에 아무것도 안보이게--%>
-    <div class="order-item" data-status="rejected" style="display: none;"></div>
+    <div class="order-item" data-status="completed" style="display: none;"></div>
 </div>
 
 <script>
-    //모든 탭 링크 선택
     const tabLinks = document.querySelectorAll('.tab-link');
-    //모든 주문 메뉴 선택
     const orderItems = document.querySelectorAll('.order-item');
 
     tabLinks.forEach(tabLink => {
         tabLink.addEventListener('click', () => {
-            //클릭한 탭의 data-tab 속성값 가져오기
             const tab = tabLink.getAttribute('data-tab');
 
             tabLinks.forEach(link => {
                 if (link.getAttribute('data-tab') === tab) {
-                    link.classList.add('active');       //탭 클릭된 상태일때 색변경
+                    link.classList.add('active');
                     link.style.color = '#46a973';
                 } else {
-                    link.classList.remove('active');    // 탭 미클릭된 상태일때 스타일 제거
+                    link.classList.remove('active');
                     link.style.color = '';
                 }
             });
@@ -158,14 +169,13 @@
             const currentStatus = orderItem.getAttribute('data-status');
 
             if (currentStatus === 'pending') {
-                const processingTab = document.querySelector('.tab-link[data-tab="processing"]');   //처리중 탭 선택
+                orderItem.setAttribute('data-status', 'processing');
+                const processingTab = document.querySelector('.tab-link[data-tab="processing"]');
                 processingTab.click();
-                orderItem.setAttribute('data-status', 'processing');    // 주문 메뉴 상태를 처리중으로 업데이트
 
-                //처리중 탭에 즉시 업데이트 되도록 setTimeout
-                setTimeout(() => {
-                    processingTab.click();
-                }, 0);
+                // 버튼 변경
+                const actionButtons = orderItem.querySelector('.action-buttons');
+                actionButtons.innerHTML = '<button class="complete-button">완료</button>';
             }
         });
     });
@@ -176,16 +186,32 @@
             const orderItem = button.closest('.order-item');
             const currentStatus = orderItem.getAttribute('data-status');
 
-            //주문메뉴 상태가 주문대기일때
             if (currentStatus === 'pending') {
-                const rejectedTab = document.querySelector('.tab-link[data-tab="rejected"]');
-                rejectedTab.click();
-                orderItem.setAttribute('data-status', 'rejected');
+                orderItem.setAttribute('data-status', 'completed');
+                const completedTab = document.querySelector('.tab-link[data-tab="completed"]');
+                completedTab.click();
 
-                //거절버튼 클릭후 탭표시가 즉시 되도록
-                setTimeout(() => {
-                    rejectedTab.click();
-                }, 0);
+                // 주문거절 텍스트 추가
+                const orderNumber = orderItem.querySelector('.order-number');
+                orderNumber.innerHTML += '<span class="rejected-text">주문거절</span>';
+            }
+        });
+    });
+
+    const completeButtons = document.querySelectorAll('.complete-button');
+    completeButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const orderItem = button.closest('.order-item');
+            const currentStatus = orderItem.getAttribute('data-status');
+
+            if (currentStatus === 'processing') {
+                orderItem.setAttribute('data-status', 'completed');
+                const completedTab = document.querySelector('.tab-link[data-tab="completed"]');
+                completedTab.click();
+
+                // 주문완료 텍스트 추가
+                const orderNumber = orderItem.querySelector('.order-number');
+                orderNumber.innerHTML = '주문번호 #1234<span class="completed-text">주문완료</span>';
             }
         });
     });
