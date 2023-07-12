@@ -57,6 +57,7 @@ public class OrderController {
             //배달 내역 db에 저장
             if (realTimeService.insertRts(rts)){
                 model.addAttribute("rtsOrderIng",rts.getRtsOrderIng());
+                System.out.println(rts.getRtsOrderIng());
                 return "order/order_delivery";
             }else{
                 return "order/order_paymentPage";

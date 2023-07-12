@@ -26,10 +26,15 @@ public class RealTimeController {
     }
 
     @GetMapping("/accept")
-    public String orderAccept(HttpSession session){
+    public String orderAccept(Order order, HttpSession session, Model model, RealTimeStatus rts){
 
-            if(realTimeService.update1(session)){
-                return "order/order_delivery";
+            if(realTimeService.update1(order, session)){
+                if(realTimeService.findRts(order,session)){
+                    rts.setRtsOrderIng(1);
+                    model.addAttribute("rtsOrderIng",rts.getRtsOrderIng());
+                    System.out.println("1 나오는 곳: "+rts.getRtsOrderIng());
+                    return "order/order_delivery";
+                }
             }
             return "order/order_delivery";
 

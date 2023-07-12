@@ -13,6 +13,6 @@ public interface RealTimeRepository extends JpaRepository<RealTimeStatus, Long> 
     @Query(value = "UPDATE RealTimeStatus r SET r.rtsOrderIng=1 WHERE r.orderNumber=?1")
     RealTimeStatus updateOrderNumber(String orderNumber,Integer rtsOrderIng);
 
-    RealTimeStatus findByorderNumber(String orderNumber);
+    RealTimeStatus findByorderNumber(Order orderNumber);
 
 }
