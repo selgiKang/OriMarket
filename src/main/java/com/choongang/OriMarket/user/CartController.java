@@ -1,28 +1,28 @@
-package com.choongang.OriMarket.user;
-
-import ch.qos.logback.core.encoder.EchoEncoder;
-import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
-import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.*;
-
-import javax.validation.Valid;
-import java.security.Principal;
-import java.util.List;
-
-
-@Controller
-@RequiredArgsConstructor
-public class CartController {
-
-    @Autowired
-    private final CartService cartService;
+//package com.choongang.OriMarket.user;
+//
+//import ch.qos.logback.core.encoder.EchoEncoder;
+//import lombok.RequiredArgsConstructor;
+//import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.http.HttpStatus;
+//import org.springframework.http.ResponseEntity;
+//import org.springframework.stereotype.Controller;
+//import org.springframework.ui.Model;
+//import org.springframework.validation.BindingResult;
+//import org.springframework.validation.FieldError;
+//import org.springframework.validation.annotation.Validated;
+//import org.springframework.web.bind.annotation.*;
+//
+//import javax.validation.Valid;
+//import java.security.Principal;
+//import java.util.List;
+//
+//
+//@Controller
+//@RequiredArgsConstructor
+//public class CartController {
+//
+//    @Autowired
+//    private final CartService cartService;
 /*
 
    @GetMapping("/cart")
@@ -58,5 +58,5 @@ public class CartController {
         return new ResponseEntity<Long>(cartItemId,HttpStatus.OK);
     }
 
-  */
-}
+//  */
+//}

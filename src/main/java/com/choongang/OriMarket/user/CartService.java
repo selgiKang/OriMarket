@@ -1,23 +1,23 @@
-package com.choongang.OriMarket.user;
-
-import com.choongang.OriMarket.order.OrderService;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import javax.persistence.EntityNotFoundException;
-
-@Service
-@RequiredArgsConstructor
-@Slf4j
-public class CartService {
-
-    @Autowired
-    private final UserRepository userRepository;
-    private final CartRepository cartRepository;
-    private final CartItemRepository cartItemRepository;
-    private final OrderService orderService;
+//package com.choongang.OriMarket.user;
+//
+//import com.choongang.OriMarket.order.OrderService;
+//import lombok.RequiredArgsConstructor;
+//import lombok.extern.slf4j.Slf4j;
+//import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.stereotype.Service;
+//
+//import javax.persistence.EntityNotFoundException;
+//
+//@Service
+//@RequiredArgsConstructor
+//@Slf4j
+//public class CartService {
+//
+//    @Autowired
+//    private final UserRepository userRepository;
+//    private final CartRepository cartRepository;
+//    private final CartItemRepository cartItemRepository;
+//    private final OrderService orderService;
     //private final ItemRepository itemRepository;
 /*
     public Long addCart(CartItem cartItem, String userId){
@@ -67,4 +67,4 @@ public class CartService {
 
 
 
-}
+//}
