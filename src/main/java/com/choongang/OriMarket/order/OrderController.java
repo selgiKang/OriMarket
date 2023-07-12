@@ -1,3 +1,4 @@
+/*
 package com.choongang.OriMarket.order;
 
 import com.choongang.OriMarket.RealTimeStatus.RealTimeService;
@@ -69,3 +70,4 @@ public class OrderController {
 //순번     order_Num : pk auto_intended
 //시퀀스 - 시행횟수    시퀀스넘
 }
+*/

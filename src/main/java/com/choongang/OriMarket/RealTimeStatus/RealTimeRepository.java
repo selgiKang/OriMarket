@@ -1,3 +1,4 @@
+/*
 package com.choongang.OriMarket.RealTimeStatus;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -11,3 +12,4 @@ public interface RealTimeRepository extends JpaRepository<RealTimeStatus, Long> 
 //    RealTimeStatus updateOrderNumber(String orderNumber,Integer rtsOrderIng);
 
 }
+*/
