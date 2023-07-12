@@ -14,9 +14,9 @@ import javax.persistence.*;
 public class CartItem {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "cartItemId")
-    private Long itemId;
+    private Long cartItemId;
 
     @ManyToOne
     @JoinColumn(name = "cartId")
@@ -32,13 +32,12 @@ public class CartItem {
     public static CartItem createCartItem(Cart cart,Item item, int count){
         CartItem cartItem = new CartItem();
         cartItem.setCart(cart);
-        cartItem.setItem(item);
+        cartItem.setItemId(item);
         cartItem.setCount(count);
         return cartItem;
 
     }
 */
-
 
     /*장바구니에 담을 수량을 증가시켜주는 메소드 추가*/
     public void addCount(int count){
