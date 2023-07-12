@@ -10,7 +10,7 @@
 <link rel= "stylesheet" href= "../../css/order/order_delivery.css">
 </head>
 <body>
-	<FORM action="/accept" method="post">
+	<FORM action="/accept" method="get">
 		<INPUT TYPE="hidden" name="orderNumber" value="${orderNumber}">
 		<input type="submit" value="주문수락">
 	</FORM>

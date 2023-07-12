@@ -32,6 +32,7 @@ public class RealTimeService {
         order.setOrderNumber(String.valueOf(session.getAttribute("orderNumber")));
         RealTimeStatus a = rtsRepository.findByorderNumber(order);
         a.setRtsOrderIng(1);
+        System.out.println("실험:"+a.getRtsOrderIng());
         if(rtsRepository.save(a) == null){
             return false;
         }
