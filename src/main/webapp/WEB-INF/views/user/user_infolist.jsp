@@ -41,7 +41,13 @@
             </table>
             <table id="infolist_table_2">
                 <td><a id="infolist_btn_edit" href="/update">회원 정보 수정</a></td>
-                <td><a id="infolist_btn_delete" href="/delete?userId=${userId}">회원 탈퇴</a></td>
+                <form action="/delete" method="post">
+                <input type="hidden" name="userSeq" value="${userSeq}">
+                <input type="submit" value="삭제">
+                </form>
+                <td>
+                    <a id="infolist_btn_delete">회원 탈퇴${userSeq}</a></td></input>
+
             </table>
         </div>
 </body>

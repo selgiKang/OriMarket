@@ -63,10 +63,13 @@ public class UserService {
        }
    }
 
-    public void delete(User user) {
-        User byUserId = userRepository.findByUserId(user.getUserId());
-        userRepository.delete(byUserId);
-    }
+   public void delete(Long UserSeq){
+       System.out.println(UserSeq);
+        User user = userRepository.findById(UserSeq).orElseThrow();
+       System.out.println(user.getUserSeq());
+        userRepository.delete(user);
+   }
+
 
 
 
