@@ -19,7 +19,7 @@ public class RealTimeStatus {
 
     //주문번호
     @Column
-    private String rtsorderNumber;
+    private String rtsOrderNumber;
 
 
     //픽업중
