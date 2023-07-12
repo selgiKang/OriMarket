@@ -27,6 +27,25 @@ public class RealTimeService {
         }
     }
 
+    public boolean update1(HttpSession session){
+
+        RealTimeStatus a = rtsRepository.findByorderNumber(String.valueOf(session.getAttribute("orderNumber")));
+        a.setRtsOrderIng(1);
+        if(rtsRepository.save(a) == null){
+            return false;
+        }
+        return true;
+    }
+   /* public void update2(RealTimeStatus orderNumber){
+        RealTimeStatus a = rtsRepository.findByorderNumber();
+        a.setRtsRiderIng(1);
+    }public void update3(RealTimeStatus orderNumber){
+        RealTimeStatus a = rtsRepository.findByorderNumber();
+        a.setRtsRiderFinish(1);
+    }*/
+
+
+
 
 
 }

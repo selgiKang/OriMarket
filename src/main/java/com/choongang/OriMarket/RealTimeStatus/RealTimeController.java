@@ -10,6 +10,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
+import javax.servlet.http.HttpSession;
+
 @Controller
 @Slf4j
 public class RealTimeController {
@@ -24,15 +26,9 @@ public class RealTimeController {
     }
 
     @GetMapping("/accept")
-    public String orderAccept(@ModelAttribute Order order, @ModelAttribute RealTimeStatus rts, Model model){
+    public String orderAccept(HttpSession session){
 
-
-            rts.setRtsOrderIng(1);
-            rts.setRtsRiderIng(0);
-            rts.setRtsRiderFinish(0);
-
-            if(realTimeService.insertRts(rts)){
-                model.addAttribute("rtsOrderIng",rts.getRtsOrderIng());
+            if(realTimeService.update1(session)){
                 return "order/order_delivery";
             }
             return "order/order_delivery";
