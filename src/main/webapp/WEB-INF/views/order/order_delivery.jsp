@@ -18,11 +18,11 @@
 			<!-- 2023-07-04 스크립트로 값 들어오면 아이콘 변경되게 추후 적용 -->
 			<!-- 2023-07-07 if문으로 색상 변경: -->
 			<!-- 픽업중 -->
-			<c:if test="${rtsOrderIng eq '0' }">
+			<c:if test="${rtsOrderIng eq 0 }">
 				<li><i class="fa-sharp fa-regular fa-circle" style="color: #b8b8b8;"></i></li>
 				<li class="orderDelivery_li_1">픽업중</li>
 			</c:if>
-			<c:if test="${rtsOrderIng eq '1' }">
+			<c:if test="${rtsOrderIng eq 1 }">
 				<li><i class="fa-sharp fa-regular fa-circle" style="color: #46a973;"></i></li>
 				<li class="orderDelivery_li_1">픽업중</li>
 			</c:if>

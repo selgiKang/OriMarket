@@ -26,18 +26,15 @@ public class RealTimeStatus {
 
     //픽업중
     @Column
-    @Builder.Default
-    private  int rtsOrderIng=0;
+    private  int rtsOrderIng;
 
     //배송중
     @Column
-    @Builder.Default
-    private int rtsRiderIng=0;
+    private int rtsRiderIng;
     
     //배달 완료
     @Column
-    @Builder.Default
-    private int rtsRiderFinish=0;
+    private int rtsRiderFinish;
 
     public void setOrderNumber(Order orderNumber){
         this.orderNumber=orderNumber;
