@@ -14,7 +14,7 @@ import javax.persistence.*;
 public class RealTimeStatus {
 
     @Id
-    @Column(name="order_number",nullable = false)
+    @Column(name="rtsNumber",nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long rtsNumber;
 
