@@ -1,3 +1,4 @@
+/*
 package com.choongang.OriMarket.user;
 
 import com.choongang.OriMarket.order.OrderService;
@@ -19,6 +20,7 @@ public class CartService {
     private final CartItemRepository cartItemRepository;
     private final OrderService orderService;
     //private final ItemRepository itemRepository;
+*/
 /*
     public Long addCart(CartItem cartItem, String userId){
        아이템레포지토리에서 해당아이템id, 유저레포지토리에서 해당 유저id검색
@@ -30,7 +32,9 @@ public class CartService {
 
     }
 
- */
+ *//*
+
+*/
 /*
 
 
@@ -47,8 +51,12 @@ public class CartService {
         CartItem savedCartItem = cartItemRepository.findByCartIdAndCartItemId(cart.getCartId(),item.getId());
 
 
-        */
+        *//*
+
+*/
 /*장바구니에 기존 상품이 존재할 경우*//*
+*/
+/*
 
         if(savedCartItem != null){
             savedCartItem.addCount(cartItem.getCount());
@@ -61,10 +69,12 @@ public class CartService {
 
     }
 
-*/
+*//*
+
 
 
 
 
 
 }
+*/
