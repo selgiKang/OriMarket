@@ -75,7 +75,7 @@
             <span class="connextion_title clear"><img class="connextion_title_img clear" src="../../img/main/singsing.png">단골시장</span>
             <div id="connextion_market" class="clear">
                 <div class="connextion_marketbox clear">
-                    <div class="connextion_mk1_wrap"><a class="connextion_mk1" href="/marketmap"><p>신림신원시장</p></a><p>　</p></div>
+                    <div class="connextion_mk1_wrap"><a class="connextion_mk1" href="/marketmap2"><p>신림신원시장</p></a><p>　</p></div>
                     <div class="connextion_mk2_wrap"><a class="connextion_mk2" href=""><p>단골시장등록</p></a><p>+</p></div>
                     <div class="connextion_mk3_wrap"><a class="connextion_mk3" href=""><p>단골시장등록</p></a><p>+</p></div>
                     <div class="connextion_mk4_wrap"><a class="connextion_mk4" href=""><p>단골시장등록</p></a><p>+</p></div>
