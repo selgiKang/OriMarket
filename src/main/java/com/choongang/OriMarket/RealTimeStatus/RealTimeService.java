@@ -6,7 +6,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.aspectj.weaver.ast.Or;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
 
 import javax.servlet.http.HttpSession;
 
@@ -29,20 +28,26 @@ public class RealTimeService {
         }
     }
 
-    public boolean update1(Order order, Model model,HttpSession session){
+    public boolean update1(Order order,HttpSession session){
+        order.setOrderNumber(String.valueOf(session.getAttribute("orderNumber")));
         RealTimeStatus a = rtsRepository.findByorderNumber(order);
         a.setRtsOrderIng(1);
-        RealTimeStatus save = rtsRepository.save(a);
-        if(save == null){
-
+        if(rtsRepository.save(a) == null){
             return false;
-        }else {
-            session.setAttribute("a",save.getRtsOrderIng());
-            return true;
         }
-
+        return true;
 
     }
+
+    public boolean findRts(Order order,HttpSession session){
+        order.setOrderNumber(String.valueOf(session.getAttribute("orderNumber")));
+        RealTimeStatus a2 = rtsRepository.findByorderNumber(order);
+        if(a2 != null){
+            return true;
+        }
+        return false;
+    }
+
    /* public void update2(RealTimeStatus orderNumber){
         RealTimeStatus a = rtsRepository.findByorderNumber();
         a.setRtsRiderIng(1);
