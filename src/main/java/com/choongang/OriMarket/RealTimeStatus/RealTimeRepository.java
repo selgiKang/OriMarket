@@ -6,8 +6,10 @@ import org.springframework.data.jpa.repository.Query;
 
 public interface RealTimeRepository extends JpaRepository<RealTimeStatus, Long> {
 
-//    @Modifying(clearAutomatically = true, flushAutomatically = true)
-//    @Query(value="UPDATE orimarket.real_time_status r SET r.rts_order_ing=1  WHERE r.order_number= ?1")
-//    RealTimeStatus updateOrderNumber(String orderNumber,Integer rtsOrderIng);
+
+
+    @Modifying(clearAutomatically = true, flushAutomatically = true)
+    @Query(value = "UPDATE RealTimeStatus r SET r.rtsOrderIng=1 WHERE r.orderNumber=?1")
+    RealTimeStatus updateOrderNumber(String orderNumber,Integer rtsOrderIng);
 
 }
