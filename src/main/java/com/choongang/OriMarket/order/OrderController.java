@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
 
@@ -40,16 +41,18 @@ public class OrderController {
     @GetMapping("/order_pastorder")
     public String orderPastorder(){return "order/order_pastorder";}
 
-    @PostMapping("/order_delivery")
-    public String orderDelivery(@ModelAttribute Order order, @ModelAttribute RealTimeStatus rts, HttpSession session){
+    @PostMapping("/order_paymentPage")
+    public String orderDelivery(@ModelAttribute Order order, @ModelAttribute RealTimeStatus rts, HttpSession session, @RequestParam("orderNumber")String orderNumberStr){
+
+        order.setOrderNumber(orderNumberStr);
+
         if(orderService.orderDelivery(order,session)){
-            String orderNumber = (String)session.getAttribute("orderNumber");
-            //다른 테이블에 값 넣기
-            realTimeService.insertRts(rts,orderNumber);
+
             return "order/order_delivery";
+        }else{
+            return "order/order_paymentPage";
         }
-        return "order/order_paymentPage";
     }
-
-
+//순번     order_Num : pk auto_intended
+//시퀀스 - 시행횟수    시퀀스넘
 }

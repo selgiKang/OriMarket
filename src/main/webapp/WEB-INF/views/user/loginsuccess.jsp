@@ -17,5 +17,6 @@
     </script>
     <h3>${userName}님 환영합니다.</h3>
     <a href="/mypage">회원 정보</a>
+    <a href="/order_paymentPage">결제하러가기</a>
 </body>
 </html>
