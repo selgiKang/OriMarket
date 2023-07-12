@@ -17,19 +17,16 @@
 			<!-- 배달표시 circle 아이콘 -->
 			<!-- 2023-07-04 스크립트로 값 들어오면 아이콘 변경되게 추후 적용 -->
 			<!-- 2023-07-07 if문으로 색상 변경: -->
-			<!-- 상품 준비중 -->
-			<c:if test="${sessionScope.rts_order_ing eq 0 }">
-				<li><i class="fa-sharp fa-regular fa-circle" style="color: #46A973;"></i></li>
-				<li class="orderDelivery_li_1">상품 준비중</li>
-			</c:if>
-			<c:if test="${sessionScope.rts_order_ing eq 1 }">
-				<li><i class="fa-sharp fa-regular fa-circle" style="color: #46A973;"></i></li>
-				<li class="orderDelivery_li_1">상품 준비중</li>
-			</c:if>
 			<!-- 픽업중 -->
-			<li><i class="fa-sharp fa-regular fa-circle" style="color: #b8b8b8;"></i></li>
-			<li class="orderDelivery_li_1">픽업중</li>
-			<!-- 배달중 -->
+			<c:if test="${rtsOrderIng eq 0 }">
+				<li><i class="fa-sharp fa-regular fa-circle" style="color: #b8b8b8;"></i></li>
+				<li class="orderDelivery_li_1">픽업중</li>
+			</c:if>
+			<c:if test="${rtsOrderIng eq 1 }">
+				<li><i class="fa-sharp fa-regular fa-circle" style="color: #46a973;"></i></li>
+				<li class="orderDelivery_li_1">픽업중</li>
+			</c:if>
+	<!-- 배달중 -->
 			<li><i class="fa-sharp fa-regular fa-circle" style="color: #b8b8b8;"></i></li>
 			<li class="orderDelivery_li_1">배달중</li>
 			<!-- 배달완료 -->

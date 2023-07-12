@@ -1,5 +1,7 @@
 package com.choongang.OriMarket.order;
 
+import com.choongang.OriMarket.RealTimeStatus.RealTimeRepository;
+import com.choongang.OriMarket.RealTimeStatus.RealTimeStatus;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +25,7 @@ public class OrderService {
 
     @Autowired
     private  final OrderRepository orderRepository;
+
     static final String cid = "TC0ONETIME";
     static final String admin_key = "${e584b59b9f572556fbac3673883cb029}";
     private  Order order;
@@ -67,5 +70,19 @@ public class OrderService {
                    KakaoReadyResponse.class);
            return order;
 
-        }*/
+        }
+        */
+
+        public boolean orderDelivery(Order order, HttpSession session){
+            //결제하기 누르면 주문내역에 저장, 여기서 주문내역 생성됨
+            Order saveOrder = orderRepository.save(order);
+
+            if(saveOrder==null){
+                return false;
+            }else{
+                session.setAttribute("orderNumber",saveOrder.getOrderNumber());
+                return true;
+            }
+
+        }
 }
