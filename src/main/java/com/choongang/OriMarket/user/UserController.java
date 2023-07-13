@@ -88,13 +88,13 @@ public class UserController {
         return "main/main";
 
     }
-
-    @GetMapping("/userId/{userId}/exists")
-    @ResponseBody
-    public ResponseEntity<Boolean> checkUserIdDuplicate(@PathVariable String userId){
-        return ResponseEntity.ok(userService.checkUserId(userId));
-
-    }
+//
+//    @GetMapping("/userId/{userId}/exists")
+//    @ResponseBody
+//    public ResponseEntity<Boolean> checkUserIdDuplicate(@PathVariable String userId){
+//        return ResponseEntity.ok(userService.checkUserId(userId));
+//
+//    }
 
     @PostMapping("/delete")
     public String deleteUser(@ModelAttribute User user){
