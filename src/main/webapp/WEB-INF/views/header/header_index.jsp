@@ -14,10 +14,10 @@
     <div class="logo"><a href="/">Ori Market</a></div>
 
     <div class="nav">
-        <span><a href="#">주소검색</a></span>
-        <a href="/cart"><i class="fa-solid fa-cart-shopping header_i"></i></a>
-        <a href="#"><i class="fa-solid fa-bell header_i"></i></a>
-        <a href="/mypage"><i class="fa-solid fa-circle-user header_i"></i></a>
+        <span><a href="/search">주소검색</a></span>
+        <a href="/cart"><i class="fa-solid fa-cart-shopping"></i></a>
+        <a href="#"><i class="fa-solid fa-bell"></i></a>
+        <a href="/mypage"><i class="fa-solid fa-circle-user"></i></a>
     </div>
 </div>
 
