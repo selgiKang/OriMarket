@@ -318,10 +318,17 @@
     const deleteIcon = document.createElement('span');
     deleteIcon.classList.add('delete-icon');
     deleteIcon.innerHTML = '&times;';
-    deleteIcon.addEventListener('click', () => {
-      box.innerHTML = '<span class="plus-icon">+</span>';
-      box.querySelector('.real-upload').value = '';
-      showPlusIcon(box);
+    deleteIcon.addEventListener('click', (e) => {
+      e.stopPropagation(); // 이벤트 전파 방지
+      const imagePreview = document.getElementById('imagePreview');
+      const previewBox = deleteIcon.parentNode;
+      const previewIndex = Array.from(previewBox.parentNode.children).indexOf(previewBox);
+
+      // 삭제한 이미지 박스의 내용만 초기화
+      previewBox.innerHTML = '<span class="plus-icon">+</span>';
+      showPlusIcon(previewBox); // 삭제한 박스의 플러스 아이콘 표시
+
+      // 이후 동작 처리
     });
     box.appendChild(deleteIcon);
   }
