@@ -94,10 +94,10 @@ public class UserController {
 
     }
 
-    @PostMapping("/delete")
-    public String deleteUser(@ModelAttribute User user){
-        System.out.println(user.getUserSeq());
-        userService.delete(user.getUserSeq());
+    @GetMapping("/delete")
+    public String deleteUser(@RequestParam("userSeq") Long userSeq){
+        System.out.println("번호: "+userSeq);
+        userService.delete(userSeq);
         return "user/login";
     }
 
