@@ -3,14 +3,15 @@ package com.choongang.OriMarket.user;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.thymeleaf.model.IModel;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpSession;
 
 @Controller
@@ -59,16 +60,15 @@ public class UserController {
         boolean isTrue = userService.login(user,session);
         if(isTrue){
             model.addAttribute("userId", user.getUserId());
-            return "user/loginsuccess";
+            return "main/main";
         }
         return "user/login";
     }
 
     @PostMapping("/join")
     public String joinUser(@ModelAttribute User user, HttpSession session) {
-
         if(userService.join(user,session)){
-            return "user/loginsuccess";
+            return "user/login";
         }
         return "user/join";
     }
@@ -80,6 +80,20 @@ public class UserController {
             return "user/user_infolist";
         }
         return "user/user_infolist_edit";
+    }
+
+    @GetMapping("/logout")
+    public String logout(HttpSession session){
+        session.invalidate();
+        return "main/main";
+
+    }
+
+    @GetMapping("/userId/{userId}/exists")
+    @ResponseBody
+    public ResponseEntity<Boolean> checkUserIdDuplicate(@PathVariable String userId){
+        return ResponseEntity.ok(userService.checkUserId(userId));
+
     }
 
     @PostMapping("/delete")

@@ -36,7 +36,6 @@
           </button>
         </div>
       </div>
-
     </div>
     <div class="form_field">
       <label for="password">비밀번호</label>
@@ -63,11 +62,12 @@
     <div class="form_field">
       <label for="address_kakao">주소</label>
       <div class="input_container">
-        <input type="text" id="address_kakao" name="userAddress" required>
+        <input type="text" id="address_kakao" name="userAddress" readonly>
         <div class="btn_container">
           <button type="button" class="btn_round" onclick="searchAddress()"
                   style="border-radius: 20px; padding: 5px 10px; background-color: #ffbf41; color: white; border: none; font-size: 14px; cursor: pointer; font-family: 'omyu pretty', Arial, sans-serif;">주소검색
           </button>
+
         </div>
       </div>
     </div>
@@ -84,8 +84,27 @@
 </div>
 
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<!--
+<script>
+//중복확인
+function check() {
+  var id = document.getElementById("id").value;
 
 
+  var ischeck = true;
+
+  if (ischeck) {
+    alert("이미 사용중인 ID입니다.");
+  } else {
+    alert("사용가능한 ID입니다");
+  }
+}
+
+
+</script>
+
+
+ -->
 
 </body>
 
