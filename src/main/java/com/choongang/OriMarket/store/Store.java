@@ -1,6 +1,7 @@
 package com.choongang.OriMarket.store;
 
 import com.choongang.OriMarket.order.OrderService;
+import com.choongang.OriMarket.user.User;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -32,4 +33,5 @@ public class Store {
 
     @Column
     private String storeAddress;
+
 }

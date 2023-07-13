@@ -37,6 +37,9 @@ public class UserController {
         return "user/user_infolist";
     }
 
+
+
+
     @GetMapping("/review")
     public String review() {
         return "user/user_review";
@@ -99,8 +102,7 @@ public class UserController {
 
     }
 
-
-    @GetMapping("/delete")
+    @PostMapping("/delete")
     public String deleteUser(@ModelAttribute User user){
         System.out.println(user.getUserSeq());
         userService.delete(user.getUserSeq());
