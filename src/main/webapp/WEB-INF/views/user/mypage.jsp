@@ -45,7 +45,7 @@
                     <img src="" width="50px" height="50px">
                 </div>
                 <div class="contents1_bold">
-                    리뷰관리
+                    <a href="/review">리뷰관리</a>
                 </div>
             </div>
         </div>
