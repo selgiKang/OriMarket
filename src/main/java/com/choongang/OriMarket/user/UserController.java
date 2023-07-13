@@ -75,4 +75,11 @@ public class UserController {
         return "user/user_infolist_edit";
     }
 
+    @GetMapping("/logout")
+    public String logout(HttpSession session){
+        session.invalidate();
+        return "main/main";
+
+    }
+
 };
