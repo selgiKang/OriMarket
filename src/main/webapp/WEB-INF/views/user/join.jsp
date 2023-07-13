@@ -36,6 +36,7 @@
           </button>
         </div>
       </div>
+
     </div>
     <div class="form_field">
       <label for="password">비밀번호</label>
@@ -83,7 +84,7 @@
 </div>
 
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<!--
+
 <script>
 //중복확인
 function check() {
@@ -103,7 +104,7 @@ function check() {
 </script>
 
 
- -->
+
 
 </body>
 
