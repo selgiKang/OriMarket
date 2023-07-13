@@ -1,3 +1,4 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -311,9 +312,10 @@
 
             <div class="line"></div>
 
+            <form action="/storenotice" method="post">
             <div class="storecare_name">
                 <h3>가게 이름</h3>
-                <input type="text" id="store-name-input" placeholder="가게 이름">
+                <input type="text" id="store-name-input" name="storeName" placeholder="가게 이름">
                 <h6>※변경이 필요한 경우 고객센터로 문의해주세요.</h6>
             </div>
 
@@ -321,30 +323,29 @@
 
             <div class="storecare_storenumber">
                 <h3>가게 번호</h3>
-                <input type="text" id="store-number-input" placeholder="가게 번호"/>
+                <input type="text" id="store-number-input" name="storePnumber" placeholder="가게 번호"/>
             </div>
 
             <div class="line"></div>
 
             <div class="storecare_category">
                 <h3>가게 카테고리</h3>
-                <input type="text" id="store-category-input" placeholder="가게 카테고리"/>
+                <input type="text" id="store-category-input" name="storeCategory" placeholder="가게 카테고리"/>
             </div>
 
             <div class="line"></div>
 
             <div class="storecare_location">
                 <h3>실제 위치</h3>
-                <input type="text" id="store-location-input" placeholder="실제 위치">
+                <input type="text" id="store-location-input" name="storeAddress" placeholder="실제 위치">
             </div>
-
+                <button type="submit" value="전송zz">
             <!-- 수정 버튼으로 변경 -->
             <div class="line"></div>
             <button onclick="showInputData()">입력</button>
+            </form>
         </div>
     </div>
-
-
 
 
 

@@ -13,8 +13,13 @@ public class MainController {
 
 
     @GetMapping("/")
-    public String footer() {
+    public String main() {
         return "main/main";
+    }
+
+    @GetMapping("/search")
+    public String search() {
+        return "main/search";
     }
 
 

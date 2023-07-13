@@ -49,26 +49,20 @@ public class UserController {
         return "user/cart";
     }
 
-    @GetMapping("/order_list")
-    public String order_list() {
-        return "user/order_list";
-    }
-
     @PostMapping("/login")
     public String loginId(@ModelAttribute User user, Model model, HttpSession session) {
         boolean isTrue = userService.login(user,session);
         if(isTrue){
             model.addAttribute("userId", user.getUserId());
-            return "user/loginsuccess";
+            return "main/main";
         }
         return "user/login";
     }
 
     @PostMapping("/join")
     public String joinUser(@ModelAttribute User user, HttpSession session) {
-
         if(userService.join(user,session)){
-            return "user/loginsuccess";
+            return "user/login";
         }
         return "user/join";
     }
@@ -81,14 +75,5 @@ public class UserController {
         }
         return "user/user_infolist_edit";
     }
-
-    @PostMapping("/delete")
-    public String deleteUser(@ModelAttribute User user){
-        System.out.println(user.getUserSeq());
-        userService.delete(user.getUserSeq());
-        return "user/login";
-    }
-
-
 
 };

@@ -29,13 +29,9 @@ public class RealTimeController {
     @GetMapping("/accept")
     public String orderAccept(Order order, HttpSession session, Model model, RealTimeStatus rts){
 
-            order.setOrderNumber(String.valueOf(session.getAttribute("orderNumber")));
-            RealTimeStatus a = rtsRepository.findByorderNumber(order);
-            a.setRtsOrderIng(1);
-            rtsRepository.save(a);
-
-            if(a.getRtsOrderIng() == 1){
-                    model.addAttribute("rtsOrderIng",a.getRtsOrderIng());
+        rts = realTimeService.update1(order, session);
+        if(rts.getRtsOrderIng() == 1){
+                    model.addAttribute("rtsOrderIng",rts.getRtsOrderIng());
                     return "order/order_delivery";
                 }
 
