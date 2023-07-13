@@ -72,6 +72,11 @@ public class UserService {
         userRepository.delete(user);
    }
 
+   public boolean checkUserId(String userId){
+       return userRepository.existsByUserId(userId);
+
+   }
+
 
 
 

@@ -3,13 +3,13 @@ package com.choongang.OriMarket.user;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import org.thymeleaf.model.IModel;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpSession;
 
 @Controller
@@ -60,6 +60,7 @@ public class UserController {
 
     @PostMapping("/join")
     public String joinUser(@ModelAttribute User user, HttpSession session) {
+
         if(userService.join(user,session)){
             return "user/login";
         }
@@ -79,6 +80,13 @@ public class UserController {
     public String logout(HttpSession session){
         session.invalidate();
         return "main/main";
+
+    }
+
+    @GetMapping("/userId/{userId}/exists")
+    @ResponseBody
+    public ResponseEntity<Boolean> checkUserIdDuplicate(@PathVariable String userId){
+        return ResponseEntity.ok(userService.checkUserId(userId));
 
     }
 

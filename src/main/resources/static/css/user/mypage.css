@@ -125,8 +125,6 @@ hr {
     background-color: rgba(0, 128, 0, 0.3);
     height: 250px;
     padding-top: 5px;
-
-
 }
 
 #hr{
@@ -149,7 +147,7 @@ li{
 }
 #img2{
     position: absolute;
-    right: 10px;
+    right: 50px;
     top: 52px;
 }
 #mypage1_small{
@@ -196,6 +194,7 @@ body {
     justify-content: center;
     align-items: center;
     height: 100%;
+    margin: 0 auto;
 }
 button {
     position: absolute;
