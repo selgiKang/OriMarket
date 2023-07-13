@@ -7,6 +7,7 @@
     <title>Title</title>
 </head>
 <body>
+
     <h2>로그인성공</h2>
     <a href="/infolist">회원정보보기</a>
     <script>

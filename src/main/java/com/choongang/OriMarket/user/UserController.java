@@ -53,14 +53,13 @@ public class UserController {
         boolean isTrue = userService.login(user,session);
         if(isTrue){
             model.addAttribute("userId", user.getUserId());
-            return "user/loginsuccess";
+            return "main/main";
         }
         return "user/login";
     }
 
     @PostMapping("/join")
     public String joinUser(@ModelAttribute User user, HttpSession session) {
-
         if(userService.join(user,session)){
             return "user/loginsuccess";
         }
