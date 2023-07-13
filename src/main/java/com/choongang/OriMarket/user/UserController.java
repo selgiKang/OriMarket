@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.thymeleaf.model.IModel;
 
 import javax.servlet.http.HttpSession;
@@ -48,20 +49,26 @@ public class UserController {
         return "user/cart";
     }
 
+    @GetMapping("/order_list")
+    public String order_list() {
+        return "user/order_list";
+    }
+
     @PostMapping("/login")
     public String loginId(@ModelAttribute User user, Model model, HttpSession session) {
         boolean isTrue = userService.login(user,session);
         if(isTrue){
             model.addAttribute("userId", user.getUserId());
-            return "main/main";
+            return "user/loginsuccess";
         }
         return "user/login";
     }
 
     @PostMapping("/join")
     public String joinUser(@ModelAttribute User user, HttpSession session) {
+
         if(userService.join(user,session)){
-            return "user/login";
+            return "user/loginsuccess";
         }
         return "user/join";
     }
@@ -74,5 +81,20 @@ public class UserController {
         }
         return "user/user_infolist_edit";
     }
+
+    @PostMapping("/delete")
+    public String deleteUser(@ModelAttribute User user){
+        System.out.println(user.getUserSeq());
+        userService.delete(user.getUserSeq());
+        return "user/login";
+    }
+
+    @PostMapping("/order_list")
+    public String order_list(@ModelAttribute User user){
+        System.out.println(user.getUserSeq());
+        userService.delete(user.getUserSeq());
+        return "user/order_list";
+    }
+
 
 };

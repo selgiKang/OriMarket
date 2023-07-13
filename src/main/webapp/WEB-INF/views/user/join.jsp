@@ -36,6 +36,7 @@
           </button>
         </div>
       </div>
+
     </div>
     <div class="form_field">
       <label for="password">비밀번호</label>
@@ -83,27 +84,8 @@
 </div>
 
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<!--
-<script>
-//중복확인
-function check() {
-  var id = document.getElementById("id").value;
 
 
-  var ischeck = true;
-
-  if (ischeck) {
-    alert("이미 사용중인 ID입니다.");
-  } else {
-    alert("사용가능한 ID입니다");
-  }
-}
-
-
-</script>
-
-
- -->
 
 </body>
 

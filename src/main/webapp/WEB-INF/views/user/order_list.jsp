@@ -107,12 +107,25 @@
             font-size: 12px;
             color: #4caf50;
         }
+
+        .order-history-heading {
+            font-size: 18px;
+            color: black;
+        }
+
+        .order-history-heading span {
+            color: #4caf50;
+        }
     </style>
 </head>
 <body>
 <div class="order-list">
+    <div class="order-history-heading">
+        <span>오리마켓</span> 주문내역
+    </div>
+
     <div class="tab">
-        <span class="tab-link active" data-tab="pending">주문대기</span>
+        <span class="tab-link active" data-tab="pending">주문</span>
         <span class="tab-link" data-tab="processing">처리중</span>
         <span class="tab-link" data-tab="completed">완료</span>
     </div>
@@ -176,6 +189,18 @@
                 // 버튼 변경
                 const actionButtons = orderItem.querySelector('.action-buttons');
                 actionButtons.innerHTML = '<button class="complete-button">완료</button>';
+
+                // 완료 버튼 클릭 이벤트 등록
+                const completeButton = orderItem.querySelector('.complete-button');
+                completeButton.addEventListener('click', () => {
+                    orderItem.setAttribute('data-status', 'completed');
+                    const completedTab = document.querySelector('.tab-link[data-tab="completed"]');
+                    completedTab.click();
+
+                    // 주문완료 텍스트 추가
+                    const orderNumber = orderItem.querySelector('.order-number');
+                    orderNumber.innerHTML = '주문번호 #1234<span class="completed-text">주문완료</span>';
+                });
             }
         });
     });
@@ -191,27 +216,13 @@
                 const completedTab = document.querySelector('.tab-link[data-tab="completed"]');
                 completedTab.click();
 
+                // 버튼 변경
+                const actionButtons = orderItem.querySelector('.action-buttons');
+                actionButtons.innerHTML = '<button class="reject-button">거절</button>';
+
                 // 주문거절 텍스트 추가
                 const orderNumber = orderItem.querySelector('.order-number');
                 orderNumber.innerHTML += '<span class="rejected-text">주문거절</span>';
-            }
-        });
-    });
-
-    const completeButtons = document.querySelectorAll('.complete-button');
-    completeButtons.forEach(button => {
-        button.addEventListener('click', () => {
-            const orderItem = button.closest('.order-item');
-            const currentStatus = orderItem.getAttribute('data-status');
-
-            if (currentStatus === 'processing') {
-                orderItem.setAttribute('data-status', 'completed');
-                const completedTab = document.querySelector('.tab-link[data-tab="completed"]');
-                completedTab.click();
-
-                // 주문완료 텍스트 추가
-                const orderNumber = orderItem.querySelector('.order-number');
-                orderNumber.innerHTML = '주문번호 #1234<span class="completed-text">주문완료</span>';
             }
         });
     });
