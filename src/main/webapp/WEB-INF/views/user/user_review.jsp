@@ -165,11 +165,16 @@
       position: absolute;
       top: 5px;
       right: 5px;
+      width: 20px; /* 가로 크기 조정 */
+      height: 20px; /* 세로 크기 조정 */
       font-size: 20px;
-      color: red;
+      color: black;
       cursor: pointer;
       z-index: 1;
-      background-color: black; /* 삭제 버튼 배경색 검정색으로 변경 */
+      background-color: grey; /* 삭제 버튼 배경색 검정색으로 변경 */
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
 
     .submit-button {
