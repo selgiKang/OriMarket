@@ -37,15 +37,18 @@
         margin:20px auto;
         background: #fff;
         border-radius:3%;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
 
     }
-    .clear:before{content:''; display:block; clear:both;}
 
     /*2023-07-12 메인페이지 수정 1차 */
+    .clear:before{content:''; display:block; clear:both;}
+
     #main_wrap_box{width:375px; height:612px;}
     span.connextion_title{float:left; margin:10px 20px;}
     .connextion_title_img{width:28px; height:28px; text-align:left;}
     .connextion_marketbox{margin:10% auto;}
+
     /*단골시장box공통*/
     .connextion_mk1_wrap, .connextion_mk2_wrap, .connextion_mk3_wrap, .connextion_mk4_wrap{
         display:inline-block; width:120px; height:100px; background-color:#eee; border-radius:3%; margin:10px; cursor:pointer;
@@ -57,12 +60,16 @@
     a>p{text-align:center; vertical-align:center; margin-top:20px;}
 
     /*배너*/
-    #main_banner_wrap{width:335px; height:170px; background-color:#fff; margin:0 auto; border-radius:3%;}
-    .main_slidebanner_box{}
-    .mainbanner1{}
-    .mainbanner2{}
-    .mainbanner3{}
-    .mainbanner4{}
+    #main_banner_wrap{width:335px; height:170px; overflow: hidden; background-color:#fff; margin:0 auto; border-radius:3%; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);}
+    .main_slidebanner_box{display: flex; justify-content: center; position: relative; margin: auto;}
+    .slideshow-image{border-radius:3%; width: 100%; height: 100%; overflow: hidden;}
+    .mySlides { border-radius:3%; width: 335px; height: 170px; display: flex; justify-content: center; align-items: center;}
+    .slideshow-container { display: flex; justify-content: center; position: relative; margin: auto;}
+    .fade { animation-name: fade; animation-duration: 2s;}
+    @keyframes fade {
+        from {opacity: 0.4}
+        to { opacity: 1}
+    }
 
 </style>
 <body>
@@ -82,11 +89,17 @@
                 </div>
             </div>
             <div id="main_banner_wrap">
-                <div class="main_slidebanner_box">
-                    <div class="mainbanner1"><img src="" alt="메인배너1"></div>
-                    <div class="mainbanner2"><img src="" alt="메인배너2"></div>
-                    <div class="mainbanner3"><img src="" alt="메인배너3"></div>
-                    <div class="mainbanner4"><img src="" alt="메인배너4"></div>
+                <div class="main_slidebanner_box slideshow-container">
+                    <div class="mySlides fade"><img class="slideshow-image" src="../../img/main/exsliderbn.png" alt="메인배너1"></div>
+                    <div class="mySlides fade"><img class="slideshow-image" src="../../img/main/exsliderbn2.png" alt="메인배너2"></div>
+                    <div class="mySlides fade"><img class="slideshow-image" src="../../img/main/exsliderbn3.png" alt="메인배너3"></div>
+                    <div class="mySlides fade"><img class="slideshow-image" src="../../img/main/exsliderbn4.png" alt="메인배너4"></div>
+                </div>
+                <div class="list-button">
+                    <span class="list-button-item active"></span>
+                    <span class="list-button-item"></span>
+                    <span class="list-button-item"></span>
+                    <span class="list-button-item"></span>
                 </div>
             </div>
         </div>
@@ -95,6 +108,27 @@
         </div>
     </div>
 
+    <script>
+        /* 슬라이드 배너 */
+        var slideIndex = 0;
+        showSlides();
+
+        function showSlides() {
+            var i;
+            var slides = document.getElementsByClassName("mySlides");
+
+            for (i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+            slideIndex++;
+            if (slideIndex > slides.length) {
+                slideIndex = 1
+            }
+            slides[slideIndex - 1].style.display = "block";
+
+            setTimeout(showSlides, 2500);
+        }
+    </script>
 
 </body>
 </html>
