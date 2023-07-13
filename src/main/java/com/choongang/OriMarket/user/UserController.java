@@ -61,7 +61,7 @@ public class UserController {
     @PostMapping("/join")
     public String joinUser(@ModelAttribute User user, HttpSession session) {
         if(userService.join(user,session)){
-            return "user/loginsuccess";
+            return "user/login";
         }
         return "user/join";
     }
