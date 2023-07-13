@@ -5,36 +5,36 @@ import lombok.*;
 
 import javax.persistence.*;
 
-@Entity
-@Table(name = "realTimeStatus")
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
-public class RealTimeStatus {
 
-    @Id
-    @Column(name="rtsNumber",nullable = false)
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+@Data
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+public class RealTimeStatusDto {
+
+
     private long rtsNumber;
 
-    //주문번호
-    @OneToOne
-    @JoinColumn(name="order_number")
+
     private Order orderNumber;
 
 
     //픽업중
-    @Column
+
     private  int rtsOrderIng;
 
     //배송중
-    @Column
     private int rtsRiderIng;
-    
+
     //배달 완료
-    @Column
     private int rtsRiderFinish;
+
+    @Builder
+    public RealTimeStatusDto(long rtsNumber, Order orderNumber, int rtsOrderIng, int rtsRiderIng, int rtsRiderFinish) {
+        this.rtsNumber = rtsNumber;
+        this.orderNumber = orderNumber;
+        this.rtsOrderIng = rtsOrderIng;
+        this.rtsRiderIng = rtsRiderIng;
+        this.rtsRiderFinish = rtsRiderFinish;
+    }
 
     public void setOrderNumber(Order orderNumber){
         this.orderNumber=orderNumber;

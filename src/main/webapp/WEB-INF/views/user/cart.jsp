@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"  %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -26,11 +27,8 @@
 			 	<input type="submit" value="변경">	 		
 		 	</form>
 		 </div>
-		 <div id="cart_marketName">
-		 	<!-- 받아와야하는 시장이름값 -->
-		 </div>
 		 <div>	 	
-		 	<input type="checkbox" checked="checked" value="">
+		 	<input type="checkbox" id="cboxAll" name="cboxAll" onclick="checkAll()">
 		 	전체선택
 		 	<!--장바구니에 들어온 수량, 체크할때마다 카운트되는 수량..? -->
 		 </div>
@@ -46,7 +44,7 @@
 		 				<ul>
 		 					<li>	
 	 							<div>		 								
- 									<input type="checkbox">
+ 									<input type="checkbox" name="cbox" class="checkbox">
  									<!-- 상품이미지나 상품타이틀을 클릭하면 상세페이지로 넘어간다(a태그) -->
  									<a href="상품상세페이지">
  										<div class="cart_itemImg">
@@ -89,7 +87,7 @@
 		 				<ul>
 		 					<li class="cart_items">	
 	 							<div>		 								
- 									<input type="checkbox">
+ 									<input type="checkbox" name="cbox" class="checkbox">
  									<!-- 상품이미지,이름 클릭하면 상세페이지로 넘어간다 -->
  									<a href="상품상세페이지">
  										<div class="cart_itemImg">
@@ -124,7 +122,7 @@
 		 					<br>
 		 					<li>	
 	 							<div>		 								
- 									<input type="checkbox">
+ 									<input type="checkbox" name="cbox" class="checkbox">
  									<!-- 상품이미지,이름 클릭하면 상세페이지로 넘어간다 -->
  									<a href="상품상세페이지">
  										<div class="cart_itemImg">

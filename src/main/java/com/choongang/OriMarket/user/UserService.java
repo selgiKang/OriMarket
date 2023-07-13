@@ -61,6 +61,7 @@ public class UserService {
 
            return true;
        }
+       //userRepository.findByUserId()
    }
 
    public void delete(Long UserSeq){
