@@ -37,11 +37,13 @@ public class UserController {
         return "user/user_infolist";
     }
 
+
+
+
     @GetMapping("/review")
     public String review() {
         return "user/user_review";
     }
-
 
     @GetMapping("/mypage")
     public String mypage() {
@@ -91,13 +93,13 @@ public class UserController {
         return "main/main";
 
     }
-
-    @GetMapping("/userId/{userId}/exists")
-    @ResponseBody
-    public ResponseEntity<Boolean> checkUserIdDuplicate(@PathVariable String userId){
-        return ResponseEntity.ok(userService.checkUserId(userId));
-
-    }
+//
+//    @GetMapping("/userId/{userId}/exists")
+//    @ResponseBody
+//    public ResponseEntity<Boolean> checkUserIdDuplicate(@PathVariable String userId){
+//        return ResponseEntity.ok(userService.checkUserId(userId));
+//
+//    }
 
     @GetMapping("/delete")
     public String deleteUser(@RequestParam("userSeq") Long userSeq){

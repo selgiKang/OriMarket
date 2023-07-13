@@ -1,9 +1,8 @@
 //package com.choongang.OriMarket.user;
 //
-//import com.choongang.OriMarket.order.OrderService;
+//
 //import com.choongang.OriMarket.store.Item;
-//import com.choongang.OriMarket.store.ItemRepository;
-//import lombok.RequiredArgsConstructor;
+//
 //import lombok.extern.slf4j.Slf4j;
 //import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.stereotype.Service;
@@ -13,14 +12,21 @@
 //import java.util.List;
 //
 //@Service
-//@RequiredArgsConstructor
 //@Slf4j
 //public class CartService {
 //
-//    @Autowired
+//
 //    private final UserRepository userRepository;
 //    private final CartRepository cartRepository;
 //    private final CartItemRepository cartItemRepository;
+//
+//    @Autowired
+//    public CartService(UserRepository userRepository,CartRepository cartRepository, CartItemRepository cartItemRepository){
+//        this.userRepository= userRepository;
+//        this.cartRepository = cartRepository;
+//        this.cartItemRepository = cartItemRepository;
+//    }
+//
 //
 ///*
 //      ItemRepository에서 해당Itemid, UserRepository에서 해당 Userid검색
@@ -29,6 +35,16 @@
 //       CartItemRepository에서 저장된 카트아이템검색(CartId,Itemid)
 //        * 저장된 카트아이템이 null이 아니라면 addCount, null이라면 createCartItem
 // */
+//
+//
+//    //해당 id의 장바구니 가져오기
+//    public Cart getCart(String userId){
+//        Cart cart = cartRepository.findByUserId(userId);
+//        return cart;
+//    }
+//
+//
+//
 //
 //
 //    //장바구니 생성

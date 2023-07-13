@@ -37,6 +37,10 @@ public class StoreController {
     public String test() {
         return "store/test";
     }
+
+    @GetMapping("/storeFav")
+    public String storeFav(){ return  "store/store";}
+
     @PostMapping("/storenotice")
     public String storenoticeStore(@ModelAttribute Store store){
         System.out.println("가게이름: "+store.getStoreName());

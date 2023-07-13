@@ -15,9 +15,9 @@ public class MarketMapController {
         return "marketmap/marketmap";
     }
 
-    @GetMapping("/marketmap2")
+    @GetMapping("/shinwon_marketmap")
     public String marketmap2() {
-        return "marketmap/marketmap2";
+        return "marketmap/shinwon_marketmap";
     }
 
 };
