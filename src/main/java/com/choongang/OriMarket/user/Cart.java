@@ -1,6 +1,5 @@
 //package com.choongang.OriMarket.user;
 //
-//
 //import lombok.AllArgsConstructor;
 //import lombok.Getter;
 //import lombok.NoArgsConstructor;
@@ -43,7 +42,10 @@
 //        지연로딩으로 설정하면 실제엔티티 대신 프록시 객체를 넣어둔다.
 //        프록시 객체는 실제로 사용하기 전까지는 데이터로딩을 하지않고,
 //        실제 사용 시점에 조회 쿼리문 실행 */
-//    @OneToOne(fetch = FetchType.LAZY)
+//
+//
+//
+//    @OneToOne(fetch =  FetchType.LAZY)
 //    @JoinColumn(name = "userId")
 //    private User user;
 //
