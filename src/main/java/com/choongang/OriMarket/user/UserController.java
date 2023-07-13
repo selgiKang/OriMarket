@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.thymeleaf.model.IModel;
 
 import javax.servlet.http.Cookie;
@@ -48,6 +50,11 @@ public class UserController {
         return "user/cart";
     }
 
+    @GetMapping("/order_list")
+    public String order_list() {
+        return "user/order_list";
+    }
+
     @PostMapping("/login")
     public String loginId(@ModelAttribute User user, Model model, HttpSession session) {
         boolean isTrue = userService.login(user,session);
@@ -60,7 +67,6 @@ public class UserController {
 
     @PostMapping("/join")
     public String joinUser(@ModelAttribute User user, HttpSession session) {
-
         if(userService.join(user,session)){
             return "user/login";
         }
@@ -89,5 +95,20 @@ public class UserController {
         return ResponseEntity.ok(userService.checkUserId(userId));
 
     }
+
+    @PostMapping("/delete")
+    public String deleteUser(@ModelAttribute User user){
+        System.out.println(user.getUserSeq());
+        userService.delete(user.getUserSeq());
+        return "user/login";
+    }
+
+    @PostMapping("/order_list")
+    public String order_list(@ModelAttribute User user){
+        System.out.println(user.getUserSeq());
+        userService.delete(user.getUserSeq());
+        return "user/order_list";
+    }
+
 
 };
