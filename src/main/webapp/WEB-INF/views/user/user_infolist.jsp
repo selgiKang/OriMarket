@@ -46,7 +46,7 @@
                 <input type="submit" value="삭제">
                 </form>
                 <td>
-                    <a id="infolist_btn_delete">회원 탈퇴${userSeq}</a></td></input>
+                    <a id="infolist_btn_delete">로그아웃</a></td></input>
 
             </table>
         </div>

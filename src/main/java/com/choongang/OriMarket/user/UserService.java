@@ -21,6 +21,7 @@ public class UserService {
         //값이 null일 떄 Optinal이 처리
         User findUser = userRepository.findByUserId(member.getUserId());
 
+
         if(findUser == null){
             return false;
         }
