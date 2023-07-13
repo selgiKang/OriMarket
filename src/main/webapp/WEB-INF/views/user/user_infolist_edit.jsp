@@ -39,11 +39,11 @@
                 <tr>
                     <td class="infolist_table_td_1">주 소</td>
                     <td class="infolist_table_td_2">
-                        <input type="text" name="userAddress" value="${userAddress}">
-                        <input type="text" name="userAddressDetail" value="${userAddressDetail}">
-                        <button type="button" class="btn_round" onclick="searchAddress()"
-                                style="border-radius: 20px; padding: 5px 10px; background-color: #ffbf41; color: white; border: none; font-size: 14px; cursor: pointer; font-family: 'omyu pretty', Arial, sans-serif;">주소검색
-                        </button>
+                        <input type="text" name="userAddress" value="${userAddress}"><button type="button" class="btn_round" onclick="searchAddress()"
+                                                                                             style="border-radius: 20px; padding: 5px 10px; background-color: #ffbf41; color: white; border: none; font-size: 14px; cursor: pointer; font-family: 'omyu pretty', Arial, sans-serif;">주소검색
+                    </button>
+                        <input type="text" name="userAddressDetail" value="${userAddressDetail}" placeholder="상세주소를입력해주세요...">
+
                     </td>
                 </tr>
             </table>

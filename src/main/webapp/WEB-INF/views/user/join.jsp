@@ -62,11 +62,12 @@
     <div class="form_field">
       <label for="address_kakao">주소</label>
       <div class="input_container">
-        <input type="text" id="address_kakao" name="userAddress" required>
+        <input type="text" id="address_kakao" name="userAddress" readonly>
         <div class="btn_container">
           <button type="button" class="btn_round" onclick="searchAddress()"
                   style="border-radius: 20px; padding: 5px 10px; background-color: #ffbf41; color: white; border: none; font-size: 14px; cursor: pointer; font-family: 'omyu pretty', Arial, sans-serif;">주소검색
           </button>
+
         </div>
       </div>
     </div>

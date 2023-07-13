@@ -21,6 +21,7 @@ public class UserService {
         //값이 null일 떄 Optinal이 처리
         User findUser = userRepository.findByUserId(member.getUserId());
 
+
         if(findUser == null){
             return false;
         }
@@ -69,6 +70,11 @@ public class UserService {
         User user = userRepository.findById(UserSeq).orElseThrow();
        System.out.println(user.getUserSeq());
         userRepository.delete(user);
+   }
+
+   public boolean checkUserId(String userId){
+       return userRepository.existsByUserId(userId);
+
    }
 
 
