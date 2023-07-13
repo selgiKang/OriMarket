@@ -105,7 +105,34 @@ function check() {
 
 
  -->
+<script>
+  function checkDuplicate() {
+    var userId = document.getElementById("id").value;
+    var url = "/userId/" + userId + "/exists"; // API 엔드포인트 URL
+    var xhr = new XMLHttpRequest();
 
+    xhr.onreadystatechange = function() {
+      if (xhr.readyState === XMLHttpRequest.DONE) {
+        if (xhr.status === 200) {
+          var response = JSON.parse(xhr.responseText);
+          if (response) {
+            // 중복된 아이디 처리 로직
+            alert("중복된 아이디입니다.");
+          } else {
+            // 중복되지 않은 아이디 처리 로직
+            alert("사용 가능한 아이디입니다.");
+          }
+        } else {
+          // 에러 처리
+          alert("오류가 발생했습니다.");
+        }
+      }
+    };
+
+    xhr.open("GET", url);
+    xhr.send();
+  }
+</script>
 </body>
 
 
