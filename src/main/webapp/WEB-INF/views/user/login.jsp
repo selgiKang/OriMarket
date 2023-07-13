@@ -158,6 +158,6 @@
         <div><a href="/join">회원가입</a></div>
     </div>
 </div>
-<div id="footer">푸터</div>
+<div id="footer">푸터z</div>
 </body>
 </html>
