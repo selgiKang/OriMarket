@@ -22,7 +22,7 @@
     <div class="logo">Ori Market</div>
 
     <div class="nav">
-        <span><a href="#">주소검색</a></span>
+        <span><a href="/search">주소검색</a></span>
         <a href="/cart"><i class="fa-solid fa-cart-shopping"></i></a>
         <a href="#"><i class="fa-solid fa-bell"></i></a>
         <a href="/mypage"><i class="fa-solid fa-circle-user"></i></a>
