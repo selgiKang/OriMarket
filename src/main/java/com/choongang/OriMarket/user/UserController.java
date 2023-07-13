@@ -30,10 +30,6 @@ public class UserController {
     public String update() {
         return "user/user_infolist_edit";
     }
-    @GetMapping("/delete")
-    public String delete() {
-        return "user/delete";
-    }
     @GetMapping("/infolist")
     public String list() {
         return "user/user_infolist";
