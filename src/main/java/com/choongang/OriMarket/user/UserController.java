@@ -94,7 +94,7 @@ public class UserController {
 
     }
 
-    @PostMapping("/delete")
+    @GetMapping("/delete")
     public String deleteUser(@ModelAttribute User user){
         System.out.println(user.getUserSeq());
         userService.delete(user.getUserSeq());
