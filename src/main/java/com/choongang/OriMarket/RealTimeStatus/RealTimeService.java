@@ -28,16 +28,12 @@ public class RealTimeService {
         }
     }
 
-    public boolean update1(Order order,HttpSession session){
+    public RealTimeStatus update1(Order order,HttpSession session){
         order.setOrderNumber(String.valueOf(session.getAttribute("orderNumber")));
         RealTimeStatus a = rtsRepository.findByorderNumber(order);
         a.setRtsOrderIng(1);
-        System.out.println("실험:"+a.getRtsOrderIng());
-        if(rtsRepository.save(a) == null){
-            return false;
-        }
-        return true;
-
+        rtsRepository.save(a);
+        return a;
     }
 
     public boolean findRts(Order order,HttpSession session){
