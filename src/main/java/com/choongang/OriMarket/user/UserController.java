@@ -37,11 +37,13 @@ public class UserController {
         return "user/user_infolist";
     }
 
+
+
+
     @GetMapping("/review")
     public String review() {
         return "user/user_review";
     }
-
 
     @GetMapping("/mypage")
     public String mypage() {
@@ -99,10 +101,10 @@ public class UserController {
 
     }
 
-    @PostMapping("/delete")
-    public String deleteUser(@ModelAttribute User user){
-        System.out.println(user.getUserSeq());
-        userService.delete(user.getUserSeq());
+    @GetMapping("/delete")
+    public String deleteUser(@RequestParam("userSeq") Long userSeq){
+        System.out.println("번호: "+userSeq);
+        userService.delete(userSeq);
         return "user/login";
     }
 
