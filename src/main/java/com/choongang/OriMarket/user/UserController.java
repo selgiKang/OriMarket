@@ -99,6 +99,7 @@ public class UserController {
 
     }
 
+
     @GetMapping("/delete")
     public String deleteUser(@ModelAttribute User user){
         System.out.println(user.getUserSeq());
