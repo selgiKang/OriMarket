@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"  %>
+<%@ taglib prefix="script" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,7 +8,7 @@
     <link rel="stylesheet" type="text/css" href="../../css/store/store.css">
 </head>
 <body>
-
+<jsp:include page="../header/header_search.jsp" />
 <div class="main-container">
     <header>
         <div class="like-container">
@@ -20,7 +21,7 @@
                     <input type="hidden" value="싱싱과일가게" name="favStoreName">
                     <input type="hidden" value="<%=session.getAttribute("userSeq")%>" name="userSeq">
 
-                    <button type="submit" class="storeFav" onclick="event.preventDefault(); toggleHeart(this);">
+                    <button type="submit" class="storeFav" onclick="event.preventDefault(); toggleHeart(this);" style="opacity: 0;" />
                        <c:if test="${sessionScope.favNumber =='' }">
                             <img src="../../img/store/empty_heart.png" alt="빈 하트" class="heart" >
                        </c:if>
@@ -28,7 +29,7 @@
                             <img src="../../img/store/filled_heart.png" alt="찬 하트" class="heart" >
                         </c:if>
                         <input type="hidden" name="favNumber" value="${sessionScope.favNumber}"><%--<%=session.getAttribute("favNumber")%>--%>
-                    </button>
+
                 </form>
             </c:if>
         </div>
