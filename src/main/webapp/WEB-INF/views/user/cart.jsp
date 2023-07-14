@@ -16,13 +16,13 @@
 <body>
 	<div id="cart_container">
 		 <div id="cart_title">
-		 	<a href="#"><i class="fas fa-regular fa-xmark"></i></a>
+		 	<button onclick="history.go(-1)"><i class="fas fa-regular fa-xmark"></i></button>
 		 	<p style="display: inline-block; margin-left: 130px;">장바구니</p>
 		 </div>
 		 <div id="cart_location">
-		 	<form action="">
+		 	<form action="/search">
 			 	<i class="far fa-solid fa-location-dot"></i>
-			 	<p>서울 마포구 신촌로 176</p>
+			 	<p>${userAddress1}</p>
 			 	<small id="cart_marketName">_시장이름</small>
 			 	<input type="submit" value="변경">	 		
 		 	</form>
@@ -37,126 +37,55 @@
 		 		가게리스트 반복문 속에 상품리스트 반복문 구현..??
 		 	 -->
 		 	<ul>
-		 		<li>
-		 			<article>
-		 				<h1>가게이름1</h1>
-		 				<!-- 같은 가게 안에서 상품리스트(where='가게이름'아니면'가게식별번호')쿼리 -->
-		 				<ul>
-		 					<li>	
-	 							<div>		 								
- 									<input type="checkbox" name="cbox" class="checkbox">
- 									<!-- 상품이미지나 상품타이틀을 클릭하면 상세페이지로 넘어간다(a태그) -->
- 									<a href="상품상세페이지">
- 										<div class="cart_itemImg">
- 											<img src="../../img/user/cart_fish.png">
- 										</div>
- 										<div class="cart_itemTitle">
- 											<p>제주산 손질갈치(특) 300g</p>
- 										</div>
- 									</a>
- 									<button class="cart_xmark"><i class="fas fa-regular fa-xmark"></i></button>
- 									
- 									<!-- 수량선택(-,+),가격표시 -->
- 									
- 									<div class="cart_itemDescription">
- 										<div class="cart_itemOption">
- 											<button><i class="fas fa-solid fa-circle-minus"></i></button>
- 											<div id="cart_countResult">1</div>
- 											<button><i class="fas fa-solid fa-circle-plus"></i></button>
- 										</div>
- 										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
- 										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
- 										<div class="cart_itemPrice">
- 											<span>
- 												9,690
- 												원
- 												&nbsp;&nbsp;
- 											</span>
- 										</div>
- 									</div>		 											 								
-	 							</div>		 						
-		 					</li>
-		 				</ul>
-		 			</article>
-		 		</li>
-		 		<br>
+				<%--반복문시작--%>
+				<%--<c:forEach var="items" items="cartItemList">--%>
+					<li>
+						<article>
+							<h1>가게1</h1>
+							<!-- 같은 가게 안에서 상품리스트(where='가게이름'아니면'가게식별번호')쿼리 -->
+							<ul>
+								<c:forEach var="items" items="cartItemList">
+									<li>
+										<div>
+											<input type="checkbox" name="cbox" class="checkbox">
+											<!-- 상품이미지나 상품타이틀을 클릭하면 상세페이지로 넘어간다(a태그) -->
+											<a href="상품상세페이지">
+												<div class="cart_itemImg">
+													<img src="../../img/user/cart_fish.png">
+												</div>
+												<div class="cart_itemTitle">
+													<p>물건</p>
+												</div>
+											</a>
+											<button class="cart_xmark"><i class="fas fa-regular fa-xmark"></i></button>
+
+											<!-- 수량선택(-,+),가격표시 -->
+
+											<div class="cart_itemDescription">
+												<div class="cart_itemOption">
+													<button><i class="fas fa-solid fa-circle-minus"></i></button>
+													<div id="cart_countResult">1</div>
+													<button><i class="fas fa-solid fa-circle-plus"></i></button>
+												</div>
+												&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+												&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+												<div class="cart_itemPrice">
+													<span>
+														0
+														원
+														&nbsp;&nbsp;
+													</span>
+												</div>
+											</div>
+										</div>
+									</li>
+								</c:forEach>
+							</ul>
+						</article>
+					</li>
+					<br>
 		 		<!-- 두번째 가게(일단, 그냥 적어놨지만 반복문으로 담은 가게만큼 리스트가 생성되게 구현해야한다.구현예시..반복문 구현시 빼버리면 됨) -->
-		 		<li>
-		 			<article>
-		 				<h1>가게이름2</h1>
-		 				<ul>
-		 					<li class="cart_items">	
-	 							<div>		 								
- 									<input type="checkbox" name="cbox" class="checkbox">
- 									<!-- 상품이미지,이름 클릭하면 상세페이지로 넘어간다 -->
- 									<a href="상품상세페이지">
- 										<div class="cart_itemImg">
- 											<img src="../../img/user/cart_mini_tomato.png">
- 										</div>
- 										<div class="cart_itemTitle">
- 											<p>대추방울토마토 750g</p>
- 										</div>
- 									</a>
- 									<button class="cart_xmark"><i class="fas fa-regular fa-xmark"></i></button>
- 									
- 									<!-- 수량선택(-,+),가격표시 -->
- 									
- 									<div class="cart_itemDescription">
- 										<div class="cart_itemOption">
- 											<button><i class="fas fa-solid fa-circle-minus"></i></button>
- 											<div id="cart_countResult">1</div>
- 											<button><i class="fas fa-solid fa-circle-plus"></i></button>
- 										</div>
- 										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
- 										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
- 										<div class="cart_itemPrice">
- 											<span>
- 												8,800
- 												원
- 												&nbsp;&nbsp;
- 											</span>
- 										</div>
- 									</div>		 											 								
-	 							</div>		 						
-		 					</li>
-		 					<br>
-		 					<li>	
-	 							<div>		 								
- 									<input type="checkbox" name="cbox" class="checkbox">
- 									<!-- 상품이미지,이름 클릭하면 상세페이지로 넘어간다 -->
- 									<a href="상품상세페이지">
- 										<div class="cart_itemImg">
- 											<img src="../../img/user/cart_fish.png">
- 										</div>
- 										<div class="cart_itemTitle">
- 											<p>제주산 손질갈치(특) 300g</p>
- 										</div>
- 									</a>
- 									<button class="cart_xmark"><i class="fas fa-regular fa-xmark"></i></button>
- 									
- 									<!-- 수량선택(-,+),가격표시 -->
- 									
- 									<div class="cart_itemDescription">
- 										<div class="cart_itemOption">
- 											<button><i class="fas fa-solid fa-circle-minus"></i></button>
- 											<div id="cart_countResult">1</div>
- 											<button><i class="fas fa-solid fa-circle-plus"></i></button>
- 										</div>
- 										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
- 										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
- 										<div class="cart_itemPrice">
- 											<span>
- 												9,690
- 												원
- 												&nbsp;&nbsp;
- 											</span>
- 										</div>
- 									</div>		 											 								
-	 							</div>		 						
-		 					</li>
-		 				</ul>
-		 			</article>
-		 		</li>		 				 		
+				<%--</c:forEach>--%>
 		 	</ul>
 		 </div>
 		 <div id="cart_moreBtn">
