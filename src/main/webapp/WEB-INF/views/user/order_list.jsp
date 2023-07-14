@@ -129,7 +129,7 @@
         <span class="tab-link" data-tab="processing">처리중</span>
         <span class="tab-link" data-tab="completed">완료</span>
     </div>
-
+    <% for (Order order : orders) { %>
     <div class="order-item" data-status="pending">
         <span class="order-number">주문번호 #1234</span>
         <div class="order-details">
@@ -142,6 +142,7 @@
             <button class="reject-button">거절</button>
         </div>
     </div>
+    <% } %>
 
     <div class="order-item" data-status="processing" style="display: none;"></div>
     <div class="order-item" data-status="completed" style="display: none;"></div>
