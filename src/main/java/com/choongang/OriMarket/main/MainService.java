@@ -19,12 +19,11 @@ public class MainService {
     public void updateAddress(HttpSession session,User user){
 
         if(session.getAttribute("userId")==null){
-                session.setAttribute("userAddress", user.getUserAddress());
-                session.setAttribute("userAddressDetail", user.getUserAddressDetail());
+                session.setAttribute("userAddress1", user.getUserAddress());
+                session.setAttribute("userAddressDetail1", user.getUserAddressDetail());
         }else {
-            User save = userRepository.save(user);
-            session.setAttribute("userAddress", save.getUserAddress());
-            session.setAttribute("userAddressDetail", save.getUserAddressDetail());
+            session.setAttribute("userAddress1", user.getUserAddress());
+            session.setAttribute("userAddressDetail1", user.getUserAddressDetail());
 
         }
 

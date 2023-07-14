@@ -11,6 +11,7 @@
 </head>
 <body>
         <input type="hidden" name="userPassword" value="${userPassword}" >
+        <a href="/"><h1 style="position: fixed; left: 20px; top: 0; font-size: 30px; color: red">홈으로 바로가기</h1></a>
         <div id="infolist_main">
             <h2>${userNickname}님 회원 정보</h2>
             <table id="infolist_table_1">

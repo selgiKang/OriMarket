@@ -5,11 +5,10 @@
 <head>
     <meta charset="utf-8">
     <title>주소로 장소 표시하기</title>
-
 </head>
 <body>
 <div id="map" style="width:375px; height:812px; margin: 0 auto;"></div>
-
+<a href="/"><h1 style="position: fixed; left: 20px; top: 0; font-size: 30px; color: red">홈으로 바로가기</h1></a>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b256385fdf81fd0ccd4bc7e1b22da770&libraries=services"></script>
 <script>
     var mapContainer = document.getElementById('map'), // 지도를 표시할 div
@@ -25,7 +24,7 @@
     var geocoder = new kakao.maps.services.Geocoder();
 
     // 주소로 좌표를 검색합니다
-    geocoder.addressSearch('${userAddress}', function(result, status) {
+    geocoder.addressSearch('${userAddress1}', function(result, status) {
 
         // 정상적으로 검색이 완료됐으면
         if (status === kakao.maps.services.Status.OK) {
@@ -40,7 +39,7 @@
 
             // 인포윈도우로 장소에 대한 설명을 표시합니다
             var infowindow = new kakao.maps.InfoWindow({
-                content: '<div style="width:150px;text-align:center;padding:6px 0;">내 위치</div>'
+                content: '<div style="width:150px;text-align:center;padding:6px 0; border-radius: 10px">내 위치</div>'
             });
             infowindow.open(map, marker);
 

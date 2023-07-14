@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"  %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,19 +9,31 @@
 <body>
 
 <div class="main-container">
-    <input type="hidden" value="${userId}">
     <header>
         <div class="like-container">
-            <img src="../../img/store/store.jpg" alt="착한생칼국수">
-            <%-- 찜 --%>
-            <form action="/storeFav" method="get">
-                <button class="storeFav">
-                    <img src="../../img/store/empty_heart.png" alt="빈 하트" class="heart" onclick="toggleHeart(this)">
-                </button>
-            </form>
+            <img src="../../img/store/store.jpg" alt="착한생칼국수"
+
+            >
+        <%-- 찜 --%>
+            <c:if test="${not empty userId}">
+                <form action="/storeFav" method="get">
+                    <input type="hidden" value="싱싱과일가게" name="favStoreName">
+                    <input type="hidden" value="<%=session.getAttribute("userSeq")%>" name="userSeq">
+
+                    <button type="submit" class="storeFav" onclick="event.preventDefault(); toggleHeart(this);">
+                       <c:if test="${sessionScope.favNumber =='' }">
+                            <img src="../../img/store/empty_heart.png" alt="빈 하트" class="heart" >
+                       </c:if>
+                       <c:if test="${sessionScope.favNumber eq 1}">
+                            <img src="../../img/store/filled_heart.png" alt="찬 하트" class="heart" >
+                        </c:if>
+                        <input type="hidden" name="favNumber" value="${sessionScope.favNumber}"><%--<%=session.getAttribute("favNumber")%>--%>
+                    </button>
+                </form>
+            </c:if>
         </div>
         <%--storeName--%>
-        <h1>착한 생 칼국수</h1>
+        <h1><input type="text" value="싱싱과일가게" name="storeName${sessionScope.favNumber}"></h1>
         <img class="star" src="../../img/store/star.png" alt="별"><a style="float: left;" href="#">>486</a>
         <br>
         <%--storeAddress--%>
