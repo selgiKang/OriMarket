@@ -14,6 +14,7 @@
   .container {
     max-height: 100vh; /* 컨테이너의 최대 높이를 화면의 높이로 설정 */
     overflow-y: auto; /* 컨테이너에 스크롤이 필요한 경우만 표시 */
+    box-sizing: border-box;
   }
 </style>
 
