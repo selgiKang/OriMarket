@@ -20,6 +20,7 @@ public class StoreController {
 
     @GetMapping("/store")
     public String store() {
+
         return "store/store";
     }
 

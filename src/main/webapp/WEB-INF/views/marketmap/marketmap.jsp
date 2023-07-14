@@ -40,7 +40,6 @@
 -->
 <!-- 전체맵 : 시장맵 no btn부분 클릭 시 모달창 open (스크롤 외 기능 없음) -->
 <div class="item1"><img src="../../img/marketmap/shinwonmarket.png" alt="신원시장전체맵"></div>
-
 <div class="arrow_wrap btns">
     center
     <a href="javascript:void(0)" class="btns">
