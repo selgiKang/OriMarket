@@ -252,42 +252,42 @@
             <h3>전체 메뉴</h3>
             <div class="detail_total_menu">
                 <div class="first_menu">
-                    <img src="../../../../resources/static/img/store/가게관리.png" alt="가게 관리"> <!-- alt 속성 추가 -->
+                    <img src="../../img/store/가게관리.png" alt="가게 관리"> <!-- alt 속성 추가 -->
                     <h5>가게 관리</h5>
                 </div>
 
                 <div class="first_menu">
-                    <img src="../../../../resources/static/img/store/게시판.png" alt="공지사항"> <!-- alt 속성 추가 -->
+                    <img src="../../img/store/게시판.png" alt="공지사항"> <!-- alt 속성 추가 -->
                     <h5>공지사항</h5>
                 </div>
 
                 <div class="first_menu">
-                    <img src="../../../../resources/static/img/store/리뷰.png" alt="리뷰 관리"> <!-- alt 속성 추가 -->
+                    <img src="../../img/store/리뷰.png" alt="리뷰 관리"> <!-- alt 속성 추가 -->
                     <h5>리뷰 관리</h5>
                 </div>
 
                 <div class="first_menu">
-                    <img src="../../../../resources/static/img/store/메뉴관리.png" alt="메뉴 관리"> <!-- alt 속성 추가 -->
+                    <img src="../../img/store/메뉴관리.png" alt="메뉴 관리"> <!-- alt 속성 추가 -->
                     <h5>메뉴 관리</h5>
                 </div>
 
                 <div class="first_menu">
-                    <img src="../../../../resources/static/img/store/주문내역.png" alt="주문 내역"> <!-- alt 속성 추가 -->
+                    <img src="../../img/store/주문내역.png" alt="주문 내역"> <!-- alt 속성 추가 -->
                     <h5>주문 내역</h5>
                 </div>
 
                 <div class="first_menu">
-                    <img src="../../../../resources/static/img/store/쿠폰.png" alt="쿠폰 관리"> <!-- alt 속성 추가 -->
+                    <img src="../../img/store/쿠폰.png" alt="쿠폰 관리"> <!-- alt 속성 추가 -->
                     <h5>쿠폰 관리</h5>
                 </div>
 
                 <div class="first_menu">
-                    <img src="../../../../resources/static/img/store/정산내역.png" alt="정산 내역"> <!-- alt 속성 추가 -->
+                    <img src="../../img/store/정산내역.png" alt="정산 내역"> <!-- alt 속성 추가 -->
                     <h5>정산 내역</h5>
                 </div>
 
                 <div class="first_menu">
-                    <img src="../../../../resources/static/img/store/확성기.png" alt="오리시장 공지사항"> <!-- alt 속성 추가 -->
+                    <img src="../../img/store/확성기.png" alt="오리시장 공지사항"> <!-- alt 속성 추가 -->
                     <h5>오리시장<br>공지사항</h5>
                 </div>
             </div>
