@@ -93,13 +93,13 @@ public class UserController {
         return "main/main";
 
     }
-//
-//    @GetMapping("/userId/{userId}/exists")
-//    @ResponseBody
-//    public ResponseEntity<Boolean> checkUserIdDuplicate(@PathVariable String userId){
-//        return ResponseEntity.ok(userService.checkUserId(userId));
-//
-//    }
+
+    @GetMapping("/userId/{userId}/exists")
+    @ResponseBody
+    public ResponseEntity<Boolean> checkUserIdDuplicate(@PathVariable String userId) {
+        return ResponseEntity.ok(userService.checkUserId(userId));
+    }
+
 
     @GetMapping("/delete")
     public String deleteUser(@RequestParam("userSeq") Long userSeq){
