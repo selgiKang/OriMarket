@@ -37,9 +37,6 @@ public class UserController {
         return "user/user_infolist";
     }
 
-
-
-
     @GetMapping("/review")
     public String review() {
         return "user/user_review";

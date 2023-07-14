@@ -22,10 +22,12 @@ public class OrderController {
     private final OrderService orderService;
     private final RealTimeService realTimeService;
 
+
     @Autowired
-    public OrderController(OrderService orderService,RealTimeService realTimeService){
+    public OrderController(OrderService orderService,RealTimeService realTimeService, OrderRepository orderRepository){
         this.orderService = orderService;
         this.realTimeService = realTimeService;
+
     }
 
     @GetMapping("/order_delivery")
@@ -39,6 +41,7 @@ public class OrderController {
     }
     @GetMapping("/order_pastorder")
     public String orderPastorder(){return "order/order_pastorder";}
+
 
     @PostMapping("/order_paymentPage")
     public String orderDelivery(@ModelAttribute Order order, @ModelAttribute RealTimeStatus rts, HttpSession session, @RequestParam("orderNumber")String orderNumberStr, Model model){
