@@ -92,15 +92,51 @@ function animateCoupon() {
 
 
 
-function hoverHeart(element) {
-    element.src = element.src.replace("empty_heart.png", "filled_heart.png");
+    function hoverHeart(element) {
+        var inputElement = element.nextElementSibling;
+        element.src = element.src.replace("empty_heart.png", "filled_heart.png");
 }
+
+    /* 찜 */
+// function toggleHeart(element) {
+//
+//     var inputElement = element.nextElementSibling;
+//     var currentValue = inputElement.value;
+//
+//     // if (currentValue==1) {
+//     //     if (element.src.includes("filled_heart.png")) {
+//     //         element.src = element.src.replace("filled_heart.png", "empty_heart.png");
+//     //     }
+//     //         inputElement.value() == "0";
+//     //
+//     // } else {
+//     //     element.src = element.src.replace("empty_heart.png", "filled_heart.png");
+//     //     inputElement.value()=="1";
+//     // }
+//     if (element.src.includes("filled_heart.png")) {
+//         element.src = element.src.replace("filled_heart.png", "empty_heart.png");
+//         inputElement.value()=="0";
+//     } else {
+//         element.src = element.src.replace("empty_heart.png", "filled_heart.png");
+//         inputElement.value()=="1";
+//     }
+//
+//
+// }
 
 function toggleHeart(element) {
-    if (element.src.includes("filled_heart.png")) {
-        element.src = element.src.replace("filled_heart.png", "empty_heart.png");
-    } else {
-        element.src = element.src.replace("empty_heart.png", "filled_heart.png");
-    }
-}
+    var inputElement = element.querySelector('input[name="favNumber"]');
+    var currentValue = inputElement.value;
 
+    if (currentValue === "") {
+        inputElement.value = "1";
+        // 이미지를 변경하는 코드 추가
+        element.querySelector('.heart').src = "../../img/store/filled_heart.png";
+    } else {
+        inputElement.value = "";
+        // 이미지를 변경하는 코드 추가
+        element.querySelector('.heart').src = "../../img/store/empty_heart.png";
+    }
+
+    element.closest('form').submit(); // 수정된 부분: form을 submit
+}

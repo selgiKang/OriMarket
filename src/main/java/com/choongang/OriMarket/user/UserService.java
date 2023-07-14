@@ -17,7 +17,8 @@ public class UserService {
     private final UserRepository userRepository;
 
     public boolean login(User member,HttpSession session) {
-
+        session.removeAttribute("userAddress1");
+        session.removeAttribute("userAddressDetail1");
         //값이 null일 떄 Optinal이 처리
         User findUser = userRepository.findByUserId(member.getUserId());
 

@@ -10,6 +10,7 @@
 <body style=" font-family: 'omyu_pretty';">
 <div id="mypage">
     <header>&lt; 헤더 &gt;</header>
+    <a href="/"><h1 style="position: fixed; left: 20px; top: 0; font-size: 30px; color: red">홈으로 바로가기</h1></a>
     <div id="mypqge1">
         <c:if test="${empty userId}">
             <a href="/login"><h2 id="mypage1_h2">로그인하러가기 ㅎㅎ</h2><img id="img1" src="" width="30px" height="30px"></a>

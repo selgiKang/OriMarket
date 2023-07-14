@@ -24,4 +24,7 @@ public class Fav {
 
     @Column
     private String favStoreName;
+
+    @Transient
+    private String favNumber;
 }

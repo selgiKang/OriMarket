@@ -30,9 +30,11 @@ public class MainController {
         return "main/search";
     }
 
+    @GetMapping("/mylocation")
+    public String test(){return "main/mylocation";}
+
     @PostMapping("/search")
     public String search1(@ModelAttribute User user, HttpSession session){
-        System.out.println("주소: "+user.getUserAddress());
         mainService.updateAddress(session,user);
         return "main/main";
     }
