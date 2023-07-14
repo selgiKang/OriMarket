@@ -27,19 +27,19 @@
         <input type="text" id="id" name="userId" required>
         <div class="btn_container">
           <button type="button" class="btn_round" onclick="checkDuplicate()"
-                  style="border-radius: 20px;
-            			padding: 5px 10px;
-            			background-color: #ffbf41;
-            			color: white; border: none;
-            			font-size: 14px; cursor: pointer;
-            			font-family: 'omyu pretty', Arial, sans-serif;">중복확인
+                  style="border-radius: 20px; padding: 5px 10px; background-color: #ffbf41; color: white; border: none; font-size: 14px; cursor: pointer; font-family: 'omyu pretty', Arial, sans-serif;">중복확인
           </button>
         </div>
       </div>
+      <div id="idError" class="error_message" style="display: none; color: red;"></div>
     </div>
     <div class="form_field">
       <label for="password">비밀번호</label>
       <input type="password" id="password" name="userPassword" required>
+    </div>
+    <div class="form_field">
+      <label for="password">비밀번호확인</label>
+      <input type="password" id="" name="" required>
     </div>
     <div class="form_field">
       <label for="name">이름</label>
@@ -110,6 +110,7 @@ function check() {
     var userId = document.getElementById("id").value;
     var url = "/userId/" + userId + "/exists"; // API 엔드포인트 URL
     var xhr = new XMLHttpRequest();
+    var idError = document.getElementById("idError");
 
     xhr.onreadystatechange = function() {
       if (xhr.readyState === XMLHttpRequest.DONE) {
@@ -117,10 +118,18 @@ function check() {
           var response = JSON.parse(xhr.responseText);
           if (response) {
             // 중복된 아이디 처리 로직
-            alert("중복된 아이디입니다.");
+            idError.textContent = "아이디가 중복되어 사용할 수 없습니다.";
+            idError.style.display = "block";
+            idError.style.color = "red";
+            idError.style.marginTop = "2px";
+            idError.style.marginLeft = "3px";
           } else {
             // 중복되지 않은 아이디 처리 로직
-            alert("사용 가능한 아이디입니다.");
+            idError.textContent = "사용 가능한 아이디입니다.";
+            idError.style.display = "block";
+            idError.style.color = "yellow";
+            idError.style.marginTop = "2px";
+            idError.style.marginLeft = "3px";
           }
         } else {
           // 에러 처리

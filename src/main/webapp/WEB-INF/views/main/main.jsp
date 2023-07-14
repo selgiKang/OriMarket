@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8"%>
+          pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"  %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,7 +13,12 @@
     <div id="main">
         <jsp:include page="../header/header_index.jsp" />
         <div id="main_wrap_box">
+            <c:if test="${empty userId}">
             <span class="connextion_title clear" style="font-weight:800; font-size: 18px;">&nbsp;<img class="connextion_title_img clear" src="../../img/main/singsing.png">&nbsp;&nbsp;님의 단골시장</span>
+            </c:if>
+            <c:if test="${!empty userId}">
+                <span class="connextion_title clear" style="font-weight:800; font-size: 18px;">&nbsp;<img class="connextion_title_img clear" src="../../img/main/singsing.png">&nbsp;&nbsp;${userNickname}님의 단골시장</span>
+            </c:if>
             <div id="connextion_market" class="clear">
                 <div class="connextion_marketbox clear">
                     <div class="connextion_mk1_wrap"><a class="connextion_mk1" href="/shinwon_marketmap"><p style="font-weight: 800;">신림<br>신원시장</p></a><p style="font-size: 10px;">　</p></div>

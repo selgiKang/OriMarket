@@ -96,10 +96,10 @@ public class UserController {
 
     @GetMapping("/userId/{userId}/exists")
     @ResponseBody
-    public ResponseEntity<Boolean> checkUserIdDuplicate(@PathVariable String userId){
+    public ResponseEntity<Boolean> checkUserIdDuplicate(@PathVariable String userId) {
         return ResponseEntity.ok(userService.checkUserId(userId));
-
     }
+
 
     @GetMapping("/delete")
     public String deleteUser(@RequestParam("userSeq") Long userSeq){
