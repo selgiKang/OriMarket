@@ -50,10 +50,6 @@ public class UserController {
         return "user/mypage";
     }
 
-    @GetMapping("/cart")
-    public String cart() {
-        return "user/cart";
-    }
 
     @GetMapping("/order_list")
     public String order_list() {
