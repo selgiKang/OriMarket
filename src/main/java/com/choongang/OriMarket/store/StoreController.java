@@ -20,6 +20,7 @@ public class StoreController {
 
     @GetMapping("/store")
     public String store() {
+
         return "store/store";
     }
 
@@ -37,9 +38,6 @@ public class StoreController {
     public String test() {
         return "store/test";
     }
-
-    @GetMapping("/storeFav")
-    public String storeFav(){ return  "store/store";}
 
     @PostMapping("/storenotice")
     public String storenoticeStore(@ModelAttribute Store store){
