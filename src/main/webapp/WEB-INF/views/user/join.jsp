@@ -77,7 +77,7 @@
         <input type="text" id="address_kakao" name="userAddress" readonly>
         <div class="btn_container">
           <button type="button" class="btn_round" onclick="searchAddress()"
-                  style="border-radius: 20px; padding: 5px 10px; background-color: #ffbf41; color: white; border: none; font-size: 14px; cursor: pointer; font-family: 'omyu pretty', Arial, sans-serif;">주소검색
+                  style="border-radius: 20px; padding: 5px 10px; background-color: #ffbf41; color: white; border: none; font-size: 14px; cursor: pointer; font-family: 'omyu pretty', Arial, sans-serif;">주소검색123
           </button>
 
         </div>
