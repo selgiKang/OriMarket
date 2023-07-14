@@ -21,17 +21,19 @@
                     <input type="hidden" value="<%=session.getAttribute("userSeq")%>" name="userSeq">
 
                     <button type="submit" class="storeFav" onclick="event.preventDefault(); toggleHeart(this);">
-                        <img src="../../img/store/empty_heart.png" alt="빈 하트" class="heart" >
-                      <%--<c:if test="${favNumber eq 1}">--%>
-                       <%-- <img src="../../img/store/filled_heart.png" alt="찬 하트" class="heart" >--%>
+                       <c:if test="${sessionScope.favNumber =='' }">
+                            <img src="../../img/store/empty_heart.png" alt="빈 하트" class="heart" >
+                       </c:if>
+                       <c:if test="${sessionScope.favNumber eq 1}">
+                            <img src="../../img/store/filled_heart.png" alt="찬 하트" class="heart" >
+                        </c:if>
                         <input type="hidden" name="favNumber" value="${sessionScope.favNumber}"><%--<%=session.getAttribute("favNumber")%>--%>
-                    <%--</c:if>--%>
                     </button>
                 </form>
             </c:if>
         </div>
         <%--storeName--%>
-        <h1><input type="text" value="싱싱과일가게" name="storeName"></h1>
+        <h1><input type="text" value="싱싱과일가게" name="storeName${sessionScope.favNumber}"></h1>
         <img class="star" src="../../img/store/star.png" alt="별"><a style="float: left;" href="#">>486</a>
         <br>
         <%--storeAddress--%>

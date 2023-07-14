@@ -17,6 +17,7 @@ import javax.servlet.http.HttpSession;
 public class FavController {
 
     private final FavService favService;
+    private final UserService userService;
 
     @GetMapping("/storeFav")
     public String storeFav(@RequestParam(value = "favId",required = false) Long favId, User user, Fav fav, HttpSession session){
@@ -38,4 +39,30 @@ public class FavController {
         System.out.println("찜 번호: "+favId);
         return "store/store";
     }
+
+    @GetMapping("/store")
+    public String store(@RequestParam("favStoreName") String favStoreName, Fav fav,User user, HttpSession session) {
+        System.out.println(favStoreName+","+session.getAttribute("userId"));
+        user.setUserId(String.valueOf(session.getAttribute("userId")));
+        //회원
+        if(userService.checkUserId(user.getUserId())) {
+
+            user.setUserSeq(Long.valueOf(String.valueOf(session.getAttribute("userSeq"))));
+
+
+            if(favService.favFavorite(user,favStoreName)){
+                session.setAttribute("favNumber","");
+
+            }else{
+                session.setAttribute("favNumber",1);
+            }
+            //session.setAttribute("favNumber", fav.getFavNumber());
+
+            return "store/store";
+        //비회원
+        }else{
+            return "store/store";
+        }
+    }
+
 }
