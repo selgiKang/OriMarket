@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"  %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,13 +22,19 @@
 
 <body>
 <div class="container" style="position: relative">
-    <form action="" method="post">
+    <form action="/search" method="post">
         <div class="form_field">
             <h2 style="position: absolute; top: 10px; left: 40px;"><label for="address_kakao">배달받을 주소 설정하기</label></h2>
+            <c:if test="${!empty userAddress}">
+                <p style="position: absolute; top: 75px; left: 20px">현재 내가 설정한주소: <span style="color: yellow">${userAddress} ${userAddressDetail} </span></p>
+            </c:if>
+            <c:if test="${empty userAddress}">
+                <p style="position: absolute; top: 75px; left: 20px">현재 내가 설정한주소: <span style="color: red">주소를 등록해주세요..</span></p>
+            </c:if>
             <hr>
             <div class="input_container">
-                <input type="text" id="address_kakao" name="userAddress" readonly style="position: absolute; top: 100px; right: 110px;" placeholder="주소검색버튼을눌러주세요..">
-                <div class="btn_container" style="position: absolute; top: 100px; right: 40px">
+                <input type="text" id="address_kakao" name="userAddress" readonly style="position: absolute; top: 120px; right: 130px;" placeholder="주소검색버튼을눌러주세요..">
+                <div class="btn_container" style="position: absolute; top: 120px; right: 60px">
                     <button type="button" class="btn_round" onclick="searchAddress()"
                             style="border-radius: 20px; padding: 5px 10px; background-color: #ffbf41; color: white; border: none; font-size: 14px; cursor: pointer; font-family: 'omyu pretty', Arial, sans-serif;">주소검색
                     </button>
@@ -35,12 +42,12 @@
             </div>
         </div>
 
-        <div class="form_field" style="position: absolute; top: 150px; right: 110px">
+        <div class="form_field" style="position: absolute; top: 170px; right: 130px">
             <label for="address_detail"></label>
             <input type="text" id="address_detail" name="userAddressDetail" placeholder="상세주소를 입력해주세요" required>
         </div>
 
-        <input type="submit" value="등록하기" class="submit_btn" style="position: absolute; top: 190px; left: 40px;">
+        <input type="submit" value="등록하기" class="submit_btn" style="position: absolute; top: 210px; left: 20px;">
     </form>
 
 </div>
