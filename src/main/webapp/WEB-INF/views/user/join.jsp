@@ -17,8 +17,6 @@
     box-sizing: border-box;
   }
 </style>
-
-
 <body>
 <div class="container">
   <div class="logo_container">
