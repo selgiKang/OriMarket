@@ -50,6 +50,7 @@ public class UserService {
 
            return false;
        } else {
+
            session.setAttribute("userSeq",savedUser.getUserSeq());
            session.setAttribute("userName",savedUser.getUserName());
            session.setAttribute("userId",savedUser.getUserId());
@@ -59,6 +60,7 @@ public class UserService {
            session.setAttribute("userEmail",savedUser.getUserEmail());
            session.setAttribute("userAddress",savedUser.getUserAddress());
            session.setAttribute("userAddressDetail",savedUser.getUserAddressDetail());
+
 
            return true;
        }
