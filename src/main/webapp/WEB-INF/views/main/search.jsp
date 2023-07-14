@@ -22,14 +22,15 @@
 
 <body>
 <div class="container" style="position: relative">
+    <a href="/"><h1 style="position: fixed; left: 20px; top: 0; font-size: 30px; color: red">홈으로 바로가기</h1></a>
     <form action="/search" method="post">
         <div class="form_field">
             <h2 style="position: absolute; top: 10px; left: 40px;"><label for="address_kakao">배달받을 주소 설정하기</label></h2>
-            <c:if test="${!empty userAddress}">
+            <c:if test="${!empty userAddress1}">
                 <a href="/mylocation" style="position: absolute; top: 75px; left: 20px">위치보기</a>
-                <p style="position: absolute; top: 75px; left: 20px">현재 내가 설정한주소: <span style="color: yellow">${userAddress} ${userAddressDetail} </span></p>
+                <p style="position: absolute; top: 75px; left: 20px">현재 내가 설정한주소: <span style="color: yellow">${userAddress1} ${userAddressDetail1} </span></p>
             </c:if>
-            <c:if test="${empty userAddress}">
+            <c:if test="${empty userAddress1}">
                 <p style="position: absolute; top: 75px; left: 20px">현재 내가 설정한주소: <span style="color: red">주소를 등록해주세요..</span></p>
             </c:if>
             <hr>

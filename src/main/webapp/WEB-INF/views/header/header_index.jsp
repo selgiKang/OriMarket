@@ -15,11 +15,11 @@
     <div class="logo"><a href="/">Ori Market</a></div>
 
     <div class="nav">
-        <c:if test="${empty userAddress}">
+        <c:if test="${empty userAddress1}">
         <span><a href="/search">주소검색</a></span>
         </c:if>
-        <c:if test="${!empty userAddress}">
-            <span><a href="/search">${userAddress} ...</a></span>
+        <c:if test="${!empty userAddress1}">
+            <span><a href="/search">${userAddress1} ...</a></span>
         </c:if>
         <a href="/cart"><i class="fa-solid fa-cart-shopping"></i></a>
         <a href="#"><i class="fa-solid fa-bell"></i></a>

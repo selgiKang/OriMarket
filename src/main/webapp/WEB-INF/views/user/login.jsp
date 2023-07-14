@@ -142,6 +142,7 @@
 <h1>오리시장</h1>
 <div id="container">
     <form action="/login" method="post">
+        <a href="/"><h1 style="position: fixed; left: 20px; top: 0; font-size: 30px; color: red">홈으로 바로가기</h1></a>
         <div id="login_box">
             <div>
                 <p>id: <input  type="text"  size="20" placeholder=" 아이디를 입력해주세요.." name="userId" required></p>
