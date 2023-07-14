@@ -39,4 +39,7 @@ public class User {
 
     @Column
     private String userAddressDetail;
+
+    //fav원투매니를 해야할까?? menuname, menuprice, menudetail 만들어놓고
+
 }

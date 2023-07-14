@@ -6,11 +6,11 @@
     font-style: normal;
 }
 
-body{margin:0 auto; font-size:16px; color:#ffbf41;}
-.logo>a{margin-top:10px; text-decoration: none; color:#ffbf41; font-weight: 700;}
+body{margin:0 auto; font-size:16px;}
+.header_wrap>.logo>a{margin-top:10px; text-decoration: none; color:#ffbf41; font-weight: 700;}
 .header_wrap{width:375px; height:100px; margin:0 auto; background-color:#46a973; box-sizing:border-box;}
-.nav{text-align:right; padding:5px 15px; margin-bottom:10px;}
+.nav{text-align:right; padding:5px 15px; margin-top:15px;}
 .nav>span{float:left; margin:5px;}
 .nav>span>a{text-decoration:none; color:#eee;}
 .header_i{color:#ffbf41; font-size:22px; margin:3px;}
-.logo{width:150px; height:35px; margin:auto; text-align:center; font-size:30px;}
+.logo{width:160px; height:35px; margin:auto; text-align:center; font-size:30px;}

@@ -21,9 +21,9 @@
         <c:if test="${!empty userAddress1}">
             <span><a href="/search">${userAddress1} ...</a></span>
         </c:if>
-        <a href="/cart"><i class="fa-solid fa-cart-shopping"></i></a>
-        <a href="#"><i class="fa-solid fa-bell"></i></a>
-        <a href="/mypage"><i class="fa-solid fa-circle-user"></i></a>
+        <a href="${sessionScope.userId}/cart"><i class="fa-solid fa-cart-shopping header_i"></i></a>
+        <a href="#"><i class="fa-solid fa-bell header_i"></i></a>
+        <a href="/mypage"><i class="fa-solid fa-circle-user header_i"></i></a>
     </div>
 </div>
 

@@ -7,37 +7,37 @@ import javax.persistence.*;
 import javax.print.attribute.standard.MediaSize;
 
 @Entity
-@Table(name = "Goods")
+@Table(name = "goods")
 @Getter
 @Setter
 public class Item {
 
     @Id
-    @Column(name = "menu_num")
+    @Column(name = "item_id")
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long ItemId;
+    private Long itemId;
 
     @Column
-    private String ItemName;
+    private String itemName;
 
     @Column
-    private int ItemCnt;
+    private int itemCnt;
 
     @Column
-    private int ItemPrice;
+    private int itemPrice;
 
     @Column
-    private int ItemG;
+    private int itemG;
 
     @Column
-    private String ItemFrom;
+    private String itemFrom;
 
     @Column
-    private String ItemInfo;
+    private String itemInfo;
 
 /*
     @ManyToOne
     @JoinColumn(name = "storeId")
-    private Strore ItemStoreNum;
+    private Strore itemStoreNum;
 */
 }
