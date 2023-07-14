@@ -1,0 +1,219 @@
+@charset "UTF-8";
+
+
+*{
+    margin: 0;
+    padding: 0;
+}
+@font-face {
+    font-family: 'omyu_pretty';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-01@1.0/omyu_pretty.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+header{
+    width: 315px;
+    background-color: green;
+    text-align: center;
+    height: 40px;
+}
+
+#mypage{
+    width: 315px;
+    height: 812px;
+    position: relative;
+    border: 1px solid black;
+}
+
+footer{
+    width: 315px;
+    background-color: red;
+    position: absolute;
+    bottom: 0;
+    text-align: center;
+    height: 40px;
+
+}
+
+#main{
+    width: 100%;
+    height: 601px;
+    background: #f1f2f3;
+    margin-top: -132px;
+}
+
+#main_box{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 20px 5px 25px 5px;
+}
+
+li{
+    list-style: none;
+    display: flex;
+    align-items: center;
+    margin: 10px 0;
+}
+
+.main_box_icon {
+    margin-right: 10px;
+    margin-left:  10px;
+}
+
+.contents1_bold {
+    font-weight: bold;
+    margin-left: 10px;
+}
+
+#coupon_points_container {
+    display: flex;
+    justify-content: space-between;
+    background-color: whitesmoke;
+    align-items: center;
+    border: 1px solid gray;
+    border-radius: 30px;
+    padding: 10px;
+    width: 250px;
+    position: relative;
+    margin: 10px auto;
+
+    /* Add styles for the dividing line */
+}
+
+#coupon_points_container div {
+    width: 50%;
+    position: relative; /* Add relative positioning */
+}
+
+
+
+#coupon_points_container div a {
+    margin-left: 5px;
+}
+
+
+#service_links,
+#customer_links {
+    margin-top: 10px;
+}
+a{
+    text-decoration: none;
+    color: blue;
+}
+#point{
+    font-weight: bolder;
+    padding-left: 7px;
+}
+#cupon{
+    font-weight: bolder;
+    padding-right: 5px;
+}
+hr {
+    width: 90%; /* 원하는 길이로 조정합니다. */
+    margin: 0 auto;
+    margin-top: 15px;
+}
+
+#mypage1_h2{
+    margin-bottom: -4px;
+    margin-left: 10px;
+}
+#mypqge1{
+    background-color: rgba(0, 128, 0, 0.3);
+    height: 250px;
+    padding-top: 5px;
+}
+
+#hr{
+    width: 100%;
+}
+
+ul{
+    color: gray;
+    margin-left: 5px;
+}
+li{
+    font-weight: bolder;
+    color: black;
+    margin-left: 20px;
+}
+#img1{
+    position: absolute;
+    right: 10px;
+    top: 52px;
+}
+#img2{
+    position: absolute;
+    right: 50px;
+    top: 52px;
+}
+#mypage1_small{
+    color: gray;
+    margin-left: 20px;
+}
+.separator {
+    width: 2px;
+    height: 40px;
+    background-color: gray;
+    margin-top: -15px;
+}
+
+.separator1 {
+    width: 2px;
+    height: 30px;
+    background-color: gray;
+    margin-top: -2px;
+}
+
+.slider {
+    width: 315px;
+    height: 100px;
+}
+.box {
+    text-align: center;
+    line-height: 100px;
+    font-size: 60px;
+    color: #fff;
+    font-weight: bold;
+    background-color: rgba(128, 128, 128, 0.7);
+    margin-top: 0;
+    height: 120px;
+    display: flex;
+    justify-content: center; /* Horizontally center the content */
+    align-items: center; /* Vertically center the content */
+    text-align: center;
+}
+html {
+    height: 100%;
+}
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    margin: 0 auto;
+}
+button {
+    position: absolute;
+    top: 42.5%;
+    transform: translateY(-50%);
+    width: 30px;
+    height: 30px;
+    font-size: 20px;
+    border: none;
+    outline: none;
+    color: red;
+    cursor: pointer;
+}
+
+#prevBtn {
+    left: 10px;
+}
+
+#nextBtn {
+    right: 10px;
+}
+

@@ -67,7 +67,7 @@
     </div>
     <div>
         <img id="nav_footer_user_img" src="../../img/footer/nav_footer_user1.png" alt="user Icon" onclick="toggleImage(this)">
-        <span>마이페이지</span>
+        <span><a href="/mypage">마이페이지</a></span>
     </div>
 </div>
 </body>
