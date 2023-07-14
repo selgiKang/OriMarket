@@ -98,26 +98,45 @@ function animateCoupon() {
 }
 
     /* 찜 */
-function toggleHeart(element) {
+// function toggleHeart(element) {
+//
+//     var inputElement = element.nextElementSibling;
+//     var currentValue = inputElement.value;
+//
+//     // if (currentValue==1) {
+//     //     if (element.src.includes("filled_heart.png")) {
+//     //         element.src = element.src.replace("filled_heart.png", "empty_heart.png");
+//     //     }
+//     //         inputElement.value() == "0";
+//     //
+//     // } else {
+//     //     element.src = element.src.replace("empty_heart.png", "filled_heart.png");
+//     //     inputElement.value()=="1";
+//     // }
+//     if (element.src.includes("filled_heart.png")) {
+//         element.src = element.src.replace("filled_heart.png", "empty_heart.png");
+//         inputElement.value()=="0";
+//     } else {
+//         element.src = element.src.replace("empty_heart.png", "filled_heart.png");
+//         inputElement.value()=="1";
+//     }
+//
+//
+// }
 
-    var inputElement = element.nextElementSibling;
+function toggleHeart(element) {
+    var inputElement = element.querySelector('input[name="favNumber"]');
     var currentValue = inputElement.value;
 
-    if (currentValue==1) {
-        element.src = element.src.replace("filled_heart.png", "empty_heart.png");
-        inputElement.value()=="0";
+    if (currentValue === "") {
+        inputElement.value = "1";
+        // 이미지를 변경하는 코드 추가
+        element.querySelector('.heart').src = "../../img/store/filled_heart.png";
     } else {
-        element.src = element.src.replace("empty_heart.png", "filled_heart.png");
-        inputElement.value()=="1";
+        inputElement.value = "";
+        // 이미지를 변경하는 코드 추가
+        element.querySelector('.heart').src = "../../img/store/empty_heart.png";
     }
-    // if (element.src.includes("filled_heart.png")) {
-    //     element.src = element.src.replace("filled_heart.png", "empty_heart.png");
-    //     inputElement.value()=="0";
-    // } else {
-    //     element.src = element.src.replace("empty_heart.png", "filled_heart.png");
-    //     inputElement.value()=="1";
-    // }
 
-
+    element.closest('form').submit(); // 수정된 부분: form을 submit
 }
-

@@ -18,22 +18,22 @@ public class FavController {
 
     private final FavService favService;
 
-    @GetMapping("/storeFav/{userSeq}")
-    public String storeFav(@PathVariable(name="userSeq") String userSeq,
-                           @RequestParam(value = "favId",required = false) Long favId, User user, Fav fav, HttpSession session){
+    @GetMapping("/storeFav")
+    public String storeFav(@RequestParam(value = "favId",required = false) Long favId, User user, Fav fav, HttpSession session){
 
-        user.setUserSeq(Long.valueOf(userSeq));
+        // user.setUserSeq(Long.valueOf((String) session.getAttribute("userSeq")));
 
-        if(favService.favFavorite(user,fav.getFavStoreName())){
-            favService.favDelete(user, fav.getFavStoreName());
+        if(favService.favFavorite(fav.getUserSeq(),fav.getFavStoreName())){
+            favService.favDelete(fav.getUserSeq(), fav.getFavStoreName());
+           fav.setFavNumber("");
             session.setAttribute("favNumber",String.valueOf(fav.getFavNumber()));
-
-
         }else{
-            fav.setFavNumber("1");
             favService.favInsert(fav);
+            fav.setFavNumber("1");
             session.setAttribute("favNumber",String.valueOf(fav.getFavNumber()));
         }
+
+        session.setAttribute("favNumber", fav.getFavNumber());
 
         System.out.println("찜 번호: "+favId);
         return "store/store";

@@ -27,7 +27,6 @@ public class FavService {
     public void favDelete(User userSeq, String favStoreName) {
         Fav fav = favRepository.findByUserSeqAndFavStoreName(userSeq, favStoreName);
         favRepository.delete(fav);
-
     }
 
     public boolean favFavorite(User userSeq, String favStoreName) {

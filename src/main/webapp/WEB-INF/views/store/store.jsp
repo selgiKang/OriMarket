@@ -11,16 +11,21 @@
 <div class="main-container">
     <header>
         <div class="like-container">
-            <img src="../../img/store/store.jpg" alt="착한생칼국수">
+            <img src="../../img/store/store.jpg" alt="착한생칼국수"
+
+            >
         <%-- 찜 --%>
             <c:if test="${not empty userId}">
                 <form action="/storeFav" method="get">
                     <input type="hidden" value="싱싱과일가게" name="favStoreName">
                     <input type="hidden" value="<%=session.getAttribute("userSeq")%>" name="userSeq">
 
-                    <button class="storeFav">
-                        <img src="../../img/store/empty_heart.png" alt="빈 하트" class="heart" onclick="toggleHeart(this)">
-                        <input type="hidden" value="<%=session.getAttribute("favNumber")%>">
+                    <button type="submit" class="storeFav" onclick="event.preventDefault(); toggleHeart(this);">
+                        <img src="../../img/store/empty_heart.png" alt="빈 하트" class="heart" >
+                      <%--<c:if test="${favNumber eq 1}">--%>
+                       <%-- <img src="../../img/store/filled_heart.png" alt="찬 하트" class="heart" >--%>
+                        <input type="hidden" name="favNumber" value="${sessionScope.favNumber}"><%--<%=session.getAttribute("favNumber")%>--%>
+                    <%--</c:if>--%>
                     </button>
                 </form>
             </c:if>

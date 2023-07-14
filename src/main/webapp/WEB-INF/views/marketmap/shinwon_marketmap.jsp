@@ -62,7 +62,7 @@
                 </div>
 
                 <!-- 신림즉석두부 -->
-                <div class="map_bg_content3_icon store_shinrimtofu_box" onclick="location.href='/store'">
+                <div class="map_bg_content3_icon store_shinrimtofu_box" onclick="location.href='/store?favNumber=0'">
                     <img class="store_shinrimtofu_icon tofu" src="../../img/marketmap/tofu.png">
                     <p class="store_shinrimtofu_txt">신림즉석두부</p>
                 </div>
