@@ -26,6 +26,7 @@
         <div class="form_field">
             <h2 style="position: absolute; top: 10px; left: 40px;"><label for="address_kakao">배달받을 주소 설정하기</label></h2>
             <c:if test="${!empty userAddress}">
+                <a href="/mylocation" style="position: absolute; top: 75px; left: 20px">위치보기</a>
                 <p style="position: absolute; top: 75px; left: 20px">현재 내가 설정한주소: <span style="color: yellow">${userAddress} ${userAddressDetail} </span></p>
             </c:if>
             <c:if test="${empty userAddress}">
