@@ -127,7 +127,7 @@ function animateCoupon() {
 function toggleHeart(element) {
     var inputElement = element.querySelector('input[name="favNumber"]');
     var currentValue = inputElement.value;
-
+    console.log("click!")
     if (currentValue === "") {
         inputElement.value = "1";
         // 이미지를 변경하는 코드 추가

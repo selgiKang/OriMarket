@@ -18,11 +18,7 @@ public class StoreController {
         return "store/detailmenu";
     }
 
-    @GetMapping("/store")
-    public String store() {
-
-        return "store/store";
-    }
+    // /store getMapping은 favController로 이동
 
     @GetMapping("/store_menu_search")
     public String store_menu_search() {

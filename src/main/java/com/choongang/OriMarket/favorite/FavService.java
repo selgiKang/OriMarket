@@ -30,6 +30,7 @@ public class FavService {
     }
 
     public boolean favFavorite(User userSeq, String favStoreName) {
+
         Fav fav = favRepository.findByUserSeqAndFavStoreName(userSeq, favStoreName);
         if (fav == null) {
             return false;
