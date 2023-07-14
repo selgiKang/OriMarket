@@ -9,7 +9,7 @@
 <body>
 <div id="map" style="width:375px; height:812px; margin: 0 auto;"></div>
 <a href="/"><h1 style="position: fixed; left: 20px; top: 0; font-size: 30px; color: red">홈으로 바로가기</h1></a>
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b256385fdf81fd0ccd4bc7e1b22da770&libraries=services"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=259217c849691d825026ea7a9f71af88&libraries=services"></script>
 <script>
     var mapContainer = document.getElementById('map'), // 지도를 표시할 div
         mapOption = {
