@@ -18,15 +18,21 @@
         </div>
         <%--정산 날짜 출력--%>
         <form action="" method="get">
-            <div id="calculate_date">
+            <table id="calculate_date">
                 <%--왼쪽 화살표--%>
-                <a href="#"><i class="fas fa-regular fa-angle-left" style="color: #f5f5f5;"></i></a>
-                    <input type="date" id="calculate_search_start_date">
-                    &nbsp - &nbsp
-                    <input type="date" id="calculate_search_end_date">
+                <tr>
+                    <td>
+                        <a class=".go-prev"><i class="fas fa-regular fa-angle-left" style="color: #f5f5f5;"></i></a>
+                    </td>
+                    <td>
+                        <input type="text" id="calculate_search_start_date">
+                    </td>
                 <%--오른쪽 화살표--%>
-                <a id="calculate_right_arrow" href="#"><i id="calculate_search_rightArrow" class="fas fa-solid fa-angle-right"></i></a>
-            </div>
+                <td>
+                    <a <%--id="calculate_right_arrow"--%>class=".go-next" href="#"><i id="calculate_search_rightArrow" class="fas fa-solid fa-angle-right"></i></a>
+                </td>
+                </tr>
+            </table>
         </form>
     </header>
     <main>
