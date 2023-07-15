@@ -19,7 +19,6 @@ public class StoreController {
     }
 
     // /store getMapping은 favController로 이동
-
     @GetMapping("/store_menu_search")
     public String store_menu_search() {
         return "store/store_menu_search";
@@ -30,10 +29,34 @@ public class StoreController {
         return "store/storenotice";
     }
 
+    @GetMapping("/s")
+    public String storenotice1() {
+        return "store/seller_itemDetail";
+    }
+
+    @GetMapping("/s1")
+    public String storenotice2() {
+        return "store/seller_itemList";
+    }
+
+    @GetMapping("/s2")
+    public String storenotice3() {
+        return "store/seller_itemRegister";
+    }
+
+    @GetMapping("/s3")
+    public String storenotice4() {
+        return "store/seller_manageMenu";
+    }
+
+
     @GetMapping("/test")
     public String test() {
         return "store/test";
     }
+
+    @GetMapping("/store_menuedit")
+    public String store_menuedit(){return "store/store_menuedit";}
 
     @PostMapping("/storenotice")
     public String storenoticeStore(@ModelAttribute Store store){
