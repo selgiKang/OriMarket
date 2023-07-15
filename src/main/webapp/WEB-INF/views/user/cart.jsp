@@ -39,12 +39,11 @@
 		 	<ul>
 				<%--반복문시작--%>
 				<%--<c:forEach var="items" items="cartItemList">--%>
-					<li>
 						<article>
 							<h1>가게1</h1>
 							<!-- 같은 가게 안에서 상품리스트(where='가게이름'아니면'가게식별번호')쿼리 -->
 							<ul>
-								<c:forEach var="items" items="cartItemList">
+								<c:forEach var="items" items="${cartItemList}">
 									<li>
 										<div>
 											<input type="checkbox" name="cbox" class="checkbox">
@@ -54,7 +53,7 @@
 													<img src="../../img/user/cart_fish.png">
 												</div>
 												<div class="cart_itemTitle">
-													<p>물건</p>
+													<p>${items.item.getItemName()}</p>
 												</div>
 											</a>
 											<button class="cart_xmark"><i class="fas fa-regular fa-xmark"></i></button>
@@ -64,14 +63,15 @@
 											<div class="cart_itemDescription">
 												<div class="cart_itemOption">
 													<button><i class="fas fa-solid fa-circle-minus"></i></button>
-													<div id="cart_countResult">1</div>
+													<div id="cart_countResult">${items.count}</div>
 													<button><i class="fas fa-solid fa-circle-plus"></i></button>
 												</div>
 												&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 												&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 												<div class="cart_itemPrice">
 													<span>
-														0
+														<%--현재는 판매원가만 불러옴,,수량을 곱하는걸 추가해야함--%>
+														${items.item.getItemPrice()}
 														원
 														&nbsp;&nbsp;
 													</span>

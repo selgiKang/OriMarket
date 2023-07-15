@@ -32,6 +32,7 @@ public class CartItem {
     /*같은 상품을 장바구니에 몇개 담을지..*/
     private int count;
 
+
     /*장바구니에 담을 상품엔티티를 생성하는 메소드*/
 
     public static CartItem createCartItem(Cart cart, Item item, int count){
@@ -47,6 +48,7 @@ public class CartItem {
     /*장바구니에 담을 수량을 증가시켜주는 메소드 추가*/
     public void addCount(int count){
         this.count += count;
+
     }
 
 }
