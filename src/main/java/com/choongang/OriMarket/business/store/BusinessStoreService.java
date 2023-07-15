@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @Service
 //필드 생성자 자동 생성
@@ -26,11 +27,16 @@ public class BusinessStoreService {
     private final BusinessStoreRepository businessStoreRepository;
     private final BusinessUserRepository businessUserRepository;
 
-    public void save(BusinessStore businessStore, HttpSession session){
+
+    public void save(BusinessStore businessStore, HttpSession session, Model model){
         Object buUserNumber = session.getAttribute("buUserNumber");
         BusinessUser businessUser = businessUserRepository.findById((Long)buUserNumber).orElseThrow();
         businessStore.setBusinessUser(businessUser);
         BusinessStore save = businessStoreRepository.save(businessStore);
+
+        model.addAttribute("save",save);
+
+
 
         //사업자가 가지고있는 가게들 출력해본거
         List<BusinessStore> businessStores = save.getBusinessUser().getBusinessStores();
