@@ -66,7 +66,7 @@ public class CartService {
         }
 
         /*cartItem생성*/
-        CartItem cartItem = cartItemRepository.findByCart_CartIdAndItem_ItemId(cart.getCartId(), item.getItemId());
+        CartItem cartItem = cartItemRepository.findByCart_CartIdAndItem_ItemName(cart.getCartId(), item.getItemName());
 
         /*cartItem이 없다면 새로 생성*/
         if (cartItem == null) {
@@ -82,6 +82,7 @@ public class CartService {
 
     //장바구니 조회하기
 
+    @Transactional
     public List<CartItem> userCartView(Cart cart){
         List<CartItem> cartItems = cartItemRepository.findAll();
         List<CartItem> userItems = new ArrayList<>();
@@ -93,7 +94,6 @@ public class CartService {
         }
         return userItems;
     }
-
 
 
     //장바구니 Item삭제

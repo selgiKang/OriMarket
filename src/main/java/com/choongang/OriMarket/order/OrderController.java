@@ -28,6 +28,10 @@ public class OrderController {
         this.realTimeService = realTimeService;
     }
 
+
+    @GetMapping("/calculate")
+    public String calculate(){return "calculate/calculate";}
+
     @GetMapping("/order_delivery")
     public String order(){return "order/order_delivery";}
     @GetMapping("/order_paymentPage")
