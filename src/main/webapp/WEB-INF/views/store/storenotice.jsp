@@ -315,7 +315,7 @@
             <form action="/storenotice" method="post">
             <div class="storecare_name">
                 <h3>가게 이름</h3>
-                <input type="text" id="store-name-input" name="storeName" placeholder="가게 이름">
+                <input type="text" id="store-name-input" name="buStoreName" placeholder="가게 이름">
                 <h6>※변경이 필요한 경우 고객센터로 문의해주세요.</h6>
             </div>
 
@@ -323,23 +323,23 @@
 
             <div class="storecare_storenumber">
                 <h3>가게 번호</h3>
-                <input type="text" id="store-number-input" name="storePnumber" placeholder="가게 번호"/>
+                <input type="text" id="store-number-input" name="buStorePhone" placeholder="가게 번호"/>
             </div>
 
             <div class="line"></div>
 
             <div class="storecare_category">
                 <h3>가게 카테고리</h3>
-                <input type="text" id="store-category-input" name="storeCategory" placeholder="가게 카테고리"/>
+                <input type="text" id="store-category-input" name="buStoreCategory" placeholder="가게 카테고리"/>
             </div>
 
             <div class="line"></div>
 
             <div class="storecare_location">
-                <h3>실제 위치</h3>
-                <input type="text" id="store-location-input" name="storeAddress" placeholder="실제 위치">
+                <h3>가게 위치 등록</h3>
+                <input type="text" id="store-location-input" name="buStoreAddress" placeholder="가게를 위치를 지정해주세요.">
+                <input type="text" name="buStoreAddressDetail" placeholder="상세위치를 적어주세요.">
             </div>
-                <button type="submit" value="전송zz">
             <!-- 수정 버튼으로 변경 -->
             <div class="line"></div>
             <button onclick="showInputData()">입력</button>
@@ -462,6 +462,7 @@
 
 
 
+
         function showInputData() {
             var logoUpload = document.getElementById("logo-upload");
             var storeNameInput = document.getElementById("store-name-input");
@@ -529,6 +530,7 @@
 
 
     </script>
+
 
 
 
