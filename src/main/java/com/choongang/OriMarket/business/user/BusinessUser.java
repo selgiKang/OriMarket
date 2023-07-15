@@ -20,7 +20,7 @@ public class BusinessUser {
     @Column(name = "bu_User_number", nullable = false)
     private Long buUserNumber;
 
-    @Column
+    @Column(unique = true)
     private String buUserId;
 
     @Column

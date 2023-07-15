@@ -312,7 +312,7 @@
 
             <div class="line"></div>
 
-            <form action="/storenotice" method="post">
+            <form action="/storenotice1" method="post">
             <div class="storecare_name">
                 <h3>가게 이름</h3>
                 <input type="text" id="store-name-input" name="buStoreName" placeholder="가게 이름">
@@ -342,7 +342,7 @@
             </div>
             <!-- 수정 버튼으로 변경 -->
             <div class="line"></div>
-            <button onclick="showInputData()">입력</button>
+            <button type="submit">입력</button>
             </form>
         </div>
     </div>
