@@ -28,7 +28,6 @@ public class BusinessUserController {
     @PostMapping("/login1")
     public String loginId(@ModelAttribute BusinessUser businessUser, Model model, HttpSession session) {
         boolean isTrue = businessUserService.login1(businessUser,session);
-
         if(isTrue){
             return "store/storenotice";
         }

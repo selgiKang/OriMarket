@@ -313,6 +313,7 @@
             <div class="line"></div>
 
             <form action="/storenotice1" method="post">
+                <input type="hidden" name="businessUser" placeholder="가게 이름">
             <div class="storecare_name">
                 <h3>가게 이름</h3>
                 <input type="text" id="store-name-input" name="buStoreName" placeholder="가게 이름">

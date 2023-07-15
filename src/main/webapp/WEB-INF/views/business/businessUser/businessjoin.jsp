@@ -34,6 +34,10 @@
 
   <form action="/join1" method="post" onsubmit="return validateForm()">
     <div class="form_field">
+      <label for="name">사업자번호</label>
+      <input type="text" id="nickname" name="buUserNumber" required>
+    </div>
+    <div class="form_field">
       <label for="id">아이디</label>
       <div class="input_container">
         <input type="text" id="id" name="buUserId" required>
@@ -174,28 +178,6 @@
       passwordMatchError.style.display = "block";
       passwordMatchError.style.marginTop = "2px";
       passwordMatchError.style.marginLeft = "3px";
-    }
-  });
-</script>
-<script>
-  var nicknameInput = document.getElementById("nickname");
-  var nicknameError = document.getElementById("nicknameError");
-
-  nicknameInput.addEventListener("input", function() {
-    var nickname = nicknameInput.value;
-
-    if (nickname.length < 2 || nickname.length > 8) {
-      nicknameError.textContent = "닉네임은 2자 이상 8자 이하로 작성해야 합니다.";
-      nicknameError.style.color = "red";
-      nicknameError.style.display = "block";
-      nicknameError.style.marginTop = "2px";
-      nicknameError.style.marginLeft = "3px";
-    } else {
-      nicknameError.textContent = "사용 가능한 닉네임입니다.";
-      nicknameError.style.color = "yellow";
-      nicknameError.style.display = "block";
-      nicknameError.style.marginTop = "2px";
-      nicknameError.style.marginLeft = "3px";
     }
   });
 </script>

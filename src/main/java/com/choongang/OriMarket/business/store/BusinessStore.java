@@ -1,5 +1,6 @@
 package com.choongang.OriMarket.business.store;
 
+import com.choongang.OriMarket.business.user.BusinessUser;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -34,5 +35,10 @@ public class BusinessStore {
 
     @Column
     private String buStoreAddressDetail;
+
+    @ManyToOne(fetch = FetchType.LAZY) //lazy가 성능최적화
+    @JoinColumn(name ="bu_store_user")
+    private BusinessUser businessUser;
+
 
 }
