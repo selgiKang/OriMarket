@@ -1,11 +1,14 @@
 package com.choongang.OriMarket.business.user;
 
+import com.choongang.OriMarket.business.store.BusinessStore;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "businessUser")
@@ -16,11 +19,10 @@ import javax.persistence.*;
 public class BusinessUser {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "bu_User_number", nullable = false)
+    @Column(name = "bu_user_number", nullable = false)
     private Long buUserNumber;
 
-    @Column
+    @Column(unique = true)
     private String buUserId;
 
     @Column
@@ -37,5 +39,8 @@ public class BusinessUser {
 
     @Column
     private String buUserPhone;
+
+    @OneToMany(mappedBy = "businessUser")
+    private List<BusinessStore> businessStores = new ArrayList<>();
 
 }
