@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"  %>
 <html lang="ko">
 <head>
     <meta charset="utf-8">
@@ -367,10 +368,16 @@
 
                 <div class="line"></div>
 
-                <form action="/storenotice" method="post">
+                <form action="/storenotice1" method="post">
                     <div class="storecare_name">
                         <h3>가게 이름</h3>
-                        <input type="text" id="store-name-input" name="buStoreName" placeholder="가게 이름">
+                        <c:if test="${empty save.buStoreName}">
+                            <input type="text" id="store-name-input" name="buStoreName" placeholder="가게 이름">
+                        </c:if>
+                        <c:if test="${!empty save.buStoreName}">
+                            <input type="text" id="store-name-input" name="buStoreName" value="${save.buStoreName}">
+                        </c:if>
+
                         <h6>※변경이 필요한 경우 고객센터로 문의해주세요.</h6>
                     </div>
 
@@ -378,26 +385,46 @@
 
                     <div class="storecare_storenumber">
                         <h3>가게 번호</h3>
+                        <c:if test="${empty save.buStorePhone}">
                         <input type="text" id="store-number-input" name="buStorePhone" placeholder="가게 번호"/>
+                        </c:if>
+                        <c:if test="${!empty save.buStorePhone}">
+                            <input type="text" id="store-number-input" name="buStorePhone" value="${save.buStorePhone}"/>
+                        </c:if>
                     </div>
 
                     <div class="line"></div>
 
                     <div class="storecare_category">
                         <h3>가게 카테고리</h3>
+                        <c:if test="${empty save.buStoreCategory}">
                         <input type="text" id="store-category-input" name="buStoreCategory" placeholder="가게 카테고리"/>
+                        </c:if>
+                        <c:if test="${!empty save.buStoreCategory}">
+                            <input type="text" id="store-category-input" name="buStoreCategory" value="${save.buStoreCategory}"/>
+                        </c:if>
                     </div>
 
                     <div class="line"></div>
 
                     <div class="storecare_location">
                         <h3>가게 위치 등록</h3>
+                        <c:if test="${empty save.buStoreAddress}">
                         <input type="text" id="store-location-input" name="buStoreAddress" placeholder="가게를 위치를 지정해주세요.">
+                        </c:if>
+                        <c:if test="${!empty save.buStoreAddress}">
+                            <input type="text" id="store-location-input" name="buStoreAddress" value="${save.buStoreAddress}">
+                        </c:if>
+                        <c:if test="${empty save.buStoreAddressDetail}">
                         <input type="text" name="buStoreAddressDetail" placeholder="상세위치를 적어주세요.">
+                        </c:if>
+                        <c:if test="${!empty save.buStoreAddressDetail}">
+                            <input type="text" name="buStoreAddressDetail" value="${save.buStoreAddressDetail}">
+                        </c:if>
                     </div>
                     <!-- 수정 버튼으로 변경 -->
                     <div class="line"></div>
-                    <button onclick="showInputData()">입력</button>
+                    <button type="submit">입력</button>
                 </form>
             </div>
 
