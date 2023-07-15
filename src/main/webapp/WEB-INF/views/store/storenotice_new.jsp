@@ -371,6 +371,7 @@
                 <form action="/storenotice1" method="post">
                     <div class="storecare_name">
                         <h3>가게 이름</h3>
+                        <input type="hidden" name="buStoreNumber" value="${save.buStoreNumber}">
                         <c:if test="${empty save.buStoreName}">
                             <input type="text" id="store-name-input" name="buStoreName" placeholder="가게 이름">
                         </c:if>
@@ -462,7 +463,7 @@
             <input class="input" name="tabs-4" type="radio" id="tab-4"/>
             <label class="label" for="tab-4">메뉴 관리</label>
             <div class="panel">
-                ㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴ
+                <jsp:include page="seller_manageMenu.jsp" />
             </div>
 
             <br>
@@ -594,78 +595,6 @@
                 otherNoticeDiv.remove();
             }
         }
-    }
-
-
-
-
-
-
-
-
-    function showInputData() {
-        var logoUpload = document.getElementById("logo-upload");
-        var storeNameInput = document.getElementById("store-name-input");
-        var storeNumberInput = document.getElementById("store-number-input");
-        var storeCategoryInput = document.getElementById("store-category-input");
-        var storeLocationInput = document.getElementById("store-location-input");
-
-        var logoPreview = document.getElementById("logo-preview");
-        var storeName = storeNameInput.value;
-        var storeNumber = storeNumberInput.value;
-        var storeCategory = storeCategoryInput.value;
-        var storeLocation = storeLocationInput.value;
-
-        // 첨부한 로고 이미지만 표시하고, 텍스트 박스는 보이지 않게 함
-        logoUpload.style.display = "none";
-        storeNameInput.style.display = "none";
-        storeNumberInput.style.display = "none";
-        storeCategoryInput.style.display = "none";
-        storeLocationInput.style.display = "none";
-
-        logoPreview.style.display = "block";
-        logoPreview.style.marginBottom = "10px";
-
-        // 입력한 데이터만 표시
-        logoPreview.innerText = ""; // 기존에 보여주던 로고 이미지 삭제
-        if (logoPreview.firstChild) {
-            logoPreview.removeChild(logoPreview.firstChild);
-        }
-
-        if (logoUpload.files.length > 0) {
-            var img = document.createElement("img");
-            img.src = URL.createObjectURL(logoUpload.files[0]);
-            img.style.maxWidth = "100%";
-            img.style.height = "auto";
-            logoPreview.appendChild(img);
-        }
-
-        // 텍스트 박스의 값을 표시하기 위해 새로운 엘리먼트를 생성하여 추가
-        var storeNameText = document.createElement("h4");
-        storeNameText.innerText = storeName;
-        storeNameInput.parentNode.appendChild(storeNameText);
-
-        var storeNumberText = document.createElement("h4");
-        storeNumberText.innerText = storeNumber;
-        storeNumberInput.parentNode.appendChild(storeNumberText);
-
-        var storeCategoryText = document.createElement("h4");
-        storeCategoryText.innerText = storeCategory;
-        storeCategoryInput.parentNode.appendChild(storeCategoryText);
-
-        var storeLocationText = document.createElement("h4");
-        storeLocationText.innerText = storeLocation;
-        storeLocationInput.parentNode.appendChild(storeLocationText);
-
-        // 텍스트 박스는 삭제
-        storeNameInput.parentNode.removeChild(storeNameInput);
-        storeNumberInput.parentNode.removeChild(storeNumberInput);
-        storeCategoryInput.parentNode.removeChild(storeCategoryInput);
-        storeLocationInput.parentNode.removeChild(storeLocationInput);
-
-        // 수정 버튼으로 변경
-        var editButton = document.querySelector(".storecare button");
-        editButton.innerText = "수정";
     }
 
 

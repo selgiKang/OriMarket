@@ -1,5 +1,6 @@
 package com.choongang.OriMarket.business.user;
 
+import com.choongang.OriMarket.business.store.BusinessStore;
 import com.choongang.OriMarket.user.User;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -10,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -27,9 +29,9 @@ public class BusinessUserController {
 
     @PostMapping("/login1")
     public String loginId(@ModelAttribute BusinessUser businessUser, Model model, HttpSession session) {
-        boolean isTrue = businessUserService.login1(businessUser,session);
+        boolean isTrue = businessUserService.login1(businessUser,session,model);
         if(isTrue){
-            return "store/storenotice";
+            return "store/storenotice_new";
         }
         return "business/businessUser/businesslogin";
     }

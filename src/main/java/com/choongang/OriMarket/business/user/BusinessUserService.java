@@ -1,12 +1,16 @@
 package com.choongang.OriMarket.business.user;
 
+import com.choongang.OriMarket.business.store.BusinessStore;
+import com.choongang.OriMarket.business.store.BusinessStoreRepository;
 import com.choongang.OriMarket.user.User;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor 
@@ -15,9 +19,18 @@ public class BusinessUserService {
 
     @Autowired
     private final BusinessUserRepository businessUserRepository;
+    private final BusinessStoreRepository businessStoreRepository;
 
-    public boolean login1(BusinessUser businessUser,HttpSession session) {
+    public boolean login1(BusinessUser businessUser, HttpSession session, Model model) {
         BusinessUser findbusinessUser = businessUserRepository.findByBuUserId(businessUser.getBuUserId());
+
+        if(findbusinessUser.getBusinessStores() == null){
+
+        }else {
+            List<BusinessStore> businessStores = findbusinessUser.getBusinessStores();
+            model.addAttribute("save",businessStores.get(0));
+        }
+
 
         if(findbusinessUser == null){
             return false;
