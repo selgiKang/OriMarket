@@ -1,5 +1,6 @@
 package com.choongang.OriMarket.order;
 
+import com.choongang.OriMarket.business.user.BusinessUser;
 import lombok.*;
 
 import javax.persistence.*;
@@ -16,6 +17,12 @@ public class Order {
     @Id
     @Column(name = "order_number", nullable = false)
     private String orderNumber;
+
+    //사업자 번호 받기
+    @ManyToOne
+    @JoinColumn(name = "bu_user_number")
+    private BusinessUser businessUser;
+
 
     @Column
     private String orderMarketName;
@@ -69,4 +76,12 @@ public class Order {
 
     @Transient
     private String next_redirect_pc_url;
+
+    //출력 날짜
+    @Transient
+    private String calculate_date;
+
+    //끝나는 날짜
+    @Transient
+    private String calculate_date_last;
 }

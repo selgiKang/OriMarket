@@ -14,7 +14,10 @@
         .nav>span>a{text-decoration:none; color:#eee;}
         .header_i{color:#ffbf41; font-size:22px; margin:3px;}
 
-
+        .h_search_wrap{padding:5px 20px;}
+        .h_searchbar{width:260px; height:30px; border-style: none; border-radius: 35px; float:left;}
+        .h_searchbtn{background-color:#ffbf41;}
+        .h_searchbtn_i{}
 
     </style>
 </head>
@@ -40,11 +43,11 @@
         <i class="fas fa-search"></i>
     </div>--%>
 
-    <form action="" method="GET">
-        <input type="text" id="searchWord" name="searchWord" placeholder="상품검색"
+    <form action="" method="GET" class="h_search_wrap">
+        <input type="text" id="searchWord" class="h_searchbar" name="searchWord" placeholder="상품검색"
                maxlength="50" size="60">
-        <button class="searchButton">
-            <i class="fas fa-search searchButtonImg"></i>
+        <button class="searchButton" class="h_searchbtn">
+            <i class="fas fa-search searchButtonImg h_searchbtn_i"></i>
         </button>
     </form>
 </div>

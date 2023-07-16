@@ -17,17 +17,24 @@
             내 수입
         </div>
         <%--정산 날짜 출력--%>
-        <form action="" method="get">
-            <div id="calculate_date">
-                <%--왼쪽 화살표--%>
-                <a href="#"><i class="fas fa-regular fa-angle-left" style="color: #f5f5f5;"></i></a>
-                    <input type="date" id="calculate_search_start_date">
-                    &nbsp - &nbsp
-                    <input type="date" id="calculate_search_end_date">
-                <%--오른쪽 화살표--%>
-                <a id="calculate_right_arrow" href="#"><i id="calculate_search_rightArrow" class="fas fa-solid fa-angle-right"></i></a>
-            </div>
-        </form>
+        <table id="calculate_date">
+            <%--왼쪽 화살표--%>
+            <tr>
+                <td>
+                    <a class="go-prev"><i class="fas fa-regular fa-angle-left" style="color: #f5f5f5;"></i></a>
+                </td>
+                <td>
+                    <input type="hidden" name="calculate_date" id="calculate_date">
+                    <%--해당 달 1달 후--%>
+                    <input type="hidden" name="calculate_date_last" id="calculate_date_last">
+                    <div id="calculate_search_date" style="color:#f5f5f5;"></div>
+                </td>
+            <%--오른쪽 화살표--%>
+                <td>
+                    <a <%--id="calculate_right_arrow"--%>class="go-next"><i id="calculate_search_rightArrow" class="fas fa-solid fa-angle-right" style="color: #f5f5f5;"></i></a>
+                </td>
+            </tr>
+        </table>
     </header>
     <main>
         <div id="calculate_main_totalIncome">
@@ -39,10 +46,11 @@
             <tr id="calculate_main_table_tr_1">
                 <td>날짜</td><td>수입</td>
             </tr>
-            <tr>
-                <td class="calculate_main_table_td_1">07/01</td>
-                <td class="calculate_main_table_td_2">30,000원</td>
-            </tr>
+            <tbody id="tableBody"></tbody>
+          <%--  <tr>
+                <td class="calculate_main_table_td_1" style="text-align: center;">07/01</td>
+                <td class="calculate_main_table_td_2" style="text-align: center;">30,000원</td>
+            </tr>--%>
         </table>
     </main>
 </body>

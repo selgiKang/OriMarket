@@ -1,5 +1,6 @@
 package com.choongang.OriMarket.store;
 
+import com.choongang.OriMarket.business.store.BusinessStore;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -21,13 +22,13 @@ public class Item {
     private String itemName;
 
     @Column
-    private int itemCnt;
+    private Integer itemCnt;
 
     @Column
-    private int itemPrice;
+    private Integer itemPrice;
 
     @Column
-    private int itemG;
+    private Integer itemG;
 
     @Column
     private String itemFrom;
@@ -35,9 +36,10 @@ public class Item {
     @Column
     private String itemInfo;
 
-/*
+    /*
     @ManyToOne
-    @JoinColumn(name = "storeId")
-    private Strore itemStoreNum;
+    @JoinColumn(name = "store_number")
+    private Store store;
 */
 }
+
