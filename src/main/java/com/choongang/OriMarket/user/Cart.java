@@ -39,8 +39,8 @@ public class Cart {
     private User user;
 
     //    cartItems 테이블이 생성됨.
-    @OneToMany(fetch = FetchType.EAGER)
-    private List<CartItem> cartItems = new ArrayList<>();
+   // @OneToMany(fetch = FetchType.EAGER)
+    //private List<CartItem> cartItems = new ArrayList<>();
 
 
     /*회원 엔티티를 파라미터로 받아서 장바구니 엔티티를 생성하는 로직

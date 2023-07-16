@@ -120,7 +120,7 @@
 				<div class="radio">
 
 					<label><input type="radio" value="오이" name="itemName" checked  />오이</label>
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" value="1000" name="itemPrice" style="outline: none;border: none;" />
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" value="500" name="itemPrice" style="outline: none;border: none;" />
 				</div>
 				<table>
 					<tr>
@@ -130,7 +130,7 @@
 					<tr>
 						<%-- 이 값은 따로 param으로 가져가서 set, save하기 --%>
 						<td><button class="menu_btn_minus"  value="1" ><i class="fa-solid fa-square-minus" style="color: #46a973;"></i></button></td>
-						<td class="detailmenu_count" na><input type="number" name="count" value="1"></td>
+						<td class="detailmenu_count" ><input type="number" name="count" value="1"></td>
 						<td><button class="menu_btn_plus" value="1" ><i class="fa-solid fa-square-plus" style="color: #46a973;"></i></button>
 						</td>
 					</tr>

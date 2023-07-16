@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
@@ -52,30 +53,31 @@ public class CartController {
 
     /*특정상품 장바구니에 추가*/
     @PostMapping("/{userId}/cart")
-    public String addMyCart(@PathVariable("userId") String userId,Item item,int count){
+    public String addMyCart(@PathVariable("userId") String userId,Item item,int count,int itemPrice){
         User user = userService.getUser(userId);
         Item additem = itemService.getItem(item.getItemName());
 
-        cartService.addCart(user,additem,count);
+        cartService.addCart(user,additem,count,itemPrice);
 
         return "/store/detailmenu";
     }
 
 
     /*특정상품 장바구니에서 삭제*/
-    @GetMapping("/user/{userId}/cart/{cartItemId}/delete")
+    @GetMapping("/{userId}/cart/{cartItemId}/delete")
+    @ResponseBody
     public String myCartDelete(@PathVariable("userId") String userId,@PathVariable("cartItemId") Long cartItemId){
         Cart cart  = cartService.getCart(userId);
         cart.setCartCnt(cart.getCartCnt()-1);
         cartService.cartItemDelete(cartItemId);
 
-        return "/user/{userId}/cart";
+        return "/user/cart";
 
 
     }
 
     /*결제후 장바구니 삭제*/
-    @PostMapping("/user/{userId}/cart/checkout")
+    @PostMapping("/{userId}/cart/checkout")
     public String myCartPayment(@PathVariable("userId") String userId,Model model) {
 
         cartService.cartPayment(userId);

@@ -44,9 +44,6 @@ public class CartService {
     }
 
 
-
-
-
     //장바구니 생성
     public void createCart(User user){
         Cart cart = Cart.createCart(user);
@@ -55,7 +52,7 @@ public class CartService {
 
     //장바구니에 item추가
     @Transactional
-    public void addCart(User user, Item item, int count) {
+    public void addCart(User user, Item item, int count,int itemPrice) {
 
         Cart cart = cartRepository.findByUserUserId(user.getUserId());
 
@@ -70,11 +67,12 @@ public class CartService {
 
         /*cartItem이 없다면 새로 생성*/
         if (cartItem == null) {
-            cartItem = CartItem.createCartItem(cart, item, count);
+            cartItem = CartItem.createCartItem(cart, item, count,itemPrice);
             cartItemRepository.save(cartItem);
             cart.setCartCnt(cart.getCartCnt() + 1);
+            cart.setCartTotalPrice(cart.getCartTotalPrice()+item.getItemPrice());
         } else {
-            cartItem.addCount(count);
+            cartItem.addCount(count, item.getItemPrice());
         }
 
     }
@@ -94,6 +92,8 @@ public class CartService {
         }
         return userItems;
     }
+
+
 
 
     //장바구니 Item삭제
