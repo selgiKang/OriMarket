@@ -8,10 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
@@ -32,8 +29,8 @@ public class OrderController {
     }
 
 
-    //@GetMapping("/calculate")
-   // public String calculate(){return "calculate/calculate";}
+    @GetMapping("/calculate")
+    public String calculate(){return "calculate/calculate";}
 
     @GetMapping("/order_delivery")
     public String order(){return "order/order_delivery";}
@@ -74,7 +71,8 @@ public class OrderController {
         }
     }
 
-    @GetMapping("/calculate")
+    @PostMapping("/calculate")
+    @ResponseBody
     public ResponseEntity<List<Map<String,String>>> calculateRequest(@RequestParam("calculate_date") String calculateDate, @RequestParam("calculate_date_last") String calculateDateLast){
         List<Map<String,String>> tableDate = orderService.getTableData(calculateDate,calculateDateLast);
 
