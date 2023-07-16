@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @Slf4j
@@ -38,8 +39,8 @@ public class OrderController {
     }
 
 
-    @GetMapping("/calculate")
-    public String calculate(){return "calculate/calculate";}
+    //@GetMapping("/calculate")
+   // public String calculate(){return "calculate/calculate";}
 
     @GetMapping("/order_delivery")
     public String order(){return "order/order_delivery";}
@@ -89,6 +90,20 @@ public class OrderController {
             return "order/order_paymentPage";
         }
     }
+
+    @GetMapping("/calculate")
+    public ResponseEntity<List<Map<String,String>>> calculateRequest(@RequestParam("calculate_date") String calculateDate, @RequestParam("calculate_date_last") String calculateDateLast){
+        List<Map<String,String>> tableDate = orderService.getTableData(calculateDate,calculateDateLast);
+
+        return ResponseEntity.ok(tableDate);
+    }
+
+//    @PostMapping("/calculate")
+//    public String calculateResult(@ModelAttribute Order order,@RequestParam("orderNumber")String orderNumberStr){
+//
+//        return "calculate/calculate";
+//    }
+
 
 
 //순번     order_Num : pk auto_intended
