@@ -2,11 +2,7 @@ package com.choongang.OriMarket.user;
 
 import com.choongang.OriMarket.store.Item;
 import com.choongang.OriMarket.store.ItemService;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.Banner;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,7 +10,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.servlet.http.HttpSession;
 import java.util.List;
 
 
@@ -65,14 +60,13 @@ public class CartController {
 
     /*특정상품 장바구니에서 삭제*/
     @GetMapping("/{userId}/cart/{cartItemId}/delete")
-    @ResponseBody
-    public String myCartDelete(@PathVariable("userId") String userId,@PathVariable("cartItemId") Long cartItemId){
+    public String myCartDelete(@PathVariable("userId") String userId, @PathVariable("cartItemId") Long cartItemId){
         Cart cart  = cartService.getCart(userId);
         cart.setCartCnt(cart.getCartCnt()-1);
         cartService.cartItemDelete(cartItemId);
-
+        /*토탈가격에서 삭제아이템 가격빼줘야함*/
+       // cart.setCartTotalPrice(cart.getCartTotalPrice()-);
         return "/user/cart";
-
 
     }
 
