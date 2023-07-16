@@ -25,6 +25,11 @@ public class MainController {
         return "main/main";
     }
 
+    @GetMapping("/index")
+    public String index() {
+        return "main/index";
+    }
+
     @GetMapping("/search")
     public String search() {
         return "main/search";

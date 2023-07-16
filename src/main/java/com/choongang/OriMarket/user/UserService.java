@@ -22,7 +22,6 @@ public class UserService {
         //값이 null일 떄 Optinal이 처리
         User findUser = userRepository.findByUserId(member.getUserId());
 
-
         if(findUser == null){
             return false;
         }
@@ -30,6 +29,8 @@ public class UserService {
         if(!findUser.getUserPassword().equals(member.getUserPassword())){
             return false;
         }
+        session.setAttribute("userAddress1", findUser.getUserAddress());
+        session.setAttribute("userAddressDetail1", findUser.getUserAddressDetail());
         session.setAttribute("userSeq",findUser.getUserSeq());
         session.setAttribute("userName",findUser.getUserName());
         session.setAttribute("userId",findUser.getUserId());

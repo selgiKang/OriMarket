@@ -16,6 +16,10 @@ import org.springframework.web.client.RestTemplate;
 
 import javax.servlet.http.HttpSession;
 import java.net.URI;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Service
 //필드 생성자 자동 생성
@@ -85,6 +89,22 @@ public class OrderService {
                 session.setAttribute("orderNumber",saveOrder.getOrderNumber());
                 return true;
             }
+        }
 
+        public List<Map<String,String>> getTableData(String calculateDate,String calculateDateLast){
+
+            List<Map<String,String>> tableData = new ArrayList<>();
+            System.out.println("calculateDate"+calculateDate+", calculateLast"+calculateDateLast);
+            List<Order> orders = orderRepository.findOrdersBetweenDates(calculateDate,calculateDateLast);
+
+            for(Order order : orders){
+                Map<String, String> orderData = new HashMap<>();
+                orderData.put("date", String.valueOf(order.getOrderDate()));
+                orderData.put("amount",String.valueOf(order.getOrderGoodsPrice()));
+
+                tableData.add(orderData);
+            }
+
+            return tableData;
         }
 }

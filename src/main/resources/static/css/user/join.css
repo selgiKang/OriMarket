@@ -14,7 +14,7 @@
       display: flex;
       justify-content: center;
     }
-    
+
     .container {
       width: 375px;
       height: 812px;
@@ -23,7 +23,7 @@
       align-items: center;
       background-color: #46a973;
     }
-    
+
     .form_field {
       display: flex;
       flex-direction: column;
