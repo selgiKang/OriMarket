@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Controller
 @Slf4j
@@ -22,10 +23,18 @@ public class OrderController {
     private final OrderService orderService;
     private final RealTimeService realTimeService;
 
+    //7.16 테스트 승엽
+    private final OrderRepository orderRepository;
+
+
     @Autowired
-    public OrderController(OrderService orderService,RealTimeService realTimeService){
+    public OrderController(OrderService orderService,RealTimeService realTimeService, OrderRepository orderRepository){
         this.orderService = orderService;
         this.realTimeService = realTimeService;
+
+        //7.16 테스트 승엽
+        this.orderRepository = orderRepository;
+
     }
 
 
@@ -43,6 +52,16 @@ public class OrderController {
     }
     @GetMapping("/order_pastorder")
     public String orderPastorder(){return "order/order_pastorder";}
+
+
+    //7.16 테스트 승엽
+    @GetMapping("/order-list")
+    public String getOrderList(Model model) {
+        List<Order> orders = orderRepository.findAll();
+        model.addAttribute("orders", orders);
+
+        return "order_list";
+    }
 
     @PostMapping("/order_paymentPage")
     public String orderDelivery(@ModelAttribute Order order, @ModelAttribute RealTimeStatus rts, HttpSession session, @RequestParam("orderNumber")String orderNumberStr, Model model){
