@@ -88,7 +88,7 @@ function updateTable(data) {
 
     for (var i = 0; i < data.length; i++) {
         var row = $('<tr></tr>');
-        var dateCell = $('<td class="calculate_main_table_td_1" style="text-align: center;"></td>').text(data[i].date);
+        var dateCell = $('<td class="calculate_main_table_td_1" style="text-align: center;"></td>').text(data[i].date.substr(0,8));
         var amountCell = $('<td class="calculate_main_table_td_2" style="text-align: center;"></td>').text(data[i].amount+"원");
 
         row.append(dateCell);
