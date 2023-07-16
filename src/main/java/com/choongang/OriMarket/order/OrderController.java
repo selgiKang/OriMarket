@@ -5,6 +5,7 @@ import com.choongang.OriMarket.RealTimeStatus.RealTimeService;
 import com.choongang.OriMarket.RealTimeStatus.RealTimeStatus;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,6 +14,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
+import java.util.Map;
 
 @Controller
 @Slf4j
@@ -29,8 +32,8 @@ public class OrderController {
     }
 
 
-    @GetMapping("/calculate")
-    public String calculate(){return "calculate/calculate";}
+    //@GetMapping("/calculate")
+   // public String calculate(){return "calculate/calculate";}
 
     @GetMapping("/order_delivery")
     public String order(){return "order/order_delivery";}
@@ -70,6 +73,20 @@ public class OrderController {
             return "order/order_paymentPage";
         }
     }
+
+    @GetMapping("/calculate")
+    public ResponseEntity<List<Map<String,String>>> calculateRequest(@RequestParam("calculate_date") String calculateDate, @RequestParam("calculate_date_last") String calculateDateLast){
+        List<Map<String,String>> tableDate = orderService.getTableData(calculateDate,calculateDateLast);
+
+        return ResponseEntity.ok(tableDate);
+    }
+
+//    @PostMapping("/calculate")
+//    public String calculateResult(@ModelAttribute Order order,@RequestParam("orderNumber")String orderNumberStr){
+//
+//        return "calculate/calculate";
+//    }
+
 
 
 //순번     order_Num : pk auto_intended
