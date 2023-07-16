@@ -57,7 +57,11 @@
 										<p>${items.item.getItemName()}</p>
 									</div>
 								</a>
-								<a href="/${sessionScope.userId}/cart/${items.cartItemId}/delete"><button class="cart_xmark"><i class="fas fa-regular fa-xmark"></i></button></a>
+								<a href="/${sessionScope.userId}/cart/${items.cartItemId}/delete">
+									<input type="hidden" id="userId" value="${sessionScope.userId}">
+									<input type="hidden" id="cartItemId" value="${items.cartItemId}">
+									<button class="cart_xmark" onclick="deleteItem()"><i class="fas fa-regular fa-xmark"></i></button>
+								</a>
 
 								<!-- 수량선택(-,+),가격표시 -->
 
@@ -128,15 +132,6 @@
 </div>
 
 <script type="text/javascript">
-	const putCntInput_${status.index} = document.querySelector('#currentCnt${status.index}');
-
-	putCntInput_${status.index}.addEventListener('change',function (){
-		const priceTag = document.querySelector('#sellPrice_${status.index}').value;
-		const putCnt = document.querySelector('#currentCnt${status.index}').value;
-		const result = priceTag*putCnt;
-		document.querySelector('#totalPriceCalSpan_${status.index}').innerText = result+"원";
-
-	});
 
 </script>
 </body>
