@@ -15,7 +15,7 @@
 		<input type="submit" value="주문수락">
 	</FORM>
 	<main id="orderDelivery_main">
-		<div id="orderDelivery_btn_cancel"><a href="#"><i class="fas fa-regular fa-xmark"></i></a></div>
+		<div id="orderDelivery_btn_cancel"><a href="/"><i class="fas fa-regular fa-xmark"></i></a></div>
 		<h2>실시간 주문 내역</h2>
 		<ul id="orderDelivery_ing">
 			<!-- 배달표시 circle 아이콘 -->
@@ -27,7 +27,7 @@
 				<li class="orderDelivery_li_1">픽업중</li>
 			</c:if>
 			<c:if test="${rtsOrderIng eq 1 }">
-				<li><i class="fa-sharp fa-regular fa-circle" style="color: #46a973;"></i></li>
+				<li><i class="fa-sharp fa-solid fa-circle" style="color: #46a973;"></i></li>
 				<li class="orderDelivery_li_1" style="color: #46A973;">픽업중</li>
 			</c:if>
 	<!-- 배달중 -->

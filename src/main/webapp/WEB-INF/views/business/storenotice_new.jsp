@@ -1,3 +1,4 @@
+<%@ page import="java.util.Date" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"  %>
@@ -275,7 +276,6 @@
             width: 295px;
         }
 
-        }
         .input:checked + .label + .panel {
             display: block;
         }
@@ -284,7 +284,32 @@
 
 
     </style>
+    <%
+        Date date = new Date();
+        long utc = date.getTime() + (date.getTimezoneOffset() * 60 * 100);
+        //한국 kst 기준 시간
+        long kstGap = 9 * 60 * 60 * 1000;
+        //한국 시가능로 date 객체 (오늘)
+        Date today = new Date(utc + kstGap);
 
+        int currentYear = today.getYear()+1900; // 전역 변수에 할당
+        int currentMonth = today.getMonth();
+
+        String currentMonthStr = String.valueOf(currentMonth + 1);
+        String currentMonthStr2 = String.valueOf(currentMonth + 2);
+
+        //현재 월 표시
+        if (currentMonthStr.length() == 1) {
+            currentMonthStr = '0' + currentMonthStr;
+        }
+        if (currentMonthStr2.length() == 1) {
+            currentMonthStr2 = '0' + currentMonthStr2;
+        }
+
+        String currentDate = String.valueOf(currentYear) + currentMonthStr;
+        String currentDateLast = String.valueOf(currentYear) + currentMonthStr2;
+
+    %>
 </head>
 <body>
 
@@ -337,10 +362,10 @@
                     <h5>쿠폰 관리</h5>
                 </div>
 
-                <div class="first_menu">
+                <a class="first_menu" href="/calculate?calculate_date=<%=currentDate%>&calculate_date_last=<%=currentDateLast%>">
                     <img src="../../img/store/정산내역.png" alt="정산 내역"> <!-- alt 속성 추가 -->
                     <h5>정산 내역</h5>
-                </div>
+                </a>
 
                 <div class="first_menu">
                     <img src="../../img/store/확성기.png" alt="오리시장 공지사항"> <!-- alt 속성 추가 -->
@@ -463,7 +488,7 @@
             <input class="input" name="tabs-4" type="radio" id="tab-4"/>
             <label class="label" for="tab-4">메뉴 관리</label>
             <div class="panel">
-                <jsp:include page="seller_manageMenu.jsp" />
+                <jsp:include page="../store/seller_manageMenu.jsp" />
             </div>
 
             <br>

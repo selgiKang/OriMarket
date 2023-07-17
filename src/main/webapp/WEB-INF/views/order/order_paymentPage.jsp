@@ -69,7 +69,7 @@
 				<table id= "paymentpage_table_2">
 					<tr class= "paymentpage_tr_3">
 						<th colspan= "2">물건 금액</th>
-						<td class= "paymentpage_td_3"><input type="text" name="orderGoodsTotalPrice" value="3000" readonly></td>
+						<td class= "paymentpage_td_3"><input type="text" name="orderGoodsTotalPrice" value="${totalPrice}" readonly></td>
 					</tr>
 					<tr class= "paymentpage_tr_3" >
 						<th colspan= "2">배달비</th>
@@ -79,7 +79,7 @@
 				<table id= "paymentpage_table_3">
 					<tr class= "paymentpage_tr_4">
 						<th colspan= "2">총 결제 금액</th>
-						<td class= "paymentpage_td_4"><input type="text" name="orderTotalPrice" value="3000" value="5" readonly></td>
+						<td class= "paymentpage_td_4"><input type="text" name="orderTotalPrice" value="${totalPrice+3000}" readonly></td>
 					</tr>
 				</table>
 			</div>

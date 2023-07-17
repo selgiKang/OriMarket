@@ -40,7 +40,7 @@ function calendarInit() {
             currentYear++;
             currentMonth = 0;
         }
-        if(currentMonth==today.getMonth()){
+        if(currentMonth==today.getMonth()&&currentYear==today.getFullYear()){
             currentMonth--;
         }
         currentMonth++;
