@@ -36,9 +36,26 @@ public class OrderController {
 
     }
 
+    @GetMapping("/test2")
+    public String test(){return "business/businessmain";}
 
+    //calculate get으로 갈 때는 businessmain 코드처럼 해야함! 보고 그 코드 복붙하기!
     @GetMapping("/calculate")
-    public String calculate(){return "calculate/calculate";}
+    public String calculateRequest2(@RequestParam("calculate_date") String calculateDate, @RequestParam("calculate_date_last") String calculateDateLast,Model model){
+        List<Map<String,String>> tableData = orderService.getTableData(calculateDate,calculateDateLast,model);
+        System.out.println("getCalculate"+calculateDate+"/"+calculateDateLast);
+        int totalCome = 0;
+        int orderCount = tableData.size();
+        for(Map<String,String>data : tableData){
+            totalCome += Integer.parseInt(data.get("amount"));
+        }
+
+        model.addAttribute("tableData",tableData);
+        model.addAttribute("totalCome",totalCome);
+        model.addAttribute("orderCount",orderCount);
+
+        return "calculate/calculate";
+    }
 
     @GetMapping("/order_delivery")
     public String order(){return "order/order_delivery";}
@@ -91,18 +108,11 @@ public class OrderController {
 
     @PostMapping("/calculate")
     @ResponseBody
-    public ResponseEntity<List<Map<String,String>>> calculateRequest(@RequestParam("calculate_date") String calculateDate, @RequestParam("calculate_date_last") String calculateDateLast){
-        List<Map<String,String>> tableDate = orderService.getTableData(calculateDate,calculateDateLast);
+    public ResponseEntity<List<Map<String,String>>> calculateRequest(@RequestParam("calculate_date") String calculateDate, @RequestParam("calculate_date_last") String calculateDateLast,Model model){
+        List<Map<String,String>> tableDate = orderService.getTableData(calculateDate,calculateDateLast,model);
 
         return ResponseEntity.ok(tableDate);
     }
-
-//    @PostMapping("/calculate")
-//    public String calculateResult(@ModelAttribute Order order,@RequestParam("orderNumber")String orderNumberStr){
-//
-//        return "calculate/calculate";
-//    }
-
 
 
 //순번     order_Num : pk auto_intended

@@ -55,4 +55,20 @@ public class CartItem {
 
     }
 
+
+
+    public void plusCount(int itemPrice){
+        this.count +=1;
+        this.itemPrice+=itemPrice;
+    }
+
+
+
+
+    /*장바구니에 담은 수량을 감소*/
+    public void minusCount(int count,int itemPrice){
+        this.count-=count;
+        this.itemPrice -=itemPrice;
+    }
+
 }
