@@ -1,10 +1,9 @@
 $(document).ready(function(){
     var currentYear; // 전역 변수로 선언
     calendarInit();
-
-    var currentDate = getCurrentDate();
-    var currentDateLast = getCurrentDateLast();
-    sendAjaxRequestGet(currentDate,currentDateLast);
+    // var currentDate = getCurrentDate();
+    // var currentDateLast = getCurrentDateLast();
+    // sendAjaxRequestGet(currentDate,currentDateLast);
 });
 
 function calendarInit() {
@@ -105,32 +104,35 @@ function sendAjaxRequest(){
         }
     });
 }
-function sendAjaxRequestGet(calculateDate, calculateDateLast){
-    $.ajax({
-        type: 'GET',
-        url: '/calculate',
-        data: {
-            calculate_date: calculateDate,
-            calculate_date_last: calculateDateLast
-        },
-        success: function (response){
-            updateTable(response)
-        },
-        error(xhr, status, error){
-            console.log(error);
-        }
-    })
-}
+// function sendAjaxRequestGet(calculateDate, calculateDateLast){
+//     $.ajax({
+//         type: 'GET',
+//         url: '/calculate',
+//         data: {
+//             calculate_date: calculateDate,
+//             calculate_date_last: calculateDateLast
+//         },
+//         success: function (response){
+//             updateTable(response)
+//         },
+//         error(xhr, status, error){
+//             console.log(error);
+//         }
+//     })
+// }
 
 function updateTable(data) {
 
     //테이블
     var tableBody = $('#tableBody');
     tableBody.empty();
+    $('#calculate_main_totalIncome h3').empty();
+    $('#calculate_main_totalIncome div').empty();
 
     //총합, 개수
     var totalCome = 0;
     var orderCount  = data.length;
+
 
     for(var i=0;i<data.length;i++){
         totalCome += parseInt(data[i].amount);
@@ -138,7 +140,12 @@ function updateTable(data) {
 
     for (var i = 0; i < data.length; i++) {
         var row = $('<tr></tr>');
-        var dateCell = $('<td class="calculate_main_table_td_1" style="text-align: center;"></td>').text(data[i].date.substr(0,8));
+        var dateCell = $('<td class="calculate_main_table_td_1" style="text-align: center;"></td>');
+        if(data[i].date){
+            dateCell.text(data[i].date.substr(0,8));
+        }else {
+            dateCell.text("")
+        }
         var amountCell = $('<td class="calculate_main_table_td_2" style="text-align: center;"></td>').text(data[i].amount+"원");
 
         row.append(dateCell);

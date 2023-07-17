@@ -18,12 +18,11 @@
     //한국 시가능로 date 객체 (오늘)
     Date today = new Date(utc + kstGap);
 
-    Date thisMonth = new Date(today.getYear(), today.getMonth(), today.getDate());
-    int currentYear = thisMonth.getYear(); // 전역 변수에 할당
-    int currentMonth = thisMonth.getMonth();
+    int currentYear = today.getYear()+1900; // 전역 변수에 할당
+    int currentMonth = today.getMonth();
 
-    String currentMonthStr = String.valueOf(thisMonth.getMonth() + 1);
-    String currentMonthStr2 = String.valueOf(thisMonth.getMonth() + 2);
+    String currentMonthStr = String.valueOf(currentMonth + 1);
+    String currentMonthStr2 = String.valueOf(currentMonth + 2);
 
     //현재 월 표시
     if (currentMonthStr.length() == 1) {
