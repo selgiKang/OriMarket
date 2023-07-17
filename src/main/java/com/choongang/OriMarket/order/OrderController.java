@@ -39,6 +39,7 @@ public class OrderController {
     @GetMapping("/test2")
     public String test(){return "business/businessmain";}
 
+    //calculate get으로 갈 때는 businessmain 코드처럼 해야함! 보고 그 코드 복붙하기!
     @GetMapping("/calculate")
     public String calculateRequest2(@RequestParam("calculate_date") String calculateDate, @RequestParam("calculate_date_last") String calculateDateLast,Model model){
         List<Map<String,String>> tableData = orderService.getTableData(calculateDate,calculateDateLast,model);

@@ -10,6 +10,7 @@
     <script src="../../js/calculate/calculate.js"></script>
 </head>
 <body>
+<%--calculate get으로 갈 때는 아래 코드 다 가져가고 주소 href 가져가기!--%>
 <%
     Date date = new Date();
     long utc = date.getTime() + (date.getTimezoneOffset() * 60 * 100);
