@@ -75,7 +75,7 @@ public class CartService {
             cart.setCartCnt(cart.getCartCnt() + 1);
             cart.setCartTotalPrice(cart.getCartTotalPrice()+item.getItemPrice());
         } else {
-            cartItem.addCount(count, item.getItemPrice());
+            cartItem.addCount(count);
             cart.setCartTotalPrice(cart.getCartTotalPrice()+item.getItemPrice());
         }
 
@@ -97,23 +97,11 @@ public class CartService {
         return userItems;
     }
 
-//
-//    //수량추가
-//    @Transactional
-//    public void plusCount(Cart cart,Item item,int itemPrice){
-//
-//        CartItem cartItem = cartItemRepository.findByCart_CartIdAndItem_ItemName(cart.getCartId(), item.getItemName());
-//        cartItem.plusCount(itemPrice);
-//    }
-//
-//
-//    //수량감소
-//    @Transactional
-//    public void minusCount(Cart cart,Item item,int count,int itemPrice){
-//        CartItem cartItem = cartItemRepository.findByCart_CartIdAndItem_ItemName(cart.getCartId(),item.getItemName());
-//        cartItem.minusCount(count, itemPrice);
-//    }
-//
+    public void itemDelete(Long cartItemId){
+        cartItemRepository.deleteById(cartItemId);
+    }
+
+
 
 
     public String menuPlusMinus(Long cartItemId,String type){

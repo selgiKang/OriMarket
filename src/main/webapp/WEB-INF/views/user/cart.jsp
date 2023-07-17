@@ -58,11 +58,11 @@
 										<p>${items.item.getItemName()}</p>
 									</div>
 								</a>
-								<a href="/${sessionScope.userId}/cart/${items.cartItemId}/delete/${items.itemPrice}">
+								<%--<a href="/${sessionScope.userId}/cart/${items.cartItemId}/delete/${items.itemPrice}">--%>
 									<input type="hidden" id="userId" value="${sessionScope.userId}">
 									<input type="hidden" id="cartItemId" value="${items.cartItemId}">
-									<button class="cart_xmark" onclick="deleteItem()"><i class="fas fa-regular fa-xmark"></i></button>
-								</a>
+									<button class="cart_xmark" onclick="deleteBtn(${items.cartItemId})"><i class="fas fa-regular fa-xmark"></i></button>
+								<%--</a>--%>
 
 								<!-- 수량선택(-,+),가격표시 -->
 
@@ -92,7 +92,7 @@
 		</ul>
 	</div>
 	<div id="cart_moreBtn">
-		<input type="button" value="+상품 더 담기">
+		<a href="store/detailmenu"><input type="button" value="+상품 더 담기"></a>
 	</div>
 
 
@@ -134,45 +134,5 @@
 	</div>
 </div>
 
-<script type="text/javascript">
-
-	function minusBtn(cartItemId) {
-		$.ajax({
-			type: 'put',
-			url: '/user/cart',
-			data: {"cartItemId": cartItemId, "type": "minus"},
-			dataType: "text",
-			success: function (result) {
-				console.log(result);
-				if (result === "ok") {
-					location.reload();
-				}
-			},
-			error: function () {
-				alert('ㅇㅔㄹㅓ');
-			}
-
-		});
-	}
-
-	function plusBtn(cartItemId){
-		$.ajax({
-			type: 'put',
-			url: '/user/cart',
-			data: {"cartItemId": cartItemId, "type": "plus"},
-			dataType: "text",
-			success: function (result) {
-				console.log(result);
-				if (result === "ok") {
-					location.reload();
-				}
-			},
-			error: function () {
-				alert('ㅇㅔㄹㅓ');
-			}
-
-		});
-	}
-</script>
 </body>
 </html>
