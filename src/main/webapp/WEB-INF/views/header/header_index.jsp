@@ -8,6 +8,7 @@
     <title>Insert title here</title>
     <script src="https://kit.fontawesome.com/1cfe6d92db.js" crossorigin="anonymous"></script>
     <link rel= "stylesheet" href= "../../css/header/header_index.css">
+
 </head>
 <body>
 
@@ -25,6 +26,8 @@
         <a href="#"><i class="fa-solid fa-bell header_i"></i></a>
         <a href="/mypage"><i class="fa-solid fa-circle-user header_i"></i></a>
     </div>
+
+
 </div>
 
 </body>
