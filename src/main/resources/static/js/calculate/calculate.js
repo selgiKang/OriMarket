@@ -1,8 +1,11 @@
 $(document).ready(function(){
     var currentYear; // 전역 변수로 선언
     calendarInit();
-});
 
+    var currentDate = getCurrentDate();
+    var currentDateLast = getCurrentDateLast();
+    sendAjaxRequestGet(currentDate,currentDateLast);
+});
 
 function calendarInit() {
     var date = new Date();
@@ -22,11 +25,11 @@ function calendarInit() {
 
     // 이전달로 이동
     $('.go-prev').on('click', function () {
-        currentMonth--;
         if (currentMonth < 0) {
             currentYear--;
             currentMonth = 11;
         }
+        currentMonth--;
         var thisMonth = new Date(currentYear, currentMonth, 1);
         renderCalender(thisMonth);
         sendAjaxRequest();
@@ -34,17 +37,38 @@ function calendarInit() {
 
     // 다음달로 이동
     $('.go-next').on('click', function () {
-        currentMonth++;
         if (currentMonth > 11) {
             currentYear++;
             currentMonth = 0;
         }
+        if(currentMonth==today.getMonth()){
+            currentMonth--;
+        }
+        currentMonth++;
         var thisMonth = new Date(currentYear, currentMonth, 1);
         renderCalender(thisMonth);
         sendAjaxRequest();
     });
 }
 
+function getCurrentDate(){
+    var date = new Date();
+    var currentYear = date.getFullYear();
+    var currentMonth = date.getMonth()+1;
+    if(currentMonth<10){
+        currentMonth="0"+currentMonth;
+    }
+    return currentYear+currentMonth;
+}
+function getCurrentDateLast(){
+    var date = new Date();
+    var currentYear = date.getFullYear();
+    var currentMonth = date.getMonth()+2;
+    if(currentMonth<10){
+        currentMonth="0"+currentMonth;
+    }
+    return currentYear+currentMonth;
+}
 function renderCalender(thisMonth) {
     var currentMonthStr = (thisMonth.getMonth() + 1).toString();
     var currentMonthStr2 = (thisMonth.getMonth() + 2).toString();
@@ -81,10 +105,36 @@ function sendAjaxRequest(){
         }
     });
 }
+function sendAjaxRequestGet(calculateDate, calculateDateLast){
+    $.ajax({
+        type: 'GET',
+        url: '/calculate',
+        data: {
+            calculate_date: calculateDate,
+            calculate_date_last: calculateDateLast
+        },
+        success: function (response){
+            updateTable(response)
+        },
+        error(xhr, status, error){
+            console.log(error);
+        }
+    })
+}
 
 function updateTable(data) {
+
+    //테이블
     var tableBody = $('#tableBody');
     tableBody.empty();
+
+    //총합, 개수
+    var totalCome = 0;
+    var orderCount  = data.length;
+
+    for(var i=0;i<data.length;i++){
+        totalCome += parseInt(data[i].amount);
+    }
 
     for (var i = 0; i < data.length; i++) {
         var row = $('<tr></tr>');
@@ -95,4 +145,9 @@ function updateTable(data) {
         row.append(amountCell);
         tableBody.append(row);
     }
+
+    $('#calculate_main_totalIncome h3').text(totalCome+'원');
+    $('#calculate_main_totalIncome div').text('주문 횟수 '+orderCount+'번');
+
+
 }
