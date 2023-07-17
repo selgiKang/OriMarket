@@ -23,7 +23,6 @@ public class Order {
     @JoinColumn(name = "bu_user_number")
     private BusinessUser businessUser;
 
-
     @Column
     private String orderMarketName;
 

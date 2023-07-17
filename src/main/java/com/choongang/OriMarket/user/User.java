@@ -1,8 +1,11 @@
 package com.choongang.OriMarket.user;
 
+import com.choongang.OriMarket.business.store.BusinessStore;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "Member")
@@ -39,6 +42,9 @@ public class User {
 
     @Column
     private String userAddressDetail;
+
+    @OneToMany(mappedBy = "user")
+    private List<UserAddress> userAddresses = new ArrayList<>();
 
     //fav원투매니를 해야할까?? menuname, menuprice, menudetail 만들어놓고
 

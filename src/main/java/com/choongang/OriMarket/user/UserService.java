@@ -4,8 +4,10 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -15,8 +17,10 @@ public class UserService {
 
     @Autowired
     private final UserRepository userRepository;
+    @Autowired
+    private final UserAddressRepository userAddressRepository;
 
-    public boolean login(User member,HttpSession session) {
+    public boolean login(User member, HttpSession session,Model model) {
         session.removeAttribute("userAddress1");
         session.removeAttribute("userAddressDetail1");
         //값이 null일 떄 Optinal이 처리
@@ -29,8 +33,15 @@ public class UserService {
         if(!findUser.getUserPassword().equals(member.getUserPassword())){
             return false;
         }
-        session.setAttribute("userAddress1", findUser.getUserAddress());
-        session.setAttribute("userAddressDetail1", findUser.getUserAddressDetail());
+        List<UserAddress> userAddresses = findUser.getUserAddresses();
+        if (userAddresses.isEmpty()){
+        }else {
+            model.addAttribute("userAddress2",userAddresses);
+            session.setAttribute("userAddress1",userAddresses.get(0).getUserAddress1());
+            session.setAttribute("userAddressDetail1",userAddresses.get(0).getUserAddressDetail1());
+        }
+
+
         session.setAttribute("userSeq",findUser.getUserSeq());
         session.setAttribute("userName",findUser.getUserName());
         session.setAttribute("userId",findUser.getUserId());

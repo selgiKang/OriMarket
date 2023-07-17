@@ -1,11 +1,13 @@
 package com.choongang.OriMarket.main;
 
 import com.choongang.OriMarket.user.User;
+import com.choongang.OriMarket.user.UserAddress;
 import com.choongang.OriMarket.user.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -39,8 +41,8 @@ public class MainController {
     public String test(){return "main/mylocation";}
 
     @PostMapping("/search")
-    public String search1(@ModelAttribute User user, HttpSession session){
-        mainService.updateAddress(session,user);
+    public String search1(@ModelAttribute UserAddress userAddress, HttpSession session, Model model){
+        mainService.updateAddress(session,userAddress,model);
         return "main/main";
     }
 

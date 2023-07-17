@@ -38,11 +38,9 @@ public class UserController {
     }
 
 
-
-
     @GetMapping("/review")
     public String review() {
-        return "user/user_review";
+        return "user/user_reviewlist";
     }
 
     @GetMapping("/mypage")
@@ -58,9 +56,10 @@ public class UserController {
 
     @PostMapping("/login")
     public String loginId(@ModelAttribute User user, Model model, HttpSession session) {
-        boolean isTrue = userService.login(user,session);
+        boolean isTrue = userService.login(user,session,model);
         if(isTrue){
             model.addAttribute("userId", user.getUserId());
+
             return "main/main";
         }
         return "user/login";

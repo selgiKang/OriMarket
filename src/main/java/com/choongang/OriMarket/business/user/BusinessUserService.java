@@ -28,7 +28,10 @@ public class BusinessUserService {
 
         }else {
             List<BusinessStore> businessStores = findbusinessUser.getBusinessStores();
-            model.addAttribute("save",businessStores.get(0));
+            if(businessStores.isEmpty()){
+            }else {
+                model.addAttribute("save", businessStores.get(0));
+            }
         }
 
 
