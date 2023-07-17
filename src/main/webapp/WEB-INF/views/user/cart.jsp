@@ -9,7 +9,7 @@
 	<script src="https://kit.fontawesome.com/1d53132cda.js" crossorigin="anonymous"></script>
 	<script src="../../js/common/jquery-3.6.4.js"></script>
 	<script src="../../js/user/cart.js"></script>
-	<link rel="stylesheet" href="../../css/user/cart.css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/user/cart.css">
 
 
 	<title>cart</title>
@@ -57,7 +57,7 @@
 										<p>${items.item.getItemName()}</p>
 									</div>
 								</a>
-								<a href="/${sessionScope.userId}/cart/${items.cartItemId}/delete">
+								<a href="/${sessionScope.userId}/cart/${items.cartItemId}/delete/${items.itemPrice}">
 									<input type="hidden" id="userId" value="${sessionScope.userId}">
 									<input type="hidden" id="cartItemId" value="${items.cartItemId}">
 									<button class="cart_xmark" onclick="deleteItem()"><i class="fas fa-regular fa-xmark"></i></button>
@@ -67,13 +67,14 @@
 
 								<div class="cart_itemDescription">
 									<div class="cart_itemOption">
-										<button onclick="dec(currentCnt${status.index})"><i class="fas fa-solid fa-circle-minus"></i></button>
-										<input type="number" id="currentCnt${status.index}" value="${items.count}">
-										<button onclick="inc(currentCnt${status.index})"><i class="fas fa-solid fa-circle-plus"></i></button>
+											<%--onclick="dec(currentCnt${status.index})"--%>
+										<a href="/${sessionScope.userId}/cart/${items.item.getItemName()}/minus/${items.count}"><button><i class="fas fa-solid fa-circle-minus"></i></button></a>
+										<input type="text" size="1" id="currentCnt${status.index}" value="${items.count}">
+										<a href="/${sessionScope.userId}/cart/${items.item.getItemName()}/plus/${items.count}"><button><i class="fas fa-solid fa-circle-plus"></i></button></a>
 									</div>
 									<div class="cart_itemPrice">
-										<input id="sellPrice_${status.index}" type="text" value="${items.itemPrice}">
-										<span id="totalPriceCalSpan_${status.index}"></span>
+										<input id="sellPrice_${status.index}" type="hidden" value="${items.itemPrice}">
+										<span id="totalPriceCalSpan_${status.index}">${items.itemPrice}원</span>
 									</div>
 								</div>
 							</div>
@@ -92,7 +93,6 @@
 	</div>
 
 
-
 	<!-- 포장/배달 선택하는 체크리스트 -->
 	<div id="cart_checkDelivery">
 		<ul>
@@ -105,10 +105,10 @@
 		<form action="" >
 			<table class="cart_costTable">
 				<tbody>
-				<tr><td>상품금액</td><td class="cart_cost">받아오는값</td></tr>
-				<tr><td>배달비</td><td class="cart_cost">받아오는값</td></tr>
-				<tr><td>총 주문금액</td><td class="cart_cost">받아오는값</td></tr>
-				<tr id="cart_totalPrice"><td>결제예정금액</td><td class="cart_cost">받아오는값</td></tr>
+				<tr><td>상품금액</td><td class="cart_cost">${totalPrice}원</td></tr>
+				<tr><td>배달비</td><td class="cart_cost">3000원</td></tr>
+				<tr><td>총 주문금액</td><td class="cart_cost">${totalPrice+3000}원</td></tr>
+				<tr id="cart_totalPrice"><td>결제예정금액</td><td class="cart_cost">${totalPrice+3000}원</td></tr>
 				</tbody>
 			</table>
 		</form>
@@ -118,9 +118,9 @@
 		<form action="">
 			<table class="cart_costTable">
 				<tbody>
-				<tr><td>상품금액</td><td class="cart_cost">받아오는값</td></tr>
-				<tr><td>총 주문금액</td><td class="cart_cost">받아오는값</td></tr>
-				<tr><td>결제예정금액</td><td class="cart_cost">받아오는값</td></tr>
+				<tr><td>상품금액</td><td class="cart_cost">${totalPrice}원</td></tr>
+				<tr><td>총 주문금액</td><td class="cart_cost">${totalPrice}원</td></tr>
+				<tr><td>결제예정금액</td><td class="cart_cost">${totalPrice}원</td></tr>
 				</tbody>
 			</table>
 		</form>
