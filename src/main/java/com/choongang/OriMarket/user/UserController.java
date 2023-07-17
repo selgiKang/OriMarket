@@ -11,6 +11,10 @@ import org.thymeleaf.model.IModel;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequiredArgsConstructor
@@ -59,7 +63,6 @@ public class UserController {
         boolean isTrue = userService.login(user,session,model);
         if(isTrue){
             model.addAttribute("userId", user.getUserId());
-
             return "main/main";
         }
         return "user/login";
@@ -88,13 +91,12 @@ public class UserController {
         return "main/main";
 
     }
-//
-//    @GetMapping("/userId/{userId}/exists")
-//    @ResponseBody
-//    public ResponseEntity<Boolean> checkUserIdDuplicate(@PathVariable String userId){
-//        return ResponseEntity.ok(userService.checkUserId(userId));
-//
-//    }
+
+    @GetMapping("/userId/{userId}/exists")
+    @ResponseBody
+    public ResponseEntity<Boolean> checkUserIdDuplicate(@PathVariable String userId){
+        return ResponseEntity.ok(userService.checkUserId(userId));
+    }
 
     @GetMapping("/delete")
     public String deleteUser(@RequestParam("userSeq") Long userSeq){

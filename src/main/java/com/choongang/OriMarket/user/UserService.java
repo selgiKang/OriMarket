@@ -7,8 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 import javax.servlet.http.HttpSession;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor 
@@ -17,7 +16,6 @@ public class UserService {
 
     @Autowired
     private final UserRepository userRepository;
-    @Autowired
     private final UserAddressRepository userAddressRepository;
 
     public boolean login(User member, HttpSession session,Model model) {
@@ -34,11 +32,21 @@ public class UserService {
             return false;
         }
         List<UserAddress> userAddresses = findUser.getUserAddresses();
+        List<Map<String,String>> userAd = new ArrayList<>();
         if (userAddresses.isEmpty()){
         }else {
-            model.addAttribute("userAddress2",userAddresses);
-            session.setAttribute("userAddress1",userAddresses.get(0).getUserAddress1());
-            session.setAttribute("userAddressDetail1",userAddresses.get(0).getUserAddressDetail1());
+            for(UserAddress userAddress3:userAddresses){
+                System.out.println(userAddress3.getUser().getUserSeq()+"의 주소: "+userAddress3.getUserAddress1());
+                Map<String, String> orderData = new HashMap<>();
+                orderData.put("date", userAddress3.getUserAddress1());
+                orderData.put("amount",userAddress3.getUserAddressDetail1());
+
+                userAd.add(orderData);
+            }
+            model.addAttribute("userAd",userAddresses.get(userAddresses.size()-1));
+
+            session.setAttribute("userAddress1",userAddresses.get(userAddresses.size()-1).getUserAddress1());
+            session.setAttribute("userAddressDetail1",userAddresses.get(userAddresses.size()-1).getUserAddressDetail1());
         }
 
 
@@ -82,7 +90,11 @@ public class UserService {
 
    public void delete(Long UserSeq){
         User user = userRepository.findById(UserSeq).orElseThrow();
-        userRepository.delete(user);
+       List<UserAddress> userAddresses = user.getUserAddresses();
+       for (UserAddress userAddress:userAddresses){
+           userAddressRepository.delete(userAddress);
+       }
+       userRepository.delete(user);
    }
 
    public boolean checkUserId(String userId){

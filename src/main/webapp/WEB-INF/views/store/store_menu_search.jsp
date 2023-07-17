@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"  %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -67,9 +68,9 @@
 						<img alt="토마토" src="../../img/store/tomato.jpg">
 					</div>
 					<div class="store-info">
-						<p>싱싱과일나라</p>
-						<h6>대추방울토마토(700g/팩)</h6>
-						<h3>6,000원</h3>
+						<p>${save.buStoreName}</p>
+						<h6>${save.buStorePhone}</h6>
+						<h3>${save.buStoreAddress}${save.buStoreAddressDetail}</h3>
 					</div>
 				</div>
 			</div>

@@ -62,6 +62,9 @@
         <p style="position: absolute; top: 240px; left: 20px;">내 주소 목록</p>
         <ul  style="position: absolute; top: 270px; left: 20px;">
             <li>키키키</li>
+            <c:forEach var="userAd" items="${userAd}">
+                <li>${userAddress1} ${userAddressDetail1}</li>
+            </c:forEach>
         </ul>
 
     </form>
