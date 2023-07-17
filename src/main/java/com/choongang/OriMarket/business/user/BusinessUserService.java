@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor 
@@ -24,15 +25,16 @@ public class BusinessUserService {
     public boolean login1(BusinessUser businessUser, HttpSession session, Model model) {
         BusinessUser findbusinessUser = businessUserRepository.findByBuUserId(businessUser.getBuUserId());
 
-        if(findbusinessUser.getBusinessStores().isEmpty()){
+            if (findbusinessUser.getBusinessStores().isEmpty()) {
 
-        }else {
-            List<BusinessStore> businessStores = findbusinessUser.getBusinessStores();
-            if(businessStores.isEmpty()){
-            }else {
-                model.addAttribute("save", businessStores.get(0));
+            } else {
+                List<BusinessStore> businessStores = findbusinessUser.getBusinessStores();
+                if (businessStores.isEmpty()) {
+                } else {
+                    model.addAttribute("save", businessStores.get(0));
+                }
             }
-        }
+
 
 
         if(findbusinessUser == null){
@@ -48,7 +50,13 @@ public class BusinessUserService {
 
 
     public boolean join1(BusinessUser businessUser, HttpSession session) {
+        BusinessUser byId = businessUserRepository.findById(businessUser.getBuUserNumber()).orElseThrow();
 
+        if(businessUser.getBuUserNumber().equals(byId.getBuUserNumber())){
+            return false;
+        }else {
+
+        }
         BusinessUser savedbusinessUser = businessUserRepository.save(businessUser);
 
         if (savedbusinessUser == null) {
