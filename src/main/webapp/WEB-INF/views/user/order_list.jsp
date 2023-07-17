@@ -3,6 +3,8 @@
 <%
     List<Order> orders = (List<Order>) request.getAttribute("orders");
 %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <%@ page import="java.util.List" %>
 <!DOCTYPE html>
 <html>
@@ -134,11 +136,10 @@
         <span class="tab-link" data-tab="processing">처리중</span>
         <span class="tab-link" data-tab="completed">완료</span>
     </div>
-
     <% if (orders != null && !orders.isEmpty()) { %>
     <% for (com.choongang.OriMarket.order.Order order : orders) { %>
     <div class="order-item" data-status="<%= order.getOrderType() %>">
-        <span class="order-number">주문번호 #<%= order.getOrderNumber() %></span>
+        <span class="order-number">주문번호 #${order.orderNumber}</span>
         <!-- 다른 주문 정보 출력 -->
         <div class="order-details">
             <span class="order-quantity">메뉴 <%= order.getOrderGoodsNum() %>개</span>
@@ -154,6 +155,8 @@
     <% } else { %>
     <p>주문이 없습니다.</p>
     <% } %>
+
+    <p>모델에 저장된 주문번호: ${orderNumber}</p>
 
     <div class="order-item" data-status="processing" style="display: none;"></div>
     <div class="order-item" data-status="completed" style="display: none;"></div>
