@@ -36,9 +36,16 @@ public class OrderController {
 
     }
 
+    @GetMapping("/test2")
+    public String test(){return "business/businessmain";}
 
     @GetMapping("/calculate")
-    public String calculate(){return "calculate/calculate";}
+    public String calculateRequest2(@RequestParam("calculate_date") String calculateDate, @RequestParam("calculate_date_last") String calculateDateLast,Model model){
+        List<Map<String,String>> tableData = orderService.getTableData(calculateDate,calculateDateLast);
+        System.out.println("getCalculate"+calculateDate+"/"+calculateDateLast);
+        model.addAttribute("tableData",tableData);
+        return "calculate/calculate";
+    }
 
     @GetMapping("/order_delivery")
     public String order(){return "order/order_delivery";}
@@ -96,13 +103,6 @@ public class OrderController {
 
         return ResponseEntity.ok(tableDate);
     }
-
-//    @PostMapping("/calculate")
-//    public String calculateResult(@ModelAttribute Order order,@RequestParam("orderNumber")String orderNumberStr){
-//
-//        return "calculate/calculate";
-//    }
-
 
 
 //순번     order_Num : pk auto_intended

@@ -97,32 +97,6 @@ function animateCoupon() {
         element.src = element.src.replace("empty_heart.png", "filled_heart.png");
 }
 
-    /* 찜 */
-// function toggleHeart(element) {
-//
-//     var inputElement = element.nextElementSibling;
-//     var currentValue = inputElement.value;
-//
-//     // if (currentValue==1) {
-//     //     if (element.src.includes("filled_heart.png")) {
-//     //         element.src = element.src.replace("filled_heart.png", "empty_heart.png");
-//     //     }
-//     //         inputElement.value() == "0";
-//     //
-//     // } else {
-//     //     element.src = element.src.replace("empty_heart.png", "filled_heart.png");
-//     //     inputElement.value()=="1";
-//     // }
-//     if (element.src.includes("filled_heart.png")) {
-//         element.src = element.src.replace("filled_heart.png", "empty_heart.png");
-//         inputElement.value()=="0";
-//     } else {
-//         element.src = element.src.replace("empty_heart.png", "filled_heart.png");
-//         inputElement.value()=="1";
-//     }
-//
-//
-// }
 
 function toggleHeart(element) {
     var inputElement = element.querySelector('input[name="favNumber"]');

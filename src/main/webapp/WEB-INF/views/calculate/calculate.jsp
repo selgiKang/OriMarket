@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -46,7 +47,18 @@
             <tr id="calculate_main_table_tr_1">
                 <td>날짜</td><td>수입</td>
             </tr>
-            <tbody id="tableBody"></tbody>
+            <tbody id="tableBody">
+            <c:forEach items="${tableData}" var="data">
+                <tr>
+                    <td class="calculate_main_table_td_1" style="text-align: center;">
+                       ${data.date}
+                    </td>
+                    <td class="calculate_main_table_td_2" style="text-align:center;">
+                       ${data.amount}
+                    </td>
+                </tr>
+            </c:forEach>
+            </tbody>
           <%--  <tr>
                 <td class="calculate_main_table_td_1" style="text-align: center;">07/01</td>
                 <td class="calculate_main_table_td_2" style="text-align: center;">30,000원</td>
