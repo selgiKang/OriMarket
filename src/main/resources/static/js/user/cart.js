@@ -12,6 +12,43 @@ $(()=>{
 
 /*장바구니 상품 수량증가 감소*/
 
+function minusBtn(cartItemId) {
+    $.ajax({
+        type: 'put',
+        url: '/user/cart',
+        data: {"cartItemId": cartItemId, "type": "minus"},
+        dataType: "text",
+        success: function (result) {
+            console.log(result);
+            if (result === "ok") {
+                location.reload();
+            }
+        },
+        error: function () {
+            alert('ㅇㅔㄹㅓ');
+        }
+
+    });
+}
+
+function plusBtn(cartItemId){
+    $.ajax({
+        type: 'put',
+        url: '/user/cart',
+        data: {"cartItemId": cartItemId, "type": "plus"},
+        dataType: "text",
+        success: function (result) {
+            console.log(result);
+            if (result === "ok") {
+                location.reload();
+            }
+        },
+        error: function () {
+            alert('ㅇㅔㄹㅓ');
+        }
+
+    });
+}
 
 
 
@@ -48,10 +85,25 @@ $(document).on("click","input:checkbox[name=cbox]",function (e){
     }
 });
 
-/*총 가격 산출*/
 
 /*선택아이템 삭제*/
+function deleteBtn(cartItemId){
+    $.ajax({
+        type:'delete',
+        url:"/user/cart",
+        data:{"cartItemId":cartItemId},
+        dataType:"text",
+        success:function (result){
+            console.log(result);
+            if(result==="ok"){
+                location.reload();
+            }
+        },
+        error:function (){
+            alert("에러");
+        }
+    })
+}
 
-/*장바구니 비우기*/
-
-/*전체,선택 상품 주문?*/
+/*checked된 값만 가격 불러오기...*/
+/*수량 1개 이하일때는 minus버튼 비활성화*/

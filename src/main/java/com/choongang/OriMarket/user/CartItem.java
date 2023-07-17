@@ -49,26 +49,10 @@ public class CartItem {
 
 
     /*장바구니에 담을 수량을 증가시켜주는 메소드 추가*/
-    public void addCount(int count,int itemPrice){
-        this.count += count;
-        this.itemPrice += itemPrice;
+    public void addCount(int count){
+        this.count += count;;
 
     }
 
-
-
-    public void plusCount(int itemPrice){
-        this.count +=1;
-        this.itemPrice+=itemPrice;
-    }
-
-
-
-
-    /*장바구니에 담은 수량을 감소*/
-    public void minusCount(int count,int itemPrice){
-        this.count-=count;
-        this.itemPrice -=itemPrice;
-    }
 
 }
