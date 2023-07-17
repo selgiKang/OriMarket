@@ -280,6 +280,7 @@
             display: block;
         }
 
+        .first_menu:hover {opacity: 0.7;}
 
 
 
@@ -362,7 +363,7 @@
                     <h5>쿠폰 관리</h5>
                 </div>
 
-                <a class="first_menu" href="/calculate?calculate_date=<%=currentDate%>&calculate_date_last=<%=currentDateLast%>">
+                <a class="first_menu" href="/calculate?calculate_date=<%=currentDate%>&calculate_date_last=<%=currentDateLast%>" style="color: #333333;text-decoration: none;">
                     <img src="../../img/store/정산내역.png" alt="정산 내역"> <!-- alt 속성 추가 -->
                     <h5>정산 내역</h5>
                 </a>
@@ -513,7 +514,10 @@
             <input class="input" name="tabs-7" type="radio" id="tab-7"/>
             <label class="label" for="tab-7">T정산 내역</label>
             <div class="panel">
-                ㅇㅇㄹㅇㄹㅇㄹㅇㄹㅇㄹㅇ
+               <%-- <jsp:include page="../calculate">
+                    <jsp:param name="calculate_date" value="<%=currentDate%>" />
+                    <jsp:param name="calculate_date_last" value="<%=currentDateLast%>" />
+                </jsp:include>--%>
             </div>
 
             <br>
