@@ -24,7 +24,7 @@ public class BusinessUserService {
     public boolean login1(BusinessUser businessUser, HttpSession session, Model model) {
         BusinessUser findbusinessUser = businessUserRepository.findByBuUserId(businessUser.getBuUserId());
 
-        if(findbusinessUser.getBusinessStores() == null){
+        if(findbusinessUser.getBusinessStores().isEmpty()){
 
         }else {
             List<BusinessStore> businessStores = findbusinessUser.getBusinessStores();
