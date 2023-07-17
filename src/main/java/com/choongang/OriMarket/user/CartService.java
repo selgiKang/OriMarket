@@ -69,10 +69,12 @@ public class CartService {
         if (cartItem == null) {
             cartItem = CartItem.createCartItem(cart, item, count,itemPrice);
             cartItemRepository.save(cartItem);
+
             cart.setCartCnt(cart.getCartCnt() + 1);
             cart.setCartTotalPrice(cart.getCartTotalPrice()+item.getItemPrice());
         } else {
             cartItem.addCount(count, item.getItemPrice());
+            cart.setCartTotalPrice(cart.getCartTotalPrice()+item.getItemPrice());
         }
 
     }
@@ -94,11 +96,28 @@ public class CartService {
     }
 
 
+    //수량추가
+    @Transactional
+    public void plusCount(Cart cart,Item item,int itemPrice){
+
+        CartItem cartItem = cartItemRepository.findByCart_CartIdAndItem_ItemName(cart.getCartId(), item.getItemName());
+        cartItem.plusCount(itemPrice);
+    }
+
+
+    //수량감소
+    @Transactional
+    public void minusCount(Cart cart,Item item,int count,int itemPrice){
+        CartItem cartItem = cartItemRepository.findByCart_CartIdAndItem_ItemName(cart.getCartId(),item.getItemName());
+        cartItem.minusCount(count, itemPrice);
+    }
+
+
 
 
     //장바구니 Item삭제
-    public void cartItemDelete(Long cartItemId){
-        cartItemRepository.deleteById(cartItemId);
+    public void cartItemDelete(Long cartItemeId){
+        cartItemRepository.deleteById(cartItemeId);
     }
 
 
