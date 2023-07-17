@@ -34,7 +34,10 @@ public class OrderService {
     static final String admin_key = "${e584b59b9f572556fbac3673883cb029}";
     private  Order order;
 
-
+    //7.17 테스트 승엽
+    public List<Order> getOrderList() {
+        return orderRepository.findAll();
+    }
 
        /*
        public Order kakaoPayReady() {
