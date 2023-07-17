@@ -34,6 +34,7 @@ public class CartController {
 
         int totalPrice = 0;
         for(CartItem cartItem : cartItems){
+
             totalPrice += (cartItem.getItem().getItemPrice()*cartItem.getCount());
         }
 
@@ -55,6 +56,8 @@ public class CartController {
         return "/store/detailmenu";
     }
 
+
+
     @PutMapping("/user/cart")
     @ResponseBody
     public String menuPlusMinus(@RequestParam("cartItemId")Long cartItemId,@RequestParam("type") String type){
@@ -64,41 +67,14 @@ public class CartController {
 
 
 
+    @DeleteMapping("/user/cart")
+    @ResponseBody
+    public String itemDelete(@RequestParam("cartItemId")Long cartItemId){
+        cartService.itemDelete(cartItemId);
+        return "ok";
+    }
 
 
-//
-//    /*수량추가*/
-//
-//    @GetMapping("/{userId}/cart/{itemName}/plus")
-//    public String addCount(@PathVariable("userId")String userId,@PathVariable("itemName")String itemName){
-//
-//        System.out.println("컨트롤러시작");
-//        Cart cart = cartService.getCart(userId);
-//        Item addItem = itemService.getItem(itemName);
-//
-//        System.out.println("item.getItemPrice: "+addItem.getItemPrice());
-//
-//        cartService.plusCount(cart,addItem,addItem.getItemPrice());
-//
-//        return "/userId/cart";
-//    }
-//
-//
-//
-//    /*수량감소*/
-//    @GetMapping("/{userId}/cart/{itemName}/minus/{itemCount}")
-//    public String minusCount(@PathVariable("userId")String userId, @PathVariable("itemName")String itemName,@PathVariable("itemCount")int count, Item item){
-//        User user = userService.getUser(userId);
-//        Item addItem = itemService.getItem(itemName);
-//
-//        Cart cart = cartService.getCart(userId);
-//
-//        cart.setCartTotalPrice(cart.getCartTotalPrice()-item.getItemPrice());
-//
-//        return "/user/cart";
-//    }
-//
-//
 
     /*특정상품 장바구니에서 삭제*/
     @GetMapping("/{userId}/cart/{cartItemId}/delete/{itemPrice}")
