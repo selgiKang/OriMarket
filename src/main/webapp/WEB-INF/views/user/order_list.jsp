@@ -1,4 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="com.choongang.OriMarket.order.Order" %>
+<%
+    List<Order> orders = (List<Order>) request.getAttribute("orders");
+%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<%@ page import="java.util.List" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -129,23 +136,38 @@
         <span class="tab-link" data-tab="processing">처리중</span>
         <span class="tab-link" data-tab="completed">완료</span>
     </div>
-
-    <div class="order-item" data-status="pending">
-        <span class="order-number">주문번호 #1234</span>
+    <% if (orders != null && !orders.isEmpty()) { %>
+    <% for (com.choongang.OriMarket.order.Order order : orders) { %>
+    <div class="order-item" data-status="<%= order.getOrderType() %>">
+        <span class="order-number">주문번호 #${order.orderNumber}</span>
+        <!-- 다른 주문 정보 출력 -->
         <div class="order-details">
-            <span class="order-quantity">메뉴 2개</span>
-            <span class="order-price">35000원</span>
+            <span class="order-quantity">메뉴 <%= order.getOrderGoodsNum() %>개</span>
+            <span class="order-price"><%= order.getOrderTotalPrice() %>원</span>
         </div>
-        <div class="order-menu">김치찌개, 된장찌개</div>
+        <div class="order-menu"><%= order.getOrderGoodsName() %></div>
         <div class="action-buttons">
             <button class="accept-button">수락</button>
             <button class="reject-button">거절</button>
         </div>
     </div>
+    <% } %>
+    <% } else { %>
+    <p>주문이 없습니다.</p>
+    <% } %>
+
+    <p>모델에 저장된 주문번호: ${orderNumber}</p>
 
     <div class="order-item" data-status="processing" style="display: none;"></div>
     <div class="order-item" data-status="completed" style="display: none;"></div>
+
+
+    <div class="order-item" data-status="processing" style="display: none;"></div>
+    <div class="order-item" data-status="completed" style="display: none;"></div>
+
+
 </div>
+
 
 <script>
     const tabLinks = document.querySelectorAll('.tab-link');

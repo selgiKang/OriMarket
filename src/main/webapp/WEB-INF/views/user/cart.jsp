@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 		 pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"  %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,7 +10,7 @@
 	<script src="https://kit.fontawesome.com/1d53132cda.js" crossorigin="anonymous"></script>
 	<script src="../../js/common/jquery-3.6.4.js"></script>
 	<script src="../../js/user/cart.js"></script>
-	<link rel="stylesheet" href="../../css/user/cart.css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/user/cart.css">
 
 
 	<title>cart</title>
@@ -57,19 +58,26 @@
 										<p>${items.item.getItemName()}</p>
 									</div>
 								</a>
-								<a href="/${sessionScope.userId}/cart/${items.cartItemId}/delete"><button class="cart_xmark"><i class="fas fa-regular fa-xmark"></i></button></a>
+								<a href="/${sessionScope.userId}/cart/${items.cartItemId}/delete/${items.itemPrice}">
+									<input type="hidden" id="userId" value="${sessionScope.userId}">
+									<input type="hidden" id="cartItemId" value="${items.cartItemId}">
+									<button class="cart_xmark" onclick="deleteItem()"><i class="fas fa-regular fa-xmark"></i></button>
+								</a>
 
 								<!-- 수량선택(-,+),가격표시 -->
 
 								<div class="cart_itemDescription">
 									<div class="cart_itemOption">
-										<button onclick="dec(currentCnt${status.index})"><i class="fas fa-solid fa-circle-minus"></i></button>
-										<input type="number" id="currentCnt${status.index}" value="${items.count}">
-										<button onclick="inc(currentCnt${status.index})"><i class="fas fa-solid fa-circle-plus"></i></button>
+											<%--onclick="dec(currentCnt${status.index})"--%>
+										<button onclick="minusBtn('${items.cartItemId}')"><i class="fas fa-solid fa-circle-minus"></i></button>
+										<input type="text" size="1" id="currentCnt${status.index}" value="${items.count}">
+										<button onclick="plusBtn('${items.cartItemId}')"><i class="fas fa-solid fa-circle-plus"></i></button>
 									</div>
 									<div class="cart_itemPrice">
-										<input id="sellPrice_${status.index}" type="text" value="${items.itemPrice}">
-										<span id="totalPriceCalSpan_${status.index}"></span>
+										<input id="sellPrice_${status.index}" type="hidden" value="${items.itemPrice}">
+										<span id="totalPriceCalSpan_${status.index}">
+												${items.itemPrice * items.count}원
+										</span>
 									</div>
 								</div>
 							</div>
@@ -88,7 +96,6 @@
 	</div>
 
 
-
 	<!-- 포장/배달 선택하는 체크리스트 -->
 	<div id="cart_checkDelivery">
 		<ul>
@@ -101,10 +108,10 @@
 		<form action="" >
 			<table class="cart_costTable">
 				<tbody>
-				<tr><td>상품금액</td><td class="cart_cost">받아오는값</td></tr>
-				<tr><td>배달비</td><td class="cart_cost">받아오는값</td></tr>
-				<tr><td>총 주문금액</td><td class="cart_cost">받아오는값</td></tr>
-				<tr id="cart_totalPrice"><td>결제예정금액</td><td class="cart_cost">받아오는값</td></tr>
+				<tr><td>상품금액</td><td class="cart_cost">${totalPrice}원</td></tr>
+				<tr><td>배달비</td><td class="cart_cost">3000원</td></tr>
+				<tr><td>총 주문금액</td><td class="cart_cost">${totalPrice+3000}원</td></tr>
+				<tr id="cart_totalPrice"><td>결제예정금액</td><td class="cart_cost">${totalPrice+3000}원</td></tr>
 				</tbody>
 			</table>
 		</form>
@@ -114,9 +121,9 @@
 		<form action="">
 			<table class="cart_costTable">
 				<tbody>
-				<tr><td>상품금액</td><td class="cart_cost">받아오는값</td></tr>
-				<tr><td>총 주문금액</td><td class="cart_cost">받아오는값</td></tr>
-				<tr><td>결제예정금액</td><td class="cart_cost">받아오는값</td></tr>
+				<tr><td>상품금액</td><td class="cart_cost">${totalPrice}원</td></tr>
+				<tr><td>총 주문금액</td><td class="cart_cost">${totalPrice}원</td></tr>
+				<tr><td>결제예정금액</td><td class="cart_cost">${totalPrice}원</td></tr>
 				</tbody>
 			</table>
 		</form>
@@ -128,16 +135,44 @@
 </div>
 
 <script type="text/javascript">
-	const putCntInput_${status.index} = document.querySelector('#currentCnt${status.index}');
 
-	putCntInput_${status.index}.addEventListener('change',function (){
-		const priceTag = document.querySelector('#sellPrice_${status.index}').value;
-		const putCnt = document.querySelector('#currentCnt${status.index}').value;
-		const result = priceTag*putCnt;
-		document.querySelector('#totalPriceCalSpan_${status.index}').innerText = result+"원";
+	function minusBtn(cartItemId) {
+		$.ajax({
+			type: 'put',
+			url: '/user/cart',
+			data: {"cartItemId": cartItemId, "type": "minus"},
+			dataType: "text",
+			success: function (result) {
+				console.log(result);
+				if (result === "ok") {
+					location.reload();
+				}
+			},
+			error: function () {
+				alert('ㅇㅔㄹㅓ');
+			}
 
-	});
+		});
+	}
 
+	function plusBtn(cartItemId){
+		$.ajax({
+			type: 'put',
+			url: '/user/cart',
+			data: {"cartItemId": cartItemId, "type": "plus"},
+			dataType: "text",
+			success: function (result) {
+				console.log(result);
+				if (result === "ok") {
+					location.reload();
+				}
+			},
+			error: function () {
+				alert('ㅇㅔㄹㅓ');
+			}
+
+		});
+	}
 </script>
 </body>
 </html>

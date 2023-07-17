@@ -75,4 +75,12 @@ public class Order {
 
     @Transient
     private String next_redirect_pc_url;
+
+    //출력 날짜
+    @Transient
+    private String calculate_date;
+
+    //끝나는 날짜
+    @Transient
+    private String calculate_date_last;
 }

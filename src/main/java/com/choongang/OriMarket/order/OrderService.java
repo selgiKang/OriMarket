@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -16,6 +17,10 @@ import org.springframework.web.client.RestTemplate;
 
 import javax.servlet.http.HttpSession;
 import java.net.URI;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Service
 //필드 생성자 자동 생성
@@ -30,7 +35,10 @@ public class OrderService {
     static final String admin_key = "${e584b59b9f572556fbac3673883cb029}";
     private  Order order;
 
-
+    //7.17 테스트 승엽
+    public List<Order> getOrderList() {
+        return orderRepository.findAll();
+    }
 
        /*
        public Order kakaoPayReady() {
@@ -85,6 +93,23 @@ public class OrderService {
                 session.setAttribute("orderNumber",saveOrder.getOrderNumber());
                 return true;
             }
+        }
 
+        public List<Map<String,String>> getTableData(String calculateDate, String calculateDateLast,Model model
+        ){
+
+            List<Map<String,String>> tableData = new ArrayList<>();
+            System.out.println("calculateDate"+calculateDate+", calculateLast"+calculateDateLast);
+            List<Order> orders = orderRepository.findOrdersBetweenDates(calculateDate,calculateDateLast);
+
+            for(Order order : orders){
+                Map<String, String> orderData = new HashMap<>();
+                orderData.put("date", String.valueOf(order.getOrderDate()));
+                orderData.put("amount",String.valueOf(order.getOrderGoodsPrice()));
+
+                tableData.add(orderData);
+            }
+            model.addAttribute("tableData",tableData);
+            return tableData;
         }
 }
