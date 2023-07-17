@@ -7,9 +7,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.swing.text.html.Option;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Slf4j
@@ -95,23 +97,36 @@ public class CartService {
         return userItems;
     }
 
+//
+//    //수량추가
+//    @Transactional
+//    public void plusCount(Cart cart,Item item,int itemPrice){
+//
+//        CartItem cartItem = cartItemRepository.findByCart_CartIdAndItem_ItemName(cart.getCartId(), item.getItemName());
+//        cartItem.plusCount(itemPrice);
+//    }
+//
+//
+//    //수량감소
+//    @Transactional
+//    public void minusCount(Cart cart,Item item,int count,int itemPrice){
+//        CartItem cartItem = cartItemRepository.findByCart_CartIdAndItem_ItemName(cart.getCartId(),item.getItemName());
+//        cartItem.minusCount(count, itemPrice);
+//    }
+//
 
-    //수량추가
-    @Transactional
-    public void plusCount(Cart cart,Item item,int itemPrice){
 
-        CartItem cartItem = cartItemRepository.findByCart_CartIdAndItem_ItemName(cart.getCartId(), item.getItemName());
-        cartItem.plusCount(itemPrice);
+    public String menuPlusMinus(Long cartItemId,String type){
+        Optional<CartItem> cartItem = cartItemRepository.findById(cartItemId);
+        if(type.equals("plus")){
+            cartItem.get().setCount(cartItem.get().getCount()+1);
+            cartItemRepository.save(cartItem.get());
+        }else{
+            cartItem.get().setCount(cartItem.get().getCount()-1);
+            cartItemRepository.save(cartItem.get());
+        }
+        return "ok";
     }
-
-
-    //수량감소
-    @Transactional
-    public void minusCount(Cart cart,Item item,int count,int itemPrice){
-        CartItem cartItem = cartItemRepository.findByCart_CartIdAndItem_ItemName(cart.getCartId(),item.getItemName());
-        cartItem.minusCount(count, itemPrice);
-    }
-
 
 
 

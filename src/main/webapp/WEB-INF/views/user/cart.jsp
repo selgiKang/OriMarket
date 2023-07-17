@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 		 pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"  %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -68,13 +69,15 @@
 								<div class="cart_itemDescription">
 									<div class="cart_itemOption">
 											<%--onclick="dec(currentCnt${status.index})"--%>
-										<a href="/${sessionScope.userId}/cart/${items.item.getItemName()}/minus/${items.count}"><button><i class="fas fa-solid fa-circle-minus"></i></button></a>
+										<button onclick="minusBtn('${items.cartItemId}')"><i class="fas fa-solid fa-circle-minus"></i></button>
 										<input type="text" size="1" id="currentCnt${status.index}" value="${items.count}">
-										<a href="/${sessionScope.userId}/cart/${items.item.getItemName()}/plus/${items.count}"><button><i class="fas fa-solid fa-circle-plus"></i></button></a>
+										<button onclick="plusBtn('${items.cartItemId}')"><i class="fas fa-solid fa-circle-plus"></i></button>
 									</div>
 									<div class="cart_itemPrice">
 										<input id="sellPrice_${status.index}" type="hidden" value="${items.itemPrice}">
-										<span id="totalPriceCalSpan_${status.index}">${items.itemPrice}원</span>
+										<span id="totalPriceCalSpan_${status.index}">
+												${items.itemPrice * items.count}원
+										</span>
 									</div>
 								</div>
 							</div>
@@ -133,6 +136,43 @@
 
 <script type="text/javascript">
 
+	function minusBtn(cartItemId) {
+		$.ajax({
+			type: 'put',
+			url: '/user/cart',
+			data: {"cartItemId": cartItemId, "type": "minus"},
+			dataType: "text",
+			success: function (result) {
+				console.log(result);
+				if (result === "ok") {
+					location.reload();
+				}
+			},
+			error: function () {
+				alert('ㅇㅔㄹㅓ');
+			}
+
+		});
+	}
+
+	function plusBtn(cartItemId){
+		$.ajax({
+			type: 'put',
+			url: '/user/cart',
+			data: {"cartItemId": cartItemId, "type": "plus"},
+			dataType: "text",
+			success: function (result) {
+				console.log(result);
+				if (result === "ok") {
+					location.reload();
+				}
+			},
+			error: function () {
+				alert('ㅇㅔㄹㅓ');
+			}
+
+		});
+	}
 </script>
 </body>
 </html>
