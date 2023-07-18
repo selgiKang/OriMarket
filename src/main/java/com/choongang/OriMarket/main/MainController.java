@@ -30,7 +30,7 @@ public class MainController {
     }
 
     @GetMapping("/connexion_market")
-    public String main111() {
+    public String connexion_market() {
         return "main/connexion_market";
     }
 
