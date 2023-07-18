@@ -1,15 +1,19 @@
 package com.choongang.OriMarket.favorite;
 
+import com.choongang.OriMarket.store.Item;
+import com.choongang.OriMarket.store.ItemRepository;
 import com.choongang.OriMarket.user.User;
 import com.choongang.OriMarket.user.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -18,6 +22,7 @@ public class FavController {
 
     private final FavService favService;
     private final UserService userService;
+    private final ItemRepository itemRepository;
 
     @GetMapping("/storeFav")
     public String storeFav(@RequestParam(value = "favId",required = false) Long favId, User user, Fav fav, HttpSession session){
@@ -41,7 +46,7 @@ public class FavController {
     }
 
     @GetMapping("/store")
-    public String store(@RequestParam("favStoreName") String favStoreName, Fav fav,User user, HttpSession session) {
+    public String store(@RequestParam("favStoreName") String favStoreName, Fav fav, User user, HttpSession session, Model model) {
         System.out.println("스토어 가져오니:"+favStoreName+","+session.getAttribute("userId"));
         user.setUserId(String.valueOf(session.getAttribute("userId")));
         //회원
@@ -58,7 +63,8 @@ public class FavController {
                 session.setAttribute("favNumber","");
             }
             //session.setAttribute("favNumber", fav.getFavNumber());
-
+            List<Item> all = itemRepository.findAll();
+            model.addAttribute("al",all);
             return "store/store";
         //비회원
         }else{

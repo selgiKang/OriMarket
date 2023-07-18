@@ -7,45 +7,9 @@
     <meta charset="UTF-8">
     <title>OriMarket</title>
     <link rel= "stylesheet" href= "../../css/main/main.css">
+    <link rel= "stylesheet" href= "../../css/main/connexion_market.css">
     <style>
-        .modal {
-            position: absolute;
 
-            width: 375px;
-            height: 812px;
-
-            z-index: 999999;
-
-            display: none;
-
-            background-color: rgba(0, 0, 0, 0.4);
-        }
-
-        .modal.show {
-            display: block;
-        }
-
-        .modal_body {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-
-            width: 300px;
-            height: 700px;
-            border-radius: 30px;
-            padding:20px;
-
-            text-align: center;
-
-            background-color: rgb(255, 255, 255);
-            border-radius: 10px;
-            box-shadow: 0 2px 3px 0 rgba(34, 36, 38, 0.15);
-
-            transform: translateX(-50%) translateY(-50%);
-        }
-        .btn_round{height:30px;}
-        .btn_round:hover {background-color:#000;}
-        .current_location_btn:hover {font-weight: bold;}
     </style>
 </head>
 <body>
@@ -55,11 +19,11 @@
             <div class="modal">
                 <div class="modal_body">
                     <div class="container">
-                        <form action="/search" method="post">
+                        <form action="/" method="post">
                             <div class="form_field">
                                 <h2 style="margin:30px 0;"><label for="address_kakao">단골시장 추가하기</label></h2>
-                                    <a href="" class="current_location_btn" style="text-decoration:none; color:#333; cursor: pointer;">현재 위치로 등록하기</a>
-                                    <p style="margin-top:30px; font-size: 14px;">현재 내가 설정한주소: <span style="color: red; font-size: 14px;">주소를 등록해주세요..</span></p>
+                                    <a href="" class="current_location_btn" style="text-decoration:none; color:#333; cursor: pointer;">가까운 시장 보기</a>
+                                    <p style="margin-top:30px; font-size: 14px;">현재 내가 설정한 주소: <span style="color: red; font-size: 14px;">주소를 등록해주세요..</span></p>
                                 <hr style="margin-top:30px;">
                                 <div class="input_container" style="margin-top:30px;">
                                     <input type="text" id="address_kakao" name="userAddress" readonly style="width:190px; height:30px; border:1px solid #ffbf41; border-radius: 35px; float:left;"  placeholder=" 주소를 입력해 주세요">
@@ -107,28 +71,9 @@
         <jsp:include page="../footer/footer.jsp" />
     </div>
     <script>
-        const body = document.querySelector('#connextion_market');
-        const modal = document.querySelector('.modal');
-        const btnOpenPopup = document.querySelector('.btn-open-popup');
 
-        btnOpenPopup.addEventListener('click', () => {
-            modal.classList.toggle('show');
-
-            if (modal.classList.contains('show')) {
-                body.style.overflow = 'hidden';
-            }
-        });
-
-        modal.addEventListener('click', (event) => {
-            if (event.target === modal) {
-                modal.classList.toggle('show');
-
-                if (!modal.classList.contains('show')) {
-                    body.style.overflow = 'auto';
-                }
-            }
-        });
     </script>
     <script type="text/javascript" src="../../js/main/main_slidebanner.js"></script>
+    <script type="text/javascript" src="../../js/main/connexion_market.js"></script>
 </body>
 </html>

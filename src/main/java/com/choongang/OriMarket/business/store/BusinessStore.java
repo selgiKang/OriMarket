@@ -1,12 +1,15 @@
 package com.choongang.OriMarket.business.store;
 
 import com.choongang.OriMarket.business.user.BusinessUser;
+import com.choongang.OriMarket.store.Item;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "businessStore")
@@ -39,6 +42,9 @@ public class BusinessStore {
     @ManyToOne(fetch = FetchType.LAZY) //lazy가 성능최적화
     @JoinColumn(name ="bu_store_user")
     private BusinessUser businessUser;
+
+    @OneToMany(mappedBy = "businessStore")
+    private List<Item> items = new ArrayList<>();
 
 
 }
