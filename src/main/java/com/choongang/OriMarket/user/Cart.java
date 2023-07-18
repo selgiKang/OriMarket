@@ -27,20 +27,18 @@ public class Cart {
 
     private int cartCnt;
 
-    private String cartCheck;
-
     private int cartDeliveryPrice;
 
     private int cartTotalPrice;
 
                          /* pk대신 원하는 컬럼 가져오기 referencedColumnName*/
     @OneToOne(fetch =  FetchType.EAGER)
-    @JoinColumn(name = "user_seq")
+    @JoinColumn(name = "seq")
     private User user;
 
     //    cartItems 테이블이 생성됨.
-   // @OneToMany(fetch = FetchType.EAGER)
-    //private List<CartItem> cartItems = new ArrayList<>();
+   @OneToMany(fetch = FetchType.EAGER)
+    private List<CartItem> cartItems = new ArrayList<>();
 
 
     /*회원 엔티티를 파라미터로 받아서 장바구니 엔티티를 생성하는 로직

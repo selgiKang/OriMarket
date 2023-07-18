@@ -23,8 +23,7 @@ public class OrderController {
     private final OrderService orderService;
     private final RealTimeService realTimeService;
 
-    //7.16 테스트 승엽
-    private final OrderRepository orderRepository;
+
 
 
     @Autowired
@@ -32,8 +31,7 @@ public class OrderController {
         this.orderService = orderService;
         this.realTimeService = realTimeService;
 
-        //7.16 테스트 승엽
-        this.orderRepository = orderRepository;
+
 
     }
 
@@ -70,34 +68,23 @@ public class OrderController {
     @GetMapping("/order_pastorder")
     public String orderPastorder(){return "order/order_pastorder";}
 
-
-    //7.17 테스트 승엽
- /*   @GetMapping("/order/list")
+    //7.18 테스트 데이터 가져오는거까지 성공 승엽
+    @GetMapping("/order/order_list")
     public String getOrderList(Model model) {
-        // 주문목록 데이터 가져오기
-        List<Order> orders = orderService.getOrderList();
-
-        // 모델에 주문데이터 추가
-        model.addAttribute("orders", orders);
-
-        // 주문이 있는 경우 첫 번째 주문번호 모델에 추가
-        if (!orders.isEmpty()) {
-            model.addAttribute("orderNumber", orders.get(0).getOrderNumber());
-        } else {
-            model.addAttribute("orderNumber", ""); // 주문이 없는 경우 빈 문자열로 설정
-        }
-
-        return "order_list";
+        List<Order> orderList = orderService.getAllOrders();
+        model.addAttribute("orders", orderList);
+        return "order/order_list";
     }
-*/
+
+
+
+
+
     @PostMapping("/order_paymentPage")
     public String orderDelivery(@ModelAttribute Order order, @ModelAttribute RealTimeStatus rts, HttpSession session, @RequestParam("orderNumber")String orderNumberStr, Model model){
 
         order.setOrderNumber(orderNumberStr);
         session.setAttribute("orderNumber",orderNumberStr);
-
-        //7.17 테스트 승엽
-        model.addAttribute("orderNumber", orderNumberStr);
 
         //주문 db에 주문내역 저장
         if(orderService.orderDelivery(order,session)){
@@ -107,10 +94,19 @@ public class OrderController {
             rts.setRtsOrderIng(0);
             rts.setRtsRiderIng(0);
             rts.setRtsRiderFinish(0);
-            
+
             //배달 내역 db에 저장
             if (realTimeService.insertRts(rts)){
                 model.addAttribute("rtsOrderIng",rts.getRtsOrderIng());
+
+                //7.18 테스트 승엽
+                model.addAttribute("orderNumber", orderNumberStr);
+
+                // order_list에 데이터 추가
+                List<Order> orderList = orderService.getAllOrders(); // 기존 order_list 가져오기
+                orderList.add(order); // 새로운 주문 데이터 추가
+                model.addAttribute("orderList", orderList); // 수정된 order_list를 모델에 추가
+
                 System.out.println(rts.getRtsOrderIng());
                 return "order/order_delivery";
             }else{

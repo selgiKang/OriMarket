@@ -43,14 +43,14 @@
 /*2023-07-12 메인페이지 수정 1차 */
 .clear:before{content:''; display:block; clear:both;}
 
-#main_wrap_box{width:375px; height:612px;}
-span.connextion_title{float:left; margin:10px 20px;}
+#main_wrap_box{width:375px; height:612px; position: relative;}
+span.connextion_title{float:left; margin:20px;}
 .connextion_title_img{width:28px; height:28px; text-align:left;}
-.connextion_marketbox{margin:10% auto;}
+.connextion_marketbox{margin: 20px auto;}
 
 /*단골시장box공통*/
 .connextion_mk1_wrap, .connextion_mk2_wrap, .connextion_mk3_wrap, .connextion_mk4_wrap{
-    display:inline-block; width:120px; height:100px; background-color:#eee; border-radius:3%; margin:10px; cursor:pointer;
+    display:inline-block; width:120px; height:100px; background-color:#eee; border-radius:3%; margin:15px 10px; cursor:pointer;
 }
 .connextion_mk1, .connextion_mk2, .connextion_mk3, .connextion_mk4{
     width:35%; height:35%; text-decoration:none; color:#333;
