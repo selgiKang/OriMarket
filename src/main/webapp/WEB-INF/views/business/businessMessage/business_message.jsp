@@ -12,7 +12,7 @@
     </header>
     <table>
         <tr><th>순번</th><th>날짜</th><th>제목</th></tr>
-        <c:forEach var="resultMessage" items="${resultMessage}">
+        <c:forEach var="resultMessage" items="${resultMessage}" varStatus="status">
             <tr>
                 <td>${status.index + 1}</td>
                 <td><a>${resultMessage.messageInsertDate}</a></td>

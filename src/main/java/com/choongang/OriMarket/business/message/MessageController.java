@@ -27,6 +27,7 @@ public class MessageController {
             businessUser.setBuUserNumber(Long.valueOf(session.getAttribute("buUserNumber").toString()));
             List<Message> resultMessage = messageService.getMessages(businessUser,model);
             model.addAttribute("resultMessage",resultMessage);
+        System.out.println(resultMessage);
         return "business/businessMessage/business_message";
     }
     @GetMapping("/businessInsertMessage")
@@ -45,8 +46,7 @@ public class MessageController {
         messages.setBuUserNumber(businessUser);
 
         messageService.insertMessage(messages);
-
-        return "/messageInsert";
+        return "redirect:/messageInsert";
     }
 
 
