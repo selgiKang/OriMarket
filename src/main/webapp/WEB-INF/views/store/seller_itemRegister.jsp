@@ -79,6 +79,10 @@
                     <td><textarea name="itemInfo"></textarea></td>
                 </tr>
                 <tr>
+                    <td>상품 카테고리</td>
+                    <td><input type="" name="itemCategory"></td>
+                </tr>
+                <tr>
                     <td>상품사진</td>
                     <td><input type="file"></td>
                 </tr>

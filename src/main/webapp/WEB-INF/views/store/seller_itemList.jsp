@@ -63,6 +63,7 @@
                 <td>원산지</td>
                 <td>입고일</td>
                 <td>상세정보</td>
+                <td>상품카테고리</td>
             </tr>
             <c:forEach var="it" items="${items}">
             <tr>
@@ -76,6 +77,7 @@
                 <td>${it.itemFrom}</td>
                 <td>${it.itemRegDate}</td>
                 <td>${it.itemInfo}</td>
+                <td>${it.itemCategory}</td>
             </tr>
             </c:forEach>
         </table>

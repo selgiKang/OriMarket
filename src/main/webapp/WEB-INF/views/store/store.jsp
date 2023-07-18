@@ -69,16 +69,18 @@
                         <label for="tabmenu1">대표 메뉴</label>
                         <div class="tabCon">
                             <%--메뉴1--%>
+                            <c:forEach var="a" items="${al}">
                             <div class="menu">
                                 <div class="menu-content">
-                                    <h2 class="menu_name">칼국수</h2>
-                                    <h6 class="menu-description">인공 조미료를 쓰지 않고 순수 천연재료로 만들어 시원한 바다맛을 느낄 수 있는 착한 생 칼국수 대표 메뉴</h6>
-                                    <h5 class="menu_price">3,800원</h5>
+                                    <h2 class="menu_name">${a.itemName}</h2>
+                                    <h6 class="menu-description">${a.itemInfo}</h6>
+                                    <h5 class="menu_price">${a.itemPrice}</h5>
                                 </div>
                                 <div class="menu-image">
                                     <img src="../../img/store/kal.jpg" alt="메뉴이미지">
                                 </div>
                             </div>
+                            </c:forEach>
                             <%--메뉴2--%>
                             <div class="menu">
                                 <div class="menu-content">
@@ -96,7 +98,7 @@
                     <%--여름메뉴 버튼--%>
                     <li id="tab2" class="btnCon">
                         <input type="radio" name="tabmenu" id="tabmenu2">
-                        <label for="tabmenu2">여름 메뉴</label>
+                        <label for="tabmenu2"><a href="/storenotice0">여름 메뉴</a></label>
                         <div class="tabCon">
                             <%--메뉴1--%>
                             <div class="menu">

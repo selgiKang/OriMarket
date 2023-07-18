@@ -1,5 +1,9 @@
 package com.choongang.OriMarket.store;
 
+import com.choongang.OriMarket.business.store.BusinessStore;
+import com.choongang.OriMarket.business.store.BusinessStoreRepository;
+import com.choongang.OriMarket.business.user.BusinessUser;
+import com.choongang.OriMarket.business.user.BusinessUserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -19,6 +24,12 @@ public class StoreController {
     private final StoreService storeService;
 
     private final  ItemService itemService;
+
+    private final BusinessStoreRepository businessStoreRepository;
+
+    private final BusinessUserRepository businessUserRepository;
+
+    private final ItemRepository itemRepository;
 
     @GetMapping("/detailmenu")
     public String store_detailmenu() {
@@ -74,7 +85,7 @@ public class StoreController {
     public String store_menuedit(){return "store/store_menuedit";}
 
     @PostMapping("/storenotice")
-    public String storenoticeStore(@ModelAttribute Store store){
+    public String storenoticeStore(@ModelAttribute Store store,Model model){
         System.out.println("가게이름: "+store.getStoreName());
         Store storeupdate = storeService.update(store);
 
@@ -86,6 +97,16 @@ public class StoreController {
             return "store/storenotice";
         }
 
+    }
+
+    @GetMapping("/storenotice0")
+    public String storenotice0(Model model){
+        List<Item> all = itemRepository.findAll();
+        for(Item item: all){
+            System.out.println("zzz"+item.getItemName());
+        }
+            model.addAttribute("al",all);
+        return "store/store";
     }
 
 };
