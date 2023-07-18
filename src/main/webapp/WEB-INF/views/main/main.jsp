@@ -13,7 +13,6 @@
     </style>
 </head>
 <body>
-
     <div id="main">
         <jsp:include page="../header/header_index.jsp" />
         <div id="main_wrap_box">

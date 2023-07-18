@@ -41,7 +41,7 @@ public class BusinessUserService {
             return false;
         }
 
-        if(!findbusinessUser.getBuUserPassWord().equals(findbusinessUser.getBuUserPassWord())){
+        if(!businessUser.getBuUserPassWord().equals(findbusinessUser.getBuUserPassWord())){
             return false;
         }
         session.setAttribute("buUserNumber",findbusinessUser.getBuUserNumber());

@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 import org.thymeleaf.model.IModel;
 
 import javax.servlet.http.Cookie;
@@ -23,6 +24,8 @@ public class UserController {
 
     @Autowired
     private final UserService userService;
+
+    private final UserRepository userRepository;
 
     @GetMapping("/login")
     public String login() {
@@ -62,6 +65,9 @@ public class UserController {
     public String loginId(@ModelAttribute User user, Model model, HttpSession session) {
         boolean isTrue = userService.login(user,session,model);
         if(isTrue){
+            User findUser = userRepository.findByUserId(String.valueOf(session.getAttribute("userId")));
+            List<UserAddress> userAddresses = findUser.getUserAddresses();
+            model.addAttribute("userAd",userAddresses);
             model.addAttribute("userId", user.getUserId());
             return "main/main";
         }
