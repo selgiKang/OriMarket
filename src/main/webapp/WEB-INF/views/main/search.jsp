@@ -59,15 +59,14 @@
 
         <input type="submit" value="등록하기" class="submit_btn" style="position: absolute; top: 210px; left: 20px;">
         <hr id="hr1">
-        <p style="position: absolute; top: 240px; left: 20px;">내 주소 목록</p>
-        <ul  style="position: absolute; top: 270px; left: 20px;">
-            <li>키키키</li>
-            <c:if test="${!empty userAddress1}">
-                <li style="color: yellow">${userAddress1} ${userAddressDetail1} </li>
-            </c:if>
-        </ul>
-
     </form>
+    <p style="position: absolute; top: 240px; left: 20px;">내 주소 목록</p>
+    <ul  style="position: absolute; top: 270px; left: 20px;">
+        <li>키키키</li>
+        <c:forEach var="userad" items="${userAddress2}">
+            <li>${userad.userAddress1}${userAd.userAddressDetail1}</li>
+        </c:forEach>
+    </ul>
 
 </div>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>

@@ -21,14 +21,14 @@ public class BusinessStoreController {
 
     @GetMapping("/storenotice1")
     public String storenotice1(){
-        return "store/storenotice_new";
+        return "business/storenotice_new";
         }
 
 
     @PostMapping("/storenotice1")
     public String storenoticesave(@ModelAttribute BusinessStore businessStore, HttpSession session,Model model){
         businessStoreService.save(businessStore,session,model);
-        return "store/storenotice_new";
+        return "business/storenotice_new";
     }
 
 

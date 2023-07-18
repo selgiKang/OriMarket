@@ -50,12 +50,18 @@ public class BusinessUserService {
 
 
     public boolean join1(BusinessUser businessUser, HttpSession session) {
-        BusinessUser byId = businessUserRepository.findById(businessUser.getBuUserNumber()).orElseThrow();
+        System.out.println("모라고 나올까요?"+businessUser.getBuUserNumber());
 
-        if(businessUser.getBuUserNumber().equals(byId.getBuUserNumber())){
-            return false;
+
+        if(businessUserRepository.findById(businessUser.getBuUserNumber()).isEmpty()){
+
         }else {
+            BusinessUser byId = businessUserRepository.findById(businessUser.getBuUserNumber()).orElseThrow();
+            if(businessUser.getBuUserNumber().equals(byId.getBuUserNumber())){
+                return false;
+            }else {
 
+            }
         }
         BusinessUser savedbusinessUser = businessUserRepository.save(businessUser);
 
