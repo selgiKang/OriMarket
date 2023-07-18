@@ -55,7 +55,10 @@ public class StoreController {
     }
 
     @GetMapping("/s1")
-    public String storenotice2() {
+    public String storenotice2(HttpSession session,Model model) {
+        BusinessUser buUserNumber = businessUserRepository.findById((Long) session.getAttribute("buUserNumber")).orElseThrow();
+        List<Item> items1 = buUserNumber.getBusinessStores().get(0).getItems();
+        model.addAttribute("items",items1);
         return "store/seller_itemList";
     }
 
