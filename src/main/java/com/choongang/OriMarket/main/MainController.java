@@ -1,18 +1,16 @@
 package com.choongang.OriMarket.main;
 
-import com.choongang.OriMarket.user.User;
-import com.choongang.OriMarket.user.UserAddress;
-import com.choongang.OriMarket.user.UserService;
+import com.choongang.OriMarket.user.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequiredArgsConstructor
@@ -22,8 +20,12 @@ public class MainController {
     @Autowired
     private final MainService mainService;
 
+    private final UserRepository userRepository;
+
+    private final UserAddressRepository userAddressRepository;
+
     @GetMapping("/")
-    public String main() {
+    public String main(HttpSession session, Model model) {
         return "main/main";
     }
 
@@ -33,18 +35,47 @@ public class MainController {
     }
 
     @GetMapping("/search")
-    public String search() {
+    public String search(HttpSession session,Model model) {
+        User findUser = userRepository.findByUserId(String.valueOf(session.getAttribute("userId")));
+        List<UserAddress> userAddresses = findUser.getUserAddresses();
+        model.addAttribute("userAd",userAddresses);
         return "main/search";
     }
 
     @GetMapping("/mylocation")
-    public String test(){return "main/mylocation";}
+    public String test(HttpSession session,Model model){
+        User findUser = userRepository.findByUserId(String.valueOf(session.getAttribute("userId")));
+        List<UserAddress> userAddresses = findUser.getUserAddresses();
+        model.addAttribute("userAd",userAddresses);
+        return "main/mylocation";}
 
     @PostMapping("/search")
     public String search1(@ModelAttribute UserAddress userAddress, HttpSession session, Model model){
         mainService.updateAddress(session,userAddress,model);
-        return "main/main";
+        return "main/search";
     }
+
+    @GetMapping("/deleteAddress")
+    public String deleteAddress(@RequestParam("userAddressSeq") Long userAddressSeq,HttpSession session,Model model) {
+        UserAddress byId = userAddressRepository.findById(userAddressSeq).orElseThrow();
+        userAddressRepository.delete(byId);
+        User findUser = userRepository.findByUserId(String.valueOf(session.getAttribute("userId")));
+        List<UserAddress> userAddresses = findUser.getUserAddresses();
+        model.addAttribute("userAd",userAddresses);
+        return "main/search";
+    }
+
+    @GetMapping("/updateAddress")
+    public String updateAddress(@RequestParam("userAddressSeq") Long userAddressSeq, Model model) {
+        UserAddress byId = userAddressRepository.findById(userAddressSeq).orElseThrow();
+        userAddressRepository.save(byId);
+
+        List<UserAddress> userAddresses = byId.getUser().getUserAddresses();
+        model.addAttribute("userAd",userAddresses);
+
+        return "main/search";
+    }
+
 
 
 

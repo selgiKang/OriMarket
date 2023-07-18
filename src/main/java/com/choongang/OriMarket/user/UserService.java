@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
 import java.util.*;
@@ -32,19 +33,11 @@ public class UserService {
             return false;
         }
         List<UserAddress> userAddresses = findUser.getUserAddresses();
-        List<Map<String,String>> userAd = new ArrayList<>();
+        //ModelAndView mav = new ModelAndView();
         if (userAddresses.isEmpty()){
         }else {
-            for(UserAddress userAddress3:userAddresses){
-                System.out.println(userAddress3.getUser().getUserSeq()+"의 주소: "+userAddress3.getUserAddress1());
-                Map<String, String> orderData = new HashMap<>();
-                orderData.put("date", userAddress3.getUserAddress1());
-                orderData.put("amount",userAddress3.getUserAddressDetail1());
-
-                userAd.add(orderData);
-            }
-            model.addAttribute("userAd",userAddresses.get(userAddresses.size()-1));
-
+            //mav.addObject("userAd",userAddresses);
+            //mav.setViewName("main/search");
             session.setAttribute("userAddress1",userAddresses.get(userAddresses.size()-1).getUserAddress1());
             session.setAttribute("userAddressDetail1",userAddresses.get(userAddresses.size()-1).getUserAddressDetail1());
         }
