@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -40,8 +41,8 @@
 <body>
 <div id="goods_container">
     <div id="goods_store">
-        <div>푸른과일마트</div>
-        <small>대표:손예솔</small>
+        <div>가게이름나오게</div>
+        <small>대표:가게주인나오게</small>
     </div>
     <div id="goods_title">
         <h1>현 재고 목록</h1>
@@ -55,45 +56,28 @@
                 <td></td>
                 <td>상품번호</td>
                 <td>상품명</td>
-                <td>재고수량</td>
-                <td>등록일</td>
+                <td>상품수량</td>
+                <td>원가</td>
+                <td>판매가</td>
+                <td>무게</td>
+                <td>원산지</td>
+                <td>입고일</td>
+                <td>상세정보</td>
             </tr>
-            <tr>
-                <!-- 반복문 사용해서 모든 제품리스트 출력 -->
-                <td><input type="checkbox" value="Goods"></td>
-                <td><a href="./GoodsManage_details.jsp">00001</a></td>
-                <td>대추방울토마토 300g</td>
-                <td>15</td>
-                <td>2023.06.01</td>
-            </tr>
+            <c:forEach var="it" items="${items}">
             <tr>
                 <td><input type="checkbox" value="Goods"></td>
-                <td><a href="#">00002</a></td>
-                <td>유명산지 고당도사과 1.5kg</td>
-                <td>50</td>
-                <td>2023.07.07</td>
+                <td><a href="./GoodsManage_details.jsp">${it.itemId}</a></td>
+                <td>${it.itemName}</td>
+                <td>${it.itemCnt}</td>
+                <td>${it.itemCost}</td>
+                <td>${it.itemPrice}</td>
+                <td>${it.itemG}</td>
+                <td>${it.itemFrom}</td>
+                <td>${it.itemRegDate}</td>
+                <td>${it.itemInfo}</td>
             </tr>
-            <tr>
-                <td><input type="checkbox" value="Goods"></td>
-                <td><a href="#">00003</a></td>
-                <td>당도선별 수박 7kg이상</td>
-                <td>27</td>
-                <td>2023.07.01</td>
-            </tr>
-            <tr>
-                <td><input type="checkbox" value="Goods"></td>
-                <td><a href="#">00004</a></td>
-                <td>제주 하우스 감귤 1kg</td>
-                <td>0</td>
-                <td>2023.05.21</td>
-            </tr>
-            <tr>
-                <td><input type="checkbox" value="Goods"></td>
-                <td><a href="#">00005</a></td>
-                <td>성주 꼬마 참외 900g</td>
-                <td>11</td>
-                <td>2023.06.03</td>
-            </tr>
+            </c:forEach>
         </table>
     </div>
 </div>

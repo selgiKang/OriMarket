@@ -1,6 +1,7 @@
 package com.choongang.OriMarket.store;
 
 import com.choongang.OriMarket.business.store.BusinessStore;
+import com.choongang.OriMarket.business.user.BusinessUser;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -25,6 +26,9 @@ public class Item {
     private Integer itemCnt;
 
     @Column
+    private Integer itemCost;
+
+    @Column
     private Integer itemPrice;
 
     @Column
@@ -34,7 +38,14 @@ public class Item {
     private String itemFrom;
 
     @Column
+    private String itemRegDate;
+
+    @Column
     private String itemInfo;
+
+    @ManyToOne(fetch = FetchType.LAZY) //lazy가 성능최적화
+    @JoinColumn(name ="bu_store_number")
+    private BusinessStore businessStore;
 
     /*
     @ManyToOne

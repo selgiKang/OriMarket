@@ -31,6 +31,7 @@ public class BusinessUserController {
     public String loginId(@ModelAttribute BusinessUser businessUser, Model model, HttpSession session) {
         boolean isTrue = businessUserService.login1(businessUser,session,model);
         if(isTrue){
+
             return "business/storenotice_new";
         }
         return "business/businessUser/businesslogin";
