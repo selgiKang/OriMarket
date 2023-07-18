@@ -33,9 +33,12 @@
                 </form>
             </c:if>
         </div>
-        <%--storeName--%>
+        <%--가게이름--%>
         <h1><input type="text" value="싱싱과일가게" name="storeName${sessionScope.favNumber}"></h1>
-        <img class="star" src="../../img/store/star.png" alt="별"><a style="float: left;" href="#">>486</a>
+        <span style="float: left;">
+            <img class="star" src="../../img/store/star.png" alt="별">
+            <a href="#">>486</a>
+        </span>
         <br>
         <%--storeAddress--%>
         <p>📍 서울 관악구 신림동 1587-39</p>
@@ -57,81 +60,80 @@
         <button class="notice-button">📢공지사항 : 안녕하세요. 착한 생 칼국수입니다...</button>
     </section>
 
-    <section>
-        <nav class="slidemenu">
+            <div class="tabmenu out-tabmenu">
 
-            <!-- 대표메뉴  -->
-            <input type="radio" name="slideItem" id="slide-item-1" class="slide-toggle" checked/>
-            <label for="slide-item-1"><span>대표 메뉴</span></label>
+                <ul>
+                    <%--대표메뉴 버튼--%>
+                    <li id="tab1" class="btnCon">
+                        <input type="radio" checked name="tabmenu" id="tabmenu1">
+                        <label for="tabmenu1">대표 메뉴</label>
+                        <div class="tabCon">
+                            <%--메뉴1--%>
+                            <div class="menu">
+                                <div class="menu-content">
+                                    <h2 class="menu_name">칼국수</h2>
+                                    <h6 class="menu-description">인공 조미료를 쓰지 않고 순수 천연재료로 만들어 시원한 바다맛을 느낄 수 있는 착한 생 칼국수 대표 메뉴</h6>
+                                    <h5 class="menu_price">3,800원</h5>
+                                </div>
+                                <div class="menu-image">
+                                    <img src="../../img/store/kal.jpg" alt="메뉴이미지">
+                                </div>
+                            </div>
+                            <%--메뉴2--%>
+                            <div class="menu">
+                                <div class="menu-content">
+                                    <h2>칼국수</h2>
+                                    <h6 class="menu-description">인공 조미료를 쓰지 않고 순수 천연재료로 만들어 시원한 바다맛을 느낄 수 있는 착한 생 칼국수 대표 메뉴</h6>
+                                    <h5>3,800원</h5>
+                                </div>
+                                <div class="menu-image">
+                                    <img src="../../img/store/kal.jpg" alt="메뉴이미지">
+                                </div>
+                            </div>
+                        </div>
+                    </li>
 
-            <!-- 여름메뉴 -->
-            <input type="radio" name="slideItem" id="slide-item-2" class="slide-toggle"/>
-            <label for="slide-item-2"><span>여름 메뉴</span></label>
-
-            <!-- 식사용 -->
-            <input type="radio" name="slideItem" id="slide-item-3" class="slide-toggle"/>
-            <label for="slide-item-3"><span>식사용</span></label>
-
-            <!-- 음료 -->
-            <input type="radio" name="slideItem" id="slide-item-4" class="slide-toggle"/>
-            <label for="slide-item-4"><span>음료</span></label>
-
-            <!-- 사이드 -->
-            <input type="radio" name="slideItem" id="slide-item-5" class="slide-toggle"/>
-            <label for="slide-item-5"><span>사이드</span></label>
-
-            <!-- 바 -->
-            <div class="slider">
-                <div class="bar"></div>
+                    <%--여름메뉴 버튼--%>
+                    <li id="tab2" class="btnCon">
+                        <input type="radio" name="tabmenu" id="tabmenu2">
+                        <label for="tabmenu2">여름 메뉴</label>
+                        <div class="tabCon">
+                            <%--메뉴1--%>
+                            <div class="menu">
+                                <div class="menu-content">
+                                    <h2>${ menu.menu_name }</h2>
+                                    <h6 class="menu-description">${ menu.menu_info }</h6>
+                                    <h5>${ menu.menu_price }</h5>
+                                </div>
+                                <div class="menu-image">
+                                    <img src="../../img/store/cold.jpg" alt="메뉴이미지">
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li id="tab3" class="btnCon">
+                        <input type="radio" name="tabmenu" id="tabmenu3">
+                        <label for="tabmenu3">식사용</label>
+                        <div class="tabCon">
+                            내용 적기
+                        </div>
+                    </li>
+                    <li id="tab4" class="btnCon">
+                        <input type="radio" name="tabmenu" id="tabmenu4">
+                        <label for="tabmenu4">사이드</label>
+                        <div class="tabCon"></div>
+                    </li>
+                    <li id="tab5" class="btnCon">
+                        <input type="radio" name="tabmenu" id="tabmenu5">
+                        <label for="tabmenu5">음료</label>
+                        <div class="tabCon"></div>
+                    </li>
+                </ul>
             </div>
-
-        </nav>
-    </section>
-
-    <section class="container">
-        <div class="menu" onclick="location.href='/detailmenu'">
-            <div class="menu-content">
-                <h2>칼국수</h2>
-                <h6>인공 조미료를 쓰지 않고 순수 천연재료로 만들어 시원한 바다맛을 느낄 수 있는 착한 생 칼국수 대표 메뉴!</h6>
-                <h5>-곱빼기&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1000원</h5>
-                <br>
-                <h4>3,800원</h4>
-            </div>
-            <div class="menu-image">
-                <img src="../../img/store/kal.jpg" alt="칼국수" class="right-image">
-            </div>
-        </div>
-
-        <div class="menu">
-            <div class="menu-content">
-                <h2>칼국수</h2>
-                <h6>인공 조미료를 쓰지 않고 순수 천연재료로 만들어 시원한 바다맛을 느낄 수 있는 착한 생 칼국수 대표 메뉴!</h6>
-                <h5>-곱빼기&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1000원</h5>
-                <br>
-                <h4>3,800원</h4>
-            </div>
-            <div class="menu-image">
-                <img src="../../img/store/kal.jpg" alt="칼국수" class="right-image">
-            </div>
-        </div>
-
-        <div class="menu">
-            <div class="menu-content">
-                <h2>칼국수</h2>
-                <h6>인공 조미료를 쓰지 않고 순수 천연재료로 만들어 시원한 바다맛을 느낄 수 있는 착한 생 칼국수 대표 메뉴!</h6>
-                <h5>-곱빼기&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1000원</h5>
-                <br>
-                <h4>3,800원</h4>
-            </div>
-            <div class="menu-image">
-                <img src="../../img/store/kal.jpg" alt="칼국수" class="right-image">
-            </div>
-        </div>
-    </section>
 
 </div>
 
-
+</script>
 <script src="../../js/store/store_script.js"></script>
 </body>
 </html>
