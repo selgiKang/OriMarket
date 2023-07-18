@@ -46,7 +46,7 @@ public class FavController {
     }
 
     @GetMapping("/store")
-    public String store(@RequestParam("favStoreName") String favStoreName, Fav fav,User user, HttpSession session) {
+    public String store(@RequestParam("favStoreName") String favStoreName, Fav fav,User user, HttpSession session,Model model) {
         user.setUserId(String.valueOf(session.getAttribute("userId")));
         //회원
         if(userService.checkUserId(user.getUserId())) {

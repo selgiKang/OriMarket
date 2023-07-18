@@ -6,11 +6,13 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -21,13 +23,18 @@ public class MessageController {
     private final MessageService messageService;
 
     @GetMapping("/messageInsert")
-    public String messageInsert(){
+    public String messageInsert(@ModelAttribute Message message, Model model,HttpSession session, BusinessUser businessUser){
+            businessUser.setBuUserNumber(Long.valueOf(session.getAttribute("buUserNumber").toString()));
+            List<Message> resultMessage = messageService.getMessages(businessUser,model);
+            model.addAttribute("resultMessage",resultMessage);
         return "business/businessMessage/business_message";
     }
     @GetMapping("/businessInsertMessage")
     public String businessInsertMessage(){
         return "business/businessMessage/message_insert";
     }
+
+   //메세지 등록
     @PostMapping("/messageInsert")
     public String messageInsertNew(@ModelAttribute Message messages,BusinessUser businessUser, HttpSession session){
 
@@ -39,7 +46,7 @@ public class MessageController {
 
         messageService.insertMessage(messages);
 
-        return "business/businessMessage/business_message";
+        return "/messageInsert";
     }
 
 

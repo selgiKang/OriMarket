@@ -12,9 +12,13 @@
     </header>
     <table>
         <tr><th>순번</th><th>날짜</th><th>제목</th></tr>
-        <c:if test="">
-        <tr><td>순번</td><td><a>날짜 들어가기</a></td>제목 들어가기</tr>
-        </c:if>
+        <c:forEach var="resultMessage" items="${resultMessage}">
+            <tr>
+                <td>${status.index + 1}</td>
+                <td><a>${resultMessage.messageInsertDate}</a></td>
+                <td>${resultMessage.messageTitle}</td>
+            </tr>
+        </c:forEach>
     </table>
 </body>
 </html>
