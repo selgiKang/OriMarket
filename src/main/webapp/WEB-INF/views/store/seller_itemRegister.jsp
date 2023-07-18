@@ -80,7 +80,18 @@
                 </tr>
                 <tr>
                     <td>상품 카테고리</td>
-                    <td><input type="" name="itemCategory"></td>
+                    <td><select type="" name="itemCategory" id="lang">
+                            <option value="korean">한식</option>
+                            <option value="east">양식</option>
+                            <option value="japanese">일식</option>
+                            <option value="boonsik">분식</option>
+                            <option value="cafe">카페</option>
+                            <option value="beverage">음료</option>
+                            <option value="vegetables">채소</option>
+                            <option value="fastfood">패스트푸드</option>
+                        </select>
+
+                    </td>
                 </tr>
                 <tr>
                     <td>상품사진</td>
