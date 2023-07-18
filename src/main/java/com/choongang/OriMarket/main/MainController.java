@@ -29,6 +29,11 @@ public class MainController {
         return "main/main";
     }
 
+    @GetMapping("/connexion_market")
+    public String main111() {
+        return "main/connexion_market";
+    }
+
     @GetMapping("/index")
     public String index() {
         return "main/index";

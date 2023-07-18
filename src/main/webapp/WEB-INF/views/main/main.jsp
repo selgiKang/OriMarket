@@ -22,7 +22,7 @@
                         <form action="/" method="post">
                             <div class="form_field">
                                 <h2 style="margin:30px 0;"><label for="address_kakao">단골시장 추가하기</label></h2>
-                                    <a href="" class="current_location_btn" style="text-decoration:none; color:#333; cursor: pointer;">가까운 시장 보기</a>
+                                    <a href="" class="current_location_btn" style="text-decoration:none; color:#333; cursor: pointer;"><i class="fa-solid fa-location-dot header_i" style="font-size: 16px;"></i>&nbsp;가까운 시장찾기 > </a>
                                     <p style="margin-top:30px; font-size: 14px;">현재 내가 설정한 주소: <span style="color: red; font-size: 14px;">주소를 등록해주세요..</span></p>
                                 <hr style="margin-top:30px;">
                                 <div class="input_container" style="margin-top:30px;">
@@ -39,13 +39,13 @@
                 </div>
 
             </div>
-            <c:if test="${empty userId}">
-            <span class="connextion_title clear" style="font-weight:800; font-size: 18px;">&nbsp;<img class="connextion_title_img clear" src="../../img/main/singsing.png">&nbsp;&nbsp; 나의 단골시장</span>
-            </c:if>
-            <c:if test="${!empty userId}">
-                <span class="connextion_title clear" style="font-weight:800; font-size: 18px;">&nbsp;<img class="connextion_title_img clear" src="../../img/main/singsing.png">&nbsp;&nbsp;${userNickname}님의 단골시장</span>
-            </c:if>
             <div id="connextion_market" class="clear">
+                <c:if test="${empty userId}">
+                    <span class="connextion_title clear" style="font-weight:800; font-size: 18px;">&nbsp;<img class="connextion_title_img clear" src="../../img/main/singsing.png">&nbsp;&nbsp; 나의 단골시장</span>
+                </c:if>
+                <c:if test="${!empty userId}">
+                    <span class="connextion_title clear" style="font-weight:800; font-size: 18px;">&nbsp;<img class="connextion_title_img clear" src="../../img/main/singsing.png">&nbsp;&nbsp;${userNickname}님의 단골시장</span>
+                </c:if>
                 <div class="connextion_marketbox clear">
                     <div class="connextion_mk1_wrap"><a class="connextion_mk1" href="/shinwon_marketmap"><p style="font-weight: 800;">신림<br>신원시장</p></a><p style="font-size: 10px;">　</p></div>
                     <div class="connextion_mk2_wrap btn-open-popup" onclick="modal"><a class="connextion_mk2" href=""><p>단골시장등록</p></a><p style="font-size: 40px;">+</p></div>
