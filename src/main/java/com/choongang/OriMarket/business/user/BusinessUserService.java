@@ -45,6 +45,7 @@ public class BusinessUserService {
             return false;
         }
         session.setAttribute("buUserNumber",findbusinessUser.getBuUserNumber());
+        System.out.println("buUserNumber: "+session.getAttribute("buUserNumber"));
         return true;
     }
 

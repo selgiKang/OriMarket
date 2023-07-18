@@ -42,14 +42,12 @@ public class FavController {
 
     @GetMapping("/store")
     public String store(@RequestParam("favStoreName") String favStoreName, Fav fav,User user, HttpSession session) {
-        System.out.println("스토어 가져오니:"+favStoreName+","+session.getAttribute("userId"));
         user.setUserId(String.valueOf(session.getAttribute("userId")));
         //회원
         if(userService.checkUserId(user.getUserId())) {
 
             user.setUserSeq(Long.valueOf(String.valueOf(session.getAttribute("userSeq"))));
             fav.setUserSeq(user);
-            System.out.println("번호 나오니"+fav.getUserSeq());
 
             if(favService.favFavorite(fav.getUserSeq(),favStoreName)){
                 session.setAttribute("favNumber",1);
