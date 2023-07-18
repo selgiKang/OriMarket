@@ -37,7 +37,7 @@ public class MainService {
             userAddressRepository.save(userAddress);
 
             List<UserAddress> userAddresses = user.getUserAddresses();
-            model.addAttribute("userAddress2",userAddresses);
+            model.addAttribute("userAd",userAddresses);
 
             session.setAttribute("userAddress1", userAddress.getUserAddress1());
             session.setAttribute("userAddressDetail1", userAddress.getUserAddressDetail1());
