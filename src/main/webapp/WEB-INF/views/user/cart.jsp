@@ -10,8 +10,8 @@
 	<script src="https://kit.fontawesome.com/1d53132cda.js" crossorigin="anonymous"></script>
 	<script src="../../js/common/jquery-3.6.4.js"></script>
 	<script src="../../js/user/cart.js"></script>
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/user/cart.css">
 
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/user/cart.css">
 
 	<title>cart</title>
 </head>
@@ -30,14 +30,11 @@
 		</form>
 	</div>
 	<div>
-		<input type="checkbox" id="cboxAll" name="cboxAll" onclick="checkAll()">
+		<input type="checkbox" id="cboxAll" name="cboxAll" checked="checked" onclick="checkAll()">
 		전체선택
-		<!--장바구니에 들어온 수량, 체크할때마다 카운트되는 수량..? -->
+
 	</div>
 	<div id="cart_itemList">
-		<!-- 가게리스트 (그속에 해당 가게의 물품 리스트가 있어야 한다.)
-            가게리스트 반복문 속에 상품리스트 반복문 구현..??
-         -->
 		<ul>
 			<%--반복문시작--%>
 			<%--<c:forEach var="items" items="cartItemList">--%>
@@ -47,8 +44,11 @@
 				<ul>
 					<c:forEach var="items" items="${cartItemList}" varStatus="status">
 						<li>
-							<div>
-								<input type="checkbox" name="cbox" class="checkbox">
+							<div class="cart_info">
+								<input type="checkbox" name="cbox" class="individual_checkbox" checked="checked">
+									<input type="hidden" class="individual_totalCount" value="${items.count}">
+									<input type="hidden" class="individual_itemPrice" value="${items.itemPrice}">
+									<input type="hidden" class="individual_totalPrice" value="${items.count*items.itemPrice}">
 								<!-- 상품이미지나 상품타이틀을 클릭하면 상세페이지로 넘어간다(a태그) -->
 								<a href="상품상세페이지">
 									<div class="cart_itemImg">
@@ -58,14 +58,11 @@
 										<p>${items.item.getItemName()}</p>
 									</div>
 								</a>
-								<%--<a href="/${sessionScope.userId}/cart/${items.cartItemId}/delete/${items.itemPrice}">--%>
 									<input type="hidden" id="userId" value="${sessionScope.userId}">
 									<input type="hidden" id="cartItemId" value="${items.cartItemId}">
 									<button class="cart_xmark" onclick="deleteBtn(${items.cartItemId})"><i class="fas fa-regular fa-xmark"></i></button>
-								<%--</a>--%>
 
 								<!-- 수량선택(-,+),가격표시 -->
-
 								<div class="cart_itemDescription">
 									<div class="cart_itemOption">
 											<%--onclick="dec(currentCnt${status.index})"--%>
@@ -87,7 +84,6 @@
 			</article>
 			</li>
 			<br>
-			<!-- 두번째 가게(일단, 그냥 적어놨지만 반복문으로 담은 가게만큼 리스트가 생성되게 구현해야한다.구현예시..반복문 구현시 빼버리면 됨) -->
 			<%--</c:forEach>--%>
 		</ul>
 	</div>
@@ -104,35 +100,37 @@
 		</ul>
 	</div>
 	<div id="cart_deliveryTotal" class="cart_section" style="display: none;">
-		<!--위 (배달/포장)리스트에 따라 달라지는 값들..배달 선택시 보여지는 div-->
+		<!--배달 선택시 보여지는 div-->
 		<form action="" >
 			<table class="cart_costTable">
 				<tbody>
-				<tr><td>상품금액</td><td class="cart_cost">${totalPrice}원</td></tr>
-				<tr><td>배달비</td><td class="cart_cost">3000원</td></tr>
-				<tr><td>총 주문금액</td><td class="cart_cost">${totalPrice+3000}원</td></tr>
-				<tr id="cart_totalPrice"><td>결제예정금액</td><td class="cart_cost">${totalPrice+3000}원</td></tr>
+				<tr><td>상품금액</td><td class="cart_cost_totalPrice"></td></tr>
+				<tr><td>배달비</td><td class="cart_cost_deliveryPrice"></td></tr>
+				<tr><td>총 주문금액</td><td class="cart_cost_finalTotalPrice" ></td></tr>
+				<tr id="cart_totalPrice"><td>결제예정금액</td><td class="cart_cost_finalTotalPrice"></td></tr>
 				</tbody>
 			</table>
 		</form>
 	</div>
 	<div id="cart_pickTotal" class="cart_section" style="display: none;">
-		<!--위 리스트에 따라 달라지는 값들..포장 선택시 보여지는 div-->
+		<!--포장 선택시 보여지는 div-->
 		<form action="">
 			<table class="cart_costTable">
 				<tbody>
-				<tr><td>상품금액</td><td class="cart_cost">${totalPrice}원</td></tr>
-				<tr><td>총 주문금액</td><td class="cart_cost">${totalPrice}원</td></tr>
-				<tr><td>결제예정금액</td><td class="cart_cost">${totalPrice}원</td></tr>
+				<tr><td>상품금액</td><td class="cart_cost_totalPrice"></td></tr>
+				<tr><td>총 주문금액</td><td class="cart_cost_finalTotalPrice"></td></tr>
+				<tr><td>결제예정금액</td><td class="cart_cost_finalTotalPrice"></td></tr>
 				</tbody>
 			</table>
 		</form>
 	</div>
 	<br>
 	<div id="cart_footer">
-		<a href="/order_paymentPage"><input type="submit" value="주문하기"></a>
+		<a href="/${sessionScope.userId}/cart/checkout"><input type="submit" value="주문하기"></a>
 	</div>
 </div>
+
+<script src="../../js/user/cartcheck.js"></script>
 
 </body>
 </html>

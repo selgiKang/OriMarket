@@ -58,6 +58,7 @@ public class CartController {
 
 
 
+    /*장바구니페이지에서 수량증감*/
     @PutMapping("/user/cart")
     @ResponseBody
     public String menuPlusMinus(@RequestParam("cartItemId")Long cartItemId,@RequestParam("type") String type){
@@ -66,7 +67,7 @@ public class CartController {
     }
 
 
-
+    /*장바구니 페이지에서 아이템개별삭제*/
     @DeleteMapping("/user/cart")
     @ResponseBody
     public String itemDelete(@RequestParam("cartItemId")Long cartItemId){
@@ -76,30 +77,16 @@ public class CartController {
 
 
 
-    /*특정상품 장바구니에서 삭제*/
-    @GetMapping("/{userId}/cart/{cartItemId}/delete/{itemPrice}")
-    public String myCartDelete(@PathVariable("userId") String userId, @PathVariable("cartItemId") Long cartItemId,@PathVariable("itemPrice") int itemPrice){
-        Cart cart  = cartService.getCart(userId);
-        cart.setCartCnt(cart.getCartCnt()-1);
-        /*토탈가격에서 삭제아이템 가격빼줘야함*/
-        cart.setCartTotalPrice(cart.getCartTotalPrice()-itemPrice);
-        cartService.cartItemDelete(cartItemId);
-
-        return "/user/cart";
-
-    }
-
-
-
-
-    /*결제후 장바구니 삭제*/
-    @PostMapping("/{userId}/cart/checkout")
+    /*결제***그리고 장바구니 삭제*/
+    @GetMapping("/{userId}/cart/checkout")
     public String myCartPayment(@PathVariable("userId") String userId,Model model) {
+
 
         cartService.cartPayment(userId);
         cartService.cartDeleteAll(userId);
 
-        return "/main";
+
+        return "/order/order_paymentPage";
     }
 
 
