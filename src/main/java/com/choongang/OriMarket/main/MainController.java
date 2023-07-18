@@ -66,9 +66,11 @@ public class MainController {
     }
 
     @GetMapping("/updateAddress")
-    public String updateAddress(@RequestParam("userAddressSeq") Long userAddressSeq, Model model) {
+    public String updateAddress(@RequestParam("userAddressSeq") Long userAddressSeq, Model model,HttpSession session) {
         UserAddress byId = userAddressRepository.findById(userAddressSeq).orElseThrow();
-        userAddressRepository.save(byId);
+
+        session.setAttribute("userAddress1", byId.getUserAddress1());
+        session.setAttribute("userAddressDetail1", byId.getUserAddressDetail1());
 
         List<UserAddress> userAddresses = byId.getUser().getUserAddresses();
         model.addAttribute("userAd",userAddresses);
