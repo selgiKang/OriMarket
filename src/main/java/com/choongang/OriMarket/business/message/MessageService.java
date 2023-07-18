@@ -38,4 +38,24 @@ public class MessageService {
         List<Message> getMessage = messageRepository.findByBuUserNumber(buUserNumber);
         return getMessage;
     }
+
+    public Message getDetailMessage(Long messageId){
+        Message getDetailMessage = messageRepository.findByMessageId(messageId);
+        return getDetailMessage;
+    }
+
+    public boolean getEditMessage(Message message){
+        Message editmessage = messageRepository.save(message);
+        if(editmessage==null){
+            return false;
+        }else {
+           return true;
+        }
+    }
+
+    //삭제
+    public void getDeleteMessage(Long messageId){
+        Message getDeleteMessage = messageRepository.findByMessageId(messageId);
+        messageRepository.delete(getDeleteMessage);
+    }
 }

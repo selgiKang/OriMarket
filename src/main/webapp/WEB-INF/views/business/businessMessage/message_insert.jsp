@@ -10,7 +10,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <link rel="stylesheet" href="../../css/business/message_insert.css">
 </head>
-
 <body id="messageInsert_body">
 <header id="messageInsert_header">
     <h3>공지사항 등록</h3>
