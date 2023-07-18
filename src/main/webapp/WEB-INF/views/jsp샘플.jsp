@@ -11,6 +11,7 @@
 </body>
 </html>
 
+
 <%--
 String itemName = "${it.itemName}"; // 변수 itemName에 "${it.itemName}" 값 할당
 int price = 3000; // 가격 변수에 3000 할당
