@@ -1,5 +1,7 @@
 package com.choongang.OriMarket.user;
 
+import com.choongang.OriMarket.business.store.BusinessStore;
+import com.choongang.OriMarket.business.store.BusinessStoreService;
 import com.choongang.OriMarket.store.Item;
 import com.choongang.OriMarket.store.ItemService;
 import lombok.extern.slf4j.Slf4j;
@@ -29,8 +31,10 @@ public class CartController {
     @GetMapping("/{userId}/cart")
     public String myCartPage(@PathVariable("userId") String userId, Model model){
         Cart cart = cartService.getCart(userId);
+        User user = userService.getUser(userId);
 
         List<CartItem> cartItems = cartService.userCartView(cart);
+        List<CartItem> userOrderList = cartService.userOrderList(user);
 
         int totalPrice = 0;
         for(CartItem cartItem : cartItems){
@@ -41,15 +45,16 @@ public class CartController {
         model.addAttribute("cartItemList",cartItems);
         model.addAttribute("totalPrice",totalPrice);
         model.addAttribute("user",userId);
+        model.addAttribute("userOrderList",userOrderList);
 
         return "/user/cart";
     }
 
     /*특정상품 장바구니에 추가*/
     @PostMapping("/{userId}/cart")
-    public String addMyCart(@PathVariable("userId") String userId,Item item,int count,int itemPrice){
+    public String addMyCart(@PathVariable("userId") String userId, Long itemId, int count, int itemPrice){
         User user = userService.getUser(userId);
-        Item additem = itemService.getItem(item.getItemId());
+        Item additem = itemService.getItem(itemId);
 
         cartService.addCart(user,additem,count,itemPrice);
 

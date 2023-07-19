@@ -37,9 +37,10 @@
 		<div id="cart_itemList">
 			<ul>
 				<%--반복문시작--%>
-				<%--<c:forEach var="items" items="cartItemList">--%>
+				<%--<c:forEach var="orderList" items="${userOrderList}">--%>
+					<c:forEach var="items" items="${cartItemList}" varStatus="status">
 				<article>
-					<h1>가게1</h1>
+					<h1>${orderList.businessStore.getBuStoreName()}</h1>
 					<!-- 같은 가게 안에서 상품리스트(where='가게이름'아니면'가게식별번호')쿼리 -->
 					<ul>
 						<c:forEach var="items" items="${cartItemList}" varStatus="status">
