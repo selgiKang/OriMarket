@@ -357,6 +357,18 @@
   });
 
   realUpload.addEventListener('change', getImageFiles);
+
+
+  /*사진 첨부 없이 업로드하기*/
+  const submitButton = document.querySelector('.submit-button');
+
+  submitButton.addEventListener('click', (e) => {
+    e.preventDefault(); // 기본 폼 제출 동작 막기
+    // 리뷰 작성 처리 로직 추가
+    // 예를 들어, 필수 입력 항목이 있는지 확인하고 서버로 데이터 전송 등을 수행할 수 있습니다.
+    console.log('리뷰 작성하기 버튼이 클릭되었습니다.');
+    document.querySelector('form').submit(); // 필요에 따라 폼 제출을 직접 호출할 수도 있습니다.
+  });
 </script>
 </body>
 
