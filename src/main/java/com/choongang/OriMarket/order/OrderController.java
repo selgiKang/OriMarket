@@ -68,44 +68,47 @@ public class OrderController {
     @GetMapping("/order_pastorder")
     public String orderPastorder(){return "order/order_pastorder";}
 
+    //7.18 테스트 데이터 가져오는거까지 성공 승엽
+    @GetMapping("/order/order_list")
+    public String getOrderList(Model model) {
+        List<Order> orderList = orderService.getAllOrders();
+        model.addAttribute("orders", orderList);
+        return "order/order_list";
+    }
+
+
+
 
 
     @PostMapping("/order_paymentPage")
-    public String orderDelivery(@ModelAttribute Order order, @ModelAttribute RealTimeStatus rts, HttpSession session, @RequestParam("orderNumber")String orderNumberStr, Model model){
-
+    public String orderDelivery(@ModelAttribute Order order, @ModelAttribute RealTimeStatus rts, HttpSession session, @RequestParam("orderNumber")String orderNumberStr, Model model) {
         order.setOrderNumber(orderNumberStr);
-        session.setAttribute("orderNumber",orderNumberStr);
+        session.setAttribute("orderNumber", orderNumberStr);
 
-        //주문 db에 주문내역 저장
-        if(orderService.orderDelivery(order,session)){
+        // 주문 db에 주문 내역 저장
+        if (orderService.orderDelivery(order, session)) {
 
-            //배달 내역에 set
+            // 배달 내역에 set
             rts.setOrderNumber(order);
-            rts.setRtsOrderIng(0);
+            rts.setRtsOrderIng(1); // "OrderIng" 상태로 설정
             rts.setRtsRiderIng(0);
             rts.setRtsRiderFinish(0);
 
-            //배달 내역 db에 저장
-            if (realTimeService.insertRts(rts)){
-                model.addAttribute("rtsOrderIng",rts.getRtsOrderIng());
-
-                //7.18 테스트 승엽
-                model.addAttribute("orderNumber", orderNumberStr);
-
-                // order_list에 데이터 추가
-                List<Order> orderList = orderService.getAllOrders(); // 기존 order_list 가져오기
-                orderList.add(order); // 새로운 주문 데이터 추가
-                model.addAttribute("orderList", orderList); // 수정된 order_list를 모델에 추가
+            // 배달 내역 db에 저장
+            if (realTimeService.insertRts(rts)) {
+                model.addAttribute("orderDelivery", order); // order_delivery 페이지로 개별 주문의 상세 내역 전달
+                model.addAttribute("orderList", orderService.getAllOrders()); // order_list 페이지로 주문 목록 전달
 
                 System.out.println(rts.getRtsOrderIng());
                 return "order/order_delivery";
-            }else{
+            } else {
                 return "order/order_paymentPage";
             }
-        }else{
+        } else {
             return "order/order_paymentPage";
         }
     }
+
 
     @PostMapping("/calculate")
     @ResponseBody
