@@ -112,6 +112,10 @@ public class OrderService {
 
         //7.18 테스트 승엽
         public List<Order> getAllOrders() {
+            List<Order> all = orderRepository.findAll();
+            for(Order order1:all){
+                    order1.getBusinessUser();
+            }
             return orderRepository.findAll(); // 모든 주문 목록을 가져오는 방식에 맞게 구현
         }
 

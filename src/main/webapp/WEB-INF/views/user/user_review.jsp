@@ -194,7 +194,8 @@
 <form action="/user_review" method="post">
   <div class="main-container">
     <div class="user_total_review">
-      <h4>이 가게를 추천하시겠어요?</h4>
+      <input type="hidden" name="item.itemId" value="${abcde.itemId}">
+      <h4><input type="hidden" name="businessStore">싱싱과일나라</h4>
       <div class="line"></div>
       <div class="stars">
         <input type="radio" id="star5" name="rating" value="5" />
