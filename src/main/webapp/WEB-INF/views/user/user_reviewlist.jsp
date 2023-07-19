@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -76,6 +77,39 @@
     .my_review_photo img {
         width: 300px;
     }
+    .rating {
+        font-size: 24px;
+    }
+
+    .rating::before {
+        content: "☆☆☆☆☆";
+        color: lightgray;
+    }
+
+    .rating[data-rating="1"]::before {
+        content: "★☆☆☆☆";
+        color: gold;
+    }
+
+    .rating[data-rating="2"]::before {
+        content: "★★☆☆☆";
+        color: gold;
+    }
+
+    .rating[data-rating="3"]::before {
+        content: "★★★☆☆";
+        color: gold;
+    }
+
+    .rating[data-rating="4"]::before {
+        content: "★★★★☆";
+        color: gold;
+    }
+
+    .rating[data-rating="5"]::before {
+        content: "★★★★★";
+        color: gold;
+    }
 </style>
 <body>
 
@@ -84,26 +118,28 @@
 
         <div class="my_review_list">
             <h3>내가 쓴 총 리뷰 ___개</h3>
+            <h2><a href="/user_review">리뷰쓰기</a></h2>
         </div>
 
         <div class="line"></div>
-
-        <div class="my_review_list_store">
-            <a href="#"><h4>불닭발</h4></a><br>
-            <div class="rate_and_date">
-            <h4 class="rating">★★★★☆</h4>&nbsp;<h6 class="date">2023.07.12</h6>
-            </div>
-
-            <div class="line"></div>
-
-            <div class="my_review_photo">
-                <img src="../../../../resources/static/img/store/kal.jpg">
+        <c:forEach var="r" items="${re}" varStatus="status">
+            <c:set var="reverseIndex" value="${re.size() - status.index - 1}" />
+            <c:set var="currentItem" value="${re[reverseIndex]}" />
+            <div class="my_review_list_store">
+                    <h4>불닭발</h4>
+                <br>
+                <div class="rate_and_date">
+                    <h4 class="rating" data-rating="${currentItem.rating}"></h4>&nbsp;<h6 class="date">${currentItem.created_date}</h6>
+                </div>
                 <div class="line"></div>
-                <p>맛있어요! 배달도 빠르고 벌써 네번째 주문이네요! 또 주문할게요</p>
-
+                <div class="my_review_photo">
+                    <img src="../../../../resources/static/img/store/kal.jpg">
+                    <div class="line"></div>
+                    <p>${currentItem.content}</p>
+                </div>
             </div>
+        </c:forEach>
 
-        </div>
 
         <div class="my_review_list_store">
             <a href="#"><h4>칼국수</h4></a><br>

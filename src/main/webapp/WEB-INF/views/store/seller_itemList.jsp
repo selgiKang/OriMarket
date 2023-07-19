@@ -72,7 +72,7 @@
                 <td>${it.itemName}</td>
                 <td>${it.itemCnt}</td>
                 <td>${it.itemCost}</td>
-                <td>${it.itemPrice}</td>
+                <td><span class="formatted-price">${it.itemPrice}</span></td>
                 <td>${it.itemG}</td>
                 <td>${it.itemFrom}</td>
                 <td>${it.itemRegDate}</td>
@@ -84,4 +84,16 @@
     </div>
 </div>
 </body>
-</html>
+<script>
+    function formatNumberWithCommas(number) {
+        return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
+
+    //백단위로 ',' 찍히게 하기
+    var priceElements = document.getElementsByClassName("formatted-price");
+    for (var i = 0; i < priceElements.length; i++) {
+        var price = parseInt(priceElements[i].textContent);
+        var formattedPrice = formatNumberWithCommas(price);
+        priceElements[i].textContent = formattedPrice;
+    }
+</script>

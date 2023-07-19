@@ -1,6 +1,7 @@
 package com.choongang.OriMarket.business.store;
 
 import com.choongang.OriMarket.business.user.BusinessUser;
+import com.choongang.OriMarket.review.Review;
 import com.choongang.OriMarket.store.Item;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -46,5 +47,6 @@ public class BusinessStore {
     @OneToMany(mappedBy = "businessStore")
     private List<Item> items = new ArrayList<>();
 
-
+    @OneToMany(mappedBy = "businessStore")
+    private List<Review> reviews = new ArrayList<>();
 }
