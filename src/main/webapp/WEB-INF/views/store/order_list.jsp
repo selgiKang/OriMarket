@@ -138,7 +138,7 @@
     </div>
     <% if (orders != null && !orders.isEmpty()) { %>
     <% for (com.choongang.OriMarket.order.Order order : orders) { %>
-    <div class="order-item" data-status="<%= order.getOrderType() %>">
+    <div class="order-item" data-status="<%= order.getOrderType()  %>">
         <span class="order-number">주문번호 #<%=order.getOrderNumber()%></span>
         <!-- 다른 주문 정보 출력 -->
         <div class="order-details">
@@ -167,87 +167,52 @@
 
 </div>
 
-
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-    const tabLinks = document.querySelectorAll('.tab-link');
-    const orderItems = document.querySelectorAll('.order-item');
+    $(document).ready(function() {
+        // 수락 버튼에 클릭 이벤트 리스너 추가
+        $('.accept-button').on('click', function() {
+            var orderItem = $(this).closest('.order-item');
+            orderItem.attr('data-status', 'processing'); // 주문 항목의 상태를 "처리중"으로 변경
+            orderItem.hide(); // 주문 항목을 숨김 처리
 
-    tabLinks.forEach(tabLink => {
-        tabLink.addEventListener('click', () => {
-            const tab = tabLink.getAttribute('data-tab');
-
-            tabLinks.forEach(link => {
-                if (link.getAttribute('data-tab') === tab) {
-                    link.classList.add('active');
-                    link.style.color = '#46a973';
-                } else {
-                    link.classList.remove('active');
-                    link.style.color = '';
-                }
-            });
-
-            orderItems.forEach(item => {
-                if (item.getAttribute('data-status') === tab) {
-                    item.style.display = 'flex';
-                } else {
-                    item.style.display = 'none';
-                }
-            });
+            $('.tab-link[data-tab="pending"]').removeClass('active'); // 현재 탭의 활성화 클래스 제거
+            $('.tab-link[data-tab="processing"]').addClass('active'); // "처리중" 탭에 활성화 클래스 추가
+            $('.tab-link[data-tab="completed"]').removeClass('active'); // "완료" 탭의 활성화 클래스 제거
         });
-    });
 
-    const acceptButtons = document.querySelectorAll('.accept-button');
-    acceptButtons.forEach(button => {
-        button.addEventListener('click', () => {
-            const orderItem = button.closest('.order-item');
-            const currentStatus = orderItem.getAttribute('data-status');
+        // 거절 버튼에 클릭 이벤트 리스너 추가
+        $('.reject-button').on('click', function() {
+            var orderItem = $(this).closest('.order-item');
+            orderItem.attr('data-status', 'completed'); // 주문 항목의 상태를 "완료"로 변경
+            orderItem.hide(); // 주문 항목을 숨김 처리
 
-            if (currentStatus === 'pending') {
-                orderItem.setAttribute('data-status', 'processing');
-                const processingTab = document.querySelector('.tab-link[data-tab="processing"]');
-                processingTab.click();
-
-                // 버튼 변경
-                const actionButtons = orderItem.querySelector('.action-buttons');
-                actionButtons.innerHTML = '<button class="complete-button">완료</button>';
-
-                // 완료 버튼 클릭 이벤트 등록
-                const completeButton = orderItem.querySelector('.complete-button');
-                completeButton.addEventListener('click', () => {
-                    orderItem.setAttribute('data-status', 'completed');
-                    const completedTab = document.querySelector('.tab-link[data-tab="completed"]');
-                    completedTab.click();
-
-                    // 주문완료 텍스트 추가
-                    const orderNumber = orderItem.querySelector('.order-number');
-                    orderNumber.innerHTML = '주문번호 #1234<span class="completed-text">주문완료</span>';
-                });
-            }
+            $('.tab-link[data-tab="pending"]').removeClass('active'); // 현재 탭의 활성화 클래스 제거
+            $('.tab-link[data-tab="processing"]').removeClass('active'); // "처리중" 탭의 활성화 클래스 제거
+            $('.tab-link[data-tab="completed"]').addClass('active'); // "완료" 탭에 활성화 클래스 추가
         });
-    });
 
-    const rejectButtons = document.querySelectorAll('.reject-button');
-    rejectButtons.forEach(button => {
-        button.addEventListener('click', () => {
-            const orderItem = button.closest('.order-item');
-            const currentStatus = orderItem.getAttribute('data-status');
+        // 탭 링크에 클릭 이벤트 리스너 추가
+        $('.tab-link').on('click', function() {
+            var tab = $(this).data('tab');
+            $('.tab-link').removeClass('active'); // 모든 탭의 활성화 클래스 제거
+            $(this).addClass('active'); // 클릭한 탭에 활성화 클래스 추가
+            $('.order-item').hide(); // 모든 주문 항목을 숨김 처리
 
-            if (currentStatus === 'pending') {
-                orderItem.setAttribute('data-status', 'completed');
-                const completedTab = document.querySelector('.tab-link[data-tab="completed"]');
-                completedTab.click();
-
-                // 버튼 변경
-                const actionButtons = orderItem.querySelector('.action-buttons');
-                actionButtons.innerHTML = '<button class="reject-button">거절</button>';
-
-                // 주문거절 텍스트 추가
-                const orderNumber = orderItem.querySelector('.order-number');
-                orderNumber.innerHTML += '<span class="rejected-text">주문거절</span>';
+            // 선택된 탭에 해당하는 주문 항목을 표시
+            if (tab === 'pending') {
+                $('.order-item[data-status="pending"]').show();
+            } else if (tab === 'processing') {
+                $('.order-item[data-status="processing"]').show();
+            } else if (tab === 'completed') {
+                $('.order-item[data-status="completed"]').show();
             }
         });
     });
 </script>
+
+
+
 
 </body>
 </html>
