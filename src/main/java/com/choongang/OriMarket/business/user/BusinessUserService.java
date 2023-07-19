@@ -27,6 +27,7 @@ public class BusinessUserService {
 
     public boolean login1(BusinessUser businessUser, HttpSession session, Model model) {
         BusinessUser findbusinessUser = businessUserRepository.findByBuUserId(businessUser.getBuUserId());
+             session.setAttribute("marketSeq",findbusinessUser.getMarket().getMarketSeq());
             session.setAttribute("buUserNumber",findbusinessUser.getBuUserNumber());
         List<Review> all = reviewRepository.findAll();
 

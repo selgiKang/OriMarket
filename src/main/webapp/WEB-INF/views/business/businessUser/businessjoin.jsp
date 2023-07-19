@@ -36,11 +36,11 @@
 
     <div class="form_field">
       <label for="name">시장 선택</label>
-      <select id="market_select">
-        <option name="marketName" value="신원시장" required>
-        <option name="marketName" value="경동시장" required>
-        <option name="marketName" value="동대문시장" required>
-        <option name="marketName" value="남대문시장" required>
+      <select name="market.marketName" id="market_select">
+        <option value="신원시장">신원시장</option>
+        <option value="경동시장">경동시장</option>
+        <option value="동대문시장">동대문시장</option>
+        <option value="남대문시장">남대문시장</option>
       </select>
     </div>
     <div class="form_field">
@@ -116,11 +116,6 @@
 
     if (!/^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@$!%*#?&])[a-zA-Z\d@$!%*#?&]{3,}$/.test(password)){
       alert("비밀번호 형식이 올바르지 않습니다.")
-      return false;
-    }
-
-    if (nickname.length < 2 || nickname.length > 8) {
-      alert("닉네임은 2자 이상 8자 이하로 작성해야 합니다.");
       return false;
     }
 

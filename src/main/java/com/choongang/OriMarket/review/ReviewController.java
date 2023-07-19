@@ -38,6 +38,7 @@ public class ReviewController {
 
     @PostMapping("/user_review")
     public String userReivew1(@ModelAttribute Review review, HttpSession session, Model model){
+        System.out.println(review.getItem().getItemId());
         reviewService.save(review,session,model);
         return  "user/user_reviewlist";
     }
