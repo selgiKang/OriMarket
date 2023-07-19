@@ -191,83 +191,81 @@
 </head>
 
 <body>
-<div class="main-container">
-<form action="/user_review" method="post">
-  <div class="user_total_review">
-    <h4>이 가게를 추천하시겠어요?</h4>
+  <div class="main-container">
+  <form action="/user_review" method="post">
+    <div class="user_total_review">
+      <h4>이 가게를 추천하시겠어요?</h4>
+      <div class="line"></div>
+      <div class="stars">
+        <input type="radio" id="star5" name="rating" value="5" />
+        <label for="star5"></label>
+        <input type="radio" id="star4" name="rating" value="4" />
+        <label for="star4"></label>
+        <input type="radio" id="star3" name="rating" value="3" />
+        <label for="star3"></label>
+        <input type="radio" id="star2" name="rating" value="2" />
+        <label for="star2"></label>
+        <input type="radio" id="star1" name="rating" value="1" />
+        <label for="star1"></label>
+      </div>
+      <br><br>
+    </div>
+
     <div class="line"></div>
-    <div class="stars">
-      <input type="radio" id="star5" name="rating1" value="5" />
-      <label for="star5"></label>
-      <input type="radio" id="star4" name="rating1" value="4" />
-      <label for="star4"></label>
-      <input type="radio" id="star3" name="rating1" value="3" />
-      <label for="star3"></label>
-      <input type="radio" id="star2" name="rating1" value="2" />
-      <label for="star2"></label>
-      <input type="radio" id="star1" name="rating1" value="1" />
-      <label for="star1"></label>
+
+    <div class="store_review">
+
+      <div class="taste_review">
+        <h3>맛</h3>
+      </div>
+
+      <div class="stars">
+        <input type="radio" id="star10" name="taste" value="5" />
+        <label for="star10"></label>
+        <input type="radio" id="star9" name="taste" value="4" />
+        <label for="star9"></label>
+        <input type="radio" id="star8" name="taste" value="3" />
+        <label for="star8"></label>
+        <input type="radio" id="star7" name="taste" value="2" />
+        <label for="star7"></label>
+        <input type="radio" id="star6" name="taste" value="1" />
+        <label for="star6"></label>
+      </div>
+    </div>
+
+    <br>
+
+    <div class="store_review">
+      <div class="delivery_review">
+        <h3>배달</h3>
+      </div>
+
+      <div class="stars">
+        <input type="radio" id="star15" name="delivery" value="5" />
+        <label for="star15"></label>
+        <input type="radio" id="star14" name="delivery" value="4" />
+        <label for="star14"></label>
+        <input type="radio" id="star13" name="delivery" value="3" />
+        <label for="star13"></label>
+        <input type="radio" id="star12" name="delivery" value="2" />
+        <label for="star12"></label>
+        <input type="radio" id="star11" name="delivery" value="1" />
+        <label for="star11"></label>
+      </div>
     </div>
     <br><br>
-  </div>
 
-  <div class="line"></div>
+    <textarea class="review_textbox" placeholder="리뷰를 작성해주세요." name="content"></textarea>
 
-  <div class="store_review">
-
-    <div class="taste_review">
-      <h3>맛</h3>
-    </div>
-
-    <div class="stars">
-      <input type="radio" id="star10" name="rating2" value="5" />
-      <label for="star10"></label>
-      <input type="radio" id="star9" name="rating2" value="4" />
-      <label for="star9"></label>
-      <input type="radio" id="star8" name="rating2" value="3" />
-      <label for="star8"></label>
-      <input type="radio" id="star7" name="rating2" value="2" />
-      <label for="star7"></label>
-      <input type="radio" id="star6" name="rating2" value="1" />
-      <label for="star6"></label>
-    </div>
-  </div>
-
-  <br>
-
-  <div class="store_review">
-    <div class="delivery_review">
-      <h3>배달</h3>
-    </div>
-
-    <div class="stars">
-      <input type="radio" id="star15" name="rating3" value="5" />
-      <label for="star15"></label>
-      <input type="radio" id="star14" name="rating3" value="4" />
-      <label for="star14"></label>
-      <input type="radio" id="star13" name="rating3" value="3" />
-      <label for="star13"></label>
-      <input type="radio" id="star12" name="rating3" value="2" />
-      <label for="star12"></label>
-      <input type="radio" id="star11" name="rating3" value="1" />
-      <label for="star11"></label>
-    </div>
-  </div>
-  <br><br>
-
-  <textarea class="review_textbox" placeholder="리뷰를 작성해주세요."></textarea>
-
-  <ul class="image-preview" id="imagePreview">
-    <li class="box"><span class="plus-icon">+</span></li>
-    <li class="box"><span class="plus-icon">+</span></li>
-    <li class="box"><span class="plus-icon">+</span></li>
-  </ul>
-  <input type="file" class="real-upload" accept="image/*" required multiple>
-
-  <button class="submit-button">리뷰 작성하기</button>
-
-</form>
-
+    <ul class="image-preview" id="imagePreview">
+      <li class="box"><span class="plus-icon">+</span></li>
+      <li class="box"><span class="plus-icon">+</span></li>
+      <li class="box"><span class="plus-icon">+</span></li>
+    </ul>
+    <input type="file" class="real-upload" accept="image/*" required multiple>
+  해줘
+    <button class="submit-button">리뷰 작성하기</button>
+  </form>
 </div>
 
 <script>
