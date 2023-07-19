@@ -2,6 +2,7 @@ package com.choongang.OriMarket.user;
 
 import com.choongang.OriMarket.business.store.BusinessStore;
 import com.choongang.OriMarket.review.Review;
+import com.choongang.OriMarket.store.Item;
 import lombok.*;
 
 import javax.persistence.*;
@@ -49,6 +50,9 @@ public class User {
 
     @OneToMany(mappedBy = "user")
     private List<Review> reviews = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user")
+    private List<Item> items = new ArrayList<>();
 
     //fav원투매니를 해야할까?? menuname, menuprice, menudetail 만들어놓고
 

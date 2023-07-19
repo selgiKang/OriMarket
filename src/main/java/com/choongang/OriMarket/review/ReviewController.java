@@ -1,5 +1,6 @@
 package com.choongang.OriMarket.review;
 
+import com.choongang.OriMarket.business.store.BusinessStore;
 import com.choongang.OriMarket.business.store.BusinessStoreRepository;
 import com.choongang.OriMarket.business.user.BusinessUser;
 import com.choongang.OriMarket.business.user.BusinessUserRepository;
@@ -30,7 +31,7 @@ public class ReviewController {
     }
 
     @PostMapping("/user_review")
-    public String userReivew(@ModelAttribute Review review){
+    public String userReivew(@ModelAttribute Review review, HttpSession session, Model model){
 
         return  null;
     }

@@ -191,8 +191,8 @@
 </head>
 
 <body>
+<form action="/user_review" method="post">
   <div class="main-container">
-  <form action="/user_review" method="post">
     <div class="user_total_review">
       <h4>이 가게를 추천하시겠어요?</h4>
       <div class="line"></div>
@@ -262,18 +262,17 @@
       <li class="box"><span class="plus-icon">+</span></li>
       <li class="box"><span class="plus-icon">+</span></li>
     </ul>
-    <input type="file" class="real-upload" accept="image/*" required multiple>
-  해줘
-    <button class="submit-button">리뷰 작성하기</button>
-  </form>
+    <input type="file" class="real-upload" name="" accept="image/*" required multiple>
+    <button class="submit-button" type="submit">리뷰 작성하기</button>
 </div>
+  </form>
 
 <script>
   let selectedBoxIndex; // 선택한 박스 인덱스 추적 변수
-
   function getImageFiles(e) {
     const uploadFiles = [];
     const files = e.currentTarget.files;
+
     const imagePreview = document.getElementById('imagePreview');
     const boxes = imagePreview.querySelectorAll('.box');
 

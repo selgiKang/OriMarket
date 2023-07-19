@@ -3,6 +3,7 @@ package com.choongang.OriMarket.store;
 import com.choongang.OriMarket.business.store.BusinessStore;
 import com.choongang.OriMarket.business.user.BusinessUser;
 import com.choongang.OriMarket.review.Review;
+import com.choongang.OriMarket.user.User;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -53,8 +54,15 @@ public class Item {
     @JoinColumn(name ="bu_store_number")
     private BusinessStore businessStore;
 
+    @ManyToOne(fetch = FetchType.LAZY) //lazy가 성능최적화
+    @JoinColumn(name ="user_seq")
+    private User user;
+
     @OneToMany(mappedBy = "item")
     private List<Review> reviews = new ArrayList<>();
+
+
+
 
     /*
     @ManyToOne
