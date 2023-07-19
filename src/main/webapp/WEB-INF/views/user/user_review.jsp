@@ -191,10 +191,10 @@
 </head>
 
 <body>
-<input type="hidden" name="item" value="${abcde.itemId}">
 <form action="/user_review" method="post">
   <div class="main-container">
     <div class="user_total_review">
+      <input type="hidden" name="item.itemId" value="${abcde.itemId}">
       <h4><input type="hidden" name="businessStore">싱싱과일나라</h4>
       <div class="line"></div>
       <div class="stars">

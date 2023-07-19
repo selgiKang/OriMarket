@@ -2,6 +2,8 @@ package com.choongang.OriMarket.business.user;
 
 import com.choongang.OriMarket.business.store.BusinessStore;
 import com.choongang.OriMarket.business.store.BusinessStoreRepository;
+import com.choongang.OriMarket.review.Review;
+import com.choongang.OriMarket.review.ReviewRepository;
 import com.choongang.OriMarket.user.User;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -21,18 +23,21 @@ public class BusinessUserService {
     @Autowired
     private final BusinessUserRepository businessUserRepository;
     private final BusinessStoreRepository businessStoreRepository;
+    private final ReviewRepository reviewRepository;
 
     public boolean login1(BusinessUser businessUser, HttpSession session, Model model) {
         BusinessUser findbusinessUser = businessUserRepository.findByBuUserId(businessUser.getBuUserId());
             session.setAttribute("buUserNumber",findbusinessUser.getBuUserNumber());
+        List<Review> all = reviewRepository.findAll();
 
 
-            if (findbusinessUser.getBusinessStores().isEmpty()) {
+        if (findbusinessUser.getBusinessStores().isEmpty()) {
 
             } else {
                 List<BusinessStore> businessStores = findbusinessUser.getBusinessStores();
                 if (businessStores.isEmpty()) {
                 } else {
+                    model.addAttribute("re",all);
                     model.addAttribute("save", businessStores.get(0));
                 }
             }

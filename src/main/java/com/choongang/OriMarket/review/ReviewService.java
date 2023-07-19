@@ -2,6 +2,7 @@ package com.choongang.OriMarket.review;
 
 import com.choongang.OriMarket.business.store.BusinessStore;
 import com.choongang.OriMarket.store.Item;
+import com.choongang.OriMarket.store.ItemRepository;
 import com.choongang.OriMarket.store.Store;
 import com.choongang.OriMarket.store.StoreRepository;
 import com.choongang.OriMarket.user.User;
@@ -29,11 +30,13 @@ public class ReviewService {
 
     private final UserRepository userRepository;
 
+    private final ItemRepository itemRepository;
+
     public void save(Review review, HttpSession session, Model model){
-        System.out.println("+이건뭔가요?"+review.getItem().getItemName());
         User byId = userRepository.findById((Long) session.getAttribute("userSeq")).orElseThrow();
         review.setUser(byId);
-        review.setBusinessStore(review.getItem().getBusinessStore());
+        Item byId1 = itemRepository.findById(review.getItem().getItemId()).orElseThrow();
+        review.setBusinessStore(byId1.getBusinessStore());
         reviewRepository.save(review);
         List<Review> reviews = byId.getReviews();
         model.addAttribute("re",reviews);
