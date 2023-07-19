@@ -1,5 +1,7 @@
 package com.choongang.OriMarket.business.store;
 
+import com.choongang.OriMarket.business.market.Market;
+import com.choongang.OriMarket.business.market.MarketRepository;
 import com.choongang.OriMarket.business.user.BusinessUser;
 import com.choongang.OriMarket.business.user.BusinessUserRepository;
 import com.choongang.OriMarket.store.Store;
@@ -26,10 +28,16 @@ public class BusinessStoreService {
     @Autowired
     private final BusinessStoreRepository businessStoreRepository;
     private final BusinessUserRepository businessUserRepository;
+    private final MarketRepository marketRepository;
 
 
     public void save(BusinessStore businessStore, HttpSession session, Model model){
         Object buUserNumber = session.getAttribute("buUserNumber");
+
+        Long marketSeq = Long.valueOf((session.getAttribute("marketSeq")).toString());
+        Market byId = marketRepository.findById(marketSeq).orElseThrow();
+        businessStore.setMarket(byId);
+
         BusinessUser businessUser = businessUserRepository.findById((Long)buUserNumber).orElseThrow();
         businessStore.setBusinessUser(businessUser);
         BusinessStore save = businessStoreRepository.save(businessStore);
