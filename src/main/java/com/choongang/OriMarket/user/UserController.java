@@ -1,5 +1,7 @@
 package com.choongang.OriMarket.user;
 
+import com.choongang.OriMarket.order.Order;
+import com.choongang.OriMarket.order.OrderService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +28,9 @@ public class UserController {
     private final UserService userService;
 
     private final UserRepository userRepository;
+
+    //7.18 테스트 데이터 가져오는거까지 성공 승엽
+    private final OrderService orderService;
 
     @GetMapping("/login")
     public String login() {
@@ -57,9 +62,12 @@ public class UserController {
 
 
     @GetMapping("/order_list")
-    public String order_list() {
+    public String getOrderList(Model model) {
+        List<Order> orderList = orderService.getAllOrders();
+        model.addAttribute("orders", orderList);
         return "user/order_list";
     }
+
 
     @PostMapping("/login")
     public String loginId(@ModelAttribute User user, Model model, HttpSession session) {

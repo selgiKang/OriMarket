@@ -338,10 +338,10 @@
                     <h5>가게 관리</h5>
                 </div>
 
-                <div class="first_menu">
+                <a class="first_menu" href="/messageInsert">
                     <img src="../../img/store/게시판.png" alt="공지사항"> <!-- alt 속성 추가 -->
                     <h5>공지사항</h5>
-                </div>
+                </a>
 
                 <div class="first_menu">
                     <img src="../../img/store/리뷰.png" alt="리뷰 관리"> <!-- alt 속성 추가 -->

@@ -35,10 +35,7 @@ public class OrderService {
     static final String admin_key = "${e584b59b9f572556fbac3673883cb029}";
     private  Order order;
 
-    //7.17 테스트 승엽
-    public List<Order> getOrderList() {
-        return orderRepository.findAll();
-    }
+
 
        /*
        public Order kakaoPayReady() {
@@ -112,4 +109,10 @@ public class OrderService {
             model.addAttribute("tableData",tableData);
             return tableData;
         }
+
+        //7.18 테스트 승엽
+        public List<Order> getAllOrders() {
+            return orderRepository.findAll(); // 모든 주문 목록을 가져오는 방식에 맞게 구현
+        }
+
 }

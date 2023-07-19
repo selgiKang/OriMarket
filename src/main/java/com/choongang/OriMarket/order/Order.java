@@ -32,6 +32,7 @@ public class Order {
     @Column
     private Integer orderAddressNumber;
 
+    //물건 총 가격 + 배송비
     @Column
     private Integer orderTotalPrice;
 
