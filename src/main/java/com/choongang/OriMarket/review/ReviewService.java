@@ -31,7 +31,7 @@ public class ReviewService {
     public void save(Review review, HttpSession session){
         User byId = userRepository.findById((Long) session.getAttribute("userSeq")).orElseThrow();
         review.setUser(byId);
-        review.setBusinessStore(byId.getItems().get(0).getBusinessStore());
+        //review.setBusinessStore(byId.getItems().get(0).getBusinessStore());
         reviewRepository.save(review);
     }
 

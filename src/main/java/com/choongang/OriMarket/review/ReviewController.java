@@ -23,7 +23,7 @@ import java.util.List;
 public class ReviewController {
 
     @Autowired
-    private final StoreService storeService;
+    private final ReviewService reviewService;
 
     @GetMapping("/user_review")
     public String userReivew(){
@@ -32,8 +32,8 @@ public class ReviewController {
 
     @PostMapping("/user_review")
     public String userReivew(@ModelAttribute Review review, HttpSession session, Model model){
-
-        return  null;
+        reviewService.save(review,session);
+        return  "user/user_reviewlist";
     }
 
 
