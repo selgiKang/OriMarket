@@ -34,8 +34,8 @@ public class CartController {
 
         int totalPrice = 0;
         for(CartItem cartItem : cartItems){
-
             totalPrice += (cartItem.getItem().getItemPrice()*cartItem.getCount());
+
         }
 
         model.addAttribute("cartItemList",cartItems);
@@ -49,7 +49,7 @@ public class CartController {
     @PostMapping("/{userId}/cart")
     public String addMyCart(@PathVariable("userId") String userId,Item item,int count,int itemPrice){
         User user = userService.getUser(userId);
-        Item additem = itemService.getItem(item.getItemName());
+        Item additem = itemService.getItem(item.getItemId());
 
         cartService.addCart(user,additem,count,itemPrice);
 
@@ -75,20 +75,37 @@ public class CartController {
         return "ok";
     }
 
+//
+//
+//    /*결제***그리고 장바구니 삭제*/
+//    @GetMapping("/{userId}/cart/checkout")
+//    public String myCartPayment(@PathVariable("userId") String userId,Model model) {
+//
+//
+//        cartService.cartPayment(userId);
+//        cartService.cartDeleteAll(userId);
+//
+//
+//        return "/order/receipt";
+//    }
 
 
-    /*결제***그리고 장바구니 삭제*/
-    @GetMapping("/{userId}/cart/checkout")
-    public String myCartPayment(@PathVariable("userId") String userId,Model model) {
+    @GetMapping("/paymentPage/{userId}")
+    public String orderPayment(@PathVariable("userId")String userId,Model model){
+
+       cartService.saveCartInfo(userId);
+
+        Cart cart = cartService.getCart(userId);
+        List<CartItem> cartItems = cartService.userCartView(cart);
 
 
-        cartService.cartPayment(userId);
-        cartService.cartDeleteAll(userId);
+        model.addAttribute("cartItemList",cartItems);
+        model.addAttribute("totalPrice",cart.getCartTotalPrice());
+        model.addAttribute("deliveryPrice",cart.getCartDeliveryPrice());
 
 
         return "/order/order_paymentPage";
     }
-
 
 
 

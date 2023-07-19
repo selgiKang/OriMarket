@@ -32,12 +32,12 @@ public class Cart {
     private int cartTotalPrice;
 
                          /* pk대신 원하는 컬럼 가져오기 referencedColumnName*/
-    @OneToOne(fetch =  FetchType.EAGER)
+    @OneToOne(fetch =  FetchType.LAZY)
     @JoinColumn(name = "seq")
     private User user;
 
     //    cartItems 테이블이 생성됨.
-   @OneToMany(fetch = FetchType.EAGER)
+   @OneToMany(fetch = FetchType.LAZY)
     private List<CartItem> cartItems = new ArrayList<>();
 
 

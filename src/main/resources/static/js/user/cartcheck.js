@@ -31,8 +31,8 @@ function setTotalInfo(){
 
     if(totalPrice >= 30000){
         deliveryPrice = 0;
-    }else if(totalPrice ==0){
-        deliveryPrice=0;
+    }else if(totalPrice ==0) {
+        deliveryPrice = 0;
     }else{
         deliveryPrice=3000;
     }

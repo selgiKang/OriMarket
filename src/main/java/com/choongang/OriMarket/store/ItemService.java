@@ -27,8 +27,8 @@ public class ItemService {
     private final BusinessStoreRepository businessStoreRepository;
 
 
-    public Item getItem(String itemName){
-        Item item = itemRepository.findByItemName(itemName);
+    public Item getItem(Long itemId){
+        Item item = itemRepository.findByItemId(itemId);
         return item;
     }
 
@@ -51,4 +51,6 @@ public class ItemService {
         model.addAttribute("items",items1);
 
     }
+
+
 }
