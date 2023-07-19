@@ -33,6 +33,16 @@
 
 
   <form action="/join1" method="post" onsubmit="return validateForm()">
+
+    <div class="form_field">
+      <label for="name">시장 선택</label>
+      <select id="market_select">
+        <option name="marketName" value="신원시장" required>
+        <option name="marketName" value="경동시장" required>
+        <option name="marketName" value="동대문시장" required>
+        <option name="marketName" value="남대문시장" required>
+      </select>
+    </div>
     <div class="form_field">
       <label for="name">사업자번호</label>
       <input type="text" id="nickname" name="buUserNumber" required>
