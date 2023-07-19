@@ -23,6 +23,7 @@ public class Order {
     @JoinColumn(name = "bu_user_number")
     private BusinessUser businessUser;
 
+    //가게이름
     @Column
     private String orderMarketName;
 
@@ -30,15 +31,17 @@ public class Order {
     private String orderUserId;
 
     @Column
-    private Integer orderAddressNumber;
+    private String orderAddressNumber;
 
     //물건 총 가격 + 배송비
     @Column
     private Integer orderTotalPrice;
 
+    //주문 날짜
     @Column
     private String orderDate;
 
+    //신용카드 결제 종류
     @Column
     private String orderType;
 
