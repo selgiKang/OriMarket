@@ -69,7 +69,7 @@ public class UserController {
     public String getOrderList(Model model) {
         List<Order> orderList = orderService.getAllOrders();
         model.addAttribute("orders", orderList);
-        return "user/order_list";
+        return "store/order_list";
     }
 
 
