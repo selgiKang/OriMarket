@@ -89,7 +89,7 @@
         return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     }
 
-    // HTML 요소를 선택하고 포맷팅된 값으로 업데이트
+    //백단위로 ',' 찍히게 하기
     var priceElements = document.getElementsByClassName("formatted-price");
     for (var i = 0; i < priceElements.length; i++) {
         var price = parseInt(priceElements[i].textContent);
