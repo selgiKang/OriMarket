@@ -89,7 +89,7 @@
         <div class="line"></div>
 
         <div class="my_review_list_store">
-            <a href="#"><h4>불닭발</h4></a><br>
+            <a href="/user_review"><h4>불닭발</h4></a><br>
             <div class="rate_and_date">
             <h4 class="rating">★★★★☆</h4>&nbsp;<h6 class="date">2023.07.12</h6>
             </div>

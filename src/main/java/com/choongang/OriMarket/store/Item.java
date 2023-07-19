@@ -2,11 +2,14 @@ package com.choongang.OriMarket.store;
 
 import com.choongang.OriMarket.business.store.BusinessStore;
 import com.choongang.OriMarket.business.user.BusinessUser;
+import com.choongang.OriMarket.review.Review;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
 import javax.print.attribute.standard.MediaSize;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "goods")
@@ -49,6 +52,9 @@ public class Item {
     @ManyToOne(fetch = FetchType.LAZY) //lazy가 성능최적화
     @JoinColumn(name ="bu_store_number")
     private BusinessStore businessStore;
+
+    @OneToMany(mappedBy = "item")
+    private List<Review> reviews = new ArrayList<>();
 
     /*
     @ManyToOne

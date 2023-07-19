@@ -192,6 +192,7 @@
 
 <body>
 <div class="main-container">
+<form action="/user_review" method="post">
   <div class="user_total_review">
     <h4>이 가게를 추천하시겠어요?</h4>
     <div class="line"></div>
@@ -219,15 +220,15 @@
     </div>
 
     <div class="stars">
-      <input type="radio" id="star10" name="rating2" value="10" />
+      <input type="radio" id="star10" name="rating2" value="5" />
       <label for="star10"></label>
-      <input type="radio" id="star9" name="rating2" value="9" />
+      <input type="radio" id="star9" name="rating2" value="4" />
       <label for="star9"></label>
-      <input type="radio" id="star8" name="rating2" value="8" />
+      <input type="radio" id="star8" name="rating2" value="3" />
       <label for="star8"></label>
-      <input type="radio" id="star7" name="rating2" value="7" />
+      <input type="radio" id="star7" name="rating2" value="2" />
       <label for="star7"></label>
-      <input type="radio" id="star6" name="rating2" value="6" />
+      <input type="radio" id="star6" name="rating2" value="1" />
       <label for="star6"></label>
     </div>
   </div>
@@ -240,15 +241,15 @@
     </div>
 
     <div class="stars">
-      <input type="radio" id="star15" name="rating3" value="10" />
+      <input type="radio" id="star15" name="rating3" value="5" />
       <label for="star15"></label>
-      <input type="radio" id="star14" name="rating3" value="9" />
+      <input type="radio" id="star14" name="rating3" value="4" />
       <label for="star14"></label>
-      <input type="radio" id="star13" name="rating3" value="8" />
+      <input type="radio" id="star13" name="rating3" value="3" />
       <label for="star13"></label>
-      <input type="radio" id="star12" name="rating3" value="7" />
+      <input type="radio" id="star12" name="rating3" value="2" />
       <label for="star12"></label>
-      <input type="radio" id="star11" name="rating3" value="6" />
+      <input type="radio" id="star11" name="rating3" value="1" />
       <label for="star11"></label>
     </div>
   </div>
@@ -264,6 +265,9 @@
   <input type="file" class="real-upload" accept="image/*" required multiple>
 
   <button class="submit-button">리뷰 작성하기</button>
+
+</form>
+
 </div>
 
 <script>
