@@ -30,9 +30,10 @@ public class ReviewService {
     private final UserRepository userRepository;
 
     public void save(Review review, HttpSession session, Model model){
+        System.out.println("+이건뭔가요?"+review.getItem().getItemName());
         User byId = userRepository.findById((Long) session.getAttribute("userSeq")).orElseThrow();
         review.setUser(byId);
-        //review.setBusinessStore(byId.getItems().get(0).getBusinessStore());
+        review.setBusinessStore(review.getItem().getBusinessStore());
         reviewRepository.save(review);
         List<Review> reviews = byId.getReviews();
         model.addAttribute("re",reviews);
