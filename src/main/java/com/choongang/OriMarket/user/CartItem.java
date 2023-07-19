@@ -34,15 +34,20 @@ public class CartItem {
 
     private int itemPrice;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "seq")
+    private User user;
+
 
     /*장바구니에 담을 상품엔티티를 생성하는 메소드*/
 
-    public static CartItem createCartItem(Cart cart, Item item, int count,int itemPrice){
+    public static CartItem createCartItem(Cart cart, Item item, int count,int itemPrice,User user){
         CartItem cartItem = new CartItem();
         cartItem.setCart(cart);
         cartItem.setItem(item);
         cartItem.setCount(count);
         cartItem.setItemPrice(itemPrice);
+        cartItem.setUser(user);
         return cartItem;
 
     }

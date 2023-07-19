@@ -1,0 +1,40 @@
+@charset "UTF-8";
+@font-face {
+    font-family: 'LINESeedKR-Bd';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/LINESeedKR-Bd.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+}
+#messageInsert_body{
+    font-family: "LINESeedKR-Bd",sans-serif;
+    margin: 0 auto;
+    width: 375px;
+    font-size: 16px;
+}
+#messageInsert_header{
+    width: 100%;
+    text-align: center;
+}
+#messageInsert_table{
+    border: solid 1px #b8b8b8;
+    text-align: center;
+    width: 100%;
+}
+.messageInsert_td1{
+    width: 80px;
+}
+.messageInsert_td2>input{
+    width: 250px;
+
+}
+.messageInsert_td2>textarea{
+    width: 250px;
+}
+
+#messageInsert_btn{
+    outline: none;
+    background-color: #4caf50;
+    color: #eeeeff;
+    width: 30%;
+    height: 30px;
+}
