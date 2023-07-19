@@ -5,12 +5,11 @@ import com.choongang.OriMarket.business.user.BusinessUserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.text.SimpleDateFormat;
@@ -97,15 +96,50 @@ public class MessageController {
     @PostMapping("/messageInsert")
     public String messageInsertNew(@ModelAttribute Message messages,BusinessUser businessUser, HttpSession session){
 
+        Date date = new Date();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String today = dateFormat.format(date);
+
         System.out.println("메세지:"+messages.getTotalMessage());
         System.out.println("사업자번호:"+session.getAttribute("buUserNumber").toString());
+
         Long buUserNumber = Long.parseLong(session.getAttribute("buUserNumber").toString());
         businessUser.setBuUserNumber(buUserNumber);
+
         messages.setBuUserNumber(businessUser);
+        messages.setMessageInsertDate(today);
+
 
         messageService.insertMessage(messages);
         return "redirect:/messageInsert";
     }
 
+
+    @PostMapping("/messageInsertMain")
+    @ResponseBody
+    public ResponseEntity<String> messageInsertMain(@RequestBody Message requestData, BusinessUser businessUser, HttpSession session) {
+        // 요청 처리 로직 작성
+        try {
+            Date date = new Date();
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            String today = dateFormat.format(date);
+
+            System.out.println("메세지: " + requestData.getTotalMessage());
+            System.out.println("사업자번호: " + session.getAttribute("buUserNumber").toString());
+
+            Long buUserNumber = Long.parseLong(session.getAttribute("buUserNumber").toString());
+            businessUser.setBuUserNumber(buUserNumber);
+
+            requestData.setBuUserNumber(businessUser);
+            requestData.setMessageInsertDate(today);
+
+            messageService.insertMessage(requestData);
+
+            return ResponseEntity.ok("요청이 성공적으로 처리되었습니다.");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("요청 처리 중 오류가 발생했습니다.");
+        }
+    }
 
 }

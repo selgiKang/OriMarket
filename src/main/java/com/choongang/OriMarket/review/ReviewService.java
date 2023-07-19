@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
 import javax.persistence.EntityManager;
 import javax.servlet.http.HttpSession;
@@ -28,11 +29,13 @@ public class ReviewService {
 
     private final UserRepository userRepository;
 
-    public void save(Review review, HttpSession session){
+    public void save(Review review, HttpSession session, Model model){
         User byId = userRepository.findById((Long) session.getAttribute("userSeq")).orElseThrow();
         review.setUser(byId);
-        review.setBusinessStore(byId.getItems().get(0).getBusinessStore());
+        //review.setBusinessStore(byId.getItems().get(0).getBusinessStore());
         reviewRepository.save(review);
+        List<Review> reviews = byId.getReviews();
+        model.addAttribute("re",reviews);
     }
 
 }

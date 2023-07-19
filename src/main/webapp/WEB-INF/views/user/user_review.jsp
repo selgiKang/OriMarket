@@ -210,9 +210,7 @@
       </div>
       <br><br>
     </div>
-
     <div class="line"></div>
-
     <div class="store_review">
 
       <div class="taste_review">
