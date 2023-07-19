@@ -32,7 +32,7 @@ public class ReviewController {
 
     @PostMapping("/user_review")
     public String userReivew(@ModelAttribute Review review, HttpSession session, Model model){
-        reviewService.save(review,session);
+        reviewService.save(review,session,model);
         return  "user/user_reviewlist";
     }
 

@@ -2,6 +2,7 @@ package com.choongang.OriMarket.user;
 
 import com.choongang.OriMarket.order.Order;
 import com.choongang.OriMarket.order.OrderService;
+import com.choongang.OriMarket.review.Review;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,7 +52,10 @@ public class UserController {
 
 
     @GetMapping("/review")
-    public String review() {
+    public String review(HttpSession session,Model model) {
+        User byId = userRepository.findById((Long) session.getAttribute("userSeq")).orElseThrow();
+        List<Review> reviews = byId.getReviews();
+        model.addAttribute("re",reviews);
         return "user/user_reviewlist";
     }
 

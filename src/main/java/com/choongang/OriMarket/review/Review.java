@@ -8,8 +8,13 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,6 +24,7 @@ import java.util.List;
 @Setter
 //생성자
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@EntityListeners(AuditingEntityListener.class)
 public class Review {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -34,11 +40,11 @@ public class Review {
     @Column
     private String picture_url;
 
-    @Column
-    private String created_date;
+    @CreatedDate
+    private LocalDateTime created_date;
 
-    @Column
-    private String modified_date;
+    @LastModifiedDate
+    private LocalDateTime modified_date;
 
     @Column
     private String taste;
