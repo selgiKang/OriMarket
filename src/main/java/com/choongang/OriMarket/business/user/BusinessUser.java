@@ -1,5 +1,6 @@
 package com.choongang.OriMarket.business.user;
 
+import com.choongang.OriMarket.business.market.Market;
 import com.choongang.OriMarket.business.store.BusinessStore;
 import com.choongang.OriMarket.order.Order;
 import lombok.AccessLevel;
@@ -47,4 +48,8 @@ public class BusinessUser {
     //임시 오더
     @OneToMany(mappedBy = "businessUser")
     private List<Order> orders = new ArrayList<>();
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="marketSeq")
+    private Market market;
 }
