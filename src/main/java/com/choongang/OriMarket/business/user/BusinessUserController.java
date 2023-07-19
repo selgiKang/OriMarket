@@ -38,7 +38,6 @@ public class BusinessUserController {
     public String loginId(@ModelAttribute BusinessUser businessUser, Model model, HttpSession session) {
         boolean isTrue = businessUserService.login1(businessUser,session,model);
         if(isTrue){
-
             session.setAttribute("buUserId",businessUser.getBuUserId());
             System.out.println(session.getAttribute("buUserId"));
             return "business/storenotice_new";

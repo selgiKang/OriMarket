@@ -501,7 +501,6 @@
                 <form action="/storenotice1" method="post">
                     <div class="storecare_name">
                         <h3>가게 이름</h3>
-
                         <input type="hidden" name="buStoreNumber" value="${save.buStoreNumber}">
                         <c:if test="${empty save.buStoreName}">
                             <input type="text" id="store-name-input" name="buStoreName" placeholder="가게 이름">

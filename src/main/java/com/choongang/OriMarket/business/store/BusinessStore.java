@@ -52,6 +52,7 @@ public class BusinessStore {
     @OneToMany(mappedBy = "businessStore")
     private List<Review> reviews = new ArrayList<>();
 
+    //시장 고유 번호
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "marketSeq")
     private Market market;
