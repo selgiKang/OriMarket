@@ -1,5 +1,6 @@
 package com.choongang.OriMarket.user;
 
+import com.choongang.OriMarket.business.store.BusinessStore;
 import com.choongang.OriMarket.store.Item;
 import lombok.Getter;
 import lombok.Setter;
@@ -38,6 +39,9 @@ public class CartItem {
     @JoinColumn(name = "seq")
     private User user;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="bu_store_number")
+    private BusinessStore businessStore;
 
     /*장바구니에 담을 상품엔티티를 생성하는 메소드*/
 

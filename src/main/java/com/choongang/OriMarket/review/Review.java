@@ -40,9 +40,11 @@ public class Review {
     @Column
     private String picture_url;
 
+    //생성일
     @CreatedDate
     private LocalDateTime created_date;
 
+    //수정일
     @LastModifiedDate
     private LocalDateTime modified_date;
 
@@ -66,10 +68,6 @@ public class Review {
     @ManyToOne(fetch = FetchType.LAZY) //lazy가 성능최적화
     @JoinColumn(name ="item_id")
     private Item item;
-
-
-
-
 
 
 }

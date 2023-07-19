@@ -15,14 +15,14 @@
     <h3>공지사항 등록</h3>
 </header>
 <form action="/messageInsert" method="post">
-    <%
-       // String buUserNumber = session.getAttribute("buUserNumber").toString();
-        Date date = new Date();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        String today = dateFormat.format(date);
-    %>
+<%--    <%--%>
+<%--       // String buUserNumber = session.getAttribute("buUserNumber").toString();--%>
+<%--        Date date = new Date();--%>
+<%--        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");--%>
+<%--        String today = dateFormat.format(date);--%>
+<%--    %>--%>
     <%--<input type="hidden" name="buUserNumber" value="<%=buUserNumber%>">--%>
-    <input type="hidden" name="messageInsertDate" value="<%=today%>">
+<%--    <input type="hidden" name="messageInsertDate" value="<%=today%>">--%>
     <table id="messageInsert_table" style="border-collapse: collapse;">
         <tr class="messageInsert_tr">
             <td class="messageInsert_td1" style="height: 30px;">제목</td>

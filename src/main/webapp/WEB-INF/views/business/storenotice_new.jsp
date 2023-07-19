@@ -8,6 +8,110 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Page Title</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        @font-face {
+            font-family: 'LINESeedKR-Bd', sans-serif;
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/LINESeedKR-Bd.woff2') format('woff2');
+            font-weight: 700;
+            font-style: normal;
+        }
+
+        .line {
+            border-top: 1px solid #c4c4c4;
+            width: 330px;
+            margin: 30px auto;
+            position: relative;
+            right: 8px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            margin: 0 auto;
+        }
+
+        .main-container {
+            width: 375px;
+            height: 812px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #eee;
+            overflow: auto;
+            overflow-x: hidden;
+            font-family: 'LINESeedKR-Bd', sans-serif;
+        }
+
+        .main-container::-webkit-scrollbar {
+            display: none;
+        }
+
+        .my_review_list{
+            margin-top: 10px;
+            margin: 20px;
+        }
+        .my_review_list_store{
+            background-color: white;
+            margin: 15px;
+            padding: 15px;
+
+        }
+
+        .rating, .date {
+            display: inline-block;
+        }
+
+        .rate_and_date{
+            margin-top: -20px;
+        }
+
+        .my_review_photo {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .my_review_photo img {
+            width: 300px;
+        }
+        .rating {
+            font-size: 24px;
+        }
+
+        .rating::before {
+            content: "☆☆☆☆☆";
+            color: lightgray;
+        }
+
+        .rating[data-rating="1"]::before {
+            content: "★☆☆☆☆";
+            color: gold;
+        }
+
+        .rating[data-rating="2"]::before {
+            content: "★★☆☆☆";
+            color: gold;
+        }
+
+        .rating[data-rating="3"]::before {
+            content: "★★★☆☆";
+            color: gold;
+        }
+
+        .rating[data-rating="4"]::before {
+            content: "★★★★☆";
+            color: gold;
+        }
+
+        .rating[data-rating="5"]::before {
+            content: "★★★★★";
+            color: gold;
+        }
+    </style>
 
     <style>
 
@@ -464,9 +568,9 @@
                 <h4>사장님 공지사항</h4>
                 <div class="board">
                     <div class="content">
-                        <input type="file" accept="image/*" id="image-upload" onchange="previewImage(event)" />
-                        <div id="image-preview"></div>
-                        <textarea placeholder="게시글 내용"></textarea>
+                        <input type="text" name="messageTitle" placeholder="공지 제목">
+<%--                        <div id="image-preview"></div>--%>
+                        <textarea type="textarea" rows="10" maxlength="700" name="totalMessage" placeholder="공지 내용"></textarea>
                     </div>
                     <div class="buttons">
                         <button onclick="uploadPost()">업로드</button>
@@ -480,7 +584,23 @@
             <input class="input" name="tabs-3" type="radio" id="tab-3"/>
             <label class="label" for="tab-3">리뷰 관리</label>
             <div class="panel">
-                ???
+                <c:forEach var="r" items="${re}" varStatus="status">
+                    <c:set var="reverseIndex" value="${re.size() - status.index - 1}" />
+                    <c:set var="currentItem" value="${re[reverseIndex]}" />
+                    <div class="my_review_list_store">
+                        <h4>불닭발</h4>
+                        <br>
+                        <div class="rate_and_date">
+                            <h4 class="rating" data-rating="${currentItem.rating}"></h4>&nbsp;<h6 class="date">${currentItem.created_date}</h6>
+                        </div>
+                        <div class="line"></div>
+                        <div class="my_review_photo">
+                            <img src="../../../../resources/static/img/store/kal.jpg">
+                            <div class="line"></div>
+                            <p>${currentItem.content}</p>
+                        </div>
+                    </div>
+                </c:forEach>
             </div>
 
             <br>
@@ -536,7 +656,6 @@
 </div>
 
 
-</body>
 <script>
     var posts = []; // 게시글 정보를 저장할 배열
 
@@ -558,72 +677,109 @@
         reader.readAsDataURL(imageFile);
     }
 
-    function uploadPost() {
-        var imageUpload = document.getElementById("image-upload");
-        var imageFile = imageUpload.files[0];
-        var postContent = document.querySelector(".board .content textarea").value;
+    // function uploadPost() {
+    //     var imageUpload = document.getElementById("image-upload");
+    //     var imageFile = imageUpload.files[0];
+    //     var postContent = document.querySelector(".board .content textarea").value;
+    //
+    //     var post = {
+    //         content: postContent,
+    //         image: imageFile,
+    //         date: new Date(),
+    //         isNotice: true, // 최신 게시글은 공지로 표시
+    //     };
+    //
+    //     posts.unshift(post); // 배열의 맨 앞에 게시글 정보 추가
+    //
+    //     // 게시글을 생성하여 화면에 표시
+    //     var boardDiv = document.querySelector(".storecare .board");
+    //     var newPostDiv = document.createElement("div");
+    //     newPostDiv.className = "post";
+    //
+    //     var titleDiv = document.createElement("div");
+    //     titleDiv.className = "title";
+    //
+    //     if (post.isNotice) {
+    //         var noticeDiv = document.createElement("div");
+    //         noticeDiv.className = "notice";
+    //         noticeDiv.innerText = "공지";
+    //         titleDiv.appendChild(noticeDiv);
+    //     }
+    //
+    //     var dateDiv = document.createElement("div");
+    //     dateDiv.className = "date";
+    //     dateDiv.style.float = "right";
+    //     dateDiv.innerText = post.date.toLocaleString();
+    //     titleDiv.appendChild(dateDiv);
+    //
+    //     newPostDiv.appendChild(titleDiv);
+    //
+    //     var contentDiv = document.createElement("div");
+    //     contentDiv.className = "content";
+    //
+    //     if (imageFile) {
+    //         var img = document.createElement("img");
+    //         img.src = URL.createObjectURL(imageFile);
+    //         img.style.maxWidth = "100%";
+    //         img.style.height = "auto";
+    //         contentDiv.appendChild(img);
+    //     }
+    //
+    //
+    //     contentDiv.innerHTML += postContent;
+    //     newPostDiv.appendChild(contentDiv);
+    //     boardDiv.prepend(newPostDiv);
+    //
+    //     // 게시글 업로드 후 입력 내용 초기화
+    //     imageUpload.value = "";
+    //     document.querySelector(".board .content textarea").value = "";
+    //     document.getElementById("image-preview").innerHTML = "";
+    //
+    //     // 이전 게시글에서 공지 표시 제거
+    //     for (var i = 1; i < posts.length; i++) {
+    //         var otherPostElement = document.querySelectorAll(".storecare .board .post")[i];
+    //         var otherNoticeDiv = otherPostElement.querySelector(".notice");
+    //         if (otherNoticeDiv) {
+    //             otherNoticeDiv.remove();
+    //         }
+    //     }
+    // }
 
-        var post = {
-            content: postContent,
-            image: imageFile,
-            date: new Date(),
-            isNotice: true, // 최신 게시글은 공지로 표시
+
+    // 컨트롤러로 요청을 보내고 처리하는 함수
+    function uploadPost() {
+        // 입력된 데이터 가져오기
+        var messageTitle = document.querySelector('input[name="messageTitle"]').value;
+        var totalMessage = document.querySelector('textarea[name="totalMessage"]').value;
+
+        // 요청 데이터 생성
+        var requestData = {
+                messageTitle: messageTitle,
+                totalMessage: totalMessage
         };
 
-        posts.unshift(post); // 배열의 맨 앞에 게시글 정보 추가
+        // AJAX 요청 생성
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "/messageInsertMain", true);
+        xhr.setRequestHeader("Content-Type", "application/json");
 
-        // 게시글을 생성하여 화면에 표시
-        var boardDiv = document.querySelector(".storecare .board");
-        var newPostDiv = document.createElement("div");
-        newPostDiv.className = "post";
+        // 요청 완료 처리
+        xhr.onload = function() {
+            if (xhr.status === 200) {
 
-        var titleDiv = document.createElement("div");
-        titleDiv.className = "title";
+                console.log("요청이 성공적으로 처리되었습니다.");
+                // 돌아온 응답을 처리하는 코드를 작성하세요.
 
-        if (post.isNotice) {
-            var noticeDiv = document.createElement("div");
-            noticeDiv.className = "notice";
-            noticeDiv.innerText = "공지";
-            titleDiv.appendChild(noticeDiv);
-        }
-
-        var dateDiv = document.createElement("div");
-        dateDiv.className = "date";
-        dateDiv.style.float = "right";
-        dateDiv.innerText = post.date.toLocaleString();
-        titleDiv.appendChild(dateDiv);
-
-        newPostDiv.appendChild(titleDiv);
-
-        var contentDiv = document.createElement("div");
-        contentDiv.className = "content";
-
-        if (imageFile) {
-            var img = document.createElement("img");
-            img.src = URL.createObjectURL(imageFile);
-            img.style.maxWidth = "100%";
-            img.style.height = "auto";
-            contentDiv.appendChild(img);
-        }
-
-
-        contentDiv.innerHTML += postContent;
-        newPostDiv.appendChild(contentDiv);
-        boardDiv.prepend(newPostDiv);
-
-        // 게시글 업로드 후 입력 내용 초기화
-        imageUpload.value = "";
-        document.querySelector(".board .content textarea").value = "";
-        document.getElementById("image-preview").innerHTML = "";
-
-        // 이전 게시글에서 공지 표시 제거
-        for (var i = 1; i < posts.length; i++) {
-            var otherPostElement = document.querySelectorAll(".storecare .board .post")[i];
-            var otherNoticeDiv = otherPostElement.querySelector(".notice");
-            if (otherNoticeDiv) {
-                otherNoticeDiv.remove();
+            } else {
+                // 요청이 실패했을 때의 동작을 여기에 작성하세요.
+                console.error("요청 처리 중 오류가 발생했습니다.");
             }
-        }
+        };
+        // 요청 전송
+
+        xhr.send(JSON.stringify(requestData));
+        document.querySelector(".board .content textarea").value = "";
+        document.querySelector(".board .content input").value = "";
     }
 
 
@@ -642,6 +798,7 @@
         });
     });
 </script>
+</body>
 
 </html>
 

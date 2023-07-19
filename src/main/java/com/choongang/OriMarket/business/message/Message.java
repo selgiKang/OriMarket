@@ -34,7 +34,7 @@ public class Message {
     private String messageInsertDate;
 
     //사업자번호
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="bu_user_number")
     private BusinessUser buUserNumber;
 
