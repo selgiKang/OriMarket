@@ -42,8 +42,9 @@ public class BusinessStore {
     @Column
     private String buStoreAddressDetail;
 
+    //사업자 번호
     @ManyToOne(fetch = FetchType.LAZY) //lazy가 성능최적화
-    @JoinColumn(name ="bu_store_user")
+    @JoinColumn(name ="business_user")
     private BusinessUser businessUser;
 
     @OneToMany(mappedBy = "businessStore")

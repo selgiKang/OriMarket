@@ -447,10 +447,10 @@
                     <h5>공지사항</h5>
                 </a>
 
-                <div class="first_menu">
+                <a class="first_menu" href="/businessReview">
                     <img src="../../img/store/리뷰.png" alt="리뷰 관리"> <!-- alt 속성 추가 -->
                     <h5>리뷰 관리</h5>
-                </div>
+                </a>
 
                 <div class="first_menu">
                     <img src="../../img/store/메뉴관리.png" alt="메뉴 관리"> <!-- alt 속성 추가 -->
@@ -584,23 +584,25 @@
             <input class="input" name="tabs-3" type="radio" id="tab-3"/>
             <label class="label" for="tab-3">리뷰 관리</label>
             <div class="panel">
-                <c:forEach var="r" items="${re}" varStatus="status">
-                    <c:set var="reverseIndex" value="${re.size() - status.index - 1}" />
-                    <c:set var="currentItem" value="${re[reverseIndex]}" />
-                    <div class="my_review_list_store">
-                        <h4>불닭발</h4>
-                        <br>
-                        <div class="rate_and_date">
-                            <h4 class="rating" data-rating="${currentItem.rating}"></h4>&nbsp;<h6 class="date">${currentItem.created_date}</h6>
-                        </div>
-                        <div class="line"></div>
-                        <div class="my_review_photo">
-                            <img src="../../../../resources/static/img/store/kal.jpg">
+                <c:if test="${!empty re}">
+                    <c:forEach var="r" items="${re}" varStatus="status">
+                        <c:set var="reverseIndex" value="${re.size() - status.index - 1}" />
+                        <c:set var="currentItem" value="${re[reverseIndex]}" />
+                        <div class="my_review_list_store">
+                            <h4>불닭발</h4>
+                            <br>
+                            <div class="rate_and_date">
+                                <h4 class="rating" data-rating="${currentItem.rating}"></h4>&nbsp;<h6 class="date">${currentItem.created_date}</h6>
+                            </div>
                             <div class="line"></div>
-                            <p>${currentItem.content}</p>
+                            <div class="my_review_photo">
+                                <img src="../../../../resources/static/img/store/kal.jpg">
+                                <div class="line"></div>
+                                <p>${currentItem.content}</p>
+                            </div>
                         </div>
-                    </div>
-                </c:forEach>
+                    </c:forEach>
+                </c:if>
             </div>
 
             <br>
