@@ -1,5 +1,7 @@
 package com.choongang.OriMarket.favorite;
 
+import com.choongang.OriMarket.business.store.BusinessStore;
+import com.choongang.OriMarket.business.store.BusinessStoreRepository;
 import com.choongang.OriMarket.store.Item;
 import com.choongang.OriMarket.store.ItemRepository;
 import com.choongang.OriMarket.user.User;
@@ -23,6 +25,7 @@ public class FavController {
     private final FavService favService;
     private final UserService userService;
     private final ItemRepository itemRepository;
+    private final BusinessStoreRepository businessStoreRepository;
 
     @GetMapping("/storeFav")
     public String storeFav(@RequestParam(value = "favId",required = false) Long favId, User user, Fav fav, HttpSession session){
@@ -62,8 +65,9 @@ public class FavController {
                 session.setAttribute("favNumber","");
             }
             //session.setAttribute("favNumber", fav.getFavNumber());
-            List<Item> all = itemRepository.findAll();
-            model.addAttribute("al",all);
+            List<BusinessStore> byBuStoreName = businessStoreRepository.findByBuStoreName(favStoreName);
+            List<Item> items = byBuStoreName.get(0).getItems();
+            model.addAttribute("al",items);
             return "store/store";
         //비회원
         }else{
