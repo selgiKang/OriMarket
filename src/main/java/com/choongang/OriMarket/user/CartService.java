@@ -110,7 +110,11 @@ public class CartService {
         List<CartItem> cartItems = cartItemRepository.findAll();
         List<CartItem> userItems = new ArrayList<>();
 
+
+
         for (CartItem cItem : cartItems) {
+            System.out.println("이게 널인가?"+cItem.getCart().getCartId());
+            System.out.println("얘가 널인가?"+cart.getCartId());
             if (cItem.getCart().getCartId() == cart.getCartId()) {
                 userItems.add(cItem);
             }
