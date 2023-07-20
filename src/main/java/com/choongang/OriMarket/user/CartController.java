@@ -1,8 +1,8 @@
 package com.choongang.OriMarket.user;
 
-import com.choongang.OriMarket.business.store.BusinessStore;
 import com.choongang.OriMarket.business.store.BusinessStoreRepository;
 import com.choongang.OriMarket.store.Item;
+import com.choongang.OriMarket.store.ItemRepository;
 import com.choongang.OriMarket.store.ItemService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,12 +26,15 @@ public class CartController {
 
     private final BusinessStoreRepository businessStoreRepository;
 
-    public CartController(CartService cartService, UserService userService, ItemService itemService, CartItemRepository cartItemRepository, BusinessStoreRepository businessStoreRepository){
+    private final ItemRepository itemRepository;
+
+    public CartController(CartService cartService, UserService userService, ItemService itemService, CartItemRepository cartItemRepository, BusinessStoreRepository businessStoreRepository, ItemRepository itemRepository){
         this.cartService=cartService;
         this.userService=userService;
         this.itemService=itemService;
         this.cartItemRepository = cartItemRepository;
         this.businessStoreRepository = businessStoreRepository;
+        this.itemRepository = itemRepository;
     }
 
     /*내 장바구니 조회*/
@@ -42,18 +45,23 @@ public class CartController {
         List<CartItem> byUserUserSeq = cartItemRepository.findByUser_UserSeq(user.getUserSeq());
         List<CartItem> cartItems = cartService.userCartView(cart);
 
-
         int totalPrice = 0;
         for(CartItem cartItem : cartItems){
             totalPrice += (cartItem.getItem().getItemPrice()*cartItem.getCount());
 
         }
-
-
         model.addAttribute("cartItemList",cartItems);
         model.addAttribute("totalPrice",totalPrice);
         model.addAttribute("user",userId);
         model.addAttribute("userOrderList",byUserUserSeq);
+
+
+
+
+        for(CartItem cartItem:byUserUserSeq){
+            System.out.println("가게: "+cartItem.getBusinessStore().getBuStoreName());
+            List<Item> items = cartItem.getBusinessStore().getItems();
+        }
 
 
         return "/user/cart";

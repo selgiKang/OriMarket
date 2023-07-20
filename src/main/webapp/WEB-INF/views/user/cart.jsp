@@ -1,3 +1,7 @@
+<%@ page import="com.choongang.OriMarket.user.CartItem" %>
+<%@ page import="java.util.List" %>
+<%@ page import="java.util.Collections" %>
+<%@ page import="com.choongang.OriMarket.store.Item" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 		 pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"  %>
@@ -36,58 +40,61 @@
 		</div>
 		<div id="cart_itemList">
 			<ul>
-				<% int i = 0; %>
+
 				<%--반복문시작--%>
 				<c:forEach var="orderList" items="${userOrderList}" varStatus="status">
-					<c:out value="${status.index}"/>
 				<article>
 					<h1>${orderList.businessStore.buStoreName}</h1>
 					<!-- 같은 가게 안에서 상품리스트(where='가게이름'아니면'가게식별번호')쿼리 -->
 					<ul>
-						<c:forEach var="items" items="${cartItemList}" varStatus="">
+						<c:forEach var="item" items="${orderList.businessStore.items}">
+						<c:if test="${item eq orderList.item}">
+						<%--<c:forEach var="items" items="${cartItemList}" varStatus="">--%>
 							<li>
 								<%--<c:out value="${status.index}"/>--%>
 								<div class="cart_info">
 									<input type="checkbox" name="cbox"  class="individual_checkbox" checked="checked">
-										<input type="hidden" class="individual_totalCount" value="${items.count}">
-										<input type="hidden" class="individual_itemPrice" value="${items.itemPrice}">
-										<input type="hidden" class="individual_totalPrice" value="${items.count*items.itemPrice}">
+										<input type="hidden" class="individual_totalCount" value="${orderList.count}">
+										<input type="hidden" class="individual_itemPrice" value="${orderList.itemPrice}">
+										<input type="hidden" class="individual_totalPrice" value="${orderList.count*orderList.itemPrice}">
 									<!-- 상품이미지나 상품타이틀을 클릭하면 상세페이지로 넘어간다(a태그) -->
 									<a href="상품상세페이지">
 										<div class="cart_itemImg">
 											<img src="../../img/user/cart_fish.png">
 										</div>
 										<div class="cart_itemTitle">
-											<p>${items.item.getItemName()}</p>
+											<p>${orderList.item.itemName}</p>
 										</div>
 									</a>
 										<input type="hidden" id="userId" value="${sessionScope.userId}">
-										<input type="hidden" id="cartItemId" value="${items.cartItemId}">
-										<button class="cart_xmark" onclick="deleteBtn(${items.cartItemId})"><i class="fas fa-regular fa-xmark"></i></button>
+										<input type="hidden" id="cartItemId" value="${orderList.cartItemId}">
+										<button class="cart_xmark" onclick="deleteBtn(${orderList.cartItemId})"><i class="fas fa-regular fa-xmark"></i></button>
 
 									<!-- 수량선택(-,+),가격표시 -->
 									<div class="cart_itemDescription">
 										<div class="cart_itemOption">
 												<%--onclick="dec(currentCnt${status.index})"--%>
-											<button onclick="minusBtn('${items.cartItemId}')"><i class="fas fa-solid fa-circle-minus"></i></button>
-											<input type="text" size="1" name="currentCnt" id="currentCnt${status.index}" value="${items.count}">
-											<button onclick="plusBtn('${items.cartItemId}')"><i class="fas fa-solid fa-circle-plus"></i></button>
+											<button onclick="minusBtn('${orderList.cartItemId}')"><i class="fas fa-solid fa-circle-minus"></i></button>
+											<input type="text" size="1" name="currentCnt" id="currentCnt${status.index}" value="${orderList.count}">
+											<button onclick="plusBtn('${orderList.cartItemId}')"><i class="fas fa-solid fa-circle-plus"></i></button>
 										</div>
 										<div class="cart_itemPrice">
-											<input id="sellPrice_${status.index}" type="hidden" value="${items.itemPrice}">
+											<input id="sellPrice_${status.index}" type="hidden" value="${orderList.itemPrice}">
 											<span id="totalPriceCalSpan_${status.index}">
-													${items.itemPrice * items.count}원
+													${orderList.itemPrice * orderList.count}원
 											</span>
 										</div>
 									</div>
 								</div>
 							</li>
+						<%--</c:forEach>--%>
+						</c:if>
 						</c:forEach>
 					</ul>
 				</article>
 				</li>
 				<br>
-					<% i++;%>
+
 				</c:forEach>
 			</ul>
 		</div>
