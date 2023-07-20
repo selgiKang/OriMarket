@@ -30,7 +30,7 @@
 				<li><i class="fa-sharp fa-solid fa-circle" style="color: #46a973;"></i></li>
 				<li class="orderDelivery_li_1" style="color: #46A973;">픽업중</li>
 			</c:if>
-	<!-- 배달중 -->
+			<!-- 배달중 -->
 			<li><i class="fa-sharp fa-regular fa-circle" style="color: #b8b8b8;"></i></li>
 			<li class="orderDelivery_li_1">배달중</li>
 			<!-- 배달완료 -->

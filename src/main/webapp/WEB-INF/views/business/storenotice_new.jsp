@@ -335,7 +335,7 @@
 
         /*탭메뉴관련*/
 
-        .tabs {
+        .manager_main_tabs {
             display: flex;
             flex-wrap: wrap;
             max-width: 700px;
