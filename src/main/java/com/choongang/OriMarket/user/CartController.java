@@ -56,14 +56,6 @@ public class CartController {
         model.addAttribute("userOrderList",byUserUserSeq);
 
 
-
-
-        for(CartItem cartItem:byUserUserSeq){
-            System.out.println("가게: "+cartItem.getBusinessStore().getBuStoreName());
-            List<Item> items = cartItem.getBusinessStore().getItems();
-        }
-
-
         return "/user/cart";
     }
 
