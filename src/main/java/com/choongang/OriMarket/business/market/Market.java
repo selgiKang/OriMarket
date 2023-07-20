@@ -2,10 +2,12 @@ package com.choongang.OriMarket.business.market;
 
 import com.choongang.OriMarket.business.store.BusinessStore;
 import com.choongang.OriMarket.business.user.BusinessUser;
+import com.choongang.OriMarket.manager.user.ManagerUser;
 import com.choongang.OriMarket.store.Store;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.catalina.Manager;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -37,4 +39,7 @@ public class Market {
 
     @OneToMany(mappedBy = "market")
     private List<BusinessStore> businessStore = new ArrayList<>();
+
+    @OneToOne(mappedBy = "market")
+    private ManagerUser managerUser;
 }

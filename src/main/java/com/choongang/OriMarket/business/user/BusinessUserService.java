@@ -45,8 +45,6 @@ public class BusinessUserService {
                 }
             }
 
-
-
         if(findbusinessUser == null){
             return false;
         }
@@ -83,6 +81,5 @@ public class BusinessUserService {
 
     public boolean checkBuId(String buUserId){
         return businessUserRepository.existsByBuUserId(buUserId);
-
     }
 };
