@@ -12,4 +12,6 @@ public interface BusinessStoreRepository extends JpaRepository<BusinessStore,Lon
     BusinessStore findByBusinessUser(BusinessUser businessUser);
 
     List<BusinessStore> findByBuStoreName(String searchKeyword);
+
+    //푸시푸시푸시
 }
