@@ -1,7 +1,7 @@
-<!--<%@ page language="java" contentType="text/html; charset=UTF-8"
-pageEncoding="UTF-8"%>-->
-<!DOCTYPE html>
-<html lang="en">
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"  %>
+<html>
 <head>
   <meta charset="UTF-8">
   <title>Title</title>
@@ -277,9 +277,11 @@ pageEncoding="UTF-8"%>-->
 <body>
 
 <div class="manager_main-container">
-  <h3>매니저 페이지</h3>
+  <h3>${sessionScope.managerName} 매니저 페이지</h3>
   <!--if문 추가-->
-  <div id="manager_main_login"><a>로 그 인</a></div>
+  <c:if test="${empty sessionScope.managerId}">
+    <div id="manager_main_login"><a href="/managerJoin">회원가입</a>&nbsp;&nbsp;&nbsp;<a href="/managerLogin">로 그 인</a></div>
+  </c:if>
   <div class="manager_main_tabs">
     <input type="radio" id="tab1" name="tab-control" checked>
     <input type="radio" id="tab2" name="tab-control">
