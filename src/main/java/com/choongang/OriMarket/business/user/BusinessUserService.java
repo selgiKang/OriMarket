@@ -1,5 +1,7 @@
 package com.choongang.OriMarket.business.user;
 
+import com.choongang.OriMarket.business.market.Market;
+import com.choongang.OriMarket.business.market.MarketService;
 import com.choongang.OriMarket.business.store.BusinessStore;
 import com.choongang.OriMarket.business.store.BusinessStoreRepository;
 import com.choongang.OriMarket.review.Review;
@@ -22,13 +24,13 @@ public class BusinessUserService {
 
     @Autowired
     private final BusinessUserRepository businessUserRepository;
-    private final BusinessStoreRepository businessStoreRepository;
     private final ReviewRepository reviewRepository;
+    private final MarketService marketService;
 
     public boolean login1(BusinessUser businessUser, HttpSession session, Model model) {
         BusinessUser findbusinessUser = businessUserRepository.findByBuUserId(businessUser.getBuUserId());
-            session.setAttribute("marketSeq",findbusinessUser.getMarket().getMarketSeq());
-            session.setAttribute("buUserNumber",findbusinessUser.getBuUserNumber());
+
+        session.setAttribute("buUserNumber",findbusinessUser.getBuUserNumber());
         List<Review> all = reviewRepository.findAll();
 
 
@@ -52,6 +54,9 @@ public class BusinessUserService {
         if(!businessUser.getBuUserPassWord().equals(findbusinessUser.getBuUserPassWord())){
             return false;
         }
+        if(findbusinessUser.getMarket().getMarketSeq()!=null){
+            session.setAttribute("marketSeq",findbusinessUser.getMarket().getMarketSeq());
+        }
         session.setAttribute("buUserNumber",findbusinessUser.getBuUserNumber());
         System.out.println("buUserNumber: "+session.getAttribute("buUserNumber"));
         return true;
@@ -59,28 +64,21 @@ public class BusinessUserService {
 
 
     public boolean join1(BusinessUser businessUser, HttpSession session) {
-        System.out.println("모라고 나올까요?"+businessUser.getBuUserNumber());
-
-
+        System.out.println("방금푸시함: "+businessUser.getMarket().getMarketName());
+        Market market = marketService.findMarket(businessUser.getMarket().getMarketName());
+        businessUser.setMarket(market);
         if(businessUserRepository.findById(businessUser.getBuUserNumber()).isEmpty()){
 
-        }else {
+        }else{
             BusinessUser byId = businessUserRepository.findById(businessUser.getBuUserNumber()).orElseThrow();
-            if(businessUser.getBuUserNumber().equals(byId.getBuUserNumber())){
-                return false;
-            }else {
-
-            }
+            if(byId.getBuUserNumber().equals(businessUser.getBuUserNumber())){return false;}
         }
-        BusinessUser savedbusinessUser = businessUserRepository.save(businessUser);
-
-        if (savedbusinessUser == null) {
-
+        BusinessUser save = businessUserRepository.save(businessUser);
+        System.out.println("이건먼가요확인: "+save.getMarket().getMarketName());
+        if(save == null){
             return false;
-        } else {
-
-            return true;
         }
+        return true;
     }
 
     public boolean checkBuId(String buUserId){

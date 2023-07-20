@@ -52,5 +52,17 @@ public class ItemService {
 
     }
 
+    public List<Item> searchItem(String searchKeyword){
+        List<Item> byItemNameContaining = itemRepository.findByItemNameContaining(searchKeyword);
+
+        if(byItemNameContaining.isEmpty()){
+            return byItemNameContaining;
+        }else {
+            return byItemNameContaining;
+        }
+
+
+    }
+
 
 }

@@ -16,17 +16,13 @@ import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
+@RequiredArgsConstructor
 @Slf4j
 public class BusinessUserController {
 
-    private BusinessUserService businessUserService;
-    private MarketService marketService;
-
     @Autowired
-    public void BusinessUserController(BusinessUserService businessUserService,MarketService marketService){
-        this.businessUserService=businessUserService;
-        this.marketService = marketService;
-    }
+    private BusinessUserService businessUserService;
+
 
     @GetMapping("/login1")
     public String login1(){return "business/businessUser/businesslogin";}
@@ -47,10 +43,6 @@ public class BusinessUserController {
 
     @PostMapping("/join1")
     public String joinUser(@ModelAttribute BusinessUser businessUser,HttpSession session) {
-
-        Market marketData = marketService.findMarket(businessUser.getMarket().getMarketName());
-        businessUser.setMarket(marketData);
-
         if(businessUserService.join1(businessUser,session)){
             return "business/businessUser/businesslogin";
         }

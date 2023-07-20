@@ -1,6 +1,8 @@
 package com.choongang.OriMarket.review;
 
 import com.choongang.OriMarket.business.store.BusinessStore;
+import com.choongang.OriMarket.business.store.BusinessStoreRepository;
+import com.choongang.OriMarket.business.user.BusinessUser;
 import com.choongang.OriMarket.store.Item;
 import com.choongang.OriMarket.store.ItemRepository;
 import com.choongang.OriMarket.store.Store;
@@ -15,6 +17,7 @@ import org.springframework.ui.Model;
 
 import javax.persistence.EntityManager;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -32,6 +35,8 @@ public class ReviewService {
 
     private final ItemRepository itemRepository;
 
+    private final BusinessStoreRepository businessStoreRepository;
+
     public void save(Review review, HttpSession session, Model model){
         User byId = userRepository.findById((Long) session.getAttribute("userSeq")).orElseThrow();
         review.setUser(byId);
@@ -41,5 +46,28 @@ public class ReviewService {
         List<Review> reviews = byId.getReviews();
         model.addAttribute("re",reviews);
     }
+
+    public List<Review> findReview(Review review,BusinessStore businessStore){
+        List<Review> findReviewResult= reviewRepository.findByBusinessStore(businessStore);
+        return findReviewResult;
+    }
+
+    public void replyMessageInsert(Review review,Model model){
+        Review resultList = reviewRepository.findById(review.getReview_id()).orElseThrow();
+
+        if(resultList.getBusinessReplyMessage()==null){
+           resultList.setBusinessReplyMessage(review.getBusinessReplyMessage());
+           Review saveReply = reviewRepository.save(resultList);
+           Review updatedReview = reviewRepository.findById(saveReply.getReview_id()).orElseThrow();
+           model.addAttribute("reviewList",updatedReview);
+
+        }else{
+            resultList.setBusinessReplyMessage(review.getBusinessReplyMessage());
+            Review saveReply = reviewRepository.save(resultList);
+            Review updatedReview = reviewRepository.findById(saveReply.getReview_id()).orElseThrow();
+            model.addAttribute("reviewList",updatedReview);
+        }
+    }
+
 
 }

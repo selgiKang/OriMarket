@@ -1,6 +1,7 @@
 package com.choongang.OriMarket.user;
 
 
+import com.choongang.OriMarket.business.store.BusinessStore;
 import com.choongang.OriMarket.store.Item;
 
 import lombok.extern.slf4j.Slf4j;
@@ -64,9 +65,9 @@ public class CartService {
             cartRepository.save(cart);
         }
 
+
         /*cartItem생성*/
         CartItem cartItem = cartItemRepository.findByCart_CartIdAndItem_ItemId(cart.getCartId(), item.getItemId());
-
 
         /*cartItem이 없다면 새로 생성*/
         if (cartItem == null) {
@@ -82,7 +83,7 @@ public class CartService {
 
     }
 
-    //가게정보조회
+    //가게정보조회(goods테이블에 가게id가 들어가지않으면 의미없다)
     public List<Item> cartItemInfo(Long cartItemId){
         List<Item> itemList = cartItemRepository.findByCartItemId(cartItemId);
         List<Item> userItemInfo = new ArrayList<>();
@@ -92,6 +93,15 @@ public class CartService {
         }
          return userItemInfo;
     }
+
+    //유저의 주문리스트 조회하기
+    public List<CartItem> userOrderList(User user){
+        List<CartItem> userCartList = cartItemRepository.findByUser_UserSeq(user.getUserSeq());
+        return  userCartList;
+    }
+
+
+
 
     //장바구니 조회하기
 

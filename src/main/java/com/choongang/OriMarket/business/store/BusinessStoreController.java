@@ -4,6 +4,7 @@ import com.choongang.OriMarket.business.user.BusinessUser;
 import com.choongang.OriMarket.store.Store;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,6 +18,7 @@ import javax.servlet.http.HttpSession;
 @Slf4j
 public class BusinessStoreController {
 
+    @Autowired
     private final BusinessStoreService businessStoreService;
 
     @GetMapping("/storenotice1")

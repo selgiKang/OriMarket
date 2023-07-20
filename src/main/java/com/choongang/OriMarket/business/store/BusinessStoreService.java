@@ -4,6 +4,7 @@ import com.choongang.OriMarket.business.market.Market;
 import com.choongang.OriMarket.business.market.MarketRepository;
 import com.choongang.OriMarket.business.user.BusinessUser;
 import com.choongang.OriMarket.business.user.BusinessUserRepository;
+import com.choongang.OriMarket.review.Review;
 import com.choongang.OriMarket.store.Store;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -55,6 +56,24 @@ public class BusinessStoreService {
 
     }
 
+    public BusinessStore findReview(BusinessStore businessStore, BusinessUser businessUser,HttpSession session){
+        Long buUserNumbers = Long.valueOf((session.getAttribute("buUserNumber")).toString());
+        businessUser.setBuUserNumber(buUserNumbers);
 
+        BusinessStore buStore = businessStoreRepository.findByBusinessUser(businessUser);
 
+        return buStore;
+    }
+
+    public List<BusinessStore> searchStore(String searchKeyword){
+        List<BusinessStore> byStoreName = businessStoreRepository.findByBuStoreName(searchKeyword);
+
+        if(byStoreName.isEmpty()){
+            return byStoreName;
+        }else {
+            return byStoreName;
+        }
+        //이거 왜안들어갈까요?
+
+    }
 }

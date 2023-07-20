@@ -32,7 +32,7 @@ public class Review {
     private Long review_id;
 
     @Column
-    private int rating;
+    private Integer rating;
 
     @Column
     private String content;
@@ -58,7 +58,7 @@ public class Review {
     private String status;
 
     @ManyToOne(fetch = FetchType.LAZY) //lazy가 성능최적화
-    @JoinColumn(name ="bu_store_number")
+    @JoinColumn(name ="business_store")
     private BusinessStore businessStore;
 
     @ManyToOne(fetch = FetchType.LAZY) //lazy가 성능최적화
@@ -69,5 +69,6 @@ public class Review {
     @JoinColumn(name ="item_id")
     private Item item;
 
-
+    @Column(length = 500)
+    private String  businessReplyMessage;
 }

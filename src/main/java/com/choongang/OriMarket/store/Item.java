@@ -54,10 +54,6 @@ public class Item {
     @JoinColumn(name ="bu_store_number")
     private BusinessStore businessStore;
 
-    @ManyToOne(fetch = FetchType.LAZY) //lazy가 성능최적화
-    @JoinColumn(name ="user_seq")
-    private User user;
-
     @OneToMany(mappedBy = "item")
     private List<Review> reviews = new ArrayList<>();
 

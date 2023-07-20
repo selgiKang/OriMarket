@@ -45,14 +45,17 @@ public class CartItem {
 
     /*장바구니에 담을 상품엔티티를 생성하는 메소드*/
 
-    public static CartItem createCartItem(Cart cart, Item item, int count,int itemPrice,User user){
+    public static CartItem createCartItem(Cart cart,Item item, int count,int itemPrice,User user){
         CartItem cartItem = new CartItem();
         cartItem.setCart(cart);
         cartItem.setItem(item);
         cartItem.setCount(count);
         cartItem.setItemPrice(itemPrice);
         cartItem.setUser(user);
+        cartItem.setBusinessStore(item.getBusinessStore());
         return cartItem;
+
+        //Item을 가져와서 저장하는데,,왜 businessStoreNumber는 cartItem에 저장이 안되지???
 
     }
 
