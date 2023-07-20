@@ -9,7 +9,7 @@
     <link rel= "stylesheet" href= "../../css/marketmap/marketmap.css">
 </head>
 <body>
-    <jsp:include page="../header/header_index.jsp" />
+    <jsp:include page="../header/header_search.jsp" />
     <div class="map_wrap">
         <!--이동 화살표-->
         <div class="arrow_wrap">

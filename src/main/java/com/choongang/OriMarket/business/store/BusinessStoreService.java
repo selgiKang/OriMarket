@@ -64,4 +64,16 @@ public class BusinessStoreService {
 
         return buStore;
     }
+
+    public List<BusinessStore> searchStore(String searchKeyword){
+        List<BusinessStore> byStoreName = businessStoreRepository.findByBuStoreName(searchKeyword);
+
+        if(byStoreName.isEmpty()){
+            return byStoreName;
+        }else {
+            return byStoreName;
+        }
+
+
+    }
 }

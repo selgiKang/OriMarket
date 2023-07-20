@@ -4,8 +4,10 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
 import javax.persistence.EntityManager;
+import java.util.List;
 
 @Service
 //필드 생성자 자동 생성
@@ -17,6 +19,7 @@ public class StoreService {
     @Autowired
     private final StoreRepository storeRepository;
 
+
     EntityManager em;
 
     public Store update(Store store){
@@ -24,6 +27,7 @@ public class StoreService {
         storeRepository.save(store);
         return store;
     }
+
 
 
 }
