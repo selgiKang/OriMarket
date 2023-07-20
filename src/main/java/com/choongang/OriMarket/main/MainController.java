@@ -31,6 +31,11 @@ public class MainController {
 
     @GetMapping("/connexion_market")
     public String connexion_market() {
+        return "main/connexion_market";
+    }
+
+    @GetMapping("/connexion_market0")
+    public String connexion_market0() {
         return "main/connexion_market0";
     }
 

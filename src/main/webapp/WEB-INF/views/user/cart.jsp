@@ -36,15 +36,17 @@
 		</div>
 		<div id="cart_itemList">
 			<ul>
+				<% int i = 0; %>
 				<%--반복문시작--%>
-				<%--<c:forEach var="orderList" items="${userOrderList}">--%>
-					<c:forEach var="items" items="${cartItemList}" varStatus="status">
+				<c:forEach var="orderList" items="${userOrderList}" varStatus="status">
+					<c:out value="${status.index}"/>
 				<article>
-					<h1>${orderList.businessStore.getBuStoreName()}</h1>
+					<h1>${orderList.businessStore.buStoreName}</h1>
 					<!-- 같은 가게 안에서 상품리스트(where='가게이름'아니면'가게식별번호')쿼리 -->
 					<ul>
-						<c:forEach var="items" items="${cartItemList}" varStatus="status">
+						<c:forEach var="items" items="${cartItemList}" varStatus="">
 							<li>
+								<%--<c:out value="${status.index}"/>--%>
 								<div class="cart_info">
 									<input type="checkbox" name="cbox"  class="individual_checkbox" checked="checked">
 										<input type="hidden" class="individual_totalCount" value="${items.count}">
@@ -85,7 +87,8 @@
 				</article>
 				</li>
 				<br>
-				<%--</c:forEach>--%>
+					<% i++;%>
+				</c:forEach>
 			</ul>
 		</div>
 		<div id="cart_moreBtn">

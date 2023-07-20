@@ -1,11 +1,11 @@
 package com.choongang.OriMarket.user;
 
 import com.choongang.OriMarket.business.store.BusinessStore;
-import com.choongang.OriMarket.business.store.BusinessStoreService;
+import com.choongang.OriMarket.business.store.BusinessStoreRepository;
 import com.choongang.OriMarket.store.Item;
 import com.choongang.OriMarket.store.ItemService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.core.parameters.P;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -17,14 +17,21 @@ import java.util.List;
 @Slf4j
 public class CartController {
 
+    @Autowired
     private final CartService cartService;
     private final UserService userService;
     private final ItemService itemService;
 
-    public CartController(CartService cartService, UserService userService,ItemService itemService){
+    private final CartItemRepository cartItemRepository;
+
+    private final BusinessStoreRepository businessStoreRepository;
+
+    public CartController(CartService cartService, UserService userService, ItemService itemService, CartItemRepository cartItemRepository, BusinessStoreRepository businessStoreRepository){
         this.cartService=cartService;
         this.userService=userService;
         this.itemService=itemService;
+        this.cartItemRepository = cartItemRepository;
+        this.businessStoreRepository = businessStoreRepository;
     }
 
     /*내 장바구니 조회*/
@@ -32,9 +39,9 @@ public class CartController {
     public String myCartPage(@PathVariable("userId") String userId, Model model){
         Cart cart = cartService.getCart(userId);
         User user = userService.getUser(userId);
-
+        List<CartItem> byUserUserSeq = cartItemRepository.findByUser_UserSeq(user.getUserSeq());
         List<CartItem> cartItems = cartService.userCartView(cart);
-        List<CartItem> userOrderList = cartService.userOrderList(user);
+
 
         int totalPrice = 0;
         for(CartItem cartItem : cartItems){
@@ -42,10 +49,12 @@ public class CartController {
 
         }
 
+
         model.addAttribute("cartItemList",cartItems);
         model.addAttribute("totalPrice",totalPrice);
         model.addAttribute("user",userId);
-        model.addAttribute("userOrderList",userOrderList);
+        model.addAttribute("userOrderList",byUserUserSeq);
+
 
         return "/user/cart";
     }
@@ -55,6 +64,7 @@ public class CartController {
     public String addMyCart(@PathVariable("userId") String userId, Long itemId, int count, int itemPrice){
         User user = userService.getUser(userId);
         Item additem = itemService.getItem(itemId);
+
 
         cartService.addCart(user,additem,count,itemPrice);
 
