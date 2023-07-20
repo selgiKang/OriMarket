@@ -58,12 +58,5 @@ public class Item {
     private List<Review> reviews = new ArrayList<>();
 
 
-
-
-    /*
-    @ManyToOne
-    @JoinColumn(name = "store_number")
-    private Store store;
-*/
 }
 

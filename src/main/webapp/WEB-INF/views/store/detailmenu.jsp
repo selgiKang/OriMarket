@@ -113,14 +113,15 @@
 		<h1>오이</h1>
 		<h5>인공 조미료를 쓰지 않고 순수 천연재료로 만들어 시원한 바다맛을 느낄 수 있는 착한 생 칼국수 대표 칼국수!</h5>
 	</div>
-	<form action="/${sessionScope.userId}/cart" method="post">
+	<form action="/${sessionScope.userId}/cart/" method="post">
 		<div class="mymenu_container">
 			<div class="mymenu">
 				<h4>가격</h4>
 				<div class="radio">
 
-					<label><input type="radio" value="사과" name="itemName" checked  />사과</label>
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" value="2500" name="itemPrice" style="outline: none;border: none;" />
+					<label><input type="radio" value="떡볶이" name="itemName" checked  />오이</label>
+							<input type="hidden" value="91234" name="itemId">
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" value="10000" name="itemPrice" style="outline: none;border: none;" />
 				</div>
 				<table>
 					<tr>

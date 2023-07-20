@@ -27,7 +27,8 @@ public class BusinessUserService {
 
     public boolean login1(BusinessUser businessUser, HttpSession session, Model model) {
         BusinessUser findbusinessUser = businessUserRepository.findByBuUserId(businessUser.getBuUserId());
-            session.setAttribute("buUserNumber",findbusinessUser.getBuUserNumber());
+
+        session.setAttribute("buUserNumber",findbusinessUser.getBuUserNumber());
         List<Review> all = reviewRepository.findAll();
 
 
@@ -50,6 +51,9 @@ public class BusinessUserService {
 
         if(!businessUser.getBuUserPassWord().equals(findbusinessUser.getBuUserPassWord())){
             return false;
+        }
+        if(findbusinessUser.getMarket().getMarketSeq()!=null){
+            session.setAttribute("marketSeq",findbusinessUser.getMarket().getMarketSeq());
         }
         session.setAttribute("buUserNumber",findbusinessUser.getBuUserNumber());
         System.out.println("buUserNumber: "+session.getAttribute("buUserNumber"));

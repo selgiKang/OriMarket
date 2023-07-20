@@ -1,6 +1,7 @@
 package com.choongang.OriMarket.user;
 
 
+import com.choongang.OriMarket.business.store.BusinessStore;
 import com.choongang.OriMarket.store.Item;
 
 import lombok.extern.slf4j.Slf4j;
@@ -64,9 +65,9 @@ public class CartService {
             cartRepository.save(cart);
         }
 
-        /*cartItem생성*/
-        CartItem cartItem = cartItemRepository.findByCart_CartIdAndItem_ItemName(cart.getCartId(), item.getItemName());
 
+        /*cartItem생성*/
+        CartItem cartItem = cartItemRepository.findByCart_CartIdAndItem_ItemId(cart.getCartId(), item.getItemId());
 
         /*cartItem이 없다면 새로 생성*/
         if (cartItem == null) {
@@ -81,6 +82,25 @@ public class CartService {
         }
 
     }
+
+    //가게정보조회(goods테이블에 가게id가 들어가지않으면 의미없다)
+    public List<Item> cartItemInfo(Long cartItemId){
+        List<Item> itemList = cartItemRepository.findByCartItemId(cartItemId);
+        List<Item> userItemInfo = new ArrayList<>();
+
+        for(Item items: itemList){
+            userItemInfo.add(items);
+        }
+         return userItemInfo;
+    }
+
+    //유저의 주문리스트 조회하기
+    public List<CartItem> userOrderList(User user){
+        List<CartItem> userCartList = cartItemRepository.findByUser_UserSeq(user.getUserSeq());
+        return  userCartList;
+    }
+
+
 
 
     //장바구니 조회하기
@@ -148,36 +168,56 @@ public class CartService {
         }
 
     }
-
-
-    //주문결제후 장바구니 비우기
-    public void cartDeleteAll(String userId) {
+//
+//
+//    //주문결제후 장바구니 비우기
+//    public void cartDeleteAll(String userId) {
+//        List<CartItem> cartItems = cartItemRepository.findAll();
+//        Cart cart = cartRepository.findByUserUserId(userId);
+//        int totalPrice = 0;
+//        int deliveryPrice = 0;
+//
+//        /*접속유저의 cartItem만 찾아서 삭제*/
+//        for (CartItem cartItem : cartItems) {
+//            //주문하기 버튼을 누르면 cart테이블에 totalPrice,deliveryPrice저장.
+//            if (cartItem.getCart().getCartId().equals(cart.getCartId())) {
+//                totalPrice += cartItem.getItemPrice() * cartItem.getCount();
+//                cart.setCartTotalPrice(totalPrice);
+//                if (totalPrice < 30000) {
+//                    deliveryPrice += 3000;
+//                    cart.setCartDeliveryPrice(deliveryPrice);
+//
+//                    //cartItem테이블 내역 삭제
+//                    cartItem.getCart().setCartCnt(cartItem.getCart().getCartCnt() - 1);
+//                    cartItemRepository.deleteById(cartItem.getCartItemId());
+//                } else {
+//                    cartItem.getCart().setCartCnt(cartItem.getCart().getCartCnt() - 1);
+//                    cartItemRepository.deleteById(cartItem.getCartItemId());
+//                }
+//            }
+//
+//
+//        }
+//
+//    }
+//
+    public void saveCartInfo(String userId) {
         List<CartItem> cartItems = cartItemRepository.findAll();
         Cart cart = cartRepository.findByUserUserId(userId);
         int totalPrice = 0;
         int deliveryPrice = 0;
 
-        /*접속유저의 cartItem만 찾아서 삭제*/
-        for (CartItem cartItem : cartItems) {
-            //주문하기 버튼을 누르면 cart테이블에 totalPrice,deliveryPrice저장.
-            if (cartItem.getCart().getCartId().equals(cart.getCartId())) {
-                totalPrice += cartItem.getItemPrice() * cartItem.getCount();
-                cart.setCartTotalPrice(totalPrice);
-                if (totalPrice < 30000) {
-                    deliveryPrice += 3000;
-                    cart.setCartDeliveryPrice(deliveryPrice);
+        for (CartItem cartItemList : cartItems) {
+            if (cartItemList.getCart().getCartId().equals(cart.getCartId())) {
+                totalPrice += cartItemList.getItemPrice() * cartItemList.getCount();
 
-                    //cartItem테이블 내역 삭제
-                    cartItem.getCart().setCartCnt(cartItem.getCart().getCartCnt() - 1);
-                    cartItemRepository.deleteById(cartItem.getCartItemId());
-                } else {
-                    cartItem.getCart().setCartCnt(cartItem.getCart().getCartCnt() - 1);
-                    cartItemRepository.deleteById(cartItem.getCartItemId());
+                cart.setCartTotalPrice(totalPrice);
+                if (totalPrice < 30000 && deliveryPrice==0) {
+                    cart.setCartDeliveryPrice(3000);
+                } else if (deliveryPrice==0) {
+                    cart.setCartDeliveryPrice(0);
                 }
             }
-
-
         }
-
     }
 }
