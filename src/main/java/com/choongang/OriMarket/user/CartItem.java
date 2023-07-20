@@ -52,6 +52,7 @@ public class CartItem {
         cartItem.setCount(count);
         cartItem.setItemPrice(itemPrice);
         cartItem.setUser(user);
+        cartItem.setBusinessStore(item.getBusinessStore());
         return cartItem;
 
         //Item을 가져와서 저장하는데,,왜 businessStoreNumber는 cartItem에 저장이 안되지???
