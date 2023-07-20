@@ -63,6 +63,11 @@ public class ReviewController {
     @PostMapping("/ReplyInsert")
     public String replyInsert(@ModelAttribute Review review,Model model){
         reviewService.replyMessageInsert(review,model);
+        return "redirect:/businessReview";
+    }
+    @GetMapping("/ReplyInsert")
+    public String replyInsert2(@ModelAttribute Review review,Model model){
+        reviewService.replyMessageInsert(review,model);
         return "business/businessReview/business_review";
     }
 

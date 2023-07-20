@@ -52,21 +52,16 @@ public class ReviewService {
         return findReviewResult;
     }
 
-    public void replyMessageInsert(Review review,Model model){
-        Review resultList = reviewRepository.findById(review.getReview_id()).orElseThrow();
+    public void replyMessageInsert(Review reviews,Model model){
+       Review resultList = reviewRepository.findById(reviews.getReview_id()).orElseThrow();
+      System.out.println("수정 메세지: "+reviews.getBusinessReplyMessage());
+      resultList.setBusinessReplyMessage(reviews.getBusinessReplyMessage());
 
-        if(resultList.getBusinessReplyMessage()==null){
-           resultList.setBusinessReplyMessage(review.getBusinessReplyMessage());
-           Review saveReply = reviewRepository.save(resultList);
-           Review updatedReview = reviewRepository.findById(saveReply.getReview_id()).orElseThrow();
-           model.addAttribute("reviewList",updatedReview);
+       Review saveReply = reviewRepository.save(resultList);
+       Review updatedReview = reviewRepository.findById(saveReply.getReview_id()).orElseThrow();
+       model.addAttribute("reviewList",updatedReview);
 
-        }else{
-            resultList.setBusinessReplyMessage(review.getBusinessReplyMessage());
-            Review saveReply = reviewRepository.save(resultList);
-            Review updatedReview = reviewRepository.findById(saveReply.getReview_id()).orElseThrow();
-            model.addAttribute("reviewList",updatedReview);
-        }
+
     }
 
 
