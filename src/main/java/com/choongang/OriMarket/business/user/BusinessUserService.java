@@ -64,11 +64,15 @@ public class BusinessUserService {
 
 
     public boolean join1(BusinessUser businessUser, HttpSession session) {
-        System.out.println("이건먼가요확인: "+businessUser.getMarket().getMarketName());
+        System.out.println("방금푸시함: "+businessUser.getMarket().getMarketName());
         Market market = marketService.findMarket(businessUser.getMarket().getMarketName());
         businessUser.setMarket(market);
-        BusinessUser byId = businessUserRepository.findById(businessUser.getBuUserNumber()).orElseThrow();
-        if(byId.getBuUserNumber().equals(businessUser.getBuUserNumber())){ return false;}
+        if(businessUserRepository.findById(businessUser.getBuUserNumber()).isEmpty()){
+
+        }else{
+            BusinessUser byId = businessUserRepository.findById(businessUser.getBuUserNumber()).orElseThrow();
+            if(byId.getBuUserNumber().equals(businessUser.getBuUserNumber())){return false;}
+        }
         BusinessUser save = businessUserRepository.save(businessUser);
         System.out.println("이건먼가요확인: "+save.getMarket().getMarketName());
         if(save == null){
