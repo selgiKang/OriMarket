@@ -1,11 +1,8 @@
-<!--<%@ page language="java" contentType="text/html; charset=UTF-8"
-pageEncoding="UTF-8"%>-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-  <link rel="stylesheet" type="text/css" href="../../css/store/delivery_pickup.css">
 </head>
 <style>
 
@@ -16,7 +13,7 @@ pageEncoding="UTF-8"%>-->
   }
 
   body {
-    margin: 0 auto;
+    font-family: 'LINESeedKR-Bd', sans-serif;
   }
 
   /*핸드폰화면 사이즈*/
@@ -30,14 +27,12 @@ pageEncoding="UTF-8"%>-->
     background-color: #eee;
     overflow: auto;
     overflow-x: hidden;
-    font-family: 'LINESeedKR-Bd', sans-serif;
   }
 
-/*스크롤 가능은 하지만 스크롤바 안보이게*/
+  /*스크롤 가능은 하지만 스크롤바 안보이게*/
   .main-container::-webkit-scrollbar {
     display: none;
   }
-
 
   /*탭 스타일*/
   body h1 {
@@ -46,6 +41,7 @@ pageEncoding="UTF-8"%>-->
     font-weight: 300;
     padding: 40px 0 20px 0;
     margin-bottom: -50px;
+    align-items: center;
   }
 
   /*내용 적는 칸 배경 */
@@ -53,7 +49,10 @@ pageEncoding="UTF-8"%>-->
     border-radius: 5px;
     background: white;
     height: 100%;
+    max-width: 365px;
+    width: 100%;
     margin-top: 15px; /*리뷰관리 제목이랑 간격 조절*/
+
   }
 
 
@@ -152,7 +151,7 @@ pageEncoding="UTF-8"%>-->
 
   /*내용 적는 칸*/
   .tabs .content {
-    margin-top: 30px;
+    margin-top: 20px;
 
   }
 
@@ -168,26 +167,6 @@ pageEncoding="UTF-8"%>-->
     /* 텍스트가 넘어가면 다음 줄로 바뀌게 하려면 아래 속성을 추가합니다. */
     word-wrap: break-word;
   }
-
-
-
-/*  .tabs .content section h2 {
-    color: #4caf50;
-    display: none;
-
-  }*/
-
-/*  .tabs .content section h2::after {
-    content: "";
-    position: relative;
-    display: block;
-    width: 30px;
-    height: 3px;
-    background: #4caf50;
-    margin-top: 5px;
-    left: 1px;
-
-  }*/
 
   .tabs
   input[name="tab-control"]:nth-of-type(1):checked
@@ -265,106 +244,13 @@ pageEncoding="UTF-8"%>-->
     }
   }
 
-  /*메뉴안 탭*/
-
-  .inside_tabs {
-    max-width: 320px;
-    min-height: 300px;
-
+  .inside_tabs{
+    margin: 10px;
   }
-
-
-  div[role="inside_tablist"] {
-    gap: 0.25rem;
-    background-color: #d1d1d170;
-    margin-bottom: 0.5rem;
-    padding: 0.4rem;
-    border-radius: 10px;
-    width: 315px;
-    text-align: center;
-    margin-left: 15px;
-  }
-
-  button[role="tab"] {
-    color: #67769e;
-    background: none;
-    border: none;
-    padding: 0.75rem 1.25rem;
-    cursor: pointer;
-    font-weight: 700;
-    border-radius: 10px;
-    font-size: 5px;
-    width: 150px;
-
-  }
-
-  button[role="tab"][aria-selected="true"] {
-    background-color: #ffffff;
-    width: 150px;
-    color: #4caf50;
-  }
-
-  button[role="tab"][aria-selected="false"]:hover {
-    color: #000000;
-  }
-
-  div[role="tabpanel"] {
-    padding: 1rem;
-  }
-
-.slider{
-  margin-bottom: -25px;
-}
-
-/*작성 가능한 리뷰 스타일*/
-  /*
-  .store-box {
-    border: 1px solid #ccc;
-    padding: 10px;
-    width: 300px;
-    border-radius: 15px;
-  }
-
-  .store-name {
-    font-weight: bold;
-    font-size: 18px;
-  }
-
-  .date {
-    margin-top: 5px;
-    font-size: 14px;
-    color: #888;
-  }
-
-  .image {
-    width: 60px;
-    height: 60px;
-    margin-top: 10px;
-    margin-left: 10px;
-    border-radius: 10px;
-  }
-
-  .order-details {
-    display: inline-block;
-    vertical-align: top;
-    margin-left: 10px;
-    font-size: 16px;
-  }
-
-  .line {
-    border-top: 1px solid #c4c4c4;
-    width: 100%;
-    margin: 30px auto;
-    position: relative;
-    right: 8px;
-  }
-  */
 
 </style>
 <body>
-
 <div class="main-container">
-  <h3>리뷰 관리</h3>
   <div class="tabs">
     <input type="radio" id="tab1" name="tab-control" checked>
     <input type="radio" id="tab2" name="tab-control">
@@ -379,36 +265,17 @@ pageEncoding="UTF-8"%>-->
       <section>
         <div class="inside_tabs">
           <div role="inside_tablist">
-            <button id="tab-1" aria-selected="true" aria-controls="tab-panel-1" role="tab" type="button" tabindex="0">
-              작성 가능한 리뷰(__)
-            </button>
-            <button id="tab-2" aria-selected="false" aria-controls="tab-panel-2" role="tab" type="button" tabindex="-1">
-              작성한 리뷰(__)
-            </button>
-          </div>
-          <div id="tab-panel-1" aria-labelledby="tab-1" role="tabpanel" tabindex="0">
-            배달탭에서 작성 가능한 리뷰
-          </div>
-          <div id="tab-panel-2" aria-labelledby="tab-2" role="tabpanel" tabindex="-1" hidden>
-            배달탭에서 작성한 리뷰
+
+
+
+
           </div>
         </div>
       </section>
       <section>
         <div class="inside_tabs">
           <div role="inside_tablist">
-            <button id="tab-3" aria-selected="true" aria-controls="tab-panel-3" role="tab" type="button" tabindex="0">
-              작성 가능한 리뷰(__)
-            </button>
-            <button id="tab-4" aria-selected="false" aria-controls="tab-panel-4" role="tab" type="button" tabindex="-1">
-              작성한 리뷰(__)
-            </button>
-          </div>
-          <div id="tab-panel-3" aria-labelledby="tab-3" role="tabpanel" tabindex="0">
-            포장탭에서 작성 가능한 리뷰
-          </div>
-          <div id="tab-panel-4" aria-labelledby="tab-4" role="tabpanel" tabindex="-1" hidden>
-            포장탭에서 작성한 리뷰
+
           </div>
         </div>
       </section>
@@ -417,6 +284,7 @@ pageEncoding="UTF-8"%>-->
 </div>
 
 </body>
+
 <script>
   const tabElements = document.querySelectorAll('button[role="tab"]');
   const panelElements = document.querySelectorAll('[role="tabpanel"]');
@@ -483,5 +351,5 @@ pageEncoding="UTF-8"%>-->
   }
 
 </script>
-</html>
 
+</html>
