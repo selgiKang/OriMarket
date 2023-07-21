@@ -147,7 +147,7 @@ a {
     top: 10px;
     right: 10px;
     cursor: pointer;
-    z-index: 2;
+    z-index: 10;
 }
 
 .heart.filled {
@@ -165,7 +165,7 @@ a {
 }
 
 /*메엔 가게 사진 사이즈*/
-.like-container img{
+#like_container_img{
     width: 375px;
 }
 

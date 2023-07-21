@@ -5,6 +5,14 @@
     <meta charset="utf-8">
     <title>가까운 시장 단골등록</title>
     <style>
+        body{
+            width:100%;
+            height:100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
         .currentlocationmap_wrap {
             width: 375px;
             height: 812px;
@@ -159,7 +167,7 @@
         { name: "이태원로데오거리", latitude: 37.535729, longitude: 126.992394 },
         { name: "통인시장", latitude: 37.565809, longitude: 126.966071 },
         { name: "평화시장", latitude: 37.570025, longitude: 126.985573 },
-        { name: "신원시장", latitude: 37.4815335827273, longitude: 126.92842341587128 }
+        { name: "신원시장", latitude: 37.4815335827273, longitude: 126.92842341587128 },
         // 추가 전통시장 데이터
         // ...
     ];

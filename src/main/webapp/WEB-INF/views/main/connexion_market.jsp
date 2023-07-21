@@ -5,6 +5,14 @@
     <meta charset="utf-8">
     <title>가까운 시장 단골등록</title>
     <style>
+        body{
+            width:100%;
+            height:100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
         .currentlocationmap_wrap {
             width: 375px;
             height: 812px;
@@ -16,7 +24,6 @@
         .currentlocationmap_box {
             width: 330px;
             height: 600px;
-            padding: 10px 20px 20px 20px;
             background-color: #fff;
             border-radius: 10px;
             box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
@@ -31,15 +38,14 @@
         #map {
             margin: auto;
             width: 280px;
-            height: 400px;
+            height: 390px;
         }
         #map_btns {
             width: 240px;
             padding: 10px;
-            margin: auto;
+            margin: 5px auto;
         }
         button {
-            margin-top: 10px;
             padding: 8px 10px;
             background-color: #ffbf41;
             border-radius: 5px;
@@ -47,21 +53,23 @@
             cursor: pointer;
             width: 240px;
         }
+        button.nowmap_btn{}
+        button.mkmap_btn{margin-top:10px;}
+        button.cnmkmap_btn{margin-top:10px; background-color: #46A973; color:#fff;}
     </style>
 </head>
 <body>
 <div class="currentlocationmap_wrap">
     <div class="currentlocationmap_box">
 
-
         <h2 class="currentlocationmap_title">현재 위치 가까운 시장 보기</h2>
         <div id="map"></div>
         <div id="map_btns">
-            <button onclick="showCurrentLocationMap()">현재 위치 보기</button>
-            <button onclick="showClosestMarketMap()">가까운 시장 보기</button>
+            <button class="nowmap_btn" onclick="showCurrentLocationMap()">현재 위치 보기</button>
+            <button class="mkmap_btn" onclick="showClosestMarketMap()">가까운 시장 보기</button>
+            <button class="cnmkmap_btn" onclick="">단골시장으로 등록하기</button>
         </div>
     </div>
-
 
 </div>
 
@@ -159,7 +167,7 @@
         { name: "이태원로데오거리", latitude: 37.535729, longitude: 126.992394 },
         { name: "통인시장", latitude: 37.565809, longitude: 126.966071 },
         { name: "평화시장", latitude: 37.570025, longitude: 126.985573 },
-        { name: "신원시장", latitude: 37.4815335827273, longitude: 126.92842341587128 }
+        { name: "신원시장", latitude: 37.4815335827273, longitude: 126.92842341587128 },
         // 추가 전통시장 데이터
         // ...
     ];

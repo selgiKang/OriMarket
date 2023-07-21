@@ -12,13 +12,11 @@
 <div class="main-container">
     <header>
         <div class="like-container">
-            <img src="../../img/store/store.jpg" alt="착한생칼국수"
-
-            >
+            <img id="like_container_img" src="../../img/store/store.jpg" alt="착한생칼국수">
         <%-- 찜 --%>
-            <c:if test="${not empty userId}">
+            <c:if test="${!empty sessionScope.userId}">
                 <form action="/storeFav" method="get">
-                    <input type="hidden" value="싱싱과일가게" name="favStoreName">
+                    <input type="hidden" value="과일가게" name="favStoreName">
                     <input type="hidden" value="<%=session.getAttribute("userSeq")%>" name="userSeq">
 
                     <button type="submit" class="storeFav" onclick="event.preventDefault(); toggleHeart(this);" style="opacity: 0;" />
@@ -29,7 +27,6 @@
                             <img src="../../img/store/filled_heart.png" alt="찬 하트" class="heart" >
                         </c:if>
                         <input type="hidden" name="favNumber" value="${sessionScope.favNumber}"><%--<%=session.getAttribute("favNumber")%>--%>
-
                 </form>
             </c:if>
         </div>
@@ -57,7 +54,7 @@
     </section>
 
     <section>
-        <button class="notice-button">📢공지사항 : 안녕하세요. 착한 생 칼국수입니다...</button>
+        <button class="notice-button">${lastM.totalMessage}</button>
     </section>
 
             <div class="tabmenu out-tabmenu">
