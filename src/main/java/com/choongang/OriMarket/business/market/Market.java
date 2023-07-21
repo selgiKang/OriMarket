@@ -24,7 +24,7 @@ public class Market {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(nullable = false)
+    @Column(name = "market_seq",nullable = false)
     private Long marketSeq;
 
     @Column

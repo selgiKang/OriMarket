@@ -31,6 +31,8 @@ public class Cart {
 
     private int cartTotalPrice;
 
+    private String deliveryType;
+
                          /* pk대신 원하는 컬럼 가져오기 referencedColumnName*/
     @OneToOne(fetch =  FetchType.LAZY)
     @JoinColumn(name = "seq")

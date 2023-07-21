@@ -1,4 +1,5 @@
 package com.choongang.OriMarket.marketmap;
+/*
 
 import javax.persistence.*;
 
@@ -20,3 +21,4 @@ public class Connexion {
     private double longitude;
 
 }
+*/

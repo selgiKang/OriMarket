@@ -1,5 +1,6 @@
 package com.choongang.OriMarket.marketmap;
 
+/*
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,4 +24,4 @@ public class ConnexionController {
         model.addAttribute("connexions", connexions);
         return "main"; // main.html 뷰 페이지로 이동
     }
-}
+}*/

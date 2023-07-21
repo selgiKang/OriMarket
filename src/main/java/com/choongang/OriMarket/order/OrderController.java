@@ -115,7 +115,7 @@ public class OrderController {
                 model.addAttribute("orderList", orderService.getAllOrders()); // order_list 페이지로 주문 목록 전달
                 RealTimeStatus rtsSearchResult = realTimeService.findRts(order,session);
                 System.out.println(rts.getRtsOrderIng());
-                return "order/order_list";
+                return "store/order_list";
             } else {
                 return "order/order_paymentPage";
             }
