@@ -60,7 +60,7 @@ public class CartController {
     }
 
     /*특정상품 장바구니에 추가*/
-    @GetMapping("/{userId}/cart/{itemId}")
+    @PostMapping("/{userId}/cart")
     public String addMyCart(@PathVariable("userId") String userId, Long itemId, int count, int itemPrice){
         User user = userService.getUser(userId);
         Item additem = itemService.getItem(itemId);
@@ -70,7 +70,6 @@ public class CartController {
 
         return "/store/detailmenu";
     }
-
 
 
     /*장바구니페이지에서 수량증감*/
