@@ -54,7 +54,7 @@
     </section>
 
     <section>
-        <button class="notice-button">📢공지사항 : 안녕하세요. 착한 생 칼국수입니다...</button>
+        <button class="notice-button">${lastM.totalMessage}</button>
     </section>
 
             <div class="tabmenu out-tabmenu">
