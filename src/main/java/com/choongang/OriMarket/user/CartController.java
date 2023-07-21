@@ -45,6 +45,9 @@ public class CartController {
         List<CartItem> byUserUserSeq = cartItemRepository.findByUser_UserSeq(user.getUserSeq());
         List<CartItem> cartItems = cartService.userCartView(cart);
 
+
+
+
         int totalPrice = 0;
         for(CartItem cartItem : cartItems){
             totalPrice += (cartItem.getItem().getItemPrice()*cartItem.getCount());

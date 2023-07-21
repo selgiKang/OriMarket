@@ -1,8 +1,10 @@
 
 package com.choongang.OriMarket.order;
 
+import com.choongang.OriMarket.RealTimeStatus.RealTimeRepository;
 import com.choongang.OriMarket.RealTimeStatus.RealTimeService;
 import com.choongang.OriMarket.RealTimeStatus.RealTimeStatus;
+import com.choongang.OriMarket.business.market.Market;
 import com.choongang.OriMarket.user.CartService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +39,7 @@ public class OrderController {
     @GetMapping("/test2")
     public String test(){return "business/businessmain";}
 
+    //정산내역
     //calculate get으로 갈 때는 businessmain 코드처럼 해야함! 보고 그 코드 복붙하기!
     @GetMapping("/calculate")
     public String calculateRequest2(@RequestParam("calculate_date") String calculateDate, @RequestParam("calculate_date_last") String calculateDateLast,Model model){
@@ -80,6 +83,13 @@ public class OrderController {
     @PostMapping("/order_paymentPage/{userId}")
     public String orderDelivery(@ModelAttribute Order order, @ModelAttribute RealTimeStatus rts, HttpSession session, @RequestParam("orderNumber")String orderNumberStr,@PathVariable("userId")String userId, Model model) {
         order.setOrderNumber(orderNumberStr);
+
+        //시장 번호 등록
+        Market m = new Market();
+        Long marketSeq = Long.valueOf((session.getAttribute("marketSeq")).toString());
+        m.setMarketSeq(marketSeq);
+        order.setMarketSeq(m);
+
         session.setAttribute("orderNumber", orderNumberStr);
 
         cartService.cartPayment(userId);
@@ -91,17 +101,21 @@ public class OrderController {
 
             // 배달 내역에 set
             rts.setOrderNumber(order);
-            rts.setRtsOrderIng(1); // "OrderIng" 상태로 설정
+            rts.setRtsOrderIng(0); // "OrderIng" 상태로 설정
             rts.setRtsRiderIng(0);
             rts.setRtsRiderFinish(0);
 
             // 배달 내역 db에 저장
             if (realTimeService.insertRts(rts)) {
+                RealTimeStatus rResult = realTimeService.findRts(order,session);
+                if(rResult!=null){
+                    model.addAttribute("rtsOrderIng",rResult.getRtsOrderIng());
+                }
                 model.addAttribute("orderDelivery", order); // order_delivery 페이지로 개별 주문의 상세 내역 전달
                 model.addAttribute("orderList", orderService.getAllOrders()); // order_list 페이지로 주문 목록 전달
-
+                RealTimeStatus rtsSearchResult = realTimeService.findRts(order,session);
                 System.out.println(rts.getRtsOrderIng());
-                return "order/order_delivery";
+                return "order/order_list";
             } else {
                 return "order/order_paymentPage";
             }

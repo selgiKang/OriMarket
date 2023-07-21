@@ -2,7 +2,9 @@ package com.choongang.OriMarket.business.market;
 
 import com.choongang.OriMarket.business.store.BusinessStore;
 import com.choongang.OriMarket.business.user.BusinessUser;
+import com.choongang.OriMarket.favorite.Fav;
 import com.choongang.OriMarket.manager.user.ManagerUser;
+import com.choongang.OriMarket.order.Order;
 import com.choongang.OriMarket.store.Store;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -42,4 +44,5 @@ public class Market {
 
     @OneToOne(mappedBy = "market")
     private ManagerUser managerUser;
+
 }

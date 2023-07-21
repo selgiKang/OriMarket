@@ -38,7 +38,7 @@
 			<li>배달 완료</li>
 		</ul>
 		<div id="orderDelivery_orderInfo">
-			<h3>오리 시장</h3>
+			<h3>${marketName}</h3>
 			<table id="orderDelivery_table_1">
 				<tr class="orderDelivery_table_tr_1"><td>주문 번호</td></tr>
 				<tr class="orderDelivery_table_tr_2"><td>202307040001</td></tr>

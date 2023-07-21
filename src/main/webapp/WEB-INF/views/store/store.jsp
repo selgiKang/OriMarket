@@ -35,7 +35,7 @@
         <span style="float: left;">
             <img class="star" src="../../img/store/star.png" alt="별">
             <%--리뷰--%>
-            <a href="#">>486</a>
+            <a href="/storeReview">>486</a>
         </span>
         <br>
         <%--storeAddress--%>
@@ -55,10 +55,11 @@
     </section>
 
     <%--공지사항--%>
-    <section>
-        <button class="notice-button" onclick="location.href='/storeMessageInsert'">${lastM.totalMessage}</button>
-    </section>
-
+    <c:if test="${lastM.totalMessage != null}">
+        <section>
+            <button class="notice-button" onclick="location.href='/storeMessageInsert'">${lastM.totalMessage}</button>
+        </section>
+    </c:if>
             <div class="tabmenu out-tabmenu">
 
                 <ul>

@@ -529,7 +529,15 @@
                     <div class="storecare_category">
                         <h3>가게 카테고리</h3>
                         <c:if test="${empty save.buStoreCategory}">
-                        <input type="text" id="store-category-input" name="buStoreCategory" placeholder="가게 카테고리"/>
+                            <select name="buStoreCategory">
+                                <option></option>
+                                <option></option>
+                                <option></option>
+                                <option></option>
+                                <option></option>
+                                <option></option>
+                            </select>
+                            <input type="text" id="store-category-input" name="buStoreCategory" placeholder="가게 카테고리"/>
                         </c:if>
                         <c:if test="${!empty save.buStoreCategory}">
                             <input type="text" id="store-category-input" name="buStoreCategory" value="${save.buStoreCategory}"/>
