@@ -59,7 +59,7 @@ public class CartService {
 
     //장바구니에 item추가
     @Transactional
-    public void addCart(User user, Item item, int count,int itemPrice) {
+    public void addCart(User user, Item item, int count) {
 
         Cart cart = cartRepository.findByUserUserId(user.getUserId());
         Item saveitem = itemRepository.findByItemId(item.getItemId());
@@ -89,17 +89,17 @@ public class CartService {
         }
 
     }
-
-    //가게정보조회(goods테이블에 가게id가 들어가지않으면 의미없다)
-    public List<Item> cartItemInfo(Long cartItemId){
-        List<Item> itemList = cartItemRepository.findByCartItemId(cartItemId);
-        List<Item> userItemInfo = new ArrayList<>();
-
-        for(Item items: itemList){
-            userItemInfo.add(items);
-        }
-         return userItemInfo;
-    }
+//
+//    //가게정보조회(goods테이블에 가게id가 들어가지않으면 의미없다)
+//    public List<Item> cartItemInfo(Long cartItemId){
+//        List<Item> itemList = cartItemRepository.findByCartItemId(cartItemId);
+//        List<Item> userItemInfo = new ArrayList<>();
+//
+//        for(Item items: itemList){
+//            userItemInfo.add(items);
+//        }
+//         return userItemInfo;
+//    }
 
     //유저의 주문리스트 조회하기
     public List<CartItem> userOrderList(User user){
@@ -120,8 +120,6 @@ public class CartService {
 
 
         for (CartItem cItem : cartItems) {
-            System.out.println("이게 널인가?"+cItem.getCart().getCartId());
-            System.out.println("얘가 널인가?"+cart.getCartId());
             if (cItem.getCart().getCartId() == cart.getCartId()) {
                 userItems.add(cItem);
             }
@@ -129,7 +127,7 @@ public class CartService {
         return userItems;
     }
 
-    //장바구니 Item삭제
+    //장바구니에서 Item개별삭제
     public void itemDelete(Long cartItemId) {
         cartItemRepository.deleteById(cartItemId);
     }
@@ -179,39 +177,41 @@ public class CartService {
         }
 
     }
-//
-//
-//    //주문결제후 장바구니 비우기
-//    public void cartDeleteAll(String userId) {
-//        List<CartItem> cartItems = cartItemRepository.findAll();
-//        Cart cart = cartRepository.findByUserUserId(userId);
-//        int totalPrice = 0;
-//        int deliveryPrice = 0;
-//
-//        /*접속유저의 cartItem만 찾아서 삭제*/
-//        for (CartItem cartItem : cartItems) {
-//            //주문하기 버튼을 누르면 cart테이블에 totalPrice,deliveryPrice저장.
-//            if (cartItem.getCart().getCartId().equals(cart.getCartId())) {
-//                totalPrice += cartItem.getItemPrice() * cartItem.getCount();
-//                cart.setCartTotalPrice(totalPrice);
-//                if (totalPrice < 30000) {
-//                    deliveryPrice += 3000;
-//                    cart.setCartDeliveryPrice(deliveryPrice);
-//
-//                    //cartItem테이블 내역 삭제
-//                    cartItem.getCart().setCartCnt(cartItem.getCart().getCartCnt() - 1);
-//                    cartItemRepository.deleteById(cartItem.getCartItemId());
-//                } else {
-//                    cartItem.getCart().setCartCnt(cartItem.getCart().getCartCnt() - 1);
-//                    cartItemRepository.deleteById(cartItem.getCartItemId());
-//                }
-//            }
-//
-//
-//        }
-//
-//    }
-//
+
+
+    //주문결제후 장바구니 비우기
+    public void cartDeleteAll(String userId) {
+        List<CartItem> cartItems = cartItemRepository.findAll();
+        Cart cart = cartRepository.findByUserUserId(userId);
+        int totalPrice = 0;
+        int deliveryPrice = 0;
+
+        /*접속유저의 cartItem만 찾아서 삭제*/
+        for (CartItem cartItem : cartItems) {
+            //주문하기 버튼을 누르면 cart테이블에 totalPrice,deliveryPrice저장.
+            if (cartItem.getCart().getCartId().equals(cart.getCartId())) {
+                totalPrice += cartItem.getItemPrice() * cartItem.getCount();
+                cart.setCartTotalPrice(totalPrice);
+                if (totalPrice < 30000) {
+                    deliveryPrice += 3000;
+                    cart.setCartDeliveryPrice(deliveryPrice);
+
+                    //cartItem테이블 내역 삭제
+                    cartItem.getCart().setCartCnt(cartItem.getCart().getCartCnt() - 1);
+                    cartItemRepository.deleteById(cartItem.getCartItemId());
+                } else {
+                    cartItem.getCart().setCartCnt(cartItem.getCart().getCartCnt() - 1);
+                    cartItemRepository.deleteById(cartItem.getCartItemId());
+                }
+            }
+
+
+        }
+
+    }
+
+
+
     public void saveCartInfo(String userId) {
         List<CartItem> cartItems = cartItemRepository.findAll();
         Cart cart = cartRepository.findByUserUserId(userId);

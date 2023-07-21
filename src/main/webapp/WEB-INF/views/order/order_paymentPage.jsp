@@ -21,7 +21,7 @@
 		String today = date1.format(date);
 	%>
 	<div id= "paymentpage_main">
-		<form action="/order_paymentPage" method="post">
+		<form action="/${userId}/cart/checkout" method="post">
 			<input type="hidden" name="orderNumber" value="<%=today%>${userId}">
 			<input type="hidden" name="orderUserId" value="1 ${userId}">
 			<input type="hidden" name="orderDate" value="<%=today%>">
@@ -52,7 +52,7 @@
 					</tr>
 					<c:forEach var="cartItems" items="${cartItemList}">
 					<tr class= "paymentpage_tr_2">
-						<td colspan="3" class= "paymentpage_td_1"><input type="text" name="orderGoodsName" value="${cartItems.item.getItemName()}" readonly></td>
+						<td colspan="3" class= "paymentpage_td_1"><input type="text" name="orderGoodsName" value="${cartItems.item.itemName}" readonly></td>
 					</tr>
 					<tr>
 						<td colspan= "3" style= "text-align: center;"><input type="text" name="orderGoodsPrice" value="${cartItems.itemPrice}원" readonly></td>
