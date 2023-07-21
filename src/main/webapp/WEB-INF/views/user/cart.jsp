@@ -26,10 +26,10 @@
 		<p style="display: inline-block; margin-left: 130px;">장바구니</p>
 	</div>
 	<div id="cart_location">
-		<form action="/search">
+		<form action="/">
 			<i class="far fa-solid fa-location-dot"></i>
 			<p>${userAddress1}</p>
-			<small id="cart_marketName">_시장이름</small>
+			<small id="cart_marketName">${marketName}</small>
 			<input type="submit" value="변경">
 		</form>
 	</div>
@@ -40,7 +40,6 @@
 		</div>
 		<div id="cart_itemList">
 			<ul>
-
 				<%--반복문시작--%>
 				<c:set var="prevBuStoreName" value="" />
 				<c:forEach var="orderList" items="${userOrderList}" varStatus="status">
@@ -50,7 +49,6 @@
 						<h1>${orderList.businessStore.buStoreName}</h1>
 					</c:if>
 					<ul>
-
 							<c:if test="${orderList.item.businessStore eq orderList.businessStore}">
 							<c:forEach var="item" items="${orderList.businessStore.items}">
 								<c:if test="${orderList.item eq item}">
@@ -102,7 +100,7 @@
 			</ul>
 		</div>
 		<div id="cart_moreBtn">
-			<a href="store/detailmenu"><input type="button" value="+상품 더 담기"></a>
+			<a href="/shinwon_marketmap"><input type="button" value="+상품 더 담기"></a>
 		</div>
 
 

@@ -143,8 +143,7 @@
 		</div>
 	</form>
 </div>
-
-
+<jsp:include page="../footer/nav_footer.jsp" />
 </body>
 </html>
 
