@@ -1,13 +1,17 @@
 package com.choongang.OriMarket.favorite;
 
+import com.choongang.OriMarket.business.message.Message;
+import com.choongang.OriMarket.business.message.MessageRepository;
 import com.choongang.OriMarket.business.store.BusinessStore;
 import com.choongang.OriMarket.business.store.BusinessStoreRepository;
+import com.choongang.OriMarket.business.user.BusinessUser;
 import com.choongang.OriMarket.store.Item;
 import com.choongang.OriMarket.store.ItemRepository;
 import com.choongang.OriMarket.user.User;
 import com.choongang.OriMarket.user.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,10 +26,13 @@ import java.util.List;
 @Slf4j
 public class FavController {
 
+    @Autowired
     private final FavService favService;
     private final UserService userService;
     private final ItemRepository itemRepository;
     private final BusinessStoreRepository businessStoreRepository;
+    private final MessageRepository messageRepository;
+
 
     @GetMapping("/storeFav")
     public String storeFav(@RequestParam(value = "favId",required = false) Long favId, User user, Fav fav, HttpSession session){
@@ -65,10 +72,18 @@ public class FavController {
             } else {
                 session.setAttribute("favNumber", "");
             }
+
             //session.setAttribute("favNumber", fav.getFavNumber());
             List<BusinessStore> byBuStoreName = businessStoreRepository.findByBuStoreName(favStoreName);
             List<Item> items = byBuStoreName.get(0).getItems();
             model.addAttribute("al", items);
+            //공지사항
+            BusinessUser buStoreNumber = items.get(0).getBusinessStore().getBusinessUser();
+            List<Message> messageList = messageRepository.findByBuUserNumber(buStoreNumber);
+
+            Message lastM = messageList.get(messageList.size()-1);
+            model.addAttribute("lastM",lastM);
+
             return "store/store";
             //비회원
         } else {
