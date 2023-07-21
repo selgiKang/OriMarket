@@ -50,7 +50,8 @@
 						<h1>${orderList.businessStore.buStoreName}</h1>
 						<!-- 같은 가게 안에서 상품리스트(where='가게이름'아니면'가게식별번호')쿼리 -->
 					</c:if>
-						<ul>
+					<ul>
+
 							<c:if test="${orderList.item.businessStore eq orderList.businessStore}">
 							<c:forEach var="item" items="${orderList.businessStore.items}">
 								<c:if test="${orderList.item eq item}">
@@ -96,7 +97,8 @@
 								</c:if>
 							</c:forEach>
 							</c:if>
-						</ul>
+					</ul>
+
 					<c:if test="${!orderList.businessStore.buStoreName.equals(prevBuStoreName)}">
 					</article>
 					<br>
