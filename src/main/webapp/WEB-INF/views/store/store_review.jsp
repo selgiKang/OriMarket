@@ -45,45 +45,33 @@
 </header>
 <main>
     <table class="review_table" border="1" style="border-collapse: collapse;">
-    <c:if test="${not empty reviewList}">
-        <c:forEach var="list" items="${reviewList}" varStatus="status">
-            <form action="/ReplyInsert" method="post">
-                <input type="hidden" name="review_id" value="${list.review_id}">
-                <tr>
-                    <td class="review_table_td_1">작성자</td><td>${list.user.userNickname}</td>
-                </tr>
-                <tr class="business_review_title">
-                    <td class="review_table_td_1">메뉴 </td>
-                    <td style="text-align: left;">불닭발 </td>
-                </tr>
-                <tr>
-                    <td class="review_table_td_1">개수</td>
-                    <td><h4 class="rating" data-rating="${list.rating}"></h4></td>
-                </tr>
-                <tr>
-                    <td style="text-align: left;" class="review_table_td_1">작성 날짜</td>
-                    <td class="rate_and_date">
-                       <h6 class="date">${list.created_date}</h6>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="my_review_photo" colspan="2">
-                        <img src="../../../../resources/static/img/store/kal.jpg">
-                        <p>${list.content}</p>
-                    </td>
-                </tr>
-                <c:if test="${empty list.businessReplyMessage}">
-                    <tr><td colspan="2" class="review_table_td_1">답댓글 달기</td></tr>
+        <c:if test="${not empty reviewList}">
+            <c:forEach var="list" items="${reviewList}" varStatus="status">
+                <form action="/ReplyInsert" method="post">
+                    <input type="hidden" name="review_id" value="${list.review_id}">
                     <tr>
-                        <td id="business_review_messageArea">
-                            <textarea type="textarea"  name="businessReplyMessage" maxlength="500" placeholder="500자 이내 작성"></textarea>
+                        <td class="review_table_td_1">작성자</td><td>${list.user.userNickname}</td>
+                    </tr>
+                    <tr class="business_review_title">
+                        <td class="review_table_td_1">메뉴 </td>
+                        <td style="text-align: left;">불닭발 </td>
+                    </tr>
+                    <tr>
+                        <td class="review_table_td_1">개수</td>
+                        <td><h4 class="rating" data-rating="${list.rating}"></h4></td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: left;" class="review_table_td_1">작성 날짜</td>
+                        <td class="rate_and_date">
+                            <h6 class="date">${list.created_date}</h6>
                         </td>
                     </tr>
                     <tr>
-                        <td><input type="submit" value="완료"></td>
+                        <td class="my_review_photo" colspan="2">
+                            <img src="../../../../resources/static/img/store/kal.jpg">
+                            <p>${list.content}</p>
+                        </td>
                     </tr>
-                </c:if>
-                <c:if test="${!empty list.businessReplyMessage}">
                     <tr>
                         <td class="review_table_td_1">리뷰 답댓글</td>
                         <td>
@@ -105,10 +93,9 @@
                             <button type="submit" id="reviewSubmitButton" style="display: none;">저장하기</button>
                         </td>
                     </tr>
-                </c:if>
-            </form>
-        </c:forEach>
-    </c:if>
+                </form>
+            </c:forEach>
+        </c:if>
     </table>
 </main>
 </body>

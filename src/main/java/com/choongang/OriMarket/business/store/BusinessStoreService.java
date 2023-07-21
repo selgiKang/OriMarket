@@ -59,7 +59,7 @@ public class BusinessStoreService {
     public BusinessStore findReview(BusinessStore businessStore, BusinessUser businessUser,HttpSession session){
         Long buUserNumbers = Long.valueOf((session.getAttribute("buUserNumber")).toString());
         businessUser.setBuUserNumber(buUserNumbers);
-
+        //사업자 번호로 해당 가게 찾기
         BusinessStore buStore = businessStoreRepository.findByBusinessUser(businessUser);
 
         return buStore;
