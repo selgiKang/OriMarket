@@ -84,7 +84,7 @@
                                 <div class="menu-image">
                                     <img src="../../img/store/kal.jpg" alt="메뉴이미지">
                                     <a href="/user_review?itemId=${a.itemId}">리뷰작성하러가기</a>
-                                    <a href="/${userId}/cart/${a.itemId}">장바구니에담기</a>
+                                    <a href="/detailmenu/${a.itemId}">상세보기</a>
                                 </div>
                             </div>
                             </c:forEach>

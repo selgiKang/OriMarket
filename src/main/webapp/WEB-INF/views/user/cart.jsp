@@ -33,7 +33,7 @@
 			<input type="submit" value="변경">
 		</form>
 	</div>
-	<form action="/paymentPage/${userId}" method="post">
+	<form action="/paymentPage/${userId}" method="get">
 		<div>
 			<input type="checkbox" id="cboxAll" name="cboxAll" checked="checked" onclick="checkAll()">
 			전체선택

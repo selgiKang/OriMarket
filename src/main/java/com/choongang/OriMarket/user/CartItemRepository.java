@@ -1,5 +1,6 @@
 package com.choongang.OriMarket.user;
 
+import com.choongang.OriMarket.business.store.BusinessStore;
 import com.choongang.OriMarket.store.Item;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -16,5 +17,6 @@ public interface CartItemRepository extends JpaRepository<CartItem,Long> {
     List<Item> findByCartItemId(Long cartItemId);
 
     List<CartItem> findByUser_UserSeq(Long userSeq);
+
 
 }
