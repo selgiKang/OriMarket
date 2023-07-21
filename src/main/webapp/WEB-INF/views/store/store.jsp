@@ -71,8 +71,10 @@
                             <div class="menu">
                                 <div class="menu-content">
                                     <h2 class="menu_name">${a.itemName}</h2>
+                                        <input type="hidden" name="itemName">
                                     <h6 class="menu-description">${a.itemInfo}</h6>
                                     <h5 class="menu_price">${a.itemPrice}</h5>
+                                    <input type="hidden" name="itemPrice">
                                     <input type="hidden" name="count" value="1">
                                     <input type="hidden" name="itemId" value="${a.itemId}">
                                 </div>

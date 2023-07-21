@@ -4,6 +4,7 @@ package com.choongang.OriMarket.user;
 import com.choongang.OriMarket.business.store.BusinessStore;
 import com.choongang.OriMarket.store.Item;
 
+import com.choongang.OriMarket.store.ItemRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,11 +24,14 @@ public class CartService {
     private final CartRepository cartRepository;
     private final CartItemRepository cartItemRepository;
 
+    private final ItemRepository itemRepository;
+
     @Autowired
-    public CartService(UserRepository userRepository, CartRepository cartRepository, CartItemRepository cartItemRepository) {
+    public CartService(UserRepository userRepository, CartRepository cartRepository, CartItemRepository cartItemRepository,ItemRepository itemRepository) {
         this.userRepository = userRepository;
         this.cartRepository = cartRepository;
         this.cartItemRepository = cartItemRepository;
+        this.itemRepository= itemRepository;
     }
 
 
@@ -55,9 +59,12 @@ public class CartService {
 
     //장바구니에 item추가
     @Transactional
-    public void addCart(User user, Item item, int count, int itemPrice) {
+    public void addCart(User user, Item item, int count,int itemPrice) {
 
         Cart cart = cartRepository.findByUserUserId(user.getUserId());
+        Item saveitem = itemRepository.findByItemId(item.getItemId());
+        int saveItemPrice = saveitem.getItemPrice();
+
 
         /*cart가 없다면 새로 생성*/
         if (cart == null) {
@@ -71,7 +78,7 @@ public class CartService {
 
         /*cartItem이 없다면 새로 생성*/
         if (cartItem == null) {
-            cartItem = CartItem.createCartItem(cart, item, count, itemPrice, user);
+            cartItem = CartItem.createCartItem(cart, item, count, saveItemPrice, user);
             cartItemRepository.save(cartItem);
 
             cart.setCartCnt(cart.getCartCnt() + 1);

@@ -119,9 +119,9 @@
 				<h4>가격</h4>
 				<div class="radio">
 
-					<label><input type="radio" value="사과" name="itemName" checked  />오이</label>
+					<label><input type="radio" value="오이" name="itemName" checked/>오이</label>
 							<input type="hidden" value="3" name="itemId">
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" value="456" name="itemPrice" style="outline: none;border: none;" />
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" value="1200" name="itemPrice" style="outline: none;border: none;" />
 				</div>
 				<table>
 					<tr>
