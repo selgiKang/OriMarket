@@ -3,6 +3,7 @@ package com.choongang.OriMarket.store;
 import com.choongang.OriMarket.business.store.BusinessStore;
 import com.choongang.OriMarket.business.user.BusinessUser;
 import com.choongang.OriMarket.review.Review;
+import com.choongang.OriMarket.user.CartItem;
 import com.choongang.OriMarket.user.User;
 import lombok.Getter;
 import lombok.Setter;
@@ -56,6 +57,9 @@ public class Item {
 
     @OneToMany(mappedBy = "item")
     private List<Review> reviews = new ArrayList<>();
+
+    @OneToMany(mappedBy = "item")
+    private List<CartItem> cartItems = new ArrayList<>();
 
 
 }
