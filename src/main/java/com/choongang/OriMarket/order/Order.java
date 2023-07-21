@@ -80,7 +80,7 @@ public class Order {
     private String forRider;
 
     @ManyToOne
-    @JoinColumn(name="marketSeq")
+    @JoinColumn(name="market_seq")
     private Market marketSeq;
 
     @Transient
