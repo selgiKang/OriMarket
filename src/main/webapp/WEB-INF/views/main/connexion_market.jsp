@@ -81,8 +81,13 @@
         <div id="map_btns">
             <button class="nowmap_btn" onclick="showCurrentLocationMap()">현재 위치 보기</button>
             <button class="mkmap_btn" onclick="showClosestMarketMap()">가까운 시장 보기</button>
-            <div></div>
-            <button class="cnmkmap_btn" onclick="">단골시장으로 등록하기</button>
+            <form action="/market_search">
+                <button class="cnmkmap_btn" type="submit">
+                    <input type="hidden" id="closestMarketInfo" name="marketName">
+                    단골시장으로 등록하기
+                </button>
+            </form>
+
         </div>
     </div>
 
@@ -151,7 +156,6 @@
         // 현재 위치에서 가장 가까운 전통시장 찾기
         var closestMarket = findClosestMarket(currentPositionMarker.getPosition().getLat(), currentPositionMarker.getPosition().getLng());
         var marketPosition = new kakao.maps.LatLng(closestMarket.latitude, closestMarket.longitude);
-
 
         // 가까운 전통시장을 지도에 표시하는 마커 생성
         var marketMarker = new kakao.maps.Marker({

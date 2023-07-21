@@ -55,10 +55,10 @@
 						<td colspan="3" class= "paymentpage_td_1"><input type="text" name="orderGoodsName" value="${cartItems.item.itemName}" readonly></td>
 					</tr>
 					<tr>
-						<td colspan= "3" style= "text-align: center;"><input type="text" name="orderGoodsPrice" value="${cartItems.itemPrice}원" readonly></td>
+						<td colspan= "3" style= "text-align: center;"><input type="text" name="orderGoodsPrice" value="${cartItems.itemPrice}" readonly></td>
 					</tr>
 					<tr>
-						<td colspan= "3" style= "text-align: right;"><input type="text" name="orderGoodsNum" value="${cartItems.count}개" readonly></td>
+						<td colspan= "3" style= "text-align: right;"><input type="text" name="orderGoodsNum" value="${cartItems.count}" readonly></td>
 					</tr>
 					</c:forEach>
 					<!-- 반복문 출력 끝 -->

@@ -5,6 +5,7 @@ import com.choongang.OriMarket.business.store.BusinessStoreRepository;
 import com.choongang.OriMarket.store.Item;
 import com.choongang.OriMarket.store.ItemRepository;
 import com.choongang.OriMarket.store.ItemService;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,7 +14,9 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.List;
+
 
 
 @Controller
@@ -112,14 +115,11 @@ public class CartController {
 
 
     /*결제페이지로 넘기기*/
-    @GetMapping("/paymentPage/{userId}")
-    public String orderPayment(@PathVariable("userId")String userId,Model model){
-
-       cartService.saveCartInfo(userId);
-
+    @PostMapping("/paymentPage/{userId}")
+    public String orderPayment(@PathVariable("userId") String userId, Model model, @ModelAttribute("deliveryType") String cart1) {
+        cartService.saveCartInfo(userId,cart1);
         Cart cart = cartService.getCart(userId);
         List<CartItem> cartItems = cartService.userCartView(cart);
-
 
         model.addAttribute("cartItemList",cartItems);
         model.addAttribute("totalPrice",cart.getCartTotalPrice());
