@@ -78,9 +78,9 @@ container.addEventListener('mouseenter', () => {
 
 
 
-    function hoverHeart(element) {
-        var inputElement = element.nextElementSibling;
-        element.src = element.src.replace("empty_heart.png", "filled_heart.png");
+function hoverHeart(element) {
+    var inputElement = element.nextElementSibling;
+    element.src = element.src.replace("empty_heart.png", "filled_heart.png");
 }
 
 

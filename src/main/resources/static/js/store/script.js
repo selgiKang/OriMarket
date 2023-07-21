@@ -92,17 +92,17 @@ function animateCoupon() {
 
 
 
-function hoverHeart(element) {
-    element.src = element.src.replace("empty_heart.png", "filled_heart.png");
-}
-
-function toggleHeart(element) {
-    if (element.src.includes("filled_heart.png")) {
-        element.src = element.src.replace("filled_heart.png", "empty_heart.png");
-    } else {
-        element.src = element.src.replace("empty_heart.png", "filled_heart.png");
-    }
-}
+// function hoverHeart(element) {
+//     element.src = element.src.replace("empty_heart.png", "filled_heart.png");
+// }
+//
+// function toggleHeart(element) {
+//     if (element.src.includes("filled_heart.png")) {
+//         element.src = element.src.replace("filled_heart.png", "empty_heart.png");
+//     } else {
+//         element.src = element.src.replace("empty_heart.png", "filled_heart.png");
+//     }
+// }
 
 
 

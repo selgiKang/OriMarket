@@ -34,17 +34,16 @@ public class FavController {
 
         if(favService.favFavorite(fav.getUserSeq(),fav.getFavStoreName())){
             favService.favDelete(fav.getUserSeq(), fav.getFavStoreName());
-           fav.setFavNumber("");
-            session.setAttribute("favNumber",String.valueOf(fav.getFavNumber()));
+            fav.setFavNumber("");
+            session.setAttribute("favNumber","");
         }else{
             favService.favInsert(fav);
+            //데이터 베이스 x
             fav.setFavNumber("1");
-            session.setAttribute("favNumber",String.valueOf(fav.getFavNumber()));
+            session.setAttribute("favNumber","1");
         }
 
-        session.setAttribute("favNumber", fav.getFavNumber());
-
-        System.out.println("찜 번호: "+favId);
+       // System.out.println("찜 번호: "+favId);
         return "store/store";
     }
 
@@ -52,25 +51,27 @@ public class FavController {
     public String store(@RequestParam("favStoreName") String favStoreName, Fav fav,User user, HttpSession session,Model model) {
         user.setUserId(String.valueOf(session.getAttribute("userId")));
         //회원
-        if(userService.checkUserId(user.getUserId())) {
+        if (userService.checkUserId(user.getUserId())) {
 
             user.setUserSeq(Long.valueOf(String.valueOf(session.getAttribute("userSeq"))));
+            //즐겨찾기 되어있는건지 안되어있는건지 확인만!
             fav.setUserSeq(user);
-            System.out.println("번호 나오니"+fav.getUserSeq());
+            fav.setFavStoreName(favStoreName);
+            System.out.println("번호 나오니" + fav.getUserSeq());
 
-            if(favService.favFavorite(fav.getUserSeq(),favStoreName)){
-                session.setAttribute("favNumber",1);
+            if (favService.favFavorite(fav.getUserSeq(), favStoreName)) {
+                session.setAttribute("favNumber", 1);
 
-            }else{
-                session.setAttribute("favNumber","");
+            } else {
+                session.setAttribute("favNumber", "");
             }
             //session.setAttribute("favNumber", fav.getFavNumber());
             List<BusinessStore> byBuStoreName = businessStoreRepository.findByBuStoreName(favStoreName);
             List<Item> items = byBuStoreName.get(0).getItems();
-            model.addAttribute("al",items);
+            model.addAttribute("al", items);
             return "store/store";
-        //비회원
-        }else{
+            //비회원
+        } else {
             return "store/store";
         }
     }
