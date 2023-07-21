@@ -73,24 +73,9 @@
                         </td>
                     </tr>
                     <tr>
-                        <td class="review_table_td_1">리뷰 답댓글</td>
+                        <td class="review_table_td_1">사장님 댓글</td>
                         <td>
                             <span id="businessReplyText">${list.businessReplyMessage}</span>
-                        </td>
-                    </tr>
-                    <tr id="businessReplyInput_txt" style="display: none">
-                        <td colspan="2" style="width: 100%;">
-                            <textarea name="businessReplyMessage" style="width: 100%;" rows="5" placeholder="댓글을 수정하시려면 여기를 클릭하고 수정하기를 눌러주세요"></textarea>
-                        </td>
-                    </tr>
-                    <tr id="business_review_btn_1">
-                        <td colspan="2" class="review_table_td_1">
-                            <button type="button" id="reviewEditButton" onclick="editReply()">수정하기</button>
-                        </td>
-                    </tr>
-                    <tr id="business_review_btn_2" style="display: none;">
-                        <td colspan="2" class="review_table_td_1">
-                            <button type="submit" id="reviewSubmitButton" style="display: none;">저장하기</button>
                         </td>
                     </tr>
                 </form>
