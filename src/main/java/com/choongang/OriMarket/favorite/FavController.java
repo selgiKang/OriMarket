@@ -80,7 +80,9 @@ public class FavController {
             //공지사항
             BusinessUser buStoreNumber = items.get(0).getBusinessStore().getBusinessUser();
             session.setAttribute("buUserNumber",buStoreNumber.getBuUserNumber());
+
             List<Message> messageList = messageRepository.findByBuUserNumber(buStoreNumber);
+
 
             if(!messageList.isEmpty()){
                 Message lastM = messageList.get(messageList.size()-1);
