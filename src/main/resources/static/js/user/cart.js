@@ -51,9 +51,6 @@ function plusBtn(cartItemId){
 }
 
 
-
-
-
 /*전체선택 및 해제*/
 function  checkAll(){
     if($("#cboxAll").is(':checked')){
@@ -62,10 +59,12 @@ function  checkAll(){
     }else{
         $("input[name=cbox]").prop("checked",false);
     }
+    setTotalInfo($(".cart_info"));
 }
 
 /*
 전체선택이 된 상태에서 체크박스가 하나라도 체크해제될 경우 전체선택 체크가 해제되게.*/
+
 $(document).on("click","input:checkbox[name=cbox]",function (e){
 
     var chks = document.getElementsByName("cbox");
@@ -78,7 +77,7 @@ $(document).on("click","input:checkbox[name=cbox]",function (e){
             chksChecked++;
         }
     }
-    if(chks.length == chksChecked){
+    if(chks.length === chksChecked){
         $("#cboxAll").prop("checked",true);
     }else{
         $("#cboxAll").prop("checked",false);
@@ -105,5 +104,8 @@ function deleteBtn(cartItemId){
     })
 }
 
-/*checked된 값만 가격 불러오기...*/
+
+/*checked된 값만 결제 넘어가게 만들어야함,,*/
+
+
 /*수량 1개 이하일때는 minus버튼 비활성화*/

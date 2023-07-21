@@ -9,7 +9,7 @@
     <link rel= "stylesheet" href= "../../css/marketmap/marketmap.css">
 </head>
 <body>
-    <jsp:include page="../header/header_index.jsp" />
+    <jsp:include page="../header/header_search.jsp" />
     <div class="map_wrap">
         <!--이동 화살표-->
         <div class="arrow_wrap">
@@ -62,9 +62,9 @@
                 </div>
 
                 <!-- 신림즉석두부 -->
-                <div class="map_bg_content3_icon store_shinrimtofu_box" onclick="location.href='/store?favStoreName=싱싱과일가게'">
+                <div class="map_bg_content3_icon store_shinrimtofu_box" onclick="location.href='/store?favStoreName=과일나라'">
                     <img class="store_shinrimtofu_icon tofu" src="../../img/marketmap/tofu.png">
-                    <p class="store_shinrimtofu_txt">신림즉석두부</p>
+                    <p class="store_shinrimtofu_txt">과일나라</p>
                 </div>
 
                 <!-- 못난이꽈배기 -->

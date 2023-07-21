@@ -21,7 +21,7 @@
 		String today = date1.format(date);
 	%>
 	<div id= "paymentpage_main">
-		<form action="/order_paymentPage" method="post">
+		<form action="/order_paymentPage/${userId}" method="post">
 			<input type="hidden" name="orderNumber" value="<%=today%>${userId}">
 			<input type="hidden" name="orderUserId" value="1 ${userId}">
 			<input type="hidden" name="orderDate" value="<%=today%>">
@@ -32,7 +32,7 @@
 			</div>
 			<div id= "paymentpage_section_1">
 				<div id= "paymentpage_address">
-					주소 출력 위치 >> 주소번호?
+					${userAddress1}
 					<input type="text" name="orderAddressNumber" value="2">
 				</div>
 				<div id= "paymentpage_btn_address_edit"><a>수정</a></div>
@@ -50,15 +50,17 @@
 					<tr class= "paymentpage_tr_1">
 						<th colspan= "3"><input type="text" name = "orderStoreName" value="카트 가게 이름 받기" readonly></th>
 					</tr>
+					<c:forEach var="cartItems" items="${cartItemList}">
 					<tr class= "paymentpage_tr_2">
-						<td colspan="3" class= "paymentpage_td_1"><input type="text" name="orderGoodsName" value="카트 물건이름 받기" readonly></td>
+						<td colspan="3" class= "paymentpage_td_1"><input type="text" name="orderGoodsName" value="${cartItems.item.itemName}" readonly></td>
 					</tr>
 					<tr>
-						<td colspan= "3" style= "text-align: center;"><input type="text" name="orderGoodsPrice" value="3000" readonly></td>
+						<td colspan= "3" style= "text-align: center;"><input type="text" name="orderGoodsPrice" value="${cartItems.itemPrice}원" readonly></td>
 					</tr>
 					<tr>
-						<td colspan= "3" style= "text-align: right;"><input type="text" name="orderGoodsNum" value="1" readonly></td>
+						<td colspan= "3" style= "text-align: right;"><input type="text" name="orderGoodsNum" value="${cartItems.count}개" readonly></td>
 					</tr>
+					</c:forEach>
 					<!-- 반복문 출력 끝 -->
 					<tr align="center">
 						<td colspan="3" class= "paymentpage_td_2">
@@ -73,13 +75,13 @@
 					</tr>
 					<tr class= "paymentpage_tr_3" >
 						<th colspan= "2">배달비</th>
-						<td class= "paymentpage_td_3"><input type="text" name="orderDeliveryPrice" value="4" readonly></td>
+						<td class= "paymentpage_td_3"><input type="text" name="orderDeliveryPrice" value="${deliveryPrice}" readonly></td>
 					</tr>
 				</table>
 				<table id= "paymentpage_table_3">
 					<tr class= "paymentpage_tr_4">
 						<th colspan= "2">총 결제 금액</th>
-						<td class= "paymentpage_td_4"><input type="text" name="orderTotalPrice" value="${totalPrice+3000}" readonly></td>
+						<td class= "paymentpage_td_4"><input type="text" name="orderTotalPrice" value="${totalPrice+deliveryPrice}" readonly></td>
 					</tr>
 				</table>
 			</div>
@@ -134,7 +136,7 @@
 					배송이 진행됩니다.
 				</div>
 			</div>
-			<button id="paymentpage_btn_pay" type="submit">총 6,500원 결제하기</button>
+			<button id="paymentpage_btn_pay" type="submit">총 ${totalPrice+deliveryPrice}원 결제하기</button>
 		</form>
 	</div>
 </body>

@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"  %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,6 +24,7 @@
 
             if (element.classList.contains("clicked")) {
                 element.classList.remove("clicked");
+
             } else {
                 homeImage.classList.remove("clicked");
                 listImage.classList.remove("clicked");
@@ -57,10 +59,11 @@
         <img id="nav_footer_list_img" src="../../img/footer/nav_footer_list1.png" alt="list Icon" onclick="toggleImage(this)">
         <span>주문내역</span>
     </div>
-    <div>
+    <a href="/${userId}/cart">
         <img id="nav_footer_cart_img" src="../../img/footer/nav_footer_cart1.png" alt="cart Icon" onclick="toggleImage(this)">
+        <br>
         <span>장바구니</span>
-    </div>
+    </a>
     <div>
         <img id="nav_footer_star_img" src="../../img/footer/nav_footer_star1.png" alt="favorite Icon" onclick="toggleImage(this)">
         <span>찜</span>

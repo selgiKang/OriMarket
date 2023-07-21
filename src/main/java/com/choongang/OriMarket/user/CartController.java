@@ -1,13 +1,18 @@
 package com.choongang.OriMarket.user;
 
+import com.choongang.OriMarket.business.store.BusinessStore;
+import com.choongang.OriMarket.business.store.BusinessStoreRepository;
 import com.choongang.OriMarket.store.Item;
+import com.choongang.OriMarket.store.ItemRepository;
 import com.choongang.OriMarket.store.ItemService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.core.parameters.P;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 
@@ -15,49 +20,66 @@ import java.util.List;
 @Slf4j
 public class CartController {
 
+    @Autowired
     private final CartService cartService;
     private final UserService userService;
     private final ItemService itemService;
+    private final CartItemRepository cartItemRepository;
 
-    public CartController(CartService cartService, UserService userService,ItemService itemService){
+
+    private final ItemRepository itemRepository;
+
+    public CartController(CartService cartService, UserService userService, ItemService itemService, CartItemRepository cartItemRepository, ItemRepository itemRepository){
         this.cartService=cartService;
         this.userService=userService;
         this.itemService=itemService;
+        this.cartItemRepository = cartItemRepository;
+        this.itemRepository = itemRepository;
     }
 
     /*내 장바구니 조회*/
     @GetMapping("/{userId}/cart")
     public String myCartPage(@PathVariable("userId") String userId, Model model){
         Cart cart = cartService.getCart(userId);
-
+        User user = userService.getUser(userId);
+        List<CartItem> byUserUserSeq = cartItemRepository.findByUser_UserSeq(user.getUserSeq());
         List<CartItem> cartItems = cartService.userCartView(cart);
+
+
+
 
         int totalPrice = 0;
         for(CartItem cartItem : cartItems){
-
             totalPrice += (cartItem.getItem().getItemPrice()*cartItem.getCount());
         }
 
         model.addAttribute("cartItemList",cartItems);
         model.addAttribute("totalPrice",totalPrice);
         model.addAttribute("user",userId);
+        model.addAttribute("userOrderList",byUserUserSeq);
+
+
+
+
 
         return "/user/cart";
     }
 
     /*특정상품 장바구니에 추가*/
     @PostMapping("/{userId}/cart")
-    public String addMyCart(@PathVariable("userId") String userId,Item item,int count,int itemPrice){
+    public String addMyCart(@PathVariable("userId") String userId, Long itemId, int count,Model model){
         User user = userService.getUser(userId);
-        Item additem = itemService.getItem(item.getItemName());
+        Item additem = itemService.getItem(itemId);
 
-        cartService.addCart(user,additem,count,itemPrice);
+
+        model.addAttribute("item",additem);
+        cartService.addCart(user,additem,count);
 
         return "/store/detailmenu";
     }
 
 
-
+    /*장바구니페이지에서 수량증감*/
     @PutMapping("/user/cart")
     @ResponseBody
     public String menuPlusMinus(@RequestParam("cartItemId")Long cartItemId,@RequestParam("type") String type){
@@ -66,7 +88,7 @@ public class CartController {
     }
 
 
-
+    /*장바구니 페이지에서 아이템개별삭제*/
     @DeleteMapping("/user/cart")
     @ResponseBody
     public String itemDelete(@RequestParam("cartItemId")Long cartItemId){
@@ -76,32 +98,36 @@ public class CartController {
 
 
 
-    /*특정상품 장바구니에서 삭제*/
-    @GetMapping("/{userId}/cart/{cartItemId}/delete/{itemPrice}")
-    public String myCartDelete(@PathVariable("userId") String userId, @PathVariable("cartItemId") Long cartItemId,@PathVariable("itemPrice") int itemPrice){
-        Cart cart  = cartService.getCart(userId);
-        cart.setCartCnt(cart.getCartCnt()-1);
-        /*토탈가격에서 삭제아이템 가격빼줘야함*/
-        cart.setCartTotalPrice(cart.getCartTotalPrice()-itemPrice);
-        cartService.cartItemDelete(cartItemId);
-
-        return "/user/cart";
-
-    }
-
-
-
-
-    /*결제후 장바구니 삭제*/
+    /*결제***그리고 장바구니 삭제*/
     @PostMapping("/{userId}/cart/checkout")
     public String myCartPayment(@PathVariable("userId") String userId,Model model) {
+
 
         cartService.cartPayment(userId);
         cartService.cartDeleteAll(userId);
 
-        return "/main";
+
+        return "/order/order_receipt";
     }
 
+
+    /*결제페이지로 넘기기*/
+    @GetMapping("/paymentPage/{userId}")
+    public String orderPayment(@PathVariable("userId")String userId,Model model){
+
+       cartService.saveCartInfo(userId);
+
+        Cart cart = cartService.getCart(userId);
+        List<CartItem> cartItems = cartService.userCartView(cart);
+
+
+        model.addAttribute("cartItemList",cartItems);
+        model.addAttribute("totalPrice",cart.getCartTotalPrice());
+        model.addAttribute("deliveryPrice",cart.getCartDeliveryPrice());
+
+
+        return "/order/order_paymentPage";
+    }
 
 
 

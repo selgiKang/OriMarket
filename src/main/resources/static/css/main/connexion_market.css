@@ -1,0 +1,20 @@
+@charset "UTF-8";
+@font-face {
+    font-family: 'LINESeedKR-Bd';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/LINESeedKR-Bd.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+}
+
+.modal {position: absolute; width: 375px; height: 832px; top:-20px; z-index: 999999; display: none; background-color: rgba(0, 0, 0, 0.4);}
+.modal.show {display: block;}
+
+.modal_body {
+    position: absolute; top: 42%; left: 50%;
+    width: 300px; height: 480px;  border-radius: 30px; padding:20px; text-align: center;
+    background-color: rgb(255, 255, 255); border-radius: 10px; box-shadow: 0 2px 3px 0 rgba(34, 36, 38, 0.15);
+    transform: translateX(-50%) translateY(-50%);
+}
+.btn_round{height:30px;}
+.btn_round:hover {background-color:#000;}
+.current_location_btn:hover {font-weight: bold;}

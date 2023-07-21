@@ -1,5 +1,8 @@
 package com.choongang.OriMarket.user;
 
+import com.choongang.OriMarket.order.Order;
+import com.choongang.OriMarket.order.OrderService;
+import com.choongang.OriMarket.review.Review;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 import org.thymeleaf.model.IModel;
 
 import javax.servlet.http.Cookie;
@@ -23,6 +27,11 @@ public class UserController {
 
     @Autowired
     private final UserService userService;
+
+    private final UserRepository userRepository;
+
+    //7.18 테스트 데이터 가져오는거까지 성공 승엽
+    private final OrderService orderService;
 
     @GetMapping("/login")
     public String login() {
@@ -43,7 +52,10 @@ public class UserController {
 
 
     @GetMapping("/review")
-    public String review() {
+    public String review(HttpSession session,Model model) {
+        User byId = userRepository.findById((Long) session.getAttribute("userSeq")).orElseThrow();
+        List<Review> reviews = byId.getReviews();
+        model.addAttribute("re",reviews);
         return "user/user_reviewlist";
     }
 
@@ -54,14 +66,20 @@ public class UserController {
 
 
     @GetMapping("/order_list")
-    public String order_list() {
-        return "user/order_list";
+    public String getOrderList(Model model) {
+        List<Order> orderList = orderService.getAllOrders();
+        model.addAttribute("orders", orderList);
+        return "store/order_list";
     }
+
 
     @PostMapping("/login")
     public String loginId(@ModelAttribute User user, Model model, HttpSession session) {
         boolean isTrue = userService.login(user,session,model);
         if(isTrue){
+            User findUser = userRepository.findByUserId(String.valueOf(session.getAttribute("userId")));
+            List<UserAddress> userAddresses = findUser.getUserAddresses();
+            model.addAttribute("userAd",userAddresses);
             model.addAttribute("userId", user.getUserId());
             return "main/main";
         }

@@ -1,7 +1,10 @@
 package com.choongang.OriMarket.business.store;
 
+import com.choongang.OriMarket.business.market.Market;
+import com.choongang.OriMarket.business.market.MarketRepository;
 import com.choongang.OriMarket.business.user.BusinessUser;
 import com.choongang.OriMarket.business.user.BusinessUserRepository;
+import com.choongang.OriMarket.review.Review;
 import com.choongang.OriMarket.store.Store;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -26,10 +29,16 @@ public class BusinessStoreService {
     @Autowired
     private final BusinessStoreRepository businessStoreRepository;
     private final BusinessUserRepository businessUserRepository;
+    private final MarketRepository marketRepository;
 
 
     public void save(BusinessStore businessStore, HttpSession session, Model model){
         Object buUserNumber = session.getAttribute("buUserNumber");
+
+        Long marketSeq = Long.valueOf((session.getAttribute("marketSeq")).toString());
+        Market byId = marketRepository.findById(marketSeq).orElseThrow();
+        businessStore.setMarket(byId);
+
         BusinessUser businessUser = businessUserRepository.findById((Long)buUserNumber).orElseThrow();
         businessStore.setBusinessUser(businessUser);
         BusinessStore save = businessStoreRepository.save(businessStore);
@@ -47,6 +56,24 @@ public class BusinessStoreService {
 
     }
 
+    public BusinessStore findReview(BusinessStore businessStore, BusinessUser businessUser,HttpSession session){
+        Long buUserNumbers = Long.valueOf((session.getAttribute("buUserNumber")).toString());
+        businessUser.setBuUserNumber(buUserNumbers);
+        //사업자 번호로 해당 가게 찾기
+        BusinessStore buStore = businessStoreRepository.findByBusinessUser(businessUser);
 
+        return buStore;
+    }
 
+    public List<BusinessStore> searchStore(String searchKeyword){
+        List<BusinessStore> byStoreName = businessStoreRepository.findByBuStoreName(searchKeyword);
+
+        if(byStoreName.isEmpty()){
+            return byStoreName;
+        }else {
+            return byStoreName;
+        }
+        //이거 왜안들어갈까요?
+
+    }
 }

@@ -110,17 +110,18 @@
 	</div>
 
 	<div class="main_menu_name">
-		<h1>오이</h1>
-		<h5>인공 조미료를 쓰지 않고 순수 천연재료로 만들어 시원한 바다맛을 느낄 수 있는 착한 생 칼국수 대표 칼국수!</h5>
+		<h1>${item.itemName}</h1>
+		<h5>${item.itemInfo}</h5>
 	</div>
-	<form action="/${sessionScope.userId}/cart" method="post">
+	<form action="/${userId}/cart/" method="post">
 		<div class="mymenu_container">
 			<div class="mymenu">
 				<h4>가격</h4>
 				<div class="radio">
 
-					<label><input type="radio" value="오이" name="itemName" checked  />오이</label>
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" value="5000" name="itemPrice" style="outline: none;border: none;" />
+					<label><input type="radio" value="${item.itemName}" name="itemName" checked/>${item.itemName}</label>
+							<input type="hidden" value="${item.itemId}" name="itemId">
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" value="${item.itemPrice}" name="itemPrice" style="outline: none;border: none;" />
 				</div>
 				<table>
 					<tr>
@@ -142,8 +143,7 @@
 		</div>
 	</form>
 </div>
-
-
+<jsp:include page="../footer/nav_footer.jsp" />
 </body>
 </html>
 

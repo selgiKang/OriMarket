@@ -1,5 +1,7 @@
 package com.choongang.OriMarket.business.user;
 
+import com.choongang.OriMarket.business.market.Market;
+import com.choongang.OriMarket.business.market.MarketService;
 import com.choongang.OriMarket.business.store.BusinessStore;
 import com.choongang.OriMarket.user.User;
 import lombok.RequiredArgsConstructor;
@@ -19,7 +21,8 @@ import java.util.List;
 public class BusinessUserController {
 
     @Autowired
-    private final BusinessUserService businessUserService;
+    private BusinessUserService businessUserService;
+
 
     @GetMapping("/login1")
     public String login1(){return "business/businessUser/businesslogin";}
@@ -31,13 +34,15 @@ public class BusinessUserController {
     public String loginId(@ModelAttribute BusinessUser businessUser, Model model, HttpSession session) {
         boolean isTrue = businessUserService.login1(businessUser,session,model);
         if(isTrue){
+            session.setAttribute("buUserId",businessUser.getBuUserId());
+            System.out.println(session.getAttribute("buUserId"));
             return "business/storenotice_new";
         }
         return "business/businessUser/businesslogin";
     }
 
     @PostMapping("/join1")
-    public String joinUser(@ModelAttribute BusinessUser businessUser, HttpSession session) {
+    public String joinUser(@ModelAttribute BusinessUser businessUser,HttpSession session) {
         if(businessUserService.join1(businessUser,session)){
             return "business/businessUser/businesslogin";
         }

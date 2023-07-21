@@ -36,13 +36,15 @@ public class RealTimeService {
         return a;
     }
 
-    public boolean findRts(Order order,HttpSession session){
+    public RealTimeStatus findRts(Order order,HttpSession session){
         order.setOrderNumber(String.valueOf(session.getAttribute("orderNumber")));
         RealTimeStatus a2 = rtsRepository.findByorderNumber(order);
+
         if(a2 != null){
-            return true;
+            return a2;
+        }else{
+            return a2;
         }
-        return false;
     }
 
    /* public void update2(RealTimeStatus orderNumber){

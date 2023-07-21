@@ -10,7 +10,7 @@ body {
     margin: 10px;
 }
 
-/* 메인 컨테이너 스타일 */
+/* 핸드폰 사이즈 및 스크롤 바 없애기*/
 .main-container {
     width: 375px;
     height: 812px;
@@ -28,6 +28,8 @@ body {
 .main-container::-webkit-scrollbar {
     display: none;
 }
+
+
 
 /* 섹션 스타일 */
 section {
@@ -93,7 +95,7 @@ a {
     border-radius: 4px;
 }
 
-/* 라인 스타일 */
+/* 라인 */
 .line {
     width: 0;
     height: 3px;
@@ -141,19 +143,11 @@ a {
 
 .heart {
     width: 30px;
-    height: 30px;
-    float: right;
-    cursor: pointer;
-}
-
-.heart {
-    width: 30px;
-    height: 30px;
     position: absolute;
     top: 10px;
     right: 10px;
     cursor: pointer;
-    z-index: 2;
+    z-index: 10;
 }
 
 .heart.filled {
@@ -164,9 +158,31 @@ a {
     content: url('../../img/store/filled_heart.png');
 }
 
+/*메엔 가게 사진*/
 .like-container {
     position: relative;
     display: inline-block;
+}
+
+/*메엔 가게 사진 사이즈*/
+#like_container_img{
+    width: 375px;
+}
+
+/*별(리뷰) 사진 사이즈*/
+.star{
+    width: 15px;
+}
+
+
+/*쿠폰 이미지 사이즈*/
+.coupon{
+    width: 180px;
+}
+/*쿠폰 이미지 가로정렬*/
+.coupon-container {
+    display: flex;
+    justify-content: flex-start;
 }
 
 /* 메뉴 */
@@ -270,4 +286,117 @@ a {
 .slidemenu #slide-item-5:checked ~ .slider .bar {
     margin-left: 85%;
     width: 15%;
+}
+
+
+ul {
+    list-style: none;
+}
+
+.tabmenu {
+    width: 350px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.tabmenu ul {
+    display: flex;
+    justify-content: flex-start;
+    padding: 0;
+    overflow-x: auto;
+    white-space: nowrap;
+
+}
+
+.tabmenu ul::-webkit-scrollbar {
+    display: none;
+}
+
+.tabmenu ul li {
+    display: inline-block;
+    text-align: center;
+    background: transparent;
+    line-height: 40px;
+    flex-shrink: 0;
+    margin-right: 10px;
+    width: calc((100% - 50px) / 5); /* 5개의 라벨이므로 5로 나눈 값으로 너비 설정 */
+}
+
+.tabmenu label {
+    display: block;
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+}
+
+.tabmenu input {
+    display: none;
+}
+
+.tabCon {
+    display: none;
+    width: 100%;
+    text-align: left;
+    padding: 20px;
+    position: absolute;
+    left: 0;
+    top: 40px;
+    box-sizing: border-box;
+    border: 3px solid #f9f9f9;
+    margin-top: 30px;
+}
+
+.tabmenu input:checked ~ label {
+    position: relative;
+}
+
+.tabmenu input:checked ~ label::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: #ee9820;
+}
+
+.tabmenu input:checked ~ .tabCon {
+    display: block;
+}
+
+/* 추가된 스타일 */
+.menu-description {
+    white-space: pre-wrap;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    word-break: break-all;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    font-size: 12px;
+    margin: 5px 0;
+    line-height: 1.4;
+}
+
+
+
+
+.menu-description.multiline {
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.menu-content h5 {
+    margin-top: 30px;
+    font-size: 17px;
+}
+
+.menu-image img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 4px;
 }

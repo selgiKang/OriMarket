@@ -1,3 +1,6 @@
+<%@ page import="com.choongang.OriMarket.user.UserAddress" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="java.util.List" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"  %>
@@ -36,7 +39,7 @@
             <h2 style="position: absolute; top: 10px; left: 40px;"><label for="address_kakao">배달받을 주소 설정하기</label></h2>
             <c:if test="${!empty userAddress1}">
                 <a href="/mylocation" style="position: absolute; top: 75px; left: 20px">위치보기</a>
-                <p style="position: absolute; top: 75px; left: 20px">현재 내가 설정한주소: <span style="color: yellow">${userAddress1} ${userAddressDetail1} </span></p>
+                <p style="position: absolute; top: 75px; left: 20px;">현재 내가 설정한주소: <span style="color: yellow">${userAddress1} ${userAddressDetail1}</span></p>
             </c:if>
             <c:if test="${empty userAddress1}">
                 <p style="position: absolute; top: 75px; left: 20px">현재 내가 설정한주소: <span style="color: red">주소를 등록해주세요..</span></p>
@@ -59,18 +62,20 @@
 
         <input type="submit" value="등록하기" class="submit_btn" style="position: absolute; top: 210px; left: 20px;">
         <hr id="hr1">
-        <p style="position: absolute; top: 240px; left: 20px;">내 주소 목록</p>
-        <ul  style="position: absolute; top: 270px; left: 20px;">
-            <li>키키키</li>
-            <c:if test="${!empty userAddress1}">
-                <li style="color: yellow">${userAddress1} ${userAddressDetail1} </li>
-            </c:if>
-        </ul>
-
     </form>
+    <p style="position: absolute; top: 240px; left: 20px;">내 주소 목록</p>
+    <ul style="position: absolute; top: 270px; left: 20px;">
+        <c:forEach var="userAddress" items="${userAd}" varStatus="status">
+            <li style="margin-top: 5px;">${userAd[userAd.size() - status.index - 1].userAddress1} ${userAd[userAd.size() - status.index - 1].userAddressDetail1}
+            <a href="/updateAddress?userAddressSeq=${userAd[userAd.size() - status.index - 1].userAddressSeq}">변경</a>
+            <a href="/deleteAddress?userAddressSeq=${userAd[userAd.size() - status.index - 1].userAddressSeq}">삭제</a></li>
+
+        </c:forEach>
+    </ul>
 
 </div>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+
 
 </body>
 

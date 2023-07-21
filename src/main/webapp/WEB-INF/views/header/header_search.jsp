@@ -8,7 +8,7 @@
     <script src="https://kit.fontawesome.com/1cfe6d92db.js" crossorigin="anonymous"></script>
     <style>
         body{margin:0 auto; font-size:16px;}
-        .header_wrap{width:375px; height:100px; margin:0 auto; background-color:#46a973; box-sizing:border-box;}
+        .header_wrap{width:375px; height:100px; margin:0 auto; background-color:#46a973; box-sizing:border-box; position: relative;}
         .nav{text-align:right; padding:5px 15px; margin-top:15px;}
         .nav>span{float:left; margin:5px;}
         .nav>span>a{text-decoration:none; color:#eee;}
@@ -27,9 +27,9 @@
 
     <div class="nav">
         <span>
-            <a href="#" class="address">
+            <a href="#" class="address" style="margin-top: -5px;">
                 <i class="fa-solid fa-location-dot header_i"></i>
-                서울 관악구 신원로
+                (ㅁㅁ시장)가져오기
             </a>
         </span>
         <!-- 안됨 -->
@@ -43,14 +43,16 @@
         <i class="fas fa-search"></i>
     </div>--%>
 
-    <form action="" method="GET" class="h_search_wrap">
-        <input type="text" id="searchWord" class="h_searchbar" name="searchWord" placeholder="상품검색"
+    <form action="/header_search1" method="GET" class="h_search_wrap">
+        <input type="text" id="searchWord" class="h_searchbar" name="searchKeyword" placeholder=" 상품검색"
                maxlength="50" size="60">
-        <button class="searchButton" class="h_searchbtn">
+        <button class="searchButton" class="h_searchbtn" type="submit">
             <i class="fas fa-search searchButtonImg h_searchbtn_i"></i>
         </button>
     </form>
+    <small style="position: absolute; top: 78px; left: 15px" >(배달받을주소..)가져오기</small>
 </div>
+
 <script>
     var searchWord = document.getElementById('searchWord');
     var sarchButton = document.getElementsByClassName('searchButton');

@@ -20,7 +20,7 @@
         <span><a href="/search">주소검색</a></span>
         </c:if>
         <c:if test="${!empty userAddress1}">
-            <span><a href="/search">${userAddress1} ...</a></span>
+            <span class="addpic"><a href="/search">${userAddress1} ${userAddressDetail1} ...</a></span>
         </c:if>
         <a href="${sessionScope.userId}/cart"><i class="fa-solid fa-cart-shopping header_i"></i></a>
         <a href="#"><i class="fa-solid fa-bell header_i"></i></a>

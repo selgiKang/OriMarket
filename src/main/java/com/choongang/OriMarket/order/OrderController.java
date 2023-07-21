@@ -1,8 +1,11 @@
 
 package com.choongang.OriMarket.order;
 
+import com.choongang.OriMarket.RealTimeStatus.RealTimeRepository;
 import com.choongang.OriMarket.RealTimeStatus.RealTimeService;
 import com.choongang.OriMarket.RealTimeStatus.RealTimeStatus;
+import com.choongang.OriMarket.business.market.Market;
+import com.choongang.OriMarket.user.CartService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -11,7 +14,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -22,24 +24,22 @@ public class OrderController {
 
     private final OrderService orderService;
     private final RealTimeService realTimeService;
+    private final CartService cartService;
 
-    //7.16 테스트 승엽
-    private final OrderRepository orderRepository;
+
 
 
     @Autowired
-    public OrderController(OrderService orderService,RealTimeService realTimeService, OrderRepository orderRepository){
+    public OrderController(OrderService orderService, RealTimeService realTimeService, OrderRepository orderRepository, CartService cartService){
         this.orderService = orderService;
         this.realTimeService = realTimeService;
-
-        //7.16 테스트 승엽
-        this.orderRepository = orderRepository;
-
+        this.cartService = cartService;
     }
 
     @GetMapping("/test2")
     public String test(){return "business/businessmain";}
 
+    //정산내역
     //calculate get으로 갈 때는 businessmain 코드처럼 해야함! 보고 그 코드 복붙하기!
     @GetMapping("/calculate")
     public String calculateRequest2(@RequestParam("calculate_date") String calculateDate, @RequestParam("calculate_date_last") String calculateDateLast,Model model){
@@ -70,56 +70,60 @@ public class OrderController {
     @GetMapping("/order_pastorder")
     public String orderPastorder(){return "order/order_pastorder";}
 
-
-    //7.17 테스트 승엽
- /*   @GetMapping("/order/list")
+    //7.18 테스트 데이터 가져오는거까지 성공 승엽
+    @GetMapping("/order/order_list")
     public String getOrderList(Model model) {
-        // 주문목록 데이터 가져오기
-        List<Order> orders = orderService.getOrderList();
-
-        // 모델에 주문데이터 추가
-        model.addAttribute("orders", orders);
-
-        // 주문이 있는 경우 첫 번째 주문번호 모델에 추가
-        if (!orders.isEmpty()) {
-            model.addAttribute("orderNumber", orders.get(0).getOrderNumber());
-        } else {
-            model.addAttribute("orderNumber", ""); // 주문이 없는 경우 빈 문자열로 설정
-        }
-
-        return "order_list";
+        List<Order> orderList = orderService.getAllOrders();
+        model.addAttribute("orders", orderList);
+        return "order/order_list";
     }
-*/
-    @PostMapping("/order_paymentPage")
-    public String orderDelivery(@ModelAttribute Order order, @ModelAttribute RealTimeStatus rts, HttpSession session, @RequestParam("orderNumber")String orderNumberStr, Model model){
 
+
+
+    @PostMapping("/order_paymentPage/{userId}")
+    public String orderDelivery(@ModelAttribute Order order, @ModelAttribute RealTimeStatus rts, HttpSession session, @RequestParam("orderNumber")String orderNumberStr,@PathVariable("userId")String userId, Model model) {
         order.setOrderNumber(orderNumberStr);
-        session.setAttribute("orderNumber",orderNumberStr);
 
-        //7.17 테스트 승엽
-        model.addAttribute("orderNumber", orderNumberStr);
+        //시장 번호 등록
+        Market m = new Market();
+        Long marketSeq = Long.valueOf((session.getAttribute("marketSeq")).toString());
+        m.setMarketSeq(marketSeq);
+        order.setMarketSeq(m);
 
-        //주문 db에 주문내역 저장
-        if(orderService.orderDelivery(order,session)){
+        session.setAttribute("orderNumber", orderNumberStr);
 
-            //배달 내역에 set
+        cartService.cartPayment(userId);
+        cartService.cartDeleteAll(userId);
+
+
+        // 주문 db에 주문 내역 저장
+        if (orderService.orderDelivery(order, session)) {
+
+            // 배달 내역에 set
             rts.setOrderNumber(order);
-            rts.setRtsOrderIng(0);
+            rts.setRtsOrderIng(0); // "OrderIng" 상태로 설정
             rts.setRtsRiderIng(0);
             rts.setRtsRiderFinish(0);
-            
-            //배달 내역 db에 저장
-            if (realTimeService.insertRts(rts)){
-                model.addAttribute("rtsOrderIng",rts.getRtsOrderIng());
+
+            // 배달 내역 db에 저장
+            if (realTimeService.insertRts(rts)) {
+                RealTimeStatus rResult = realTimeService.findRts(order,session);
+                if(rResult!=null){
+                    model.addAttribute("rtsOrderIng",rResult.getRtsOrderIng());
+                }
+                model.addAttribute("orderDelivery", order); // order_delivery 페이지로 개별 주문의 상세 내역 전달
+                model.addAttribute("orderList", orderService.getAllOrders()); // order_list 페이지로 주문 목록 전달
+                RealTimeStatus rtsSearchResult = realTimeService.findRts(order,session);
                 System.out.println(rts.getRtsOrderIng());
-                return "order/order_delivery";
-            }else{
+                return "order/order_list";
+            } else {
                 return "order/order_paymentPage";
             }
-        }else{
+        } else {
             return "order/order_paymentPage";
         }
     }
+
 
     @PostMapping("/calculate")
     @ResponseBody

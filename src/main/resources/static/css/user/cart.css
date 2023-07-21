@@ -27,7 +27,7 @@ body{margin: 0; padding: 0; font-family:'LINESeedKR-Bd'; font-size: 16px;}
 
 /* 가게리스트 */
 #cart_itemList li{list-style: none;}
-#cart_itemList article{width: 320px; border: 1px solid black;}
+#cart_itemList article{width: 320px;}
 
 .inner_article{width:250px; margin-left: 0;}
 

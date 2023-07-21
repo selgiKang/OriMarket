@@ -30,7 +30,7 @@
 				<li><i class="fa-sharp fa-solid fa-circle" style="color: #46a973;"></i></li>
 				<li class="orderDelivery_li_1" style="color: #46A973;">픽업중</li>
 			</c:if>
-	<!-- 배달중 -->
+			<!-- 배달중 -->
 			<li><i class="fa-sharp fa-regular fa-circle" style="color: #b8b8b8;"></i></li>
 			<li class="orderDelivery_li_1">배달중</li>
 			<!-- 배달완료 -->
@@ -38,7 +38,7 @@
 			<li>배달 완료</li>
 		</ul>
 		<div id="orderDelivery_orderInfo">
-			<h3>오리 시장</h3>
+			<h3>${marketName}</h3>
 			<table id="orderDelivery_table_1">
 				<tr class="orderDelivery_table_tr_1"><td>주문 번호</td></tr>
 				<tr class="orderDelivery_table_tr_2"><td>202307040001</td></tr>
