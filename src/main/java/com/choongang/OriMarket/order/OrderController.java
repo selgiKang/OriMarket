@@ -3,6 +3,7 @@ package com.choongang.OriMarket.order;
 
 import com.choongang.OriMarket.RealTimeStatus.RealTimeService;
 import com.choongang.OriMarket.RealTimeStatus.RealTimeStatus;
+import com.choongang.OriMarket.user.CartService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -11,7 +12,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -22,17 +22,16 @@ public class OrderController {
 
     private final OrderService orderService;
     private final RealTimeService realTimeService;
+    private final CartService cartService;
 
 
 
 
     @Autowired
-    public OrderController(OrderService orderService,RealTimeService realTimeService, OrderRepository orderRepository){
+    public OrderController(OrderService orderService, RealTimeService realTimeService, OrderRepository orderRepository, CartService cartService){
         this.orderService = orderService;
         this.realTimeService = realTimeService;
-
-
-
+        this.cartService = cartService;
     }
 
     @GetMapping("/test2")
@@ -78,12 +77,14 @@ public class OrderController {
 
 
 
-
-
-    @PostMapping("/order_paymentPage")
-    public String orderDelivery(@ModelAttribute Order order, @ModelAttribute RealTimeStatus rts, HttpSession session, @RequestParam("orderNumber")String orderNumberStr, Model model) {
+    @PostMapping("/order_paymentPage/{userId}")
+    public String orderDelivery(@ModelAttribute Order order, @ModelAttribute RealTimeStatus rts, HttpSession session, @RequestParam("orderNumber")String orderNumberStr,@PathVariable("userId")String userId, Model model) {
         order.setOrderNumber(orderNumberStr);
         session.setAttribute("orderNumber", orderNumberStr);
+
+        cartService.cartPayment(userId);
+        cartService.cartDeleteAll(userId);
+
 
         // 주문 db에 주문 내역 저장
         if (orderService.orderDelivery(order, session)) {

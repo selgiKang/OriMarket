@@ -113,7 +113,7 @@
 		<h1>${item.itemName}</h1>
 		<h5>${item.itemInfo}</h5>
 	</div>
-	<form action="/${sessionScope.userId}/cart/" method="post">
+	<form action="/${userId}/cart/" method="post">
 		<div class="mymenu_container">
 			<div class="mymenu">
 				<h4>가격</h4>
