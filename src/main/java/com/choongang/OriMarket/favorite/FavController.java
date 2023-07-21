@@ -75,14 +75,25 @@ public class FavController {
 
             //session.setAttribute("favNumber", fav.getFavNumber());
             List<BusinessStore> byBuStoreName = businessStoreRepository.findByBuStoreName(favStoreName);
+
+            //확실해지면 model로 변해도 됨
+            //시장 번호
+            Long marketSeq = byBuStoreName.get(0).getMarket().getMarketSeq();
+            session.setAttribute("marketSeq",marketSeq);
+
+            //시장 이름
+            String marketName = byBuStoreName.get(0).getMarket().getMarketName();
+            session.setAttribute("marketName",marketName);
+
+            //물건 목록
             List<Item> items = byBuStoreName.get(0).getItems();
             model.addAttribute("al", items);
+
             //공지사항
             BusinessUser buStoreNumber = items.get(0).getBusinessStore().getBusinessUser();
             session.setAttribute("buUserNumber",buStoreNumber.getBuUserNumber());
 
             List<Message> messageList = messageRepository.findByBuUserNumber(buStoreNumber);
-
 
             if(!messageList.isEmpty()){
                 Message lastM = messageList.get(messageList.size()-1);

@@ -1,7 +1,9 @@
 package com.choongang.OriMarket.order;
 
+import com.choongang.OriMarket.business.market.Market;
 import com.choongang.OriMarket.business.user.BusinessUser;
 import lombok.*;
+import lombok.extern.slf4j.Slf4j;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -11,7 +13,7 @@ import java.util.Date;
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
+@Slf4j
 public class Order {
 
     @Id
@@ -76,6 +78,10 @@ public class Order {
     //배달기사 요청사항
     @Column
     private String forRider;
+
+    @ManyToOne
+    @JoinColumn(name="marketSeq")
+    private Market marketSeq;
 
     @Transient
     private String next_redirect_pc_url;

@@ -42,6 +42,7 @@ public class BusinessUser {
     @Column
     private String buUserPhone;
 
+    //등록 가게
     @OneToMany(mappedBy = "businessUser")
     private List<BusinessStore> businessStores = new ArrayList<>();
 
@@ -49,6 +50,7 @@ public class BusinessUser {
     @OneToMany(mappedBy = "businessUser")
     private List<Order> orders = new ArrayList<>();
 
+    //시장 번호
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="marketSeq")
     private Market market;

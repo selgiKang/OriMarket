@@ -137,21 +137,25 @@
         <span class="tab-link" data-tab="completed">완료</span>
     </div>
     <% if (orders != null && !orders.isEmpty()) { %>
-    <% for (com.choongang.OriMarket.order.Order order : orders) { %>
-    <div class="order-item" data-status="<%= order.getOrderType()  %>">
-        <span class="order-number">주문번호 #<%=order.getOrderNumber()%></span>
-        <!-- 다른 주문 정보 출력 -->
-        <div class="order-details">
-            <span class="order-quantity">메뉴 <%= order.getOrderGoodsNum() %>개</span>
-            <span class="order-price"><%= order.getOrderTotalPrice() %>원</span>
+        <% for (com.choongang.OriMarket.order.Order order : orders) { %>
+        <div class="order-item" data-status="<%= order.getOrderType()  %>">
+            <span class="order-number">주문번호 #<%=order.getOrderNumber()%></span>
+            <!-- 다른 주문 정보 출력 -->
+            <div class="order-details">
+                <span class="order-quantity">메뉴 <%= order.getOrderGoodsNum() %>개</span>
+                <span class="order-price"><%= order.getOrderTotalPrice() %>원</span>
+            </div>
+            <div class="order-menu"><%= order.getOrderGoodsName() %></div>
+            <div class="action-buttons">
+                <form action="/accept" method="get">
+                    <input type="hidden" name="orderNumber" value="<%=order.getOrderNumber()%>">
+                    <button class="accept-button">수락</button>
+                </form>
+                <%--<div class="resultSection">${rtsOrderIng}</div>--%>
+                <button class="reject-button">거절</button>
+            </div>
         </div>
-        <div class="order-menu"><%= order.getOrderGoodsName() %></div>
-        <div class="action-buttons">
-            <button class="accept-button">수락</button>
-            <button class="reject-button">거절</button>
-        </div>
-    </div>
-    <% } %>
+        <% } %>
     <% } else { %>
     <p>주문이 없습니다.</p>
     <% } %>

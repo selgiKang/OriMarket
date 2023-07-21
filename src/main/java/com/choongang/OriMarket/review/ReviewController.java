@@ -53,6 +53,21 @@ public class ReviewController {
         }
         return "/business/businessReview/business_review";
     }
+    @GetMapping("/storeReview")
+    public String storeReview(@ModelAttribute Review review,BusinessStore businessStore,BusinessUser businessUser,Model model,HttpSession session){
+        //사업자 번호
+        BusinessStore findReviewResult = businessStoreService.findReview(businessStore,businessUser,session);
+        //상점 번호
+       // businessStore.setBuStoreNumber(findReview.getBuStoreNumber());
+
+        //사업자 번호 일치하는 리뷰만 골라오기
+        List<Review> reviewListResult = reviewService.findReview(review,findReviewResult);
+        model.addAttribute("reviewList",reviewListResult);
+        for(Review r : reviewListResult){
+            System.out.println(r.getReview_id());
+        }
+        return "/store/store_review";
+    }
 
     @PostMapping("/user_review")
     public String userReivew1(@ModelAttribute Review review, HttpSession session, Model model){
