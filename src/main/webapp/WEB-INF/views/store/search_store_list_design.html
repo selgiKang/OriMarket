@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+  <meta charset="UTF-8">
+  <title>Title</title>
 </head>
 <style>
 
@@ -45,7 +45,7 @@
   }
 
   /*내용 적는 칸 배경 */
-  .manager_main_tabs {
+  .tabs {
     border-radius: 5px;
     background: white;
     height: 100%;
@@ -56,14 +56,14 @@
   }
 
 
-  .manager_main_tabs input[name="tab-control"] {
+  .tabs input[name="tab-control"] {
     display: none;
 
   }
 
   /*배달, 포장 폰트*/
-  .manager_main_tabs .content section h2,
-  .manager_main_tabs ul li label {
+  .tabs .content section h2,
+  .tabs ul li label {
     font-weight: bold;
     font-size: 18px;
     color: #4caf50;
@@ -72,7 +72,7 @@
   }
 
   /*배달, 포장 전체 탭*/
-  .manager_main_tabs ul {
+  .tabs ul {
     list-style-type: none;
     padding-left: 0;
     display: flex;
@@ -85,7 +85,7 @@
 
   }
 
-  .manager_main_tabs ul li {
+  .tabs ul li {
     box-sizing: border-box;
     flex: 1;
     width: 25%;
@@ -94,7 +94,7 @@
   }
 
   /*배달, 포장 선택하기 전 색상*/
-  .manager_main_tabs ul li label {
+  .tabs ul li label {
     transition: all 0.3s ease-in-out;
     color: #929daf;
     overflow: hidden;
@@ -107,11 +107,11 @@
   }
 
 
-  .manager_main_tabs ul li label br {
+  .tabs ul li label br {
     display: none;
 
   }
-  .manager_main_tabs ul li label svg {
+  .tabs ul li label svg {
     fill: #929daf;
     height: 1.2em;
     vertical-align: bottom;
@@ -121,25 +121,25 @@
   }
 
   /*배달, 포장 마우스 가져다 댔을 때 색상*/
-  .manager_main_tabs ul li label:hover,
-  .manager_main_tabs ul li label:focus,
-  .manager_main_tabs ul li label:active {
+  .tabs ul li label:hover,
+  .tabs ul li label:focus,
+  .tabs ul li label:active {
     outline: 0;
     color: #bec5cf;
   }
-  .manager_main_tabs ul li label:hover svg,
-  .manager_main_tabs ul li label:focus svg,
-  .manager_main_tabs ul li label:active svg {
+  .tabs ul li label:hover svg,
+  .tabs ul li label:focus svg,
+  .tabs ul li label:active svg {
     fill: #bec5cf;
   }
 
   /*배달, 포장 탭 밑에 있는 슬라이드바 설정*/
-  .manager_main_tabs .slider {
+  .tabs .slider {
     position: relative;
     width: 50%;
     transition: all 0.33s cubic-bezier(0.38, 0.8, 0.32, 1.07);
   }
-  .manager_main_tabs .slider .indicator {
+  .tabs .slider .indicator {
     position: relative;
     width: 130px;
     max-width: 100%;
@@ -150,13 +150,13 @@
   }
 
   /*내용 적는 칸*/
-  .manager_main_tabs .content {
+  .tabs .content {
     margin-top: 20px;
 
   }
 
   /*배달 포장 탭 넘어갈때 효과*/
-  .manager_main_tabs .content section {
+  .tabs .content section {
     display: none;
     animation-name: content;
     animation-direction: normal;
@@ -168,7 +168,7 @@
     word-wrap: break-word;
   }
 
-  .manager_main_tabs
+  .tabs
   input[name="tab-control"]:nth-of-type(1):checked
   ~ ul
   > li:nth-child(1)
@@ -176,14 +176,14 @@
     cursor: default;
     color: #4caf50;
   }
-  .manager_main_tabs
+  .tabs
   input[name="tab-control"]:nth-of-type(1):checked
   ~ ul
   > li:nth-child(1)
   > label
 
   @media (max-width: 600px) {
-    .manager_main_tabs
+    .tabs
     input[name="tab-control"]:nth-of-type(1):checked
     ~ ul
     > li:nth-child(1)
@@ -191,16 +191,16 @@
       background: rgba(0, 0, 0, 0.08);
     }
   }
-  .manager_main_tabs input[name="tab-control"]:nth-of-type(1):checked ~ .slider {
+  .tabs input[name="tab-control"]:nth-of-type(1):checked ~ .slider {
     transform: translateX(0%);
   }
-  .manager_main_tabs
+  .tabs
   input[name="tab-control"]:nth-of-type(1):checked
   ~ .content
   > section:nth-child(1) {
     display: block;
   }
-  .manager_main_tabs
+  .tabs
   input[name="tab-control"]:nth-of-type(2):checked
   ~ ul
   > li:nth-child(2)
@@ -208,14 +208,14 @@
     cursor: default;
     color: #4caf50;
   }
-  .manager_main_tabs
+  .tabs
   input[name="tab-control"]:nth-of-type(2):checked
   ~ ul
   > li:nth-child(2)
   > label
 
   @media (max-width: 600px) {
-    .manager_main_tabs
+    .tabs
     input[name="tab-control"]:nth-of-type(2):checked
     ~ ul
     > li:nth-child(2)
@@ -223,10 +223,10 @@
       background: rgba(0, 0, 0, 0.08);
     }
   }
-  .manager_main_tabs input[name="tab-control"]:nth-of-type(2):checked ~ .slider {
+  .tabs input[name="tab-control"]:nth-of-type(2):checked ~ .slider {
     transform: translateX(100%);
   }
-  .manager_main_tabs
+  .tabs
   input[name="tab-control"]:nth-of-type(2):checked
   ~ .content
   > section:nth-child(2) {

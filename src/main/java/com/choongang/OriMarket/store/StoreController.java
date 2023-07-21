@@ -54,6 +54,22 @@ public class StoreController {
         return "store/seller_itemDetail";
     }
 
+    @GetMapping("/deliverypickup")
+    public String deliverypickup() {
+        return "store/delivery_pickup";
+    }
+
+    @GetMapping("/modalslideup")
+    public String modalslideup() {
+        return "store/modal_slideup";
+    }
+
+    @GetMapping("/modalsearchlist")
+    public String modalsearchlist() {
+        return "store/search_store_list_final";
+    }
+
+
     @GetMapping("/s1")
     public String storenotice2(HttpSession session,Model model) {
         BusinessUser buUserNumber = businessUserRepository.findById((Long) session.getAttribute("buUserNumber")).orElseThrow();
