@@ -29,12 +29,29 @@
             box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
             box-sizing: border-box;
         }
-        .currentlocationmap_title {
-            font-size: 20px;
-            letter-spacing: -2px;
-            text-align: center;
-            margin-bottom: 10px;
+        .top_content {
+            display: flex;
+            align-items: center;
         }
+
+        button.backbtn {
+            display: flex;
+            align-items: center;
+            font-size: 20px;
+            color: #999;
+            margin: 0 0 0 10px;
+            width: 30px;
+            height: 30px;
+            background-color: #fff;
+            border-radius: 50%;
+            border: 1px solid #999;
+            cursor: pointer;
+            justify-content: center;
+        }
+        /* hover공통 */
+        button.backbtn:hover, button.nowmap_btn:hover, button.mkmap_btn:hover {background-color:#333; color:#fff;}
+        button.cnmkmap_btn:hover {background-color:#333; color:#ffbf41;}
+        h2.currentlocationmap_title {font-size: 20px; letter-spacing: -2px; text-align: center;margin: 15px 15%;}
         #map {
             margin: auto;
             width: 280px;
@@ -45,14 +62,9 @@
             padding: 10px;
             margin: 5px auto;
         }
-        button {
-            padding: 8px 10px;
-            background-color: #ffbf41;
-            border-radius: 5px;
-            border: none;
-            cursor: pointer;
-            width: 240px;
-        }
+        /* 하단 버튼 공통 */
+        button.nowmap_btn, button.mkmap_btn, button.cnmkmap_btn{padding: 8px 10px; background-color: #ffbf41; border-radius: 5px; border: none; cursor: pointer; width: 240px;}
+
         button.nowmap_btn{}
         button.mkmap_btn{margin-top:10px;}
         button.cnmkmap_btn{margin-top:10px; background-color: #46A973; color:#fff;}
@@ -61,8 +73,10 @@
 <body>
 <div class="currentlocationmap_wrap">
     <div class="currentlocationmap_box">
-
-        <h2 class="currentlocationmap_title">현재 위치 가까운 시장 보기</h2>
+        <div class="top_content">
+            <button class="backbtn" onclick="window.history.go(-1)">&lt;</button>
+            <h2 class="currentlocationmap_title">가까운시장 단골등록</h2>
+        </div>
         <div id="map"></div>
         <div id="map_btns">
             <button class="nowmap_btn" onclick="showCurrentLocationMap()">현재 위치 보기</button>

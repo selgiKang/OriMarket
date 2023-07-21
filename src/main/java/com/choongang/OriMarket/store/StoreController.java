@@ -31,10 +31,10 @@ public class StoreController {
 
     private final ItemRepository itemRepository;
 
-    @GetMapping("/detailmenu")
-    public String store_detailmenu() {
-        return "store/detailmenu";
-    }
+//    @GetMapping("/detailmenu")
+//    public String store_detailmenu(){
+//        return "store/detailmenu";
+//    }
 
     // /store getMapping은 favController로 이동
     @GetMapping("/store_menu_search")
@@ -53,6 +53,22 @@ public class StoreController {
     public String storenotice1() {
         return "store/seller_itemDetail";
     }
+
+    @GetMapping("/deliverypickup")
+    public String deliverypickup() {
+        return "store/delivery_pickup";
+    }
+
+    @GetMapping("/modalslideup")
+    public String modalslideup() {
+        return "store/modal_slideup";
+    }
+
+    @GetMapping("/modalsearchlist")
+    public String modalsearchlist() {
+        return "store/search_store_list_final";
+    }
+
 
     @GetMapping("/s1")
     public String storenotice2(HttpSession session,Model model) {
@@ -111,5 +127,16 @@ public class StoreController {
             model.addAttribute("al",all);
         return "store/store";
     }
+
+    @GetMapping("/detailmenu/{itemId}")
+    public String store_detailmenu(@PathVariable("itemId")Long itemId,Model model){
+
+        Item item = itemService.getItem(itemId);
+
+        model.addAttribute("item",item);
+
+        return "store/detailmenu";
+    }
+
 
 };

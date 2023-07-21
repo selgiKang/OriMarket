@@ -1,3 +1,4 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -35,26 +36,23 @@
 
     .modal {
       position: absolute;
-      bottom: 600px; /* Set initial top position to 10px */
+      bottom: 0;
       left: 50%;
       transform: translateX(-50%);
       background-color: #fefefe;
-      width: 350px;
-      max-height: 81vh;
-      height: 800px;
+      width: 350px; /* 고정된 너비 */
+      max-height: 81vh; /* 최대 높이 */
+      overflow-y: auto;
       padding: 20px;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-      transition: top 0.3s ease-in-out;
-      border-radius: 0px 0px 50px 50px;
+      transition: bottom 0.3s ease-in-out; /* 부드러운 이동을 위한 트랜지션 */
+      border-radius: 30px 30px 0 0;
     }
+
 
     .modal-content {
-      margin-top: 150px;
       /* 내용의 높이에 따라 자동으로 조정 */
     }
-
-
-
 
 
 
@@ -69,7 +67,7 @@
     }
 
     /*내용 적는 칸 배경 */
-    .manager_main_tabs {
+    .tabs {
       border-radius: 5px;
       background: white;
       height: 100%;
@@ -80,14 +78,14 @@
     }
 
 
-    .manager_main_tabs input[name="tab-control"] {
+    .tabs input[name="tab-control"] {
       display: none;
 
     }
 
     /*배달, 포장 폰트*/
-    .manager_main_tabs .content section h2,
-    .manager_main_tabs ul li label {
+    .tabs .content section h2,
+    .tabs ul li label {
       font-weight: bold;
       font-size: 18px;
       color: #4caf50;
@@ -96,7 +94,7 @@
     }
 
     /*배달, 포장 전체 탭*/
-    .manager_main_tabs ul {
+    .tabs ul {
       list-style-type: none;
       padding-left: 0;
       display: flex;
@@ -109,7 +107,7 @@
 
     }
 
-    .manager_main_tabs ul li {
+    .tabs ul li {
       box-sizing: border-box;
       flex: 1;
       width: 25%;
@@ -118,7 +116,7 @@
     }
 
     /*배달, 포장 선택하기 전 색상*/
-    .manager_main_tabs ul li label {
+    .tabs ul li label {
       transition: all 0.3s ease-in-out;
       color: #929daf;
       overflow: hidden;
@@ -131,11 +129,11 @@
     }
 
 
-    .manager_main_tabs ul li label br {
+    .tabs ul li label br {
       display: none;
 
     }
-    .manager_main_tabs ul li label svg {
+    .tabs ul li label svg {
       fill: #929daf;
       height: 1.2em;
       vertical-align: bottom;
@@ -145,25 +143,25 @@
     }
 
     /*배달, 포장 마우스 가져다 댔을 때 색상*/
-    .manager_main_tabs ul li label:hover,
-    .manager_main_tabs ul li label:focus,
-    .manager_main_tabs ul li label:active {
+    .tabs ul li label:hover,
+    .tabs ul li label:focus,
+    .tabs ul li label:active {
       outline: 0;
       color: #bec5cf;
     }
-    .manager_main_tabs ul li label:hover svg,
-    .manager_main_tabs ul li label:focus svg,
-    .manager_main_tabs ul li label:active svg {
+    .tabs ul li label:hover svg,
+    .tabs ul li label:focus svg,
+    .tabs ul li label:active svg {
       fill: #bec5cf;
     }
 
     /*배달, 포장 탭 밑에 있는 슬라이드바 설정*/
-    .manager_main_tabs .slider {
+    .tabs .slider {
       position: relative;
       width: 50%;
       transition: all 0.33s cubic-bezier(0.38, 0.8, 0.32, 1.07);
     }
-    .manager_main_tabs .slider .indicator {
+    .tabs .slider .indicator {
       position: relative;
       width: 130px;
       max-width: 100%;
@@ -174,13 +172,13 @@
     }
 
     /*내용 적는 칸*/
-    .manager_main_tabs .content {
+    .tabs .content {
       margin-top: 20px;
 
     }
 
     /*배달 포장 탭 넘어갈때 효과*/
-    .manager_main_tabs .content section {
+    .tabs .content section {
       display: none;
       animation-name: content;
       animation-direction: normal;
@@ -188,13 +186,11 @@
       animation-timing-function: ease-in-out;
       animation-iteration-count: 1;
       line-height: 1.4;
-
-
       /* 텍스트가 넘어가면 다음 줄로 바뀌게 하려면 아래 속성을 추가합니다. */
       word-wrap: break-word;
     }
 
-    .manager_main_tabs
+    .tabs
     input[name="tab-control"]:nth-of-type(1):checked
     ~ ul
     > li:nth-child(1)
@@ -202,14 +198,14 @@
       cursor: default;
       color: #4caf50;
     }
-    .manager_main_tabs
+    .tabs
     input[name="tab-control"]:nth-of-type(1):checked
     ~ ul
     > li:nth-child(1)
     > label
 
     @media (max-width: 600px) {
-      .manager_main_tabs
+      .tabs
       input[name="tab-control"]:nth-of-type(1):checked
       ~ ul
       > li:nth-child(1)
@@ -217,16 +213,16 @@
         background: rgba(0, 0, 0, 0.08);
       }
     }
-    .manager_main_tabs input[name="tab-control"]:nth-of-type(1):checked ~ .slider {
+    .tabs input[name="tab-control"]:nth-of-type(1):checked ~ .slider {
       transform: translateX(0%);
     }
-    .manager_main_tabs
+    .tabs
     input[name="tab-control"]:nth-of-type(1):checked
     ~ .content
     > section:nth-child(1) {
       display: block;
     }
-    .manager_main_tabs
+    .tabs
     input[name="tab-control"]:nth-of-type(2):checked
     ~ ul
     > li:nth-child(2)
@@ -234,14 +230,14 @@
       cursor: default;
       color: #4caf50;
     }
-    .manager_main_tabs
+    .tabs
     input[name="tab-control"]:nth-of-type(2):checked
     ~ ul
     > li:nth-child(2)
     > label
 
     @media (max-width: 600px) {
-      .manager_main_tabs
+      .tabs
       input[name="tab-control"]:nth-of-type(2):checked
       ~ ul
       > li:nth-child(2)
@@ -249,10 +245,10 @@
         background: rgba(0, 0, 0, 0.08);
       }
     }
-    .manager_main_tabs input[name="tab-control"]:nth-of-type(2):checked ~ .slider {
+    .tabs input[name="tab-control"]:nth-of-type(2):checked ~ .slider {
       transform: translateX(100%);
     }
-    .manager_main_tabs
+    .tabs
     input[name="tab-control"]:nth-of-type(2):checked
     ~ .content
     > section:nth-child(2) {
@@ -276,19 +272,6 @@
 
 
 
-
-    /*드래그용 내부 막대기*/
-    .modal .bottom-bar {
-      position: absolute;
-      bottom: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 60px;
-      height: 4px;
-      background-color: #666666; /* 원하는 색상으로 변경 가능합니다 */
-      border-radius: 2px;
-    }
-
   </style>
 </head>
 <body>
@@ -311,7 +294,7 @@
             <div class="inside_tabs">
               <div role="inside_tablist">
 
-                여기에 배달 내용을 적어주세요
+
 
 
               </div>
@@ -321,58 +304,54 @@
             <div class="inside_tabs">
               <div role="inside_tablist">
 
-                여기에 포장 내용을 적어주세요
-
               </div>
             </div>
           </section>
         </div>
       </div>
 
-      <div class="bottom-bar"></div>
+
 
     </div>
   </div>
 </div>
+
 <script>
   const modal = document.getElementById('modal');
-  const bottomBar = modal.querySelector('.bottom-bar'); // .bottom-bar를 찾습니다.
-  const maxDragDistance = 700; /*모달창 시작 지점*/
 
-  // 모달 위아래로 드래그 가능하도록 설정
   let isDragging = false;
-  let startY = 0;
-  let startTop = 0;
+  let startOffsetY = 0;
+  let modalOffsetY = 0;
 
-  function dragModal(event) {
-    if (isDragging) {
-      const deltaY = event.clientY - startY;
-      const newTop = startTop + deltaY;
-      const limitedTop = Math.min(Math.max(newTop, -maxDragDistance), -15); // 모달창 어디까지 드래그 가능?
-      modal.style.top = `${limitedTop}px`;
-    }
-  }
-
-  bottomBar.addEventListener('mousedown', (event) => { // .bottom-bar에 이벤트 리스너를 추가합니다.
+  modal.addEventListener('mousedown', (event) => {
+    // 마우스를 누를 때 모달창을 보이도록 위치 설정
+    modal.style.bottom = '0';
     isDragging = true;
-    startY = event.clientY;
-    startTop = parseFloat(getComputedStyle(modal).top);
+    startOffsetY = event.clientY - modal.getBoundingClientRect().top;
+    modalOffsetY = modal.offsetTop;
 
-    window.addEventListener('mousemove', dragModal);
+    // 드래그 중인 상태에서 cursor 스타일 변경
+    modal.classList.add('dragging');
+  });
 
-    // 드래그 시작시 body의 선택 이벤트를 막습니다.
-    document.body.style.userSelect = 'none';
-    document.body.style.pointerEvents = 'none';
+  window.addEventListener('mousemove', (event) => {
+    if (isDragging) {
+      const newY = event.clientY - startOffsetY;
+      const maxY = window.innerHeight - modal.clientHeight;
+      const minY = 50;
+      const newTop = Math.max(minY, Math.min(newY, maxY));
+      modal.style.top = `${newTop}px`;
+    }
   });
 
   window.addEventListener('mouseup', () => {
     isDragging = false;
-    window.removeEventListener('mousemove', dragModal);
 
-    // 드래그 종료시 body의 선택 이벤트를 다시 활성화합니다.
-    document.body.style.userSelect = 'auto';
-    document.body.style.pointerEvents = 'auto';
+    // 드래그 종료시 cursor 스타일 원래대로 돌려놓기
+    modal.classList.remove('dragging');
   });
 </script>
+
+
 </body>
 </html>
