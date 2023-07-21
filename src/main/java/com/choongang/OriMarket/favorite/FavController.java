@@ -81,8 +81,8 @@ public class FavController {
             BusinessUser buStoreNumber = items.get(0).getBusinessStore().getBusinessUser();
             List<Message> messageList = messageRepository.findByBuUserNumber(buStoreNumber);
 
-            Message lastM = messageList.get(messageList.size()-1);
-            model.addAttribute("lastM",lastM);
+            //Message lastM = messageList.get(messageList.size()-1);
+           //model.addAttribute("lastM",lastM);
 
             return "store/store";
             //비회원
