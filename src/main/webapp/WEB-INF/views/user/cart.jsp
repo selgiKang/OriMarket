@@ -48,16 +48,13 @@
 					<c:set var="prevBuStoreName" value="${orderList.businessStore.buStoreName}" />
 					<article>
 						<h1>${orderList.businessStore.buStoreName}</h1>
-						<!-- 같은 가게 안에서 상품리스트(where='가게이름'아니면'가게식별번호')쿼리 -->
 					</c:if>
 					<ul>
 
 							<c:if test="${orderList.item.businessStore eq orderList.businessStore}">
 							<c:forEach var="item" items="${orderList.businessStore.items}">
 								<c:if test="${orderList.item eq item}">
-									<%--<c:forEach var="items" items="${cartItemList}" varStatus="">--%>
 									<li>
-											<%--<c:out value="${status.index}"/>--%>
 										<div class="cart_info">
 											<input type="checkbox" name="cbox"  class="individual_checkbox" checked="checked">
 											<input type="hidden" class="individual_totalCount" value="${orderList.count}">
@@ -79,7 +76,6 @@
 											<!-- 수량선택(-,+),가격표시 -->
 											<div class="cart_itemDescription">
 												<div class="cart_itemOption">
-														<%--onclick="dec(currentCnt${status.index})"--%>
 													<button onclick="minusBtn('${orderList.cartItemId}')"><i class="fas fa-solid fa-circle-minus"></i></button>
 													<input type="text" size="1" name="currentCnt" id="currentCnt${status.index}" value="${orderList.count}">
 													<button onclick="plusBtn('${orderList.cartItemId}')"><i class="fas fa-solid fa-circle-plus"></i></button>
@@ -93,7 +89,6 @@
 											</div>
 										</div>
 									</li>
-									<%--</c:forEach>--%>
 								</c:if>
 							</c:forEach>
 							</c:if>

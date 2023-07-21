@@ -11,6 +11,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 
@@ -62,11 +64,12 @@ public class CartController {
 
     /*특정상품 장바구니에 추가*/
     @PostMapping("/{userId}/cart")
-    public String addMyCart(@PathVariable("userId") String userId, Long itemId, int count){
+    public String addMyCart(@PathVariable("userId") String userId, Long itemId, int count,Model model){
         User user = userService.getUser(userId);
         Item additem = itemService.getItem(itemId);
 
 
+        model.addAttribute("item",additem);
         cartService.addCart(user,additem,count);
 
         return "/store/detailmenu";
@@ -105,6 +108,7 @@ public class CartController {
     }
 
 
+    /*결제페이지로 넘기기*/
     @GetMapping("/paymentPage/{userId}")
     public String orderPayment(@PathVariable("userId")String userId,Model model){
 
