@@ -1,5 +1,6 @@
 package com.choongang.OriMarket.user;
 
+import com.choongang.OriMarket.business.store.BusinessStore;
 import com.choongang.OriMarket.business.store.BusinessStoreRepository;
 import com.choongang.OriMarket.store.Item;
 import com.choongang.OriMarket.store.ItemRepository;
@@ -21,19 +22,16 @@ public class CartController {
     private final CartService cartService;
     private final UserService userService;
     private final ItemService itemService;
-
     private final CartItemRepository cartItemRepository;
 
-    private final BusinessStoreRepository businessStoreRepository;
 
     private final ItemRepository itemRepository;
 
-    public CartController(CartService cartService, UserService userService, ItemService itemService, CartItemRepository cartItemRepository, BusinessStoreRepository businessStoreRepository, ItemRepository itemRepository){
+    public CartController(CartService cartService, UserService userService, ItemService itemService, CartItemRepository cartItemRepository, ItemRepository itemRepository){
         this.cartService=cartService;
         this.userService=userService;
         this.itemService=itemService;
         this.cartItemRepository = cartItemRepository;
-        this.businessStoreRepository = businessStoreRepository;
         this.itemRepository = itemRepository;
     }
 
@@ -48,8 +46,8 @@ public class CartController {
         int totalPrice = 0;
         for(CartItem cartItem : cartItems){
             totalPrice += (cartItem.getItem().getItemPrice()*cartItem.getCount());
-
         }
+
         model.addAttribute("cartItemList",cartItems);
         model.addAttribute("totalPrice",totalPrice);
         model.addAttribute("user",userId);
@@ -64,12 +62,12 @@ public class CartController {
 
     /*특정상품 장바구니에 추가*/
     @PostMapping("/{userId}/cart")
-    public String addMyCart(@PathVariable("userId") String userId, Long itemId, int count, int itemPrice){
+    public String addMyCart(@PathVariable("userId") String userId, Long itemId, int count){
         User user = userService.getUser(userId);
         Item additem = itemService.getItem(itemId);
 
 
-        cartService.addCart(user,additem,count,itemPrice);
+        cartService.addCart(user,additem,count);
 
         return "/store/detailmenu";
     }
@@ -92,19 +90,19 @@ public class CartController {
         return "ok";
     }
 
-//
-//
-//    /*결제***그리고 장바구니 삭제*/
-//    @GetMapping("/{userId}/cart/checkout")
-//    public String myCartPayment(@PathVariable("userId") String userId,Model model) {
-//
-//
-//        cartService.cartPayment(userId);
-//        cartService.cartDeleteAll(userId);
-//
-//
-//        return "/order/receipt";
-//    }
+
+
+    /*결제***그리고 장바구니 삭제*/
+    @PostMapping("/{userId}/cart/checkout")
+    public String myCartPayment(@PathVariable("userId") String userId,Model model) {
+
+
+        cartService.cartPayment(userId);
+        cartService.cartDeleteAll(userId);
+
+
+        return "/order/order_receipt";
+    }
 
 
     @GetMapping("/paymentPage/{userId}")
