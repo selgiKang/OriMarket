@@ -33,6 +33,14 @@ public class MessageController {
         System.out.println(resultMessage);
         return "business/businessMessage/business_message";
     }
+    @GetMapping("/storeMessageInsert")
+    public String storeMessageInsert(@ModelAttribute Message message, Model model,HttpSession session, BusinessUser businessUser){
+            businessUser.setBuUserNumber(Long.valueOf(session.getAttribute("buUserNumber").toString()));
+            List<Message> resultMessage = messageService.getMessages(businessUser,model);
+            model.addAttribute("resultMessage",resultMessage);
+        System.out.println(resultMessage);
+        return "store/store_message";
+    }
     @GetMapping("/businessInsertMessage")
     public String businessInsertMessage(){
         return "business/businessMessage/message_insert";

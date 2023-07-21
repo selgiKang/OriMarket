@@ -41,11 +41,12 @@ public class ReviewController {
     @GetMapping("/businessReview")
     public String businessPageReview(@ModelAttribute Review review,BusinessStore businessStore,BusinessUser businessUser,Model model,HttpSession session){
         //사업자 번호
-        BusinessStore findReview = businessStoreService.findReview(businessStore,businessUser,session);
-        businessStore.setBuStoreNumber(findReview.getBuStoreNumber());
+        BusinessStore findReviewResult = businessStoreService.findReview(businessStore,businessUser,session);
+        //상점 번호
+       // businessStore.setBuStoreNumber(findReview.getBuStoreNumber());
 
         //사업자 번호 일치하는 리뷰만 골라오기
-        List<Review> reviewListResult = reviewService.findReview(review,businessStore);
+        List<Review> reviewListResult = reviewService.findReview(review,findReviewResult);
         model.addAttribute("reviewList",reviewListResult);
         for(Review r : reviewListResult){
             System.out.println(r.getReview_id());

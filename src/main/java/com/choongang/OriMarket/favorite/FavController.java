@@ -79,10 +79,15 @@ public class FavController {
             model.addAttribute("al", items);
             //공지사항
             BusinessUser buStoreNumber = items.get(0).getBusinessStore().getBusinessUser();
+            session.setAttribute("buUserNumber",buStoreNumber.getBuUserNumber());
             List<Message> messageList = messageRepository.findByBuUserNumber(buStoreNumber);
 
             //Message lastM = messageList.get(messageList.size()-1);
            //model.addAttribute("lastM",lastM);
+            if(messageList != null){
+                Message lastM = messageList.get(messageList.size()-1);
+                model.addAttribute("lastM",lastM);
+            }
 
             return "store/store";
             //비회원

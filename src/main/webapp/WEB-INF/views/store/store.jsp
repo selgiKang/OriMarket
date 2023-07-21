@@ -34,6 +34,7 @@
         <h1><input type="text" value="싱싱과일가게" name="storeName${sessionScope.favNumber}"></h1>
         <span style="float: left;">
             <img class="star" src="../../img/store/star.png" alt="별">
+            <%--리뷰--%>
             <a href="#">>486</a>
         </span>
         <br>
@@ -53,8 +54,9 @@
         </div>
     </section>
 
+    <%--공지사항--%>
     <section>
-        <button class="notice-button">${lastM.totalMessage}</button>
+        <button class="notice-button" onclick="location.href='/storeMessageInsert'">${lastM.totalMessage}</button>
     </section>
 
             <div class="tabmenu out-tabmenu">

@@ -11,7 +11,6 @@
             document.getElementById('reviewSubmitButton').style.display = 'inline';
             document.getElementById('reviewEditButton').style.display = 'none';
             document.getElementById('business_review_btn_2').style.display = 'inline';
-
         }
     </script>
     <style>
@@ -76,7 +75,7 @@
                 <c:if test="${empty list.businessReplyMessage}">
                     <tr><td colspan="2" class="review_table_td_1">답댓글 달기</td></tr>
                     <tr>
-                        <td id="business_review_messageArea" style="display: none;">
+                        <td id="business_review_messageArea">
                             <textarea type="textarea"  name="businessReplyMessage" maxlength="500" placeholder="500자 이내 작성"></textarea>
                         </td>
                     </tr>
