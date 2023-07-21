@@ -10,12 +10,18 @@ import org.springframework.stereotype.Service;
 import javax.servlet.http.HttpSession;
 
 @Service
-@RequiredArgsConstructor
+//@RequiredArgsConstructor
 @Slf4j
 public class RealTimeService {
 
     @Autowired
     private final RealTimeRepository rtsRepository;
+
+
+    @Autowired
+    public RealTimeService(RealTimeRepository rtsRepository) {
+        this.rtsRepository = rtsRepository;
+    }
 
     //주문번호 넣어서 생성, 나머지 값은 디폴트 들어가게
     public boolean insertRts(RealTimeStatus rts){
@@ -28,12 +34,20 @@ public class RealTimeService {
         }
     }
 
-    public RealTimeStatus update1(Order order,HttpSession session){
+
+    //7.20 테스트 승엽
+    public RealTimeStatus update1(Order order, HttpSession session) {
         order.setOrderNumber(String.valueOf(session.getAttribute("orderNumber")));
         RealTimeStatus a = rtsRepository.findByorderNumber(order);
         a.setRtsOrderIng(1);
-        rtsRepository.save(a);
-        return a;
+        return rtsRepository.save(a); // 변경 사항을 저장하고 리턴
+    }
+
+    public RealTimeStatus update2(Order order, HttpSession session) {
+        order.setOrderNumber(String.valueOf(session.getAttribute("orderNumber")));
+        RealTimeStatus a = rtsRepository.findByorderNumber(order);
+        a.setRtsRiderFinish(1);
+        return rtsRepository.save(a); // 변경 사항을 저장하고 리턴
     }
 
     public boolean findRts(Order order,HttpSession session){
@@ -53,7 +67,14 @@ public class RealTimeService {
         a.setRtsRiderFinish(1);
     }*/
 
+    //7.20 테스트 승엽
+    public RealTimeStatus findByOrderNumber(String orderNumber) {
+        return rtsRepository.findByOrderNumber(orderNumber);
+    }
 
+    public void updateRts(RealTimeStatus rts) {
+        rtsRepository.save(rts);
+    }
 
 
 

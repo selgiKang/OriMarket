@@ -208,6 +208,30 @@
                 $('.order-item[data-status="completed"]').show();
             }
         });
+
+        // 탭 링크에 클릭 이벤트 리스너 추가
+        $('.tab-link').on('click', function() {
+            var tab = $(this).data('tab');
+            $('.tab-link').removeClass('active'); // 모든 탭의 활성화 클래스 제거
+            $(this).addClass('active'); // 클릭한 탭에 활성화 클래스 추가
+            $('.order-item').hide(); // 모든 주문 항목을 숨김 처리
+
+            // 선택된 탭에 해당하는 주문 항목을 표시
+            if (tab === 'pending') {
+                $('.order-item[data-status="pending"]').show();
+                $('.order-item[data-status="processing"]').hide();
+                $('.order-item[data-status="completed"]').hide();
+            } else if (tab === 'processing') {
+                $('.order-item[data-status="pending"]').hide();
+                $('.order-item[data-status="processing"]').show();
+                $('.order-item[data-status="completed"]').hide();
+            } else if (tab === 'completed') {
+                $('.order-item[data-status="pending"]').hide();
+                $('.order-item[data-status="processing"]').hide();
+                $('.order-item[data-status="completed"]').show();
+            }
+        });
+
     });
 </script>
 
