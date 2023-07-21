@@ -182,8 +182,7 @@
         { name: "통인시장", latitude: 37.565809, longitude: 126.966071 },
         { name: "평화시장", latitude: 37.570025, longitude: 126.985573 },
         { name: "신원시장", latitude: 37.4815335827273, longitude: 126.92842341587128 },
-        // 추가 전통시장 데이터
-        // ...
+        { name: "장위전통시장", latitude: 37.61002647830202, longitude: 127.05155130278266 }
     ];
 
     function findClosestMarket(latitude, longitude) {
