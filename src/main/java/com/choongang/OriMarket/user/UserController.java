@@ -75,16 +75,19 @@ public class UserController {
 
     @PostMapping("/login")
     public String loginId(@ModelAttribute User user, Model model, HttpSession session) {
-        boolean isTrue = userService.login(user,session,model);
-        if(isTrue){
+        boolean isTrue = userService.login(user, session, model);
+        if (isTrue) {
             User findUser = userRepository.findByUserId(String.valueOf(session.getAttribute("userId")));
             List<UserAddress> userAddresses = findUser.getUserAddresses();
-            model.addAttribute("userAd",userAddresses);
+            model.addAttribute("userAd", userAddresses);
             model.addAttribute("userId", user.getUserId());
             return "main/main";
+        } else {
+            model.addAttribute("loginError", "아이디 또는 비밀번호가 틀립니다.");
+            return "user/login";
         }
-        return "user/login";
     }
+
 
     @PostMapping("/join")
     public String joinUser(@ModelAttribute User user, HttpSession session) {
