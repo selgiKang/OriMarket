@@ -108,12 +108,12 @@
 		<img alt="mainfoodpic" src="../../img/store/kal.jpg">
 		<p>위 사진은 연출된 사진으로 실제와 다를 수 있습니다.</p>
 	</div>
-
 	<div class="main_menu_name">
 		<h1>${item.itemName}</h1>
 		<h5>${item.itemInfo}</h5>
 	</div>
 	<form action="/${userId}/cart/" method="post">
+		<input type="hidden" value="${item.businessStore}" name="businessStore">
 		<div class="mymenu_container">
 			<div class="mymenu">
 				<h4>가격</h4>

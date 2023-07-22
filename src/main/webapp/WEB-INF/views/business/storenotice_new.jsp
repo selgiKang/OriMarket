@@ -530,20 +530,36 @@
                         <h3>가게 카테고리</h3>
                         <c:if test="${empty save.buStoreCategory}">
                             <select name="buStoreCategory">
-                                <option></option>
-                                <option></option>
-                                <option></option>
-                                <option></option>
-                                <option></option>
-                                <option></option>
+                                <option value="채소">채소</option>
+                                <option value="과일,견과,쌀">과일,견과,쌀</option>
+                                <option value="수산,해산물,건어물">수산,해산물,건어물</option>
+                                <option value="정육,계란">정육,계란</option>
+                                <option value="국,반찬">국,반찬</option>
+                                <option value="베이커리">베이커리</option>
+                                <option value="양념,오일">양념,오일</option>
+                                <option value="음료,커피">음료,커피</option>
+                                <option value="간식">간식</option>
+                                <option value="생활용품">생활용품</option>
                             </select>
-                            <input type="text" id="store-category-input" name="buStoreCategory" placeholder="가게 카테고리"/>
                         </c:if>
+                     <%--   <c:if test="${!empty save.buStoreCategory}">
+                            &lt;%&ndash;<input type="text" id="store-category-input" name="buStoreCategory" value="${save.buStoreCategory}"/>&ndash;%&gt;
+                        </c:if>--%>
                         <c:if test="${!empty save.buStoreCategory}">
-                            <input type="text" id="store-category-input" name="buStoreCategory" value="${save.buStoreCategory}"/>
+                            <select name="buStoreCategory">
+                                <c:forEach var="category" items="${['채소', '과일,견과,쌀', '수산,해산물,건어물', '정육,계란', '국,반찬', '베이커리', '양념,오일', '음료,커피', '간식', '생활용품']}">
+                                    <c:choose>
+                                        <c:when test="${save.buStoreCategory eq category}">
+                                            <option value="${category}" selected>${category}</option>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <option value="${category}">${category}</option>
+                                        </c:otherwise>
+                                    </c:choose>
+                                </c:forEach>
+                            </select>
                         </c:if>
                     </div>
-
                     <div class="line"></div>
 
                     <div class="storecare_location">

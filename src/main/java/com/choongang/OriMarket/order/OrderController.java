@@ -85,17 +85,17 @@ public class OrderController {
     public String orderDelivery(@ModelAttribute Order order, @ModelAttribute RealTimeStatus rts, HttpSession session, @RequestParam("orderNumber")String orderNumberStr,@PathVariable("userId")String userId, Model model) {
         order.setOrderNumber(orderNumberStr);
 
+        //주문번호
+        session.setAttribute("orderNumber", orderNumberStr);
+
         //시장 번호 등록
+        cartService.cartPayment(userId);
+        cartService.cartDeleteAll(userId,session);      // 여기서 시장 번호 받기
+
         Market m = new Market();
         Long marketSeq = Long.valueOf((session.getAttribute("marketSeq")).toString());
         m.setMarketSeq(marketSeq);
         order.setMarketSeq(m);
-
-        session.setAttribute("orderNumber", orderNumberStr);
-
-        cartService.cartPayment(userId);
-        cartService.cartDeleteAll(userId);
-        session.setAttribute("marketSeq",marketSeq);
 
         // 주문 db에 주문 내역 저장
         if (orderService.orderDelivery(order, session)) {

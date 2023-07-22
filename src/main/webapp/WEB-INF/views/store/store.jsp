@@ -16,7 +16,7 @@
         <%-- 찜 --%>
             <c:if test="${!empty sessionScope.userId}">
                 <form action="/storeFav" method="get">
-                    <input type="hidden" value="과일가게" name="favStoreName">
+                    <input type="hidden" value="${param.favStoreName}" name="favStoreName">
                     <input type="hidden" value="<%=session.getAttribute("userSeq")%>" name="userSeq">
 
                     <button type="submit" class="storeFav" onclick="event.preventDefault(); toggleHeart(this);" style="opacity: 0;" />
