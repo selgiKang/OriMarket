@@ -23,7 +23,7 @@
 	<div id= "paymentpage_main">
 		<form action="/order_paymentPage/${userId}" method="post">
 			<input type="hidden" name="orderNumber" value="<%=today%>${userId}">
-			<input type="hidden" name="orderUserId" value="1 ${userId}">
+			<input type="hidden" name="orderUserId" value="${userId}">
 			<input type="hidden" name="orderDate" value="<%=today%>">
 			<div id="paymentpage_title">
 				<%-- 전 페이지 돌아가기--%>
@@ -51,6 +51,7 @@
 						<th colspan= "3"><input type="text" name = "orderStoreName" value="카트 가게 이름 받기" readonly></th>
 					</tr>
 					<c:forEach var="cartItems" items="${cartItemList}">
+						<input type="hidden" name="businessUser" value="${cartItems.item.businessStore.businessUser.buUserNumber}">
 					<tr class= "paymentpage_tr_2">
 						<td colspan="3" class= "paymentpage_td_1"><input type="text" name="orderGoodsName" value="${cartItems.item.itemName}" readonly></td>
 					</tr>

@@ -81,6 +81,10 @@ public class FavController {
             Long marketSeq = byBuStoreName.get(0).getMarket().getMarketSeq();
             session.setAttribute("marketSeq",marketSeq);
 
+            //사업자번호
+           Long businessNumber = byBuStoreName.get(0).getBusinessUser().getBuUserNumber();
+           session.setAttribute("businessNumber",businessNumber);
+
             //시장 이름
             String marketName = byBuStoreName.get(0).getMarket().getMarketName();
             session.setAttribute("marketName",marketName);

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -29,9 +30,10 @@ public class RealTimeService {
     }
 
     public RealTimeStatus update1(Order order,HttpSession session){
-        order.setOrderNumber(String.valueOf(session.getAttribute("orderNumber")));
+        order.setOrderNumber(order.getOrderNumber());
         RealTimeStatus a = rtsRepository.findByorderNumber(order);
         a.setRtsOrderIng(1);
+        a.setOrderNumber(order);
         rtsRepository.save(a);
         return a;
     }
@@ -55,6 +57,10 @@ public class RealTimeService {
         a.setRtsRiderFinish(1);
     }*/
 
+    public List<RealTimeStatus> getAllRtsList(String orderNumber){
+        List<RealTimeStatus> allList = rtsRepository.findAll();
+        return allList;
+    }
 
 
 

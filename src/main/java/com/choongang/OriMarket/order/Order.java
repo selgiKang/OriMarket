@@ -20,11 +20,6 @@ public class Order {
     @Column(name = "order_number", nullable = false)
     private String orderNumber;
 
-    //사업자 번호 받기
-    @ManyToOne
-    @JoinColumn(name = "bu_user_number")
-    private BusinessUser businessUser;
-
     //가게이름
     @Column
     private String orderMarketName;
@@ -79,9 +74,16 @@ public class Order {
     @Column
     private String forRider;
 
+    //시장 번호
     @ManyToOne
     @JoinColumn(name="market_seq")
     private Market marketSeq;
+
+    //사업자 번호 받기
+    @ManyToOne
+    @JoinColumn(name = "bu_user_number")
+    private BusinessUser businessUser;
+
 
     @Transient
     private String next_redirect_pc_url;

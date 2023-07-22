@@ -2,13 +2,16 @@ package com.choongang.OriMarket.user;
 
 
 import com.choongang.OriMarket.business.store.BusinessStore;
+import com.choongang.OriMarket.business.store.BusinessStoreRepository;
 import com.choongang.OriMarket.store.Item;
 
 import com.choongang.OriMarket.store.ItemRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
+import javax.servlet.http.HttpSession;
 import javax.swing.text.html.Option;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
@@ -23,15 +26,18 @@ public class CartService {
     private final UserRepository userRepository;
     private final CartRepository cartRepository;
     private final CartItemRepository cartItemRepository;
-
     private final ItemRepository itemRepository;
+    private final BusinessStoreRepository businessStoreRepository;
 
     @Autowired
-    public CartService(UserRepository userRepository, CartRepository cartRepository, CartItemRepository cartItemRepository,ItemRepository itemRepository) {
+    public CartService(UserRepository userRepository, CartRepository cartRepository,
+                       CartItemRepository cartItemRepository,ItemRepository itemRepository,
+                        BusinessStoreRepository businessStoreRepository) {
         this.userRepository = userRepository;
         this.cartRepository = cartRepository;
         this.cartItemRepository = cartItemRepository;
         this.itemRepository= itemRepository;
+        this.businessStoreRepository=businessStoreRepository;
     }
 
 
@@ -63,7 +69,9 @@ public class CartService {
 
         Cart cart = cartRepository.findByUserUserId(user.getUserId());
         Item saveitem = itemRepository.findByItemId(item.getItemId());
+        //물건 가격
         int saveItemPrice = saveitem.getItemPrice();
+
 
 
         /*cart가 없다면 새로 생성*/
@@ -180,11 +188,18 @@ public class CartService {
 
 
     //주문결제후 장바구니 비우기
-    public void cartDeleteAll(String userId) {
+    public void cartDeleteAll(String userId, HttpSession session) {
         List<CartItem> cartItems = cartItemRepository.findAll();
         Cart cart = cartRepository.findByUserUserId(userId);
         int totalPrice = 0;
         int deliveryPrice = 0;
+
+        //시장 번호 찾기
+        BusinessStore bu = cartItems.get(0).getBusinessStore();
+        BusinessStore buNumberResult = businessStoreRepository.findByBuStoreNumber(bu.getBuStoreNumber());
+        Long marketSeq = buNumberResult.getMarket().getMarketSeq();
+
+        session.setAttribute("marketSeq",marketSeq);
 
         /*접속유저의 cartItem만 찾아서 삭제*/
         for (CartItem cartItem : cartItems) {
@@ -204,8 +219,6 @@ public class CartService {
                     cartItemRepository.deleteById(cartItem.getCartItemId());
                 }
             }
-
-
         }
 
     }

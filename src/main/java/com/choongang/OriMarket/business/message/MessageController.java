@@ -27,10 +27,17 @@ public class MessageController {
     //메세지 목록 입장 및 출력
     @GetMapping("/messageInsert")
     public String messageInsert(@ModelAttribute Message message, Model model,HttpSession session, BusinessUser businessUser){
-            businessUser.setBuUserNumber(Long.valueOf(session.getAttribute("buUserNumber").toString()));
-            List<Message> resultMessage = messageService.getMessages(businessUser,model);
-            model.addAttribute("resultMessage",resultMessage);
-        System.out.println(resultMessage);
+        Long buUserNumber = (Long) session.getAttribute("buUserNumber");
+        if (buUserNumber != null) {
+            businessUser.setBuUserNumber(buUserNumber);
+            System.out.println("비지니스유저" + businessUser.getBuUserNumber());
+
+            List<Message> resultMessage = messageService.getMessages(businessUser, model);
+            if (resultMessage != null) {
+                model.addAttribute("resultMessage", resultMessage);
+                System.out.println(resultMessage);
+            }
+        }
         return "business/businessMessage/business_message";
     }
     @GetMapping("/storeMessageInsert")

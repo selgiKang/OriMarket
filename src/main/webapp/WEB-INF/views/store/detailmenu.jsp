@@ -9,8 +9,8 @@
 	<link rel="stylesheet" type="text/css" href="../../css/store/menuclick_style.css">
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/paper/bootstrap.min.css" rel="stylesheet"/>
 	<script type="text/javascript" src="../../js/common/jquery-3.6.4.js"></script>
-	<script type="text/javascript" src="../../js/store/detailmenu.js"></script>
-
+	<script src="https://kit.fontawesome.com/1d53132cda.js" crossorigin="anonymous"></script>
+	<script src="../../js/store/detailmenu.js"></script>
 </head>
 <style>
 	body{
@@ -99,6 +99,7 @@
 	.mymenuoption .radio label {
 		margin-bottom: 5px; /* 라디오 버튼과 레이블 사이의 간격 조정 */
 	}
+	button{border-style: none; background: none; display: inline-block;}
 
 </style>
 
@@ -108,12 +109,13 @@
 		<img alt="mainfoodpic" src="../../img/store/kal.jpg">
 		<p>위 사진은 연출된 사진으로 실제와 다를 수 있습니다.</p>
 	</div>
-
 	<div class="main_menu_name">
 		<h1>${item.itemName}</h1>
 		<h5>${item.itemInfo}</h5>
 	</div>
+	<form action="/${userId}/cart/" method="post" id="cartForm">
 	<form action="/${userId}/cart/" method="post">
+		<input type="hidden" value="${item.businessStore}" name="businessStore">
 		<div class="mymenu_container">
 			<div class="mymenu">
 				<h4>가격</h4>
@@ -130,16 +132,16 @@
 					<%-- js 적용됨 class 이름 바꿀 때 js 파일도 참조--%>
 					<tr>
 						<%-- 이 값은 따로 param으로 가져가서 set, save하기 --%>
-						<td><button class="menu_btn_minus"  value="1" ><i class="fa-solid fa-square-minus" style="color: #46a973;"></i></button></td>
-						<td class="detailmenu_count" ><input type="number" name="count" value="1"></td>
-						<td><button class="menu_btn_plus" value="1" ><i class="fa-solid fa-square-plus" style="color: #46a973;"></i></button>
-						</td>
+							<td><button type="button" class="menu_btn_minus" onclick="minusBtn()"><i class="fas fa-solid fa-square-minus" style="color: #46a973;"></i></button></td>
+							<td class="detailmenu_count"><input type="text" id="countInput" name="count" value="1" size="1"></td>
+							<td><button type="button" class="menu_btn_plus" onclick="plusBtn()"><i class="fas fa-solid fa-square-plus" style="color: #46a973;"></i></button></td>
+
 					</tr>
 				</table>
 			</div>
 		</div>
 		<div>
-			<input type="submit" value="장바구니 담기">
+			<button type="button" onclick="submitForm()">장바구니 담기</button>
 		</div>
 	</form>
 </div>

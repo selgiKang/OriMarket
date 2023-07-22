@@ -204,8 +204,7 @@
                 closestMarket = market;
             }
         }
-        var closestMarketSpan = document.getElementById('closestMarketInfo');
-        closestMarketSpan.value = closestMarket.name;
+
         return closestMarket;
     }
 

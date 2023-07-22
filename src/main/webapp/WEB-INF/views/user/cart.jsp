@@ -166,7 +166,43 @@
 	//
 	// }
 
+	//
+	// function goOrder() {
+	// 	var selectedItems = [];
+	// 	$(".individual_checkbox").each(function (index, element) {
+	// 		if ($(element).is(":checked") === true) {
+	// 			// 선택된 항목의 cartItemId 값을 가져와 배열에 추가
+	// 			var cartItemId = $(element).siblings('.cart_xmark').siblings('#cartItemId').val();
+	// 			selectedItems.push(cartItemId);
+	// 		}
+	// 	});
+	//
+	// 	if (selectedItems.length === 0) {
+	// 		alert("주문할 상품을 체크하세요");
+	// 		return;
+	// 	}
+	//
+	// 	// 서버로 AJAX 요청 보내기
+	// 	$.ajax({
+	// 		url: "/paymentPage/" + userId,
+	// 		method: "POST",
+	// 		data: JSON.stringify(selectedItems),
+	// 		contentType: "application/json; charset=utf-8",
+	// 		success: function (response) {
+	// 			// 서버에서 받은 응답에 대한 처리 (예: 페이지 이동)
+	// 			// 예시로는 주문페이지로 이동하는 코드를 작성합니다.
+	// 			window.location.href = "/order/order_paymentPage";
+	// 		},
+	// 		error: function (xhr, status, error) {
+	// 			// 오류 발생 시 처리
+	// 			alert("주문하기 실패: " + error);
+	// 		}
+	// 	});
+	// }
+
 </script>
+
+
 
 </body>
 </html>

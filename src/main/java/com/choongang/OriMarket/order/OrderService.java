@@ -92,19 +92,22 @@ public class OrderService {
             }
         }
 
-        public List<Map<String,String>> getTableData(String calculateDate, String calculateDateLast,Model model
-        ){
+        public List<Map<String,String>> getTableData(String calculateDate, String calculateDateLast,Model model,HttpSession session){
 
             List<Map<String,String>> tableData = new ArrayList<>();
             System.out.println("calculateDate"+calculateDate+", calculateLast"+calculateDateLast);
             List<Order> orders = orderRepository.findOrdersBetweenDates(calculateDate,calculateDateLast);
 
+            //사업자 번호 세션꺼 꺼내서
+            //그 스토어 이름이랑 오더의 스토어 이르
+            Long buUserNumber = Long.valueOf(session.getAttribute("buUserNumber").toString());
             for(Order order : orders){
-                Map<String, String> orderData = new HashMap<>();
-                orderData.put("date", String.valueOf(order.getOrderDate()));
-                orderData.put("amount",String.valueOf(order.getOrderGoodsPrice()));
-
-                tableData.add(orderData);
+                if(order.getBusinessUser().getBuUserNumber().equals(buUserNumber)){
+                    Map<String, String> orderData = new HashMap<>();
+                    orderData.put("date", String.valueOf(order.getOrderDate()));
+                    orderData.put("amount",String.valueOf(order.getOrderGoodsPrice()));
+                    tableData.add(orderData);
+                }
             }
             model.addAttribute("tableData",tableData);
             return tableData;
