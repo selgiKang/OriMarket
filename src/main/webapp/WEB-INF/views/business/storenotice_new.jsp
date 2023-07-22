@@ -429,10 +429,10 @@
                     <h5>메뉴 관리</h5>
                 </div>
 
-                <div class="first_menu">
+                <a class="first_menu" href="/sellerList?calculate_date=<%=currentDate%>&calculate_date_last=<%=currentDateLast%>">
                     <img src="../../img/store/주문내역.png" alt="주문 내역"> <!-- alt 속성 추가 -->
                     <h5>주문 내역</h5>
-                </div>
+                </a>
 
                 <div class="first_menu">
                     <img src="../../img/store/쿠폰.png" alt="쿠폰 관리"> <!-- alt 속성 추가 -->

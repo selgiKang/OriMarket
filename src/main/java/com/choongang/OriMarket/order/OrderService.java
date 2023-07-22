@@ -115,6 +115,38 @@ public class OrderService {
             return tableData;
         }
 
+        public List<Map<String,String>> allOrderList(String calculateDate, String calculateDateLast,Model model,HttpSession session){
+
+            List<Map<String,String>> tableAllList = new ArrayList<>();
+            System.out.println("calculateDate"+calculateDate+", calculateLast"+calculateDateLast);
+            List<Order> orders = orderRepository.findOrdersBetweenDates(calculateDate,calculateDateLast);
+
+            //사업자 번호 세션꺼 꺼내서
+            //그 스토어 이름이랑 오더의 스토어 이르
+            Long buUserNumber = Long.valueOf(session.getAttribute("buUserNumber").toString());
+
+            for(Order order : orders){
+                //사업자 번호 비교
+                if(order.getBusinessUser().getBuUserNumber().equals(buUserNumber)){
+                    Map<String, String> orderAllList = new HashMap<>();
+                    //주문 날짜
+                    orderAllList.put("date", String.valueOf(order.getOrderDate()));
+                    //아이템 갯수
+                    orderAllList.put("goodsCount",order.getOrderGoodsNum());
+                    //아이템 이름
+                    orderAllList.put("goodsName",order.getOrderGoodsName());
+                    //아이템 가격
+                    orderAllList.put("amount",order.getOrderGoodsPrice());
+                    //아이템 총가격
+                    orderAllList.put("totalPrice",order.getOrderGoodsTotalPrice());
+                    tableAllList.add(orderAllList);
+                }
+            }
+            model.addAttribute("tableAllList",tableAllList);
+            return tableAllList;
+        }
+
+        // , 를 +로 바꿔서 더해서 반환
     public int sumCommaSeparatedNumbers(String commaSeparatedNumbers) {
         int sum = 0;
         String[] numbers = commaSeparatedNumbers.split(",");

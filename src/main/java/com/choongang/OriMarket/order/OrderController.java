@@ -65,6 +65,29 @@ public class OrderController {
         return "calculate/calculate";
     }
 
+    @GetMapping("/sellerList")
+    public String sellerList(@RequestParam("calculate_date") String calculateDate,
+                                    @RequestParam("calculate_date_last") String calculateDateLast,
+                                    Model model,HttpSession session){
+        List<Map<String,String>> tableData = orderService.getTableData(calculateDate,calculateDateLast,model,session);
+        System.out.println("getCalculate"+calculateDate+"/"+calculateDateLast);
+        int totalCome = 0;
+        int orderCount = tableData.size();
+        String totalPrice=null;
+
+        for(Map<String,String>data : tableData){
+            //orders 테이블에 물건 여러개 들어가면 가격 ,표시를 빼고 더애서 가져옴
+            totalCome += orderService.sumCommaSeparatedNumbers(data.get("amount"));
+            totalPrice = data.get("totalPrice");
+        }
+
+        model.addAttribute("tableData",tableData);
+        model.addAttribute("totalCome",totalCome);
+        model.addAttribute("orderCount",orderCount);
+
+        return "business/seller_list";
+    }
+
     @GetMapping("/order_delivery")
     public String order(){return "order/order_delivery";}
     @GetMapping("/order_paymentPage")
