@@ -79,6 +79,7 @@ public class Order {
     @Column
     private String forRider;
 
+    //시장 번호
     @ManyToOne
     @JoinColumn(name="market_seq")
     private Market marketSeq;

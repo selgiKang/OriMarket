@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 
@@ -45,9 +46,9 @@ public class CartController {
     public String myCartPage(@PathVariable("userId") String userId, Model model){
         Cart cart = cartService.getCart(userId);
         User user = userService.getUser(userId);
+
         List<CartItem> byUserUserSeq = cartItemRepository.findByUser_UserSeq(user.getUserSeq());
         List<CartItem> cartItems = cartService.userCartView(cart);
-
 
 
 
@@ -61,21 +62,20 @@ public class CartController {
         model.addAttribute("user",userId);
         model.addAttribute("userOrderList",byUserUserSeq);
 
-
-
-
-
         return "/user/cart";
     }
 
     /*특정상품 장바구니에 추가*/
     @PostMapping("/{userId}/cart")
-    public String addMyCart(@PathVariable("userId") String userId, Long itemId, Integer count,Model model){
+    public String addMyCart(@PathVariable("userId") String userId, Long itemId, int count,Model model){
+       //유저 찾기
         User user = userService.getUser(userId);
+        //물건 아이디 찾기..?
         Item additem = itemService.getItem(itemId);
 
 
         model.addAttribute("item",additem);
+        //카트에 수량 저장
         cartService.addCart(user,additem,count);
 
         return "/store/detailmenu";
@@ -102,16 +102,16 @@ public class CartController {
 
 
     /*결제***그리고 장바구니 삭제*/
-    @PostMapping("/{userId}/cart/checkout")
-    public String myCartPayment(@PathVariable("userId") String userId,Model model) {
-
-
-        cartService.cartPayment(userId);
-        cartService.cartDeleteAll(userId);
-
-
-        return "/order/order_receipt";
-    }
+//    @PostMapping("/{userId}/cart/checkout")
+//    public String myCartPayment(@PathVariable("userId") String userId, Model model, HttpSession session) {
+//
+//
+//        cartService.cartPayment(userId);
+//        cartService.cartDeleteAll(userId,session);
+//
+//
+//        return "/order/order_receipt";
+//    }
 
 
     /*결제페이지로 넘기기*/

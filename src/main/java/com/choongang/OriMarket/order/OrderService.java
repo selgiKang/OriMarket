@@ -99,6 +99,9 @@ public class OrderService {
             System.out.println("calculateDate"+calculateDate+", calculateLast"+calculateDateLast);
             List<Order> orders = orderRepository.findOrdersBetweenDates(calculateDate,calculateDateLast);
 
+            //사업자 번호 세션꺼 꺼내서
+            //그 스토어 이름이랑 오더의 스토어 이르
+
             for(Order order : orders){
                 Map<String, String> orderData = new HashMap<>();
                 orderData.put("date", String.valueOf(order.getOrderDate()));
