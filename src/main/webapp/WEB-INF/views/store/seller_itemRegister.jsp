@@ -43,7 +43,7 @@
     <div>
         <h1>신규상품등록</h1>
     </div>
-    <div>5
+    <div>
         <form action="/s2" method="post">
             <table id="goods_listTable">
                 <tr>

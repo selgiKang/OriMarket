@@ -212,20 +212,25 @@ public class CartService {
 
 
 
-    public void saveCartInfo(String userId) {
+    public void saveCartInfo(String userId,String cart1) {
         List<CartItem> cartItems = cartItemRepository.findAll();
         Cart cart = cartRepository.findByUserUserId(userId);
         int totalPrice = 0;
         int deliveryPrice = 0;
+        cart.setDeliveryType(cart1);
 
         for (CartItem cartItemList : cartItems) {
             if (cartItemList.getCart().getCartId().equals(cart.getCartId())) {
                 totalPrice += cartItemList.getItemPrice() * cartItemList.getCount();
 
                 cart.setCartTotalPrice(totalPrice);
-                if (totalPrice < 30000 && deliveryPrice==0) {
-                    cart.setCartDeliveryPrice(3000);
-                } else if (deliveryPrice==0) {
+                if (cart.getDeliveryType().equals("배달")) {
+                    if (totalPrice < 30000 && deliveryPrice == 0) {
+                        cart.setCartDeliveryPrice(3000);
+                    } else if (deliveryPrice == 0) {
+                        cart.setCartDeliveryPrice(0);
+                    }
+                }else {
                     cart.setCartDeliveryPrice(0);
                 }
             }

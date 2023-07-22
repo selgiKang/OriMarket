@@ -33,7 +33,7 @@
 			<input type="submit" value="변경">
 		</form>
 	</div>
-	<form action="/paymentPage/${userId}" method="get">
+	<form action="/paymentPage/${userId}" method="Post">
 		<div>
 			<input type="checkbox" id="cboxAll" name="cboxAll" checked="checked" onclick="checkAll()">
 			전체선택
@@ -107,8 +107,8 @@
 		<!-- 포장/배달 선택하는 체크리스트 -->
 		<div id="cart_checkDelivery">
 			<ul>
-				<li id="cart_chkDel"><a href="#cart_deliveryTotal">배달</a></li>
-				<li id="cart_chkPick"><a href="#cart_pickTotal">포장</a></li>
+				<li id="cart_chkDel"><a href="#cart_deliveryTotal"><input type="radio" name="deliveryType" value="배달">배달</a></li>
+				<li id="cart_chkPick"><a href="#cart_pickTotal"><input type="radio" name="deliveryType" value="포장">포장</a></li>
 			</ul>
 		</div>
 		<div id="cart_deliveryTotal" class="cart_section" style="display: none;">
@@ -127,8 +127,8 @@
 			<table class="cart_costTable">
 				<tbody>
 				<tr><td>상품금액</td><td class="cart_cost_totalPrice"></td></tr>
-				<tr><td>총 주문금액</td><td class="cart_cost_finalTotalPrice"></td></tr>
-				<tr class="cart_totalPrice"><td>결제예정금액</td><td class="cart_cost_finalTotalPrice"></td></tr>
+				<tr><td>총 주문금액</td><td class="cart_cost_totalPrice"></td></tr>
+				<tr class="cart_totalPrice"><td>결제예정금액</td><td class="cart_cost_totalPrice"></td></tr>
 				</tbody>
 			</table>
 		</div>
@@ -167,7 +167,6 @@
 	// }
 
 </script>
-
 
 </body>
 </html>

@@ -48,7 +48,12 @@
                 </c:if>
                 <div class="connextion_marketbox clear">
                     <div class="connextion_mk1_wrap"><a class="connextion_mk1" href="/shinwon_marketmap"><p style="font-weight: 800;">내가<br>등록한 시장</p></a><p style="font-size: 10px;">　</p></div>
-                    <div class="connextion_mk2_wrap btn-open-popup" onclick="modal"><a class="connextion_mk2" href=""><p>단골시장등록</p></a><p style="font-size: 40px;">+</p></div>
+                    <c:if test="${!empty marketName}">
+                    <div class="connextion_mk2_wrap btn-open-popup" onclick="modal"><a class="connextion_mk2" href=""><p>${marketName}</p></a><p style="font-size: 40px;"></p></div>
+                    </c:if>
+                    <c:if test="${empty marketName}">
+                        <div class="connextion_mk2_wrap btn-open-popup" onclick="modal"><a class="connextion_mk2" href=""><p>단골시장등록</p></a><p style="font-size: 40px;">+</p></div>
+                    </c:if>
                     <div class="connextion_mk3_wrap"><a class="connextion_mk3" href=""><p>단골시장등록</p></a><p style="font-size: 40px;">+</p></div>
                     <div class="connextion_mk4_wrap"><a class="connextion_mk4" href=""><p>단골시장등록</p></a><p style="font-size: 40px;">+</p></div>
                 </div>

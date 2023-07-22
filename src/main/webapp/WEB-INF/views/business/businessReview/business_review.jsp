@@ -75,12 +75,12 @@
                 <c:if test="${empty list.businessReplyMessage}">
                     <tr><td colspan="2" class="review_table_td_1">답댓글 달기</td></tr>
                     <tr>
-                        <td id="business_review_messageArea">
-                            <textarea type="textarea"  name="businessReplyMessage" maxlength="500" placeholder="500자 이내 작성"></textarea>
+                        <td id="business_review_messageArea" colspan="2">
+                            <textarea style="width: 98%; margin-left: 0.5px;" type="textarea"  name="businessReplyMessage" maxlength="500" placeholder="500자 이내 작성"></textarea>
                         </td>
                     </tr>
                     <tr>
-                        <td><input type="submit" value="완료"></td>
+                        <td colspan="2" style="text-align: center;"><input type="submit" value="완료"></td>
                     </tr>
                 </c:if>
                 <c:if test="${!empty list.businessReplyMessage}">

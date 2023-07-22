@@ -1,4 +1,5 @@
 package com.choongang.OriMarket.marketmap;
+/*
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,4 +19,4 @@ public class ConnexionService {
     public List<Connexion> getAllConnexions() {
         return connexionRepository.findAll();
     }
-}
+}*/

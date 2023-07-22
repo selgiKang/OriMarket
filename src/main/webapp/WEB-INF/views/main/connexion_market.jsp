@@ -81,7 +81,13 @@
         <div id="map_btns">
             <button class="nowmap_btn" onclick="showCurrentLocationMap()">현재 위치 보기</button>
             <button class="mkmap_btn" onclick="showClosestMarketMap()">가까운 시장 보기</button>
-            <button class="cnmkmap_btn" onclick="">단골시장으로 등록하기</button>
+            <form action="/market_search">
+                <button class="cnmkmap_btn" type="submit">
+                    <input type="hidden" id="closestMarketInfo" name="marketName">
+                    단골시장으로 등록하기
+                </button>
+            </form>
+
         </div>
     </div>
 
@@ -198,7 +204,8 @@
                 closestMarket = market;
             }
         }
-
+        var closestMarketSpan = document.getElementById('closestMarketInfo');
+        closestMarketSpan.value = closestMarket.name;
         return closestMarket;
     }
 
