@@ -70,16 +70,28 @@ public class StoreController {
     }
 
 
-    @GetMapping("/s1")
-    public String storenotice2(HttpSession session,Model model) {
+    @GetMapping("/s1/{buUserId}")
+    public String storenotice2(HttpSession session,Model model,@PathVariable("buUserId")String buUserId) {
         BusinessUser buUserNumber = businessUserRepository.findById((Long) session.getAttribute("buUserNumber")).orElseThrow();
         List<Item> items1 = buUserNumber.getBusinessStores().get(0).getItems();
         model.addAttribute("items",items1);
+
+
+        BusinessUser businessUser = businessUserRepository.findByBuUserId(buUserId);
+        BusinessStore businessStore = businessStoreRepository.findByBuStoreNumber(businessUser.getBusinessStores().get(0).getBuStoreNumber());
+        session.setAttribute("buUser",businessUser);
+        session.setAttribute("buStore",businessStore);
+
         return "store/seller_itemList";
     }
 
-    @GetMapping("/s2")
-    public String storenotice3() {
+    @GetMapping("/s2/{buUserId}")
+    public String storenotice3(@PathVariable("buUserId")String buUserId,HttpSession session) {
+        BusinessUser businessUser = businessUserRepository.findByBuUserId(buUserId);
+        BusinessStore businessStore = businessStoreRepository.findByBuStoreNumber(businessUser.getBusinessStores().get(0).getBuStoreNumber());
+        session.setAttribute("buUser",businessUser);
+        session.setAttribute("buStore",businessStore);
+
         return "store/seller_itemRegister";
     }
 

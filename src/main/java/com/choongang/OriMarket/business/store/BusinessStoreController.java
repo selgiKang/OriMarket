@@ -1,6 +1,8 @@
 package com.choongang.OriMarket.business.store;
 
 import com.choongang.OriMarket.business.user.BusinessUser;
+import com.choongang.OriMarket.store.Item;
+import com.choongang.OriMarket.store.ItemService;
 import com.choongang.OriMarket.store.Store;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -9,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.servlet.http.HttpSession;
@@ -20,6 +23,7 @@ public class BusinessStoreController {
 
     @Autowired
     private final BusinessStoreService businessStoreService;
+    private final ItemService itemService;
 
     @GetMapping("/storenotice1")
     public String storenotice1(){
@@ -33,6 +37,14 @@ public class BusinessStoreController {
         return "business/storenotice_new";
     }
 
+    @GetMapping("/seller_itemDetail/{itemId}")
+    public String storeMenu(@PathVariable("itemId")Long itemId,Model model){
+
+        Item item = itemService.getItem(itemId);
+        model.addAttribute("item",item);
+
+        return "/store/seller_itemDetail";
+    }
 
 
 

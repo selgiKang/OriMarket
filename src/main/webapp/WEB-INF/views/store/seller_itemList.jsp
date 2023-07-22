@@ -22,8 +22,8 @@
         }
 
         /* 전체 크기 */
-        body{margin: 0; padding: 0; font-family:'LINESeedKR-Bd'; font-size: 16px; text-align: center;}
-        #goods_container{width: 375px; border: 1px solid black;}
+        body{margin: 0; padding: 0; font-family:'LINESeedKR-Bd'; font-size: 16px; text-align: center; width: 100%; height: 100%}
+        #goods_container{width: 375px; height:812px; margin: 0 auto;}
 
         /* 가게상호명,업주 */
         #goods_store{text-align: right;}
@@ -41,13 +41,13 @@
 <body>
 <div id="goods_container">
     <div id="goods_store">
-        <div>가게이름나오게</div>
-        <small>대표:가게주인나오게</small>
+        <div>${buStore.buStoreName}</div>
+        <small>대표:${buUser.buUserName}</small>
     </div>
     <div id="goods_title">
         <h1>현 재고 목록</h1>
         <a href="#"><input type="button"  value="선택품목 삭제"></a>
-        <a href="./GoodsManage_register.jsp"><input type="button"  value="신규품목 등록"></a>
+        <a href="/s2/${buUserId}"><input type="button"  value="신규품목 등록"></a>
     </div>
     <br>
     <div id="goods_list">
@@ -57,26 +57,26 @@
                 <td>상품번호</td>
                 <td>상품명</td>
                 <td>상품수량</td>
-                <td>원가</td>
+<%--                <td>원가</td>--%>
                 <td>판매가</td>
-                <td>무게</td>
-                <td>원산지</td>
+<%--                <td>무게</td>--%>
+<%--                <td>원산지</td>--%>
                 <td>입고일</td>
-                <td>상세정보</td>
-                <td>상품카테고리</td>
+<%--                <td>상세정보</td>--%>
+                <td>카테고리</td>
             </tr>
             <c:forEach var="it" items="${items}">
             <tr>
                 <td><input type="checkbox" value="Goods"></td>
-                <td><a href="./GoodsManage_details.jsp">${it.itemId}</a></td>
+                <td><a href="/seller_itemDetail/${it.itemId}">${it.itemId}</a></td>
                 <td>${it.itemName}</td>
                 <td>${it.itemCnt}</td>
-                <td>${it.itemCost}</td>
+<%--                <td>${it.itemCost}</td>--%>
                 <td><span class="formatted-price">${it.itemPrice}</span></td>
-                <td>${it.itemG}</td>
-                <td>${it.itemFrom}</td>
+<%--                <td>${it.itemG}</td>--%>
+<%--                <td>${it.itemFrom}</td>--%>
                 <td>${it.itemRegDate}</td>
-                <td>${it.itemInfo}</td>
+<%--                <td>${it.itemInfo}</td>--%>
                 <td>${it.itemCategory}</td>
             </tr>
             </c:forEach>
