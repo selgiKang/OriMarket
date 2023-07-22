@@ -41,9 +41,9 @@
     </div>
     <div>
         <h1>상품관리메뉴</h1>
-        <div class="goods_menu"><a href="/s1">현 재고 확인</a></div>
+        <div class="goods_menu"><a href="/s1/${buUserId}">현 재고 확인</a></div>
         <br>
-        <div class="goods_menu"><a href="/s2">상품 신규등록</a></div>
+        <div class="goods_menu"><a href="/s2/${buUserId}">상품 신규등록</a></div>
         <br>
         <br>
     </div>

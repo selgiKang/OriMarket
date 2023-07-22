@@ -21,8 +21,8 @@
         }
 
         /* 전체 크기 */
-        body{margin: 0; padding: 0; font-family:'LINESeedKR-Bd'; font-size: 16px; text-align: center;}
-        #goods_container{width: 375px; border: 1px solid black;}
+        body{margin: 0; padding: 0; font-family:'LINESeedKR-Bd'; font-size: 16px; text-align: center; width: 100%; height: 100%}
+        #goods_container{width: 375px; height:812px; margin: 0 auto;}
 
         /* 가게상호명,업주 */
         #goods_store{text-align: right;}
@@ -31,14 +31,15 @@
         #goods_btn input{background-color: #FFBF41; font-family:'LINESeedKR-Bd'; border-style: none; font-size: 16px;}
 
         #goods_listTable{margin: 0 auto;}
-        #goods_listTable td{color: #46A973;}
+        #goods_listTable tr{line-height: 30px;}
+        #goods_listTable td{color: #46A973; text-align: center;}
     </style>
 </head>
 <body>
 <div id="goods_container">
     <div id="goods_store">
-        <div>${items.BusinessStore.BuStoreName}</div>
-        <small>대표:${items.BusinessStore.BusinessUser.BuUserName}</small>
+        <div>${buStore.buStoreName}</div>
+        <small>대표:${buUser.buUserName}</small>
     </div>
     <div>
         <h1>신규상품등록</h1>
@@ -64,7 +65,7 @@
                 </tr>
                 <tr>
                     <td>무게</td>
-                    <td><input type="text" name="itemG"></td>
+                    <td><input type="text" name="itemG" placeholder="g(그램)단위로 작성해주세요."></td>
                 </tr>
                 <tr>
                     <td>원산지</td>
@@ -103,7 +104,7 @@
                 <!-- 등록버튼 클릭하면 모달창 띄워서 등록이 완료되었습니다. 표시하고 계속 상품등록할 수 있도록 같은 등록페이지로 리다이렉트 -->
                 <input type="submit" value="등록">
                 <input type="reset" value="취소">
-                <a href="">리스트</a>
+                <a href="/s1/${buUserId}">리스트</a>
             </div>
         </form>
         <div>
