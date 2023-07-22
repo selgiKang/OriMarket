@@ -43,8 +43,10 @@ public class OrderController {
     //정산내역
     //calculate get으로 갈 때는 businessmain 코드처럼 해야함! 보고 그 코드 복붙하기!
     @GetMapping("/calculate")
-    public String calculateRequest2(@RequestParam("calculate_date") String calculateDate, @RequestParam("calculate_date_last") String calculateDateLast,Model model){
-        List<Map<String,String>> tableData = orderService.getTableData(calculateDate,calculateDateLast,model);
+    public String calculateRequest2(@RequestParam("calculate_date") String calculateDate,
+                                    @RequestParam("calculate_date_last") String calculateDateLast,
+                                    Model model,HttpSession session){
+        List<Map<String,String>> tableData = orderService.getTableData(calculateDate,calculateDateLast,model,session);
         System.out.println("getCalculate"+calculateDate+"/"+calculateDateLast);
         int totalCome = 0;
         int orderCount = tableData.size();
@@ -172,10 +174,13 @@ public class OrderController {
     }
 
 
+    //정산내역
     @PostMapping("/calculate")
     @ResponseBody
-    public ResponseEntity<List<Map<String,String>>> calculateRequest(@RequestParam("calculate_date") String calculateDate, @RequestParam("calculate_date_last") String calculateDateLast,Model model){
-        List<Map<String,String>> tableDate = orderService.getTableData(calculateDate,calculateDateLast,model);
+    public ResponseEntity<List<Map<String,String>>> calculateRequest(@RequestParam("calculate_date") String calculateDate,
+                                                                     @RequestParam("calculate_date_last") String calculateDateLast,
+                                                                     HttpSession session, Model model){
+        List<Map<String,String>> tableDate = orderService.getTableData(calculateDate,calculateDateLast,model,session);
 
         return ResponseEntity.ok(tableDate);
     }
