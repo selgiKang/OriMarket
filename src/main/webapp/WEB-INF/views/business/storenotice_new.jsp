@@ -8,110 +8,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Page Title</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <style>
-        @font-face {
-            font-family: 'LINESeedKR-Bd', sans-serif;
-            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/LINESeedKR-Bd.woff2') format('woff2');
-            font-weight: 700;
-            font-style: normal;
-        }
-
-        .line {
-            border-top: 1px solid #c4c4c4;
-            width: 330px;
-            margin: 30px auto;
-            position: relative;
-            right: 8px;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-        }
-
-        body {
-            margin: 0 auto;
-        }
-
-        .main-container {
-            width: 375px;
-            height: 812px;
-            margin: 0 auto;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            background-color: #eee;
-            overflow: auto;
-            overflow-x: hidden;
-            font-family: 'LINESeedKR-Bd', sans-serif;
-        }
-
-        .main-container::-webkit-scrollbar {
-            display: none;
-        }
-
-        .my_review_list{
-            margin-top: 10px;
-            margin: 20px;
-        }
-        .my_review_list_store{
-            background-color: white;
-            margin: 15px;
-            padding: 15px;
-
-        }
-
-        .rating, .date {
-            display: inline-block;
-        }
-
-        .rate_and_date{
-            margin-top: -20px;
-        }
-
-        .my_review_photo {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .my_review_photo img {
-            width: 300px;
-        }
-        .rating {
-            font-size: 24px;
-        }
-
-        .rating::before {
-            content: "☆☆☆☆☆";
-            color: lightgray;
-        }
-
-        .rating[data-rating="1"]::before {
-            content: "★☆☆☆☆";
-            color: gold;
-        }
-
-        .rating[data-rating="2"]::before {
-            content: "★★☆☆☆";
-            color: gold;
-        }
-
-        .rating[data-rating="3"]::before {
-            content: "★★★☆☆";
-            color: gold;
-        }
-
-        .rating[data-rating="4"]::before {
-            content: "★★★★☆";
-            color: gold;
-        }
-
-        .rating[data-rating="5"]::before {
-            content: "★★★★★";
-            color: gold;
-        }
-    </style>
 
     <style>
 
@@ -278,6 +174,7 @@
             border-radius: 25px;
             margin: 10px;
             width: 355px;
+            position: relative; /* main-container 내에 위치하도록 설정 */
         }
 
         .storecare {
@@ -335,20 +232,29 @@
 
         /*탭메뉴관련*/
 
+        .tabs {
+            display: flex;
+            flex-direction: column;
+        }
+/*
         .manager_main_tabs {
             display: flex;
             flex-wrap: wrap;
             max-width: 700px;
-            /* box-shadow: 0 48px 80px -32px rgba(0,0,0,0.3);*/
-        }
+            !* box-shadow: 0 48px 80px -32px rgba(0,0,0,0.3);*!
+        }*/
+
         .input {
+            display: none;
             position: absolute;
             opacity: 0;
             border-radius: 25px;
+            margin-bottom: 50px;
         }
+
         .label {
             border-radius: 25px;
-            width: 100%;
+            width: 295px;
             padding: 20px 30px;
             background: white;
             cursor: pointer;
@@ -356,29 +262,33 @@
             font-size: 18px;
             color: #000000;
             transition: background 0.1s, color 0.1s;
+            margin-bottom: 1px;
+
         }
-        .label:hover {
-            background: #d8d8d8;
-        }
+
         .label:active {
-            background: #ccc;
+
+            box-shadow: inset -.3rem -.1rem 1.4rem  #FBFBFB, inset .3rem .4rem .8rem #BEC5D0;
+            cursor: pointer;
+
         }
+
+
         .input:focus + .label {
             z-index: 1;
         }
 
-        @media (max-width: 755px), (min-width: 755px) {
-            .label {
-                width: 755px;
-            }
-        }
+
+        /*탭안에 내용들*/
         .panel {
-            border-radius: 15px;
+            border-radius: 0 0 15px 15px;
             display: none;
             padding: 20px 30px 30px;
             background: #fff;
             width: 295px;
+            margin-top: -22px;
         }
+
 
         .input:checked + .label + .panel {
             display: block;
@@ -387,6 +297,68 @@
         .first_menu:hover {opacity: 0.7;}
 
 
+/*        .my_review_list{
+            margin-top: 10px;
+            margin: 20px;
+        }*/
+
+        .my_review_list_store{
+            background-color: white;
+            margin: 15px;
+            padding: 15px;
+
+        }
+
+        .rating, .date {
+            display: inline-block;
+        }
+
+        .rate_and_date{
+            margin-top: -20px;
+        }
+
+        .my_review_photo {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .my_review_photo img {
+            width: 300px;
+        }
+        .rating {
+            font-size: 24px;
+        }
+
+        .rating::before {
+            content: "☆☆☆☆☆";
+            color: lightgray;
+        }
+
+        .rating[data-rating="1"]::before {
+            content: "★☆☆☆☆";
+            color: gold;
+        }
+
+        .rating[data-rating="2"]::before {
+            content: "★★☆☆☆";
+            color: gold;
+        }
+
+        .rating[data-rating="3"]::before {
+            content: "★★★☆☆";
+            color: gold;
+        }
+
+        .rating[data-rating="4"]::before {
+            content: "★★★★☆";
+            color: gold;
+        }
+
+        .rating[data-rating="5"]::before {
+            content: "★★★★★";
+            color: gold;
+        }
 
     </style>
     <%
@@ -474,7 +446,7 @@
 
                 <div class="first_menu">
                     <img src="../../img/store/확성기.png" alt="오리시장 공지사항"> <!-- alt 속성 추가 -->
-                    <h5>오리시장<br>공지사항</h5>
+                    <h5>고객센터</h5>
                 </div>
             </div>
         </div>
@@ -658,7 +630,7 @@
             <br>
 
             <input class="input" name="tabs-7" type="radio" id="tab-7"/>
-            <label class="label" for="tab-7">T정산 내역</label>
+            <label class="label" for="tab-7">정산 내역</label>
             <div class="panel">
                <%-- <jsp:include page="../calculate">
                     <jsp:param name="calculate_date" value="<%=currentDate%>" />

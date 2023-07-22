@@ -102,16 +102,29 @@ public class OrderService {
             //그 스토어 이름이랑 오더의 스토어 이르
             Long buUserNumber = Long.valueOf(session.getAttribute("buUserNumber").toString());
             for(Order order : orders){
+                //사업자 번호 비교
                 if(order.getBusinessUser().getBuUserNumber().equals(buUserNumber)){
                     Map<String, String> orderData = new HashMap<>();
                     orderData.put("date", String.valueOf(order.getOrderDate()));
                     orderData.put("amount",String.valueOf(order.getOrderGoodsPrice()));
+                    orderData.put("totalPrice",String.valueOf(order.getOrderGoodsTotalPrice()));
                     tableData.add(orderData);
                 }
             }
             model.addAttribute("tableData",tableData);
             return tableData;
         }
+
+    public int sumCommaSeparatedNumbers(String commaSeparatedNumbers) {
+        int sum = 0;
+        String[] numbers = commaSeparatedNumbers.split(",");
+
+        for (String number : numbers) {
+            sum += Integer.parseInt(number);
+        }
+
+        return sum;
+    }
 
         //7.18 테스트 승엽
         public List<Order> getAllOrders() {

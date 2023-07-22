@@ -58,7 +58,7 @@
                        </script>
                     </td>
                     <td class="calculate_main_table_td_2" style="text-align:center;">
-                       ${datas.amount}
+                       ${datas.totalPrice}원
                     </td>
                 </tr>
             </c:forEach>
