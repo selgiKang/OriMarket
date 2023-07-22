@@ -50,8 +50,12 @@ public class OrderController {
         System.out.println("getCalculate"+calculateDate+"/"+calculateDateLast);
         int totalCome = 0;
         int orderCount = tableData.size();
+        String totalPrice=null;
+
         for(Map<String,String>data : tableData){
-            totalCome += Integer.parseInt(data.get("amount"));
+            //orders 테이블에 물건 여러개 들어가면 가격 ,표시를 빼고 더애서 가져옴
+            totalCome += orderService.sumCommaSeparatedNumbers(data.get("amount"));
+            totalPrice = data.get("totalPrice");
         }
 
         model.addAttribute("tableData",tableData);
