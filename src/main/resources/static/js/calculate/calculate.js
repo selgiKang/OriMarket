@@ -135,7 +135,7 @@ function updateTable(data) {
 
 
     for(var i=0;i<data.length;i++){
-        totalCome += parseInt(data[i].amount);
+        totalCome += parseInt(data[i].totalPrice);
     }
 
     for (var i = 0; i < data.length; i++) {
@@ -146,7 +146,7 @@ function updateTable(data) {
         }else {
             dateCell.text("")
         }
-        var amountCell = $('<td class="calculate_main_table_td_2" style="text-align: center;"></td>').text(data[i].amount+"원");
+        var amountCell = $('<td class="calculate_main_table_td_2" style="text-align: center;"></td>').text(data[i].totalPrice+"원");
 
         row.append(dateCell);
         row.append(amountCell);

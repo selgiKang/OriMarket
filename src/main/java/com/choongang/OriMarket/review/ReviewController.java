@@ -59,13 +59,24 @@ public class ReviewController {
         BusinessStore findReviewResult = businessStoreService.findReview(businessStore,businessUser,session);
         //상점 번호
        // businessStore.setBuStoreNumber(findReview.getBuStoreNumber());
-
         //사업자 번호 일치하는 리뷰만 골라오기
         List<Review> reviewListResult = reviewService.findReview(review,findReviewResult);
+
+        //리뷰 총점 계산
+        int totalSum = 0;
+        int reviewCount = reviewListResult.size();
+        for(Review review1:reviewListResult){
+            int rating = review1.getRating();
+            totalSum += rating;
+        }
+        double averageRating = (double) totalSum / reviewCount;
+        model.addAttribute("aveRating",averageRating);
+
         model.addAttribute("reviewList",reviewListResult);
         for(Review r : reviewListResult){
             System.out.println(r.getReview_id());
         }
+
         return "/store/store_review";
     }
 

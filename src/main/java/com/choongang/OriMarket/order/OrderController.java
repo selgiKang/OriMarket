@@ -50,17 +50,18 @@ public class OrderController {
         System.out.println("getCalculate"+calculateDate+"/"+calculateDateLast);
         int totalCome = 0;
         int orderCount = tableData.size();
-        String totalPrice=null;
+        int allTotalPrice = 0;
 
         for(Map<String,String>data : tableData){
             //orders 테이블에 물건 여러개 들어가면 가격 ,표시를 빼고 더애서 가져옴
             totalCome += orderService.sumCommaSeparatedNumbers(data.get("amount"));
-            totalPrice = data.get("totalPrice");
+            allTotalPrice += Integer.parseInt(data.get("totalPrice"));
         }
 
         model.addAttribute("tableData",tableData);
         model.addAttribute("totalCome",totalCome);
         model.addAttribute("orderCount",orderCount);
+        model.addAttribute("allTotalPrice",allTotalPrice);
 
         return "calculate/calculate";
     }
@@ -76,7 +77,7 @@ public class OrderController {
         String totalPrice=null;
 
         for(Map<String,String>data : tableData){
-            //orders 테이블에 물건 여러개 들어가면 가격 ,표시를 빼고 더애서 가져옴
+            //orders 테이블에 물건 여러개 들어가면 가격 ,표시를 빼고 더해서 가져옴
             totalCome += orderService.sumCommaSeparatedNumbers(data.get("amount"));
             totalPrice = data.get("totalPrice");
         }
@@ -207,9 +208,21 @@ public class OrderController {
     public ResponseEntity<List<Map<String,String>>> calculateRequest(@RequestParam("calculate_date") String calculateDate,
                                                                      @RequestParam("calculate_date_last") String calculateDateLast,
                                                                      HttpSession session, Model model){
-        List<Map<String,String>> tableDate = orderService.getTableData(calculateDate,calculateDateLast,model,session);
+        List<Map<String,String>> tableData = orderService.getTableData(calculateDate,calculateDateLast,model,session);
 
-        return ResponseEntity.ok(tableDate);
+        int totalCome = 0;
+        int orderCount = tableData.size();
+        int allTotalPrice = 0;
+
+        for(Map<String,String>data : tableData){
+            //orders 테이블에 물건 여러개 들어가면 가격 ,표시를 빼고 더애서 가져옴
+            totalCome += orderService.sumCommaSeparatedNumbers(data.get("amount"));
+           //총 수입
+            allTotalPrice += Integer.parseInt(data.get("totalPrice"));
+            System.out.println("가격:"+data.get("tatalPrice"));
+        }
+
+        return ResponseEntity.ok(tableData);
     }
 
 

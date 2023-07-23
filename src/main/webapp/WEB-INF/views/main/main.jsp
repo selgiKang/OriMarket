@@ -47,7 +47,7 @@
                     <span class="connextion_title clear" style="font-weight:800; font-size: 18px;">&nbsp;<img class="connextion_title_img clear" src="../../img/main/singsing.png">&nbsp;&nbsp;${userNickname}님의 단골시장</span>
                 </c:if>
                 <div class="connextion_marketbox clear">
-                    <div class="connextion_mk1_wrap"><a class="connextion_mk1" href="/shinwon_marketmap"><p style="font-weight: 800;">내가<br>등록한 시장</p></a><p style="font-size: 10px;">　</p></div>
+                    <div class="connextion_mk1_wrap"><a class="connextion_mk1" href="/shinwon_marketmap"><p style="font-weight: 800;">내가<br>등록한 시장</p></a><p style="font-size: 10px;"></p></div>
                     <c:if test="${!empty marketName}">
                     <div class="connextion_mk2_wrap btn-open-popup" onclick="modal"><a class="connextion_mk2" href=""><p>${marketName}</p></a><p style="font-size: 40px;"></p></div>
                     </c:if>

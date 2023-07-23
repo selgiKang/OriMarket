@@ -40,7 +40,7 @@
     <main>
         <div id="calculate_main_totalIncome">
             <p id="calculate_main_totalIncome_title">총 수입</p>
-            <h3>${totalCome}원</h3>
+            <h3>${allTotalPrice}원</h3>
             <div>주문 횟수 ${orderCount}회</div>
         </div>
         <table id="calculate_main_table">
