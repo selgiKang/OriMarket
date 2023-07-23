@@ -51,8 +51,10 @@ public class ReviewController {
         int totalSum = 0;
         int reviewCount = reviewListResult.size();
         for(Review review1:reviewListResult){
-            int rating = review1.getRating();
-            totalSum += rating;
+            if(review1.getRating()!=null){
+                int rating = review1.getRating();
+                totalSum += rating;
+            }
         }
         double averageRating = (double) totalSum / reviewCount;
         model.addAttribute("aveRating",averageRating);
@@ -76,8 +78,10 @@ public class ReviewController {
         int totalSum = 0;
         int reviewCount = reviewListResult.size();
         for(Review review1:reviewListResult){
-            int rating = review1.getRating();
-            totalSum += rating;
+            if(review1.getRating()!=null){
+                int rating = review1.getRating();
+                totalSum += rating;
+            }
         }
         double averageRating = (double) totalSum / reviewCount;
         model.addAttribute("aveRating",averageRating);
