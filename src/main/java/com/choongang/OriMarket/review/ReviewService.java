@@ -43,7 +43,21 @@ public class ReviewService {
         Item byId1 = itemRepository.findById(review.getItem().getItemId()).orElseThrow();
         review.setBusinessStore(byId1.getBusinessStore());
         reviewRepository.save(review);
+        BusinessStore businessStore = byId1.getBusinessStore();
         List<Review> reviews = byId.getReviews();
+
+        List<Review> reviewListResult = reviewRepository.findByBusinessStore(businessStore);
+        //리뷰 총점 계산
+        int totalSum = 0;
+        int reviewCount = reviewListResult.size();
+        for(Review review1:reviewListResult){
+            int rating = review1.getRating();
+            totalSum += rating;
+        }
+        double averageRating = (double) totalSum / reviewCount;
+        model.addAttribute("aveRating",averageRating);
+
+
         model.addAttribute("re",reviews);
     }
 
