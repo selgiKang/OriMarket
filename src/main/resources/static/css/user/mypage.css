@@ -216,4 +216,8 @@ button {
 #nextBtn {
     right: 10px;
 }
+#mypage_favStore:hover {
+    opacity: 0.7;
+    cursor: pointer;
+}
 

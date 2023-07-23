@@ -39,19 +39,48 @@ public class FavController {
 
 
     @GetMapping("/storeFav")
-    public String storeFav(@RequestParam(value = "favId",required = false) Long favId, User user, Fav fav, HttpSession session){
+    public String storeFav(@RequestParam(value = "favId",required = false) Long favId, User user, Fav fav, HttpSession session,Model model){
 
         // user.setUserSeq(Long.valueOf((String) session.getAttribute("userSeq")));
+        List<BusinessStore> byBuStoreName = businessStoreRepository.findByBuStoreName(fav.getFavStoreName());
 
-        if(favService.favFavorite(fav.getUserSeq(),fav.getFavStoreName())){
-            favService.favDelete(fav.getUserSeq(), fav.getFavStoreName());
-            fav.setFavNumber("");
-            session.setAttribute("favNumber","");
-        }else{
-            favService.favInsert(fav);
-            //데이터 베이스 x
-            fav.setFavNumber("1");
-            session.setAttribute("favNumber","1");
+        List<Item> items = byBuStoreName.get(0).getItems();
+        model.addAttribute("al", items);
+
+            if(favService.favFavorite(fav.getUserSeq(),fav.getFavStoreName())){
+                favService.favDelete(fav.getUserSeq(), fav.getFavStoreName());
+                fav.setFavNumber("");
+                session.setAttribute("favNumber","");
+            }else {
+                favService.favInsert(fav);
+                //데이터 베이스 x
+                fav.setFavNumber("1");
+                session.setAttribute("favNumber", "1");
+            }
+
+        //리뷰 평점계산
+        List<Review> reviewListResult = reviewRepository.findByBusinessStore(byBuStoreName.get(0));
+        //리뷰 총점 계산
+        int totalSum = 0;
+        int reviewCount = reviewListResult.size();
+        for(Review review1:reviewListResult){
+            if(review1.getRating()!=null){
+                int rating = review1.getRating();
+                totalSum += rating;
+            }
+        }
+        double averageRating = (double) totalSum / reviewCount;
+        model.addAttribute("aveRating",averageRating);
+
+        //공지사항
+        BusinessUser buStoreNumber = items.get(0).getBusinessStore().getBusinessUser();
+        session.setAttribute("buUserNumber",buStoreNumber.getBuUserNumber());
+
+        List<Message> messageList = messageRepository.findByBuUserNumber(buStoreNumber);
+
+        if(!messageList.isEmpty()){
+            Message lastM = messageList.get(messageList.size()-1);
+            model.addAttribute("lastM",lastM);
         }
 
        // System.out.println("찜 번호: "+favId);
@@ -59,7 +88,10 @@ public class FavController {
     }
 
     @GetMapping("/store")
-    public String store(@RequestParam("favStoreName") String favStoreName, Fav fav,User user, HttpSession session,Model model) {
+    public String store(@RequestParam("favStoreName") String favStoreName,
+                        @RequestParam(value = "favId",required = false) Long favId,
+                        Fav fav,User user, HttpSession session,Model model) {
+
         user.setUserId(String.valueOf(session.getAttribute("userId")));
 
 
@@ -88,8 +120,10 @@ public class FavController {
             int totalSum = 0;
             int reviewCount = reviewListResult.size();
             for(Review review1:reviewListResult){
-                int rating = review1.getRating();
-                totalSum += rating;
+                if(review1.getRating()!=null){
+                    int rating = review1.getRating();
+                    totalSum += rating;
+                }
             }
             double averageRating = (double) totalSum / reviewCount;
             model.addAttribute("aveRating",averageRating);
@@ -127,6 +161,23 @@ public class FavController {
         } else {
             return "store/store";
         }
+    }
+
+    @GetMapping("/favList")
+    public String favStoreList(User user,HttpSession session,Model model){
+        Long userSeq = Long.valueOf((session.getAttribute("userSeq")).toString());
+        user.setUserSeq(userSeq);
+       if(favService.favList(user) != null){
+           List<Fav> fResult = favService.favList(user);
+           model.addAttribute("favResult",fResult);
+           model.addAttribute("favs",1);
+           return "user/favStoreList";
+       }else{
+
+           model.addAttribute("favs",0);
+           return "user/favStoreList";
+       }
+
     }
 
 }
