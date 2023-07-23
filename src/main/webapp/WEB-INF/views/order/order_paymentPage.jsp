@@ -21,7 +21,7 @@
 		String today = date1.format(date);
 	%>
 	<div id= "paymentpage_main">
-		<form action="/${userId}/cart/checkout" method="post">
+		<form action="/order_paymentPage" method="post">
 			<input type="hidden" name="orderNumber" value="<%=today%>${userId}">
 			<input type="hidden" name="orderUserId" value="1 ${userId}">
 			<input type="hidden" name="orderDate" value="<%=today%>">
