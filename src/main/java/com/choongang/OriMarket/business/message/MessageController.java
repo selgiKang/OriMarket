@@ -84,6 +84,9 @@ public class MessageController {
         return "redirect:/messageInsert";
     }
 
+
+
+
     //수정
     @PostMapping("message_edit/{messageId}")
     public String businessEditMessage(@PathVariable("messageId")String messageId,@ModelAttribute Message messages, Model model,BusinessUser businessUser,HttpSession session){

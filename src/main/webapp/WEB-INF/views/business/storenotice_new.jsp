@@ -410,8 +410,10 @@
             <h3>전체 메뉴</h3>
             <div class="detail_total_menu">
                 <div class="first_menu">
+                    <a href="/business_manage">
                     <img src="../../img/store/가게관리.png" alt="가게 관리"> <!-- alt 속성 추가 -->
                     <h5>가게 관리</h5>
+                    </a>
                 </div>
 
                 <a class="first_menu" href="/messageInsert">

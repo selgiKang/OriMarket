@@ -114,7 +114,6 @@
 		<h5>${item.itemInfo}</h5>
 	</div>
 	<form action="/${userId}/cart/" method="post" id="cartForm">
-	<form action="/${userId}/cart/" method="post">
 		<input type="hidden" value="${item.businessStore}" name="businessStore">
 		<div class="mymenu_container">
 			<div class="mymenu">
@@ -145,6 +144,22 @@
 		</div>
 	</form>
 </div>
+<script>
+	function submitForm() {
+		const confirmed = confirm("장바구니에 담으시겠습니까?");
+		if (confirmed) {
+			// 아이템을 장바구니에 추가하는 동작을 여기에 구현합니다.
+			// 예를 들어, JavaScript를 사용하여 폼을 제출할 수 있습니다.
+			document.getElementById("cartForm").submit();
+		} else {
+			// 사용자가 "취소"를 클릭한 경우 추가적인 동작을 여기에 추가할 수 있습니다.
+		}
+	}
+
+	function viewCart() {
+		window.location.href = "/user/cart";
+	}
+</script>
 <jsp:include page="../footer/nav_footer.jsp" />
 </body>
 </html>
