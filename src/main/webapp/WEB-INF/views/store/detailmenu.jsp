@@ -14,11 +14,16 @@
 </head>
 <style>
 	body{
+		width:375px; height: 712px; box-sizing: border-box; margin:0 auto;
 		background-color: #eef;
 	}
+
+	/* 230723 승원 */
+	#detailmenu_wrap{width:375px; height:712px; position:relative; box-sizing: border-box; margin:0 auto; display: flex; justify-content: center; align-items: center;}
+
 	.selected_menu {
-		width: 315px;
-		height: 812px;
+		width: 375px;
+		height: 712px;
 		background-color: white;
 		text-align: center;
 		position: static;
@@ -33,8 +38,8 @@
 	}
 
 	.mainfood img{
-		width: 315px;
-		height: 315px;
+		width: 100%;
+		height: 100%;
 	}
 
 	.mainfood p{
@@ -62,7 +67,7 @@
 
 	.mymenu_container{
 		background-color: white;
-		width: 285px;
+		width: 90%;
 		height: auto;
 		box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5); /* 그림자 설정 */
 		border-radius: 15px;
@@ -72,7 +77,7 @@
 
 	.mymenu{
 		text-align: left; /* 왼쪽 정렬 */
-		padding: 10px;
+		padding: 15px;
 	}
 
 	.mymenuoption_container{
@@ -95,54 +100,66 @@
 		align-items: flex-start; /* 좌측 정렬 */
 		margin-top: 10px; /* 항목 사이의 간격 조정 */
 	}
+	.radio{margin-bottom:10px;}
 
 	.mymenuoption .radio label {
 		margin-bottom: 5px; /* 라디오 버튼과 레이블 사이의 간격 조정 */
 	}
 	button{border-style: none; background: none; display: inline-block;}
 
+	/* 230723 승원 */
+	.mainfood{width:375px; height:375px;}
+	.mainfood > img{position:relative;}
+	button.backbtn { position:absolute; top:1%; left:1%; z-index:99; display: flex; align-items: center; font-size: 25px; color: #999; margin: 0 0 0 10px; width: 35px; height: 35px; background-color: #fff; border-radius: 50%; border: 1px solid #999; cursor: pointer; justify-content: center;}
+	button.backbtn:hover {background-color:#333; color:#fff;}
+	.main_menu_wrap{width:100%; padding:25px 10px 20px;}
+	button.dm_cart{width:90%; height:40px; border-radius: 25px; background-color:#ffbf41; color:#333; font-size: 16px; font-weight: 600;}
+	button.dm_cart:hover {background-color:#333; color:#fff;}
+
 </style>
 
 <body>
-<div class="selected_menu">
-	<div class="mainfood">
-		<img alt="mainfoodpic" src="../../img/store/kal.jpg">
-		<p>위 사진은 연출된 사진으로 실제와 다를 수 있습니다.</p>
-	</div>
-	<div class="main_menu_name">
-		<h1>${item.itemName}</h1>
-		<h5>${item.itemInfo}</h5>
-	</div>
-	<form action="/${userId}/cart/" method="post" id="cartForm">
-		<input type="hidden" value="${item.businessStore}" name="businessStore">
-		<div class="mymenu_container">
-			<div class="mymenu">
-				<h4>가격</h4>
-				<div class="radio">
-
-					<label><input type="radio" value="${item.itemName}" name="itemName" checked/>${item.itemName}</label>
-							<input type="hidden" value="${item.itemId}" name="itemId">
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" value="${item.itemPrice}" name="itemPrice" style="outline: none;border: none;" />
-				</div>
-				<table>
-					<tr>
-						<td>개수</td>
-					</tr>
-					<%-- js 적용됨 class 이름 바꿀 때 js 파일도 참조--%>
-					<tr>
-						<%-- 이 값은 따로 param으로 가져가서 set, save하기 --%>
-							<td><button type="button" class="menu_btn_minus" onclick="minusBtn()"><i class="fas fa-solid fa-square-minus" style="color: #46a973;"></i></button></td>
-							<td class="detailmenu_count"><input type="text" id="countInput" name="count" value="1" size="1"></td>
-							<td><button type="button" class="menu_btn_plus" onclick="plusBtn()"><i class="fas fa-solid fa-square-plus" style="color: #46a973;"></i></button></td>
-
-					</tr>
-				</table>
+<div id="detailmenu_wrap">
+	<div class="selected_menu">
+		<div class="mainfood">
+			<!-- 뒤로가기 -->
+			<button class="backbtn" onclick="window.history.go(-1)">&lt;</button>
+			<img alt="mainfoodpic" src="../../img/store/kal.jpg">
+			<p>위 사진은 연출된 사진으로 실제와 다를 수 있습니다.</p>
+		</div>
+		<div class="main_menu_wrap">
+			<div class="main_menu_name">
+				<h1>${item.itemName}</h1>
+				<h5>${item.itemInfo}</h5>
 			</div>
+			<form action="/${userId}/cart/" method="post" id="cartForm">
+				<input type="hidden" value="${item.businessStore}" name="businessStore">
+				<div class="mymenu_container">
+					<div class="mymenu">
+						<div class="radio">
+							<h5>가격</h5>
+							<label><input type="radio" value="${item.itemName}" name="itemName" checked/>${item.itemName}</label>
+									<input type="hidden" value="${item.itemId}" name="itemId">
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" value="${item.itemPrice}" name="itemPrice" style="outline: none;border: none;" />
+						</div>
+						<table style="margin-left:20px;">
+							<tr>
+								<td style="margin-right:15px;">개수</td>
+								<%-- js 적용됨 class 이름 바꿀 때 js 파일도 참조--%>
+								<%-- 이 값은 따로 param으로 가져가서 set, save하기 --%>
+								<td><button type="button" class="menu_btn_minus" onclick="minusBtn()" style="margin-left:20px;"><i class="fas fa-solid fa-square-minus" style="color: #46a973; font-size: 24px;"></i></button></td>
+								<td class="detailmenu_count"><input type="text" id="countInput" name="count" value="1" size="1"></td>
+								<td><button type="button" class="menu_btn_plus" onclick="plusBtn()"><i class="fas fa-solid fa-square-plus" style="color: #46a973; font-size: 24px;"></i></button></td>
+							</tr>
+						</table>
+					</div>
+				</div>
+				<div>
+					<button type="button" class="dm_cart" onclick="submitForm()">장바구니 담기</button>
+				</div>
+			</form>
 		</div>
-		<div>
-			<button type="button" onclick="submitForm()">장바구니 담기</button>
-		</div>
-	</form>
+	</div>
 </div>
 <script>
 	function submitForm() {

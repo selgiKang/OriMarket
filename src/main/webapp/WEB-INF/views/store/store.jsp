@@ -71,21 +71,22 @@
                             <%--메뉴1--%>
                             <form action="/${userId}/cart/${a.itemId}" method="get">
                             <c:forEach var="a" items="${al}">
-                            <div class="menu">
-                                <div class="menu-content">
-                                    <h2 class="menu_name">${a.itemName}</h2>
-                                        <input type="hidden" name="itemName">
-                                    <h6 class="menu-description">${a.itemInfo}</h6>
-                                    <h5 class="menu_price">${a.itemPrice}</h5>
-                                    <input type="hidden" name="itemPrice">
-                                    <input type="hidden" name="count" value="1">
-                                    <input type="hidden" name="itemId" value="${a.itemId}">
-                                </div>
-                                <div class="menu-image">
-                                    <img src="../../img/store/kal.jpg" alt="메뉴이미지">
-                                    <a href="/user_review?itemId=${a.itemId}">리뷰작성하러가기</a>
-                                    <a href="/detailmenu/${a.itemId}">상세보기</a>
-                                </div>
+                            <div class="menu" type="button" onclick="/detailmenu/${a.itemId}">
+                                <a href="/detailmenu/${a.itemId}" style="position:relative; display:flex;">
+                                    <div class="menu-content">
+                                        <h2 class="menu_name">${a.itemName}</h2>
+                                            <input type="hidden" name="itemName">
+                                        <h6 class="menu-description">${a.itemInfo}</h6>
+                                        <h5 class="menu_price" style="line-height: 0;">${a.itemPrice} 원</h5>
+                                        <input type="hidden" name="itemPrice">
+                                        <input type="hidden" name="count" value="1">
+                                        <input type="hidden" name="itemId" value="${a.itemId}">
+                                    </div>
+                                    <div class="menu-image">
+                                        <img src="../../img/store/kal.jpg" alt="메뉴이미지">
+                                        <%--<a href="/user_review?itemId=${a.itemId}">리뷰작성하러가기</a>--%>
+                                    </div>
+                                </a>
                             </div>
                             </c:forEach>
                             </form>
