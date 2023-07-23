@@ -109,8 +109,24 @@ public class OrderController {
         return "order/order_list";
     }
 
+    //특정 날짜 정보
+    @GetMapping("/details")
+    public String showDetailsPage(@RequestParam("date") String date, Model model,HttpSession session) {
+        // 날짜 정보를 서비스로 전달하여 해당 날짜의 정보를 가져온다.
 
+        // detailsService의 메서드 이름과 내용은 프로젝트의 요구사항에 맞게 작성해야 합니다.
+        List<Order> detailsDataList = orderService.getDetailsByDate(date,session);
+        Long buUserNumber = Long.valueOf(session.getAttribute("buUserNumber").toString());
 
+        for(Order detailsOrder:detailsDataList){
+            if(detailsOrder.getBusinessUser().getBuUserNumber().equals(buUserNumber)){
+                model.addAttribute("detailsDataList", detailsDataList);
+                // 가져온 정보를 뷰에 전달한다.
+            }
+        }
+
+        return "calculate/detailsCalculate"; // details.jsp 또는 해당하는 뷰 페이지의 이름
+    }
     @PostMapping("/order_paymentPage/{userId}")
     public String orderDelivery(@ModelAttribute Order order, @ModelAttribute RealTimeStatus rts, HttpSession session, @RequestParam("orderNumber")String orderNumberStr,@PathVariable("userId")String userId, Model model) {
         order.setOrderNumber(orderNumberStr);
@@ -187,8 +203,6 @@ public class OrderController {
                         model.addAttribute("finishResult",finishResult);
                     }
                 }
-
-
                 RealTimeStatus rtsSearchResult = realTimeService.findRts(order,session);
                 System.out.println(rts.getRtsOrderIng());
 

@@ -156,5 +156,15 @@ function updateTable(data) {
     $('#calculate_main_totalIncome h3').text(totalCome+'원');
     $('#calculate_main_totalIncome div').text('주문 횟수 '+orderCount+'번');
 
-
+    //날짜 선택
+   // $('#tableBody').on('click', 'tr', function () {
+//         var date = $(this).find('.calculate_main_table_td_1').text().trim(); // 클릭한 날짜 가져오기
+//         console.log('Clicked date:', date);
+//
+//         // 새 페이지로 이동하는 URL 생성
+//         var url = '/details?date=' + date;
+//         window.location.href = url; // 새 페이지로 이동
+//     });
 }
+
+
