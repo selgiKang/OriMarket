@@ -461,16 +461,13 @@
             <label class="label" for="tab-1">가게 관리</label>
             <div class="panel">
                 <div class="line"></div>
-
+                <form action="/storenotice1" method="post">
                 <div class="storecare_logo">
                     <h3>로고</h3>
-                    <input type="file" accept="image/*" id="logo-upload" onchange="previewLogo(event)" />
+                    <input type="file" accept="image/*" name="pictureUrl" id="logo-upload" onchange="previewPicture(event)" />
                     <div id="logo-preview"></div>
                 </div>
-
                 <div class="line"></div>
-
-                <form action="/storenotice1" method="post">
                     <div class="storecare_name">
                         <h3>가게 이름</h3>
                         <input type="hidden" name="buStoreNumber" value="${save.buStoreNumber}">
@@ -655,7 +652,7 @@
 
 
 <script>
-    var posts = []; // 게시글 정보를 저장할 배열
+  /*  var posts = []; // 게시글 정보를 저장할 배열
 
     function previewImage(event) {
         var imageUpload = event.target;
@@ -673,6 +670,26 @@
         };
 
         reader.readAsDataURL(imageFile);
+    }*/
+
+    function previewPicture(event) {
+        const pictureInput = event.target;
+        const picturePreview = document.getElementById('logo-preview');
+
+        if (pictureInput.files && pictureInput.files[0]) {
+            const reader = new FileReader();
+
+            reader.onload = function (e) {
+                const imgElement = document.createElement('img');
+                imgElement.src = e.target.result;
+                imgElement.style.maxWidth = '100%'; // 이미지 크기 조절 (선택사항)
+                imgElement.style.height = "auto";
+                picturePreview.innerHTML = ''; // 이미지 미리보기 업데이트
+                picturePreview.appendChild(imgElement);
+            };
+
+            reader.readAsDataURL(pictureInput.files[0]);
+        }
     }
 
     // function uploadPost() {

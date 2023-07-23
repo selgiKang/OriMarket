@@ -111,6 +111,8 @@
         color: gold;
     }
 </style>
+<!-- JavaScript 코드 추가 -->
+
 <body>
 
 <div class="main-container">
@@ -118,6 +120,7 @@
 
         <div class="my_review_list">
             <h3>내가 쓴 총 리뷰 ___개</h3>
+            <h4 class="rating" data-rating="${aveRating}">${aveRating}</h4>
             <h2><a href="/user_review">리뷰쓰기</a></h2>
         </div>
 
