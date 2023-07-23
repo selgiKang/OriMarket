@@ -158,7 +158,7 @@
                                         <input type="hidden" name="itemId" value="${a.itemId}">
                                     </div>
                                     <div class="menu-image">
-                                        <img src="../../img/store/kal.jpg" alt="메뉴이미지">
+                                        <img src="../../img/store/watermelon.jpg" alt="메뉴이미지">
                                         <%--<a href="/user_review?itemId=${a.itemId}">리뷰작성하러가기</a>--%>
                                     </div>
                                 </a>
