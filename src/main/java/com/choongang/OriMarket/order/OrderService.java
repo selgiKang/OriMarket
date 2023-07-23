@@ -147,9 +147,9 @@ public class OrderService {
         }
 
         // , 를 +로 바꿔서 더해서 반환
-    public int sumCommaSeparatedNumbers(String commaSeparatedNumbers) {
+    public int sumCommaSeparatedNumbers(String csNumbers) {
         int sum = 0;
-        String[] numbers = commaSeparatedNumbers.split(",");
+        String[] numbers = csNumbers.split(",");
 
         for (String number : numbers) {
             sum += Integer.parseInt(number);
@@ -166,5 +166,12 @@ public class OrderService {
         }
 
 
+    //특정 날짜 조회
+    public List<Order> getDetailsByDate(String date,HttpSession session){
+
+          List<Order> getDate= orderRepository.findByOrderDateContaining(date);
+
+            return getDate;
+    }
 
 }
