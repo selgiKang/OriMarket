@@ -8,20 +8,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Service
-//@RequiredArgsConstructor
+@RequiredArgsConstructor
 @Slf4j
 public class RealTimeService {
 
     @Autowired
     private final RealTimeRepository rtsRepository;
-
-
-    @Autowired
-    public RealTimeService(RealTimeRepository rtsRepository) {
-        this.rtsRepository = rtsRepository;
-    }
 
     //주문번호 넣어서 생성, 나머지 값은 디폴트 들어가게
     public boolean insertRts(RealTimeStatus rts){
@@ -34,29 +29,24 @@ public class RealTimeService {
         }
     }
 
-
-    //7.20 테스트 승엽
-    public RealTimeStatus update1(Order order, HttpSession session) {
-        order.setOrderNumber(String.valueOf(session.getAttribute("orderNumber")));
+    public RealTimeStatus update1(Order order,HttpSession session){
+        order.setOrderNumber(order.getOrderNumber());
         RealTimeStatus a = rtsRepository.findByorderNumber(order);
         a.setRtsOrderIng(1);
-        return rtsRepository.save(a); // 변경 사항을 저장하고 리턴
+        a.setOrderNumber(order);
+        rtsRepository.save(a);
+        return a;
     }
 
-    public RealTimeStatus update2(Order order, HttpSession session) {
-        order.setOrderNumber(String.valueOf(session.getAttribute("orderNumber")));
-        RealTimeStatus a = rtsRepository.findByorderNumber(order);
-        a.setRtsRiderFinish(1);
-        return rtsRepository.save(a); // 변경 사항을 저장하고 리턴
-    }
-
-    public boolean findRts(Order order,HttpSession session){
+    public RealTimeStatus findRts(Order order,HttpSession session){
         order.setOrderNumber(String.valueOf(session.getAttribute("orderNumber")));
         RealTimeStatus a2 = rtsRepository.findByorderNumber(order);
+
         if(a2 != null){
-            return true;
+            return a2;
+        }else{
+            return a2;
         }
-        return false;
     }
 
    /* public void update2(RealTimeStatus orderNumber){
@@ -67,14 +57,11 @@ public class RealTimeService {
         a.setRtsRiderFinish(1);
     }*/
 
-    //7.20 테스트 승엽
-    public RealTimeStatus findByOrderNumber(String orderNumber) {
-        return rtsRepository.findByOrderNumber(orderNumber);
+    public List<RealTimeStatus> getAllRtsList(String orderNumber){
+        List<RealTimeStatus> allList = rtsRepository.findAll();
+        return allList;
     }
 
-    public void updateRts(RealTimeStatus rts) {
-        rtsRepository.save(rts);
-    }
 
 
 

@@ -1,7 +1,9 @@
 package com.choongang.OriMarket.order;
 
+import com.choongang.OriMarket.business.market.Market;
 import com.choongang.OriMarket.business.user.BusinessUser;
 import lombok.*;
+import lombok.extern.slf4j.Slf4j;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -11,17 +13,12 @@ import java.util.Date;
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
+@Slf4j
 public class Order {
 
     @Id
     @Column(name = "order_number", nullable = false)
     private String orderNumber;
-
-    //사업자 번호 받기
-    @ManyToOne
-    @JoinColumn(name = "bu_user_number")
-    private BusinessUser businessUser;
 
     //가게이름
     @Column
@@ -76,6 +73,17 @@ public class Order {
     //배달기사 요청사항
     @Column
     private String forRider;
+
+    //시장 번호
+    @ManyToOne
+    @JoinColumn(name="market_seq")
+    private Market marketSeq;
+
+    //사업자 번호 받기
+    @ManyToOne
+    @JoinColumn(name = "bu_user_number")
+    private BusinessUser businessUser;
+
 
     @Transient
     private String next_redirect_pc_url;

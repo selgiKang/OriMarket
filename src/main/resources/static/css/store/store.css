@@ -46,25 +46,38 @@ a {
 
 /* 메뉴 스타일 */
 .menu {
+    width: 300px;
+    height: 130px;
     display: flex;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    padding: 10px;
-    margin-bottom: 10px;
+    border: 2px solid #ccc;
+    border-radius: 12px;
+    padding: 20px 15px 20px 5px;
+    margin-bottom: 15px;
     background: white;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.2);
 }
 
+.menu:hover {border:2px solid #46A973;}
+
 .menu-content {
-    flex: 1;
+    /*flex: 1;*/
+    /* 230723 승원 */
+    width: 60%;
+    height: 100%;
+    padding: 0 15px 0 0;
 }
 
 .menu-content h2 {
     font-size: 20px;
     margin-top: 0;
+    margin-bottom: 5px;
+    width: 180px;
 }
 
 .menu-content h6 {
-    font-size: 12px;
+    width: 180px;
+    height: 40px;
+    font-size: 14px;
     margin: 5px 0;
     line-height: 1.4;
     overflow-wrap: break-word;
@@ -83,14 +96,9 @@ a {
     overflow: hidden;
 }
 
-.menu-content h5 {
-    margin-top: 30px;
-    font-size: 17px;
-}
-
 .menu-image img {
-    width: 100px;
-    height: 100px;
+    width: 150px;
+    height: 150px;
     object-fit: cover;
     border-radius: 4px;
 }
@@ -337,12 +345,12 @@ ul {
     display: none;
     width: 100%;
     text-align: left;
-    padding: 20px;
+    padding: 20px 15px;
     position: absolute;
     left: 0;
     top: 40px;
     box-sizing: border-box;
-    border: 3px solid #f9f9f9;
+/*    border: 3px solid #f9f9f9;*/
     margin-top: 30px;
 }
 
@@ -390,8 +398,9 @@ ul {
 }
 
 .menu-content h5 {
-    margin-top: 30px;
-    font-size: 17px;
+    margin-top: 25px;
+    font-size: 18px;
+    color:#333;
 }
 
 .menu-image img {

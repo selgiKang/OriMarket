@@ -1,20 +1,18 @@
-$(document).ready(function() {
-    var detailmenu_count = parseInt($(".detailmenu_count").text());
-    /* 사람 필터 증가, 감소 */
-    $(".menu_btn_minus").off().click(function () {
-        console.log("Button clicked!");
-        if (detailmenu_count > 0) {
-            detailmenu_count--;
-            $(".hotelList_filter_table_man").text(detailmenu_count);
-        } else {
-            detailmenu_count = 0;
-        }
-    });
+function plusBtn() {
+    var countInput = document.getElementById('countInput');
+    var count = parseInt(countInput.value);
+    count = isNaN(count) ? 1 : count; // 만약 값이 NaN이면 기본값 1로 설정
+    countInput.value = count + 1;
+}
 
-    $(".menu_btn_plus").off().click(function () {
-        console.log("Button clicked!");
-        detailmenu_count++;
-        $(".detailmenu_count").text(detailmenu_count);
-    });
-
-});
+function minusBtn() {
+    var countInput = document.getElementById('countInput');
+    var count = parseInt(countInput.value);
+    count = isNaN(count) ? 1 : count; // 만약 값이 NaN이면 기본값 1로 설정
+    if (count > 1) {
+        countInput.value = count - 1;
+    }
+}
+function submitForm() {
+    document.getElementById('cartForm').submit();
+}

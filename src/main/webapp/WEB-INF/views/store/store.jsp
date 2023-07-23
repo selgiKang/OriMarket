@@ -7,6 +7,81 @@
     <title>오리시장</title>
     <link rel="stylesheet" type="text/css" href="../../css/store/store.css">
 </head>
+<style>
+    .rating::before {
+        content: "☆☆☆☆☆";
+        color: lightgray;
+    }
+
+    .rating[data-rating="1"]::before {
+        content: "★☆☆☆☆";
+        color: gold;
+    }
+
+    .rating[data-rating="2"]::before {
+        content: "★★☆☆☆";
+        color: gold;
+    }
+
+    .rating[data-rating="3"]::before {
+        content: "★★★☆☆";
+        color: gold;
+    }
+
+    .rating[data-rating="4"]::before {
+        content: "★★★★☆";
+        color: gold;
+    }
+
+    .rating[data-rating="5"]::before {
+        content: "★★★★★";
+        color: gold;
+    }  .rating::before {
+           content: "☆☆☆☆☆";
+           color: lightgray;
+       }
+
+    .rating[data-rating="1"]::before {
+        content: "★☆☆☆☆";
+        color: gold;
+    }
+
+    .rating[data-rating="2"]::before {
+        content: "★★☆☆☆";
+        color: gold;
+    }
+
+    .rating[data-rating="3"]::before {
+        content: "★★★☆☆";
+        color: gold;
+    }
+
+    .rating[data-rating="4"]::before {
+        content: "★★★★☆";
+        color: gold;
+    }
+
+    .rating[data-rating="5"]::before {
+        content: "★★★★★";
+        color: gold;
+    }
+    .rating[data-rating="1.5"]::before {
+        content: "★½☆☆☆";
+        color: gold;
+    }
+    .rating[data-rating="2.5"]::before {
+        content: "★★½☆☆";
+        color: gold;
+    }
+    .rating[data-rating="3.5"]::before {
+        content: "★★★½☆";
+        color: gold;
+    }
+    .rating[data-rating="4.5"]::before {
+        content: "★★★★½";
+        color: gold;
+    }
+</style>
 <body>
 <jsp:include page="../header/header_search.jsp" />
 <div class="main-container">
@@ -16,7 +91,7 @@
         <%-- 찜 --%>
             <c:if test="${!empty sessionScope.userId}">
                 <form action="/storeFav" method="get">
-                    <input type="hidden" value="과일가게" name="favStoreName">
+                    <input type="hidden" value="${param.favStoreName}" name="favStoreName">
                     <input type="hidden" value="<%=session.getAttribute("userSeq")%>" name="userSeq">
 
                     <button type="submit" class="storeFav" onclick="event.preventDefault(); toggleHeart(this);" style="opacity: 0;" />
@@ -33,9 +108,9 @@
         <%--가게이름--%>
         <h1><input type="text" value="싱싱과일가게" name="storeName${sessionScope.favNumber}"></h1>
         <span style="float: left;">
-            <img class="star" src="../../img/store/star.png" alt="별">
+            <small style="font-size: 12px;"> &lt; 총 ${aveRating}점 &gt; : </small><span class="rating" data-rating="${Math.round(aveRating * 2) / 2}"></span><br>
+            <small><a href="/storeReview" style="color: #4A98F7">리뷰 보러가기 </a></small>
             <%--리뷰--%>
-            <a href="#">>486</a>
         </span>
         <br>
         <%--storeAddress--%>
@@ -55,10 +130,11 @@
     </section>
 
     <%--공지사항--%>
-    <section>
-        <button class="notice-button" onclick="location.href='/storeMessageInsert'">${lastM.totalMessage}</button>
-    </section>
-
+    <c:if test="${lastM.totalMessage != null}">
+        <section>
+            <button class="notice-button" onclick="location.href='/storeMessageInsert'">${lastM.totalMessage}</button>
+        </section>
+    </c:if>
             <div class="tabmenu out-tabmenu">
 
                 <ul>
@@ -70,25 +146,26 @@
                             <%--메뉴1--%>
                             <form action="/${userId}/cart/${a.itemId}" method="get">
                             <c:forEach var="a" items="${al}">
-                            <div class="menu">
-                                <div class="menu-content">
-                                    <h2 class="menu_name">${a.itemName}</h2>
-                                        <input type="hidden" name="itemName">
-                                    <h6 class="menu-description">${a.itemInfo}</h6>
-                                    <h5 class="menu_price">${a.itemPrice}</h5>
-                                    <input type="hidden" name="itemPrice">
-                                    <input type="hidden" name="count" value="1">
-                                    <input type="hidden" name="itemId" value="${a.itemId}">
-                                </div>
-                                <div class="menu-image">
-                                    <img src="../../img/store/kal.jpg" alt="메뉴이미지">
-                                    <a href="/user_review?itemId=${a.itemId}">리뷰작성하러가기</a>
-                                    <a href="/detailmenu/${a.itemId}">상세보기</a>
-                                </div>
+                            <div class="menu" type="button" onclick="/detailmenu/${a.itemId}">
+                                <a href="/detailmenu/${a.itemId}" style="position:relative; display:flex;">
+                                    <div class="menu-content">
+                                        <h2 class="menu_name">${a.itemName}</h2>
+                                            <input type="hidden" name="itemName">
+                                        <h6 class="menu-description">${a.itemInfo}</h6>
+                                        <h5 class="menu_price" style="line-height: 0;">${a.itemPrice} 원</h5>
+                                        <input type="hidden" name="itemPrice">
+                                        <input type="hidden" name="count" value="1">
+                                        <input type="hidden" name="itemId" value="${a.itemId}">
+                                    </div>
+                                    <div class="menu-image">
+                                        <img src="../../img/store/watermelon.jpg" alt="메뉴이미지">
+                                        <%--<a href="/user_review?itemId=${a.itemId}">리뷰작성하러가기</a>--%>
+                                    </div>
+                                </a>
                             </div>
                             </c:forEach>
                             </form>
-                            <%--메뉴2--%>
+                            <%-- &lt;%&ndash;메뉴2&ndash;%&gt;
                             <div class="menu">
                                 <div class="menu-content">
                                     <h2>칼국수</h2>
@@ -99,7 +176,7 @@
                                     <img src="../../img/store/kal.jpg" alt="메뉴이미지">
                                 </div>
                             </div>
-                        </div>
+                        </div>--%>
                     </li>
 
                     <%--여름메뉴 버튼--%>

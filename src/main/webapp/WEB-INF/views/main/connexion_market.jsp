@@ -81,7 +81,13 @@
         <div id="map_btns">
             <button class="nowmap_btn" onclick="showCurrentLocationMap()">현재 위치 보기</button>
             <button class="mkmap_btn" onclick="showClosestMarketMap()">가까운 시장 보기</button>
-            <button class="cnmkmap_btn" onclick="">단골시장으로 등록하기</button>
+            <form action="/market_search">
+                <button class="cnmkmap_btn" type="submit">
+                    <input type="hidden" id="closestMarketInfo" name="marketName">
+                    단골시장으로 등록하기
+                </button>
+            </form>
+
         </div>
     </div>
 
@@ -182,8 +188,7 @@
         { name: "통인시장", latitude: 37.565809, longitude: 126.966071 },
         { name: "평화시장", latitude: 37.570025, longitude: 126.985573 },
         { name: "신원시장", latitude: 37.4815335827273, longitude: 126.92842341587128 },
-        // 추가 전통시장 데이터
-        // ...
+        { name: "장위전통시장", latitude: 37.61002647830202, longitude: 127.05155130278266 }
     ];
 
     function findClosestMarket(latitude, longitude) {
@@ -199,6 +204,8 @@
                 closestMarket = market;
             }
         }
+        var closestMarketSpan = document.getElementById('closestMarketInfo');
+        closestMarketSpan.value = closestMarket.name;
 
         return closestMarket;
     }

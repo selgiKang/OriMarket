@@ -9,13 +9,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="UTF-8">
-	<!-- 아이콘 -->
-	<script src="https://kit.fontawesome.com/1d53132cda.js" crossorigin="anonymous"></script>
-	<script src="../../js/common/jquery-3.6.4.js"></script>
-	<script src="../../js/user/cart.js"></script>
+<meta charset="UTF-8">
+<!-- 아이콘 -->
+<script src="https://kit.fontawesome.com/1d53132cda.js" crossorigin="anonymous"></script>
+<script src="../../js/common/jquery-3.6.4.js"></script>
+<script src="../../js/user/cart.js"></script>
 
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/user/cart.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/user/cart.css">
 
 	<title>cart</title>
 </head>
@@ -26,38 +26,33 @@
 		<p style="display: inline-block; margin-left: 130px;">장바구니</p>
 	</div>
 	<div id="cart_location">
-		<form action="/search">
+		<form action="/">
 			<i class="far fa-solid fa-location-dot"></i>
 			<p>${userAddress1}</p>
-			<small id="cart_marketName">_시장이름</small>
+			<small id="cart_marketName">${marketName}</small>
 			<input type="submit" value="변경">
 		</form>
 	</div>
-	<form action="/paymentPage/${userId}" method="get">
+	<form action="/paymentPage/${userId}" method="Post">
 		<div>
 			<input type="checkbox" id="cboxAll" name="cboxAll" checked="checked" onclick="checkAll()">
 			전체선택
 		</div>
 		<div id="cart_itemList">
 			<ul>
-
 				<%--반복문시작--%>
 				<c:set var="prevBuStoreName" value="" />
 				<c:forEach var="orderList" items="${userOrderList}" varStatus="status">
 					<c:if test="${!orderList.businessStore.buStoreName.equals(prevBuStoreName)}">
 					<c:set var="prevBuStoreName" value="${orderList.businessStore.buStoreName}" />
-					<article>
-						<h1>${orderList.businessStore.buStoreName}</h1>
-						<!-- 같은 가게 안에서 상품리스트(where='가게이름'아니면'가게식별번호')쿼리 -->
+					<div id="itemList">
+						<h3>${orderList.businessStore.buStoreName}</h3>
 					</c:if>
 					<ul>
-
-							<c:if test="${orderList.item.businessStore eq orderList.businessStore}">
-							<c:forEach var="item" items="${orderList.businessStore.items}">
-								<c:if test="${orderList.item eq item}">
-									<%--<c:forEach var="items" items="${cartItemList}" varStatus="">--%>
-									<li>
-											<%--<c:out value="${status.index}"/>--%>
+						<c:if test="${orderList.item.businessStore eq orderList.businessStore}">
+						<c:forEach var="item" items="${orderList.businessStore.items}">
+							<c:if test="${orderList.item eq item}">
+								<li>
 										<div class="cart_info">
 											<input type="checkbox" name="cbox"  class="individual_checkbox" checked="checked">
 											<input type="hidden" class="individual_totalCount" value="${orderList.count}">
@@ -79,7 +74,6 @@
 											<!-- 수량선택(-,+),가격표시 -->
 											<div class="cart_itemDescription">
 												<div class="cart_itemOption">
-														<%--onclick="dec(currentCnt${status.index})"--%>
 													<button onclick="minusBtn('${orderList.cartItemId}')"><i class="fas fa-solid fa-circle-minus"></i></button>
 													<input type="text" size="1" name="currentCnt" id="currentCnt${status.index}" value="${orderList.count}">
 													<button onclick="plusBtn('${orderList.cartItemId}')"><i class="fas fa-solid fa-circle-plus"></i></button>
@@ -88,34 +82,32 @@
 													<input id="sellPrice_${status.index}" type="hidden" value="${orderList.itemPrice}">
 													<span id="totalPriceCalSpan_${status.index}">
 													${orderList.itemPrice * orderList.count}원
-											</span>
+													</span>
 												</div>
 											</div>
 										</div>
 									</li>
-									<%--</c:forEach>--%>
 								</c:if>
 							</c:forEach>
 							</c:if>
 					</ul>
-
 					<c:if test="${!orderList.businessStore.buStoreName.equals(prevBuStoreName)}">
-					</article>
+					</div>
 					<br>
 					</c:if>
 				</c:forEach>
 			</ul>
 		</div>
 		<div id="cart_moreBtn">
-			<a href="store/detailmenu"><input type="button" value="+상품 더 담기"></a>
+			<a href="/shinwon_marketmap"><input type="button" value="+상품 더 담기"></a>
 		</div>
 
 
 		<!-- 포장/배달 선택하는 체크리스트 -->
 		<div id="cart_checkDelivery">
 			<ul>
-				<li id="cart_chkDel"><a href="#cart_deliveryTotal">배달</a></li>
-				<li id="cart_chkPick"><a href="#cart_pickTotal">포장</a></li>
+				<li id="cart_chkDel"><a href="#cart_deliveryTotal"><input type="radio" name="deliveryType" value="배달">배달</a></li>
+				<li id="cart_chkPick"><a href="#cart_pickTotal"><input type="radio" name="deliveryType" value="포장">포장</a></li>
 			</ul>
 		</div>
 		<div id="cart_deliveryTotal" class="cart_section" style="display: none;">
@@ -134,8 +126,8 @@
 			<table class="cart_costTable">
 				<tbody>
 				<tr><td>상품금액</td><td class="cart_cost_totalPrice"></td></tr>
-				<tr><td>총 주문금액</td><td class="cart_cost_finalTotalPrice"></td></tr>
-				<tr class="cart_totalPrice"><td>결제예정금액</td><td class="cart_cost_finalTotalPrice"></td></tr>
+				<tr><td>총 주문금액</td><td class="cart_cost_totalPrice"></td></tr>
+				<tr class="cart_totalPrice"><td>결제예정금액</td><td class="cart_cost_totalPrice"></td></tr>
 				</tbody>
 			</table>
 		</div>
@@ -173,7 +165,42 @@
 	//
 	// }
 
+	//
+	// function goOrder() {
+	// 	var selectedItems = [];
+	// 	$(".individual_checkbox").each(function (index, element) {
+	// 		if ($(element).is(":checked") === true) {
+	// 			// 선택된 항목의 cartItemId 값을 가져와 배열에 추가
+	// 			var cartItemId = $(element).siblings('.cart_xmark').siblings('#cartItemId').val();
+	// 			selectedItems.push(cartItemId);
+	// 		}
+	// 	});
+	//
+	// 	if (selectedItems.length === 0) {
+	// 		alert("주문할 상품을 체크하세요");
+	// 		return;
+	// 	}
+	//
+	// 	// 서버로 AJAX 요청 보내기
+	// 	$.ajax({
+	// 		url: "/paymentPage/" + userId,
+	// 		method: "POST",
+	// 		data: JSON.stringify(selectedItems),
+	// 		contentType: "application/json; charset=utf-8",
+	// 		success: function (response) {
+	// 			// 서버에서 받은 응답에 대한 처리 (예: 페이지 이동)
+	// 			// 예시로는 주문페이지로 이동하는 코드를 작성합니다.
+	// 			window.location.href = "/order/order_paymentPage";
+	// 		},
+	// 		error: function (xhr, status, error) {
+	// 			// 오류 발생 시 처리
+	// 			alert("주문하기 실패: " + error);
+	// 		}
+	// 	});
+	// }
+
 </script>
+
 
 
 </body>

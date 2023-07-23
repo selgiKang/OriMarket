@@ -31,6 +31,7 @@ public class BusinessUserService {
         BusinessUser findbusinessUser = businessUserRepository.findByBuUserId(businessUser.getBuUserId());
 
         session.setAttribute("buUserNumber",findbusinessUser.getBuUserNumber());
+        System.out.println("서비스 넘버:"+session.getAttribute("buUserNumber"));
         List<Review> all = reviewRepository.findAll();
 
 

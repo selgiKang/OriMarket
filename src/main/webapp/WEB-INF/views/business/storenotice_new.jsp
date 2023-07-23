@@ -8,110 +8,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Page Title</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <style>
-        @font-face {
-            font-family: 'LINESeedKR-Bd', sans-serif;
-            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/LINESeedKR-Bd.woff2') format('woff2');
-            font-weight: 700;
-            font-style: normal;
-        }
-
-        .line {
-            border-top: 1px solid #c4c4c4;
-            width: 330px;
-            margin: 30px auto;
-            position: relative;
-            right: 8px;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-        }
-
-        body {
-            margin: 0 auto;
-        }
-
-        .main-container {
-            width: 375px;
-            height: 812px;
-            margin: 0 auto;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            background-color: #eee;
-            overflow: auto;
-            overflow-x: hidden;
-            font-family: 'LINESeedKR-Bd', sans-serif;
-        }
-
-        .main-container::-webkit-scrollbar {
-            display: none;
-        }
-
-        .my_review_list{
-            margin-top: 10px;
-            margin: 20px;
-        }
-        .my_review_list_store{
-            background-color: white;
-            margin: 15px;
-            padding: 15px;
-
-        }
-
-        .rating, .date {
-            display: inline-block;
-        }
-
-        .rate_and_date{
-            margin-top: -20px;
-        }
-
-        .my_review_photo {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .my_review_photo img {
-            width: 300px;
-        }
-        .rating {
-            font-size: 24px;
-        }
-
-        .rating::before {
-            content: "☆☆☆☆☆";
-            color: lightgray;
-        }
-
-        .rating[data-rating="1"]::before {
-            content: "★☆☆☆☆";
-            color: gold;
-        }
-
-        .rating[data-rating="2"]::before {
-            content: "★★☆☆☆";
-            color: gold;
-        }
-
-        .rating[data-rating="3"]::before {
-            content: "★★★☆☆";
-            color: gold;
-        }
-
-        .rating[data-rating="4"]::before {
-            content: "★★★★☆";
-            color: gold;
-        }
-
-        .rating[data-rating="5"]::before {
-            content: "★★★★★";
-            color: gold;
-        }
-    </style>
 
     <style>
 
@@ -278,6 +174,7 @@
             border-radius: 25px;
             margin: 10px;
             width: 355px;
+            position: relative; /* main-container 내에 위치하도록 설정 */
         }
 
         .storecare {
@@ -335,20 +232,29 @@
 
         /*탭메뉴관련*/
 
+        .tabs {
+            display: flex;
+            flex-direction: column;
+        }
+/*
         .manager_main_tabs {
             display: flex;
             flex-wrap: wrap;
             max-width: 700px;
-            /* box-shadow: 0 48px 80px -32px rgba(0,0,0,0.3);*/
-        }
+            !* box-shadow: 0 48px 80px -32px rgba(0,0,0,0.3);*!
+        }*/
+
         .input {
+            display: none;
             position: absolute;
             opacity: 0;
             border-radius: 25px;
+            margin-bottom: 50px;
         }
+
         .label {
             border-radius: 25px;
-            width: 100%;
+            width: 295px;
             padding: 20px 30px;
             background: white;
             cursor: pointer;
@@ -356,29 +262,33 @@
             font-size: 18px;
             color: #000000;
             transition: background 0.1s, color 0.1s;
+            margin-bottom: 1px;
+
         }
-        .label:hover {
-            background: #d8d8d8;
-        }
+
         .label:active {
-            background: #ccc;
+
+            box-shadow: inset -.3rem -.1rem 1.4rem  #FBFBFB, inset .3rem .4rem .8rem #BEC5D0;
+            cursor: pointer;
+
         }
+
+
         .input:focus + .label {
             z-index: 1;
         }
 
-        @media (max-width: 755px), (min-width: 755px) {
-            .label {
-                width: 755px;
-            }
-        }
+
+        /*탭안에 내용들*/
         .panel {
-            border-radius: 15px;
+            border-radius: 0 0 15px 15px;
             display: none;
             padding: 20px 30px 30px;
             background: #fff;
             width: 295px;
+            margin-top: -22px;
         }
+
 
         .input:checked + .label + .panel {
             display: block;
@@ -387,6 +297,68 @@
         .first_menu:hover {opacity: 0.7;}
 
 
+/*        .my_review_list{
+            margin-top: 10px;
+            margin: 20px;
+        }*/
+
+        .my_review_list_store{
+            background-color: white;
+            margin: 15px;
+            padding: 15px;
+
+        }
+
+        .rating, .date {
+            display: inline-block;
+        }
+
+        .rate_and_date{
+            margin-top: -20px;
+        }
+
+        .my_review_photo {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .my_review_photo img {
+            width: 300px;
+        }
+        .rating {
+            font-size: 24px;
+        }
+
+        .rating::before {
+            content: "☆☆☆☆☆";
+            color: lightgray;
+        }
+
+        .rating[data-rating="1"]::before {
+            content: "★☆☆☆☆";
+            color: gold;
+        }
+
+        .rating[data-rating="2"]::before {
+            content: "★★☆☆☆";
+            color: gold;
+        }
+
+        .rating[data-rating="3"]::before {
+            content: "★★★☆☆";
+            color: gold;
+        }
+
+        .rating[data-rating="4"]::before {
+            content: "★★★★☆";
+            color: gold;
+        }
+
+        .rating[data-rating="5"]::before {
+            content: "★★★★★";
+            color: gold;
+        }
 
     </style>
     <%
@@ -438,8 +410,10 @@
             <h3>전체 메뉴</h3>
             <div class="detail_total_menu">
                 <div class="first_menu">
+                    <a href="/business_manage">
                     <img src="../../img/store/가게관리.png" alt="가게 관리"> <!-- alt 속성 추가 -->
                     <h5>가게 관리</h5>
+                    </a>
                 </div>
 
                 <a class="first_menu" href="/messageInsert">
@@ -457,10 +431,10 @@
                     <h5>메뉴 관리</h5>
                 </div>
 
-                <div class="first_menu">
+                <a class="first_menu" href="/sellerList?calculate_date=<%=currentDate%>&calculate_date_last=<%=currentDateLast%>">
                     <img src="../../img/store/주문내역.png" alt="주문 내역"> <!-- alt 속성 추가 -->
                     <h5>주문 내역</h5>
-                </div>
+                </a>
 
                 <div class="first_menu">
                     <img src="../../img/store/쿠폰.png" alt="쿠폰 관리"> <!-- alt 속성 추가 -->
@@ -474,7 +448,7 @@
 
                 <div class="first_menu">
                     <img src="../../img/store/확성기.png" alt="오리시장 공지사항"> <!-- alt 속성 추가 -->
-                    <h5>오리시장<br>공지사항</h5>
+                    <h5>고객센터</h5>
                 </div>
             </div>
         </div>
@@ -489,16 +463,13 @@
             <label class="label" for="tab-1">가게 관리</label>
             <div class="panel">
                 <div class="line"></div>
-
+                <form action="/storenotice1" method="post">
                 <div class="storecare_logo">
                     <h3>로고</h3>
-                    <input type="file" accept="image/*" id="logo-upload" onchange="previewLogo(event)" />
+                    <input type="file" accept="image/*" name="pictureUrl" id="logo-upload" onchange="previewPicture(event)" />
                     <div id="logo-preview"></div>
                 </div>
-
                 <div class="line"></div>
-
-                <form action="/storenotice1" method="post">
                     <div class="storecare_name">
                         <h3>가게 이름</h3>
                         <input type="hidden" name="buStoreNumber" value="${save.buStoreNumber}">
@@ -529,13 +500,37 @@
                     <div class="storecare_category">
                         <h3>가게 카테고리</h3>
                         <c:if test="${empty save.buStoreCategory}">
-                        <input type="text" id="store-category-input" name="buStoreCategory" placeholder="가게 카테고리"/>
+                            <select name="buStoreCategory">
+                                <option value="채소">채소</option>
+                                <option value="과일,견과,쌀">과일,견과,쌀</option>
+                                <option value="수산,해산물,건어물">수산,해산물,건어물</option>
+                                <option value="정육,계란">정육,계란</option>
+                                <option value="국,반찬">국,반찬</option>
+                                <option value="베이커리">베이커리</option>
+                                <option value="양념,오일">양념,오일</option>
+                                <option value="음료,커피">음료,커피</option>
+                                <option value="간식">간식</option>
+                                <option value="생활용품">생활용품</option>
+                            </select>
                         </c:if>
+                     <%--   <c:if test="${!empty save.buStoreCategory}">
+                            &lt;%&ndash;<input type="text" id="store-category-input" name="buStoreCategory" value="${save.buStoreCategory}"/>&ndash;%&gt;
+                        </c:if>--%>
                         <c:if test="${!empty save.buStoreCategory}">
-                            <input type="text" id="store-category-input" name="buStoreCategory" value="${save.buStoreCategory}"/>
+                            <select name="buStoreCategory">
+                                <c:forEach var="category" items="${['채소', '과일,견과,쌀', '수산,해산물,건어물', '정육,계란', '국,반찬', '베이커리', '양념,오일', '음료,커피', '간식', '생활용품']}">
+                                    <c:choose>
+                                        <c:when test="${save.buStoreCategory eq category}">
+                                            <option value="${category}" selected>${category}</option>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <option value="${category}">${category}</option>
+                                        </c:otherwise>
+                                    </c:choose>
+                                </c:forEach>
+                            </select>
                         </c:if>
                     </div>
-
                     <div class="line"></div>
 
                     <div class="storecare_location">
@@ -634,7 +629,7 @@
             <br>
 
             <input class="input" name="tabs-7" type="radio" id="tab-7"/>
-            <label class="label" for="tab-7">T정산 내역</label>
+            <label class="label" for="tab-7">정산 내역</label>
             <div class="panel">
                <%-- <jsp:include page="../calculate">
                     <jsp:param name="calculate_date" value="<%=currentDate%>" />
@@ -659,7 +654,7 @@
 
 
 <script>
-    var posts = []; // 게시글 정보를 저장할 배열
+  /*  var posts = []; // 게시글 정보를 저장할 배열
 
     function previewImage(event) {
         var imageUpload = event.target;
@@ -677,6 +672,26 @@
         };
 
         reader.readAsDataURL(imageFile);
+    }*/
+
+    function previewPicture(event) {
+        const pictureInput = event.target;
+        const picturePreview = document.getElementById('logo-preview');
+
+        if (pictureInput.files && pictureInput.files[0]) {
+            const reader = new FileReader();
+
+            reader.onload = function (e) {
+                const imgElement = document.createElement('img');
+                imgElement.src = e.target.result;
+                imgElement.style.maxWidth = '100%'; // 이미지 크기 조절 (선택사항)
+                imgElement.style.height = "auto";
+                picturePreview.innerHTML = ''; // 이미지 미리보기 업데이트
+                picturePreview.appendChild(imgElement);
+            };
+
+            reader.readAsDataURL(pictureInput.files[0]);
+        }
     }
 
     // function uploadPost() {

@@ -21,9 +21,9 @@
 		String today = date1.format(date);
 	%>
 	<div id= "paymentpage_main">
-		<form action="/order_paymentPage" method="post">
+		<form action="/order_paymentPage/${userId}" method="post">
 			<input type="hidden" name="orderNumber" value="<%=today%>${userId}">
-			<input type="hidden" name="orderUserId" value="1 ${userId}">
+			<input type="hidden" name="orderUserId" value="${userId}">
 			<input type="hidden" name="orderDate" value="<%=today%>">
 			<div id="paymentpage_title">
 				<%-- 전 페이지 돌아가기--%>
@@ -32,10 +32,9 @@
 			</div>
 			<div id= "paymentpage_section_1">
 				<div id= "paymentpage_address">
-					${userAddress1}
-					<input type="text" name="orderAddressNumber" value="2">
+					<input type="text" name="orderAddressNumber" value="${userAddress1}">
 				</div>
-				<div id= "paymentpage_btn_address_edit"><a>수정</a></div>
+				<%--<div id= "paymentpage_btn_address_edit"><a>수정</a></div>--%>
 			</div>
 			<hr>
 			<div style="text-align: right;"><a class="order_paymentPage_btn_filter1"><i class="fa-solid fa-caret-up" style="color: #ee9820;"></i></a></div>
@@ -51,14 +50,15 @@
 						<th colspan= "3"><input type="text" name = "orderStoreName" value="카트 가게 이름 받기" readonly></th>
 					</tr>
 					<c:forEach var="cartItems" items="${cartItemList}">
+						<input type="hidden" name="businessUser" value="${cartItems.item.businessStore.businessUser.buUserNumber}">
 					<tr class= "paymentpage_tr_2">
 						<td colspan="3" class= "paymentpage_td_1"><input type="text" name="orderGoodsName" value="${cartItems.item.itemName}" readonly></td>
 					</tr>
 					<tr>
-						<td colspan= "3" style= "text-align: center;"><input type="text" name="orderGoodsPrice" value="${cartItems.itemPrice}원" readonly></td>
+						<td colspan= "3" style= "text-align: center;"><input type="text" name="orderGoodsPrice" value="${cartItems.itemPrice}" readonly></td>
 					</tr>
 					<tr>
-						<td colspan= "3" style= "text-align: right;"><input type="text" name="orderGoodsNum" value="${cartItems.count}개" readonly></td>
+						<td colspan= "3" style= "text-align: right;"><input type="text" name="orderGoodsNum" value="${cartItems.count}" readonly></td>
 					</tr>
 					</c:forEach>
 					<!-- 반복문 출력 끝 -->
