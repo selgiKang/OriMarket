@@ -32,10 +32,9 @@
 			</div>
 			<div id= "paymentpage_section_1">
 				<div id= "paymentpage_address">
-					${userAddress1}
-					<input type="text" name="orderAddressNumber" value="2">
+					<input type="text" name="orderAddressNumber" value="${userAddress1}">
 				</div>
-				<div id= "paymentpage_btn_address_edit"><a>수정</a></div>
+				<%--<div id= "paymentpage_btn_address_edit"><a>수정</a></div>--%>
 			</div>
 			<hr>
 			<div style="text-align: right;"><a class="order_paymentPage_btn_filter1"><i class="fa-solid fa-caret-up" style="color: #ee9820;"></i></a></div>
