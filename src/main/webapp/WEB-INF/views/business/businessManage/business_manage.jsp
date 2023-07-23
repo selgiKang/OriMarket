@@ -47,7 +47,7 @@
             flex-direction: column;
             justify-content: center; /* 세로 방향으로 중앙 정렬 */
             align-items: center;
-            background-color: #eee;
+            background-color: #46a973;
             overflow: auto;
             overflow-x: hidden;
         }
