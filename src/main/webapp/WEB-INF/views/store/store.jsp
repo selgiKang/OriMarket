@@ -165,7 +165,7 @@
                             </div>
                             </c:forEach>
                             </form>
-                            <%--메뉴2--%>
+                            <%-- &lt;%&ndash;메뉴2&ndash;%&gt;
                             <div class="menu">
                                 <div class="menu-content">
                                     <h2>칼국수</h2>
@@ -176,7 +176,7 @@
                                     <img src="../../img/store/kal.jpg" alt="메뉴이미지">
                                 </div>
                             </div>
-                        </div>
+                        </div>--%>
                     </li>
 
                     <%--여름메뉴 버튼--%>
