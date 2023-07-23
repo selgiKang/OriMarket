@@ -40,8 +40,9 @@
     <main>
         <div id="calculate_main_totalIncome">
             <p id="calculate_main_totalIncome_title">총 수입</p>
-            <h3>${totalCome}원</h3>
+            <h3>${allTotalPrice}원</h3>
             <div>주문 횟수 ${orderCount}회</div>
+            <small style="color: #818083">* 자세한 내역은 날짜를 클릭해주세요. *</small>
         </div>
         <table id="calculate_main_table">
             <tr id="calculate_main_table_tr_1">
@@ -51,11 +52,13 @@
             <c:forEach items="${tableData}" var="datas">
                 <tr>
                     <td class="calculate_main_table_td_1" style="text-align: center;">
-                       <script>
-                           var date = "${datas.date}";
-                           var formattedDate = date.substr(0, 8);
-                           document.write(formattedDate);
-                       </script>
+                        <a class="dateTag" href="/details?date=${datas.date}">
+                           <script>
+                               var date = "${datas.date}";
+                               var formattedDate = date.substr(0, 8);
+                               document.write(formattedDate);
+                           </script>
+                        </a>
                     </td>
                     <td class="calculate_main_table_td_2" style="text-align:center;">
                        ${datas.totalPrice}원

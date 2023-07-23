@@ -50,17 +50,18 @@ public class OrderController {
         System.out.println("getCalculate"+calculateDate+"/"+calculateDateLast);
         int totalCome = 0;
         int orderCount = tableData.size();
-        String totalPrice=null;
+        int allTotalPrice = 0;
 
         for(Map<String,String>data : tableData){
             //orders 테이블에 물건 여러개 들어가면 가격 ,표시를 빼고 더애서 가져옴
             totalCome += orderService.sumCommaSeparatedNumbers(data.get("amount"));
-            totalPrice = data.get("totalPrice");
+            allTotalPrice += Integer.parseInt(data.get("totalPrice"));
         }
 
         model.addAttribute("tableData",tableData);
         model.addAttribute("totalCome",totalCome);
         model.addAttribute("orderCount",orderCount);
+        model.addAttribute("allTotalPrice",allTotalPrice);
 
         return "calculate/calculate";
     }
@@ -76,7 +77,7 @@ public class OrderController {
         String totalPrice=null;
 
         for(Map<String,String>data : tableData){
-            //orders 테이블에 물건 여러개 들어가면 가격 ,표시를 빼고 더애서 가져옴
+            //orders 테이블에 물건 여러개 들어가면 가격 ,표시를 빼고 더해서 가져옴
             totalCome += orderService.sumCommaSeparatedNumbers(data.get("amount"));
             totalPrice = data.get("totalPrice");
         }
@@ -108,8 +109,24 @@ public class OrderController {
         return "order/order_list";
     }
 
+    //특정 날짜 정보
+    @GetMapping("/details")
+    public String showDetailsPage(@RequestParam("date") String date, Model model,HttpSession session) {
+        // 날짜 정보를 서비스로 전달하여 해당 날짜의 정보를 가져온다.
 
+        // detailsService의 메서드 이름과 내용은 프로젝트의 요구사항에 맞게 작성해야 합니다.
+        List<Order> detailsDataList = orderService.getDetailsByDate(date,session);
+        Long buUserNumber = Long.valueOf(session.getAttribute("buUserNumber").toString());
 
+        for(Order detailsOrder:detailsDataList){
+            if(detailsOrder.getBusinessUser().getBuUserNumber().equals(buUserNumber)){
+                model.addAttribute("detailsDataList", detailsDataList);
+                // 가져온 정보를 뷰에 전달한다.
+            }
+        }
+
+        return "calculate/detailsCalculate"; // details.jsp 또는 해당하는 뷰 페이지의 이름
+    }
     @PostMapping("/order_paymentPage/{userId}")
     public String orderDelivery(@ModelAttribute Order order, @ModelAttribute RealTimeStatus rts, HttpSession session, @RequestParam("orderNumber")String orderNumberStr,@PathVariable("userId")String userId, Model model) {
         order.setOrderNumber(orderNumberStr);
@@ -186,8 +203,6 @@ public class OrderController {
                         model.addAttribute("finishResult",finishResult);
                     }
                 }
-
-
                 RealTimeStatus rtsSearchResult = realTimeService.findRts(order,session);
                 System.out.println(rts.getRtsOrderIng());
 
@@ -207,9 +222,21 @@ public class OrderController {
     public ResponseEntity<List<Map<String,String>>> calculateRequest(@RequestParam("calculate_date") String calculateDate,
                                                                      @RequestParam("calculate_date_last") String calculateDateLast,
                                                                      HttpSession session, Model model){
-        List<Map<String,String>> tableDate = orderService.getTableData(calculateDate,calculateDateLast,model,session);
+        List<Map<String,String>> tableData = orderService.getTableData(calculateDate,calculateDateLast,model,session);
 
-        return ResponseEntity.ok(tableDate);
+        int totalCome = 0;
+        int orderCount = tableData.size();
+        int allTotalPrice = 0;
+
+        for(Map<String,String>data : tableData){
+            //orders 테이블에 물건 여러개 들어가면 가격 ,표시를 빼고 더애서 가져옴
+            totalCome += orderService.sumCommaSeparatedNumbers(data.get("amount"));
+           //총 수입
+            allTotalPrice += Integer.parseInt(data.get("totalPrice"));
+            System.out.println("가격:"+data.get("tatalPrice"));
+        }
+
+        return ResponseEntity.ok(tableData);
     }
 
 
