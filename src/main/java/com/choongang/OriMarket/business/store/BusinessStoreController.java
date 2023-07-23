@@ -31,6 +31,7 @@ public class BusinessStoreController {
         }
 
 
+
     @PostMapping("/storenotice1")
     public String storenoticesave(@ModelAttribute BusinessStore businessStore, HttpSession session,Model model){
         businessStoreService.save(businessStore,session,model);
@@ -46,6 +47,12 @@ public class BusinessStoreController {
         return "/store/seller_itemDetail";
     }
 
+    //7.23 전체메뉴의 가게관리연결
+    @GetMapping("/business_manage")
+    public String businessManage() {
+
+        return "business/businessManage/business_manage";
+    }
 
 
 };
