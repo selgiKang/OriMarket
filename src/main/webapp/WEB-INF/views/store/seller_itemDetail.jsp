@@ -70,44 +70,45 @@
                     <h1>상품상세정보</h1>
                 </div>
             </div>
-                <form action="" enctype="">
+                <form action="/update_itemDetail" method="post">
                     <table id="goods_table">
+                        <td><input type="hidden" name="itemId" value="${items.itemId}"></td>
                         <tr>
                             <td>상품명</td>
-                            <td><input type="text" name="menu_name" value="${item.itemName}"></td>
+                            <td><input type="text" name="itemName" value="${items.itemName}"></td>
                         </tr>
                         <tr>
                             <td>상품수량</td>
-                            <td><input type="text" name="menu_cnt" value="${item.itemCnt}"></td>
+                            <td><input type="text" name="itemCnt" value="${items.itemCnt}"></td>
                         </tr>
                         <tr>
                             <td>원가</td>
-                            <td><input type="text" name="menu_priceOrigin" value="${item.itemCost}"></td>
+                            <td><input type="text" name="itemCost" value="${items.itemCost}"></td>
                         </tr>
                         <tr>
                             <td>판매가</td>
-                            <td><input type="text" name="menu_price" value="${item.itemPrice}"></td>
+                            <td><input type="text" name="itemPrice" value="${items.itemPrice}"></td>
                         </tr>
                         <tr>
                             <td>무게</td>
-                            <td><input type="text" name="menu_g" value="${item.itemG}"></td>
+                            <td><input type="text" name="itemG" value="${items.itemG}"></td>
                         </tr>
                         <tr>
                             <td>원산지</td>
-                            <td><input type="text" name="menu_from" value="${item.itemFrom}"></td>
+                            <td><input type="text" name="itemFrom" value="${items.itemFrom}"></td>
                         </tr>
                         <tr>
                             <td>입고일</td>
-                            <td><input type="text" name="menu_regDate" value="${item.itemRegDate}"></td>
+                            <td><input type="text" name="itemRegDate" value="${items.itemRegDate}"></td>
                         </tr>
                         <tr>
                             <td>상세정보</td>
-                            <td><textarea name="menu_info" rows="7">${item.itemInfo}</textarea></td>
+                            <td><textarea name="menu_info" rows="7">${items.itemInfo}</textarea></td>
                         </tr>
                         <tr>
                             <td>상품 카테고리</td>
                             <td><select type="" name="itemCategory" id="lang" class="select" >
-                                <option value="${item.itemCategory}" selected>${item.itemCategory}</option>
+                                <option value="${items.itemCategory}" selected>${items.itemCategory}</option>
                                 <option value="한식">한식</option>
                                 <option value="양식">양식</option>
                                 <option value="일식">일식</option>

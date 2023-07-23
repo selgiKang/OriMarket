@@ -64,5 +64,12 @@ public class ItemService {
 
     }
 
+    public Item update(Item item){
+        Item updateItem = itemRepository.save(item);
+        return updateItem;
+    }
+
+
+
 
 }

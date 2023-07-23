@@ -9,13 +9,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="UTF-8">
-	<!-- 아이콘 -->
-	<script src="https://kit.fontawesome.com/1d53132cda.js" crossorigin="anonymous"></script>
-	<script src="../../js/common/jquery-3.6.4.js"></script>
-	<script src="../../js/user/cart.js"></script>
+<meta charset="UTF-8">
+<!-- 아이콘 -->
+<script src="https://kit.fontawesome.com/1d53132cda.js" crossorigin="anonymous"></script>
+<script src="../../js/common/jquery-3.6.4.js"></script>
+<script src="../../js/user/cart.js"></script>
 
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/user/cart.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/user/cart.css">
 
 	<title>cart</title>
 </head>
@@ -45,14 +45,14 @@
 				<c:forEach var="orderList" items="${userOrderList}" varStatus="status">
 					<c:if test="${!orderList.businessStore.buStoreName.equals(prevBuStoreName)}">
 					<c:set var="prevBuStoreName" value="${orderList.businessStore.buStoreName}" />
-					<article>
-						<h1>${orderList.businessStore.buStoreName}</h1>
+					<div id="itemList">
+						<h3>${orderList.businessStore.buStoreName}</h3>
 					</c:if>
 					<ul>
-							<c:if test="${orderList.item.businessStore eq orderList.businessStore}">
-							<c:forEach var="item" items="${orderList.businessStore.items}">
-								<c:if test="${orderList.item eq item}">
-									<li>
+						<c:if test="${orderList.item.businessStore eq orderList.businessStore}">
+						<c:forEach var="item" items="${orderList.businessStore.items}">
+							<c:if test="${orderList.item eq item}">
+								<li>
 										<div class="cart_info">
 											<input type="checkbox" name="cbox"  class="individual_checkbox" checked="checked">
 											<input type="hidden" class="individual_totalCount" value="${orderList.count}">
@@ -82,7 +82,7 @@
 													<input id="sellPrice_${status.index}" type="hidden" value="${orderList.itemPrice}">
 													<span id="totalPriceCalSpan_${status.index}">
 													${orderList.itemPrice * orderList.count}원
-											</span>
+													</span>
 												</div>
 											</div>
 										</div>
@@ -91,9 +91,8 @@
 							</c:forEach>
 							</c:if>
 					</ul>
-
 					<c:if test="${!orderList.businessStore.buStoreName.equals(prevBuStoreName)}">
-					</article>
+					</div>
 					<br>
 					</c:if>
 				</c:forEach>

@@ -68,7 +68,7 @@
                 <button class="backbtn" onclick="window.history.go(-1)">&lt;</button>
                 <h1>현 재고 목록</h1>
             </div>
-            <a href="#"><input type="button" class-="delete_btn" value="선택품목 삭제"></a>
+            <a href="#"><input type="button" class-="delete_btn" value="선택품목 삭제" onclick="deleteSelectedItems()"></a>
             <a href="/s2/${buUserId}"><input type="button" class="insert_btn" value="신규품목 등록"></a>
         </div>
         <br>
@@ -79,12 +79,8 @@
                     <td>상품번호</td>
                     <td>상품명</td>
                     <td>상품수량</td>
-    <%--                <td>원가</td>--%>
                     <td>판매가</td>
-    <%--                <td>무게</td>--%>
-    <%--                <td>원산지</td>--%>
                     <td>입고일</td>
-    <%--                <td>상세정보</td>--%>
                     <td>카테고리</td>
                 </tr>
                 <c:forEach var="it" items="${items}">
@@ -93,12 +89,8 @@
                     <td><a href="/seller_itemDetail/${it.itemId}">${it.itemId}</a></td>
                     <td>${it.itemName}</td>
                     <td>${it.itemCnt}</td>
-    <%--                <td>${it.itemCost}</td>--%>
                     <td><span class="formatted-price">${it.itemPrice}</span></td>
-    <%--                <td>${it.itemG}</td>--%>
-    <%--                <td>${it.itemFrom}</td>--%>
                     <td>${it.itemRegDate}</td>
-    <%--                <td>${it.itemInfo}</td>--%>
                     <td>${it.itemCategory}</td>
                 </tr>
                 </c:forEach>
@@ -108,6 +100,7 @@
 </div>
 </body>
 <script>
+
     function formatNumberWithCommas(number) {
         return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     }
