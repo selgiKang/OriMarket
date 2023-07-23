@@ -127,6 +127,7 @@
                 <div id="goods_btn">
                     <!-- 등록버튼 클릭하면 모달창 띄워서 등록이 완료되었습니다. 표시하고 계속 상품등록할 수 있도록 같은 등록페이지로 리다이렉트 -->
                     <input type="submit" value="등록">
+                    <!-- 뒤로가기 -->
                     <input type="reset" onclick="window.history.go(-1)" value="취소">
                     <a href="/s1/${buUserId}">리스트</a>
                 </div>

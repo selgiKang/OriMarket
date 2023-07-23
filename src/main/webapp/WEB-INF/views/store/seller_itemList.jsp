@@ -64,6 +64,7 @@
     <div class="goods_store_wrap">
         <div id="goods_title">
             <div class="top_title_wrap">
+                <!-- 뒤로가기 -->
                 <button class="backbtn" onclick="window.history.go(-1)">&lt;</button>
                 <h1>현 재고 목록</h1>
             </div>
