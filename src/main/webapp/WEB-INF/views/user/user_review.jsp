@@ -266,6 +266,7 @@
 </div>
   </form>
 
+
 <script>
   let selectedBoxIndex; // 선택한 박스 인덱스 추적 변수
   function getImageFiles(e) {

@@ -7,6 +7,81 @@
     <title>오리시장</title>
     <link rel="stylesheet" type="text/css" href="../../css/store/store.css">
 </head>
+<style>
+    .rating::before {
+        content: "☆☆☆☆☆";
+        color: lightgray;
+    }
+
+    .rating[data-rating="1"]::before {
+        content: "★☆☆☆☆";
+        color: gold;
+    }
+
+    .rating[data-rating="2"]::before {
+        content: "★★☆☆☆";
+        color: gold;
+    }
+
+    .rating[data-rating="3"]::before {
+        content: "★★★☆☆";
+        color: gold;
+    }
+
+    .rating[data-rating="4"]::before {
+        content: "★★★★☆";
+        color: gold;
+    }
+
+    .rating[data-rating="5"]::before {
+        content: "★★★★★";
+        color: gold;
+    }  .rating::before {
+           content: "☆☆☆☆☆";
+           color: lightgray;
+       }
+
+    .rating[data-rating="1"]::before {
+        content: "★☆☆☆☆";
+        color: gold;
+    }
+
+    .rating[data-rating="2"]::before {
+        content: "★★☆☆☆";
+        color: gold;
+    }
+
+    .rating[data-rating="3"]::before {
+        content: "★★★☆☆";
+        color: gold;
+    }
+
+    .rating[data-rating="4"]::before {
+        content: "★★★★☆";
+        color: gold;
+    }
+
+    .rating[data-rating="5"]::before {
+        content: "★★★★★";
+        color: gold;
+    }
+    .rating[data-rating="1.5"]::before {
+        content: "★½☆☆☆";
+        color: gold;
+    }
+    .rating[data-rating="2.5"]::before {
+        content: "★★½☆☆";
+        color: gold;
+    }
+    .rating[data-rating="3.5"]::before {
+        content: "★★★½☆";
+        color: gold;
+    }
+    .rating[data-rating="4.5"]::before {
+        content: "★★★★½";
+        color: gold;
+    }
+</style>
 <body>
 <jsp:include page="../header/header_search.jsp" />
 <div class="main-container">
@@ -33,9 +108,9 @@
         <%--가게이름--%>
         <h1><input type="text" value="싱싱과일가게" name="storeName${sessionScope.favNumber}"></h1>
         <span style="float: left;">
-            <img class="star" src="../../img/store/star.png" alt="별">
+            <small style="font-size: 12px;"> &lt; 총 ${aveRating}점 &gt; : </small><span class="rating" data-rating="${Math.round(aveRating * 2) / 2}"></span><br>
+            <small><a href="/storeReview" style="color: #4A98F7">리뷰 보러가기 </a></small>
             <%--리뷰--%>
-            <a href="/storeReview">>486</a>
         </span>
         <br>
         <%--storeAddress--%>

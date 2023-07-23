@@ -51,6 +51,9 @@ public class User {
     @OneToMany(mappedBy = "user")
     private List<Review> reviews = new ArrayList<>();
 
+    @OneToMany(mappedBy = "user")
+    private List<UserMarket> userMarkets = new ArrayList<>();
+
 
     //fav원투매니를 해야할까?? menuname, menuprice, menudetail 만들어놓고
 

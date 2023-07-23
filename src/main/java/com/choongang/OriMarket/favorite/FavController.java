@@ -5,6 +5,8 @@ import com.choongang.OriMarket.business.message.MessageRepository;
 import com.choongang.OriMarket.business.store.BusinessStore;
 import com.choongang.OriMarket.business.store.BusinessStoreRepository;
 import com.choongang.OriMarket.business.user.BusinessUser;
+import com.choongang.OriMarket.review.Review;
+import com.choongang.OriMarket.review.ReviewRepository;
 import com.choongang.OriMarket.store.Item;
 import com.choongang.OriMarket.store.ItemRepository;
 import com.choongang.OriMarket.user.User;
@@ -33,6 +35,8 @@ public class FavController {
     private final BusinessStoreRepository businessStoreRepository;
     private final MessageRepository messageRepository;
 
+    private final ReviewRepository reviewRepository;
+
 
     @GetMapping("/storeFav")
     public String storeFav(@RequestParam(value = "favId",required = false) Long favId, User user, Fav fav, HttpSession session){
@@ -57,6 +61,8 @@ public class FavController {
     @GetMapping("/store")
     public String store(@RequestParam("favStoreName") String favStoreName, Fav fav,User user, HttpSession session,Model model) {
         user.setUserId(String.valueOf(session.getAttribute("userId")));
+
+
         //회원
         if (userService.checkUserId(user.getUserId())) {
 
@@ -75,6 +81,18 @@ public class FavController {
 
             //session.setAttribute("favNumber", fav.getFavNumber());
             List<BusinessStore> byBuStoreName = businessStoreRepository.findByBuStoreName(favStoreName);
+
+            //리뷰 평점계산
+            List<Review> reviewListResult = reviewRepository.findByBusinessStore(byBuStoreName.get(0));
+            //리뷰 총점 계산
+            int totalSum = 0;
+            int reviewCount = reviewListResult.size();
+            for(Review review1:reviewListResult){
+                int rating = review1.getRating();
+                totalSum += rating;
+            }
+            double averageRating = (double) totalSum / reviewCount;
+            model.addAttribute("aveRating",averageRating);
 
             //확실해지면 model로 변해도 됨
             //시장 번호
