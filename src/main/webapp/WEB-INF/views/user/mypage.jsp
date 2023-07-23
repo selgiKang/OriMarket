@@ -13,7 +13,7 @@
     <a href="/"><h1 style="position: fixed; left: 20px; top: 0; font-size: 30px; color: red">홈으로 바로가기</h1></a>
     <div id="mypqge1">
         <c:if test="${empty userId}">
-            <a href="/login"><h2 id="mypage1_h2">로그인하러가기 ㅎㅎ</h2><img id="img1" src="" width="30px" height="30px"></a>
+            <a href="/login"><h2 id="mypage1_h2">로그인하러가기</h2><img id="img1" src="" width="30px" height="30px"></a>
             <small id="mypage1_small">&lt;회원등급&gt;</small>
         </c:if>
         <c:if test="${not empty userId}">
@@ -23,9 +23,9 @@
 
         <hr>
         <div id="main_box">
-            <div>
+            <div id="mypage_favStore" onclick="location.href='/favList'">
                 <div class="main_box_icon">
-                    <img src="" width="50px" height="50px">
+                    <img src="../../img/user/shop.png" style="width:50px; height: 50px;">
                 </div>
                 <div class="contents1_bold">
                     단골가게
