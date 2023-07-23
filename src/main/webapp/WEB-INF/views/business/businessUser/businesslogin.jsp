@@ -162,4 +162,12 @@
 </div>
 <div id="footer">푸터z</div>
 </body>
+<script>
+    <%-- 서버에서 에러 메시지를 전달할 경우 알림 팝업 띄우기 --%>
+    <% if (request.getAttribute("loginError") != null) { %>
+    window.onload = function() {
+        alert("<%= request.getAttribute("loginError") %>");
+    };
+    <% } %>
+</script>
 </html>
