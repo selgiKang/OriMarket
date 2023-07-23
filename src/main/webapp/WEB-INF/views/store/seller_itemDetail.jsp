@@ -47,16 +47,9 @@
         #goods_table tr{line-height: 30px;}
         #goods_table td{color: #46A973;}
 
-        input[type=text] {
-            width: 85%;
-            height: 20px;
-            font-size: 15px;
-            border: 0;
-            border-radius: 15px;
-            outline: none;
-            padding-left: 10px;
-            background-color: rgb(233, 233, 233);
-        }
+        input[type=text] {width: 80%; height: 30px; font-size: 15px; border: 0; border-radius: 15px; outline: none; padding-left: 10px; background-color: rgb(233, 233, 233);}
+        textarea { width: 80%;height: 50px; padding: 10px; box-sizing: border-box; border: solid 2px #e6e6e6; border-radius: 5px;font-size: 16px; resize: both;}
+        .select {width:80%; height:30px; border-radius:5px; border:2px solid #e9e9e9;}
 
     </style>
 </head>
@@ -113,7 +106,7 @@
                         </tr>
                         <tr>
                             <td>상품 카테고리</td>
-                            <td><select type="" name="itemCategory" id="lang" >
+                            <td><select type="" name="itemCategory" id="lang" class="select" >
                                 <option value="${item.itemCategory}" selected>${item.itemCategory}</option>
                                 <option value="한식">한식</option>
                                 <option value="양식">양식</option>

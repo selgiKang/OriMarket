@@ -37,22 +37,20 @@
 
         /* 230723 승원 */
         .goods_store_wrap{background-color:#eee; height:712px; display: flex;}
-        .goods_store_new_wrap{width: 90%; border-radius: 25px; border-radius: 25px; background-color:#fff; padding:20px 5px; margin:auto; box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.2);}
+        .goods_store_new_wrap{width: 93%; border-radius: 25px; border-radius: 25px; background-color:#fff; padding:20px 5px; margin:auto; box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.2);}
 
         #goods_listTable{margin: 0 auto;}
         #goods_listTable tr{line-height: 30px;}
+        #goods_listTable > tbody > tr:first-child{width:20%;}
+        #goods_listTable > tbody > tr.file_tr :last-child{width:75%;}
         #goods_listTable td{color: #46A973; text-align: center;}
 
-        input[type=text] {
-            width: 75%;
-            height: 20px;
-            font-size: 15px;
-            border: 0;
-            border-radius: 15px;
-            outline: none;
-            padding-left: 10px;
-            background-color: rgb(233, 233, 233);
-        }
+        input[type=date]{width:77%; height:25px; border-radius:5px; border:2px solid #eee;}
+        input[type=text] {width: 80%; height: 20px; font-size: 15px; border: 0; border-radius: 15px; outline: none; padding-left: 10px; background-color: rgb(233, 233, 233);}
+        textarea { width: 80%;height: 50px; padding: 10px; box-sizing: border-box; border: solid 2px #e6e6e6; border-radius: 5px;font-size: 16px; resize: both;}
+        select::-ms-expand {}
+        .select {width:80%; height:30px; border-radius:5px; border:2px solid #e9e9e9;}
+
     </style>
 </head>
 <body>
@@ -105,7 +103,7 @@
                     </tr>
                     <tr>
                         <td>상품 카테고리</td>
-                        <td><select type="" name="itemCategory" id="lang">
+                        <td><select type="" name="itemCategory" class="select" id="lang">
                                 <option value="한식">한식</option>
                                 <option value="양식">양식</option>
                                 <option value="일식">일식</option>
@@ -118,7 +116,7 @@
                             </select>
                         </td>
                     </tr>
-                    <tr>
+                    <tr class="file_tr">
                         <td>상품사진</td>
                         <td><input type="file"></td>
                     </tr>
