@@ -47,6 +47,17 @@
         #goods_table tr{line-height: 30px;}
         #goods_table td{color: #46A973;}
 
+        input[type=text] {
+            width: 85%;
+            height: 20px;
+            font-size: 15px;
+            border: 0;
+            border-radius: 15px;
+            outline: none;
+            padding-left: 10px;
+            background-color: rgb(233, 233, 233);
+        }
+
     </style>
 </head>
 <body>
