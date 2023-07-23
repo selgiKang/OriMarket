@@ -15,6 +15,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -71,4 +72,20 @@ public class Review {
 
     @Column(length = 500)
     private String  businessReplyMessage;
+
+    public String getFormattedCreatedDate() {
+        // 원하는 형식으로 DateTimeFormatter를 생성
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd / HH:mm:ss");
+
+        // LocalDateTime 객체를 원하는 형식으로 변환하여 문자열로 반환
+        return created_date.format(formatter);
+    }
+
+    public String getFormattedCreatedDate1() {
+        // 원하는 형식으로 DateTimeFormatter를 생성
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd / HH:mm:ss");
+
+        // LocalDateTime 객체를 원하는 형식으로 변환하여 문자열로 반환
+        return modified_date.format(formatter);
+    }
 }
