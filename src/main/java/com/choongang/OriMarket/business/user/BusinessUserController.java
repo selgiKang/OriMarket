@@ -32,14 +32,18 @@ public class BusinessUserController {
 
     @PostMapping("/login1")
     public String loginId(@ModelAttribute BusinessUser businessUser, Model model, HttpSession session) {
-        boolean isTrue = businessUserService.login1(businessUser,session,model);
-        if(isTrue){
-            session.setAttribute("buUserId",businessUser.getBuUserId());
+        boolean isTrue = businessUserService.login1(businessUser, session, model);
+        if (isTrue) {
+            session.setAttribute("buUserId", businessUser.getBuUserId());
             System.out.println(session.getAttribute("buUserId"));
             return "business/storenotice_new";
+        } else {
+            // If login fails, add an error message to the model
+            model.addAttribute("loginError", "아이디 또는 비밀번호가 틀립니다.");
+            return "business/businessUser/businesslogin";
         }
-        return "business/businessUser/businesslogin";
     }
+
 
     @PostMapping("/join1")
     public String joinUser(@ModelAttribute BusinessUser businessUser,HttpSession session) {
