@@ -149,6 +149,4 @@ public class StoreController {
 
         return "store/detailmenu";
     }
-
-
 };
