@@ -50,7 +50,7 @@ public class BusinessStoreController {
     }
 
 
-    //등록된 item수정
+    //등록된 item수정하기
     @PostMapping("/update_itemDetail")
     public String updateMenu(@ModelAttribute Item formItem,Model model,HttpSession session) {
 
@@ -77,12 +77,12 @@ public class BusinessStoreController {
         return "/store/seller_itemList";
     }
 
-    //등록된 아이템 삭제
+
+    //등록된 아이템 삭제(cartItem테이블에서도 삭제되게)
     @DeleteMapping("/delete_items")
     @ResponseBody
-    public String deleteSelectedItems(@RequestParam("itemIds")  List<Long> itemIds) {
+    public String deleteSelectedItems(@RequestParam("itemIds[]")  List<Long> itemIds) {
 
-        System.out.println("컨트롤러로 넘어오나????");
         for(Long deleteItemId :itemIds){
             itemService.deleteItems(deleteItemId);
         }

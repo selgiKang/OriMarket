@@ -37,6 +37,22 @@ public class RealTimeService {
         rtsRepository.save(a);
         return a;
     }
+    public RealTimeStatus update2(Order order,HttpSession session){
+        order.setOrderNumber(order.getOrderNumber());
+        RealTimeStatus a = rtsRepository.findByorderNumber(order);
+        a.setRtsRiderIng(1);
+        a.setOrderNumber(order);
+        rtsRepository.save(a);
+        return a;
+    }
+    public RealTimeStatus update3(Order order,HttpSession session){
+        order.setOrderNumber(order.getOrderNumber());
+        RealTimeStatus a = rtsRepository.findByorderNumber(order);
+        a.setRtsRiderFinish(1);
+        a.setOrderNumber(order);
+        rtsRepository.save(a);
+        return a;
+    }
 
     public RealTimeStatus findRts(Order order,HttpSession session){
         order.setOrderNumber(String.valueOf(session.getAttribute("orderNumber")));
