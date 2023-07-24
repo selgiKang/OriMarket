@@ -40,6 +40,7 @@ public class MessageController {
         }
         return "business/businessMessage/business_message";
     }
+
     @GetMapping("/storeMessageInsert")
     public String storeMessageInsert(@ModelAttribute Message message, Model model,HttpSession session, BusinessUser businessUser){
             businessUser.setBuUserNumber(Long.valueOf(session.getAttribute("buUserNumber").toString()));

@@ -59,7 +59,12 @@
     <c:forEach var="resultMessage" items="${resultMessage}" varStatus="status">
         <tr>
             <td class="message_td_1">${status.index + 1}</td>
-            <td class="message_td_2"><a href="/message_detail/${resultMessage.messageId}">${resultMessage.messageInsertDate}</a></td>
+            <c:if test="${empty sessionScope.userId}">
+                <td class="message_td_2"><a href="/message_detail/${resultMessage.messageId}">${resultMessage.messageInsertDate}</a></td>
+            </c:if>
+            <c:if test="${!empty sessionScope.userId}">
+                <td class="message_td_2">${resultMessage.messageInsertDate}</td>
+            </c:if>
             <td class="message_td_2">${resultMessage.totalMessage}</td>
         </tr>
     </c:forEach>
