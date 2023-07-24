@@ -476,10 +476,11 @@
                         <c:if test="${empty save.buStoreName}">
                             <input type="text" id="store-name-input" name="buStoreName" placeholder="가게 이름">
                         </c:if>
-                    <%--    <c:if test="${!empty save.buStoreName}">
-                            <input type="text" id="store-name-input" name="buStoreName" value="${save.buStoreName}">
-                        </c:if>--%>
 
+                        <%--입력창--%>
+                        <c:if test="${!empty save.buStoreName}">
+                            <input type="text" id="store-name-input" name="buStoreName" value="${save.buStoreName}">
+                        </c:if>
 
                        <%-- 7.24 테스트 승엽--%>
                         <%-- 입력된 가게 이름 --%>
@@ -497,9 +498,10 @@
                         <input type="text" id="store-number-input" name="buStorePhone" placeholder="가게 번호"/>
                         </c:if>
 
-                      <%--  <c:if test="${!empty save.buStorePhone}">
+                        <%--입력창--%>
+                            <c:if test="${!empty save.buStorePhone}">
                             <input type="text" id="store-number-input" name="buStorePhone" value="${save.buStorePhone}"/>
-                        </c:if>--%>
+                        </c:if>
 
                         <%--//7.24 테스트 승엽--%>
                         <%-- 입력된 가게 번호를 표시합니다. --%>
@@ -526,10 +528,13 @@
                                 <option value="생활용품">생활용품</option>
                             </select>
                         </c:if>
-                     <%--   <c:if test="${!empty save.buStoreCategory}">
-                            &lt;%&ndash;<input type="text" id="store-category-input" name="buStoreCategory" value="${save.buStoreCategory}"/>&ndash;%&gt;
-                        </c:if>--%>
-                       <%-- <c:if test="${!empty save.buStoreCategory}">
+
+                        <%--입력창--%>
+                        <c:if test="${!empty save.buStoreCategory}">
+                            <%--<input type="text" id="store-category-input" name="buStoreCategory" value="${save.buStoreCategory}"/>--%>
+                        </c:if>
+
+                        <c:if test="${!empty save.buStoreCategory}">
                             <select name="buStoreCategory">
                                 <c:forEach var="category" items="${['채소', '과일,견과,쌀', '수산,해산물,건어물', '정육,계란', '국,반찬', '베이커리', '양념,오일', '음료,커피', '간식', '생활용품']}">
                                     <c:choose>
@@ -542,7 +547,7 @@
                                     </c:choose>
                                 </c:forEach>
                             </select>
-                        </c:if>--%>
+                        </c:if>
 
                         <%--//7.24 테스트 승엽--%>
                         <%-- 입력된 가게 카테고리를 표시합니다. --%>
@@ -557,15 +562,21 @@
                         <c:if test="${empty save.buStoreAddress}">
                         <input type="text" id="store-location-input" name="buStoreAddress" placeholder="가게를 위치를 지정해주세요.">
                         </c:if>
-                       <%-- <c:if test="${!empty save.buStoreAddress}">
+
+                     <%--입력창--%>
+                            <c:if test="${!empty save.buStoreAddress}">
                             <input type="text" id="store-location-input" name="buStoreAddress" value="${save.buStoreAddress}">
-                        </c:if>--%>
+                        </c:if>
+
+
                         <c:if test="${empty save.buStoreAddressDetail}">
                         <input type="text" name="buStoreAddressDetail" placeholder="상세위치를 적어주세요.">
                         </c:if>
-                       <%-- <c:if test="${!empty save.buStoreAddressDetail}">
+
+                        <%--입력창--%>
+                            <c:if test="${!empty save.buStoreAddressDetail}">
                             <input type="text" name="buStoreAddressDetail" value="${save.buStoreAddressDetail}">
-                        </c:if>--%>
+                        </c:if>
 
                       <%--  //7.24 테스트 승엽--%>
                         <%-- 입력된 가게 위치를 표시합니다. --%>
