@@ -1,5 +1,5 @@
 package com.choongang.OriMarket.review;
-
+/*
 import com.choongang.OriMarket.business.store.BusinessStore;
 import com.choongang.OriMarket.business.store.BusinessStoreService;
 import com.choongang.OriMarket.business.user.BusinessUser;
@@ -33,4 +33,4 @@ public class PictureUrlController {
 //        return imageDto.getMap();
 //    }
 
-};
+};*/
