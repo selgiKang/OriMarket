@@ -103,12 +103,14 @@ public class OrderService {
             Long buUserNumber = Long.valueOf(session.getAttribute("buUserNumber").toString());
             for(Order order : orders){
                 //사업자 번호 비교
-                if(order.getBusinessUser().getBuUserNumber().equals(buUserNumber)){
-                    Map<String, String> orderData = new HashMap<>();
-                    orderData.put("date", String.valueOf(order.getOrderDate()));
-                    orderData.put("amount",String.valueOf(order.getOrderGoodsPrice()));
-                    orderData.put("totalPrice",String.valueOf(order.getOrderGoodsTotalPrice()));
-                    tableData.add(orderData);
+                if(order.getBusinessUser().getBuUserNumber()!=null){
+                    if(order.getBusinessUser().getBuUserNumber().equals(buUserNumber)){
+                        Map<String, String> orderData = new HashMap<>();
+                        orderData.put("date", String.valueOf(order.getOrderDate()));
+                        orderData.put("amount",String.valueOf(order.getOrderGoodsPrice()));
+                        orderData.put("totalPrice",String.valueOf(order.getOrderGoodsTotalPrice()));
+                        tableData.add(orderData);
+                    }
                 }
             }
             model.addAttribute("tableData",tableData);

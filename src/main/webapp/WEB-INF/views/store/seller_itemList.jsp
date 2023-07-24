@@ -76,17 +76,17 @@
             <table>
                 <tr class="goods_listTitle">
                     <td></td>
-                    <td>상품번호</td>
+                    <td>순번</td>
                     <td>상품명</td>
                     <td>상품수량</td>
                     <td>판매가</td>
                     <td>입고일</td>
                     <td>카테고리</td>
                 </tr>
-                <c:forEach var="it" items="${items}">
+                <c:forEach var="it" items="${items}" varStatus="status">
                 <tr>
                     <td><input type="checkbox" value="Goods"></td>
-                    <td><a href="/seller_itemDetail/${it.itemId}">${it.itemId}</a></td>
+                    <td><a href="/seller_itemDetail/${it.itemId}">${status.index+1}</a></td>
                     <td>${it.itemName}</td>
                     <td>${it.itemCnt}</td>
                     <td><span class="formatted-price">${it.itemPrice}</span></td>
