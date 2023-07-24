@@ -4,6 +4,8 @@ import com.choongang.OriMarket.business.market.Market;
 import com.choongang.OriMarket.business.market.MarketService;
 import com.choongang.OriMarket.business.store.BusinessStore;
 import com.choongang.OriMarket.business.user.BusinessUser;
+import com.choongang.OriMarket.order.Order;
+import com.choongang.OriMarket.order.OrderRepository;
 import com.choongang.OriMarket.review.Review;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -23,6 +25,8 @@ public class ManagerService {
     @Autowired
     private  final ManagerRepository managerRepository;
     private  final MarketService marketService;
+    private  final OrderRepository orderRepository;
+
 
     public boolean join(ManagerUser managerUser, HttpSession session){
         Market market = marketService.findMarket(managerUser.getMarket().getMarketName());
@@ -63,5 +67,22 @@ public class ManagerService {
         }
         session.setAttribute("managerName",findManagerUser.getManagerName());
         return true;
+    }
+
+    //해당 매니저 불러오기
+    public ManagerUser findByManagerId(String managerId,Model model){
+        //매니저 번호 넣어서 매니저가 소속된 시장 번호 꺼내기
+        ManagerUser userResult = managerRepository.findByManagerId(managerId);
+
+        //시장 번호
+        Long marketSeq = userResult.getMarket().getMarketSeq();
+        Market market = new Market();
+        market.setMarketSeq(marketSeq);
+
+        //시장 번호 가지고 그 시장의 주문 가져오기
+        List<Order> managerOrderList = orderRepository.findByMarketSeq(market);
+        model.addAttribute("managerOrderList",managerOrderList);
+
+        return userResult;
     }
 }
