@@ -58,9 +58,13 @@ public class Item {
     @OneToMany(mappedBy = "item")
     private List<Review> reviews = new ArrayList<>();
 
-    @OneToMany(mappedBy = "item", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "item", cascade =  CascadeType.REMOVE)
     private List<CartItem> cartItems = new ArrayList<>();
 
 
+
+
+
 }
+
 

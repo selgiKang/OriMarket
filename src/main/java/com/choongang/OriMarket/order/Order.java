@@ -3,11 +3,14 @@ package com.choongang.OriMarket.order;
 import com.choongang.OriMarket.RealTimeStatus.RealTimeStatus;
 import com.choongang.OriMarket.business.market.Market;
 import com.choongang.OriMarket.business.user.BusinessUser;
+import com.choongang.OriMarket.user.User;
 import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table (name = "orders")
@@ -99,4 +102,6 @@ public class Order {
     //끝나는 날짜
     @Transient
     private String calculate_date_last;
+
+
 }

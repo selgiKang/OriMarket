@@ -18,7 +18,6 @@
         button.backbtn:hover {background-color:#333; color:#fff;}
 
         .infolist_content_wrap{width:90%; margin: 20px auto;}
-
     </style>
 </head>
 <body>

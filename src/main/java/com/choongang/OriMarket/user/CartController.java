@@ -73,10 +73,14 @@ public class CartController {
         //물건 아이디 찾기..?
         Item additem = itemService.getItem(itemId);
 
+        CartItem cartItem = cartItemRepository.findByItem_ItemId(itemId);
 
         model.addAttribute("item",additem);
-        //카트에 수량 저장
-        cartService.addCart(user,additem,count);
+
+        //재고보다 많이 담으면 안담기게.
+        if(count<=additem.getItemCnt()){
+            cartService.addCart(user,additem,count);
+        }
 
         return "/store/detailmenu";
     }
@@ -98,20 +102,6 @@ public class CartController {
         cartService.itemDelete(cartItemId);
         return "ok";
     }
-
-
-
-    /*결제***그리고 장바구니 삭제*/
-//    @PostMapping("/{userId}/cart/checkout")
-//    public String myCartPayment(@PathVariable("userId") String userId, Model model, HttpSession session) {
-//
-//
-//        cartService.cartPayment(userId);
-//        cartService.cartDeleteAll(userId,session);
-//
-//
-//        return "/order/order_receipt";
-//    }
 
 
     /*결제페이지로 넘기기*/
