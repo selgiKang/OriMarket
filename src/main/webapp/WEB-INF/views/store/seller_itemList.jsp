@@ -52,6 +52,7 @@
 
         .goods_listTitle{color: #46A973; margin-bottom:15px;}
     </style>
+    <script src="../../js/common/jquery-3.6.4.js"></script>
 </head>
 <body>
 <div id="goods_container">
@@ -68,7 +69,7 @@
                 <button class="backbtn" onclick="window.history.go(-1)">&lt;</button>
                 <h1>현 재고 목록</h1>
             </div>
-            <a href="#"><input type="button" class-="delete_btn" value="선택품목 삭제" onclick="deleteSelectedItems()"></a>
+            <input type="button" class="delete_btn" value="선택품목 삭제" onclick="deleteSelectedItems()">
             <a href="/s2/${buUserId}"><input type="button" class="insert_btn" value="신규품목 등록"></a>
         </div>
         <br>
@@ -85,7 +86,7 @@
                 </tr>
                 <c:forEach var="it" items="${items}" varStatus="status">
                 <tr>
-                    <td><input type="checkbox" value="Goods"></td>
+                    <td><input type="checkbox" value="${it.itemId}"></td>
                     <td><a href="/seller_itemDetail/${it.itemId}">${status.index+1}</a></td>
                     <td>${it.itemName}</td>
                     <td>${it.itemCnt}</td>
@@ -100,6 +101,40 @@
 </div>
 </body>
 <script>
+    // 선택된 체크박스 항목들을 삭제하는 함수
+    function deleteSelectedItems() {
+        var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+        var selectedItems = [];
+
+        for (var i = 0; i < checkboxes.length; i++) {
+            if (checkboxes[i].checked) {
+                var itemId = checkboxes[i].value;
+                selectedItems.push(itemId);
+            }
+        }
+
+        // 선택된 항목들을 서버로 보내어 삭제 처리
+        if (selectedItems.length > 0) {
+            console.log(selectedItems);
+            console.log({ itemIds: selectedItems });
+            $.ajax({
+                url: "/delete_items",
+                type: "DELETE",
+                data: { itemIds: selectedItems },
+                success: function(result) {
+                    // 삭제 성공 시, 페이지를 새로고침하여 목록을 업데이트
+                    if (result === "success") {
+                        location.reload();
+                    }
+                },
+                error: function(xhr, status, error) {
+                    // 에러 처리
+                    console.error("Error:", error);
+                }
+            });
+        }
+    }
+
 
     function formatNumberWithCommas(number) {
         return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");

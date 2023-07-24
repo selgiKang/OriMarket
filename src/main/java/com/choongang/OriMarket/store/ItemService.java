@@ -21,9 +21,7 @@ public class ItemService {
 
     @Autowired
     private final ItemRepository itemRepository;
-
     private final BusinessUserRepository businessUserRepository;
-
     private final BusinessStoreRepository businessStoreRepository;
 
 
@@ -70,6 +68,12 @@ public class ItemService {
     }
 
 
+    public void deleteItems(Long itemId) {
+        /*리스트 받아서 하나씩 삭제.*/
 
+        System.out.println("여기로 넘어오나????");
+        itemRepository.deleteById(itemId);
+
+    }
 
 }

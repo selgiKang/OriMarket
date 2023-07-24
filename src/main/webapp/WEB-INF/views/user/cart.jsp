@@ -106,8 +106,8 @@
 		<!-- 포장/배달 선택하는 체크리스트 -->
 		<div id="cart_checkDelivery">
 			<ul>
-				<li id="cart_chkDel"><a href="#cart_deliveryTotal"><input type="radio" name="deliveryType" value="배달">배달</a></li>
-				<li id="cart_chkPick"><a href="#cart_pickTotal"><input type="radio" name="deliveryType" value="포장">포장</a></li>
+				<li id="cart_chkDel"><a href="#cart_deliveryTotal"><label for="deliverType1"><input type="radio" id="deliverType1" name="deliveryType" value="배달" checked>배달</label></a></li>
+				<li id="cart_chkPick"><a href="#cart_pickTotal"><label for="deliverType2"><input type="radio" id="deliverType2" name="deliveryType" value="포장">포장</label></a></li>
 			</ul>
 		</div>
 		<div id="cart_deliveryTotal" class="cart_section" style="display: none;">

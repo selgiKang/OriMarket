@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -74,6 +75,18 @@ public class BusinessStoreController {
 
 
         return "/store/seller_itemList";
+    }
+
+    //등록된 아이템 삭제
+    @DeleteMapping("/delete_items")
+    @ResponseBody
+    public String deleteSelectedItems(@RequestParam("itemIds")  List<Long> itemIds) {
+
+        System.out.println("컨트롤러로 넘어오나????");
+        for(Long deleteItemId :itemIds){
+            itemService.deleteItems(deleteItemId);
+        }
+        return "success";
     }
 
 
