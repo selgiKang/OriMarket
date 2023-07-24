@@ -57,7 +57,7 @@ public class ManagerController {
             String managerId = (session.getAttribute("managerId")).toString();
 
             //매니저 정보 가져오기
-            ManagerUser userResult = managerService.findByManagerId(managerId,model);
+            ManagerUser userResult = managerService.findByManagerId(managerId,model,session);
             model.addAttribute("userResult",userResult);
 
             //매니저가 소속된 시장의 주문만 리스트에 저장
@@ -115,7 +115,7 @@ public class ManagerController {
             session.setAttribute("managerId",managerUser.getManagerId());
 
             //매니저 정보 가져오기
-            ManagerUser userResult = managerService.findByManagerId(managerUser.getManagerId(),model);
+            ManagerUser userResult = managerService.findByManagerId(managerUser.getManagerId(),model,session);
             model.addAttribute("userResult",userResult);
 
             //매니저가 소속된 시장의 주문만 리스트에 저장
