@@ -23,14 +23,14 @@ import java.util.Map;
 @Slf4j
 public class PictureUrlController {
 
-    @PostMapping("/api/v1/users/images/{userId}")
-    public Map<String, Object> updateUserProfile(@PathVariable("userId") Long userId, @RequestBody MultipartFile file)  {
-        ImageDto imageDto = updateProfile(file);
-        if(imageDto.getContent()==null) {
-            return imageDto.getMap();
-        }
-        userImageService.update(userService.findOneById(userId), (Image) imageDto.getContent());
-        return imageDto.getMap();
-    }
+//    @PostMapping("/api/v1/users/images/{userId}")
+//    public Map<String, Object> updateUserProfile(@PathVariable("userId") Long userId, @RequestBody MultipartFile file)  {
+//        ImageDto imageDto = updateProfile(file);
+//        if(imageDto.getContent()==null) {
+//            return imageDto.getMap();
+//        }
+//        userImageService.update(userService.findOneById(userId), (Image) imageDto.getContent());
+//        return imageDto.getMap();
+//    }
 
 };

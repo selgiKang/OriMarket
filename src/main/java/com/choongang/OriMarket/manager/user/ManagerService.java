@@ -78,6 +78,7 @@ public class ManagerService {
         Long marketSeq = userResult.getMarket().getMarketSeq();
         Market market = new Market();
         market.setMarketSeq(marketSeq);
+        System.out.println("매니저 소속 시장번호: "+marketSeq);
 
         //시장 번호 가지고 그 시장의 주문 가져오기
         List<Order> managerOrderList = orderRepository.findByMarketSeq(market);
