@@ -3,6 +3,10 @@ package com.choongang.OriMarket.order;
 import com.choongang.OriMarket.RealTimeStatus.RealTimeRepository;
 import com.choongang.OriMarket.RealTimeStatus.RealTimeService;
 import com.choongang.OriMarket.RealTimeStatus.RealTimeStatus;
+import com.choongang.OriMarket.store.Item;
+import com.choongang.OriMarket.store.ItemRepository;
+import com.choongang.OriMarket.user.User;
+import com.choongang.OriMarket.user.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +35,9 @@ public class OrderService {
 
     @Autowired
     private  final OrderRepository orderRepository;
+    private final ItemRepository itemRepository;
+    private final UserRepository userRepository;
+
     static final String cid = "TC0ONETIME";
     static final String admin_key = "${e584b59b9f572556fbac3673883cb029}";
     private  Order order;

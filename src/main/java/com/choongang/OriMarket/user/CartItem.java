@@ -25,7 +25,7 @@ public class CartItem {
     private Cart cart;
 
     /*장바구니에 담을 상품의 정보를 알아야 하니까 상품엔티티 매핑*/
-    @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "item_id")
     private Item item;
 
@@ -54,7 +54,6 @@ public class CartItem {
         cartItem.setBusinessStore(item.getBusinessStore());
         return cartItem;
 
-        //Item을 가져와서 저장하는데,,왜 businessStoreNumber는 cartItem에 저장이 안되지???
 
     }
 
