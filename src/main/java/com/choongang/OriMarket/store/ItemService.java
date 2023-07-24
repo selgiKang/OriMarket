@@ -4,6 +4,8 @@ import com.choongang.OriMarket.business.store.BusinessStore;
 import com.choongang.OriMarket.business.store.BusinessStoreRepository;
 import com.choongang.OriMarket.business.user.BusinessUser;
 import com.choongang.OriMarket.business.user.BusinessUserRepository;
+import com.choongang.OriMarket.user.CartItem;
+import com.choongang.OriMarket.user.CartItemRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 import javax.servlet.http.HttpSession;
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,7 +26,7 @@ public class ItemService {
     private final ItemRepository itemRepository;
     private final BusinessUserRepository businessUserRepository;
     private final BusinessStoreRepository businessStoreRepository;
-
+    private final CartItemRepository cartItemRepository;
 
     public Item getItem(Long itemId){
         Item item = itemRepository.findByItemId(itemId);
@@ -68,11 +71,18 @@ public class ItemService {
     }
 
 
-    public void deleteItems(Long itemId) {
-        /*리스트 받아서 하나씩 삭제.*/
 
-        System.out.println("여기로 넘어오나????");
-        itemRepository.deleteById(itemId);
+    @Transactional
+    public void deleteItems(Long itemId) {
+
+        Item item = itemRepository.findById(itemId).orElse(null);
+        if (item != null) {
+            List<CartItem> cartItems = item.getCartItems();
+            if (cartItems != null) {
+                cartItemRepository.deleteAll(cartItems);
+            }
+            itemRepository.delete(item);
+        }
 
     }
 
