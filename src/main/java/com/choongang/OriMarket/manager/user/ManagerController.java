@@ -3,6 +3,8 @@ package com.choongang.OriMarket.manager.user;
 import com.choongang.OriMarket.RealTimeStatus.RealTimeRepository;
 import com.choongang.OriMarket.RealTimeStatus.RealTimeStatus;
 import com.choongang.OriMarket.order.Order;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +15,9 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequiredArgsConstructor
@@ -44,6 +48,63 @@ public class ManagerController {
         return ResponseEntity.ok(managerService.checkManagerId(managerId));
     }
 
+
+    @GetMapping("/managerLoginResult")
+    @ResponseBody
+    public String returnAjaxResult(@ModelAttribute ManagerUser managerUser, HttpSession session, Model model){
+
+            //매니저 아이디
+            String managerId = (session.getAttribute("managerId")).toString();
+
+            //매니저 정보 가져오기
+            ManagerUser userResult = managerService.findByManagerId(managerId,model);
+            model.addAttribute("userResult",userResult);
+
+            //매니저가 소속된 시장의 주문만 리스트에 저장
+            List<Order> orderList = (List<Order>) model.getAttribute("managerOrderList");
+            model.addAttribute("orderList",orderList);
+            System.out.println("주문 목록: "+orderList.get(0).getOrderNumber());
+
+            //불러온 주문의 상태 검색
+            List<RealTimeStatus> rtsList = new ArrayList<>();
+            Order finalOrder = new Order();
+
+            if(orderList!=null && !orderList.isEmpty()){
+
+                //주문 목록 출력해서
+                for(Order orders: orderList){
+                    //해당 주문번호의
+                    String orderNumber = orders.getOrderNumber();
+                    finalOrder.setOrderNumber(orderNumber);
+
+                    //그 주문번호의 상태를 찾아서
+                    RealTimeStatus rtsResult = realTimeRepository.findByorderNumber(finalOrder);
+                    System.out.println("rts상태"+rtsResult.getRtsOrderIng());
+                    if(rtsResult!=null){
+                        //넣는다.
+                        rtsList.add(rtsResult);
+                    }
+                }
+            }
+            model.addAttribute("rtsResult",rtsList);
+
+        Map<String, Object> response = new HashMap<>();
+        response.put("userResult", userResult);
+        response.put("orderList", orderList);
+        response.put("rtsResult", rtsList);
+
+        // ObjectMapper를 사용하여 JSON 형식으로 변환
+        ObjectMapper objectMapper = new ObjectMapper();
+        String jsonResponse;
+        try {
+            jsonResponse = objectMapper.writeValueAsString(response);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+            jsonResponse = "{\"error\":\"JSON 변환에 실패했습니다.\"}";
+        }
+
+        return jsonResponse;
+    }
 
 
     //로그인

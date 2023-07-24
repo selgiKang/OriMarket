@@ -39,7 +39,7 @@
                             </div>
                            <%-- <div class="order-menu"></div>--%>
                             <div class="action-buttons">
-                                <form action="/accept" method="get" onclick="acceptOrder('${order.orderNumber}')">
+                                <form action="/accept" method="get">
                                     <input type="hidden" name="orderNumber" value="${order.orderNumber}">
                                     <button class="accept-button">수락</button>
                                 </form>
@@ -69,7 +69,7 @@
                             </div>
                             <div class="order-menu">${order.orderGoodsName}</div>
                             <div class="action-buttons">
-                                <form action="/accept" method="get">
+                                <form action="/acceptPickup" method="get">
                                     <input type="hidden" name="orderNumber" value="${order.orderNumber}">
                                     <button class="accept-button">픽업 완료</button>
                                 </form>
@@ -97,13 +97,6 @@
                                 <span class="order-price">${order.orderTotalPrice}원</span>
                             </div>
                             <div class="order-menu">${order.orderGoodsName}</div>
-                            <div class="action-buttons">
-                                <form action="/accept" method="get">
-                                    <input type="hidden" name="orderNumber" value="${order.orderNumber}">
-                                    <button class="accept-button">수락</button>
-                                </form>
-                                <button class="reject-button">거절</button>
-                            </div>
                         </c:if>
                     </c:if>
                 </c:forEach>
@@ -127,13 +120,6 @@
                                 <span class="order-price">${order.orderTotalPrice}원</span>
                             </div>
                             <div class="order-menu">${order.orderGoodsName}</div>
-                            <div class="action-buttons">
-                                <form action="/accept" method="get">
-                                    <input type="hidden" name="orderNumber" value="${order.orderNumber}">
-                                    <button class="accept-button">수락</button>
-                                </form>
-                                <button class="reject-button">거절</button>
-                            </div>
                         </c:if>
                     </c:if>
                 </c:forEach>
