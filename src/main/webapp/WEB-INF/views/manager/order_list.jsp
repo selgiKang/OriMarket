@@ -2,11 +2,6 @@
 <%@ page import="com.choongang.OriMarket.order.Order" %>
 <%@ page import="java.util.List" %>
 <%@ page import="com.choongang.OriMarket.RealTimeStatus.RealTimeStatus" %>
-<%--<%--%>
-<%--    List<Order> orders = (List<Order>) request.getAttribute("orders");--%>
-<%--    String orderNumber = (String) request.getAttribute("orderNumber");--%>
-<%--%>--%>
-
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
@@ -37,13 +32,14 @@
                         <c:if test="${rts.rtsOrderIng eq 0 && rts.rtsRiderIng eq 0 && rts.rtsRiderFinish eq 0}">
                             <!-- 주문번호 클릭 시 주문 상세 정보를 보여줄 버튼 -->
                             <span class="order-number" onclick="showOrderDetail('${order.orderNumber}')">주문번호 #${order.orderNumber}</span>
+                            <span class="order-quantity">메뉴</span>
                             <div class="order-details">
-                                <span class="order-quantity">메뉴 ${order.orderGoodsNum}개</span>
-                                <span class="order-price">${order.orderTotalPrice}원</span>
+                                <span>${order.orderGoodsName} 총 ${order.orderGoodsNum}개</span>
+                                <span class="order-price">총 금액 ${order.orderTotalPrice}원</span>
                             </div>
-                            <div class="order-menu">${order.orderGoodsName}</div>
+                           <%-- <div class="order-menu"></div>--%>
                             <div class="action-buttons">
-                                <form action="/accept" method="get">
+                                <form action="/accept" method="get" onclick="acceptOrder('${order.orderNumber}')">
                                     <input type="hidden" name="orderNumber" value="${order.orderNumber}">
                                     <button class="accept-button">수락</button>
                                 </form>
