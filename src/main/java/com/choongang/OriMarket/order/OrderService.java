@@ -176,7 +176,7 @@ public class OrderService {
             return getDate;
     }
 
-    //사업자 번호로 검색
+    //주문 번호로 검색
     public Order getOrderNumberList(String orderNumber){
             Order orderNumberResult = orderRepository.findByOrderNumber(orderNumber);
             return orderNumberResult;

@@ -196,6 +196,11 @@ button {
 #mypage_favStore:hover {
     opacity: 0.7;
     cursor: pointer;
+
+}
+#order_pastorder:hover {
+    opacity: 0.7;
+    cursor: pointer;
 }
 
 /* 230724 로그인 모달창 추가 */
