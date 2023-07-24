@@ -65,12 +65,12 @@ public class UserController {
     }
 
 
-    @GetMapping("/order_list")
+ /*   @GetMapping("/order_list")
     public String getOrderList(Model model) {
         List<Order> orderList = orderService.getAllOrders();
         model.addAttribute("orders", orderList);
         return "store/order_list";
-    }
+    }*/
 
 /*
 기존 로그인

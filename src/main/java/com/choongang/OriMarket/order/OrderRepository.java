@@ -20,4 +20,7 @@ public interface OrderRepository extends JpaRepository<Order, String> {
     List<Order> findByOrderDateContaining(String orderDate);
 
     List<Order> findByMarketSeq(Market marketSeq);
+
+    Order findByOrderNumber(String orderNumber);
+    List<Order> findByOrderUserId(String orderUserId);
 }

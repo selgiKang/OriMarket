@@ -40,12 +40,12 @@ hr{
     width: 25%;
 
 }
-#mypage1_h2{
+.mypage1_h2{
     margin-bottom: -4px;
     margin-left: 10px;
     text-align: left;
 }
-#img1{
+.img1{
     position: absolute;
     right: 10px;
     top: 10px;
@@ -53,7 +53,7 @@ hr{
     height: 50px;
 
 }
-#div1{
+.div1{
     border: none;
     width: 75%;
     height: 40px;
@@ -63,7 +63,7 @@ hr{
     padding-left: 10px;
     margin-top: 15px;
 }
-#div2{
+.div2{
     width: 315px;
     background-color: gray;
     position: absolute;
@@ -72,7 +72,7 @@ hr{
     height: 30px;
 }
 
-#order_1{
+.order_1{
     background-color: rgba(0, 128, 0, 0.3);
     height: 250px;
     padding-top: 5px;
@@ -101,4 +101,8 @@ small{
 }
 #order_pastorder:hover {
     cursor: pointer;
+}
+.div2:hover {
+    cursor: pointer;
+    opacity: 0.7;
 }

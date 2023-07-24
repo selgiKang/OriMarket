@@ -117,7 +117,7 @@ li{
     color: black;
     margin-left: 20px;
 }
-#img1{
+.img1{
     position: absolute;
     right: 10px;
     top: 109px;
@@ -194,6 +194,11 @@ button {
     right: 10px;
 }
 #mypage_favStore:hover {
+    opacity: 0.7;
+    cursor: pointer;
+
+}
+#order_pastorder:hover {
     opacity: 0.7;
     cursor: pointer;
 }

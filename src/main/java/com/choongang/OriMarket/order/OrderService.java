@@ -176,4 +176,15 @@ public class OrderService {
             return getDate;
     }
 
+    //주문 번호로 검색
+    public Order getOrderNumberList(String orderNumber){
+            Order orderNumberResult = orderRepository.findByOrderNumber(orderNumber);
+            return orderNumberResult;
+    }
+
+    public List<Order> findByUserIdList(String userId){
+            List<Order> getOrderUserIdList = orderRepository.findByOrderUserId(userId);
+            return getOrderUserIdList;
+        }
+
 }

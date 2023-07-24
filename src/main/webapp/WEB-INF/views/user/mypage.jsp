@@ -84,11 +84,11 @@
 </div>
         <div id="mypage_content">
             <c:if test="${empty userId}">
-                <div class="login_modal btn-open-popup" onclick="modal" style="cursor: pointer;"><h2 id="mypage1_h2">로그인하러가기</h2></div><img id="img1" src="" width="30px" height="30px">
+                <div class="login_modal btn-open-popup" onclick="modal" style="cursor: pointer;"><h2 class="mypage1_h2">로그인하러가기</h2></div><img class="img1" src="" width="30px" height="30px">
                 <small id="mypage_content_small">&lt;회원등급&gt;</small>
             </c:if>
             <c:if test="${not empty userId}">
-                <a href="/infolist"><h2 id="mypage1_h2">${userNickname} 님, 어서오리</h2><img id="img1" src="" width="30px" height="30px"></a>
+                <a href="/infolist"><h2 class="mypage1_h2">${userNickname} 님, 어서오리</h2><img class="img1" src="" width="30px" height="30px"></a>
                 <small id="mypage_content_small">&lt;회원등급&gt;</small>
             </c:if>
 
@@ -103,9 +103,9 @@
                     </div>
                 </div>
                 <span class="separator"></span> <!-- Separator -->
-                <div id="order_pastorder" onclick="location.href='/order_list'">
+                <div id="order_pastorder" onclick="location.href='order_pastorder'">
                     <div class="main_box_icon">
-                        <img src="" width="50px" height="50px">
+                        <img src="../../img/order/orderRecipt.png" width="50px" height="50px">
                     </div>
                     <div class="contents1_bold">
                         주문내역
