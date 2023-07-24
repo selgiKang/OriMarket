@@ -198,3 +198,29 @@ button {
     cursor: pointer;
 }
 
+/* 230724 로그인 모달창 추가 */
+.modal {position: absolute; width: 375px; height: 913px; top:-20px; z-index: 999999; display: none; background-color: rgba(0, 0, 0, 0.6);}
+.modal.show {display: block;}
+
+.modal_body {
+    position: absolute; top: 42%; left: 50%;
+    width: 300px; height: 350px;  border-radius: 30px; padding:20px; text-align: center;
+    background-color:#fff; border-radius: 10px; box-shadow: 0 2px 3px 0 rgba(34, 36, 38, 0.15);
+    transform: translateX(-50%) translateY(-50%);
+}
+
+div#login_box{margin:30px 0}
+h1.login_modal_title{margin-top:20px; color: #333; letter-spacing: 5px;}
+div.login_box_wrap{margin-bottom:20px;}
+div.login_box_wrap p {margin-bottom:10px;}
+
+input[type=text] {width: 65%; height: 30px; font-size: 15px; border: 0; border-radius: 15px; outline: none; padding-left: 10px; background-color: rgb(233, 233, 233);}
+input[type=password] {width: 65%; height: 30px; font-size: 15px; border: 0; border-radius: 15px; outline: none; padding-left: 10px; background-color: rgb(233, 233, 233);}
+
+input.login_btn { width:80%; height:40px; background-color:#46A973; border:none; border-radius: 25px; color:#fff; font-weight: 700; font-size: 16px; font-family: 'omyu_pretty';}
+input.login_btn:hover{ background-color:#333; color:#ffbf41;}
+
+div.join_btn_wrap{width:100%;}
+a.join_btn{width:70%; height:40px; padding: 4% 32%; background-color:#ffbf41; border:none; border-radius: 25px; color:#333; font-weight: 700; font-size: 16px;}
+a.join_btn:hover {background-color: #333; color:#fff;}
+
