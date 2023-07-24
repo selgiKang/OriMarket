@@ -38,8 +38,8 @@ public class Review {
     @Column
     private String content;
 
-    @Column
-    private String picture_url;
+    @Embedded
+    private String pictureUrl;
 
     //생성일
     @CreatedDate
