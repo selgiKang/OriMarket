@@ -90,11 +90,6 @@ public class OrderController {
     public String order(){return "order/order_delivery";}
     @GetMapping("/order_paymentPage")
     public String orderPaymentPage(){return "order/order_paymentPage";}
-    @GetMapping("/order_receipt")
-    public String orderReceipt(){
-
-        return "order/order_receipt";
-    }
     @GetMapping("/order_pastorder")
     public String orderPastorder(HttpSession session,Model model){
         //아이디로
@@ -136,6 +131,30 @@ public class OrderController {
 
         return "calculate/detailsCalculate"; // details.jsp 또는 해당하는 뷰 페이지의 이름
     }
+
+    @GetMapping("/order_receiptDelivery")
+    public String pastOrderDetailList(@RequestParam("orderNumber")String orderNumber,HttpSession session,Model model){
+
+        Order resultPastOrder = orderService.getOrderNumberList(orderNumber);
+        model.addAttribute("orderDelivery",resultPastOrder);
+
+        //배송 상태 찾아서 넣기
+        Order order = new Order();
+        order.setOrderNumber(orderNumber);
+
+
+        RealTimeStatus rResult = realTimeService.findRts(order,session);
+
+        if(rResult!=null) {
+            model.addAttribute("rtsOrderIng", rResult.getRtsOrderIng());
+            model.addAttribute("rtsRiderIng", rResult.getRtsRiderIng());
+            model.addAttribute("rtsRiderFinish", rResult.getRtsRiderFinish());
+        }
+
+        return "order/order_delivery";
+    }
+
+
     @PostMapping("/order_paymentPage/{userId}")
     public String orderDelivery(@ModelAttribute Order order, @ModelAttribute RealTimeStatus rts, HttpSession session, @RequestParam("orderNumber")String orderNumberStr,@PathVariable("userId")String userId, Model model) {
         order.setOrderNumber(orderNumberStr);

@@ -55,7 +55,7 @@
             <h3 style="text-align: left;">합계: ${pastOrder.orderGoodsTotalPrice}원</h3>
 
             <!-- 영수증 보기 버튼 -->
-            <div class="div2" onclick="location.href='/order_receipt?orderNumber=${pastOrder.orderNumber}'">영수증 보기</div>
+            <div class="div2" onclick="location.href='/order_receiptDelivery?orderNumber=${pastOrder.orderNumber}'">영수증 보기</div>
         </div>
     </c:forEach>
 

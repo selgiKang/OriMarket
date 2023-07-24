@@ -5,10 +5,16 @@
 <head>
     <meta charset="utf-8">
     <title>주소로 장소 표시하기</title>
+    <style>
+        button.backbtn { display: flex; align-items: center; font-size: 26px; color: #fff; margin: 0 0 0 10px; width: 40px; height: 40px; background-color: #46A973; border-radius: 50%; border: 1px solid #eee; cursor: pointer; justify-content: center;}
+        button.backbtn:hover {background-color:#333; color:#ffbf41;}
+    </style>
 </head>
 <body>
-<div id="map" style="width:375px; height:812px; margin: 0 auto;"></div>
-<a href="/"><h1 style="position: fixed; left: 20px; top: 0; font-size: 30px; color: red">홈으로 바로가기</h1></a>
+<div id="map" style="width:375px; height:812px; margin: 0 auto;">
+    <!-- 뒤로가기 -->
+    <button class="backbtn" onclick="window.history.go(-1)" style="position:absolute; top:3%; left:3%; z-index:999;">&lt;</button>
+</div>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=259217c849691d825026ea7a9f71af88&libraries=services"></script>
 <script>
     var mapContainer = document.getElementById('map'), // 지도를 표시할 div

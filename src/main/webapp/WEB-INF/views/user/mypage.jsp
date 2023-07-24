@@ -105,7 +105,7 @@
                 <span class="separator"></span> <!-- Separator -->
                 <div id="order_pastorder" onclick="location.href='order_pastorder'">
                     <div class="main_box_icon">
-                        <img src="" width="50px" height="50px">
+                        <img src="../../img/order/orderRecipt.png" width="50px" height="50px">
                     </div>
                     <div class="contents1_bold">
                         주문내역
