@@ -6,13 +6,12 @@ import com.choongang.OriMarket.business.store.BusinessStoreRepository;
 import com.choongang.OriMarket.store.Item;
 
 import com.choongang.OriMarket.store.ItemRepository;
+import com.choongang.OriMarket.store.ItemService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
 
 import javax.servlet.http.HttpSession;
-import javax.swing.text.html.Option;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,16 +27,19 @@ public class CartService {
     private final CartItemRepository cartItemRepository;
     private final ItemRepository itemRepository;
     private final BusinessStoreRepository businessStoreRepository;
+    private final ItemService itemService;
+
 
     @Autowired
     public CartService(UserRepository userRepository, CartRepository cartRepository,
-                       CartItemRepository cartItemRepository,ItemRepository itemRepository,
-                        BusinessStoreRepository businessStoreRepository) {
+                       CartItemRepository cartItemRepository, ItemRepository itemRepository,
+                       BusinessStoreRepository businessStoreRepository, ItemService itemService) {
         this.userRepository = userRepository;
         this.cartRepository = cartRepository;
         this.cartItemRepository = cartItemRepository;
         this.itemRepository= itemRepository;
         this.businessStoreRepository=businessStoreRepository;
+        this.itemService = itemService;
     }
 
 
@@ -176,12 +178,10 @@ public class CartService {
             stock = stock - cartItem.getCount();
             /*현 재고 변경*/
             cartItem.getItem().setItemCnt(stock);
-
-            /*금액처리?*/
-//            User seller = cartItem.getItem().getUser();
-//            int cash =  cartItem.getItem().getItemPrice();
-//            buyer.setMoney(cash * -1);
-//            seller.setMoney(cash);
+            //재고가 0이면 삭제됨
+            if(stock==0){
+                itemService.deleteItems(cartItem.getItem().getItemId());
+            }
         }
 
     }

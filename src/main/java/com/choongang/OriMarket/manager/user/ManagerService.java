@@ -70,19 +70,25 @@ public class ManagerService {
     }
 
     //해당 매니저 불러오기
-    public ManagerUser findByManagerId(String managerId,Model model){
+    public ManagerUser findByManagerId(String managerIds,Model model,HttpSession session){
+       String managerId = session.getAttribute("managerId").toString();
+        System.out.println("managerId"+managerId);
         //매니저 번호 넣어서 매니저가 소속된 시장 번호 꺼내기
         ManagerUser userResult = managerRepository.findByManagerId(managerId);
 
         //시장 번호
-        Long marketSeq = userResult.getMarket().getMarketSeq();
-        Market market = new Market();
-        market.setMarketSeq(marketSeq);
-        System.out.println("매니저 소속 시장번호: "+marketSeq);
+        if(userResult!=null){
+            if(userResult.getMarket().getMarketSeq()!=null){
+                Long marketSeq = userResult.getMarket().getMarketSeq();
+                Market market = new Market();
+                market.setMarketSeq(marketSeq);
+                System.out.println("매니저 소속 시장번호: "+marketSeq);
+                //시장 번호 가지고 그 시장의 주문 가져오기
+                List<Order> managerOrderList = orderRepository.findByMarketSeq(market);
+                model.addAttribute("managerOrderList",managerOrderList);
+            }
+        }
 
-        //시장 번호 가지고 그 시장의 주문 가져오기
-        List<Order> managerOrderList = orderRepository.findByMarketSeq(market);
-        model.addAttribute("managerOrderList",managerOrderList);
 
         return userResult;
     }
