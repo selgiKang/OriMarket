@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -30,7 +31,7 @@ public class RealTimeController {
         this.rtsRepository = rtsRepository;
     }
 
-    @GetMapping("/accept")
+/*    @GetMapping("/accept")
     @ResponseBody // AJAX 요청에 응답 데이터를 JSON 형태로 반환
     public Map<String, Object> orderAccept(@RequestParam("orderNumber") String orderNumber, HttpSession session) {
         Map<String, Object> response = new HashMap<>();
@@ -49,19 +50,55 @@ public class RealTimeController {
         }
 
         return response;
-    }
+    }*/
 
-/*    @GetMapping("/accept")
+    //주문 수락
+    @GetMapping("/accept")
     public String orderAccept(Order order, HttpSession session, Model model, RealTimeStatus rts){
 
         // 주문 번호 보냄
         rts = realTimeService.update1(order, session);
-        if(rts.getRtsOrderIng() == 1){
+        if(rts.getRtsOrderIng() == 1 && rts.getRtsRiderIng()==0 && rts.getRtsRiderFinish()==0){
             model.addAttribute("rtsOrderIng",rts.getRtsOrderIng());
+            model.addAttribute("rtsRiderIng",rts.getRtsRiderIng());
+            model.addAttribute("rtsRiderFinish",rts.getRtsRiderFinish());
             return "manager/order_list";
-       }
+        }
 
-       return "manager/order_list";
-    }*/
+        return "manager/order_list";
+    }
+
+    //픽업 완료 - 라이더한테 가도록
+    @GetMapping("/acceptPickup")
+    public String acceptPickup(Order order, HttpSession session, Model model, RealTimeStatus rts){
+
+        // 주문 번호 보냄
+        rts = realTimeService.update2(order, session);
+        if(rts.getRtsOrderIng() == 1 && rts.getRtsRiderIng()==1 && rts.getRtsRiderFinish()==0){
+            model.addAttribute("rtsOrderIng",rts.getRtsOrderIng());
+            model.addAttribute("rtsRiderIng",rts.getRtsRiderIng());
+            model.addAttribute("rtsRiderFinish",rts.getRtsRiderFinish());
+            return "manager/order_list";
+        }
+
+        return "manager/order_list";
+    }
+
+    @GetMapping("/acceptFinish")
+    public String acceptFinish(Order order, HttpSession session, Model model, RealTimeStatus rts){
+
+        // 주문 번호 보냄
+        rts = realTimeService.update2(order, session);
+        if(rts.getRtsOrderIng() == 1 && rts.getRtsRiderIng()==1 && rts.getRtsRiderFinish()==1){
+            model.addAttribute("rtsOrderIng",rts.getRtsOrderIng());
+            model.addAttribute("rtsRiderIng",rts.getRtsRiderIng());
+            model.addAttribute("rtsRiderFinish",rts.getRtsRiderFinish());
+            return "manager/order_list";
+        }
+
+        return "manager/order_list";
+    }
+
+
 
 }
