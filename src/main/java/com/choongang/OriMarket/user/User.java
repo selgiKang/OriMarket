@@ -1,8 +1,6 @@
 package com.choongang.OriMarket.user;
 
-import com.choongang.OriMarket.business.store.BusinessStore;
 import com.choongang.OriMarket.review.Review;
-import com.choongang.OriMarket.store.Item;
 import lombok.*;
 
 import javax.persistence.*;

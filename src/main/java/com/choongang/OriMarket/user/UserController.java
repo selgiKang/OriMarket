@@ -65,14 +65,15 @@ public class UserController {
     }
 
 
-    @GetMapping("/order_list")
+ /*   @GetMapping("/order_list")
     public String getOrderList(Model model) {
         List<Order> orderList = orderService.getAllOrders();
         model.addAttribute("orders", orderList);
         return "store/order_list";
-    }
+    }*/
 
-
+/*
+기존 로그인
     @PostMapping("/login")
     public String loginId(@ModelAttribute User user, Model model, HttpSession session) {
         boolean isTrue = userService.login(user, session, model);
@@ -87,7 +88,33 @@ public class UserController {
             return "user/login";
         }
     }
+*/
+/* 모달로그인 230724 */
+@PostMapping("/login")
+public ResponseEntity<String> loginId(@RequestBody Map<String, String> loginData, HttpSession session, Model model) {
+    String userId = loginData.get("userId");
+    String userPassword = loginData.get("userPassword");
+    User user = new User();
+    user.setUserId(userId);
+    user.setUserPassword(userPassword);
 
+    boolean isTrue = userService.login(user, session, model);
+
+    if (isTrue) {
+        User findUser = userRepository.findByUserId(String.valueOf(session.getAttribute("userId")));
+        List<UserAddress> userAddresses = findUser.getUserAddresses();
+        model.addAttribute("userAd", userAddresses);
+        model.addAttribute("userId", user.getUserId());
+
+        // 로그인 성공 시, 세션 설정 및 응답 반환
+        session.setAttribute("userId", userId);
+        return ResponseEntity.ok().body("로그인 성공");
+    } else {
+        // 로그인 실패 시, 오류 메시지와 함께 응답 반환
+        model.addAttribute("loginError", "아이디 또는 비밀번호가 틀립니다.");
+        return ResponseEntity.badRequest().body("아이디 또는 비밀번호가 틀립니다.");
+    }
+}
 
     @PostMapping("/join")
     public String joinUser(@ModelAttribute User user, HttpSession session) {

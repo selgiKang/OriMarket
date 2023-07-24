@@ -1,5 +1,6 @@
 package com.choongang.OriMarket.order;
 
+import com.choongang.OriMarket.RealTimeStatus.RealTimeStatus;
 import com.choongang.OriMarket.business.market.Market;
 import com.choongang.OriMarket.business.user.BusinessUser;
 import lombok.*;
@@ -84,6 +85,9 @@ public class Order {
     @JoinColumn(name = "bu_user_number")
     private BusinessUser businessUser;
 
+    // RealTimeStatus와의 연관관계 설정
+    @OneToOne(mappedBy = "orderNumber")
+    private RealTimeStatus realTimeStatus;
 
     @Transient
     private String next_redirect_pc_url;

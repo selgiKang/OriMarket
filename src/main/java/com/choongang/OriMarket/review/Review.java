@@ -39,7 +39,7 @@ public class Review {
     private String content;
 
     @Column
-    private String picture_url;
+    private String pictureUrl;
 
     //생성일
     @CreatedDate

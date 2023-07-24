@@ -37,9 +37,6 @@ public class OrderController {
         this.cartService = cartService;
     }
 
-    @GetMapping("/test2")
-    public String test(){return "business/businessmain";}
-
     //정산내역
     //calculate get으로 갈 때는 businessmain 코드처럼 해야함! 보고 그 코드 복붙하기!
     @GetMapping("/calculate")
@@ -99,7 +96,15 @@ public class OrderController {
         return "order/order_receipt";
     }
     @GetMapping("/order_pastorder")
-    public String orderPastorder(){return "order/order_pastorder";}
+    public String orderPastorder(HttpSession session,Model model){
+        //아이디로
+        String userId = (session.getAttribute("userId")).toString();
+        //지난 모든 주문들 출력
+        List<Order> pastOrderList = orderService.findByUserIdList(userId);
+        model.addAttribute("pastOrderList",pastOrderList);
+
+        return "order/order_pastorder";
+    }
 
 
     @GetMapping("/order/order_list")
@@ -157,67 +162,33 @@ public class OrderController {
             rts.setRtsRiderFinish(0);
 
             // 배달 내역 db에 저장
-            if (realTimeService.insertRts(rts)) {
-                RealTimeStatus rResult = realTimeService.findRts(order,session);
-                if(rResult!=null){
-                    model.addAttribute("rtsOrderIng",rResult.getRtsOrderIng());
-                }
-                model.addAttribute("orderDelivery", order); // order_delivery 페이지로 개별 주문의 상세 내역 전달
-                model.addAttribute("orderList", orderService.getAllOrders()); // order_list 페이지로 주문 목록 전달
+            realTimeService.insertRts(rts);
 
-                //시장으로 바꾸기!
-                //모든 주문 리스트
-                List<Order> allOrders = orderService.getAllOrders();
+            model.addAttribute("orderDelivery", order); // order_delivery 페이지로 개별 주문의 상세 내역 전달
+            model.addAttribute("orderList", orderService.getAllOrders()); // order_list 페이지로 주문 목록 전달
 
-                //order_list 출력
-                for(Order allOrderList: allOrders){
+            //시장으로 바꾸기!
+            //모든 주문 리스트
+            List<Order> allOrders = orderService.getAllOrders();
+            //주문 번호 비교해서 그 주문 내역만 꺼냄
+            Order onlyUserNowOrder = orderService.getOrderNumberList(orderNumberStr);
 
-                    //주문 받은 리스트 전부 가져옴
-                    //모든 rts 리스트
-                    List<RealTimeStatus> allList = realTimeService.getAllRtsList(allOrderList.getOrderNumber());
-                    System.out.println("주문번호 오니? "+allOrderList.getOrderNumber());
-                    List<RealTimeStatus> firstStatus = new ArrayList<>();
-                    List<RealTimeStatus> ingResult = new ArrayList<>();
-                    List<RealTimeStatus> riderIng = new ArrayList<>();
-                    List<RealTimeStatus> finishResult = new ArrayList<>();
 
-                    if(!allList.isEmpty()){
-                        for(RealTimeStatus allListResult : allList){
-                            //주문 리스트 중 배송중이 1이면
-                            if(allListResult.getRtsOrderIng()==0 && allListResult.getRtsRiderIng()==0 && allListResult.getRtsRiderFinish()==0){
-                                System.out.println(allListResult.getOrderNumber());
-                                System.out.println(allListResult.getRtsOrderIng());
-                                firstStatus.add(allListResult);
-                            }
-                            if(allListResult.getRtsOrderIng()==1 && allListResult.getRtsRiderIng()==0 && allListResult.getRtsRiderFinish()==0){
-                                ingResult.add(allListResult);
-                            }else if(allListResult.getRtsOrderIng()==1 && allListResult.getRtsRiderIng()==1 && allListResult.getRtsRiderFinish()==0){
-                                riderIng.add(allListResult);
-                            }else{
-                                finishResult.add(allListResult);
-                            }
-                        }
-                        //주문
-                        model.addAttribute("firstStatus",firstStatus);
-                        //주문 시작
-                        model.addAttribute("ingResult",ingResult);
-                        //배달중
-                        model.addAttribute("riderIng",riderIng);
-                        //배달 완료
-                        model.addAttribute("finishResult",finishResult);
-                    }
-                }
-                RealTimeStatus rtsSearchResult = realTimeService.findRts(order,session);
-                System.out.println(rts.getRtsOrderIng());
-
-                return "store/order_list";
-            } else {
-                return "order/order_paymentPage";
-            }
-        } else {
-            return "order/order_paymentPage";
         }
+
+         //저장된 rts 테이블에서 order (주문번호) 비교해서 찾기
+        RealTimeStatus rResult = realTimeService.findRts(order,session);
+        if(rResult!=null) {
+            model.addAttribute("rtsOrderIng", rResult.getRtsOrderIng());
+            model.addAttribute("rtsRiderIng", rResult.getRtsRiderIng());
+            model.addAttribute("rtsRiderFinish", rResult.getRtsRiderFinish());
+        }
+        RealTimeStatus rtsSearchResult = realTimeService.findRts(order,session);
+        System.out.println(rts.getRtsOrderIng());
+
+        return "order/order_delivery";
     }
+
 
 
     //정산내역

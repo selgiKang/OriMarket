@@ -609,6 +609,7 @@
             <input class="input" name="tabs-3" type="radio" id="tab-3"/>
             <label class="label" for="tab-3">리뷰 관리</label>
             <div class="panel">
+                <c:if test="${empty re}"><h3>현재 등록된 리뷰가 없습니다.!</h3></c:if>
                 <c:if test="${!empty re}">
                     <c:forEach var="r" items="${re}" varStatus="status">
                         <c:set var="reverseIndex" value="${re.size() - status.index - 1}" />

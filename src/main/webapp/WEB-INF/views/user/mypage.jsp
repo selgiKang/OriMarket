@@ -7,32 +7,49 @@
     <title>Insert title here</title>
     <link href="../../css/user/mypage.css" rel="stylesheet" media="all">
     <style>
-        /* 230724 로그인 모달창 추가 */
-        .modal {position: absolute; width: 375px; height: 913px; top:-20px; z-index: 999999; display: none; background-color: rgba(0, 0, 0, 0.6);}
-        .modal.show {display: block;}
-
-        .modal_body {
-            position: absolute; top: 42%; left: 50%;
-            width: 300px; height: 350px;  border-radius: 30px; padding:20px; text-align: center;
-            background-color:#fff; border-radius: 10px; box-shadow: 0 2px 3px 0 rgba(34, 36, 38, 0.15);
-            transform: translateX(-50%) translateY(-50%);
-        }
-
-        div#login_box{margin:30px 0}
-        h1.login_modal_title{margin-top:20px; color: #333; letter-spacing: 5px;}
-        div.login_box_wrap{margin-bottom:20px;}
-        div.login_box_wrap p {margin-bottom:10px;}
-
-        input[type=text] {width: 65%; height: 30px; font-size: 15px; border: 0; border-radius: 15px; outline: none; padding-left: 10px; background-color: rgb(233, 233, 233);}
-        input[type=password] {width: 65%; height: 30px; font-size: 15px; border: 0; border-radius: 15px; outline: none; padding-left: 10px; background-color: rgb(233, 233, 233);}
-
-        input.login_btn { width:70%; height:40px; background-color:#46A973; border:none; border-radius: 25px; color:#fff; font-weight: 700; font-size: 16px;}
-        input.login_btn:hover{ background-color:#333; color:#ffbf41;}
-
-        div.join_btn_wrap{width:100%;}
-        a.join_btn{width:70%; height:40px; padding: 4% 32%; background-color:#ffbf41; border:none; border-radius: 25px; color:#333; font-weight: 700; font-size: 16px;}
-
     </style>
+    <script>
+        // 서버에서 에러 메시지를 전달할 경우 알림 팝업 띄우기
+        window.onload = function() {
+            /* 'loginError'가 null이 아닌 경우에만 팝업창을 띄우기 */
+            <% if (request.getAttribute("loginError") != null) { %>
+            alert("<%= request.getAttribute("loginError") %>");
+            <% } %>
+        };
+        // 이미 모달창이 열려있을 때도 팝업창이 뜨도록 수정
+        function validateLoginForm() {
+            const userId = document.getElementById("userId").value;
+            const userPassword = document.getElementById("userPassword").value;
+
+            // 서버로 로그인 정보 전달 (AJAX 요청)
+            fetch("/login", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ userId, userPassword })
+            })
+                .then(response => response.text())
+                .then(data => {
+                    if (data === "로그인 성공") {
+                        // 로그인 성공
+                        window.location.replace('/')
+                    } else {
+                        // 로그인 실패
+                        const errorMessage = "아이디 또는 비밀번호가 틀립니다.";
+                        alert(errorMessage);
+                        document.querySelector('.modal').classList.add('show');
+                    }
+                })
+                .catch(error => {
+                    console.error("Error:", error);
+                });
+
+            // 폼 전송을 막음 (기본 동작 취소)
+            return false;
+        }
+    </script>
+    <script src="../../../../resources/static/js/user/login_ajax.js"></script>
 </head>
 <body style=" font-family: 'omyu_pretty';">
 
@@ -49,14 +66,14 @@
             <form action="/login" method="post" onsubmit="return validateLoginForm();">
                 <div id="login_box">
                     <div class="login_box_wrap">
-                        <p>아이디 <input type="text" size="20" placeholder=" 아이디를 입력해주세요.." name="userId" id="userId" required></p>
+                        <p>아이디 &nbsp;<input type="text" size="20" placeholder=" 아이디를 입력해주세요.." name="userId" id="userId" required></p>
                         <p>비밀번호 <input type="password" size="20" placeholder=" *********" name="userPassword" id="userPassword" required></p>
                     </div>
                     <p style="margin-bottom:10px;"><input type="checkbox" name="login" value=""> 로그인 상태 유지</p>
-                    <p align="center"><input class="login_btn" type="submit" value="로그인" style="width:80%;"></p>
+                    <p align="center"><input class="login_btn" type="submit" value="로그인"></p>
                 </div>
             </form>
-            <div id="list" style="margin-top:25px;">
+            <div id="list" style="margin-top:15px;">
                 <div style="margin-bottom:20px;">
                     <a href="#">아이디 찾기</a> / <span><a href="#">비밀번호 찾기</a></span>
                 </div>
@@ -67,11 +84,11 @@
 </div>
         <div id="mypage_content">
             <c:if test="${empty userId}">
-                <div class="login_modal btn-open-popup" onclick="modal" style="cursor: pointer;"><h2 id="mypage1_h2">로그인하러가기</h2></div><img id="img1" src="" width="30px" height="30px">
+                <div class="login_modal btn-open-popup" onclick="modal" style="cursor: pointer;"><h2 class="mypage1_h2">로그인하러가기</h2></div><img class="img1" src="" width="30px" height="30px">
                 <small id="mypage_content_small">&lt;회원등급&gt;</small>
             </c:if>
             <c:if test="${not empty userId}">
-                <a href="/infolist"><h2 id="mypage1_h2">${userNickname} 님, 어서오리</h2><img id="img1" src="" width="30px" height="30px"></a>
+                <a href="/infolist"><h2 class="mypage1_h2">${userNickname} 님, 어서오리</h2><img class="img1" src="" width="30px" height="30px"></a>
                 <small id="mypage_content_small">&lt;회원등급&gt;</small>
             </c:if>
 
@@ -86,7 +103,7 @@
                     </div>
                 </div>
                 <span class="separator"></span> <!-- Separator -->
-                <div id="order_pastorder" onclick="location.href='/order_list'">
+                <div id="order_pastorder" onclick="location.href='order_pastorder'">
                     <div class="main_box_icon">
                         <img src="" width="50px" height="50px">
                     </div>
