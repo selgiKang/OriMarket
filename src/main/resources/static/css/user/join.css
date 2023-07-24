@@ -18,6 +18,7 @@
     .container {
       width: 375px;
       height: 812px;
+      margin:0px;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -33,21 +34,21 @@
     .form_field label {
       font-weight: bold;
       margin-bottom: 5px;
-      color: #ffffff; /* 폰트 색상 변경 */
+      color: #333; /* 폰트 색상 변경 */
     }
     
     .form_field input {
       padding: 8px;
       font-size: 16px;
-      color: #ffffff; 
+      color: #333;
       border-radius: 20px;
-      background-color: #46a973;
+      background-color: #eee;
       
      
     }
     
     .form_field input::placeholder {
-  	color: rgba(255, 255, 255, 0.5); 	/* placeholder 색상, 투명도 추가 */
+  	color: rgba(0, 0, 0, 0.5); 	/* placeholder 색상, 투명도 추가 */
 }
 
 .form_field input#address_detail {
@@ -57,19 +58,20 @@
     /* 입력란 눌렀을때 테두리가 똑같이 #ffbf41되도록 수정 */
     .form_field input:focus {
   outline: none;
-  border-color: #ffbf41;
+  border-color: #eee;
   box-shadow: 0 0 5px #ffbf41;
 }
     
     
     .submit_btn {
+        width:80%;
      display:block;
      margin:0 auto;
       padding: 10px 20px;
-      background-color: #46a973;
-      color: white;
+      background-color: #ffbf41;
+      color: #333;
       border: none;
-      border-radius: 5px;
+      border-radius: 15px;
       font-size: 16px;
       cursor: pointer;
       font-family: 'omyu pretty', Arial, sans-serif;
@@ -144,3 +146,6 @@
       margin-top: 30px;
    }
    
+.mylocation_btn{width: 80%; padding: 10px 0; background-color: #46A973;border-radius: 25px;position: absolute;top: 24%;left: 9%; text-align: center; text-decoration: none; color:#fff;}
+.mylocation_btn:hover {background-color:#333; color:#ffbf41;}
+.submit_btn:hover {background-color:#333; color:#fff;}
