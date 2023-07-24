@@ -12,36 +12,13 @@
     font-style: normal;
 }
 
-
-header{
-    width: 315px;
-    background-color: green;
-    text-align: center;
-    height: 40px;
-}
+.mypage_wrap{width:375px; height:812px; box-sizing: border-box; margin: 0 auto;}
 
 #mypage{
-    width: 315px;
-    height: 812px;
+    width: 375px;
+    height: 612px;
     position: relative;
-    border: 1px solid black;
-}
-
-footer{
-    width: 315px;
-    background-color: red;
-    position: absolute;
-    bottom: 0;
-    text-align: center;
-    height: 40px;
-
-}
-
-#main{
-    width: 100%;
-    height: 601px;
-    background: #f1f2f3;
-    margin-top: -132px;
+/*    border: 1px solid black;*/
 }
 
 #main_box{
@@ -117,14 +94,14 @@ hr {
     margin-top: 15px;
 }
 
-#mypage1_h2{
+#mypage_content_h2{
     margin-bottom: -4px;
     margin-left: 10px;
 }
-#mypqge1{
+#mypage_content{
     background-color: rgba(0, 128, 0, 0.3);
-    height: 250px;
-    padding-top: 5px;
+    height: 230px;
+    padding: 10px;
 }
 
 #hr{
@@ -143,14 +120,14 @@ li{
 #img1{
     position: absolute;
     right: 10px;
-    top: 52px;
+    top: 109px;
 }
 #img2{
     position: absolute;
     right: 50px;
     top: 52px;
 }
-#mypage1_small{
+#_small{
     color: gray;
     margin-left: 20px;
 }
@@ -169,7 +146,7 @@ li{
 }
 
 .slider {
-    width: 315px;
+    width: 375px;
     height: 100px;
 }
 .box {
@@ -189,16 +166,16 @@ li{
 html {
     height: 100%;
 }
-body {
+/*body {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100%;
     margin: 0 auto;
-}
+}*/
 button {
     position: absolute;
-    top: 42.5%;
+    top: 66%;
     transform: translateY(-50%);
     width: 30px;
     height: 30px;
