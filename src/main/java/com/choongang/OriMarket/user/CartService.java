@@ -145,12 +145,14 @@ public class CartService {
 
     public String menuPlusMinus(Long cartItemId, String type) {
         Optional<CartItem> cartItem = cartItemRepository.findById(cartItemId);
+
+
         if (type.equals("plus")) {
-            cartItem.get().setCount(cartItem.get().getCount() + 1);
-            cartItemRepository.save(cartItem.get());
+                cartItem.get().setCount(cartItem.get().getCount() + 1);
+                cartItemRepository.save(cartItem.get());
         } else {
-            cartItem.get().setCount(cartItem.get().getCount() - 1);
-            cartItemRepository.save(cartItem.get());
+                cartItem.get().setCount(cartItem.get().getCount() - 1);
+                cartItemRepository.save(cartItem.get());
         }
         return "ok";
     }

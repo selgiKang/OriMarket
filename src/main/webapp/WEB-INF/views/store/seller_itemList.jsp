@@ -66,10 +66,10 @@
         <div id="goods_title">
             <div class="top_title_wrap">
                 <!-- 뒤로가기 -->
-                <button class="backbtn" onclick="window.history.go(-1)">&lt;</button>
+                <button class="backbtn" onclick="window.location.replace('/storenotice1')">&lt;</button>
                 <h1>현 재고 목록</h1>
             </div>
-            <input type="button" class="delete_btn" value="선택품목 삭제" onclick="deleteSelectedItems()">
+            <a><input type="button" class="delete_btn" value="선택품목 삭제" onclick="deleteSelectedItems()"></a>
             <a href="/s2/${buUserId}"><input type="button" class="insert_btn" value="신규품목 등록"></a>
         </div>
         <br>
