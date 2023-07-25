@@ -11,6 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.EntityManager;
 import javax.servlet.http.HttpSession;
@@ -32,7 +33,7 @@ public class BusinessStoreService {
     private final MarketRepository marketRepository;
 
 
-    public void save(BusinessStore businessStore, HttpSession session, Model model){
+    public void save(BusinessStore businessStore, HttpSession session, Model model, String s){
         Object buUserNumber = session.getAttribute("buUserNumber");
 
         Long marketSeq = Long.valueOf((session.getAttribute("marketSeq")).toString());
@@ -41,8 +42,9 @@ public class BusinessStoreService {
 
         BusinessUser businessUser = businessUserRepository.findById((Long)buUserNumber).orElseThrow();
         businessStore.setBusinessUser(businessUser);
+        businessStore.setBuStoreImageUrl(s);
         BusinessStore save = businessStoreRepository.save(businessStore);
-
+        System.out.println("aaaaaa"+save.getBuStoreImageUrl());
         model.addAttribute("save",save);
 
 

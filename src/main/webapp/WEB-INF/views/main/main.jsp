@@ -17,13 +17,14 @@
             position: absolute;
             top: 42%;
             left: 6%;}
-        a.connextion_mk1{position:absolute; top:-9%; left:21%;}
+        a.connextion_mk1{width:120px; height:120px; position:absolute; top:0%; left:8%;}
         .connextion_mk1 > p {
             position: absolute;
-            width: 120px;
-            top: 2%;
-            left: -40%;
-            font-size: 16px;
+            width: 125px;
+            padding: 3px 0;
+            top: -10px;
+            left: -3%;
+            font-size: 20px;
             background-color: #ffbf41;
             border-radius: 10px;}
 
