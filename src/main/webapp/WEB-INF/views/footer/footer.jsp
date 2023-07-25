@@ -39,9 +39,9 @@
         </div>
     </div>
     <div class="text">
-        <a href="#">(주)오리마켓</a>
-        <a href="#">이용약관</a>
-        <a href="#">개인정보처리방침</a>
+        <a href="#" style="color:white; text-decoration:none; font-size:16px; margin-right:10px;">(주)오리마켓</a>
+        <a href="#" style="color:white; text-decoration:none; font-size:16px; margin-right:10px;">이용약관</a>
+        <a href="#" style="color:white; text-decoration:none; font-size:16px;">개인정보처리방침</a>
     </div>
 </div>
 </body>

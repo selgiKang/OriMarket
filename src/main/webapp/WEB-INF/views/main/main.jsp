@@ -37,13 +37,14 @@
             position: absolute;
             top: 42%;
             left: 6%;}
-        a.change_marketimg{position:absolute; top:-9%; left:21%;}
+        a.change_marketimg{position:absolute; width:120px; height:120px; top:-7%; left:7%;}
         .change_marketimg > p {
             position: absolute;
-            width: 120px;
-            top: 2%;
-            left: -40%;
-            font-size: 16px;
+            width: 125px;
+            padding: 3px 0;
+            top: -2%;
+            left: -4%;
+            font-size: 20px;
             background-color: #ffbf41;
             border-radius: 10px;}
 
@@ -68,9 +69,9 @@
                     <div class="container">
                         <form action="/" method="post">
                             <div class="form_field">
-                                <h2 style="margin:30px 0;"><label for="address_kakao">단골시장 추가하기</label></h2>
+                                <h2 style="margin:30px 0;"><label for="address_kakao" style="font-size: 26px;">단골시장 추가하기</label></h2>
                                     <a href="/connexion_market" class="current_location_btn" style="text-decoration:none; color:#333; cursor: pointer;"><i class="fa-solid fa-location-dot header_i" style="font-size: 16px;"></i>&nbsp;가까운 시장찾기 > </a>
-                                    <p style="margin-top:30px; font-size: 14px;">현재 내가 설정한 주소: <span style="color: red; font-size: 14px;">주소를 등록해주세요..</span></p>
+                                    <p style="margin-top:30px; font-size: 16px;">현재 내가 설정한 주소: <span style="color: red; font-size: 16px;">주소를 등록해주세요..</span></p>
                                 <hr style="margin-top:30px;">
                                 <div class="input_container" style="margin-top:30px;">
                                     <input type="text" id="address_kakao" name="userAddress" readonly style="width:190px; height:30px; border:1px solid #ffbf41; border-radius: 35px; float:left;"  placeholder=" 주소를 입력해 주세요">
@@ -88,12 +89,13 @@
             </div>
             <div id="connextion_market" class="clear">
                 <c:if test="${empty userId}">
-                    <span class="connextion_title clear" style="font-weight:800;font-size: 18px;font-family: 'omyu pretty';/*border: 2px solid #999;*/width: 290px;border-radius: 5px;height: 50px; display: flex; justify-content: flex-start; align-items: center;">&nbsp;<img class="connextion_title_img clear navicon" src="../../img/main/navi.png">&nbsp;<p>&nbsp나의 단골시장</p></span>
+                    <span class="connextion_title clear" style="font-weight:800;font-size: 18px;font-family: 'omyu pretty';/*border: 2px solid #999;*/width: 290px;border-radius: 5px;height: 25px; display: flex; justify-content: flex-start; align-items: center;">&nbsp;<img class="connextion_title_img clear navicon" src="../../img/main/navi.png">&nbsp;<p>&nbsp나의 단골시장</p></span>
                 </c:if>
                 <c:if test="${!empty userId}">
-                    <span class="connextion_title clear" style="font-weight:800;font-size: 18px;font-family: 'omyu pretty';/*border: 2px solid #999;*/width: 290px;border-radius: 5px;height: 50px; display: flex; justify-content: flex-start; align-items: center;">&nbsp;<img class="connextion_title_img clear navicon" src="../../img/main/navi.png">&nbsp;<p>&nbsp;${userNickname}님의 단골시장</p></span>
+                    <span class="connextion_title clear" style="font-weight:800;font-size: 18px;font-family: 'omyu pretty';/*border: 2px solid #999;*/width: 290px;border-radius: 5px;height: 25px; display: flex; justify-content: flex-start; align-items: center;">&nbsp;<img class="connextion_title_img clear navicon" src="../../img/main/navi.png">&nbsp;<p>&nbsp;${userNickname}님의 단골시장</p></span>
                 </c:if>
                 <hr style="width:280px;margin-left: 8%;opacity: 0.4;">
+                <span style="font-size:15px;margon-left: 0;/* text-align: left; */float: left;padding: 10px 30px 0;color: #46a973;"> # 주문할 시장을 단골등록해오리</span>
                 <div class="connextion_marketbox clear">
                     <div class="connexion_marketbox_wrap" style="padding:10px 20px;">
                         <div class="connextion_mk1_wrap" style="margin-right:20px;">
@@ -103,9 +105,9 @@
                             </a>
                         </div>
                         <c:if test="${!empty marketName}">
-                        <div class="connextion_mk2_wrap change_marketimg_wrap btn-open-popup" onclick="modal" style="margin-right:20px;">
+                        <div class="connextion_mk2_wrap change_marketimg_wrap" style="margin-right:20px; background:none;">
                             <img class="connexion_market_img" src="../../img/main/market2.png">
-                            <a class="connextion_mk2 change_marketimg" href="">
+                            <a class="connextion_mk2 change_marketimg" href="javascript:(0);">
                                 <p>${marketName}</p>
                             </a>
                         </div>
@@ -114,9 +116,19 @@
                             <div class="connextion_mk2_wrap btn-open-popup" onclick="modal"><a class="connextion_mk2" href=""><p>단골시장등록</p></a><p style="font-size: 40px;">+</p></div>
                         </c:if>
                     </div>
-                    <div class="connexion_marketbox_wrap" style="padding:10px 20px;">
-                      <div class="connextion_mk3_wrap"><a class="connextion_mk3" href=""><p>단골시장등록</p></a><p style="font-size: 40px;">+</p></div>
-                      <div class="connextion_mk4_wrap"><a class="connextion_mk4" href=""><p>단골시장등록</p></a><p style="font-size: 40px;">+</p></div>
+                    <div class="connexion_marketbox_wrap" style="padding:0 20px 0 30px;">
+                        <c:if test="${!empty marketName}">
+                            <div class="connextion_mk3_wrap change_marketimg_wrap" style="margin-right:20px; background:none;">
+                                <img class="connexion_market_img" src="../../img/main/market2.png">
+                                <a class="connextion_mk3 change_marketimg" href="javascript:(0);">
+                                    <p>${marketName}</p>
+                                </a>
+                            </div>
+                        </c:if>
+                        <c:if test="${empty marketName}">
+                            <div class="connextion_mk3_wrap btn-open-popup" onclick="modal"><a class="connextion_mk3" href=""><p>단골시장등록</p></a><p style="font-size: 40px;">+</p></div>
+                        </c:if>
+                      <div class="connextion_mk4_wrap btn-open-popup" onclick="modal"><a class="connextion_mk4" href=""><p>단골시장등록</p></a><p style="font-size: 40px;">+</p></div>
                     </div>
                 </div>
             </div>
