@@ -6,9 +6,9 @@
     font-style: normal;
 }
 
-body{margin:0 auto; font-size:16px;}
+body{margin:0 auto; font-size:18px; font-family: 'omyu_pretty';}
 .header_wrap>.logo>a{margin-top:10px; text-decoration: none; color:#ffbf41; font-weight: 700;}
-.header_wrap{width:375px; height:100px; margin:0 auto; background-color:#46a973; box-sizing:border-box;}
+.header_wrap{width:375px; height:100px; margin:0 auto; background-color:#46a973; box-sizing:border-box; border-bottom-left-radius: 25px; border-bottom-right-radius: 25px;}
 .nav{text-align:right; padding:5px 15px; margin-top:15px;}
 .nav>span{float:left; margin: 5px;}
 .nav>span.addpic{float:left; margin: 5px; width: 230px;overflow: hidden;text-overflow: ellipsis; white-space: nowrap; color: #fff;}

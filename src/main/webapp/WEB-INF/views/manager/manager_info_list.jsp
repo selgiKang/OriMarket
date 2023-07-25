@@ -26,41 +26,36 @@
         <div id="infolist_main">
             <div class="top_title_wrap">
                 <!-- 뒤로가기 -->
-                <button class="backbtn" onclick="window.location.replace('/mypage')">&lt;</button>
-                <h2>${userNickname}님 회원 정보</h2>
+                <button class="backbtn" onclick="window.history.go(-1)">&lt;</button>
+                <h2>${managerInfoResult.managerName}님 회원 정보</h2>
             </div>
             <div class="infolist_content_wrap">
                 <table id="infolist_table_1" style="margin-bottom:20px;">
                     <tr>
+                        <td class="infolist_table_td_1">소속 시장</td>
+                        <td class="infolist_table_td_2">${managerInfoResult.market.marketName}</td>
+                    </tr>
+                    <tr>
                         <td class="infolist_table_td_1">아 이 디</td>
-                        <td class="infolist_table_td_2">${userId}</td>
+                        <td class="infolist_table_td_2">${managerInfoResult.managerId}</td>
                     </tr>
                     <tr>
                         <td class="infolist_table_td_1">이 름</td>
-                        <td class="infolist_table_td_2">${userName}</td>
-                    </tr>
-                    <tr>
-                        <td class="infolist_table_td_1">닉 네 임</td>
-                        <td class="infolist_table_td_2">${userNickname}</td>
+                        <td class="infolist_table_td_2">${managerInfoResult.managerName}</td>
                     </tr>
                     <tr>
                         <td class="infolist_table_td_1">휴 대 폰</td>
-                        <td class="infolist_table_td_2">${userPhone}</td>
+                        <td class="infolist_table_td_2">${managerInfoResult.managerPhone}</td>
                     </tr>
                     <tr>
                         <td class="infolist_table_td_1">이 메 일</td>
-                        <td class="infolist_table_td_2">${userEmail}</td>
-                    </tr>
-                    <tr>
-                        <td class="infolist_table_td_1">주 소</td>
-                        <td class="infolist_table_td_2">${userAddress} ${userAddressDetail}</td>
+                        <td class="infolist_table_td_2">${managerInfoResult.managerEmail}</td>
                     </tr>
                 </table>
                 <table id="infolist_table_2">
                     <td class="infolist_btn_edit" style="width:50%; height:40px; background-color:#ffbf41; border-radius: 25px;"><a id="infolist_btn_edit" href="/update">회원 정보 수정</a></td>
                     <td style="width:50%; height:40px; background-color:#e9e9e9; border-radius: 25px;">
-                        <a id="infolist_btn_delete" href="/logout">로그아웃</a></td></input>
-
+                        <a id="infolist_btn_delete" href="/manager_logout">로그아웃</a></td></input>
                 </table>
             </div>
         </div>

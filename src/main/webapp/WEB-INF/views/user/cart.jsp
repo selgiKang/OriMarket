@@ -74,9 +74,10 @@
 											<!-- 수량선택(-,+),가격표시 -->
 											<div class="cart_itemDescription">
 												<div class="cart_itemOption">
-													<button onclick="minusBtn('${orderList.cartItemId}')"><i class="fas fa-solid fa-circle-minus"></i></button>
+													<button type="button" onclick="minusBtn('${orderList.cartItemId}',${status.index})"><i class="fas fa-solid fa-circle-minus"></i></button>
 													<input type="text" size="1" name="currentCnt" id="currentCnt${status.index}" value="${orderList.count}">
-													<button onclick="plusBtn('${orderList.cartItemId}')"><i class="fas fa-solid fa-circle-plus"></i></button>
+													<input type="hidden" name="itemCnt" id="itemCnt${status.index}" value="${orderList.item.itemCnt}">
+													<button type="button" onclick="plusBtn('${orderList.cartItemId}',${status.index})"><i class="fas fa-solid fa-circle-plus"></i></button>
 												</div>
 												<div class="cart_itemPrice">
 													<input id="sellPrice_${status.index}" type="hidden" value="${orderList.itemPrice}">

@@ -14,6 +14,10 @@ public interface ItemRepository extends JpaRepository<Item,Long> {
 
     List<Item> findByItemNameContaining(String searchKeyword);
 
+    List<Item> findByCartItems(Long cartItemId);
+
+
+
 
 
 

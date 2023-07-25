@@ -113,6 +113,7 @@ public class FavController {
 
             //session.setAttribute("favNumber", fav.getFavNumber());
             List<BusinessStore> byBuStoreName = businessStoreRepository.findByBuStoreName(favStoreName);
+            System.out.println("이건모라고나올까요??"+byBuStoreName.get(0).getBuStoreImageUrl());
 
             //리뷰 평점계산
             List<Review> reviewListResult = reviewRepository.findByBusinessStore(byBuStoreName.get(0));
@@ -134,8 +135,8 @@ public class FavController {
             session.setAttribute("marketSeq",marketSeq);
 
             //사업자번호
-           Long businessNumber = byBuStoreName.get(0).getBusinessUser().getBuUserNumber();
-           session.setAttribute("businessNumber",businessNumber);
+            Long businessNumber = byBuStoreName.get(0).getBusinessUser().getBuUserNumber();
+            session.setAttribute("businessNumber",businessNumber);
 
             //시장 이름
             String marketName = byBuStoreName.get(0).getMarket().getMarketName();
@@ -144,6 +145,11 @@ public class FavController {
             //물건 목록
             List<Item> items = byBuStoreName.get(0).getItems();
             model.addAttribute("al", items);
+
+            //가게 이미지 정보
+            String buStoreImageUrl = byBuStoreName.get(0).getBuStoreImageUrl();
+            System.out.println("이건머라고나오띾요?:"+buStoreImageUrl);
+            session.setAttribute("buStoreImage",buStoreImageUrl);
 
             //공지사항
             BusinessUser buStoreNumber = items.get(0).getBusinessStore().getBusinessUser();

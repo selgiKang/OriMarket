@@ -35,11 +35,9 @@
 </head>
 <body>
 <div id="goods_container">
-    <div id="goods_store">
-        <div>푸른과일마트</div>
-        <small>대표:손예솔</small>
-    </div>
     <div>
+        <br>
+        <br>
         <h1>상품관리메뉴</h1>
         <div class="goods_menu"><a href="/s1/${buUserId}">현 재고 확인</a></div>
         <br>

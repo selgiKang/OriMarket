@@ -2,23 +2,15 @@
          pageEncoding="UTF-8"%>
 <html>
 <head>
+  <title>Orimarket_ManagerJoin</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" type="text/css" href="../../../../css/user/join.css">
-
+  <link rel="stylesheet" href="../../css/manager/manager_join.css">
+  <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+  <script src="../../js/common/jquery-3.6.4.js"></script>
   <script src="../../../../js/user/join.js"></script>
+  <script src="../../js/manager/manager_join.js"></script>
 </head>
-<style>
-  /* 추가된 CSS 스타일 */
-
-  .container {
-    max-height: 100vh; /* 컨테이너의 최대 높이를 화면의 높이로 설정 */
-    overflow-y: auto;
-    box-sizing: border-box;
-  }
-  .container::-webkit-scrollbar {
-    display: none;
-  }
-</style>
 <body>
 <a href="/"><h1 style="position: fixed; left: 20px; top: 0; font-size: 30px; color: red">홈으로 바로가기</h1></a>
 <div class="container">
@@ -67,20 +59,21 @@
     <div class="form_field">
       <label for="name">이름</label>
       <input type="text" id="name" name="managerName" required>
-
     </div>
     <div class="form_field">
       <label for="phone">휴대폰</label>
       <input type="tel" id="phone" name="managerPhone" required>
       <div id="phoneError" class="error_message" style="display: none; color: red;"></div>
     </div>
+    <div class="form_field">
+      <label for="managerEmail">이메일</label>
+      <input type="email" id="managerEmail" name="managerEmail" required>
+    </div>
     <input type="submit" value="SIGN UP" class="submit_btn">
   </form>
 
 </div>
-
-<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-
+</body>
 <script>
   function validateForm() {
     var password = document.getElementById("password").value;
@@ -102,9 +95,7 @@
 
     return true;
   }
-</script>
 
-<script>
   function checkDuplicate() {
     var managerId = document.getElementById("id").value;
     var url = "/managerId/" + managerId + "/exists"; // API 엔드포인트 URL
@@ -140,8 +131,7 @@
     xhr.open("GET", url);
     xhr.send();
   }
-</script>
-<script>
+
   var passwordInput = document.getElementById("password");
   var passwordConfirmInput = document.getElementById("passwordConfirm");
   var passwordMatchError = document.getElementById("passwordMatchError");
@@ -164,8 +154,7 @@
       passwordMatchError.style.marginLeft = "3px";
     }
   });
-</script>
-<script>
+
   var phoneInput = document.getElementById("phone");
   var phoneError = document.getElementById("phoneError");
 
@@ -185,9 +174,7 @@
       phoneError.style.display = "none";
     }
   });
-</script>
 
-<script>
   var passwordInput = document.getElementById("password");
   var passwordError = document.getElementById("passwordError");
 
@@ -212,8 +199,6 @@
     }
   });
 </script>
-</body>
-
 
 </html>
 

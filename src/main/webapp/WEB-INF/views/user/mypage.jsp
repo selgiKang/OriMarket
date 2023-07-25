@@ -7,6 +7,7 @@
     <title>Insert title here</title>
     <link href="../../css/user/mypage.css" rel="stylesheet" media="all">
     <style>
+        h2.addpic{width: 280px; height:30px; overflow: hidden;text-overflow: ellipsis; white-space: nowrap;}
     </style>
     <script>
         // 서버에서 에러 메시지를 전달할 경우 알림 팝업 띄우기
@@ -54,7 +55,7 @@
 <body style=" font-family: 'omyu_pretty';">
 
 <!-- 마이페이지 시작 -->
-<div class="mypage_wrap">
+<div class="mypage_wrap" style="background-color:#eee;">
     <div id="mypage">
         <jsp:include page="../header/header_index.jsp" />
 
@@ -84,19 +85,19 @@
 </div>
         <div id="mypage_content">
             <c:if test="${empty userId}">
-                <div class="login_modal btn-open-popup" onclick="modal" style="cursor: pointer;"><h2 class="mypage1_h2">로그인하러가기</h2></div><img class="img1" src="" width="30px" height="30px">
-                <small id="mypage_content_small">&lt;회원등급&gt;</small>
+                <div class="login_modal btn-open-popup" onclick="modal" style="cursor: pointer;"><h2 class="mypage1_h2" style="margin-left:10px;">로그인하러가기 &nbsp;&nbsp;></h2></div><img class="img1" src="" width="30px" height="30px" style="margin-right:10px;">
+                <small id="mypage_content_small" style="margin-left:10px;">&lt;회원등급&gt;</small>
             </c:if>
             <c:if test="${not empty userId}">
-                <a href="/infolist"><h2 class="mypage1_h2">${userNickname} 님, 어서오리</h2><img class="img1" src="" width="30px" height="30px"></a>
-                <small id="mypage_content_small">&lt;회원등급&gt;</small>
+                <a href="/infolist"><h2 class="mypage1_h2 addpic" style="margin-left:10px;">${userNickname} 님, 어서오리</h2><img class="img1" src="" width="30px" height="30px" style="margin-right:10px;"></a>
+                <small id="mypage_content_small" style="margin-left:10px;">&lt;회원등급&gt;</small>
             </c:if>
 
             <hr>
             <div id="main_box">
                 <div id="mypage_favStore" onclick="location.href='/favList'">
                     <div class="main_box_icon">
-                        <img src="../../img/user/shop.png" style="width:50px; height: 50px;">
+                        <img src="../../img/store/가게관리.png" style="width:50px; height: 50px;">
                     </div>
                     <div class="contents1_bold">
                         단골가게
@@ -105,16 +106,16 @@
                 <span class="separator"></span> <!-- Separator -->
                 <div id="order_pastorder" onclick="location.href='order_pastorder'">
                     <div class="main_box_icon">
-                        <img src="../../img/order/orderRecipt.png" width="50px" height="50px">
+                        <img src="../../img/store/주문내역.png" width="50px" height="50px">
                     </div>
                     <div class="contents1_bold">
                         주문내역
                     </div>
                 </div>
                 <span class="separator"></span> <!-- Separator -->
-                <div id="review" onclick="location.href='/review'">
+                <div id="review" onclick="location.href='/review'" style="cursor:pointer;">
                     <div class="main_box_icon">
-                        <img src="../../img/user/star.png" width="50px" height="50px">
+                        <img src="../../img/user/star.png" width="45px" height="45px">
                     </div>
                     <div class="contents1_bold">
                         <a href="/review">리뷰관리</a>
@@ -122,9 +123,9 @@
                 </div>
             </div>
             <div id="coupon_points_container">
-                <div id="cupon">쿠폰함 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0장<a href="#">></a></div>
+                <div id="cupon">쿠폰함 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0장<a href="#">&nbsp;&nbsp;></a></div>
                 <span class="separator1"></span> <!-- Separator -->
-                <div id="point">포인트 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0장<a href="#">></a></div>
+                <div id="point">포인트 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0장<a href="#">&nbsp;&nbsp;></a></div>
             </div>
         </div>
 
