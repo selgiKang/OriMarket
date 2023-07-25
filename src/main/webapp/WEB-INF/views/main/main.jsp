@@ -48,13 +48,13 @@
 
         .navicon{
             font-size: 5em;
-            animation: motion 0.6s /* 속도 */
-            linear 0s   /* 처음부터 끝까지 일정 속도로 진행 */
-            infinite alternate; /* 무한 반복 */
+            animation: motion 0.6s
+            linear 0s
+            infinite alternate;
         }
         @keyframes motion {
-            0% {margin-top: 0px;} /* 처음 위치 */
-            100% {margin-top: 8px;} /* 마지막 위치 */
+            0% {margin-top: 0px;}
+            100% {margin-top: 8px;}
         }
     </style>
 </head>
