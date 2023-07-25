@@ -9,7 +9,53 @@
     <link rel= "stylesheet" href= "../../css/main/main.css">
     <link rel= "stylesheet" href= "../../css/main/connexion_market.css">
     <style>
+        div.connextion_mk1_wrap{position:relative;}
+        .connexion_marketbox_wrap{display: flex; justify-items: center; align-items: center;}
+        img.connexion_market_img{
+            width: 120px;
+            height: 65px;
+            position: absolute;
+            top: 42%;
+            left: 6%;}
+        a.connextion_mk1{position:absolute; top:-9%; left:21%;}
+        .connextion_mk1 > p {
+            position: absolute;
+            width: 120px;
+            top: 2%;
+            left: -40%;
+            font-size: 16px;
+            background-color: #ffbf41;
+            border-radius: 10px;}
 
+        /**/
+        div.connextion_mk2_wrap{position:relative;}
+        .connexion_marketbox_wrap{display: flex; justify-items: center; align-items: center;}
+        img.connexion_market_img{
+            width: 120px;
+            height: 65px;
+            position: absolute;
+            top: 42%;
+            left: 6%;}
+        a.connextion_mk2{position:absolute; top:-9%; left:21%;}
+        .connextion_mk2 > p {
+            position: absolute;
+            width: 120px;
+            top: 2%;
+            left: -40%;
+            font-size: 16px;
+            background-color: #ffbf41;
+            border-radius: 10px;}
+
+        .navicon{
+            font-size: 5em;
+            animation: motion 0.6s /* 속도 */
+            linear 0s   /* 처음부터 끝까지 일정 속도로 진행 */
+            infinite alternate; /* 무한 반복 */
+        }
+        @keyframes motion {
+            0% {margin-top: 0px;} /* 처음 위치 */
+            100% {margin-top: 8px;} /* 마지막 위치 */
+        }
     </style>
 </head>
 <body>
@@ -41,21 +87,36 @@
             </div>
             <div id="connextion_market" class="clear">
                 <c:if test="${empty userId}">
-                    <span class="connextion_title clear" style="font-weight:800; font-size: 18px;">&nbsp;<img class="connextion_title_img clear" src="../../img/main/singsing.png">&nbsp;&nbsp; 나의 단골시장</span>
+                    <span class="connextion_title clear" style="font-weight:800;font-size: 18px;font-family: 'omyu pretty';/*border: 2px solid #999;*/width: 290px;border-radius: 5px;height: 50px; display: flex; justify-content: flex-start; align-items: center;">&nbsp;<img class="connextion_title_img clear navicon" src="../../img/main/navi.png">&nbsp;<p>&nbsp나의 단골시장</p></span>
                 </c:if>
                 <c:if test="${!empty userId}">
-                    <span class="connextion_title clear" style="font-weight:800; font-size: 18px;">&nbsp;<img class="connextion_title_img clear" src="../../img/main/singsing.png">&nbsp;&nbsp;${userNickname}님의 단골시장</span>
+                    <span class="connextion_title clear" style="font-weight:800;font-size: 18px;font-family: 'omyu pretty';/*border: 2px solid #999;*/width: 290px;border-radius: 5px;height: 50px; display: flex; justify-content: flex-start; align-items: center;">&nbsp;<img class="connextion_title_img clear navicon" src="../../img/main/navi.png">&nbsp;<p>&nbsp;${userNickname}님의 단골시장</p></span>
                 </c:if>
+                <hr style="width:280px;margin-left: 8%;opacity: 0.4;">
                 <div class="connextion_marketbox clear">
-                    <div class="connextion_mk1_wrap"><a class="connextion_mk1" href="/shinwon_marketmap"><p style="font-weight: 800;">내가<br>등록한 시장</p></a><p style="font-size: 10px;"></p></div>
-                    <c:if test="${!empty marketName}">
-                    <div class="connextion_mk2_wrap btn-open-popup" onclick="modal"><a class="connextion_mk2" href=""><p>${marketName}</p></a><p style="font-size: 40px;"></p></div>
-                    </c:if>
-                    <c:if test="${empty marketName}">
-                        <div class="connextion_mk2_wrap btn-open-popup" onclick="modal"><a class="connextion_mk2" href=""><p>단골시장등록</p></a><p style="font-size: 40px;">+</p></div>
-                    </c:if>
-                    <div class="connextion_mk3_wrap"><a class="connextion_mk3" href=""><p>단골시장등록</p></a><p style="font-size: 40px;">+</p></div>
-                    <div class="connextion_mk4_wrap"><a class="connextion_mk4" href=""><p>단골시장등록</p></a><p style="font-size: 40px;">+</p></div>
+                    <div class="connexion_marketbox_wrap" style="padding:10px 20px;">
+                        <div class="connextion_mk1_wrap" style="margin-right:20px;">
+                            <img class="connexion_market_img" src="../../img/main/market2.png">
+                            <a class="connextion_mk1" href="/shinwon_marketmap">
+                                <p style="font-weight: 800;">내가 등록한시장</p>
+                            </a>
+                        </div>
+                        <c:if test="${!empty marketName}">
+                        <div class="connextion_mk2_wrap btn-open-popup" onclick="modal" style="margin-right:20px;">
+                            <img class="connexion_market_img" src="../../img/main/market2.png">
+                            <a class="connextion_mk2" href="">
+                                <p>${marketName}</p>
+                            </a>
+                        </div>
+                        </c:if>
+                        <c:if test="${empty marketName}">
+                            <div class="connextion_mk2_wrap btn-open-popup" onclick="modal"><a class="connextion_mk2" href=""><p>단골시장등록</p></a><p style="font-size: 40px;">+</p></div>
+                        </c:if>
+                    </div>
+                    <div class="connexion_marketbox_wrap" style="padding:10px 20px;">
+                      <div class="connextion_mk3_wrap"><a class="connextion_mk3" href=""><p>단골시장등록</p></a><p style="font-size: 40px;">+</p></div>
+                      <div class="connextion_mk4_wrap"><a class="connextion_mk4" href=""><p>단골시장등록</p></a><p style="font-size: 40px;">+</p></div>
+                    </div>
                 </div>
             </div>
             <div id="main_banner_wrap">
