@@ -28,17 +28,31 @@ public class ManagerController {
     private final ManagerService managerService;
     private final RealTimeRepository realTimeRepository;
 
-    @GetMapping("/managerMain")
-    public String main(){return "manager/manager_main";
-    }
+    //로그인 페이지
     @GetMapping("/managerLogin")
     public String login(){
         return "manager/manager_login";
     }
 
+    //회원가입 페이지
     @GetMapping("/managerJoin")
     public String join(){
-        return "manager/managerjoin";
+        return "manager/manager_join";
+    }
+
+    //로그아웃
+    @GetMapping("/manager_logout")
+    public String logout(HttpSession session){
+        session.invalidate();
+        return "manager/manager_login";
+    }
+    //마이 페이지
+    @GetMapping("/manager_mypage")
+    public String managerInfo(Model model,HttpSession session){
+        ManagerUser managerInfoResult = managerService.findByManagerId(model,session);
+        System.out.println(managerInfoResult.getManagerName());
+        model.addAttribute("managerInfoResult",managerInfoResult);
+        return "manager/manager_info_list";
     }
 
     //아이디 중복 확인
@@ -49,74 +63,18 @@ public class ManagerController {
     }
 
 
-    @GetMapping("/managerLoginResult")
-    @ResponseBody
-    public String returnAjaxResult(@ModelAttribute ManagerUser managerUser, HttpSession session, Model model){
-
-            //매니저 아이디
-            String managerId = (session.getAttribute("managerId")).toString();
-
-            //매니저 정보 가져오기
-            ManagerUser userResult = managerService.findByManagerId(model,session);
-            model.addAttribute("userResult",userResult);
-
-            //매니저가 소속된 시장의 주문만 리스트에 저장
-            List<Order> orderList = (List<Order>) model.getAttribute("managerOrderList");
-            model.addAttribute("orderList",orderList);
-            System.out.println("주문 목록: "+orderList.get(0).getOrderNumber());
-
-            //불러온 주문의 상태 검색
-            List<RealTimeStatus> rtsList = new ArrayList<>();
-            Order finalOrder = new Order();
-
-            if(orderList!=null && !orderList.isEmpty()){
-
-                //주문 목록 출력해서
-                for(Order orders: orderList){
-                    //해당 주문번호의
-                    String orderNumber = orders.getOrderNumber();
-                    finalOrder.setOrderNumber(orderNumber);
-
-                    //그 주문번호의 상태를 찾아서
-                    RealTimeStatus rtsResult = realTimeRepository.findByorderNumber(finalOrder);
-                    System.out.println("rts상태"+rtsResult.getRtsOrderIng());
-                    if(rtsResult!=null){
-                        //넣는다.
-                        rtsList.add(rtsResult);
-                    }
-                }
-            }
-            model.addAttribute("rtsResult",rtsList);
-
-        Map<String, Object> response = new HashMap<>();
-        response.put("userResult", userResult);
-        response.put("orderList", orderList);
-        response.put("rtsResult", rtsList);
-
-        // ObjectMapper를 사용하여 JSON 형식으로 변환
-        ObjectMapper objectMapper = new ObjectMapper();
-        String jsonResponse;
-        try {
-            jsonResponse = objectMapper.writeValueAsString(response);
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
-            jsonResponse = "{\"error\":\"JSON 변환에 실패했습니다.\"}";
-        }
-
-        return jsonResponse;
-    }
-
-
     //로그인
     @PostMapping("/managerLogin")
     public String loginResult(@ModelAttribute ManagerUser managerUser, HttpSession session, Model model){
         boolean result = managerService.loginCheck(managerUser,session);
         if(result){
             session.setAttribute("managerId",managerUser.getManagerId());
+            System.out.println(5);
 
             //매니저 정보 가져오기
             ManagerUser userResult = managerService.findByManagerId(model,session);
             model.addAttribute("userResult",userResult);
+            System.out.println(6);
 
             //매니저가 소속된 시장의 주문만 리스트에 저장
            List<Order> orderList = (List<Order>) model.getAttribute("managerOrderList");
@@ -148,6 +106,7 @@ public class ManagerController {
 
             return "manager/order_list";
         }
+        model.addAttribute("fail",1);
         return "manager/manager_login";
     }
 
