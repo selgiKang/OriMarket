@@ -12,10 +12,10 @@ $(()=>{
 
 /*장바구니 상품 수량증가 감소*/
 
-function minusBtn(cartItemId) {
+function minusBtn(cartItemId,index) {
 
-    var currentCountElement = document.getElementById("currentCnt");
-    var currentCount = parseInt(currentCountElement.value);
+    var currentCountElement = $("#currentCnt"+index);
+    var currentCount = parseInt(currentCountElement.val());
 
     if (currentCount <= 0) {
         return; // 수량이 0 이하이면 클릭을 막음
@@ -39,14 +39,14 @@ function minusBtn(cartItemId) {
     });
 }
 
-function plusBtn(cartItemId){
+function plusBtn(cartItemId,index){
 
-    var currentCountElement = document.getElementById("currentCnt");
-    var currentCount = parseInt(currentCountElement.value);
+    var currentCountElement = $("#currentCnt"+index);
+    var currentCount = parseInt(currentCountElement.val());
 
 
-    var itemCntElement = document.getElementById("itemCnt");
-    var itemCnt = parseInt(itemCntElement.value);
+    var itemCntElement = $("#itemCnt"+index);
+    var itemCnt = parseInt(itemCntElement.val());
 
     if (currentCount >= itemCnt) {
         return; // 수량이 itemCnt 이상이면 클릭을 막음
