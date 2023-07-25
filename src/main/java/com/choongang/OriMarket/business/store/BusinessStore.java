@@ -8,11 +8,14 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.web.multipart.MultipartFile;
 import org.yaml.snakeyaml.error.Mark;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+
+
 
 @Entity
 @Table(name = "businessStore")
@@ -41,6 +44,9 @@ public class BusinessStore {
 
     @Column
     private String buStoreAddressDetail;
+
+    @Column
+    private String buStoreImageUrl;
 
     //사업자 번호
     @ManyToOne(fetch = FetchType.LAZY) //lazy가 성능최적화
