@@ -21,5 +21,10 @@ public class MarketMapController {
         return "marketmap/shinwon_marketmap";
     }
 
+    @GetMapping("/tongin_marketmap")
+    public String marketmap3() {
+        return "marketmap/tongin_marketmap";
+    }
+
 };
 
