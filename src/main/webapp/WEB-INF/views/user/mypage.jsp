@@ -112,9 +112,9 @@
                     </div>
                 </div>
                 <span class="separator"></span> <!-- Separator -->
-                <div>
+                <div id="review" onclick="location.href='/review'">
                     <div class="main_box_icon">
-                        <img src="" width="50px" height="50px">
+                        <img src="../../img/user/star.png" width="50px" height="50px">
                     </div>
                     <div class="contents1_bold">
                         <a href="/review">리뷰관리</a>

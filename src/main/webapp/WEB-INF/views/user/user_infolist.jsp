@@ -26,7 +26,7 @@
         <div id="infolist_main">
             <div class="top_title_wrap">
                 <!-- 뒤로가기 -->
-                <button class="backbtn" onclick="window.history.go(-1)">&lt;</button>
+                <button class="backbtn" onclick="window.location.replace('/')">&lt;</button>
                 <h2>${userNickname}님 회원 정보</h2>
             </div>
             <div class="infolist_content_wrap">
