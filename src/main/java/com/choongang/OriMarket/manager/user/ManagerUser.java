@@ -4,6 +4,7 @@ import com.choongang.OriMarket.business.market.Market;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.hibernate.mapping.ToOne;
 
 import javax.persistence.*;
 
@@ -30,10 +31,13 @@ public class ManagerUser {
     @Column
     private String managerPhone;
 
+    @Column
+    private String managerEmail;
+
     //시장 seq
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "marketSeq")
-   private Market market;
+    private Market market;
 
 }
 

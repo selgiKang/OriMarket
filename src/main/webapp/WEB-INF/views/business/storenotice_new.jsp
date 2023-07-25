@@ -463,10 +463,10 @@
             <label class="label" for="tab-1">가게 관리</label>
             <div class="panel">
                 <div class="line"></div>
-                <form action="/storenotice1" method="post">
+                <form action="/storenotice1" method="post" enctype="multipart/form-data">
                 <div class="storecare_logo">
                     <h3>로고</h3>
-                    <input type="file" accept="image/*" name="pictureUrl" id="logo-upload" onchange="previewPicture(event)" />
+                    <input type="file" accept="image/*" name="pictureUrl" id="logo-upload" onchange="previewPicture(event)"/>
                     <div id="logo-preview"></div>
                 </div>
                 <div class="line"></div>

@@ -89,7 +89,7 @@ public class CartController {
     /*장바구니페이지에서 수량증감*/
     @PutMapping("/user/cart")
     @ResponseBody
-    public String menuPlusMinus(@RequestParam("cartItemId")Long cartItemId,@RequestParam("type") String type){
+    public String menuPlusMinus(@RequestParam("cartItemId")Long cartItemId,@RequestParam("type") String type,Item item){
         String result = cartService.menuPlusMinus(cartItemId,type);
         return result;
     }

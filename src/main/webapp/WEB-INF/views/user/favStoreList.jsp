@@ -33,7 +33,7 @@
     <c:forEach var="favResult" items="${favResult}" varStatus="status">
       <tr>
         <td>${status.index+1}</td>
-        <td><a href="">${favResult.favStoreName}</a></td>
+        <td><a href="/store?favStoreName=${favResult.favStoreName}">${favResult.favStoreName}</a></td>
       </tr>
     </c:forEach>
   </table>
