@@ -32,12 +32,25 @@ public class BusinessStoreController {
         }
 
 
-
     @PostMapping("/storenotice1")
     public String storenoticesave(@ModelAttribute BusinessStore businessStore, HttpSession session,Model model){
         businessStoreService.save(businessStore,session,model);
+
+        // businessStore 객체를 Model에 추가하여 business_manage.jsp에서 사용할 수 있도록 함 테스트중
+        model.addAttribute("businessStore", businessStore);
+
         return "business/storenotice_new";
     }
+
+    //7.23 전체메뉴의 가게관리연결
+    @GetMapping("/business_manage")
+    public String businessManage() {
+
+        return "business/businessManage/business_manage";
+    }
+
+
+
 
     /*물건리스트에서 상세로*/
     @GetMapping("/seller_itemDetail/{itemId}")
@@ -48,6 +61,7 @@ public class BusinessStoreController {
 
         return "/store/seller_itemDetail";
     }
+
 
 
     //등록된 item수정하기
@@ -91,12 +105,6 @@ public class BusinessStoreController {
 
 
 
-    //7.23 전체메뉴의 가게관리연결
-    @GetMapping("/business_manage")
-    public String businessManage() {
-
-        return "business/businessManage/business_manage";
-    }
 
 
 };

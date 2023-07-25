@@ -360,6 +360,24 @@
             color: gold;
         }
 
+
+        /* 주소검색 css */
+        .btn_container {
+            display: flex;
+            justify-content: center;
+            margin-top: 10px;
+        }
+
+        .btn_round {
+            border-radius: 20px;
+            padding: 5px 10px;
+            background-color: #ffbf41;
+            color: white;
+            border: none;
+            font-size: 14px;
+            cursor: pointer;
+            font-family: 'omyu pretty', Arial, sans-serif;
+
     </style>
     <%
         Date date = new Date();
@@ -570,14 +588,19 @@
 
 
                         <c:if test="${empty save.buStoreAddressDetail}">
-                        <input type="text" name="buStoreAddressDetail" placeholder="상세위치를 적어주세요.">
+                        <input type="text" name="buStoreAddressDetail" id="buStoreAddressDetail" placeholder="상세위치를 적어주세요.">
                         </c:if>
 
                         <%--입력창--%>
                             <c:if test="${!empty save.buStoreAddressDetail}">
-                            <input type="text" name="buStoreAddressDetail" value="${save.buStoreAddressDetail}">
+                            <input type="text" name="buStoreAddressDetail" id="buStoreAddressDetail" value="${save.buStoreAddressDetail}">
                         </c:if>
 
+                        <div class="btn_container">
+                            <button type="button" class="btn_round" onclick="searchAddress()">주소검색</button>
+                        </div>
+
+                        <br>
                       <%--  //7.24 테스트 승엽--%>
                         <%-- 입력된 가게 위치를 표시합니다. --%>
                         <c:if test="${!empty save.buStoreAddress}">
@@ -696,6 +719,18 @@
 
 
 <script>
+
+    //주소API
+    function searchAddress() {
+        new daum.Postcode({
+            oncomplete: function (data) {
+                document.getElementById("store-location-input").value = data.address;
+
+                //주소 검색 후 선택하면 창이 닫히고 상세주소칸으로 포인트가 이동
+                document.getElementById("buStoreAddressDetail").focus();
+            }
+        }).open();
+    }
   /*  var posts = []; // 게시글 정보를 저장할 배열
 
     function previewImage(event) {
@@ -856,7 +891,12 @@
             }
         });
     });
+
+
+
 </script>
+
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 </body>
 
 </html>
