@@ -85,11 +85,11 @@
 </div>
         <div id="mypage_content">
             <c:if test="${empty userId}">
-                <div class="login_modal btn-open-popup" onclick="modal" style="cursor: pointer;"><h2 class="mypage1_h2" style="margin-left:10px;">로그인하러가기 &nbsp;&nbsp;></h2></div><img class="img1" src="" width="30px" height="30px" style="margin-right:10px;">
+                <div class="login_modal btn-open-popup" onclick="modal" style="cursor: pointer;"><h2 class="mypage1_h2" style="margin-left:10px; margin-top:10px;">로그인하러가기 &nbsp;&nbsp;></h2></div><img class="img1" src="" width="30px" height="30px" style="margin-top:10px; margin-right:20px;">
                 <small id="mypage_content_small" style="margin-left:10px;">&lt;회원등급&gt;</small>
             </c:if>
             <c:if test="${not empty userId}">
-                <a href="/infolist"><h2 class="mypage1_h2 addpic" style="margin-left:10px;">${userNickname} 님, 어서오리</h2><img class="img1" src="" width="30px" height="30px" style="margin-right:10px;"></a>
+                <a href="/infolist"><h2 class="mypage1_h2 addpic" style="margin-left:10px;">${userNickname} 님, 어서오리</h2><img class="img1" src="" width="30px" height="30px" style="margin-top:10px; margin-right:20px;"></a>
                 <small id="mypage_content_small" style="margin-left:10px;">&lt;회원등급&gt;</small>
             </c:if>
 
@@ -123,9 +123,9 @@
                 </div>
             </div>
             <div id="coupon_points_container">
-                <div id="cupon">쿠폰함 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0장<a href="#">&nbsp;&nbsp;></a></div>
+                <div id="cupon">쿠폰함 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0장<a href="#">&nbsp;></a></div>
                 <span class="separator1"></span> <!-- Separator -->
-                <div id="point">포인트 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0장<a href="#">&nbsp;&nbsp;></a></div>
+                <div id="point">포인트 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0장<a href="#">&nbsp;></a></div>
             </div>
         </div>
 

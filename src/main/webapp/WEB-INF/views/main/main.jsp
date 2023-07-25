@@ -116,7 +116,7 @@
                             <div class="connextion_mk2_wrap btn-open-popup" onclick="modal"><a class="connextion_mk2" href=""><p>단골시장등록</p></a><p style="font-size: 40px;">+</p></div>
                         </c:if>
                     </div>
-                    <div class="connexion_marketbox_wrap" style="padding:0 20px 0 30px;">
+                    <div class="connexion_marketbox_wrap" style="padding:0 20px 0 25px;">
                         <c:if test="${!empty marketName}">
                             <div class="connextion_mk3_wrap change_marketimg_wrap" style="margin-right:20px; background:none;">
                                 <img class="connexion_market_img" src="../../img/main/market2.png">
