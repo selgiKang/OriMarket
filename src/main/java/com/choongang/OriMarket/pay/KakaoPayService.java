@@ -1,3 +1,4 @@
+/*
 package com.choongang.OriMarket.pay;
 
 import lombok.RequiredArgsConstructor;
@@ -19,9 +20,11 @@ public class KakaoPayService {
     static final String adminKey = "535bfe22c2408903ccb259c7d0763974"; // 공개 조심! 본인 애플리케이션의 어드민 키를 넣어주세요
     private KakaoReadyResponse kakaoReady;
 
-    /**
+    */
+/**
      * 결제 준비 요청
-     */
+     *//*
+
     public KakaoReadyResponse kakaoPayReady() {
         // 카카오페이 요청 양식
         MultiValueMap<String, String> parameters = new LinkedMultiValueMap<>();
@@ -51,9 +54,11 @@ public class KakaoPayService {
         return kakaoReady;
     }
 
-    /**
+    */
+/**
      * 결제 승인 요청
-     */
+     *//*
+
     public KakaoApproveResponse approveResponse(String pgToken) {
         // 카카오 요청
         MultiValueMap<String, String> parameters = new LinkedMultiValueMap<>();
@@ -79,9 +84,11 @@ public class KakaoPayService {
 
 
 
-    /**
+    */
+/**
      * 카카오 요구 헤더값
-     */
+     *//*
+
     private HttpHeaders getHeaders() {
         HttpHeaders httpHeaders = new HttpHeaders();
 
@@ -95,3 +102,4 @@ public class KakaoPayService {
 
 
 }
+*/

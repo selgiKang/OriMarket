@@ -1,3 +1,4 @@
+/*
 package com.choongang.OriMarket.pay;
 
 import lombok.Data;
@@ -11,4 +12,4 @@ public class Card {
     private String interest_free_install, card_item_code;
 
 
-}
+}*/
