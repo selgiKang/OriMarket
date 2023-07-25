@@ -41,48 +41,62 @@ public class CartController {
         this.itemRepository = itemRepository;
     }
 
+    @GetMapping("/cart")
+    public String c(){
+        return "/error/login_error";
+    }
     /*내 장바구니 조회*/
     @GetMapping("/{userId}/cart")
     public String myCartPage(@PathVariable("userId") String userId, Model model){
-        Cart cart = cartService.getCart(userId);
-        User user = userService.getUser(userId);
 
-        List<CartItem> byUserUserSeq = cartItemRepository.findByUser_UserSeq(user.getUserSeq());
-        List<CartItem> cartItems = cartService.userCartView(cart);
+        if(userId.isEmpty()){
+            return "/error/login_error";
+        }else {
+            Cart cart = cartService.getCart(userId);
+            User user = userService.getUser(userId);
+
+            List<CartItem> byUserUserSeq = cartItemRepository.findByUser_UserSeq(user.getUserSeq());
+            List<CartItem> cartItems = cartService.userCartView(cart);
 
 
+            int totalPrice = 0;
+            for (CartItem cartItem : cartItems) {
+                totalPrice += (cartItem.getItem().getItemPrice() * cartItem.getCount());
+            }
 
-        int totalPrice = 0;
-        for(CartItem cartItem : cartItems){
-            totalPrice += (cartItem.getItem().getItemPrice()*cartItem.getCount());
+            model.addAttribute("cartItemList", cartItems);
+            model.addAttribute("totalPrice", totalPrice);
+            model.addAttribute("user", userId);
+            model.addAttribute("userOrderList", byUserUserSeq);
+
+            return "/user/cart";
         }
-
-        model.addAttribute("cartItemList",cartItems);
-        model.addAttribute("totalPrice",totalPrice);
-        model.addAttribute("user",userId);
-        model.addAttribute("userOrderList",byUserUserSeq);
-
-        return "/user/cart";
     }
 
     /*특정상품 장바구니에 추가*/
     @PostMapping("/{userId}/cart")
     public String addMyCart(@PathVariable("userId") String userId, Long itemId, int count,Model model){
-       //유저 찾기
-        User user = userService.getUser(userId);
-        //물건 아이디 찾기..?
-        Item additem = itemService.getItem(itemId);
 
-        CartItem cartItem = cartItemRepository.findByItem_ItemId(itemId);
+        if(userService.getUser(userId) == null){
+            // 장바구니에 물건을 담을때 비회원이면 로그인해달라고 창뛰우고 마이페이지로 넘어가기
+            return "/user/mypage";
+        }else {
+            //유저 찾기
+            User user = userService.getUser(userId);
+            //물건 아이디 찾기..?
+            Item additem = itemService.getItem(itemId);
 
-        model.addAttribute("item",additem);
+            CartItem cartItem = cartItemRepository.findByItem_ItemId(itemId);
 
-        //재고보다 많이 담으면 안담기게.
-        if(count<=additem.getItemCnt()){
-            cartService.addCart(user,additem,count);
+            model.addAttribute("item", additem);
+
+            //재고보다 많이 담으면 안담기게.
+            if (count <= additem.getItemCnt()) {
+                cartService.addCart(user, additem, count);
+            }
+
+            return "/store/detailmenu";
         }
-
-        return "/store/detailmenu";
     }
 
 

@@ -87,7 +87,7 @@
 <div class="main-container">
     <header>
         <div class="like-container">
-            <img id="like_container_img" src="../../img/store/${buStoreImage}" alt="착한생칼국수">
+            <img id="like_container_img" src="../../img/store/${sessionScope.buStoreImage}" alt="착한생칼국수">
         <%-- 찜 --%>
             <c:if test="${!empty sessionScope.userId}">
                 <form action="/storeFav" method="get">
