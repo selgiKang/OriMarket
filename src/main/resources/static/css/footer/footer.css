@@ -25,6 +25,8 @@
             padding: 20px;
             box-sizing: border-box; 
             color: white;
+            border-top-left-radius: 25px;
+            border-top-right-radius: 25px;
             
         }
 
@@ -64,7 +66,7 @@
         .links a {
             color: white;
             text-decoration: none;
-            font-size: 14px;
+            font-size: 16px;
             margin-bottom: 5px;
             
            

@@ -108,8 +108,8 @@
                        <div class="connextion_mk2_wrap btn-open-popup" onclick="modal"><a class="connextion_mk2" href=""><p>단골시장등록</p></a><p style="font-size: 40px;">+</p></div>
                     </div>
                     <div class="connexion_marketbox_wrap" style="padding:10px 20px;">
-                        <div class="connextion_mk3_wrap" style="margin-right:20px;"><a class="connextion_mk3" href=""><p>단골시장등록</p></a><p style="font-size: 40px;">+</p></div>
-                    <div class="connextion_mk4_wrap"><a class="connextion_mk4" href=""><p>단골시장등록</p></a><p style="font-size: 40px;">+</p></div>
+                        <div class="connextion_mk3_wrap btn-open-popup"  style="margin-right:20px;"  onclick="modal"><a class="connextion_mk3" href=""><p>단골시장등록</p></a><p style="font-size: 40px;">+</p></div>
+                    <div class="connextion_mk4_wrap btn-open-popup"  onclick="modal"><a class="connextion_mk4" href=""><p>단골시장등록</p></a><p style="font-size: 40px;">+</p></div>
                     </div>
             </div>
         </div>

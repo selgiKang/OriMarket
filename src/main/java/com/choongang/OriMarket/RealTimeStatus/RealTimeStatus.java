@@ -36,9 +36,52 @@ public class RealTimeStatus {
     @Column
     private int rtsRiderFinish;
 
-    public void setOrderNumber(Order orderNumber){
-        this.orderNumber=orderNumber;
+
+    //7.20 테스트 승엽
+    // Getters and Setters
+    public long getRtsNumber() {
+        return rtsNumber;
     }
+
+    public void setRtsNumber(long rtsNumber) {
+        this.rtsNumber = rtsNumber;
+    }
+
+    public Order getOrderNumber() {
+        return orderNumber;
+    }
+
+    public void setOrderNumber(Order orderNumber) {
+        this.orderNumber = orderNumber;
+    }
+
+    public int getRtsOrderIng() {
+        return rtsOrderIng;
+    }
+
+    public void setRtsOrderIng(int rtsOrderIng) {
+        this.rtsOrderIng = rtsOrderIng;
+    }
+
+    public int getRtsRiderIng() {
+        return rtsRiderIng;
+    }
+
+    public void setRtsRiderIng(int rtsRiderIng) {
+        this.rtsRiderIng = rtsRiderIng;
+    }
+
+    public int getRtsRiderFinish() {
+        return rtsRiderFinish;
+    }
+
+    public void setRtsRiderFinish(int rtsRiderFinish) {
+        this.rtsRiderFinish = rtsRiderFinish;
+    }
+
+   /* public void setOrderNumber(Order orderNumber){
+        this.orderNumber=orderNumber;
+    }*/
 }
 
 
