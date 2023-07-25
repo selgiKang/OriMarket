@@ -70,7 +70,7 @@ public class ManagerService {
     }
 
     //해당 매니저 불러오기
-    public ManagerUser findByManagerId(String managerIds,Model model,HttpSession session){
+    public ManagerUser findByManagerId(Model model,HttpSession session){
        String managerId = session.getAttribute("managerId").toString();
         System.out.println("managerId"+managerId);
         //매니저 번호 넣어서 매니저가 소속된 시장 번호 꺼내기
