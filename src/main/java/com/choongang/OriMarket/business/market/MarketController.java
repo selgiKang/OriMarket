@@ -34,6 +34,8 @@ public class MarketController {
     @GetMapping("/market_search")
     public String marketSearch(@ModelAttribute Market market, HttpSession session, UserMarket userMarket, Model model){
         Market byMarketName = marketRepository.findByMarketName(market.getMarketName());
+        session.setAttribute("marketName",byMarketName.getMarketName());
+        session.setAttribute("marketSeq",byMarketName.getMarketSeq());
 
         if(session.getAttribute("userSeq") == null){
             return "main/main";
