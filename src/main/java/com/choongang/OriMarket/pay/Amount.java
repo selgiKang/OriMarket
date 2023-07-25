@@ -1,8 +1,7 @@
-package com.choongang.OriMarket.pay;
+/* package com.choongang.OriMarket.pay;
 
-/**
- * 결제 금액 정보 모델 클래스
- */
+
+//결제 금액 정보 모델 클래스
 
 public class Amount {
 
@@ -12,3 +11,4 @@ public class Amount {
     private Integer point; // 사용한 포인트
     private Integer discount; // 할인금액
 }
+*/

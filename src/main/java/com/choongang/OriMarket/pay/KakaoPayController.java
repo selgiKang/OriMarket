@@ -1,3 +1,5 @@
+/*
+
 package com.choongang.OriMarket.pay;
 
 import lombok.RequiredArgsConstructor;
@@ -12,18 +14,18 @@ public class KakaoPayController {
 
     private final KakaoPayService kakaoPayService;
 
-    /**
-     * 결제요청
-     */
+
+     //결제요청
+
     @PostMapping("/ready")
     public ResponseEntity<KakaoReadyResponse> readyToKakaoPay() {
         KakaoReadyResponse kakaoReadyResponse = kakaoPayService.kakaoPayReady();
         return new ResponseEntity<>(kakaoReadyResponse, HttpStatus.OK);
     }
 
-    /**
-     * 결제 성공 처리
-     */
+
+     // 결제 성공 처리
+
     @PostMapping("/success")
     public ResponseEntity<String> afterPayRequest(@RequestParam("pg_token") String pgToken) {
         KakaoApproveResponse kakaoApproveResponse = kakaoPayService.approveResponse(pgToken);
@@ -45,30 +47,32 @@ public class KakaoPayController {
         }
     }
 
-    /**
-     * 결제 진행 중 취소
-     */
+
+     //결제 진행 중 취소
+
     @GetMapping("/cancel")
     public ResponseEntity<String> cancel() {
         // 취소에 대한 로직 추가
         return new ResponseEntity<>("Payment cancelled successfully.", HttpStatus.OK);
     }
 
-    /**
-     * 결제 실패
-     */
+
+    // 결제 실패
+
     @GetMapping("/fail")
     public ResponseEntity<String> fail() {
         // 실패에 대한 로직 추가
         return new ResponseEntity<>("Payment failed.", HttpStatus.BAD_REQUEST);
     }
 
-    /**
-     * 결제 승인 처리
-     */
+
+     //결제 승인 처리
+
     @PostMapping("/approve")
     public ResponseEntity<KakaoApproveResponse> approvePayment(@RequestParam("pg_token") String pgToken) {
         KakaoApproveResponse kakaoApproveResponse = kakaoPayService.approveResponse(pgToken);
         return new ResponseEntity<>(kakaoApproveResponse, HttpStatus.OK);
     }
 }
+
+*/

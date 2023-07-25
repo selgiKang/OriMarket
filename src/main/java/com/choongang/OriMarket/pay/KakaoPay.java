@@ -1,3 +1,5 @@
+/*
+
 package com.choongang.OriMarket.pay;
 
 import lombok.Getter;
@@ -44,3 +46,5 @@ public class KakaoPay {
     private String nonBankPaymentInfo;
 
 }
+
+ */

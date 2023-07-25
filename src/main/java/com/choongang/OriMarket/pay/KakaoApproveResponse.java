@@ -1,12 +1,14 @@
+/*
+
 package com.choongang.OriMarket.pay;
 
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-/**
- * 결제 승인 요청 시 사용하는 응답 모델 클래스
- */
+
+//결제 승인 요청 시 사용하는 응답 모델 클래스
+
 @Getter
 @Setter
 @ToString
@@ -28,3 +30,4 @@ public class KakaoApproveResponse {
     private String payload; // 결제 승인 요청에 대해 저장 값, 요청 시 전달 내용
 }
 
+*/
