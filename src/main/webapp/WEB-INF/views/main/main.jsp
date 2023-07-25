@@ -29,7 +29,7 @@
             border-radius: 10px;}
 
         /**/
-        div.connextion_mk2_wrap{position:relative;}
+        div.change_marketimg_wrap{position:relative;}
         .connexion_marketbox_wrap{display: flex; justify-items: center; align-items: center;}
         img.connexion_market_img{
             width: 120px;
@@ -37,8 +37,8 @@
             position: absolute;
             top: 42%;
             left: 6%;}
-        a.connextion_mk2{position:absolute; top:-9%; left:21%;}
-        .connextion_mk2 > p {
+        a.change_marketimg{position:absolute; top:-9%; left:21%;}
+        .change_marketimg > p {
             position: absolute;
             width: 120px;
             top: 2%;
@@ -103,9 +103,9 @@
                             </a>
                         </div>
                         <c:if test="${!empty marketName}">
-                        <div class="connextion_mk2_wrap btn-open-popup" onclick="modal" style="margin-right:20px;">
+                        <div class="connextion_mk2_wrap change_marketimg_wrap btn-open-popup" onclick="modal" style="margin-right:20px;">
                             <img class="connexion_market_img" src="../../img/main/market2.png">
-                            <a class="connextion_mk2" href="">
+                            <a class="connextion_mk2 change_marketimg" href="">
                                 <p>${marketName}</p>
                             </a>
                         </div>
