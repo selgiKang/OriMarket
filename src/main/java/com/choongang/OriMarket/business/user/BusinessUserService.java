@@ -35,9 +35,8 @@ public class BusinessUserService {
         List<Review> all = reviewRepository.findAll();
 
 
-        if (findbusinessUser.getBusinessStores().isEmpty()) {
-
-            } else {
+        if(findbusinessUser.getBusinessStores().isEmpty()) {
+        }else{
                 List<BusinessStore> businessStores = findbusinessUser.getBusinessStores();
                 if (businessStores.isEmpty()) {
                 } else {

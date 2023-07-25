@@ -48,6 +48,9 @@ public class BusinessStore {
     @Column
     private String buStoreImageUrl;
 
+    @Column
+    private String status;
+
     //사업자 번호
     @ManyToOne(fetch = FetchType.LAZY) //lazy가 성능최적화
     @JoinColumn(name ="business_user")
