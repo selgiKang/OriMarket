@@ -42,7 +42,7 @@ public class Market {
     @OneToMany(mappedBy = "market")
     private List<BusinessStore> businessStore = new ArrayList<>();
 
-    @OneToOne(mappedBy = "market")
-    private ManagerUser managerUser;
+    @OneToMany(mappedBy = "market")
+    private List<ManagerUser> managerUser = new ArrayList<>();
 
 }

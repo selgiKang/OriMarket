@@ -18,14 +18,20 @@ import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Service
-@RequiredArgsConstructor
 @Slf4j
 public class ManagerService {
 
-    @Autowired
     private  final ManagerRepository managerRepository;
     private  final MarketService marketService;
     private  final OrderRepository orderRepository;
+
+    @Autowired
+    public ManagerService(ManagerRepository managerRepository,MarketService marketService,OrderRepository orderRepository){
+        this.managerRepository = managerRepository;
+        this.marketService = marketService;
+        this.orderRepository = orderRepository;
+    }
+
 
 
     public boolean join(ManagerUser managerUser, HttpSession session){
@@ -51,29 +57,33 @@ public class ManagerService {
     }
 
     public boolean loginCheck(ManagerUser managerUser, HttpSession session) {
+        System.out.println("id"+managerUser.getManagerId());
+        System.out.println("pw"+managerUser.getManagerPassword());
         ManagerUser findManagerUser = managerRepository.findByManagerId(managerUser.getManagerId());
 
         //session.setAttribute("managerId",findManagerUser.getManagerId());
-
+        System.out.println(1);
         if(findManagerUser == null){
             return false;
         }
-
+        System.out.println(2);
         if(!managerUser.getManagerPassword().equals(findManagerUser.getManagerPassword())){
             return false;
         }
+        System.out.println(3);
         if(findManagerUser.getMarket().getMarketSeq()!=null){
             session.setAttribute("marketSeq",findManagerUser.getMarket().getMarketSeq());
         }
+        System.out.println(4);
         session.setAttribute("managerName",findManagerUser.getManagerName());
         return true;
     }
 
     //해당 매니저 불러오기
     public ManagerUser findByManagerId(Model model,HttpSession session){
-       String managerId = session.getAttribute("managerId").toString();
+        String managerId = session.getAttribute("managerId").toString();
         System.out.println("managerId"+managerId);
-        //매니저 번호 넣어서 매니저가 소속된 시장 번호 꺼내기
+        //매니저 번호 넣어서 매니저 정보 꺼내기(시장 번호도 확인)
         ManagerUser userResult = managerRepository.findByManagerId(managerId);
 
         //시장 번호
@@ -88,8 +98,6 @@ public class ManagerService {
                 model.addAttribute("managerOrderList",managerOrderList);
             }
         }
-
-
         return userResult;
     }
 }
