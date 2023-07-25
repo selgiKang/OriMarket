@@ -89,7 +89,7 @@
                 <small id="mypage_content_small" style="margin-left:10px;">&lt;회원등급&gt;</small>
             </c:if>
             <c:if test="${not empty userId}">
-                <a href="/infolist"><h2 class="mypage1_h2 addpic" style="margin-left:10px;">${userNickname} 님, 어서오리</h2><img class="img1" src="" width="30px" height="30px" style="margin-right:10px;"></a>
+                <a href="/infolist"><h2 class="mypage1_h2 addpic" style="margin-left:10px;">${userNickname} 님, 어서오리</h2><img class="img1" src="" width="30px" height="30px" style="margin-top:10px; margin-right:20px;"></a>
                 <small id="mypage_content_small" style="margin-left:10px;">&lt;회원등급&gt;</small>
             </c:if>
 
