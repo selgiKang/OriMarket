@@ -18,7 +18,9 @@ import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static com.choongang.OriMarket.utill.Constant.IMAGE_PATH;
 
@@ -82,7 +84,6 @@ public class BusinessStoreController {
         List<Item> items1 = buUserNumber.getBusinessStores().get(0).getItems();
         model.addAttribute("items",items1);
 
-
         return "/store/seller_itemList";
     }
 
@@ -90,12 +91,18 @@ public class BusinessStoreController {
     //등록된 아이템 삭제(cartItem테이블에서도 삭제되게)
     @DeleteMapping("/delete_items")
     @ResponseBody
-    public String deleteSelectedItems(@RequestParam("itemIds[]")  List<Long> itemIds) {
+    public String deleteSelectedItems(@RequestParam("itemIds[]")  List<Long> itemIds,HttpSession session) {
+        String buUserId = (session.getAttribute("buUserId")).toString();
 
         for(Long deleteItemId :itemIds){
             itemService.deleteItems(deleteItemId);
         }
-        return "success";
+
+        Map<String, Object> response = new HashMap<>();
+        response.put("buUserId", buUserId);
+        response.put("success","success");
+        System.out.println("아이디? "+buUserId);
+        return "response";
     }
 
 

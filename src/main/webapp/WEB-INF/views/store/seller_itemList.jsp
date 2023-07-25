@@ -124,7 +124,8 @@
                 success: function(result) {
                     // 삭제 성공 시, 페이지를 새로고침하여 목록을 업데이트
                     if (result === "success") {
-                        location.reload();
+                        var buUserId = response.buUserId;
+                        window.location.href="/s1/{buUserId}");
                     }
                 },
                 error: function(xhr, status, error) {
