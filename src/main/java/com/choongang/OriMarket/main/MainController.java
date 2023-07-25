@@ -61,11 +61,18 @@ public class MainController {
     }
 
     @GetMapping("/mylocation")
-    public String test(HttpSession session,Model model){
-        User findUser = userRepository.findByUserId(String.valueOf(session.getAttribute("userId")));
-        List<UserAddress> userAddresses = findUser.getUserAddresses();
-        model.addAttribute("userAd",userAddresses);
-        return "main/mylocation";}
+    public String test(HttpSession session,Model model) {
+
+        if (session.getAttribute("userId") == null) {
+            //비회원일때 등록한주소 값 받아와서
+            return "main/mylocation";
+        } else {
+            User findUser = userRepository.findByUserId(String.valueOf(session.getAttribute("userId")));
+            List<UserAddress> userAddresses = findUser.getUserAddresses();
+            model.addAttribute("userAd", userAddresses);
+            return "main/mylocation";
+        }
+    }
 
     @PostMapping("/search")
     public String search1(@ModelAttribute UserAddress userAddress, HttpSession session, Model model){
