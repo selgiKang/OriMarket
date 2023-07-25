@@ -119,6 +119,26 @@ public class CartController {
         return "/order/order_paymentPage";
     }
 
+  /*  *//*결제페이지로 넘기기*//*
+    @PostMapping("/paymentPage/{userId}")
+    public String orderPayment(@PathVariable("userId") String userId, Model model, @ModelAttribute("deliveryType") String cart1) {
+        cartService.saveCartInfo(userId,cart1);
+        Cart cart = cartService.getCart(userId);
+        List<CartItem> cartItems = cartService.userCartView(cart);
+
+        model.addAttribute("cartItemList",cartItems);
+        model.addAttribute("totalPrice",cart.getCartTotalPrice());
+        model.addAttribute("deliveryPrice",cart.getCartDeliveryPrice());
+
+        return "/order/order_paymentPage"; // 카카오페이 결제 페이지로 이동
+    }
+
+    // 결제 성공 시, paymentResult.jsp로 리다이렉트
+    @PostMapping("/paymentResult")
+    public String paymentResult() {
+        return "/paymentResult";
+    }*/
+
 
 
 
