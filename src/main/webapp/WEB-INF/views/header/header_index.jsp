@@ -13,7 +13,7 @@
 <body>
 
 <div class="header_wrap">
-    <div class="logo"><a href="/">Ori Market</a></div>
+    <div class="logo"><a href="/"style="font-size:32px;">Ori Market</a></div>
 
     <div class="nav">
         <c:if test="${empty userAddress1}">
