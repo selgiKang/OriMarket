@@ -40,6 +40,7 @@ public class MarketController {
         userMarket.setUserMarketName((String) session.getAttribute("marketName"));
         userMarketRepository.save(userMarket);
 
+
         return "main/main";
     }
 }
