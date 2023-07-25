@@ -7,8 +7,8 @@ import org.springframework.data.jpa.repository.Query;
 
 public interface RealTimeRepository extends JpaRepository<RealTimeStatus, Long> {
 
-
-
+    //7.20 테스트 승엽
+    RealTimeStatus findByOrderNumber(String orderNumber);
     @Modifying(clearAutomatically = true, flushAutomatically = true)
     @Query(value = "UPDATE RealTimeStatus r SET r.rtsOrderIng=1 WHERE r.orderNumber=?1")
     RealTimeStatus updateOrderNumber(String orderNumber,Integer rtsOrderIng);

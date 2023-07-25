@@ -101,11 +101,15 @@ public class OrderController {
         return "order/order_pastorder";
     }
 
-    //7.18 테스트 데이터 가져오는거까지 성공 승엽
+
     @GetMapping("/order/order_list")
     public String getOrderList(Model model) {
         List<Order> orderList = orderService.getAllOrders();
         model.addAttribute("orders", orderList);
+
+        //log.info("Number of orders retrieved: {}", orderList.size());
+
+
         return "order/order_list";
     }
 
