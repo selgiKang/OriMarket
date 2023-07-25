@@ -41,12 +41,16 @@ public class CartController {
         this.itemRepository = itemRepository;
     }
 
+    @GetMapping("/cart")
+    public String c(){
+        return "/error/login_error";
+    }
     /*내 장바구니 조회*/
     @GetMapping("/{userId}/cart")
     public String myCartPage(@PathVariable("userId") String userId, Model model){
 
         if(userId.isEmpty()){
-            return "/user/cart";
+            return "/error/login_error";
         }else {
             Cart cart = cartService.getCart(userId);
             User user = userService.getUser(userId);
