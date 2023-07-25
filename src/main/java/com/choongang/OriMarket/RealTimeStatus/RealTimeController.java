@@ -67,7 +67,7 @@ public class RealTimeController {
        String managerId= session.getAttribute("managerId").toString();
 
         //매니저 정보 가져오기
-        ManagerUser userResult = managerService.findByManagerId(managerId,model,session);
+        ManagerUser userResult = managerService.findByManagerId(model,session);
         model.addAttribute("userResult",userResult);
 
         //매니저가 소속된 시장의 주문만 리스트에 저장
@@ -114,10 +114,10 @@ public class RealTimeController {
     //픽업 완료 - 라이더한테 가도록
     @GetMapping("/acceptPickup")
     public String acceptPickup(Order order, HttpSession session, Model model, RealTimeStatus rts){
-
+        managerService.findByManagerId(model,session);
         List<Order> orderList = (List<Order>) model.getAttribute("managerOrderList");
         model.addAttribute("orderList",orderList);
-        System.out.println("주문 목록: "+orderList.get(0).getOrderNumber());
+       // System.out.println("주문 목록: "+orderList.get(0).getOrderNumber());
 
         //불러온 주문의 상태 검색
         List<RealTimeStatus> rtsList = new ArrayList<>();
@@ -133,6 +133,7 @@ public class RealTimeController {
 
                 //그 주문번호의 상태를 찾아서
                 RealTimeStatus rtsResult = rtsRepository.findByorderNumber(finalOrder);
+                                            // 1
                 System.out.println("rts상태"+rtsResult.getRtsOrderIng());
                 if(rtsResult!=null){
                     //넣는다.
