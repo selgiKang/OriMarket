@@ -43,8 +43,8 @@
             margin: 0 auto;
             display: flex;
             flex-direction: column;
-            justify-content: flex-start;
-            align-items: flex-start;
+            justify-content: center;
+            align-items: center;
             background-color: #eee;
             overflow: auto; /* 스크롤 가능하도록 수정 */
             overflow-x: hidden; /* 가로 스크롤 금지 */
@@ -236,13 +236,6 @@
             display: flex;
             flex-direction: column;
         }
-        /*
-                .manager_main_tabs {
-                    display: flex;
-                    flex-wrap: wrap;
-                    max-width: 700px;
-                    !* box-shadow: 0 48px 80px -32px rgba(0,0,0,0.3);*!
-                }*/
 
         .input {
             display: none;
@@ -302,63 +295,6 @@
                     margin: 20px;
                 }*/
 
-        .my_review_list_store{
-            background-color: white;
-            margin: 15px;
-            padding: 15px;
-
-        }
-
-        .rating, .date {
-            display: inline-block;
-        }
-
-        .rate_and_date{
-            margin-top: -20px;
-        }
-
-        .my_review_photo {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .my_review_photo img {
-            width: 300px;
-        }
-        .rating {
-            font-size: 24px;
-        }
-
-        .rating::before {
-            content: "☆☆☆☆☆";
-            color: lightgray;
-        }
-
-        .rating[data-rating="1"]::before {
-            content: "★☆☆☆☆";
-            color: gold;
-        }
-
-        .rating[data-rating="2"]::before {
-            content: "★★☆☆☆";
-            color: gold;
-        }
-
-        .rating[data-rating="3"]::before {
-            content: "★★★☆☆";
-            color: gold;
-        }
-
-        .rating[data-rating="4"]::before {
-            content: "★★★★☆";
-            color: gold;
-        }
-
-        .rating[data-rating="5"]::before {
-            content: "★★★★★";
-            color: gold;
-        }
 
 
         /* 주소검색 css */
@@ -388,9 +324,9 @@
     <div class="storecare_container">
 
         <div class="tabs">
-            <input class="input" name="tabs-1" type="radio" id="tab-1" />
+            <input class="input" name="tabs-1" type="radio" id="tab-1"checked="checked" />
             <label class="label" for="tab-1">가게 관리</label>
-            <div class="panel">
+            <div class="panel" >
                 <div class="line"></div>
                 <form action="/storenotice1" method="post">
                     <div class="storecare_logo">
@@ -529,32 +465,6 @@
 
 
 
-            <br>
-
-            <br>
-
-
-
-            <br>
-
-
-
-            <br>
-
-
-
-
-            <br>
-
-
-
-            <br>
-
-
-
-            <br>
-
-
         </div>
 
     </div>
@@ -636,7 +546,7 @@
 
 
     /*탭*/
-    const labels = document.querySelectorAll('.label');
+   /* const labels = document.querySelectorAll('.label');
     labels.forEach((label) => {
         label.addEventListener('click', () => {
             const panel = label.nextElementSibling;
@@ -648,7 +558,7 @@
                 panel.style.display = 'block';
             }
         });
-    });
+    });*/
 </script>
 
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
