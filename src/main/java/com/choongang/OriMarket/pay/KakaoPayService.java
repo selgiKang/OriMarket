@@ -1,6 +1,7 @@
 package com.choongang.OriMarket.pay;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Service;
@@ -86,7 +87,7 @@ public class KakaoPayService {
 
         String auth = "KakaoAK " + adminKey;
 
-        httpHeaders.set("Authorization", auth);
+        httpHeaders.set("Authorization", "535bfe22c2408903ccb259c7d0763974");
         httpHeaders.set("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
 
         return httpHeaders;

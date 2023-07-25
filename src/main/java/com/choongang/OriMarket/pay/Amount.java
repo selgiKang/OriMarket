@@ -11,5 +11,4 @@ public class Amount {
     private Integer tax; // 부가세 금액
     private Integer point; // 사용한 포인트
     private Integer discount; // 할인금액
-    private Integer green_deposit; // 컵 보증금
 }
