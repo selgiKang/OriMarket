@@ -467,7 +467,7 @@
 
                 <div class="first_menu">
                     <img src="../../img/store/확성기.png" alt="오리시장 공지사항"> <!-- alt 속성 추가 -->
-                    <h5>고객센터</h5>
+                    <a href="/business_manage1"><h5>고객센터</h5></a>
                 </div>
             </div>
         </div>

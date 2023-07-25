@@ -84,6 +84,7 @@ public class BusinessStoreController {
         List<Item> items1 = buUserNumber.getBusinessStores().get(0).getItems();
         model.addAttribute("items",items1);
 
+
         return "/store/seller_itemList";
     }
 
@@ -92,27 +93,35 @@ public class BusinessStoreController {
     @DeleteMapping("/delete_items")
     @ResponseBody
     public String deleteSelectedItems(@RequestParam("itemIds[]")  List<Long> itemIds,HttpSession session) {
-        String buUserId = (session.getAttribute("buUserId")).toString();
 
         for(Long deleteItemId :itemIds){
             itemService.deleteItems(deleteItemId);
         }
 
-        Map<String, Object> response = new HashMap<>();
-        response.put("buUserId", buUserId);
-        response.put("success","success");
-        System.out.println("아이디? "+buUserId);
-        return "response";
+        System.out.println("여기까지는와지는가?11");
+        return "success";
     }
 
 
 
     //7.23 전체메뉴의 가게관리연결
     @GetMapping("/business_manage")
-    public String businessManage() {
+    public String businessManage(HttpSession session,Model model) {
+        BusinessUser buUserId = businessUserRepository.findByBuUserId((String) session.getAttribute("buUserId"));
+        List<BusinessStore> businessStores = buUserId.getBusinessStores();
+        if (businessStores.isEmpty()) {
+        } else {
+            model.addAttribute("save", businessStores.get(0));
+        }
+        return "business/businessManage/business_manage";
+    }
+
+    @GetMapping("/business_manage1")
+    public String businessManage1(HttpSession session,Model model) {
 
         return "business/businessManage/business_manage";
     }
+
 
 
 };

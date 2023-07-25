@@ -98,7 +98,9 @@ public class StoreController {
 
     @PostMapping("/s2")
     public String storenotice31(@ModelAttribute Item item, HttpSession session, Model model){
+
         itemService.save(item,session,model);
+        System.out.println("이게또실행되나?");
         return "store/seller_itemList";
     }
 
