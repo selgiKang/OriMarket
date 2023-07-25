@@ -44,6 +44,8 @@ public class BusinessStoreController {
         String imageUrl = IMAGE_PATH+file.getOriginalFilename();
         String s = imageService.saveStoreImage(file);
         System.out.println("이건머죠::?"+s);
+
+        // BusinessStoreService의 save 메서드 호출
         businessStoreService.save(businessStore,session,model,s);
         return "business/storenotice_new";
     }

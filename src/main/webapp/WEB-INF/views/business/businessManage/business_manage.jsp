@@ -328,7 +328,7 @@
             <label class="label" for="tab-1">가게 관리</label>
             <div class="panel" >
                 <div class="line"></div>
-                <form action="/storenotice1" method="post">
+                <form action="/storenotice1" method="post" enctype="multipart/form-data">
                     <div class="storecare_logo">
                         <h3>로고</h3>
                         <input type="file" accept="image/*" name="pictureUrl" id="logo-upload" onchange="previewPicture(event)" />
@@ -545,20 +545,7 @@
     }
 
 
-    /*탭*/
-   /* const labels = document.querySelectorAll('.label');
-    labels.forEach((label) => {
-        label.addEventListener('click', () => {
-            const panel = label.nextElementSibling;
-            const isOpen = panel.style.display === 'block';
 
-            if (isOpen) {
-                panel.style.display = 'none';
-            } else {
-                panel.style.display = 'block';
-            }
-        });
-    });*/
 </script>
 
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>

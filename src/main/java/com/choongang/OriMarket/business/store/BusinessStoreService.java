@@ -34,17 +34,22 @@ public class BusinessStoreService {
 
 
     public void save(BusinessStore businessStore, HttpSession session, Model model, String s){
+        // 세션에서 사업자 번호 가져오기
         Object buUserNumber = session.getAttribute("buUserNumber");
 
+        // 가게 정보에 맞는 Market 조회
         Long marketSeq = Long.valueOf((session.getAttribute("marketSeq")).toString());
         Market byId = marketRepository.findById(marketSeq).orElseThrow();
         businessStore.setMarket(byId);
 
+        // BusinessUser 조회 및 가게 정보 설정
         BusinessUser businessUser = businessUserRepository.findById((Long)buUserNumber).orElseThrow();
         businessStore.setBusinessUser(businessUser);
         businessStore.setBuStoreImageUrl(s);
+
+        // 가게 정보를 데이터베이스에 저장
         BusinessStore save = businessStoreRepository.save(businessStore);
-        System.out.println("aaaaaa"+save.getBuStoreImageUrl());
+        //System.out.println("aaaaaa"+save.getBuStoreImageUrl());
         model.addAttribute("save",save);
 
 
@@ -70,12 +75,12 @@ public class BusinessStoreService {
     public List<BusinessStore> searchStore(String searchKeyword){
         List<BusinessStore> byStoreName = businessStoreRepository.findByBuStoreName(searchKeyword);
 
-        if(byStoreName.isEmpty()){
+        /*if(byStoreName.isEmpty()){
             return byStoreName;
         }else {
             return byStoreName;
-        }
+        }*/
         //이거 왜안들어갈까요?
-
+        return byStoreName;
     }
 }
