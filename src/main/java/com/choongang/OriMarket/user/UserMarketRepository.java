@@ -1,5 +1,6 @@
 package com.choongang.OriMarket.user;
 
+import com.choongang.OriMarket.business.market.Market;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

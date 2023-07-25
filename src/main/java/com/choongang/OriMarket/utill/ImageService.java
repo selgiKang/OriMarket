@@ -17,7 +17,7 @@ public class ImageService {
         String originalFilename = multipartFile.getOriginalFilename();
         String imageUrl = IMAGE_PATH+originalFilename;
         Path saveImagePath = Paths.get(imageUrl);
-        System.out.println("imageUrl"+imageUrl);
+
         // 저장할 디렉토리 생성
         File directory = new File(IMAGE_PATH);
         if (!directory.exists()) {
@@ -25,10 +25,9 @@ public class ImageService {
         }
         // 파일을 저장할 경로 생성
         File destinationFile = new File(saveImagePath.toUri());
-        System.out.println("saveImagePath.getFileName()"+saveImagePath);
+
         // MultipartFile을 파일로 저장
-        //multipartFile.transferTo(destinationFile);
-        System.out.println("destinationFile.getName()"+destinationFile);
+        multipartFile.transferTo(destinationFile);
 
         return destinationFile.getName();
     }
@@ -48,7 +47,7 @@ public class ImageService {
         File destinationFile = new File(saveImagePath.toUri());
 
         // MultipartFile을 파일로 저장
-       // multipartFile.transferTo(destinationFile);
+        multipartFile.transferTo(destinationFile);
 
         return destinationFile.getName();
     }

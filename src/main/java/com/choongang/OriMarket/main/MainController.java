@@ -49,15 +49,15 @@ public class MainController {
 
     @GetMapping("/search")
     public String search(HttpSession session,Model model) {
-//        Object userId = session.getAttribute("userId");
-//        if(userId ==  null){
-//            return "error/login_error";
-//        }else{
-            User findUser = userRepository.findByUserId(String.valueOf(session.getAttribute("userId")));
-            List<UserAddress> userAddresses = findUser.getUserAddresses();
-            model.addAttribute("userAd",userAddresses);
+
+        User findUser = userRepository.findByUserId(String.valueOf(session.getAttribute("userId")));
+        if(findUser == null){
             return "main/search";
-       // }
+        } else {
+            List<UserAddress> userAddresses = findUser.getUserAddresses();
+            model.addAttribute("userAd", userAddresses);
+            return "main/search";
+        }
     }
 
     @GetMapping("/mylocation")

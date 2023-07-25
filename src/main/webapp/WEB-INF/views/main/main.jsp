@@ -104,34 +104,47 @@
                                 <p style="font-weight: 800;">내가 등록한시장</p>
                             </a>
                         </div>
-                        <c:if test="${!empty marketName}">
+
+                        <c:forEach var="i" items="${userMarket}" varStatus="status">
+
+                        <c:if test="${status.index == 0}">
+                        <c:if test="${!empty i.market.marketName}">
                         <div class="connextion_mk2_wrap change_marketimg_wrap" style="margin-right:20px; background:none;">
                             <img class="connexion_market_img" src="../../img/main/market2.png">
                             <a class="connextion_mk2 change_marketimg" href="javascript:(0);">
-                                <p>${marketName}</p>
+                                <p>${i.market.marketName}</p>
                             </a>
                         </div>
                         </c:if>
-                        <c:if test="${empty marketName}">
+                        </c:if>
+                        </c:forEach>
+                        <c:if test="${empty userMarket}">
                             <div class="connextion_mk2_wrap btn-open-popup" onclick="modal"><a class="connextion_mk2" href=""><p>단골시장등록</p></a><p style="font-size: 40px;">+</p></div>
                         </c:if>
+
                     </div>
+
                     <div class="connexion_marketbox_wrap" style="padding:0 20px 0 25px;">
-                        <c:if test="${!empty marketName}">
-                            <div class="connextion_mk3_wrap change_marketimg_wrap" style="margin-right:20px; background:none;">
-                                <img class="connexion_market_img" src="../../img/main/market2.png">
-                                <a class="connextion_mk3 change_marketimg" href="javascript:(0);">
-                                    <p>${marketName}</p>
-                                </a>
-                            </div>
-                        </c:if>
-                        <c:if test="${empty marketName}">
-                            <div class="connextion_mk3_wrap btn-open-popup" onclick="modal"><a class="connextion_mk3" href=""><p>단골시장등록</p></a><p style="font-size: 40px;">+</p></div>
+                        <c:forEach var="i" items="${userMarket}" varStatus="status">
+                            <c:if test="${status.index == 1}">
+                                <c:if test="${!empty i.market.marketName}">
+                                    <div class="connextion_mk3_wrap change_marketimg_wrap" style="margin-right:20px; background:none;">
+                                        <img class="connexion_market_img" src="../../img/main/market2.png">
+                                        <a class="connextion_mk3 change_marketimg" href="javascript:(0);">
+                                            <p>${i.market.marketName}</p>
+                                        </a>
+                                    </div>
+                                </c:if>
+                            </c:if>
+                        </c:forEach>
+                        <c:if test="${empty userMarket}">
+                        <div class="connextion_mk3_wrap btn-open-popup" onclick="modal"><a class="connextion_mk3" href=""><p>단골시장등록</p></a><p style="font-size: 40px;">+</p></div>
                         </c:if>
                       <div class="connextion_mk4_wrap btn-open-popup" onclick="modal"><a class="connextion_mk4" href=""><p>단골시장등록</p></a><p style="font-size: 40px;">+</p></div>
                     </div>
                 </div>
             </div>
+
             <div id="main_banner_wrap">
                 <div class="main_slidebanner_box slideshow-container">
                     <div class="mySlides fade"><img class="slideshow-image" src="../../img/main/exsliderbn.png" alt="메인배너1"></div>
