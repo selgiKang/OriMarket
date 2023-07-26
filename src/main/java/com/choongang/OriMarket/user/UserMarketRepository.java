@@ -10,6 +10,6 @@ public interface UserMarketRepository extends JpaRepository<UserMarket, Long> {
 
     List<UserMarket> findByUser(User user);
 
-    UserMarket findByMarket(Market market);
+    List<UserMarket> findByMarket(Market market);
 }
 

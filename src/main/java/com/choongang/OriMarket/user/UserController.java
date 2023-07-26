@@ -17,10 +17,7 @@ import org.thymeleaf.model.IModel;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Controller
 @RequiredArgsConstructor
@@ -179,11 +176,20 @@ public class UserController {
     }
 
     @GetMapping("/deleteUserMarket")
-    public String deleteUserMarket(@RequestParam("userMarketName") String userMarketName){
-        Market byMarketName = marketRepository.findByMarketName(userMarketName);
-        UserMarket byMarket = userMarketRepository.findByMarket(byMarketName);
-        userMarketRepository.delete(byMarket);
-        return "main/main";
+    public String deleteUserMarket(@RequestParam("userMarketSeq") String userMarketSeq,HttpSession session, Model model){
+        UserMarket byId = userMarketRepository.findById(Long.valueOf(userMarketSeq)).orElseThrow();
+        userMarketRepository.delete(byId);
+
+        if(session.getAttribute("userSeq") != null){
+            //유저 번호 찾아서
+            Long userSeq = Long.valueOf((session.getAttribute("userSeq")).toString());
+            User user= userRepository.findByUserSeq(userSeq);
+            model.addAttribute("userMarket", user.getUserMarkets());
+
+            return "main/main";
+        }else {
+            return "main/main";
+        }
     }
 
 
