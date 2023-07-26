@@ -100,7 +100,6 @@ public class OrderController {
             //지난 모든 주문들 출력
             List<Order> pastOrderList = orderService.findByUserIdList(userId);
             model.addAttribute("pastOrderList", pastOrderList);
-
             return "order/order_pastorder";
         }
     }
