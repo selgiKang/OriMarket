@@ -108,14 +108,14 @@
                         <c:forEach var="i" items="${userMarket}" varStatus="status">
 
                         <c:if test="${status.index == 0}">
-                        <c:if test="${!empty i.market.marketName}">
-                        <div class="connextion_mk2_wrap change_marketimg_wrap" style="margin-right:20px; background:none;">
-                            <img class="connexion_market_img" src="../../img/main/market2.png">
-                            <a class="connextion_mk2 change_marketimg" href="javascript:(0);">
-                                <p>${i.market.marketName}</p>
-                            </a>
-                        </div>
-                        </c:if>
+                            <c:if test="${!empty i.market.marketName}">
+                                <div class="connextion_mk2_wrap change_marketimg_wrap" style="margin-right:20px; background:none;">
+                                    <img class="connexion_market_img" src="../../img/main/market2.png">
+                                    <a class="connextion_mk2 change_marketimg" href="${i.market.marketHref}">
+                                        <p>${i.market.marketName}</p>
+                                    </a>
+                                </div>
+                            </c:if>
                         </c:if>
                         </c:forEach>
                         <c:if test="${empty userMarket}">
@@ -130,7 +130,7 @@
                                 <c:if test="${!empty i.market.marketName}">
                                     <div class="connextion_mk3_wrap change_marketimg_wrap" style="margin-right:20px; background:none;">
                                         <img class="connexion_market_img" src="../../img/main/market2.png">
-                                        <a class="connextion_mk3 change_marketimg" href="javascript:(0);">
+                                        <a class="connextion_mk3 change_marketimg" href="${i.market.marketHref}">
                                             <p>${i.market.marketName}</p>
                                         </a>
                                     </div>

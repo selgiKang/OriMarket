@@ -36,6 +36,10 @@ public class Market {
     @Column
     private String marketLongitude;
 
+    //시장 주소
+    @Column
+    private String marketHref;
+
     @OneToMany(mappedBy = "market")
     private List<BusinessUser> businessUsers = new ArrayList<>();
 
