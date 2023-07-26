@@ -76,7 +76,7 @@
             </form>
             <div id="list" style="margin-top:15px;">
                 <div style="margin-bottom:20px;">
-                    <a href="#">아이디 찾기</a> / <span><a href="#">비밀번호 찾기</a></span>
+                    <a href="/findUserId">아이디 찾기</a> / <span><a href="#">비밀번호 찾기</a></span>
                 </div>
                 <div class="join_btn_wrap" style="margin-bottom:40px;"><a href="/join" class="join_btn">회원가입</a></div>
                 <a href="/login1" class="business_logingo">사업자 로그인하러가기 ></a>
