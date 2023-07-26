@@ -175,7 +175,7 @@
                                                 <h2 class="menu_name">${a.itemName}</h2>
                                                 <input type="hidden" name="itemName">
                                                 <h6 class="menu-description">${a.itemInfo}</h6>
-                                                <p>현재 '${a.itemName}'은/는 품절입니다.</p>
+                                                <h5 class="menu_price" style="line-height: 0;">품절상품입니다.</h5>
                                                 <input type="hidden" name="itemPrice">
                                                 <input type="hidden" name="count" value="1">
                                                 <input type="hidden" name="itemId" value="${a.itemId}">
