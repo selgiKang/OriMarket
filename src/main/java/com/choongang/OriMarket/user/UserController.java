@@ -53,10 +53,14 @@ public class UserController {
 
     @GetMapping("/review")
     public String review(HttpSession session,Model model) {
-        User byId = userRepository.findById((Long) session.getAttribute("userSeq")).orElseThrow();
-        List<Review> reviews = byId.getReviews();
-        model.addAttribute("re",reviews);
-        return "user/user_reviewlist";
+        if(session.getAttribute("userSeq")==null){
+            return "error/login_error";
+        }else {
+            User byId = userRepository.findById((Long) session.getAttribute("userSeq")).orElseThrow();
+            List<Review> reviews = byId.getReviews();
+            model.addAttribute("re", reviews);
+            return "user/user_reviewlist";
+        }
     }
 
     @GetMapping("/mypage")
