@@ -410,9 +410,8 @@
 </head>
 <body>
 
-<div>
+
 <jsp:include page="../header/business_header_index.jsp" />
-</div>
 
 <div class="main-container">
 
