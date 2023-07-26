@@ -163,13 +163,20 @@
 </div>
 <script>
 	function submitForm() {
-		const confirmed = confirm("장바구니에 담으시겠습니까?");
-		if (confirmed) {
-			// 아이템을 장바구니에 추가하는 동작을 여기에 구현합니다.
-			// 예를 들어, JavaScript를 사용하여 폼을 제출할 수 있습니다.
-			document.getElementById("cartForm").submit();
-		} else {
-			// 사용자가 "취소"를 클릭한 경우 추가적인 동작을 여기에 추가할 수 있습니다.
+		const userId = '<%= session.getAttribute("userId") %>';
+		console.log("userId:", userId); // userId의 값을 콘솔에 출력해보세요.
+		if (userId === null || userId === "null") {
+			alert("장바구니를 이용하시려면 로그인이 필요합니다.");
+			window.location.href = "/mypage";
+		}else {
+			const confirmed = confirm("장바구니에 담으시겠습니까?");
+			if (confirmed) {
+				// 아이템을 장바구니에 추가하는 동작을 여기에 구현합니다.
+				// 예를 들어, JavaScript를 사용하여 폼을 제출할 수 있습니다.
+				document.getElementById("cartForm").submit();
+			} else {
+				// 사용자가 "취소"를 클릭한 경우 추가적인 동작을 여기에 추가할 수 있습니다.
+			}
 		}
 	}
 
