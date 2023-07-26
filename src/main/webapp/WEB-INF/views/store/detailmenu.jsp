@@ -151,6 +151,9 @@
 								<td class="detailmenu_count"><input type="text" id="countInput" name="count" value="1" size="1"></td>
 								<td><button type="button" class="menu_btn_plus" onclick="plusBtn()"><i class="fas fa-solid fa-square-plus" style="color: #46a973; font-size: 24px;"></i></button></td>
 							</tr>
+							<tr>
+								<td><small style="color: red">현재 재고: ${item.itemCnt}개</small></td>
+							</tr>
 						</table>
 					</div>
 				</div>
@@ -159,8 +162,6 @@
 					<%--올 때 재고 확인해서 hidden으로 넣기--%>
 					<input type="hidden" id="itemCnt" value="${item.itemCnt}">
 					<input type="hidden" id="cartCnt" value="${cartItem}">
-					<div>${item.itemCnt}개</div>
-					<div>${cartItem}</div>
 				</div>
 			</form>
 		</div>
