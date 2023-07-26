@@ -355,4 +355,9 @@
             modalElement.style.top = '-300px'; // 모달 닫힐 때 위치
         }
     }
+
+    window.onload = function() {
+        const modalElement = document.getElementById('myModal');
+        modalElement.style.top = '-300px'; // 모달 닫힐 때 위치
+    };
 </script>
