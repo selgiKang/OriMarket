@@ -24,7 +24,7 @@ public class Order {
     @Column(name = "order_number", nullable = false)
     private String orderNumber;
 
-    //가게이름
+    //시장이름
     @Column
     private String orderMarketName;
 
@@ -78,6 +78,10 @@ public class Order {
     @Column
     private String forRider;
 
+    //배달 타입
+    @Column
+    private String deliveryType;
+
     //시장 번호
     @ManyToOne
     @JoinColumn(name="market_seq")
@@ -92,8 +96,8 @@ public class Order {
     @OneToOne(mappedBy = "orderNumber")
     private RealTimeStatus realTimeStatus;
 
-    @Transient
-    private String next_redirect_pc_url;
+//    @Transient
+//    private String next_redirect_pc_url;
 
     //출력 날짜
     @Transient
@@ -102,6 +106,7 @@ public class Order {
     //끝나는 날짜
     @Transient
     private String calculate_date_last;
+
 
 
 }

@@ -33,11 +33,10 @@ hr{
     margin-top: 15px;
 }
 #search_area > form > span {
-    color: black;
+    color: #333;
     font-weight: bold;
     cursor: pointer;
-    padding-left: 8px;
-    width: 25%;
+    padding: 9px 0 7px 8px;
 
 }
 .mypage1_h2{

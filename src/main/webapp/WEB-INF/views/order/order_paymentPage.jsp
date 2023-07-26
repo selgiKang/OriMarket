@@ -41,13 +41,13 @@
 			<div id= "paymentpage_section_2">
 				<table id= "paymentpage_table_1">
 					<tr class= "paymentpage_tr_1">
-						<th colspan= "3"><input type="text" name = "orderMarketName" value="카트 시장 이름 받기" readonly></th>
+						<th colspan= "3"><input type="text" name = "orderMarketName" value="${cartItemList[0].businessStore.market.marketName}" readonly></th>
 					</tr>
 
 					<!-- 2023_07_02 같은 가게 물건이면?? 반복문 출력 고민 -->
 					<!-- 반복문 출력 위치 -->
 					<tr class= "paymentpage_tr_1">
-						<th colspan= "3"><input type="text" name = "orderStoreName" value="카트 가게 이름 받기" readonly></th>
+						<th colspan= "3"><input type="text" name = "orderStoreName" value="${cartItemList[0].businessStore.buStoreName}" readonly></th>
 					</tr>
 					<c:forEach var="cartItems" items="${cartItemList}">
 						<input type="hidden" name="businessUser" value="${cartItems.item.businessStore.businessUser.buUserNumber}">
@@ -60,6 +60,7 @@
 					<tr>
 						<td colspan= "3" style= "text-align: right;"><input type="text" name="orderGoodsNum" value="${cartItems.count}" readonly></td>
 					</tr>
+						${cartItems.cart.deliveryType}
 					</c:forEach>
 					<!-- 반복문 출력 끝 -->
 					<tr align="center">
@@ -69,19 +70,22 @@
 					</tr>
 				</table>
 				<table id= "paymentpage_table_2">
+					<tr>
+						<td><input type="text" name="deliveryType" value="${cart.deliveryType}" readonly></td>
+					</tr>
 					<tr class= "paymentpage_tr_3">
 						<th colspan= "2">물건 금액</th>
-						<td class= "paymentpage_td_3"><input type="text" name="orderGoodsTotalPrice" value="${totalPrice}" readonly></td>
+						<td class= "paymentpage_td_3"><input type="text" name="orderGoodsTotalPrice" value="${cart.cartTotalPrice}" readonly></td>
 					</tr>
 					<tr class= "paymentpage_tr_3" >
 						<th colspan= "2">배달비</th>
-						<td class= "paymentpage_td_3"><input type="text" name="orderDeliveryPrice" value="${deliveryPrice}" readonly></td>
+						<td class= "paymentpage_td_3"><input type="text" name="orderDeliveryPrice" value="${cart.cartDeliveryPrice}" readonly></td>
 					</tr>
 				</table>
 				<table id= "paymentpage_table_3">
 					<tr class= "paymentpage_tr_4">
 						<th colspan= "2">총 결제 금액</th>
-						<td class= "paymentpage_td_4"><input type="text" name="orderTotalPrice" value="${totalPrice+deliveryPrice}" readonly></td>
+						<td class= "paymentpage_td_4"><input type="text" name="orderTotalPrice" value="${cart.cartTotalPrice+cart.cartDeliveryPrice}" readonly></td>
 					</tr>
 				</table>
 			</div>

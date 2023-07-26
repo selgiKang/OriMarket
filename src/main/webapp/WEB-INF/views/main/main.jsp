@@ -58,6 +58,26 @@
             0% {margin-top: 0px;}
             100% {margin-top: 8px;}
         }
+
+        #orderReceipt_btn_cancel{
+            width:100%;
+            text-align: right;
+        }
+        #orderReceipt_btn_cancel>a:hover {
+            text-decoration: none;
+            cursor: pointer;
+            opacity: 0.7;
+        }
+
+        #orderReceipt_btn_cancel1{
+            width:100%;
+            text-align: right;
+        }
+        #orderReceipt_btn_cancel1>a:hover {
+            text-decoration: none;
+            cursor: pointer;
+            opacity: 0.7;
+        }
     </style>
 </head>
 <body>
@@ -100,24 +120,25 @@
                     <div class="connexion_marketbox_wrap" style="padding:10px 20px;">
                         <div class="connextion_mk1_wrap" style="margin-right:20px;">
                             <img class="connexion_market_img" src="../../img/main/market2.png">
-                            <a class="connextion_mk1" href="/shinwon_marketmap">
+                            <a class="connextion_mk1" href="/shinwon_marketmap?marketName=신원시장">
                                 <p style="font-weight: 800;">내가 등록한시장</p>
                             </a>
                         </div>
-
-                        <c:forEach var="i" items="${userMarket}" varStatus="status">
-
-                        <c:if test="${status.index == 0}">
-                        <c:if test="${!empty i.market.marketName}">
-                        <div class="connextion_mk2_wrap change_marketimg_wrap" style="margin-right:20px; background:none;">
-                            <img class="connexion_market_img" src="../../img/main/market2.png">
-                            <a class="connextion_mk2 change_marketimg" href="javascript:(0);">
-                                <p>${i.market.marketName}</p>
-                            </a>
-                        </div>
+                        <c:if test="${!empty userMarket}">
+                            <c:forEach var="i" items="${userMarket}" varStatus="status">
+                                <c:if test="${status.index == 0}">
+                                    <c:if test="${!empty i.market.marketName}">
+                                        <div class="connextion_mk2_wrap change_marketimg_wrap" style="margin-right:20px; background:none; position: relative">
+                                            <div id="orderReceipt_btn_cancel" style="position: absolute; right: -7px; top: 12px; z-index: 9999;"><a href="/deleteUserMarket?userMarketSeq=${i.userMarketSeq}"><i class="fas fa-regular fa-xmark"></i></a></div>
+                                            <img class="connexion_market_img" src="../../img/main/market2.png">
+                                            <a class="connextion_mk2 change_marketimg" href="${i.market.marketHref}?marketName=${i.market.marketName}">
+                                                <p>${i.market.marketName}</p>
+                                            </a>
+                                        </div>
+                                    </c:if>
+                                </c:if>
+                            </c:forEach>
                         </c:if>
-                        </c:if>
-                        </c:forEach>
                         <c:if test="${empty userMarket}">
                             <div class="connextion_mk2_wrap btn-open-popup" onclick="modal"><a class="connextion_mk2" href=""><p>단골시장등록</p></a><p style="font-size: 40px;">+</p></div>
                         </c:if>
@@ -125,18 +146,21 @@
                     </div>
 
                     <div class="connexion_marketbox_wrap" style="padding:0 20px 0 25px;">
-                        <c:forEach var="i" items="${userMarket}" varStatus="status">
-                            <c:if test="${status.index == 1}">
-                                <c:if test="${!empty i.market.marketName}">
-                                    <div class="connextion_mk3_wrap change_marketimg_wrap" style="margin-right:20px; background:none;">
-                                        <img class="connexion_market_img" src="../../img/main/market2.png">
-                                        <a class="connextion_mk3 change_marketimg" href="javascript:(0);">
-                                            <p>${i.market.marketName}</p>
-                                        </a>
-                                    </div>
+                        <c:if test="${!empty userMarket}">
+                            <c:forEach var="i" items="${userMarket}" varStatus="status">
+                                <c:if test="${status.index == 1}">
+                                    <c:if test="${!empty i.market.marketName}">
+                                        <div class="connextion_mk3_wrap change_marketimg_wrap" style="margin-right:20px; background:none; position: relative;" >
+                                            <div id="orderReceipt_btn_cancel1" style="position: absolute; right: -7px; top: 12px; z-index: 9999;"><a href="/deleteUserMarket?userMarketSeq=${i.userMarketSeq}"><i class="fas fa-regular fa-xmark"></i></a></div>
+                                            <img class="connexion_market_img" src="../../img/main/market2.png">
+                                            <a class="connextion_mk3 change_marketimg" href="${i.market.marketHref}?marketSeq=${market.marketSeq}">
+                                                <p>${i.market.marketName}</p>
+                                            </a>
+                                        </div>
+                                    </c:if>
                                 </c:if>
-                            </c:if>
-                        </c:forEach>
+                            </c:forEach>
+                        </c:if>
                         <c:if test="${empty userMarket}">
                         <div class="connextion_mk3_wrap btn-open-popup" onclick="modal"><a class="connextion_mk3" href=""><p>단골시장등록</p></a><p style="font-size: 40px;">+</p></div>
                         </c:if>

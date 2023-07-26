@@ -34,7 +34,6 @@ public class BusinessUserService {
         System.out.println("서비스 넘버:"+session.getAttribute("buUserNumber"));
         List<Review> all = reviewRepository.findAll();
 
-
         if(findbusinessUser.getBusinessStores().isEmpty()) {
         }else{
                 List<BusinessStore> businessStores = findbusinessUser.getBusinessStores();

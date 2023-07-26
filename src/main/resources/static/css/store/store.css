@@ -62,7 +62,7 @@ a {
 .menu-content {
     /*flex: 1;*/
     /* 230723 승원 */
-    width: 60%;
+    width: 50%;
     height: 100%;
     padding: 0 15px 0 0;
 }
@@ -75,7 +75,7 @@ a {
 }
 
 .menu-content h6 {
-    width: 180px;
+    width: 160px;
     height: 40px;
     font-size: 14px;
     margin: 5px 0;
@@ -96,12 +96,12 @@ a {
     overflow: hidden;
 }
 
-.menu-image img {
+/*.menu-image img {
     width: 150px;
     height: 150px;
     object-fit: cover;
     border-radius: 4px;
-}
+}*/
 
 /* 라인 */
 .line {
@@ -404,8 +404,8 @@ ul {
 }
 
 .menu-image img {
-    width: 100px;
-    height: 100px;
+/*    width: 100px;
+    height: 100px;*/
     object-fit: cover;
     border-radius: 4px;
 }

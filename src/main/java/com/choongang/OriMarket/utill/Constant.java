@@ -8,4 +8,6 @@ public class Constant {
 
     public static final String REVIEW_IMAGE_PATH = "src\\main\\resources\\static\\img\\review\\";
 
+    public static final String ITEM_IMAGE_PATH = "src\\main\\resources\\static\\img\\store\\item\\";
+
 }

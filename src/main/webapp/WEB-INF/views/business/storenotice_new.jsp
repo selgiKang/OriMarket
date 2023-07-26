@@ -377,6 +377,9 @@
             font-size: 14px;
             cursor: pointer;
             font-family: 'omyu pretty', Arial, sans-serif;
+        }
+
+
 
     </style>
     <%
@@ -407,6 +410,9 @@
     %>
 </head>
 <body>
+
+
+<jsp:include page="../header/business_header_index.jsp" />
 
 <div class="main-container">
 
@@ -466,7 +472,7 @@
 
                 <div class="first_menu">
                     <img src="../../img/store/확성기.png" alt="오리시장 공지사항"> <!-- alt 속성 추가 -->
-                    <h5>고객센터</h5>
+                    <a href="/business_manage1"><h5>고객센터</h5></a>
                 </div>
             </div>
         </div>
@@ -480,16 +486,23 @@
             <input class="input" name="tabs-1" type="radio" id="tab-1" />
             <label class="label" for="tab-1">가게 관리</label>
             <div class="panel">
+                <h6 style="color: #818083; margin-top: 7px;">※가게 정보수정은 전체메뉴 가게관리에서 해주세요.</h6>
                 <div class="line"></div>
                 <form action="/storenotice1" method="post" enctype="multipart/form-data">
                 <div class="storecare_logo">
-                    <h3>로고</h3>
+                    <h3 style="font-size: small">내 가게 사진</h3>
+                    <c:if test="${empty save.buStoreImageUrl}">
                     <input type="file" accept="image/*" name="pictureUrl" id="logo-upload" onchange="previewPicture(event)"/>
-                    <div id="logo-preview"></div>
+                    </c:if>
+                    <div id="logo-preview">
+                        <c:if test="${!empty save.buStoreImageUrl}">
+                            <img src="../../img/store/${save.buStoreImageUrl}" style="max-width: 100%; height: auto;">
+                        </c:if>
+                    </div>
                 </div>
                 <div class="line"></div>
                     <div class="storecare_name">
-                        <h3>가게 이름</h3>
+                        <h3 style="font-size: small">내 가게 이름</h3>
                         <input type="hidden" name="buStoreNumber" value="${save.buStoreNumber}">
                         <c:if test="${empty save.buStoreName}">
                             <input type="text" id="store-name-input" name="buStoreName" placeholder="가게 이름">
@@ -497,41 +510,41 @@
 
                         <%--입력창--%>
                         <c:if test="${!empty save.buStoreName}">
-                            <input type="text" id="store-name-input" name="buStoreName" value="${save.buStoreName}">
+                            <input type="hidden" id="store-name-input" name="buStoreName" value="${save.buStoreName}">
                         </c:if>
 
                        <%-- 7.24 테스트 승엽--%>
                         <%-- 입력된 가게 이름 --%>
                         <c:if test="${!empty save.buStoreName}">
-                            <p>${save.buStoreName}</p>
+                            <p style="margin-top: 10px; font-size: 23px; color: #2382f6">${save.buStoreName}</p>
                         </c:if>
-                        <h6>※변경이 필요한 경우 고객센터로 문의해주세요.</h6>
+                        <h6 style="color: #818083; margin-top: 7px;">※변경이 필요한 경우 고객센터로 문의해주세요.</h6>
                     </div>
 
                     <div class="line"></div>
 
                     <div class="storecare_storenumber">
-                        <h3>가게 번호</h3>
+                        <h3 style="font-size: small">내 가게 전화번호</h3>
                         <c:if test="${empty save.buStorePhone}">
                         <input type="text" id="store-number-input" name="buStorePhone" placeholder="가게 번호"/>
                         </c:if>
 
                         <%--입력창--%>
                             <c:if test="${!empty save.buStorePhone}">
-                            <input type="text" id="store-number-input" name="buStorePhone" value="${save.buStorePhone}"/>
+                            <input type="hidden" id="store-number-input" name="buStorePhone" value="${save.buStorePhone}"/>
                         </c:if>
 
                         <%--//7.24 테스트 승엽--%>
                         <%-- 입력된 가게 번호를 표시합니다. --%>
                        <c:if test="${!empty save.buStorePhone}">
-                            <p>${save.buStorePhone}</p>
+                            <p style="margin-top: 10px; font-size: 23px; color: #2382f6">${save.buStorePhone}</p>
                         </c:if>
                     </div>
 
                     <div class="line"></div>
 
                     <div class="storecare_category">
-                        <h3>가게 카테고리</h3>
+                        <h3 style="font-size: small">내 가게 카테고리</h3>
                         <c:if test="${empty save.buStoreCategory}">
                             <select name="buStoreCategory">
                                 <option value="채소">채소</option>
@@ -552,7 +565,7 @@
                             <%--<input type="text" id="store-category-input" name="buStoreCategory" value="${save.buStoreCategory}"/>--%>
                         </c:if>
 
-                        <c:if test="${!empty save.buStoreCategory}">
+                       <%-- <c:if test="${!empty save.buStoreCategory}">
                             <select name="buStoreCategory">
                                 <c:forEach var="category" items="${['채소', '과일,견과,쌀', '수산,해산물,건어물', '정육,계란', '국,반찬', '베이커리', '양념,오일', '음료,커피', '간식', '생활용품']}">
                                     <c:choose>
@@ -565,25 +578,25 @@
                                     </c:choose>
                                 </c:forEach>
                             </select>
-                        </c:if>
+                        </c:if>--%>
 
                         <%--//7.24 테스트 승엽--%>
                         <%-- 입력된 가게 카테고리를 표시합니다. --%>
                         <c:if test="${!empty save.buStoreCategory}">
-                            <p>${save.buStoreCategory}</p>
+                            <p style="margin-top: 10px; font-size: 23px; color: #2382f6">${save.buStoreCategory}</p>
                         </c:if>
                     </div>
                     <div class="line"></div>
 
                     <div class="storecare_location">
-                        <h3>가게 위치 등록</h3>
+                        <h3 style="font-size: small" >내 가게 주소</h3>
                         <c:if test="${empty save.buStoreAddress}">
                         <input type="text" id="store-location-input" name="buStoreAddress" placeholder="가게를 위치를 지정해주세요.">
                         </c:if>
 
                      <%--입력창--%>
                             <c:if test="${!empty save.buStoreAddress}">
-                            <input type="text" id="store-location-input" name="buStoreAddress" value="${save.buStoreAddress}">
+                            <input type="hidden" id="store-location-input" name="buStoreAddress" value="${save.buStoreAddress}">
                         </c:if>
 
 
@@ -593,21 +606,23 @@
 
                         <%--입력창--%>
                             <c:if test="${!empty save.buStoreAddressDetail}">
-                            <input type="text" name="buStoreAddressDetail" id="buStoreAddressDetail" value="${save.buStoreAddressDetail}">
+                            <input type="hidden" name="buStoreAddressDetail" id="buStoreAddressDetail" value="${save.buStoreAddressDetail}">
                         </c:if>
 
+                        <c:if test="${empty save.buStoreAddress}">
                         <div class="btn_container">
                             <button type="button" class="btn_round" onclick="searchAddress()">주소검색</button>
                         </div>
+                        </c:if>
 
                         <br>
                       <%--  //7.24 테스트 승엽--%>
                         <%-- 입력된 가게 위치를 표시합니다. --%>
                         <c:if test="${!empty save.buStoreAddress}">
-                            <p>${save.buStoreAddress}</p>
+                            <p style="font-size: 23px; color: #2382f6">${save.buStoreAddress}</p>
                         </c:if>
                         <c:if test="${!empty save.buStoreAddressDetail}">
-                            <p>${save.buStoreAddressDetail}</p>
+                            <p style="margin-top: 2px; font-size: 23px; color: #2382f6">${save.buStoreAddressDetail}</p>
                         </c:if>
                     </div>
                     <!-- 수정 버튼으로 변경 -->

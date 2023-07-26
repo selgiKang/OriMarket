@@ -56,7 +56,7 @@
                 </div>
 
                 <!-- 김치천국 -->
-                <div class="map_bg_content3_icon store_kimchiheven_box" onclick="">
+                <div class="map_bg_content3_icon store_kimchiheven_box" onclick="location.href='/store?favStoreName=김치천국'">
                     <img class="store_kimchiheven_icon kimchi" src="../../img/marketmap/kimchi.png">
                     <p class="store_kimchiheven_txt">김치천국</p>
                 </div>

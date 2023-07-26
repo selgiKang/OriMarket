@@ -82,6 +82,7 @@
         color: gold;
     }
 </style>
+
 <body>${buStoreImage}
 <jsp:include page="../header/header_search.jsp" />
 <div class="main-container">
@@ -148,23 +149,44 @@
                             <%--메뉴1--%>
                             <form action="/${userId}/cart/${a.itemId}" method="get">
                             <c:forEach var="a" items="${al}">
-                            <div class="menu" type="button" onclick="/detailmenu/${a.itemId}">
-                                <a href="/detailmenu/${a.itemId}" style="position:relative; display:flex;">
-                                    <div class="menu-content">
-                                        <h2 class="menu_name">${a.itemName}</h2>
-                                            <input type="hidden" name="itemName">
-                                        <h6 class="menu-description">${a.itemInfo}</h6>
-                                        <h5 class="menu_price" style="line-height: 0;">${a.itemPrice} 원</h5>
-                                        <input type="hidden" name="itemPrice">
-                                        <input type="hidden" name="count" value="1">
-                                        <input type="hidden" name="itemId" value="${a.itemId}">
+                                <c:if test="${a.itemCnt>0}">
+                                    <div class="menu" type="button" onclick="/detailmenu/${a.itemId}">
+                                        <a href="/detailmenu/${a.itemId}" style="position:relative; display:flex;">
+                                            <div class="menu-content">
+                                                <h2 class="menu_name">${a.itemName}</h2>
+                                                <input type="hidden" name="itemName">
+                                                <h6 class="menu-description">${a.itemInfo}</h6>
+                                                <h5 class="menu_price" style="line-height: 0;">${a.itemPrice} 원</h5>
+                                                <input type="hidden" name="itemPrice">
+                                                <input type="hidden" name="count" value="1">
+                                                <input type="hidden" name="itemId" value="${a.itemId}">
+                                            </div>
+                                            <div class="menu-image"style="width:120px; height:120px; box-sizing:border-box; overflow:hidden;">
+                                                <img src="../../img/store/item/${a.itemImageUrl}" alt="메뉴이미지" style="width: 100%;height:100%;">
+                                                    <%--<a href="/user_review?itemId=${a.itemId}">리뷰작성하러가기</a>--%>
+                                            </div>
+                                        </a>
                                     </div>
-                                    <div class="menu-image">
-                                        <img src="../../img/store/watermelon.jpg" alt="메뉴이미지">
-                                        <%--<a href="/user_review?itemId=${a.itemId}">리뷰작성하러가기</a>--%>
+                                </c:if>
+                                <c:if test="${a.itemCnt==0}">
+                                    <div class="menu" type="button">
+                                       <%-- <a href="/detailmenu/${a.itemId}" style="position:relative; display:flex;">--%>
+                                            <div class="menu-content">
+                                                <h2 class="menu_name">${a.itemName}</h2>
+                                                <input type="hidden" name="itemName">
+                                                <h6 class="menu-description">${a.itemInfo}</h6>
+                                                <h5 class="menu_price" style="line-height: 0;">품절상품입니다.</h5>
+                                                <input type="hidden" name="itemPrice">
+                                                <input type="hidden" name="count" value="1">
+                                                <input type="hidden" name="itemId" value="${a.itemId}">
+                                            </div>
+                                            <div class="menu-image"style="width:120px; height:120px; box-sizing:border-box; overflow:hidden;">
+                                                <img src="../../img/store/item/${a.itemImageUrl}" alt="메뉴이미지" style="width: 100%;height:100%;">
+                                                    <%--<a href="/user_review?itemId=${a.itemId}">리뷰작성하러가기</a>--%>
+                                            </div>
+                                        </a>
                                     </div>
-                                </a>
-                            </div>
+                                </c:if>
                             </c:forEach>
                             </form>
                             <%-- &lt;%&ndash;메뉴2&ndash;%&gt;
@@ -193,8 +215,8 @@
                                     <h6 class="menu-description">${ menu.menu_info }</h6>
                                     <h5>${ menu.menu_price }</h5>
                                 </div>
-                                <div class="menu-image">
-                                    <img src="../../img/store/cold.jpg" alt="메뉴이미지">
+                                <div class="menu-image"style="width:120px; height:120px; box-sizing:border-box; overflow:hidden;">
+                                    <img src="../../img/store/cold.jpg" alt="메뉴이미지" style="width: 100%;width: 100%;height:100%;">
                                 </div>
                             </div>
                         </div>

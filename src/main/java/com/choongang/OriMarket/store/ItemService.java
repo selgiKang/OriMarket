@@ -40,9 +40,15 @@ public class ItemService {
         return item.getItemId();
     }
 
-    public void save(Item item, HttpSession session, Model model){
+    public void save(Item item, HttpSession session, Model model,String s){
+
         BusinessUser buUserNumber = businessUserRepository.findById((Long) session.getAttribute("buUserNumber")).orElseThrow();
         item.setBusinessStore(buUserNumber.getBusinessStores().get(0));
+        if(s.equals("null")){
+
+        }else {
+            item.setItemImageUrl(s);
+        }
         itemRepository.save(item);
 
         List<Item> items1 = buUserNumber.getBusinessStores().get(0).getItems();

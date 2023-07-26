@@ -21,16 +21,26 @@ public class MainController {
     private final MainService mainService;
 
     private final UserRepository userRepository;
-
     private final UserAddressRepository userAddressRepository;
 
     @GetMapping("/")
     public String main(HttpSession session, Model model) {
-        return "main/main";
+
+        if(session.getAttribute("userSeq") != null){
+            //유저 번호 찾아서
+            Long userSeq = Long.valueOf((session.getAttribute("userSeq")).toString());
+            User user= userRepository.findByUserSeq(userSeq);
+            model.addAttribute("userMarket", user.getUserMarkets());
+
+            return "main/main";
+        }else {
+            return "main/main";
+        }
     }
 
     @GetMapping("/connexion_market")
     public String connexion_market() {
+        
         return "main/connexion_market";
     }
 
@@ -49,23 +59,33 @@ public class MainController {
 
     @GetMapping("/search")
     public String search(HttpSession session,Model model) {
-
-        User findUser = userRepository.findByUserId(String.valueOf(session.getAttribute("userId")));
-        if(findUser == null){
-            return "main/search";
-        } else {
-            List<UserAddress> userAddresses = findUser.getUserAddresses();
-            model.addAttribute("userAd", userAddresses);
-            return "main/search";
+        if(session.getAttribute("userId")==null){
+            return "error/login_error";
+        }else {
+            User findUser = userRepository.findByUserId(String.valueOf(session.getAttribute("userId")));
+            if (findUser == null) {
+                return "main/search";
+            } else {
+                List<UserAddress> userAddresses = findUser.getUserAddresses();
+                model.addAttribute("userAd", userAddresses);
+                return "main/search";
+            }
         }
     }
 
     @GetMapping("/mylocation")
-    public String test(HttpSession session,Model model){
-        User findUser = userRepository.findByUserId(String.valueOf(session.getAttribute("userId")));
-        List<UserAddress> userAddresses = findUser.getUserAddresses();
-        model.addAttribute("userAd",userAddresses);
-        return "main/mylocation";}
+    public String test(HttpSession session,Model model) {
+
+        if (session.getAttribute("userId") == null) {
+            //비회원일때 등록한주소 값 받아와서
+            return "main/mylocation";
+        } else {
+            User findUser = userRepository.findByUserId(String.valueOf(session.getAttribute("userId")));
+            List<UserAddress> userAddresses = findUser.getUserAddresses();
+            model.addAttribute("userAd", userAddresses);
+            return "main/mylocation";
+        }
+    }
 
     @PostMapping("/search")
     public String search1(@ModelAttribute UserAddress userAddress, HttpSession session, Model model){

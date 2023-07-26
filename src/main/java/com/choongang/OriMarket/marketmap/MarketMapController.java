@@ -3,7 +3,9 @@ package com.choongang.OriMarket.marketmap;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 
 @Controller
@@ -17,7 +19,8 @@ public class MarketMapController {
     }
 
     @GetMapping("/shinwon_marketmap")
-    public String marketmap2() {
+    public String marketmap2(@RequestParam("marketName") String marketName, Model model) {
+        model.addAttribute("marketName",marketName);
         return "marketmap/shinwon_marketmap";
     }
 
