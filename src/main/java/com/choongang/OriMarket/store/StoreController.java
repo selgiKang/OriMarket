@@ -158,11 +158,20 @@ public class StoreController {
     @GetMapping("/detailmenu/{itemId}")
     public String store_detailmenu(@PathVariable("itemId")Long itemId,Model model,Item cartItem){
 
+        System.out.println("아이템 번호: "+itemId);
         Item item = itemService.getItem(itemId);
         cartItem.setItemId(itemId);
-        CartItem cartItemResult = cartItemRepository.findByItem(cartItem);
-        model.addAttribute("cartItem",cartItemResult);
-        model.addAttribute("item",item);
+
+        //카트 아이템에 있으면
+        if(cartItemRepository.findByItem(cartItem) != null){
+            CartItem cartItemResult = cartItemRepository.findByItem(cartItem);
+            System.out.println("장바구니 수량! "+ cartItemResult.getCount());
+
+            model.addAttribute("cartItem",cartItemResult.getCount());
+            model.addAttribute("item",item);
+        }else{
+            model.addAttribute("item",item);
+        }
 
         return "store/detailmenu";
     }
