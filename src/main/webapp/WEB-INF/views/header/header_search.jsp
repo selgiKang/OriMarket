@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"  %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,7 +30,7 @@
         <span>
             <a href="#" class="address" style="margin-top: -5px;">
                 <i class="fa-solid fa-location-dot header_i"></i>
-                (ㅁㅁ시장)가져오기
+                ${marketInfo.marketName}
             </a>
         </span>
         <!-- 안됨 -->
@@ -50,7 +51,16 @@
             <i class="fas fa-search searchButtonImg h_searchbtn_i"></i>
         </button>
     </form>
-    <small style="position: absolute; top: 78px; left: 15px" >(배달받을주소..)가져오기</small>
+    <c:if test="${!empty userAddress}">
+        <c:forEach items="${userAddress}" var="userAddress" varStatus="status">
+            <c:if test="${status.last}">
+                ${userAddress.userAddress1}${userAddress.userAddressDetail1}
+            </c:if>
+        </c:forEach>
+    </c:if>
+    <c:if test="${empty userAddress}">
+        로그인 후 주소 등록이 가능합니다.
+    </c:if>
 </div>
 
 <script>

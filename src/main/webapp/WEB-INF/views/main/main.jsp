@@ -100,7 +100,7 @@
                     <div class="connexion_marketbox_wrap" style="padding:10px 20px;">
                         <div class="connextion_mk1_wrap" style="margin-right:20px;">
                             <img class="connexion_market_img" src="../../img/main/market2.png">
-                            <a class="connextion_mk1" href="/shinwon_marketmap">
+                            <a class="connextion_mk1" href="/shinwon_marketmap?marketSeq=2">
                                 <p style="font-weight: 800;">내가 등록한시장</p>
                             </a>
                         </div>
@@ -110,7 +110,7 @@
                                     <c:if test="${!empty i.market.marketName}">
                                         <div class="connextion_mk2_wrap change_marketimg_wrap" style="margin-right:20px; background:none;">
                                             <img class="connexion_market_img" src="../../img/main/market2.png">
-                                            <a class="connextion_mk2 change_marketimg" href="${i.market.marketHref}">
+                                            <a class="connextion_mk2 change_marketimg" href="${i.market.marketHref}?marketSeq=${market.marketSeq}">
                                                 <p>${i.market.marketName}</p>
                                             </a>
                                         </div>
@@ -131,7 +131,7 @@
                                     <c:if test="${!empty i.market.marketName}">
                                         <div class="connextion_mk3_wrap change_marketimg_wrap" style="margin-right:20px; background:none;">
                                             <img class="connexion_market_img" src="../../img/main/market2.png">
-                                            <a class="connextion_mk3 change_marketimg" href="${i.market.marketHref}">
+                                            <a class="connextion_mk3 change_marketimg" href="${i.market.marketHref}?marketSeq=${market.marketSeq}">
                                                 <p>${i.market.marketName}</p>
                                             </a>
                                         </div>
