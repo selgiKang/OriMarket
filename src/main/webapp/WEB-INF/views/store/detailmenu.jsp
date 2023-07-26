@@ -124,7 +124,7 @@
 		<div class="mainfood">
 			<!-- 뒤로가기 -->
 			<button class="backbtn" onclick="window.history.go(-1)">&lt;</button>
-			<img alt="mainfoodpic" src="../../img/store/kal.jpg">
+			<img alt="mainfoodpic" src="../../img/store/item/${item.itemImageUrl}">
 			<p>위 사진은 연출된 사진으로 실제와 다를 수 있습니다.</p>
 		</div>
 		<div class="main_menu_wrap">
