@@ -26,18 +26,13 @@ public class SearchController {
     @GetMapping("/header_search1")
     public String header_search(@RequestParam(value = "searchKeyword") String searchKeyword, Model model){
         List<BusinessStore> businessStores = businessStoreService.searchStore(searchKeyword);
-        for (BusinessStore store:businessStores){
-            System.out.println("확인용: "+store.getBuStoreName());
-        }
+
         List<Item> items = itemService.searchItem(searchKeyword);
-        for( Item item:items){
-            System.out.println("확인용2: "+item.getItemName());
-        }
+
         model.addAttribute("st123",businessStores);
         model.addAttribute("it1",items);
 
-
-        return "user/test";
+        return "test/test";
     }
 
 

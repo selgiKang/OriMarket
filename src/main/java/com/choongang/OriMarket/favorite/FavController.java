@@ -31,7 +31,6 @@ public class FavController {
     @Autowired
     private final FavService favService;
     private final UserService userService;
-    private final ItemRepository itemRepository;
     private final BusinessStoreRepository businessStoreRepository;
     private final MessageRepository messageRepository;
 
@@ -93,7 +92,6 @@ public class FavController {
                         Fav fav,User user, HttpSession session,Model model) {
 
         user.setUserId(String.valueOf(session.getAttribute("userId")));
-
 
         //회원
         if (userService.checkUserId(user.getUserId())) {
@@ -171,18 +169,24 @@ public class FavController {
 
     @GetMapping("/favList")
     public String favStoreList(User user,HttpSession session,Model model){
-        Long userSeq = Long.valueOf((session.getAttribute("userSeq")).toString());
-        user.setUserSeq(userSeq);
-       if(favService.favList(user) != null){
-           List<Fav> fResult = favService.favList(user);
-           model.addAttribute("favResult",fResult);
-           model.addAttribute("favs",1);
-           return "user/favStoreList";
-       }else{
 
-           model.addAttribute("favs",0);
-           return "user/favStoreList";
-       }
+        if(session.getAttribute("userSeq")==null){
+            return "error/login_error";
+        }else{
+           Long userSeq = Long.valueOf((session.getAttribute("userSeq")).toString());
+           user.setUserSeq(userSeq);
+
+           if(favService.favList(user) != null){
+               List<Fav> fResult = favService.favList(user);
+               model.addAttribute("favResult",fResult);
+               model.addAttribute("favs",1);
+               return "user/favStoreList";
+
+           }else{
+               model.addAttribute("favs",0);
+               return "user/favStoreList";
+           }
+        }
 
     }
 

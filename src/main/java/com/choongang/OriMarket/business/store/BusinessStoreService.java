@@ -34,32 +34,32 @@ public class BusinessStoreService {
 
 
     public void save(BusinessStore businessStore, HttpSession session, Model model, String s){
-        // 세션에서 사업자 번호 가져오기
+
         Object buUserNumber = session.getAttribute("buUserNumber");
 
-        // 가게 정보에 맞는 Market 조회
+        // 사업자가 로그인할때 생성된 마켓번호로 해당마켓번호의 마켓을 찾는다.
         Long marketSeq = Long.valueOf((session.getAttribute("marketSeq")).toString());
-        Market byId = marketRepository.findById(marketSeq).orElseThrow();
-        businessStore.setMarket(byId);
+        Market bymarket = marketRepository.findById(marketSeq).orElseThrow();
 
-        // BusinessUser 조회 및 가게 정보 설정
+        // 가게등록을 할때 어느 시장의 가게인지 알아야하기 때문에 상인이속한 시장을 가게에 등록해준다.
+        businessStore.setMarket(bymarket);
+
+        // 로그인할 때 생성된 사업자 번호로 사업자를 찾는다.
         BusinessUser businessUser = businessUserRepository.findById((Long)buUserNumber).orElseThrow();
+
+        // 가게등록할때 누구 가게인지 알아야하기 때문에 찾은 사업자를 가게에 등록해준다.
         businessStore.setBusinessUser(businessUser);
+
+        // 가게에 등록한 사진 정보를 등록해준다.
         businessStore.setBuStoreImageUrl(s);
 
-        // 가게 정보를 데이터베이스에 저장
-        BusinessStore save = businessStoreRepository.save(businessStore);
-        //System.out.println("aaaaaa"+save.getBuStoreImageUrl());
-        model.addAttribute("save",save);
+        // 위의 정보를들 가지고 있는 비즈니스 스토어를 save해서 생성 또는 업데이트 한다.
+        BusinessStore businessStore1 = businessStoreRepository.save(businessStore);
 
+        session.setAttribute("buStoreImageUrl",businessStore1.getBuStoreImageUrl());
 
-
-        //사업자가 가지고있는 가게들 출력해본거
-        List<BusinessStore> businessStores = save.getBusinessUser().getBusinessStores();
-
-        for(BusinessStore businessStores1:businessStores){
-            System.out.println("가게이름:"+businessStores1.getBuStoreName());
-        }
+        // 모델에 저장해서 view 페이지로쓴다.
+        model.addAttribute("save",businessStore1);
 
     }
 
@@ -75,12 +75,12 @@ public class BusinessStoreService {
     public List<BusinessStore> searchStore(String searchKeyword){
         List<BusinessStore> byStoreName = businessStoreRepository.findByBuStoreName(searchKeyword);
 
-        /*if(byStoreName.isEmpty()){
+        if(byStoreName.isEmpty()){
             return byStoreName;
         }else {
             return byStoreName;
-        }*/
+        }
         //이거 왜안들어갈까요?
-        return byStoreName;
+
     }
 }

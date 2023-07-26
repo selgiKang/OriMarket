@@ -21,16 +21,26 @@ public class MainController {
     private final MainService mainService;
 
     private final UserRepository userRepository;
-
     private final UserAddressRepository userAddressRepository;
 
     @GetMapping("/")
     public String main(HttpSession session, Model model) {
-        return "main/main";
+
+        if(session.getAttribute("userSeq") != null){
+            //유저 번호 찾아서
+            Long userSeq = Long.valueOf((session.getAttribute("userSeq")).toString());
+            User user= userRepository.findByUserSeq(userSeq);
+            model.addAttribute("userMarket", user.getUserMarkets());
+
+            return "main/main";
+        }else {
+            return "main/main";
+        }
     }
 
     @GetMapping("/connexion_market")
     public String connexion_market() {
+        
         return "main/connexion_market";
     }
 
@@ -49,14 +59,17 @@ public class MainController {
 
     @GetMapping("/search")
     public String search(HttpSession session,Model model) {
-
-        User findUser = userRepository.findByUserId(String.valueOf(session.getAttribute("userId")));
-        if(findUser == null){
-            return "main/search";
-        } else {
-            List<UserAddress> userAddresses = findUser.getUserAddresses();
-            model.addAttribute("userAd", userAddresses);
-            return "main/search";
+        if(session.getAttribute("userId")==null){
+            return "error/login_error";
+        }else {
+            User findUser = userRepository.findByUserId(String.valueOf(session.getAttribute("userId")));
+            if (findUser == null) {
+                return "main/search";
+            } else {
+                List<UserAddress> userAddresses = findUser.getUserAddresses();
+                model.addAttribute("userAd", userAddresses);
+                return "main/search";
+            }
         }
     }
 

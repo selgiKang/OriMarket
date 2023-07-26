@@ -51,11 +51,11 @@
 </head>
 <body>
 <div class="nav_footer">
-    <div>
+    <div onclick="location.href='/'">
         <img id="nav_footer_home_img" src="../../img/footer/nav_footer_home1.png" alt="main Icon" onclick="toggleImage(this)">
         <span>홈</span>
     </div>
-    <div>
+    <div onclick="location.href='/order_pastorder'">
         <img id="nav_footer_list_img" src="../../img/footer/nav_footer_list1.png" alt="list Icon" onclick="toggleImage(this)">
         <span>주문내역</span>
     </div>
@@ -64,11 +64,11 @@
         <br>
         <span>장바구니</span>
     </a>
-    <div>
+    <div onclick="location.href='/favList'">
         <img id="nav_footer_star_img" src="../../img/footer/nav_footer_star1.png" alt="favorite Icon" onclick="toggleImage(this)">
-        <span>찜</span>
+        <span>단골가게</span>
     </div>
-    <div>
+    <div onclick="location.href='/mypage'">
         <img id="nav_footer_user_img" src="../../img/footer/nav_footer_user1.png" alt="user Icon" onclick="toggleImage(this)">
         <span><a href="/mypage">마이페이지</a></span>
     </div>

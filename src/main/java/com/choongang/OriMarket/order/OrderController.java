@@ -92,13 +92,17 @@ public class OrderController {
     public String orderPaymentPage(){return "order/order_paymentPage";}
     @GetMapping("/order_pastorder")
     public String orderPastorder(HttpSession session,Model model){
-        //아이디로
-        String userId = (session.getAttribute("userId")).toString();
-        //지난 모든 주문들 출력
-        List<Order> pastOrderList = orderService.findByUserIdList(userId);
-        model.addAttribute("pastOrderList",pastOrderList);
+        if(session.getAttribute("userId")==null){
+            return "error/login_error";
+        }else {
+            //아이디로
+            String userId = (session.getAttribute("userId")).toString();
+            //지난 모든 주문들 출력
+            List<Order> pastOrderList = orderService.findByUserIdList(userId);
+            model.addAttribute("pastOrderList", pastOrderList);
 
-        return "order/order_pastorder";
+            return "order/order_pastorder";
+        }
     }
 
 
@@ -184,7 +188,8 @@ public class OrderController {
             realTimeService.insertRts(rts);
 
             model.addAttribute("orderDelivery", order); // order_delivery 페이지로 개별 주문의 상세 내역 전달
-            model.addAttribute("orderList", orderService.getAllOrders()); // order_list 페이지로 주문 목록 전달
+            model.addAttribute("orderList", orderService.
+                    getAllOrders()); // order_list 페이지로 주문 목록 전달
 
             //시장으로 바꾸기!
             //모든 주문 리스트
