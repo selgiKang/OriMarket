@@ -129,7 +129,7 @@
                                 <c:if test="${status.index == 0}">
                                     <c:if test="${!empty i.market.marketName}">
                                         <div class="connextion_mk2_wrap change_marketimg_wrap" style="margin-right:20px; background:none; position: relative">
-                                            <div id="orderReceipt_btn_cancel" style="position: absolute; right: -7px; top: 12px; z-index: 9999;"><a href="/deleteUserMarket?userMarketName=${i.market.marketName}"><i class="fas fa-regular fa-xmark"></i></a></div>
+                                            <div id="orderReceipt_btn_cancel" style="position: absolute; right: -7px; top: 12px; z-index: 9999;"><a href="/deleteUserMarket?userMarketSeq=${i.userMarketSeq}"><i class="fas fa-regular fa-xmark"></i></a></div>
                                             <img class="connexion_market_img" src="../../img/main/market2.png">
                                             <a class="connextion_mk2 change_marketimg" href="${i.market.marketHref}">
                                                 <p>${i.market.marketName}</p>
@@ -151,7 +151,7 @@
                                 <c:if test="${status.index == 1}">
                                     <c:if test="${!empty i.market.marketName}">
                                         <div class="connextion_mk3_wrap change_marketimg_wrap" style="margin-right:20px; background:none; position: relative;" >
-                                            <div id="orderReceipt_btn_cancel1" style="position: absolute; right: -7px; top: 12px; z-index: 9999;"><a href="#"><i class="fas fa-regular fa-xmark"></i></a></div>
+                                            <div id="orderReceipt_btn_cancel1" style="position: absolute; right: -7px; top: 12px; z-index: 9999;"><a href="/deleteUserMarket?userMarketSeq=${i.userMarketSeq}"><i class="fas fa-regular fa-xmark"></i></a></div>
                                             <img class="connexion_market_img" src="../../img/main/market2.png">
                                             <a class="connextion_mk3 change_marketimg" href="${i.market.marketHref}">
                                                 <p>${i.market.marketName}</p>
