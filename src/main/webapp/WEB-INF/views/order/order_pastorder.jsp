@@ -342,7 +342,6 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        margin-right: 73px;
     }
 
     .orderdetailcheck{
@@ -356,14 +355,13 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        margin-left: -65px;
     }
 
     .mybutton{
         display: flex;
         justify-content: center;
         align-items: center;
-        margin-top: 8px;
+        margin-left: 30px;
 
 
     }
