@@ -35,6 +35,7 @@ public class BusinessStoreController {
     private final BusinessUserRepository businessUserRepository;
     private final ImageService imageService;
 
+
     @GetMapping("/storenotice1")
     public String storenotice1(){
         return "business/storenotice_new";
