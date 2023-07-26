@@ -91,11 +91,19 @@ public class CartController {
             model.addAttribute("item", additem);
 
             //재고보다 많이 담으면 안담기게.
-            if (count <= additem.getItemCnt()) {
-                cartService.addCart(user, additem, count);
-            }
+            if(cartItem==null){
+                if(count<=additem.getItemCnt()){
+                    cartService.addCart(user, additem, count);
+                }else{
 
+                }
+            }else{
+                if(count+cartItem.getCount()<= additem.getItemCnt()){
+                    cartService.addCart(user, additem, count);
+                }
+            }
             return "/store/detailmenu";
+
         }
     }
 

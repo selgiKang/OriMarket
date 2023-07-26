@@ -61,7 +61,7 @@
 											<!-- 상품이미지나 상품타이틀을 클릭하면 상세페이지로 넘어간다(a태그) -->
 											<a href="상품상세페이지">
 												<div class="cart_itemImg">
-													<img src="../../img/user/cart_fish.png">
+													<img src="../../img/store/item/${orderList.item.itemImageUrl}">
 												</div>
 												<div class="cart_itemTitle">
 													<p>${orderList.item.itemName}</p>
@@ -140,67 +140,6 @@
 </div>
 
 <script src="../../js/user/cartcheck.js"></script>
-
-<script type="text/javascript">
-	// function goOrder(){
-	// 	var chk = $('input[name="cbox"]');
-	// 	if(chk.length==0){
-	// 		return;
-	// 	}
-	// 		var cnt = 0;
-	// 		$.each(chk,function (i,ch){
-	// 			if($(ch).is(":checked")){
-	// 				cnt++;
-	// 				$('#currentCnt'+(i+1)).prop('disabled',false);
-	// 			}else{
-	// 				$('#currentCnt'+(i+1)).prop('disabled',true);
-	// 			}
-	// 			return "order/order_paymentPage"
-	// 		});
-	// 		if(cnt==0){
-	// 			alert("주문할 상품을 체크하세요");
-	// 			$('input[name=currentCnt]').prop('disabled',false)
-	// 			return;
-	// 		}
-	//
-	//
-	// }
-
-	//
-	// function goOrder() {
-	// 	var selectedItems = [];
-	// 	$(".individual_checkbox").each(function (index, element) {
-	// 		if ($(element).is(":checked") === true) {
-	// 			// 선택된 항목의 cartItemId 값을 가져와 배열에 추가
-	// 			var cartItemId = $(element).siblings('.cart_xmark').siblings('#cartItemId').val();
-	// 			selectedItems.push(cartItemId);
-	// 		}
-	// 	});
-	//
-	// 	if (selectedItems.length === 0) {
-	// 		alert("주문할 상품을 체크하세요");
-	// 		return;
-	// 	}
-	//
-	// 	// 서버로 AJAX 요청 보내기
-	// 	$.ajax({
-	// 		url: "/paymentPage/" + userId,
-	// 		method: "POST",
-	// 		data: JSON.stringify(selectedItems),
-	// 		contentType: "application/json; charset=utf-8",
-	// 		success: function (response) {
-	// 			// 서버에서 받은 응답에 대한 처리 (예: 페이지 이동)
-	// 			// 예시로는 주문페이지로 이동하는 코드를 작성합니다.
-	// 			window.location.href = "/order/order_paymentPage";
-	// 		},
-	// 		error: function (xhr, status, error) {
-	// 			// 오류 발생 시 처리
-	// 			alert("주문하기 실패: " + error);
-	// 		}
-	// 	});
-	// }
-
-</script>
 
 
 
