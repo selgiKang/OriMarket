@@ -104,20 +104,20 @@
                                 <p style="font-weight: 800;">내가 등록한시장</p>
                             </a>
                         </div>
-
-                        <c:forEach var="i" items="${userMarket}" varStatus="status">
-
-                        <c:if test="${status.index == 0}">
-                            <c:if test="${!empty i.market.marketName}">
-                                <div class="connextion_mk2_wrap change_marketimg_wrap" style="margin-right:20px; background:none;">
-                                    <img class="connexion_market_img" src="../../img/main/market2.png">
-                                    <a class="connextion_mk2 change_marketimg" href="${i.market.marketHref}">
-                                        <p>${i.market.marketName}</p>
-                                    </a>
-                                </div>
-                            </c:if>
+                        <c:if test="${!empty userMarket}">
+                            <c:forEach var="i" items="${userMarket}" varStatus="status">
+                                <c:if test="${status.index == 0}">
+                                    <c:if test="${!empty i.market.marketName}">
+                                        <div class="connextion_mk2_wrap change_marketimg_wrap" style="margin-right:20px; background:none;">
+                                            <img class="connexion_market_img" src="../../img/main/market2.png">
+                                            <a class="connextion_mk2 change_marketimg" href="${i.market.marketHref}">
+                                                <p>${i.market.marketName}</p>
+                                            </a>
+                                        </div>
+                                    </c:if>
+                                </c:if>
+                            </c:forEach>
                         </c:if>
-                        </c:forEach>
                         <c:if test="${empty userMarket}">
                             <div class="connextion_mk2_wrap btn-open-popup" onclick="modal"><a class="connextion_mk2" href=""><p>단골시장등록</p></a><p style="font-size: 40px;">+</p></div>
                         </c:if>
@@ -125,18 +125,20 @@
                     </div>
 
                     <div class="connexion_marketbox_wrap" style="padding:0 20px 0 25px;">
-                        <c:forEach var="i" items="${userMarket}" varStatus="status">
-                            <c:if test="${status.index == 1}">
-                                <c:if test="${!empty i.market.marketName}">
-                                    <div class="connextion_mk3_wrap change_marketimg_wrap" style="margin-right:20px; background:none;">
-                                        <img class="connexion_market_img" src="../../img/main/market2.png">
-                                        <a class="connextion_mk3 change_marketimg" href="${i.market.marketHref}">
-                                            <p>${i.market.marketName}</p>
-                                        </a>
-                                    </div>
+                        <c:if test="${!empty userMarket}">
+                            <c:forEach var="i" items="${userMarket}" varStatus="status">
+                                <c:if test="${status.index == 1}">
+                                    <c:if test="${!empty i.market.marketName}">
+                                        <div class="connextion_mk3_wrap change_marketimg_wrap" style="margin-right:20px; background:none;">
+                                            <img class="connexion_market_img" src="../../img/main/market2.png">
+                                            <a class="connextion_mk3 change_marketimg" href="${i.market.marketHref}">
+                                                <p>${i.market.marketName}</p>
+                                            </a>
+                                        </div>
+                                    </c:if>
                                 </c:if>
-                            </c:if>
-                        </c:forEach>
+                            </c:forEach>
+                        </c:if>
                         <c:if test="${empty userMarket}">
                         <div class="connextion_mk3_wrap btn-open-popup" onclick="modal"><a class="connextion_mk3" href=""><p>단골시장등록</p></a><p style="font-size: 40px;">+</p></div>
                         </c:if>

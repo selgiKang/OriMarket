@@ -21,12 +21,23 @@ public class MainController {
     private final MainService mainService;
 
     private final UserRepository userRepository;
+    private final UserMarketRepository userMarketRepository;
 
     private final UserAddressRepository userAddressRepository;
 
     @GetMapping("/")
     public String main(HttpSession session, Model model) {
-        return "main/main";
+
+        if(session.getAttribute("userSeq") != null){
+            //유저 번호 찾아서
+            Long userSeq = Long.valueOf((session.getAttribute("userSeq")).toString());
+            User user= userRepository.findByUserSeq(userSeq);
+            model.addAttribute("userMarket", user.getUserMarkets());
+
+            return "main/main";
+        }else {
+            return "main/main";
+        }
     }
 
     @GetMapping("/connexion_market")
