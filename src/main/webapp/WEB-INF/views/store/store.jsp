@@ -159,8 +159,8 @@
                                         <input type="hidden" name="count" value="1">
                                         <input type="hidden" name="itemId" value="${a.itemId}">
                                     </div>
-                                    <div class="menu-image">
-                                        <img src="../../img/store/item/${a.itemImageUrl}" alt="메뉴이미지">
+                                    <div class="menu-image"style="width:100px; height:100px; box-sizing:border-box; position:relative;">
+                                        <img src="../../img/store/item/${a.itemImageUrl}" alt="메뉴이미지" style="position: absolute;top: 0;right: 0;width: 100%;">
                                         <%--<a href="/user_review?itemId=${a.itemId}">리뷰작성하러가기</a>--%>
                                     </div>
                                 </a>
@@ -193,8 +193,8 @@
                                     <h6 class="menu-description">${ menu.menu_info }</h6>
                                     <h5>${ menu.menu_price }</h5>
                                 </div>
-                                <div class="menu-image">
-                                    <img src="../../img/store/cold.jpg" alt="메뉴이미지">
+                                <div class="menu-image"style="width:100px; height:100px; box-sizing:border-box; position:relative;">
+                                    <img src="../../img/store/cold.jpg" alt="메뉴이미지" style="position: absolute;top: 0;right: 0;width: 100%;width: 100%;">
                                 </div>
                             </div>
                         </div>

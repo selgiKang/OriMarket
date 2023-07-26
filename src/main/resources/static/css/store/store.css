@@ -96,12 +96,12 @@ a {
     overflow: hidden;
 }
 
-.menu-image img {
+/*.menu-image img {
     width: 150px;
     height: 150px;
     object-fit: cover;
     border-radius: 4px;
-}
+}*/
 
 /* 라인 */
 .line {
@@ -404,8 +404,8 @@ ul {
 }
 
 .menu-image img {
-    width: 100px;
-    height: 100px;
+/*    width: 100px;
+    height: 100px;*/
     object-fit: cover;
     border-radius: 4px;
 }
