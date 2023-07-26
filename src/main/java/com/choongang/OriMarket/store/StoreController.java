@@ -4,6 +4,8 @@ import com.choongang.OriMarket.business.store.BusinessStore;
 import com.choongang.OriMarket.business.store.BusinessStoreRepository;
 import com.choongang.OriMarket.business.user.BusinessUser;
 import com.choongang.OriMarket.business.user.BusinessUserRepository;
+import com.choongang.OriMarket.user.CartItem;
+import com.choongang.OriMarket.user.CartItemRepository;
 import com.choongang.OriMarket.utill.ImageService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -33,6 +35,8 @@ public class StoreController {
     private final BusinessUserRepository businessUserRepository;
 
     private final ItemRepository itemRepository;
+
+    private final CartItemRepository cartItemRepository;
 
     private final ImageService imageService;
 
@@ -152,11 +156,22 @@ public class StoreController {
     }
 
     @GetMapping("/detailmenu/{itemId}")
-    public String store_detailmenu(@PathVariable("itemId")Long itemId,Model model){
+    public String store_detailmenu(@PathVariable("itemId")Long itemId,Model model,Item cartItem){
 
+        System.out.println("아이템 번호: "+itemId);
         Item item = itemService.getItem(itemId);
+        cartItem.setItemId(itemId);
 
-        model.addAttribute("item",item);
+        //카트 아이템에 있으면
+        if(cartItemRepository.findByItem(cartItem) != null){
+            CartItem cartItemResult = cartItemRepository.findByItem(cartItem);
+            System.out.println("장바구니 수량! "+ cartItemResult.getCount());
+
+            model.addAttribute("cartItem",cartItemResult.getCount());
+            model.addAttribute("item",item);
+        }else{
+            model.addAttribute("item",item);
+        }
 
         return "store/detailmenu";
     }

@@ -188,7 +188,8 @@ public class OrderController {
             realTimeService.insertRts(rts);
 
             model.addAttribute("orderDelivery", order); // order_delivery 페이지로 개별 주문의 상세 내역 전달
-            model.addAttribute("orderList", orderService.getAllOrders()); // order_list 페이지로 주문 목록 전달
+            model.addAttribute("orderList", orderService.
+                    getAllOrders()); // order_list 페이지로 주문 목록 전달
 
             //시장으로 바꾸기!
             //모든 주문 리스트

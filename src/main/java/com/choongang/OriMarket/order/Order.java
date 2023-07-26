@@ -92,8 +92,8 @@ public class Order {
     @OneToOne(mappedBy = "orderNumber")
     private RealTimeStatus realTimeStatus;
 
-    @Transient
-    private String next_redirect_pc_url;
+//    @Transient
+//    private String next_redirect_pc_url;
 
     //출력 날짜
     @Transient

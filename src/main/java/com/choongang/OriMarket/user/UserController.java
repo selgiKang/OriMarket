@@ -106,7 +106,7 @@ public class UserController {
             User byId = userRepository.findById((Long) session.getAttribute("userSeq")).orElseThrow();
             List<Review> reviews = byId.getReviews();
             model.addAttribute("re", reviews);
-            return "user/user_reviewlist";
+            return "store/delivery_pickup";
         }
     }
 
