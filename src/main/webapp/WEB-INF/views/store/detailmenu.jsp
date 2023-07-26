@@ -158,6 +158,7 @@
 					<button type="button" class="dm_cart" onclick="submitForm()">장바구니 담기</button>
 					<%--올 때 재고 확인해서 hidden으로 넣기--%>
 					<input type="hidden" id="itemCnt" value="${item.itemCnt}">
+					<input type="hidden" id="cartCnt" value="${cartItem.count}">
 				</div>
 			</form>
 		</div>
@@ -169,6 +170,8 @@
 		var itemCnt = parseInt(document.getElementById("itemCnt").value, 10);
 		//선택 수
 		var countInput = parseInt(document.getElementById("countInput").value, 10);
+		//장바구니 수량
+		var cartCnt = parseInt(document.getElementById("cartCnt").value, 10);
 
 		const itemId = document.getElementById("itemId").value;
 
@@ -180,8 +183,10 @@
 			alert("장바구니를 이용하시려면 로그인이 필요합니다.");
 			window.location.href = "/mypage";
 		}else {
+			console.log("장바구니 수량"+cartCnt);
+			console.log("전체 수량"+countInput+cartCnt);
 			//if문 추가해서 재고 보다 많이 담으면 재고 알림?
-			if(itemCnt<countInput){
+			if(itemCnt<countInput+cartCnt){
 				alert("재고 수량보다 많습니다.")
 				window.location.href="/detailmenu/"+itemId;
 			}else{

@@ -84,6 +84,19 @@
 													<span id="totalPriceCalSpan_${status.index}">
 													${orderList.itemPrice * orderList.count}원
 													</span>
+													<script>
+														var user = (session.getAttribute("userId")).toString();
+														//장바구니 수량
+														var currentCnt = parseInt(document.getElementById("currentCnt${status.index}").value);
+														//재고 수량
+														var itemCnt = parseInt(document.getElementById("itemCnt${status.index}").value);
+
+														if(itemCnt<currentCnt){
+															alert("재고보다 수량이 많습니다.")
+															document.getElementById("currentCnt${status.index}").value = itemCnt;
+															window.location.href="/"+user+"/cart";
+														}
+													</script>
 												</div>
 											</div>
 										</div>

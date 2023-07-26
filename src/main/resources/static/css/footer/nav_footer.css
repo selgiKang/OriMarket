@@ -33,7 +33,10 @@
             flex-direction: column;
             align-items: center;
         }
-        
+        .nav_footer div:hover {
+            cursor: pointer;
+        }
+
         .nav_footer img.clicked + span {
             opacity: 1;
         }
