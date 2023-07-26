@@ -7,6 +7,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Insert title here</title>
+    <script src="https://kit.fontawesome.com/1cfe6d92db.js" crossorigin="anonymous"></script>
     <link href="../../css/order/order_pastorder.css" rel="stylesheet" media="all">
 </head>
 <style>
@@ -253,14 +254,17 @@
         margin: 10px;
     }
 
+    .searchbar_wrap{width: 95%; margin: auto;}
+    .searchbar_wrap > input[type="search"]{width: 86%;margin-left: 7px;}
+    .fa-solid, .fas{font-size: 20px;}
 </style>
 <body>
     <div class="main-container">
         <h3 style="margin-top: 5px;">회원 주문내역</h3>
         <div id="search_area" style="width: 95%;">
-            <form>
+            <form class="searchbar_wrap">
                 <input type="search" placeholder="주문했던 메뉴와 시장을 검색해보세요." style="width: 88%;">
-                <span><i class="fa-solid fa-magnifying-glass"></i></span>
+                <span><i class="fas fa-solid fa-magnifying-glass"></i></span>
             </form>
         </div>
         <div class="tabs">
