@@ -245,5 +245,5 @@ div.join_btn_wrap{width:100%;}
 a.join_btn{width:70%; height:40px; padding: 4% 32%; background-color:#ffbf41; border:none; border-radius: 25px; color:#333; font-weight: 700; font-size: 16px;}
 a.join_btn:hover {background-color: #333; color:#fff;}
 
-a.business_logingo{cursor: pointer; padding: 3% 23%; border-radius: 35px; bockground-color:#fff; border:2px solid #46A973; color:#46A973;}
+a.business_logingo{cursor: pointer; padding: 3% 14%; border-radius: 35px; bockground-color:#fff; border:2px solid #46A973; color:#46A973;}
 a.business_logingo:hover { bockground-color:#333; border:2px solid #333; color:#333; }
