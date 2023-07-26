@@ -290,6 +290,8 @@
                         <%-- 과거 주문내역 --%>
                         <c:forEach items="${pastOrderList}" var="pastOrder" varStatus="status">
                             <div class="order_1">
+                                <%-- 가게사진 --%>
+
                                 <!-- 주문 정보 출력 -->
                                 <h2 class="mypage1_h2">${pastOrder.marketSeq.marketName}</h2>
                                 <!-- 날짜 출력 -->

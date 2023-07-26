@@ -1,5 +1,7 @@
 package com.choongang.OriMarket.user;
 
+import com.choongang.OriMarket.business.market.Market;
+import com.choongang.OriMarket.business.market.MarketRepository;
 import com.choongang.OriMarket.order.Order;
 import com.choongang.OriMarket.order.OrderService;
 import com.choongang.OriMarket.review.Review;
@@ -29,6 +31,10 @@ public class UserController {
     private final UserService userService;
 
     private final UserRepository userRepository;
+
+    private final MarketRepository marketRepository;
+
+    private final UserMarketRepository userMarketRepository;
 
     // 로그인 get , post 매핑
     @GetMapping("/login")
@@ -170,6 +176,14 @@ public class UserController {
         System.out.println(user.getUserSeq());
         userService.delete(user.getUserSeq());
         return "user/order_list";
+    }
+
+    @GetMapping("/deleteUserMarket")
+    public String deleteUserMarket(@RequestParam("userMarketName") String userMarketName){
+        Market byMarketName = marketRepository.findByMarketName(userMarketName);
+        UserMarket byMarket = userMarketRepository.findByMarket(byMarketName);
+        userMarketRepository.delete(byMarket);
+        return "main/main";
     }
 
 

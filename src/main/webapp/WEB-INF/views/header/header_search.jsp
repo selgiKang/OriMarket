@@ -29,7 +29,7 @@
         <span>
             <a href="#" class="address" style="margin-top: -5px;">
                 <i class="fa-solid fa-location-dot header_i"></i>
-                (ㅁㅁ시장)가져오기
+                ${marketName}
             </a>
         </span>
         <!-- 안됨 -->
@@ -47,10 +47,14 @@
         <input type="text" id="searchWord" class="h_searchbar" name="searchKeyword" placeholder=" 상품검색"
                maxlength="50" size="60">
         <button class="searchButton" class="h_searchbtn" type="submit">
-            <i class="fas fa-search searchButtonImg h_searchbtn_i"></i>
+             &nbsp;<i class="fas fa-search searchButtonImg h_searchbtn_i"></i>
         </button>
     </form>
-    <small style="position: absolute; top: 78px; left: 15px" >(배달받을주소..)가져오기</small>
+    <small style="position: absolute; top: 78px; left: 15px" >
+        <c:if test="${!empty userAddress1}">
+            배달지: <span class="addpic"><a href="/search" style="text-decoration: none;">${userAddress1} ${userAddressDetail1} ...</a></span>
+        </c:if>
+    </small>
 </div>
 
 <script>
