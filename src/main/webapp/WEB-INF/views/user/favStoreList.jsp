@@ -2,8 +2,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Orimarket_단골가게</title>
-  <style>
+  <title>Orimarket_단골가게</title>
+<style>
     @font-face {
       font-family: 'LINESeedKR-Bd';
       src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/LINESeedKR-Bd.woff2') format('woff2');
@@ -24,7 +24,7 @@
       text-align: center;
       width: 100%;
     }
-  </style>
+</style>
 </head>
 <body id="favStoreList_table_body">
   <h3>단골 가게 목록</h3>

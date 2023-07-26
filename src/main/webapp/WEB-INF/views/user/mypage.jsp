@@ -78,7 +78,8 @@
                 <div style="margin-bottom:20px;">
                     <a href="#">아이디 찾기</a> / <span><a href="#">비밀번호 찾기</a></span>
                 </div>
-                <div class="join_btn_wrap"><a href="/join" class="join_btn">회원가입</a></div>
+                <div class="join_btn_wrap" style="margin-bottom:20px;"><a href="/join" class="join_btn">회원가입</a></div>
+                <a href="/login1" class="business_logingo">사업자 로그인</a>
             </div>
         </div>
     </div>

@@ -21,8 +21,6 @@ public class MainController {
     private final MainService mainService;
 
     private final UserRepository userRepository;
-    private final UserMarketRepository userMarketRepository;
-
     private final UserAddressRepository userAddressRepository;
 
     @GetMapping("/")
@@ -60,14 +58,17 @@ public class MainController {
 
     @GetMapping("/search")
     public String search(HttpSession session,Model model) {
-
-        User findUser = userRepository.findByUserId(String.valueOf(session.getAttribute("userId")));
-        if(findUser == null){
-            return "main/search";
-        } else {
-            List<UserAddress> userAddresses = findUser.getUserAddresses();
-            model.addAttribute("userAd", userAddresses);
-            return "main/search";
+        if(session.getAttribute("userId")==null){
+            return "error/login_error";
+        }else {
+            User findUser = userRepository.findByUserId(String.valueOf(session.getAttribute("userId")));
+            if (findUser == null) {
+                return "main/search";
+            } else {
+                List<UserAddress> userAddresses = findUser.getUserAddresses();
+                model.addAttribute("userAd", userAddresses);
+                return "main/search";
+            }
         }
     }
 

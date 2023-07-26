@@ -67,7 +67,7 @@
               <h1>신규상품등록</h1>
             </div>
         <div>
-            <form action="/s2" method="post">
+            <form action="/s2" method="post" enctype="multipart/form-data">
                 <table id="goods_listTable">
                     <tr>
                         <td>상품명</td>
@@ -118,7 +118,7 @@
                     </tr>
                     <tr class="file_tr">
                         <td>상품사진</td>
-                        <td><input type="file"></td>
+                        <td><input type="file" accept="image/*" name="pictureUrl"></td>
                     </tr>
                 </table>
                 <br>
