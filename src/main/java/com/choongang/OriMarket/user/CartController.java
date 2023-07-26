@@ -69,7 +69,7 @@ public class CartController {
             model.addAttribute("user", userId);
             model.addAttribute("userOrderList", byUserUserSeq);
 
-            return "/user/cart";
+            return "/cart/cart";
         }
     }
 

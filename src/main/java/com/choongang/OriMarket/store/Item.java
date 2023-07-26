@@ -51,6 +51,9 @@ public class Item {
     @Column
     private String itemCategory;
 
+    @Column
+    private String itemImageUrl;
+
     @ManyToOne(fetch = FetchType.LAZY) //lazy가 성능최적화
     @JoinColumn(name ="bu_store_number")
     private BusinessStore businessStore;

@@ -19,6 +19,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static com.choongang.OriMarket.utill.Constant.IMAGE_PATH;
 
@@ -29,6 +30,7 @@ public class BusinessStoreController {
 
     @Autowired
     private final BusinessStoreService businessStoreService;
+    private final BusinessStoreRepository businessStoreRepository;
     private final ItemService itemService;
     private final BusinessUserRepository businessUserRepository;
     private final ImageService imageService;
@@ -41,10 +43,15 @@ public class BusinessStoreController {
     @PostMapping("/storenotice1")
     public String storenoticesave(@ModelAttribute BusinessStore businessStore, HttpSession session,Model model, @RequestParam("pictureUrl") MultipartFile file) throws IOException {
 
-        String imageUrl = IMAGE_PATH+file.getOriginalFilename();
-        String s = imageService.saveStoreImage(file);
-        System.out.println("이건머죠::?"+s);
-        businessStoreService.save(businessStore,session,model,s);
+        if(file.isEmpty()){
+            BusinessStore businessStore1 = businessStoreRepository.findById(businessStore.getBuStoreNumber()).orElseThrow();
+            String s = businessStore1.getBuStoreImageUrl();
+            businessStoreService.save(businessStore, session, model, s);
+        }else {
+            String s = imageService.saveStoreImage(file);
+            businessStoreService.save(businessStore, session, model, s);
+        }
+
         return "business/storenotice_new";
     }
 
@@ -61,10 +68,16 @@ public class BusinessStoreController {
 
     //등록된 item수정하기
     @PostMapping("/update_itemDetail")
-    public String updateMenu(@ModelAttribute Item formItem,Model model,HttpSession session) {
+    public String updateMenu(@ModelAttribute Item formItem,Model model,HttpSession session,@RequestParam("pictureUrl") MultipartFile file) throws IOException {
 
         Item updateItem = itemService.getItem(formItem.getItemId());
 
+        if(file.isEmpty()){
+            updateItem.setItemImageUrl(updateItem.getItemImageUrl());
+        }else {
+            String s = imageService.saveItemImage(file);
+            updateItem.setItemImageUrl(s);
+        }
 
         updateItem.setItemName(formItem.getItemName());
         updateItem.setItemCnt(formItem.getItemCnt());
@@ -74,7 +87,6 @@ public class BusinessStoreController {
         updateItem.setItemPrice(formItem.getItemPrice());
         updateItem.setItemCost(formItem.getItemCost());
         updateItem.setItemInfo(formItem.getItemInfo());
-
 
         itemService.update(updateItem);
 
