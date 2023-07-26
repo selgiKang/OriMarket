@@ -156,8 +156,7 @@ public class CartController {
             List<CartItem> cartItems = cartService.userCartView(cart);
 
             model.addAttribute("cartItemList", cartItems);
-            model.addAttribute("totalPrice", cart.getCartTotalPrice());
-            model.addAttribute("deliveryPrice", cart.getCartDeliveryPrice());
+            model.addAttribute("cart", cart);
 
             return "/order/order_paymentPage";
         }

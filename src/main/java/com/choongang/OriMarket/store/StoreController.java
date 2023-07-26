@@ -89,6 +89,7 @@ public class StoreController {
         BusinessUser businessUser = businessUserRepository.findByBuUserId(buUserId);
         BusinessStore businessStore = businessStoreRepository.findByBuStoreNumber(businessUser.getBusinessStores().get(0).getBuStoreNumber());
         session.setAttribute("buUser",businessUser);
+        session.setAttribute("buUserId",businessUser.getBuUserId());
         session.setAttribute("buStore",businessStore);
 
         return "store/seller_itemList";
