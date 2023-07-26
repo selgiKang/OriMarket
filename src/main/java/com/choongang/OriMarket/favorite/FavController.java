@@ -93,7 +93,6 @@ public class FavController {
 
         user.setUserId(String.valueOf(session.getAttribute("userId")));
 
-
         //회원
         if (userService.checkUserId(user.getUserId())) {
 

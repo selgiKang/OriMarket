@@ -41,6 +41,7 @@
         <option value="경동시장">경동시장</option>
         <option value="동대문시장">동대문시장</option>
         <option value="남대문시장">남대문시장</option>
+        <option value="통인시장">통인시장</option>
       </select>
     </div>
     <div class="form_field">

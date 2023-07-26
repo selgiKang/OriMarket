@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"  %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,7 +30,7 @@
         <span>
             <a href="#" class="address" style="margin-top: -5px;">
                 <i class="fa-solid fa-location-dot header_i"></i>
-                (ㅁㅁ시장)가져오기
+                ${marketName}
             </a>
         </span>
         <!-- 안됨 -->
@@ -50,7 +51,14 @@
             <i class="fas fa-search searchButtonImg h_searchbtn_i"></i>
         </button>
     </form>
-    <small style="position: absolute; top: 78px; left: 15px" >(배달받을주소..)가져오기</small>
+    <small style="position: absolute; top: 78px; left: 15px" >
+        <c:if test="${!empty userAddress1}">
+            배달지: <span class="addpic"><a href="/search">${userAddress1}${userAddressDetail}</a></span>
+        </c:if>
+        <c:if test="${empty userAddress1}">
+            배달지: <span class="addpic">로그인 후 주소 등록이 가능합니다.</span>
+        </c:if>
+    </small>
 </div>
 
 <script>

@@ -1,5 +1,7 @@
 package com.choongang.OriMarket.user;
 
+import com.choongang.OriMarket.business.market.Market;
+import com.choongang.OriMarket.business.market.MarketRepository;
 import com.choongang.OriMarket.order.Order;
 import com.choongang.OriMarket.order.OrderService;
 import com.choongang.OriMarket.review.Review;
@@ -14,11 +16,9 @@ import org.springframework.web.servlet.ModelAndView;
 import org.thymeleaf.model.IModel;
 
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Controller
 @RequiredArgsConstructor
@@ -29,6 +29,10 @@ public class UserController {
     private final UserService userService;
 
     private final UserRepository userRepository;
+
+    private final MarketRepository marketRepository;
+
+    private final UserMarketRepository userMarketRepository;
 
     // 로그인 get , post 매핑
     @GetMapping("/login")
@@ -106,7 +110,7 @@ public class UserController {
             User byId = userRepository.findById((Long) session.getAttribute("userSeq")).orElseThrow();
             List<Review> reviews = byId.getReviews();
             model.addAttribute("re", reviews);
-            return "user/user_reviewlist";
+            return "store/delivery_pickup";
         }
     }
 
@@ -115,6 +119,25 @@ public class UserController {
         return "user/mypage";
     }
 
+    @GetMapping("/findUserId")
+    public String findUserId(){return "user/findID";}
+
+    @PostMapping("/findUserId")
+    public String findUserIdResult(User user, Model model, HttpServletRequest request){
+        User userInfo = userService.getUser(user.getUserId());
+
+        if(userInfo!=null){
+            if(userInfo.getUserPhone().equals(user.getUserPhone())){
+                model.addAttribute("userInfo",userInfo);
+            }else{
+                request.setAttribute("loginError","정보가 틀려습니다. 다시 한번 확인해주세요.");
+            }
+        }else{
+            request.setAttribute("loginError","정보가 틀려습니다. 다시 한번 확인해주세요.");
+        }
+
+        return "user/findID";
+    }
 
  /*   @GetMapping("/order_list")
     public String getOrderList(Model model) {
@@ -170,6 +193,23 @@ public class UserController {
         System.out.println(user.getUserSeq());
         userService.delete(user.getUserSeq());
         return "user/order_list";
+    }
+
+    @GetMapping("/deleteUserMarket")
+    public String deleteUserMarket(@RequestParam("userMarketSeq") String userMarketSeq,HttpSession session, Model model){
+        UserMarket byId = userMarketRepository.findById(Long.valueOf(userMarketSeq)).orElseThrow();
+        userMarketRepository.delete(byId);
+
+        if(session.getAttribute("userSeq") != null){
+            //유저 번호 찾아서
+            Long userSeq = Long.valueOf((session.getAttribute("userSeq")).toString());
+            User user= userRepository.findByUserSeq(userSeq);
+            model.addAttribute("userMarket", user.getUserMarkets());
+
+            return "main/main";
+        }else {
+            return "main/main";
+        }
     }
 
 
