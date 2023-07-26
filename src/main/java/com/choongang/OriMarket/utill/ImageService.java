@@ -27,7 +27,7 @@ public class ImageService {
         File destinationFile = new File(saveImagePath.toUri());
 
         // MultipartFile을 파일로 저장
-        multipartFile.transferTo(destinationFile);
+        //multipartFile.transferTo(destinationFile);
 
         return destinationFile.getName();
     }
