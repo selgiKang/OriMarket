@@ -257,6 +257,120 @@
     .searchbar_wrap{width: 95%; margin: auto;}
     .searchbar_wrap > input[type="search"]{width: 86%;margin-left: 7px;}
     .fa-solid, .fas{font-size: 20px;}
+
+
+
+
+    /*주문내역 폼*/
+
+    .main-box {
+        border: 1px solid #000;
+        width: 320px;
+        padding: 10px;
+        border-radius: 10px;
+        position: relative;
+
+    }
+
+    .top{
+        display: flex; /* Use flexbox to align items horizontally */
+        align-items: center; /* Vertically center align items */
+        justify-content: space-between;
+
+    }
+
+    .small-box {
+        background-color: #BEC5D0;
+        color: black;
+        padding: 5px;
+        width: 70px;
+        height: 10px;
+        border-radius: 5px;
+        font-weight: bolder;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 5px;
+        margin-left: 1px;
+    }
+
+    .date{
+        display: flex;
+        float: left;
+        flex-direction: row;
+        font-size: 13px;
+        font-weight: bolder;
+        color: #999999;
+        margin-right: 125px;
+    }
+
+
+    .storepicture img{
+        width: 83px;
+        height:84px;
+        float: left;
+        border-radius: 10px;
+        margin-top: 7px;
+    }
+
+    img {
+        margin-bottom: 5px;
+    }
+
+    .middle {
+        margin-left: 93px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 7px;
+    }
+
+    .storename,
+    .orderitems {
+        flex-grow: 1;
+    }
+
+    .orderitems{
+
+        font-size: 10px;
+        color: #666666;
+    }
+
+    .reorder{
+        background-color: white;
+        border: 1px solid red;
+        border-radius: 5px;
+        width: 80px;
+        height: 25px;
+        color: red;
+        font-weight: bolder;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-right: 73px;
+    }
+
+    .orderdetailcheck{
+        background-color: white;
+        border: 1px solid dimgray;
+        border-radius: 5px;
+        width: 80px;
+        height: 25px;
+        color: black;
+        font-weight: bolder;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-left: -65px;
+    }
+
+    .mybutton{
+        display: flex;
+        margin-top: 8px;
+        margin-left: 10px;
+        padding-left: 9px;
+    }
+
 </style>
 <body>
     <div class="main-container">
@@ -282,9 +396,41 @@
                 <div class="inside_tabs">
                     <div role="inside_tablist">
 
-
-
-
+                        <%--주문내역폼--%>
+                        <div class="main-box">
+                            <div class="top">
+                                <div class="small-box">
+                                    <p>포장</p>
+                                </div>
+                                <div class="date">
+                                    <p>2023.07.26 15:03</p>
+                                </div>
+                            </div>
+                            <div style="position: absolute; top: 10px; right: 10px;">
+                                배달완료
+                            </div>
+                            <div class="storepicture">
+                                <img src="../../img/store/store.jpg" alt="사진">
+                            </div>
+                            <div class="middle">
+                                <div class="storeinfo">
+                                    <div class="storename">
+                                        <p>파리바게뜨이대자이점</p>
+                                    </div>
+                                    <div class="orderitems">
+                                        <p>두번 쫄깃 블루베리 베이글&허니월넛크림치즈 x 1 외...</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class ="mybutton">
+                                <div class="reorder">
+                                    <p>재주문</p>
+                                </div>
+                                <div class="orderdetailcheck">
+                                    <p>주문상세</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -294,6 +440,8 @@
                         <%-- 과거 주문내역 --%>
                         <c:forEach items="${pastOrderList}" var="pastOrder" varStatus="status">
                             <div class="order_1">
+                                <%-- 가게사진 --%>
+
                                 <!-- 주문 정보 출력 -->
                                 <h2 class="mypage1_h2">${pastOrder.marketSeq.marketName}</h2>
                                 <!-- 날짜 출력 -->

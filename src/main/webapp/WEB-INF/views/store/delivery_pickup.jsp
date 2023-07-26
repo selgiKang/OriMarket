@@ -1,4 +1,3 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -12,8 +11,7 @@ pageEncoding="UTF-8"%>
 <body>
 
 <div class="main-container">
-
-
+  <h3 style="margin-top: 5px;">회원 리뷰관리</h3>
   <div class="tabs">
     <input type="radio" id="tab1" name="tab-control" checked>
     <input type="radio" id="tab2" name="tab-control">

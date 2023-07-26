@@ -159,7 +159,7 @@
         </form>
         <div id="list">
             <div>
-                <a href="#">아이디 찾기</a> / <span><a href="#">비밀번호 찾기</a></span>
+                <a href="/findUserId">아이디 찾기</a> / <span><a href="#">비밀번호 찾기</a></span>
             </div>
             <div><a href="/join">회원가입</a></div>
         </div>

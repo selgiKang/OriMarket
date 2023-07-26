@@ -378,6 +378,8 @@
             cursor: pointer;
             font-family: 'omyu pretty', Arial, sans-serif;
 
+
+
     </style>
     <%
         Date date = new Date();
@@ -407,6 +409,10 @@
     %>
 </head>
 <body>
+
+<div>
+<jsp:include page="../header/business_header_index.jsp" />
+</div>
 
 <div class="main-container">
 

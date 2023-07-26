@@ -124,7 +124,7 @@
 		<div class="mainfood">
 			<!-- 뒤로가기 -->
 			<button class="backbtn" onclick="window.history.go(-1)">&lt;</button>
-			<img alt="mainfoodpic" src="../../img/store/kal.jpg">
+			<img src="../../img/store/item/${item.itemImageUrl}" alt="메뉴이미지" style="width: 100%;height:100%;">
 			<p>위 사진은 연출된 사진으로 실제와 다를 수 있습니다.</p>
 		</div>
 		<div class="main_menu_wrap">
@@ -132,7 +132,7 @@
 				<h1>${item.itemName}</h1>
 				<h5>${item.itemInfo}</h5>
 			</div>
-			<form action="/${userId}/cart/" method="post" id="cartForm">
+			<form action="/${userId}/cart" method="post" id="cartForm">
 				<input type="hidden" value="${item.businessStore}" name="businessStore">
 				<div class="mymenu_container">
 					<div class="mymenu">
@@ -151,6 +151,9 @@
 								<td class="detailmenu_count"><input type="text" id="countInput" name="count" value="1" size="1"></td>
 								<td><button type="button" class="menu_btn_plus" onclick="plusBtn()"><i class="fas fa-solid fa-square-plus" style="color: #46a973; font-size: 24px;"></i></button></td>
 							</tr>
+							<tr>
+								<td><small style="color: red">현재 재고: ${item.itemCnt}개</small></td>
+							</tr>
 						</table>
 					</div>
 				</div>
@@ -158,7 +161,7 @@
 					<button type="button" class="dm_cart" onclick="submitForm()">장바구니 담기</button>
 					<%--올 때 재고 확인해서 hidden으로 넣기--%>
 					<input type="hidden" id="itemCnt" value="${item.itemCnt}">
-					<input type="hidden" id="cartCnt" value="${cartItem.count}">
+					<input type="hidden" id="cartCnt" value="${cartItem}">
 				</div>
 			</form>
 		</div>
@@ -195,6 +198,8 @@
 					// 아이템을 장바구니에 추가하는 동작을 여기에 구현합니다.
 					// 예를 들어, JavaScript를 사용하여 폼을 제출할 수 있습니다.
 					document.getElementById("cartForm").submit();
+
+
 				} else {
 					// 사용자가 "취소"를 클릭한 경우 추가적인 동작을 여기에 추가할 수 있습니다.
 				}
@@ -203,7 +208,7 @@
 	}
 
 	function viewCart() {
-		window.location.href = "/user/cart";
+		window.location.href="/"+userId+"/cart";
 	}
 </script>
 <jsp:include page="../footer/nav_footer.jsp" />

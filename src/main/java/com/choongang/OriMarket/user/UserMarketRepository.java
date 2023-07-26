@@ -9,5 +9,7 @@ import java.util.List;
 public interface UserMarketRepository extends JpaRepository<UserMarket, Long> {
 
     List<UserMarket> findByUser(User user);
+
+    List<UserMarket> findByMarket(Market market);
 }
 
