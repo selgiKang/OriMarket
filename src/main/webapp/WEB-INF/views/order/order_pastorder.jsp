@@ -268,6 +268,7 @@
         width: 320px;
         padding: 10px;
         border-radius: 10px;
+        position: relative;
 
     }
 
@@ -282,7 +283,7 @@
         background-color: #BEC5D0;
         color: black;
         padding: 5px;
-        width: 57px;
+        width: 70px;
         height: 10px;
         border-radius: 5px;
         font-weight: bolder;
@@ -290,23 +291,26 @@
         justify-content: center;
         align-items: center;
         margin-bottom: 5px;
+        margin-left: 1px;
     }
 
     .date{
         display: flex;
+        float: left;
         flex-direction: row;
-        justify-content: space-between;
         font-size: 13px;
         font-weight: bolder;
         color: #999999;
+        margin-right: 125px;
     }
 
 
     .storepicture img{
-        width: 70px;
-        height:70px;
+        width: 83px;
+        height:84px;
         float: left;
         border-radius: 10px;
+        margin-top: 7px;
     }
 
     img {
@@ -314,10 +318,11 @@
     }
 
     .middle {
-        margin-left: 80px;
+        margin-left: 93px;
         display: flex;
         justify-content: center;
         align-items: center;
+        margin-top: 7px;
     }
 
     .storename,
@@ -361,11 +366,9 @@
 
     .mybutton{
         display: flex;
-        justify-content: center;
-        align-items: center;
         margin-top: 8px;
-
-
+        margin-left: 10px;
+        padding-left: 9px;
     }
 
 </style>
@@ -395,50 +398,39 @@
 
                         <%--주문내역폼--%>
                         <div class="main-box">
-
                             <div class="top">
                                 <div class="small-box">
                                     <p>포장</p>
                                 </div>
-
                                 <div class="date">
                                     <p>2023.07.26 15:03</p>
                                 </div>
                             </div>
-
-                            <div class="storepicture">
-                                <img src="../../img/store/store.jpg" alt="사진" width="30px">
+                            <div style="position: absolute; top: 10px; right: 10px;">
+                                배달완료
                             </div>
-
+                            <div class="storepicture">
+                                <img src="../../img/store/store.jpg" alt="사진">
+                            </div>
                             <div class="middle">
                                 <div class="storeinfo">
                                     <div class="storename">
                                         <p>파리바게뜨이대자이점</p>
                                     </div>
-
                                     <div class="orderitems">
                                         <p>두번 쫄깃 블루베리 베이글&허니월넛크림치즈 x 1 외...</p>
                                     </div>
                                 </div>
                             </div>
-
                             <div class ="mybutton">
                                 <div class="reorder">
                                     <p>재주문</p>
                                 </div>
-
                                 <div class="orderdetailcheck">
                                     <p>주문상세</p>
                                 </div>
                             </div>
-
                         </div>
-
-                    </div>
-
-
-
-
                     </div>
                 </div>
             </section>
