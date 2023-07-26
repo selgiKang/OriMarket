@@ -33,10 +33,10 @@ pageEncoding="UTF-8"%>
               작성한 리뷰(__)
             </button>
           </div>
-          <div id="tab-panel-1" aria-labelledby="tab-1" role="tabpanel" tabindex="0">
+          <div id="tab-panel-1" aria-labelledby="tab-1" role="tabpanel" tabindex="0" >
             배달탭에서 작성 가능한 리뷰
           </div>
-          <div id="tab-panel-2" aria-labelledby="tab-2" role="tabpanel" tabindex="-1" hidden>
+          <div id="tab-panel-2" aria-labelledby="tab-2" role="tabpanel" tabindex="-1" >
             배달탭에서 작성한 리뷰
           </div>
         </div>
