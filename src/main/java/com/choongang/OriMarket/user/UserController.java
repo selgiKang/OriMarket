@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.thymeleaf.model.IModel;
 
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.*;
 
@@ -118,6 +119,25 @@ public class UserController {
         return "user/mypage";
     }
 
+    @GetMapping("/findUserId")
+    public String findUserId(){return "user/findID";}
+
+    @PostMapping("/findUserId")
+    public String findUserIdResult(User user, Model model, HttpServletRequest request){
+        User userInfo = userService.getUser(user.getUserId());
+
+        if(userInfo!=null){
+            if(userInfo.getUserPhone().equals(user.getUserPhone())){
+                model.addAttribute("userInfo",userInfo);
+            }else{
+                request.setAttribute("loginError","정보가 틀려습니다. 다시 한번 확인해주세요.");
+            }
+        }else{
+            request.setAttribute("loginError","정보가 틀려습니다. 다시 한번 확인해주세요.");
+        }
+
+        return "user/findID";
+    }
 
  /*   @GetMapping("/order_list")
     public String getOrderList(Model model) {

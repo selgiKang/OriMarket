@@ -95,8 +95,7 @@ public class UserService {
 
    }
 
-    public User getUser(String userId){
-        return userRepository.findByUserId(userId);
+    public User getUser(String userId){return userRepository.findByUserId(userId);
     }
 
 

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"  %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -47,12 +48,15 @@
         <input type="text" id="searchWord" class="h_searchbar" name="searchKeyword" placeholder=" 상품검색"
                maxlength="50" size="60">
         <button class="searchButton" class="h_searchbtn" type="submit">
-             &nbsp;<i class="fas fa-search searchButtonImg h_searchbtn_i"></i>
+            <i class="fas fa-search searchButtonImg h_searchbtn_i"></i>
         </button>
     </form>
     <small style="position: absolute; top: 78px; left: 15px" >
         <c:if test="${!empty userAddress1}">
-            배달지: <span class="addpic"><a href="/search" style="text-decoration: none;">${userAddress1} ${userAddressDetail1} ...</a></span>
+            배달지: <span class="addpic"><a href="/search">${userAddress1}${userAddressDetail}</a></span>
+        </c:if>
+        <c:if test="${empty userAddress1}">
+            배달지: <span class="addpic">로그인 후 주소 등록이 가능합니다.</span>
         </c:if>
     </small>
 </div>
