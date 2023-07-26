@@ -332,7 +332,11 @@
                     <div class="storecare_logo">
                         <h3>로고</h3>
                         <input type="file" accept="image/*" name="pictureUrl" id="logo-upload" onchange="previewPicture(event)"/>
-                        <div id="logo-preview"></div>
+                        <div id="logo-preview">
+                            <c:if test="${!empty save.buStoreImageUrl}">
+                                <img src="../../img/store/${save.buStoreImageUrl}" style="max-width: 100%; height: auto;">
+                            </c:if>
+                        </div>
                     </div>
                     <div class="line"></div>
                     <div class="storecare_name">
@@ -342,9 +346,7 @@
                             <input type="text" id="store-name-input" name="buStoreName" placeholder="가게 이름">
                         </c:if>
                         <%--입력창--%>
-                        <c:if test="${!empty save.buStoreName}">
-                            <input type="text" id="store-name-input" name="buStoreName" value="${save.buStoreName}">
-                        </c:if>
+                            <input type="hidden" id="store-name-input" name="buStoreName" value="${save.buStoreName}" >
 
                         <%-- 7.24 테스트 승엽--%>
                         <%-- 입력된 가게 이름 --%>

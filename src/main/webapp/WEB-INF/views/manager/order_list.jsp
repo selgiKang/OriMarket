@@ -100,7 +100,7 @@
                                     <span class="order-quantity">메뉴 ${order.orderGoodsNum}개</span>
                                     <span class="order-price">${order.orderTotalPrice}원</span>
                                 </div>
-                                <div class="order-menu">${order.orderGoodsName}</div>
+                                <div class="order-menu" style="margin-bottom: 10px;">${order.orderGoodsName}</div>
                             </c:if>
                         </c:if>
                     </c:forEach>

@@ -23,6 +23,23 @@ public class BusinessUserController {
     @Autowired
     private BusinessUserService businessUserService;
 
+    private final BusinessUserRepository businessUserRepository;
+
+    //7.26 테스트중
+    @GetMapping("/bu_main")
+    public String main(HttpSession session, Model model) {
+
+        if(session.getAttribute("buUserId") != null){
+
+            String buUserId = String.valueOf((session.getAttribute("buUserId")).toString());
+            BusinessUser businessUser= businessUserRepository.findByBuUserId(buUserId);
+            //model.addAttribute("userMarket", user.getUserMarkets());
+
+            return "business/storenotice_new";
+        }else {
+            return "business/storenotice_new";
+        }
+    }
 
     @GetMapping("/login1")
     public String login1(){return "business/businessUser/businesslogin";}
@@ -37,6 +54,8 @@ public class BusinessUserController {
             session.setAttribute("buUserId", businessUser.getBuUserId());
             System.out.println(session.getAttribute("buUserId"));
             return "business/storenotice_new";
+
+
         } else {
             // If login fails, add an error message to the model
             model.addAttribute("loginError", "아이디 또는 비밀번호가 틀립니다.");

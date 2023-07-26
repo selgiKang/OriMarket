@@ -181,9 +181,9 @@ public class CartService {
             /*현 재고 변경*/
             cartItem.getItem().setItemCnt(stock);
             //재고가 0이면 삭제됨
-            if(stock==0){
-                itemService.deleteItems(cartItem.getItem().getItemId());
-            }
+//            if(stock==0){
+//                itemService.deleteItems(cartItem.getItem().getItemId());
+//            }
         }
 
     }

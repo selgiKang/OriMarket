@@ -4,6 +4,9 @@ import com.choongang.OriMarket.business.store.BusinessStore;
 import com.choongang.OriMarket.business.store.BusinessStoreRepository;
 import com.choongang.OriMarket.business.user.BusinessUser;
 import com.choongang.OriMarket.business.user.BusinessUserRepository;
+import com.choongang.OriMarket.user.CartItem;
+import com.choongang.OriMarket.user.CartItemRepository;
+import com.choongang.OriMarket.utill.ImageService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,8 +14,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
 import java.util.List;
 
 @Controller
@@ -31,17 +36,21 @@ public class StoreController {
 
     private final ItemRepository itemRepository;
 
+    private final CartItemRepository cartItemRepository;
+
+    private final ImageService imageService;
+
 //    @GetMapping("/detailmenu")
 //    public String store_detailmenu(){
 //        return "store/detailmenu";
 //    }
 
     // /store getMapping은 favController로 이동
-    @GetMapping("/store_menu_search")
+    @GetMapping("/search_modal_popup")
     public String store_menu_search() {
 
 
-        return "store/store_menu_search";
+        return "store/search_modal_popup";
     }
 
     @GetMapping("/storenotice")
@@ -97,10 +106,19 @@ public class StoreController {
     }
 
     @PostMapping("/s2")
-    public String storenotice31(@ModelAttribute Item item, HttpSession session, Model model){
+    public String storenotice31(@ModelAttribute Item item, HttpSession session, Model model, @RequestParam("pictureUrl") MultipartFile file) throws IOException {
 
-        itemService.save(item,session,model);
-        System.out.println("이게또실행되나?");
+        // 상품등록할때 등록한 이미지를 item 디렉토리에 저장
+        if(file.isEmpty()){
+            String s = "null";
+            itemService.save(item,session,model,s);
+        }else {
+            String s = imageService.saveItemImage(file);
+            itemService.save(item,session,model,s);
+        }
+        // 상품 저장
+
+
         return "store/seller_itemList";
     }
 
@@ -109,11 +127,6 @@ public class StoreController {
         return "store/seller_manageMenu";
     }
 
-
-    @GetMapping("/test")
-    public String test() {
-        return "store/test";
-    }
 
     @GetMapping("/store_menuedit")
     public String store_menuedit(){return "store/store_menuedit";}
@@ -144,11 +157,22 @@ public class StoreController {
     }
 
     @GetMapping("/detailmenu/{itemId}")
-    public String store_detailmenu(@PathVariable("itemId")Long itemId,Model model){
+    public String store_detailmenu(@PathVariable("itemId")Long itemId,Model model,Item cartItem){
 
+        System.out.println("아이템 번호: "+itemId);
         Item item = itemService.getItem(itemId);
+        cartItem.setItemId(itemId);
 
-        model.addAttribute("item",item);
+        //카트 아이템에 있으면
+        if(cartItemRepository.findByItem(cartItem) != null){
+            CartItem cartItemResult = cartItemRepository.findByItem(cartItem);
+            System.out.println("장바구니 수량! "+ cartItemResult.getCount());
+
+            model.addAttribute("cartItem",cartItemResult.getCount());
+            model.addAttribute("item",item);
+        }else{
+            model.addAttribute("item",item);
+        }
 
         return "store/detailmenu";
     }

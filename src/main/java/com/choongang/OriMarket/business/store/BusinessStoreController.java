@@ -20,6 +20,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Optional;
 import java.util.Map;
 
 import static com.choongang.OriMarket.utill.Constant.IMAGE_PATH;
@@ -31,9 +32,11 @@ public class BusinessStoreController {
 
     @Autowired
     private final BusinessStoreService businessStoreService;
+    private final BusinessStoreRepository businessStoreRepository;
     private final ItemService itemService;
     private final BusinessUserRepository businessUserRepository;
     private final ImageService imageService;
+
 
     @GetMapping("/storenotice1")
     public String storenotice1(){
@@ -43,10 +46,15 @@ public class BusinessStoreController {
     @PostMapping("/storenotice1")
     public String storenoticesave(@ModelAttribute BusinessStore businessStore, HttpSession session,Model model, @RequestParam("pictureUrl") MultipartFile file) throws IOException {
 
-        String imageUrl = IMAGE_PATH+file.getOriginalFilename();
-        String s = imageService.saveStoreImage(file);
-        System.out.println("이건머죠::?"+s);
-        businessStoreService.save(businessStore,session,model,s);
+        if(file.isEmpty()){
+            BusinessStore businessStore1 = businessStoreRepository.findById(businessStore.getBuStoreNumber()).orElseThrow();
+            String s = businessStore1.getBuStoreImageUrl();
+            businessStoreService.save(businessStore, session, model, s);
+        }else {
+            String s = imageService.saveStoreImage(file);
+            businessStoreService.save(businessStore, session, model, s);
+        }
+
         return "business/storenotice_new";
     }
 
@@ -63,10 +71,16 @@ public class BusinessStoreController {
 
     //등록된 item수정하기
     @PostMapping("/update_itemDetail")
-    public String updateMenu(@ModelAttribute Item formItem,Model model,HttpSession session) {
+    public String updateMenu(@ModelAttribute Item formItem,Model model,HttpSession session,@RequestParam("pictureUrl") MultipartFile file) throws IOException {
 
         Item updateItem = itemService.getItem(formItem.getItemId());
 
+        if(file.isEmpty()){
+            updateItem.setItemImageUrl(updateItem.getItemImageUrl());
+        }else {
+            String s = imageService.saveItemImage(file);
+            updateItem.setItemImageUrl(s);
+        }
 
         updateItem.setItemName(formItem.getItemName());
         updateItem.setItemCnt(formItem.getItemCnt());
@@ -92,12 +106,11 @@ public class BusinessStoreController {
     //등록된 아이템 삭제(cartItem테이블에서도 삭제되게)
     @DeleteMapping("/delete_items")
     @ResponseBody
-    public String deleteSelectedItems(@RequestParam("itemIds[]")  List<Long> itemIds,HttpSession session) {
+    public String deleteSelectedItems(@RequestParam("itemIds[]")  List<Long> itemIds) {
 
         for(Long deleteItemId :itemIds){
             itemService.deleteItems(deleteItemId);
         }
-
         System.out.println("여기까지는와지는가?11");
         return "success";
     }
