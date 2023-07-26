@@ -1,5 +1,7 @@
 package com.choongang.OriMarket.user;
 
+import com.choongang.OriMarket.business.market.Market;
+import com.choongang.OriMarket.business.market.MarketRepository;
 import com.choongang.OriMarket.order.Order;
 import com.choongang.OriMarket.order.OrderService;
 import com.choongang.OriMarket.review.Review;
@@ -15,10 +17,7 @@ import org.thymeleaf.model.IModel;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Controller
 @RequiredArgsConstructor
@@ -29,6 +28,10 @@ public class UserController {
     private final UserService userService;
 
     private final UserRepository userRepository;
+
+    private final MarketRepository marketRepository;
+
+    private final UserMarketRepository userMarketRepository;
 
     // 로그인 get , post 매핑
     @GetMapping("/login")
@@ -170,6 +173,23 @@ public class UserController {
         System.out.println(user.getUserSeq());
         userService.delete(user.getUserSeq());
         return "user/order_list";
+    }
+
+    @GetMapping("/deleteUserMarket")
+    public String deleteUserMarket(@RequestParam("userMarketSeq") String userMarketSeq,HttpSession session, Model model){
+        UserMarket byId = userMarketRepository.findById(Long.valueOf(userMarketSeq)).orElseThrow();
+        userMarketRepository.delete(byId);
+
+        if(session.getAttribute("userSeq") != null){
+            //유저 번호 찾아서
+            Long userSeq = Long.valueOf((session.getAttribute("userSeq")).toString());
+            User user= userRepository.findByUserSeq(userSeq);
+            model.addAttribute("userMarket", user.getUserMarkets());
+
+            return "main/main";
+        }else {
+            return "main/main";
+        }
     }
 
 
