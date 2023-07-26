@@ -139,6 +139,26 @@ public class UserController {
         return "user/findID";
     }
 
+    @GetMapping("/findUserPw")
+    public String findUserPw(){return "user/findID";}
+
+    @PostMapping("/findUserPw")
+    public String findUserPwResult(User user, Model model, HttpServletRequest request){
+        User userInfo = userService.getUser(user.getUserEmail());
+
+        if(userInfo!=null){
+            if(userInfo.getUserPhone().equals(user.getUserPhone())){
+                model.addAttribute("userInfo",userInfo);
+            }else{
+                request.setAttribute("loginError","정보가 틀려습니다. 다시 한번 확인해주세요.");
+            }
+        }else{
+            request.setAttribute("loginError","정보가 틀려습니다. 다시 한번 확인해주세요.");
+        }
+
+        return "user/findID";
+    }
+
  /*   @GetMapping("/order_list")
     public String getOrderList(Model model) {
         List<Order> orderList = orderService.getAllOrders();
