@@ -61,7 +61,7 @@
 											<!-- 상품이미지나 상품타이틀을 클릭하면 상세페이지로 넘어간다(a태그) -->
 											<a href="상품상세페이지">
 												<div class="cart_itemImg">
-													<img src="../../img/user/cart_fish.png">
+													<img src="../../img/store/item/${orderList.item.itemImageUrl}">
 												</div>
 												<div class="cart_itemTitle">
 													<p>${orderList.item.itemName}</p>
