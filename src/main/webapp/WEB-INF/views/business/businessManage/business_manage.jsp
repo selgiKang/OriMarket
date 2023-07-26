@@ -332,7 +332,11 @@
                     <div class="storecare_logo">
                         <h3>로고</h3>
                         <input type="file" accept="image/*" name="pictureUrl" id="logo-upload" onchange="previewPicture(event)"/>
-                        <div id="logo-preview"></div>
+                        <div id="logo-preview">
+                            <c:if test="${!empty save.buStoreImageUrl}">
+                                <img src="../../img/store/${save.buStoreImageUrl}" style="max-width: 100%; height: auto;">
+                            </c:if>
+                        </div>
                     </div>
                     <div class="line"></div>
                     <div class="storecare_name">

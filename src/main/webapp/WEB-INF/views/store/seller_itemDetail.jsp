@@ -70,7 +70,7 @@
                     <h1>상품상세정보</h1>
                 </div>
             </div>
-                <form action="/update_itemDetail" method="post">
+                <form action="/update_itemDetail" method="post" enctype="multipart/form-data">
                     <table id="goods_table">
                         <td><input type="hidden" name="itemId" value="${items.itemId}"></td>
                         <tr>
@@ -103,7 +103,7 @@
                         </tr>
                         <tr>
                             <td>상세정보</td>
-                            <td><textarea name="menu_info" rows="7">${items.itemInfo}</textarea></td>
+                            <td><textarea name="itemInfo" rows="7">${items.itemInfo}</textarea></td>
                         </tr>
                         <tr>
                             <td>상품 카테고리</td>
@@ -123,7 +123,12 @@
                         </tr>
                         <tr>
                             <td>상품사진</td>
-                            <td><input type="image" value="제품사진" name=""></td>
+                            <td>
+                                <input type="file" accept="image/*" name="pictureUrl" id="logo-upload" onchange="previewPicture(event)">
+                                <div id="logo-preview">
+                                     <img src="../../img/store/item/${items.itemImageUrl}" style="max-width: 100%; height: auto;">
+                                </div>
+                            </td>
                         </tr>
                     </table>
                     <br>
@@ -138,4 +143,25 @@
     </div>
 </div>
 </body>
+<script>
+    function previewPicture(event) {
+        const pictureInput = event.target;
+        const picturePreview = document.getElementById('logo-preview');
+
+        if (pictureInput.files && pictureInput.files[0]) {
+            const reader = new FileReader();
+
+            reader.onload = function (e) {
+                const imgElement = document.createElement('img');
+                imgElement.src = e.target.result;
+                imgElement.style.maxWidth = '100%'; // 이미지 크기 조절 (선택사항)
+                imgElement.style.height = "auto";
+                picturePreview.innerHTML = ''; // 이미지 미리보기 업데이트
+                picturePreview.appendChild(imgElement);
+            };
+
+            reader.readAsDataURL(pictureInput.files[0]);
+        }
+    }
+</script>
 </html>

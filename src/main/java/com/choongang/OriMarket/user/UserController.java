@@ -30,21 +30,68 @@ public class UserController {
 
     private final UserRepository userRepository;
 
-    //7.18 테스트 데이터 가져오는거까지 성공 승엽
-    private final OrderService orderService;
-
+    // 로그인 get , post 매핑
     @GetMapping("/login")
     public String login() {
         return "user/login";
     }
+    @PostMapping("/login")
+    public ResponseEntity<String> loginId(@RequestBody Map<String, String> loginData, HttpSession session, Model model) {
+        String userId = loginData.get("userId");
+        String userPassword = loginData.get("userPassword");
+        User user = new User();
+        user.setUserId(userId);
+        user.setUserPassword(userPassword);
+
+        boolean isTrue = userService.login(user, session, model);
+
+        if (isTrue) {
+            User findUser = userRepository.findByUserId(String.valueOf(session.getAttribute("userId")));
+            List<UserAddress> userAddresses = findUser.getUserAddresses();
+            model.addAttribute("userAd", userAddresses);
+            model.addAttribute("userId", user.getUserId());
+
+            // 로그인 성공 시, 세션 설정 및 응답 반환
+            session.setAttribute("userId", userId);
+            return ResponseEntity.ok().body("로그인 성공");
+        } else {
+            // 로그인 실패 시, 오류 메시지와 함께 응답 반환
+            model.addAttribute("loginError", "아이디 또는 비밀번호가 틀립니다.");
+            return ResponseEntity.badRequest().body("아이디 또는 비밀번호가 틀립니다.");
+        }
+    }
+
+    // join get, Post 매핑
     @GetMapping("/join")
     public String join() {
         return "user/join";
     }
+
+    @PostMapping("/join")
+    public String joinUser(@ModelAttribute User user, HttpSession session) {
+        if(userService.join(user,session)){
+            return "user/mypage";
+        }
+        return "user/join";
+    }
+
+
+    // update get, Post 매핑
     @GetMapping("/update")
     public String update() {
         return "user/user_infolist_edit";
     }
+
+    @PostMapping("/update")
+    public String updateUser(@ModelAttribute User user, HttpSession session){
+
+        if(userService.join(user,session)){
+            return "user/user_infolist";
+        }
+        return "user/user_infolist_edit";
+    }
+
+
     @GetMapping("/infolist")
     public String list() {
         return "user/user_infolist";
@@ -53,10 +100,14 @@ public class UserController {
 
     @GetMapping("/review")
     public String review(HttpSession session,Model model) {
-        User byId = userRepository.findById((Long) session.getAttribute("userSeq")).orElseThrow();
-        List<Review> reviews = byId.getReviews();
-        model.addAttribute("re",reviews);
-        return "user/user_reviewlist";
+        if(session.getAttribute("userSeq")==null){
+            return "error/login_error";
+        }else {
+            User byId = userRepository.findById((Long) session.getAttribute("userSeq")).orElseThrow();
+            List<Review> reviews = byId.getReviews();
+            model.addAttribute("re", reviews);
+            return "user/user_reviewlist";
+        }
     }
 
     @GetMapping("/mypage")
@@ -71,7 +122,6 @@ public class UserController {
         model.addAttribute("orders", orderList);
         return "store/order_list";
     }*/
-
 /*
 기존 로그인
     @PostMapping("/login")
@@ -89,49 +139,10 @@ public class UserController {
         }
     }
 */
-/* 모달로그인 230724 */
-@PostMapping("/login")
-public ResponseEntity<String> loginId(@RequestBody Map<String, String> loginData, HttpSession session, Model model) {
-    String userId = loginData.get("userId");
-    String userPassword = loginData.get("userPassword");
-    User user = new User();
-    user.setUserId(userId);
-    user.setUserPassword(userPassword);
+    /* 모달로그인 230724 */
 
-    boolean isTrue = userService.login(user, session, model);
 
-    if (isTrue) {
-        User findUser = userRepository.findByUserId(String.valueOf(session.getAttribute("userId")));
-        List<UserAddress> userAddresses = findUser.getUserAddresses();
-        model.addAttribute("userAd", userAddresses);
-        model.addAttribute("userId", user.getUserId());
 
-        // 로그인 성공 시, 세션 설정 및 응답 반환
-        session.setAttribute("userId", userId);
-        return ResponseEntity.ok().body("로그인 성공");
-    } else {
-        // 로그인 실패 시, 오류 메시지와 함께 응답 반환
-        model.addAttribute("loginError", "아이디 또는 비밀번호가 틀립니다.");
-        return ResponseEntity.badRequest().body("아이디 또는 비밀번호가 틀립니다.");
-    }
-}
-
-    @PostMapping("/join")
-    public String joinUser(@ModelAttribute User user, HttpSession session) {
-        if(userService.join(user,session)){
-            return "user/mypage";
-        }
-        return "user/join";
-    }
-
-    @PostMapping("/update")
-    public String updateUser(@ModelAttribute User user, HttpSession session){
-
-        if(userService.join(user,session)){
-            return "user/user_infolist";
-        }
-        return "user/user_infolist_edit";
-    }
 
     @GetMapping("/logout")
     public String logout(HttpSession session){
@@ -140,6 +151,7 @@ public ResponseEntity<String> loginId(@RequestBody Map<String, String> loginData
 
     }
 
+    //아이디 중복확인
     @GetMapping("/userId/{userId}/exists")
     @ResponseBody
     public ResponseEntity<Boolean> checkUserIdDuplicate(@PathVariable String userId){

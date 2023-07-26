@@ -139,7 +139,7 @@
 						<div class="radio">
 							<h5>가격</h5>
 							<label><input type="radio" value="${item.itemName}" name="itemName" checked/>${item.itemName}</label>
-									<input type="hidden" value="${item.itemId}" name="itemId">
+									<input type="hidden" value="${item.itemId}" name="itemId" id="itemId">
 							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" value="${item.itemPrice}" name="itemPrice" style="outline: none;border: none;" />
 						</div>
 						<table style="margin-left:20px;">
@@ -156,6 +156,8 @@
 				</div>
 				<div>
 					<button type="button" class="dm_cart" onclick="submitForm()">장바구니 담기</button>
+					<%--올 때 재고 확인해서 hidden으로 넣기--%>
+					<input type="hidden" id="itemCnt" value="${item.itemCnt}">
 				</div>
 			</form>
 		</div>
@@ -163,13 +165,35 @@
 </div>
 <script>
 	function submitForm() {
-		const confirmed = confirm("장바구니에 담으시겠습니까?");
-		if (confirmed) {
-			// 아이템을 장바구니에 추가하는 동작을 여기에 구현합니다.
-			// 예를 들어, JavaScript를 사용하여 폼을 제출할 수 있습니다.
-			document.getElementById("cartForm").submit();
-		} else {
-			// 사용자가 "취소"를 클릭한 경우 추가적인 동작을 여기에 추가할 수 있습니다.
+		//재고
+		var itemCnt = parseInt(document.getElementById("itemCnt").value, 10);
+		//선택 수
+		var countInput = parseInt(document.getElementById("countInput").value, 10);
+
+		const itemId = document.getElementById("itemId").value;
+
+		//아이디
+		const userId = '<%= session.getAttribute("userId") %>';
+
+		console.log("userId:", userId); // userId의 값을 콘솔에 출력해보세요.
+		if (userId === null || userId === "null") {
+			alert("장바구니를 이용하시려면 로그인이 필요합니다.");
+			window.location.href = "/mypage";
+		}else {
+			//if문 추가해서 재고 보다 많이 담으면 재고 알림?
+			if(itemCnt<countInput){
+				alert("재고 수량보다 많습니다.")
+				window.location.href="/detailmenu/"+itemId;
+			}else{
+				const confirmed = confirm("장바구니에 담으시겠습니까?");
+				if (confirmed) {
+					// 아이템을 장바구니에 추가하는 동작을 여기에 구현합니다.
+					// 예를 들어, JavaScript를 사용하여 폼을 제출할 수 있습니다.
+					document.getElementById("cartForm").submit();
+				} else {
+					// 사용자가 "취소"를 클릭한 경우 추가적인 동작을 여기에 추가할 수 있습니다.
+				}
+			}
 		}
 	}
 
