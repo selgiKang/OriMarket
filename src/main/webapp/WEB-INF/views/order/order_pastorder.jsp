@@ -256,11 +256,11 @@
 </style>
 <body>
     <div class="main-container">
-        <h3>회원 주문내역</h3>
+        <h3 style="margin-top: 5px;">회원 주문내역</h3>
         <div id="search_area" style="width: 95%;">
             <form>
                 <input type="search" placeholder="주문했던 메뉴와 시장을 검색해보세요." style="width: 88%;">
-                <span>i</span>
+                <span><i class="fa-solid fa-magnifying-glass"></i></span>
             </form>
         </div>
         <div class="tabs">
