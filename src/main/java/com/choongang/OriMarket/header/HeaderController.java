@@ -23,5 +23,9 @@ public class HeaderController {
         return "header/header_search";
     }
 
+    @GetMapping("/business_header_index")
+    public String business_header_index() {
+        return "header/business_header_index";
+    }
 
 };
