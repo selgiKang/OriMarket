@@ -37,11 +37,11 @@ public class StoreController {
 //    }
 
     // /store getMapping은 favController로 이동
-    @GetMapping("/store_menu_search")
+    @GetMapping("/search_modal_popup")
     public String store_menu_search() {
 
 
-        return "store/store_menu_search";
+        return "store/search_modal_popup";
     }
 
     @GetMapping("/storenotice")
