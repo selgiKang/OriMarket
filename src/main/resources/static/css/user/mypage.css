@@ -220,7 +220,7 @@ button {
 
 
 /* 230724 로그인 모달창 추가 */
-.modal {position: absolute; width: 375px; height: 913px; top:-20px; z-index: 999999; display: none; background-color: rgba(0, 0, 0, 0.6);}
+.modal {position: absolute; width: 375px; height: 935px; top:0px; z-index: 999999; display: none; background-color: rgba(0, 0, 0, 0.6);}
 .modal.show {display: block;}
 
 .modal_body {

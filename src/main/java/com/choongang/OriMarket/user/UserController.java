@@ -119,7 +119,7 @@ public ResponseEntity<String> loginId(@RequestBody Map<String, String> loginData
     @PostMapping("/join")
     public String joinUser(@ModelAttribute User user, HttpSession session) {
         if(userService.join(user,session)){
-            return "user/login";
+            return "user/mypage";
         }
         return "user/join";
     }
