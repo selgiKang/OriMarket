@@ -79,7 +79,7 @@ public class CartController {
 
         if(userService.getUser(userId) == null){
             // 장바구니에 물건을 담을때 비회원이면 로그인해달라고 창뛰우고 마이페이지로 넘어가기
-            return "/user/mypage";
+            return "/error/login_error";
         }else {
             //유저 찾기
             User user = userService.getUser(userId);
@@ -121,16 +121,20 @@ public class CartController {
     /*결제페이지로 넘기기*/
     @PostMapping("/paymentPage/{userId}")
     public String orderPayment(@PathVariable("userId") String userId, Model model, @ModelAttribute("deliveryType") String cart1) {
-        cartService.saveCartInfo(userId,cart1);
-        Cart cart = cartService.getCart(userId);
-        List<CartItem> cartItems = cartService.userCartView(cart);
+        if(userId.isEmpty()){
+            return "/error/login_error";
+        }else {
+            cartService.saveCartInfo(userId, cart1);
+            Cart cart = cartService.getCart(userId);
+            List<CartItem> cartItems = cartService.userCartView(cart);
 
-        model.addAttribute("cartItemList",cartItems);
-        model.addAttribute("totalPrice",cart.getCartTotalPrice());
-        model.addAttribute("deliveryPrice",cart.getCartDeliveryPrice());
+            model.addAttribute("cartItemList", cartItems);
+            model.addAttribute("totalPrice", cart.getCartTotalPrice());
+            model.addAttribute("deliveryPrice", cart.getCartDeliveryPrice());
 
+            return "/order/order_paymentPage";
+        }
 
-        return "/order/order_paymentPage";
     }
 
   /*  *//*결제페이지로 넘기기*//*

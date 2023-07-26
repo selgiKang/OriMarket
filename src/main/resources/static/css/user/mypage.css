@@ -230,8 +230,8 @@ button {
     transform: translateX(-50%) translateY(-50%);
 }
 
-div#login_box{margin:30px 0}
-h1.login_modal_title{margin-top:20px; color: #333; letter-spacing: 5px;}
+div#login_box{margin:20px 0}
+h1.login_modal_title{margin-top:10px; color: #333; letter-spacing: 5px;}
 div.login_box_wrap{margin-bottom:20px;}
 div.login_box_wrap p {margin-bottom:10px;}
 
@@ -245,3 +245,5 @@ div.join_btn_wrap{width:100%;}
 a.join_btn{width:70%; height:40px; padding: 4% 32%; background-color:#ffbf41; border:none; border-radius: 25px; color:#333; font-weight: 700; font-size: 16px;}
 a.join_btn:hover {background-color: #333; color:#fff;}
 
+a.business_logingo{cursor: pointer;}
+a.business_logingo:hover {color:#46A973; font-weight: bolder;}

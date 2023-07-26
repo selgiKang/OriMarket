@@ -92,13 +92,17 @@ public class OrderController {
     public String orderPaymentPage(){return "order/order_paymentPage";}
     @GetMapping("/order_pastorder")
     public String orderPastorder(HttpSession session,Model model){
-        //아이디로
-        String userId = (session.getAttribute("userId")).toString();
-        //지난 모든 주문들 출력
-        List<Order> pastOrderList = orderService.findByUserIdList(userId);
-        model.addAttribute("pastOrderList",pastOrderList);
+        if(session.getAttribute("userId")==null){
+            return "error/login_error";
+        }else {
+            //아이디로
+            String userId = (session.getAttribute("userId")).toString();
+            //지난 모든 주문들 출력
+            List<Order> pastOrderList = orderService.findByUserIdList(userId);
+            model.addAttribute("pastOrderList", pastOrderList);
 
-        return "order/order_pastorder";
+            return "order/order_pastorder";
+        }
     }
 
 
