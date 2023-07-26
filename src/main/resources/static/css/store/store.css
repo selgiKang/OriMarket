@@ -62,7 +62,7 @@ a {
 .menu-content {
     /*flex: 1;*/
     /* 230723 승원 */
-    width: 60%;
+    width: 50%;
     height: 100%;
     padding: 0 15px 0 0;
 }
@@ -75,7 +75,7 @@ a {
 }
 
 .menu-content h6 {
-    width: 180px;
+    width: 160px;
     height: 40px;
     font-size: 14px;
     margin: 5px 0;
