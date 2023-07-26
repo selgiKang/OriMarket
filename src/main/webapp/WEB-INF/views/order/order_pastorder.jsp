@@ -282,14 +282,14 @@
         background-color: #BEC5D0;
         color: black;
         padding: 5px;
-        width: 80px;
-        height: 20px;
-        border-radius: 10px;
+        width: 57px;
+        height: 10px;
+        border-radius: 5px;
         font-weight: bolder;
         display: flex;
         justify-content: center;
         align-items: center;
-
+        margin-bottom: 5px;
     }
 
     .date{
@@ -303,11 +303,10 @@
 
 
     .storepicture img{
-        width: 10px;
-        height: 100px;
+        width: 70px;
+        height:70px;
         float: left;
         border-radius: 10px;
-        margin: 10px;
     }
 
     img {
@@ -315,7 +314,7 @@
     }
 
     .middle {
-        margin-left: 150px;
+        margin-left: 80px;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -326,39 +325,49 @@
         flex-grow: 1;
     }
 
+    .orderitems{
+
+        font-size: 10px;
+        color: #666666;
+    }
+
     .reorder{
         background-color: white;
         border: 1px solid red;
-        border-radius: 10px;
-        width: 140px;
-        height: 35px;
+        border-radius: 5px;
+        width: 80px;
+        height: 25px;
         color: red;
         font-weight: bolder;
         display: flex;
         justify-content: center;
         align-items: center;
-        margin-right: 20px;
-        margin-left: -50px;
+        margin-right: 73px;
     }
 
     .orderdetailcheck{
         background-color: white;
         border: 1px solid dimgray;
-        border-radius: 10px;
-        width: 140px;
-        height: 35px;
+        border-radius: 5px;
+        width: 80px;
+        height: 25px;
         color: black;
         font-weight: bolder;
         display: flex;
         justify-content: center;
         align-items: center;
+        margin-left: -65px;
     }
 
     .mybutton{
         display: flex;
         justify-content: center;
         align-items: center;
+        margin-top: 8px;
+
+
     }
+
 </style>
 <body>
     <div class="main-container">
@@ -404,7 +413,7 @@
                             <div class="middle">
                                 <div class="storeinfo">
                                     <div class="storename">
-                                        <p>파바픽업-파리바게뜨이대자이점</p>
+                                        <p>파리바게뜨이대자이점</p>
                                     </div>
 
                                     <div class="orderitems">
