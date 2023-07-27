@@ -213,7 +213,26 @@
                 // 주소 검색 후 선택하면 창이 닫히고 상세주소칸으로 포커스 이동
                 document.getElementById("address_detail").focus();
                 // 주소 검색이 완료되면 폼 자동 제출
-                document.getElementById("userMarketSearchForm").submit();
+                // 주소 정보를 서버로 전송 (Ajax 요청)
+                var userAddress = data.address;
+                $.ajax({
+                    type: "POST",
+                    url: "/usermarketSearch",
+                    data: {
+                        userAddress: userAddress,
+                    },
+                    success: function(result) {
+                        if(result == "success"){
+                            window.location.href="/";
+                        }
+                    },
+                    error: function (error) {
+                        // Ajax 요청이 실패한 경우 처리할 로직 작성
+                        console.error("Ajax 요청 실패:", xhr, status, error);
+                    }
+                });
+            }
+        }).open();
             }
         }).open();
     }

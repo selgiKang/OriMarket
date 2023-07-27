@@ -239,7 +239,7 @@ public class UserController {
             System.out.println("시장이름: "+market.getMarketName());
         }
         session.setAttribute("aabb",all.get(0).getMarketName());
-        return "redirect:/";
+        return "success";
     }
 
 
