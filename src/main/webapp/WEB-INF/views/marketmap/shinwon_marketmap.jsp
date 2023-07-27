@@ -66,7 +66,7 @@
                 <c:if test="${!empty buStore}">
                 <c:forEach var="bustore" items="${buStore}">
                     <c:if test="${bustore.buStoreName eq '과일나라'}">
-                        <c:if test="${bustore.status eq 'CLOSE'}">
+                        <c:if test="${bustore.status eq 'CLOSE' or bustore.status eq 'null'}">
                             <div class="map_bg_content3_icon store_shinrimtofu_box" onclick="">
                                 <img class="store_shinrimtofu_icon tofu" src="../../img/marketmap/tofu.png" style="opacity: 0.2;">
                                 <p class="store_shinrimtofu_txt">과일나라</p>
