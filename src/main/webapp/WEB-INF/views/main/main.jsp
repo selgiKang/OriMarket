@@ -93,20 +93,36 @@
                                     <a href="/connexion_market" class="current_location_btn" style="text-decoration:none; color:#333; cursor: pointer;"><i class="fa-solid fa-location-dot header_i" style="font-size: 16px;"></i>&nbsp;가까운 시장찾기 > </a>
                                     <p style="margin-top:30px; font-size: 16px;">현재 내가 설정한 주소: <span style="color: red; font-size: 16px;">${userAddress1} ${userAddressDetail1} ...</span></p>
                                 <hr style="margin-top:30px;">
-                                <div class="input_container" style="margin-top:30px;">
-                                    <input type="text" id="address_kakao" name="userAddress" readonly style="width:190px; height:30px; border:1px solid #ffbf41; border-radius: 35px; float:left;"  placeholder=" 주소를 입력해 주세요">
+                                <div class="input_container" style="margin-top:15px;">
+                                    <input type="text" id="address_kakao" name="userAddress" readonly style="width:215px; height:30px; border:1px solid #ffbf41; border-radius: 35px; float:left;"  placeholder=" 주소를 입력해 주세요">
                                     <div class="btn_container" >
                                         <button type="button" class="btn_round" onclick="searchAddress()"
                                                 style="border-radius: 20px; padding: 5px 10px; background-color: #ffbf41; color: white; border: none; font-size: 14px; cursor: pointer; float: right; font-family: 'omyu pretty', Arial, sans-serif;">주소검색
                                         </button>
                                     </div>
                                 </div>
+                                <input type="hidden" id="address_detail" name="userAddressDetail1" placeholder="상세주소를 입력해주세요" required>
                             </div>
                         </form>
                     </div>
+                    <p style="text-align: left; margin-top: 65px; font-size: 23px;">* 등록한 주소에서 가까운 시장목록 *</p>
+                    <ul style="text-align: left; margin-left: 0px;">
+                        <li style="margin-top: 5px; list-style: none; font-size: 16px; margin-left: 20px;">
+                            1.어쩌구저쩌구 시장
+                            <a href="#" style="font-size: 16px;">선택</a>
+                        </li>
+                        <li style="margin-top: 5px; list-style: none; font-size: 16px; margin-left: 20px;">
+                            2.어쩌구저쩌구 시장
+                            <a href="#" style="font-size: 16px;">선택</a>
+                        </li>
+                        <li style="margin-top: 5px; list-style: none; font-size: 16px; margin-left: 20px;">
+                            3.어쩌구저쩌구 시장
+                            <a href="#" style="font-size: 16px;">선택</a>
+                        </li>
+                    </ul>
                 </div>
-
             </div>
+            <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
             <div id="connextion_market" class="clear">
                 <c:if test="${empty userId}">
                     <span class="connextion_title clear" style="font-weight:800;font-size: 18px;font-family: 'omyu pretty';/*border: 2px solid #999;*/width: 290px;border-radius: 5px;height: 25px; display: flex; justify-content: flex-start; align-items: center;">&nbsp;<img class="connextion_title_img clear navicon" src="../../img/main/navi.png">&nbsp;<p>&nbsp나의 단골시장</p></span>
@@ -187,7 +203,16 @@
         <jsp:include page="../footer/footer.jsp" />
     </div>
     <script>
+        function searchAddress() {
+            new daum.Postcode({
+                oncomplete: function (data) {
+                    document.getElementById("address_kakao").value = data.address;
 
+                    //주소 검색 후 선택하면 창이 닫히고 상세주소칸으로 포인트가 이동
+                    document.getElementById("address_detail").focus();
+                }
+            }).open();
+        }
     </script>
     <script type="text/javascript" src="../../js/main/main_slidebanner.js"></script>
     <script type="text/javascript" src="../../js/main/connexion_market.js"></script>
