@@ -73,7 +73,10 @@
     <div class="form_field">
       <label for="name">이름</label>
       <input type="text" id="name" name="buUserName" required>
-
+    </div>
+    <div class="form_field">
+      <label for="email">이메일</label>
+      <input type="email" id="email" name="buUserEmail" required>
     </div>
     <div class="form_field">
       <label for="phone">휴대폰</label>

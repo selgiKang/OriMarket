@@ -203,6 +203,14 @@
         <jsp:include page="../footer/footer.jsp" />
     </div>
     <script>
+        <% if (request.getAttribute("deleteError") != null) { %>
+        window.onload = function() {
+            var errorMessage = "<%= request.getAttribute("deleteError") %>";
+            if (errorMessage.trim() !== "") {
+                alert(errorMessage);
+            }
+        };
+        <% } %>
         function searchAddress() {
             new daum.Postcode({
                 oncomplete: function (data) {

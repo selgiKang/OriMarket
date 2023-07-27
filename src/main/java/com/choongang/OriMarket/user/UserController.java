@@ -158,13 +158,6 @@ public class UserController {
 
         return "user/findID";
     }
-
- /*   @GetMapping("/order_list")
-    public String getOrderList(Model model) {
-        List<Order> orderList = orderService.getAllOrders();
-        model.addAttribute("orders", orderList);
-        return "store/order_list";
-    }*/
 /*
 기존 로그인
     @PostMapping("/login")
@@ -202,10 +195,15 @@ public class UserController {
     }
 
     @GetMapping("/delete")
-    public String deleteUser(@RequestParam("userSeq") Long userSeq){
+    public String deleteUser(@RequestParam("userSeq") Long userSeq,Model model){
         System.out.println("번호: "+userSeq);
-        userService.delete(userSeq);
-        return "user/login";
+        boolean userDeleteResult = userService.delete(userSeq);
+        if(userDeleteResult==false){
+            model.addAttribute("deleteError", "탈퇴에 실패했습니다. 다시 시도해주세요.");
+        }else{
+            model.addAttribute("deleteError", "탈퇴가 완료되었습니다.");
+        }
+        return "main/main";
     }
 
     @PostMapping("/order_list")
