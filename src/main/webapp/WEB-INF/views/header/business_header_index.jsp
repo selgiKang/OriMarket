@@ -7,9 +7,10 @@
     <meta charset="UTF-8">
     <title>Insert title here</title>
     <script src="https://kit.fontawesome.com/1cfe6d92db.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="../../css/header/business_header_index.css">
+    <link rel= "stylesheet" href= "../../css/header/header_index.css">
+
     <style>
-         추가한 CSS 스타일
+        추가한 CSS 스타일
         body {
             margin: 0; /* body의 기본 마진을 제거하여 헤더를 화면 맨 위에 배치합니다. */
         }
@@ -19,11 +20,13 @@
             top: 0;
             left: 0;
             right: 0;
-            background-color: #46a973; /* 헤더 배경색을 지정해주세요. */
+            background-color: #46A973; /* 헤더 배경색을 지정해주세요. */
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* 헤더에 그림자 효과를 추가할 수 있습니다. */
             z-index: 9999; /* 다른 요소들보다 위에 표시되도록 설정합니다. */
         }
     </style>
+
+
 </head>
 <body>
 
@@ -36,8 +39,7 @@
             <span class="addpic"><a href="/infolist1">${buUserId}님</a>, 어서오리</h2></span>
         </c:if>
 
-        <div class="icon" style="margin-top: 5px">
-            <a href="/storenotice1"><i class="fa-solid fa-house" style="color: #ffbf41;"></i></a>
+        <a href=""><i class="fa-solid fa-house" style="color: #ffbf41;"></i></a>
 
         <a href="/buUserLogout?buUserId=${buUserId}"><i class="fa-solid fa-right-from-bracket" style="color: #ffbf41;"></i></a>
 
