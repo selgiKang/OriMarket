@@ -3,6 +3,7 @@ package com.choongang.OriMarket.order;
 import com.choongang.OriMarket.RealTimeStatus.RealTimeStatus;
 import com.choongang.OriMarket.business.market.Market;
 import com.choongang.OriMarket.business.user.BusinessUser;
+import com.choongang.OriMarket.manager.user.ManagerUser;
 import com.choongang.OriMarket.user.User;
 import lombok.*;
 import lombok.extern.slf4j.Slf4j;
@@ -95,6 +96,10 @@ public class Order {
     // RealTimeStatus와의 연관관계 설정
     @OneToOne(mappedBy = "orderNumber")
     private RealTimeStatus realTimeStatus;
+
+    @ManyToOne
+    @JoinColumn(name="managerUser")
+    private ManagerUser managerUser;
 
 //    @Transient
 //    private String next_redirect_pc_url;
