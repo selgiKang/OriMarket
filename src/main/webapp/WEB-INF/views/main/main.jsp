@@ -211,6 +211,14 @@
             }
         };
         <% } %>
+        <% if (request.getAttribute("userMarketError") != null) { %>
+        window.onload = function() {
+            var errorMessage = "<%= request.getAttribute("userMarketError") %>";
+            if (errorMessage.trim() !== "") {
+                alert(errorMessage);
+            }
+        };
+        <% } %>
         function searchAddress() {
             new daum.Postcode({
                 oncomplete: function (data) {
