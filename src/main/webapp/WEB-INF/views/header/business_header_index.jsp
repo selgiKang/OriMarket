@@ -39,8 +39,9 @@
         <div class="icon" style="margin-top: 5px">
             <a href="/storenotice1"><i class="fa-solid fa-house" style="color: #ffbf41;"></i></a>
 
-            <a href="/login1"><i class="fa-solid fa-right-from-bracket" style="color: #ffbf41;"></i></a>
-        </div>
+        <a href="/buUserLogout?buUserId=${buUserId}"><i class="fa-solid fa-right-from-bracket" style="color: #ffbf41;"></i></a>
+
+
     </div>
 
 
