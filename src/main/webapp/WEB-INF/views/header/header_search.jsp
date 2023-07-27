@@ -77,7 +77,7 @@
         <span>
             <a href="#" class="address">
                 <i class="fa-solid fa-location-dot header_i" style="font-size: 15px;color: #ffbf41;"></i>
-                (ㅁㅁㅁ시장)
+                ${marketName}
             </a>
         </span>
         <div>
@@ -95,7 +95,7 @@
     </form>--%>
     <div style="display: flex; justify-content: space-around; align-items: center;">
         <small class="d_addess">
-            배달주소 : (가져오기)(가져오기)(가져오기)(가져오기)(가져오기)
+            배달주소 : ${userAddress1} ${userAddressDetail1}
         </small>
         <form action="/header_search1" method="GET" class="h_search_wrap">
             <i class="fas fa-solid fa-magnifying-glass search_i"></i>

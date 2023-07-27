@@ -131,7 +131,7 @@
                                         <div class="connextion_mk2_wrap change_marketimg_wrap" style="margin-right:20px; background:none; position: relative">
                                             <div id="orderReceipt_btn_cancel" style="position: absolute; right: -7px; top: 12px; z-index: 9999;"><a href="/deleteUserMarket?userMarketSeq=${i.userMarketSeq}"><i class="fas fa-regular fa-xmark"></i></a></div>
                                             <img class="connexion_market_img" src="../../img/main/market2.png">
-                                            <a class="connextion_mk2 change_marketimg" href="${i.market.marketHref}?marketName=${i.market.marketName}">
+                                            <a class="connextion_mk2 change_marketimg" href="/shinwon_marketmap?marketName=${i.market.marketName}">
                                                 <p>${i.market.marketName}</p>
                                             </a>
                                         </div>
@@ -153,7 +153,7 @@
                                         <div class="connextion_mk3_wrap change_marketimg_wrap" style="margin-right:20px; background:none; position: relative;" >
                                             <div id="orderReceipt_btn_cancel1" style="position: absolute; right: -7px; top: 12px; z-index: 9999;"><a href="/deleteUserMarket?userMarketSeq=${i.userMarketSeq}"><i class="fas fa-regular fa-xmark"></i></a></div>
                                             <img class="connexion_market_img" src="../../img/main/market2.png">
-                                            <a class="connextion_mk3 change_marketimg" href="${i.market.marketHref}?marketSeq=${market.marketSeq}">
+                                            <a class="connextion_mk3 change_marketimg" href="${i.market.marketHref}?marketName=${market.marketName}">
                                                 <p>${i.market.marketName}</p>
                                             </a>
                                         </div>

@@ -49,6 +49,7 @@
             overflow: auto; /* 스크롤 가능하도록 수정 */
             overflow-x: hidden; /* 가로 스크롤 금지 */
             font-family: 'LINESeedKR-Bd', sans-serif; /* 따옴표 추가 */
+            padding-top: 100px;
         }
 
         .main-container::-webkit-scrollbar {
@@ -377,7 +378,6 @@
             font-size: 14px;
             cursor: pointer;
             font-family: 'omyu pretty', Arial, sans-serif;
-        }
 
 
 
@@ -411,10 +411,10 @@
 </head>
 <body>
 
-
-<jsp:include page="../header/business_header_index.jsp" />
-
 <div class="main-container">
+    <div class="header">
+        <jsp:include page="../header/business_header_index.jsp" />
+    </div>
 
     <div class="store_time_container">
         <div class="store_time">
