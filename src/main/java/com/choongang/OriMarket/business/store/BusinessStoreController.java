@@ -151,5 +151,18 @@ public class BusinessStoreController {
     }
 
 
+    @PostMapping("/storeStatus")
+    public String storeStauts(@ModelAttribute BusinessStore businessStore){
+        BusinessStore byId = businessStoreRepository.findById(businessStore.getBuStoreNumber()).orElseThrow();
+        System.out.println("현재상태:"+businessStore.getStatus());
+        if(businessStore.getStatus() == null){
+            byId.setStatus("CLOSE");
+            businessStoreRepository.save(byId);
+        }else{
+            byId.setStatus(businessStore.getStatus());
+            businessStoreRepository.save(byId);
+        }
+        return "redirect:/storenotice1";
+    }
 
 };

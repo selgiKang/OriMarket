@@ -94,7 +94,7 @@
                                     <p style="margin-top:30px; font-size: 16px;">현재 내가 설정한 주소: <span style="color: red; font-size: 16px;">${userAddress1} ${userAddressDetail1} ...</span></p>
                                 <hr style="margin-top:30px;">
                                 <div class="input_container" style="margin-top:15px;">
-                                    <input type="text" id="address_kakao" name="userAddress" readonly style="width:215px; height:30px; border:1px solid #ffbf41; border-radius: 35px; float:left;"  placeholder=" 주소를 입력해 주세요">
+                                    <input type="text" id="address_kakao" name="userAddress" readonly style="width:215px; height:30px; border:1px solid #ffbf41; border-radius: 35px; float:left;"  placeholder=" 주소를 검색해 주세요">
                                     <div class="btn_container" >
                                         <button type="button" class="btn_round" onclick="searchAddress()"
                                                 style="border-radius: 20px; padding: 5px 10px; background-color: #ffbf41; color: white; border: none; font-size: 14px; cursor: pointer; float: right; font-family: 'omyu pretty', Arial, sans-serif;">주소검색
@@ -203,11 +203,18 @@
         <jsp:include page="../footer/footer.jsp" />
     </div>
     <script>
+        <% if (request.getAttribute("deleteError") != null) { %>
+        window.onload = function() {
+            var errorMessage = "<%= request.getAttribute("deleteError") %>";
+            if (errorMessage.trim() !== "") {
+                alert(errorMessage);
+            }
+        };
+        <% } %>
         function searchAddress() {
             new daum.Postcode({
                 oncomplete: function (data) {
                     document.getElementById("address_kakao").value = data.address;
-
                     //주소 검색 후 선택하면 창이 닫히고 상세주소칸으로 포인트가 이동
                     document.getElementById("address_detail").focus();
                 }

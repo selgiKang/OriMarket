@@ -81,21 +81,31 @@ public class UserService {
        //userRepository.findByUserId()
    }
 
-   public void delete(Long UserSeq){
-        User user = userRepository.findById(UserSeq).orElseThrow();
-       List<UserAddress> userAddresses = user.getUserAddresses();
-       for (UserAddress userAddress:userAddresses){
-           userAddressRepository.delete(userAddress);
-       }
-       userRepository.delete(user);
-   }
+    public boolean delete(Long UserSeq) {
+        User user = userRepository.findById(UserSeq).orElse(null);
+        if (user != null) {
+            List<UserAddress> userAddresses = user.getUserAddresses();
+            try {
+                for (UserAddress userAddress : userAddresses) {
+                    userAddressRepository.delete(userAddress);
+                }
+                userRepository.delete(user);
+                return true;
+            } catch (Exception e) {
+
+                e.printStackTrace();
+            }
+        }
+        return false;
+    }
 
    public boolean checkUserId(String userId){
        return userRepository.existsByUserId(userId);
 
    }
 
-    public User getUser(String userId){return userRepository.findByUserId(userId);
+    public User getUser(String userId){
+        return userRepository.findByUserId(userId);
     }
 
 

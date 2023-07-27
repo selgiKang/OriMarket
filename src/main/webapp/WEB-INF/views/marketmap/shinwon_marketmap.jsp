@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"  %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -62,10 +63,24 @@
                 </div>
 
                 <!-- 신림즉석두부 -->
-                <div class="map_bg_content3_icon store_shinrimtofu_box" onclick="location.href='/store?favStoreName=과일나라'">
-                    <img class="store_shinrimtofu_icon tofu" src="../../img/marketmap/tofu.png">
-                    <p class="store_shinrimtofu_txt">과일나라</p>
-                </div>
+                <c:if test="${!empty buStore}">
+                <c:forEach var="bustore" items="${buStore}">
+                    <c:if test="${bustore.buStoreName eq '과일나라'}">
+                        <c:if test="${bustore.status eq 'CLOSE'}">
+                            <div class="map_bg_content3_icon store_shinrimtofu_box" onclick="">
+                                <img class="store_shinrimtofu_icon tofu" src="../../img/marketmap/tofu.png" style="opacity: 0.2;">
+                                <p class="store_shinrimtofu_txt">과일나라</p>
+                            </div>
+                        </c:if>
+                        <c:if test="${bustore.status eq 'OPEN'}">
+                            <div class="map_bg_content3_icon store_shinrimtofu_box" onclick="location.href='/store?favStoreName=과일나라'">
+                                <img class="store_shinrimtofu_icon tofu" src="../../img/marketmap/tofu.png">
+                                <p class="store_shinrimtofu_txt">과일나라</p>
+                            </div>
+                        </c:if>
+                    </c:if>
+                </c:forEach>
+                </c:if>
 
                 <!-- 못난이꽈배기 -->
                 <div class="map_bg_content3_icon store_uglypretzel_box" onclick="">

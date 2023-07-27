@@ -7,6 +7,7 @@ import com.choongang.OriMarket.business.user.BusinessUser;
 import com.choongang.OriMarket.order.Order;
 import com.choongang.OriMarket.order.OrderRepository;
 import com.choongang.OriMarket.review.Review;
+import com.choongang.OriMarket.user.User;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -99,5 +100,10 @@ public class ManagerService {
             }
         }
         return userResult;
+    }
+
+    //매니저 아이디 찾기
+    public ManagerUser getManager(String managerName){
+        return managerRepository.findByManagerName(managerName);
     }
 }
