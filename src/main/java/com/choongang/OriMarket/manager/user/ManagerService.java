@@ -103,4 +103,28 @@ public class ManagerService {
     public ManagerUser getManager(String managerName){
         return managerRepository.findByManagerName(managerName);
     }
+
+    public boolean managerUpdate(ManagerUser managerUser,HttpSession session){
+        ManagerUser managerUpdateResult =  managerRepository.save(managerUser);
+        if(managerUpdateResult == null){
+            return false;
+        }else{
+            return true;
+        }
+    }
+    //회원 탈퇴
+    public boolean managerUserDelete(HttpSession session){
+        String managerId=session.getAttribute("managerId").toString();
+        ManagerUser managerUserResult = managerRepository.findByManagerId(managerId);
+
+        if(managerUserResult!=null){
+            try{
+                managerRepository.delete(managerUserResult);
+                return true;
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+        return false;
+    }
 }

@@ -1,8 +1,10 @@
 package com.choongang.OriMarket.manager.user;
 
 import com.choongang.OriMarket.RealTimeStatus.RealTimeRepository;
+import com.choongang.OriMarket.RealTimeStatus.RealTimeService;
 import com.choongang.OriMarket.RealTimeStatus.RealTimeStatus;
 import com.choongang.OriMarket.order.Order;
+import com.choongang.OriMarket.order.OrderService;
 import com.choongang.OriMarket.user.User;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -29,6 +31,8 @@ public class ManagerController {
     @Autowired
     private final ManagerService managerService;
     private final RealTimeRepository realTimeRepository;
+    private final OrderService orderService;
+    private final RealTimeService realTimeService;
 
     //로그인 페이지
     @GetMapping("/managerLogin")
@@ -105,6 +109,45 @@ public class ManagerController {
 
         return "manager/order_list";
     }
+
+    //주문 상세 내역
+    @GetMapping("/manager_receiptDelivery")
+    public String manager_receiptDelivery(@RequestParam("orderNumber")String orderNumber,HttpSession session,Model model){
+
+        Order resultPastOrder = orderService.getOrderNumberList(orderNumber);
+        model.addAttribute("orderDelivery",resultPastOrder);
+
+        return "manager/manager_delivery";
+    }
+
+    @GetMapping("/managerUpdate")
+    public String managerUpdate(Model model, HttpSession session){
+        ManagerUser managerUserResult = managerService.findByManagerId(model,session);
+        model.addAttribute("managerUserResult",managerUserResult);
+        return "manager/manager_infolist_edit";
+    }
+    //회원 탈퇴
+    @GetMapping("/managerDelete")
+    public String buUserDelete(HttpSession session,Model model){
+        boolean result = managerService.managerUserDelete(session);
+
+        if(result==false){
+            model.addAttribute("deleteError", "탈퇴에 실패했습니다. 다시 시도해주세요.");
+        }else{
+            model.addAttribute("deleteError", "탈퇴가 완료되었습니다.");
+        }
+        return "manager/manager_login";
+    }
+    @PostMapping("/managerUpdate")
+    public String managerUpdateResult(@ModelAttribute ManagerUser managerUser, Model model, HttpSession session){
+        if(managerService.managerUpdate(managerUser,session)){
+            return "redirect:/manager_mypage";
+        }else{
+            model.addAttribute("managerUpdateError", "수정에 실패했습니다. 다시 시도해주세요.");
+        }
+        return "redirect:/managerUpdate";
+    }
+
     //아이디 찾기
     @PostMapping("/findManagerId")
     public String findUserIdResult(ManagerUser managerUser, Model model, HttpServletRequest request){

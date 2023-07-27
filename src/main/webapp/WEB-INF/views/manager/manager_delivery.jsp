@@ -11,8 +11,13 @@
 <link rel= "stylesheet" href= "../../css/order/order_delivery.css">
 </head>
 <body>
+<%--	<FORM action="/accept" method="get">
+		<INPUT TYPE="hidden" name="orderNumber" value="${orderNumber}">
+		<input type="submit" value="주문수락">
+	</FORM>--%>
 	<main id="orderDelivery_main">
 		<div id="orderDelivery_btn_cancel"><a href="/managerMain"><i class="fas fa-regular fa-xmark"></i></a></div>
+		<h2>실시간 주문 내역</h2>
 		<div id="orderDelivery_orderInfo">
 			<h3>${marketName}</h3>
 			<table id="orderDelivery_table_1">
@@ -32,28 +37,22 @@
 			<hr>
 			<table id="orderDelivery_table_2">
 				<tr class="orderDelivery_table_tr_1"><td colspan="2">주문 내역</td></tr>
-				<!-- 2023_07_04 입력 받아서 출력할 때 format 이용해서 3번째마다 ,들어가게 출력 -->
-				<c:set var="orderGoodsNumArray" value="${fn:split(orderDelivery.orderGoodsNum, ',')}" />
-				<tr class="orderDelivery_table_tr_2">
-					<td>${orderDelivery.orderGoodsName}</td>
-					<tr>
-						<c:forEach items="${orderGoodsNumArray}" var="goodNum">
-							<td>${goodNum}개</td>
-						</c:forEach>
-					</tr>
-				<c:set var="orderGoodsPrice" value="${fn:split(orderDelivery.orderGoodsPrice, ',')}" />
-					<tr>
+				<c:forEach var="store" items="${orderDelivery.businessUser.businessStores}">
+					<tr class="orderDelivery_table_tr_1"><td colspan="2">${store}</td></tr>
+					<!-- 2023_07_04 입력 받아서 출력할 때 format 이용해서 3번째마다 ,들어가게 출력 -->
+					<c:set var="orderGoodsNumArray" value="${fn:split(orderDelivery.orderGoodsNum, ',')}" />
+					<c:set var="orderGoodsName" value="${fn:split(orderDelivery.orderGoodsName, ',')}" />
+					<c:set var="orderGoodsPrice" value="${fn:split(orderDelivery.orderGoodsPrice, ',')}" />
+					<tr class="orderDelivery_table_tr_2">
 						<c:if test="${!empty orderGoodsNumArray}">
-							${orderGoodsPrice[0]}원 <small style="color: #818083;">x${orderGoodsNumArray[0]}</small>
-							${orderGoodsPrice[1]}원 <small style="color: #818083;">x${orderGoodsNumArray[1]}</small>
-						</c:if>
-						<c:forEach items="${orderGoodsPrice}" var="goodPrice">
-							<c:forEach items="${orderGoodsNumArray}" var="goodNum">
-								<td>${goodPrice}원&nbsp;&nbsp;<small style="color: #818083;">X ${goodNum}</small></td>
+							<c:forEach var="i" begin="0" end="${fn:length(orderGoodsNumArray) - 1}">
+								<tr>
+									<td>${orderGoodsName[i]}&nbsp;&nbsp;&nbsp;${orderGoodsPrice[i]}원 <small style="color: #818083;">&nbsp;&nbsp;&nbsp;x${orderGoodsNumArray[i]}</small></td>
+								</tr>
 							</c:forEach>
-						</c:forEach>
+						</c:if>
 					</tr>
-				</tr>
+				</c:forEach>
 			</table>
 			<hr>
 			<table id="orderDelivery_table_3">
@@ -61,7 +60,6 @@
 				<tr><td class="orderDelivery_table3_td_1">배달 기사님께</td><td class="orderDelivery_table3_td_1">${orderDelivery.forRider}</td></tr>
 				<tr><td id="orderDelivery_table3_total_td_1">총 금액</td><td id="orderDelivery_table3_total_td_2">${orderDelivery.orderGoodsTotalPrice}원</td></tr>
 			</table>
-			
 		</div>
 	</main>
 </body>
