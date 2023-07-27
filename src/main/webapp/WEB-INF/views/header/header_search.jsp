@@ -15,6 +15,7 @@
             font-style: normal;
         }
         body{margin:0 auto; font-size:16px; font-family: 'omyu_pretty';}
+        .header_boxbgc{margin:0 auto; background-color:#eee; width:375px; height:100px;}
         .header_wrap{width:375px; height:100px; margin:0 auto; background-color:#46a973; box-sizing:border-box; border-bottom-left-radius: 25px; border-bottom-right-radius: 25px; box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.2);}
         .nav{display: flex; justify-content:space-between; align-items:center; padding: 7px 15px; margin-top:0px;}
         .nav>span{float:left; margin:5px;}
@@ -70,7 +71,8 @@
 </head>
 <body>
 
-<div class="header_wrap">
+<div class="header_boxbgc">
+    <div class="header_wrap">
 
     <div class="nav">
         <a href="/"style="font-size:32px;"><i class="fa-solid fa-house" style="padding-left: 6px;font-size: 23px;color: #ffbf41;"></i></a>

@@ -69,6 +69,12 @@ public class CartController {
             model.addAttribute("user", userId);
             model.addAttribute("userOrderList", byUserUserSeq);
 
+            if(!byUserUserSeq.isEmpty()) {
+                System.out.println("이게먼대" + byUserUserSeq.get(0).getBusinessStore().getMarket().getMarketName());
+                model.addAttribute("aa",byUserUserSeq.get(0).getBusinessStore().getMarket().getMarketName());
+            }else{
+
+            }
             return "/cart/cart";
         }
     }
@@ -118,7 +124,7 @@ public class CartController {
             //재고보다 많이 담으면 안담기게.
             if (count > additem.getItemCnt()) {
                 // 재고보다 많은 수량을 담을 때 에러 처리
-                return "redirect:/error/login_error"; // 재고가 부족한 경우 에러 페이지로 이동
+                return "error/login_error"; // 재고가 부족한 경우 에러 페이지로 이동
             }
             cartService.addCart(user, additem, count);
 
