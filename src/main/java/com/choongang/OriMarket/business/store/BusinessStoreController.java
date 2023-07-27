@@ -122,11 +122,9 @@ public class BusinessStoreController {
     @DeleteMapping("/delete_items")
     @ResponseBody
     public String deleteSelectedItems(@RequestParam("itemIds[]")  List<Long> itemIds) {
-
         for(Long deleteItemId :itemIds){
             itemService.deleteItems(deleteItemId);
         }
-        System.out.println("여기까지는와지는가?11");
         return "success";
     }
 
