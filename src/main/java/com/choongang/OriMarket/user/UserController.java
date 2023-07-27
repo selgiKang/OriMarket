@@ -8,6 +8,7 @@ import com.choongang.OriMarket.review.Review;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -33,6 +34,7 @@ public class UserController {
     private final MarketRepository marketRepository;
 
     private final UserMarketRepository userMarketRepository;
+
 
     // 로그인 get , post 매핑
     @GetMapping("/login")
@@ -84,6 +86,12 @@ public class UserController {
     @GetMapping("/update")
     public String update() {
         return "user/user_infolist_edit";
+    }
+
+    //라이더 테스트용으로 잠시 만들어 놨습니다..
+    @GetMapping("/riderfirstscreen")
+    public String riderfirstscreen() {
+        return "rider/rider_firstscreen";
     }
 
     @PostMapping("/update")
@@ -228,6 +236,28 @@ public class UserController {
         }else {
             return "main/main";
         }
+    }
+
+    @PostMapping("/usermarketSearch")
+    @ResponseBody
+    public ResponseEntity<List<Map<String, String>>> usermarketSearch(@RequestParam("userAddress") String userAddress, Model model, HttpSession session) {
+        try {
+            List<Map<String,String>> tableData = new ArrayList<>();
+            List<Market> all = marketRepository.findAll();
+            for(Market a : all){
+                Map<String, String> allData = new HashMap<>();
+                //시장 이름만 우선 넣었어요!
+                allData.put("marketName",(a.getMarketName()).toString());
+                System.out.println(a.getMarketName());
+                tableData.add(allData);
+            }
+            model.addAttribute("tableData", tableData);
+            return ResponseEntity.ok(tableData); // 이 위치에서 응답을 한 번만 보냄
+
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+
     }
 
 

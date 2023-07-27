@@ -396,52 +396,57 @@
                 <div class="inside_tabs">
                     <div role="inside_tablist">
                         <c:forEach items="${pastOrderList}" var="pastOrder" varStatus="status">
-                            <c:if test="${pastOrder.realTimeStatus.rtsRiderFinish eq 0}">
-                                <%--주문내역폼--%>
-                                <div class="main-box">
-                                    <div class="top">
-                                        <div class="small-box">
-                                            <p>${pastOrder.deliveryType}</p>
-                                        </div>
-                                        <div class="date">
-                                            <p>
-                                                ${fn:substring(pastOrder.orderDate, 0, 4)}.
-                                                ${fn:substring(pastOrder.orderDate, 4, 6)}.
-                                                ${fn:substring(pastOrder.orderDate, 6, 8)}&nbsp;
-                                                ${fn:substring(pastOrder.orderDate, 8, 10)}:
-                                                ${fn:substring(pastOrder.orderDate, 10, 12)}:
-                                                ${fn:substring(pastOrder.orderDate, 12, 14)}
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <div style="position: absolute; top: 10px; right: 10px;">
-                                        배달중
-                                    </div>
-                                    <div class="storepicture">
-                                        <img src="../../img/store/store.jpg" alt="사진">
-                                    </div>
-                                    <div class="middle">
-                                        <div class="storeinfo">
-                                            <div class="storename">
-                                                <p>${pastOrder.businessUser.businessStores[0].buStoreName}</p>
+
+                            <c:if test="${empty pastOrderList}">
+                                <div>현재 주문 내역이 없습니다.</div>
+                            </c:if>
+                            <c:if test="${not empty pastOrderList}">
+                                <c:if test="${pastOrder.realTimeStatus.rtsRiderFinish eq 0}">
+                                    <%--주문내역폼--%>
+                                    <div class="main-box">
+                                        <div class="top">
+                                            <div class="small-box">
+                                                <p>${pastOrder.deliveryType}</p>
                                             </div>
-                                            <div class="orderitems">
-                                                <p>두번 쫄깃 블루베리 베이글&허니월넛크림치즈 x 1 외...</p>
+                                            <div class="date">
+                                                <p>
+                                                    ${fn:substring(pastOrder.orderDate, 0, 4)}.
+                                                    ${fn:substring(pastOrder.orderDate, 4, 6)}.
+                                                    ${fn:substring(pastOrder.orderDate, 6, 8)}&nbsp;
+                                                    ${fn:substring(pastOrder.orderDate, 8, 10)}:
+                                                    ${fn:substring(pastOrder.orderDate, 10, 12)}:
+                                                    ${fn:substring(pastOrder.orderDate, 12, 14)}
+                                                </p>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class ="mybutton">
-                                        <div class="reorder" onclick="location.href='/store?favStoreName=${pastOrder.businessUser.businessStores[0].buStoreName}'">
-                                            <p>재주문</p>
+                                        <div style="position: absolute; top: 10px; right: 10px;">
+                                            배달중
                                         </div>
-                                        <div class="orderdetailcheck" onclick="location.href='/order_receiptDelivery?orderNumber=${pastOrder.orderNumber}'">
-                                            <p>주문상세</p>
+                                        <div class="storepicture">
+                                            <img src="../../img/store/store.jpg" alt="사진">
+                                        </div>
+                                        <div class="middle">
+                                            <div class="storeinfo">
+                                                <div class="storename">
+                                                    <p>${pastOrder.businessUser.businessStores[0].buStoreName}</p>
+                                                </div>
+                                                <div class="orderitems">
+                                                    <p>두번 쫄깃 블루베리 베이글&허니월넛크림치즈 x 1 외...</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class ="mybutton">
+                                            <div class="reorder" onclick="location.href='/store?favStoreName=${pastOrder.businessUser.businessStores[0].buStoreName}'">
+                                                <p>재주문</p>
+                                            </div>
+                                            <div class="orderdetailcheck" onclick="location.href='/order_receiptDelivery?orderNumber=${pastOrder.orderNumber}'">
+                                                <p>주문상세</p>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
+                                </c:if>
                             </c:if>
                         </c:forEach>
-                        </div>
                     </div>
                 </div>
             </section>
