@@ -20,11 +20,10 @@
     display: none;
   }
 </style>
-<body>
-<a href="/"><h1 style="position: fixed; left: 20px; top: 0; font-size: 30px; color: red">홈으로 바로가기</h1></a>
+<body style="margin:0;">
 <div class="container">
   <div class="logo_container">
-    <img src="../../../../img/user/ori.png" alt="logo">
+    <a href="/"><img src="../../../../img/user/ori.png" alt="logo"></a>
     <img src="../../../../img/user/smoke.png" alt="smoke">
 
     <span class="logo-text">Ori Market</span>
