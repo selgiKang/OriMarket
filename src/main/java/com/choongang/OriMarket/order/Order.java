@@ -102,10 +102,6 @@ public class Order {
     @OneToOne(mappedBy = "orderNumber")
     private RealTimeStatus realTimeStatus;
 
-    @ManyToOne
-    @JoinColumn(name="managerUser")
-    private ManagerUser managerUser;
-
 //    @Transient
 //    private String next_redirect_pc_url;
 

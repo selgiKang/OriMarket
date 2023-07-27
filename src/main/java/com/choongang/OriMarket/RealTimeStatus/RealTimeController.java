@@ -136,6 +136,7 @@ public class RealTimeController {
         managerService.findByManagerId(model,session);
         List<Order> orderList = (List<Order>) model.getAttribute("managerOrderList");
         model.addAttribute("orderList",orderList);
+
        // System.out.println("주문 목록: "+orderList.get(0).getOrderNumber());
 
         //불러온 주문의 상태 검색

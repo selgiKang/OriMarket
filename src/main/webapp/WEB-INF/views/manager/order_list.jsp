@@ -35,7 +35,7 @@
                         <c:if test="${order.orderNumber == rts.orderNumber.orderNumber}">
                             <c:if test="${rts.rtsOrderIng eq 0 && rts.rtsRiderIng eq 0 && rts.rtsRiderFinish eq 0}">
                                 <!-- 주문번호 클릭 시 주문 상세 정보를 보여줄 버튼 -->
-                                <span class="order-number" onclick="showOrderDetail('${order.orderNumber}')">주문번호 #${order.orderNumber}</span>
+                                <span class="order-number" onclick="showOrderDetail('${order.orderNumber}')"><a>주문번호: ${order.orderNumber}</a></span>
                                 <span class="order-quantity">메뉴</span>
                                 <div class="order-details">
                                     <span>${order.orderGoodsName} 총 ${order.orderGoodsNum}개</span>
@@ -45,6 +45,7 @@
                                 <div class="action-buttons">
                                     <form action="/accept" method="get">
                                         <input type="hidden" name="orderNumber" value="${order.orderNumber}">
+                                        <input type="hidden" name="managerUser" value="${sessionScope.managerSeq}">
                                         <button class="accept-button">수락</button>
                                     </form>
                                     <button class="reject-button">거절</button>
@@ -58,6 +59,8 @@
                 <p>주문이 없습니다.</p>
             </c:if>
         </div>
+        <div class="order-item" data-status="processing" style="display: none;"></div>
+        <div class="order-item" data-status="completed" style="display: none;"></div>
         <%--주문 시작--%>
         <div class="order-item" data-status="processing1">
             <c:if test="${not empty orderList}">
@@ -67,7 +70,9 @@
                             <c:if test="${order.managerUser.managerSeq eq sessionScope.managerSeq}">
                                 <c:if test="${rts.rtsOrderIng eq 1 && rts.rtsRiderIng eq 0 && rts.rtsRiderFinish eq 0}">
                                     <!-- 주문번호 클릭 시 주문 상세 정보를 보여줄 버튼 -->
-                                    <span class="order-number" onclick="showOrderDetail('${order.orderNumber}')">주문번호 #${order.orderNumber}</span>
+                                    <span class="order-number" onclick="showOrderDetail('${order.orderNumber}')">
+                                        <a>주문번호: ${order.orderNumber}</a>
+                                    </span>
                                     <div class="order-details">
                                         <span class="order-quantity">메뉴 ${order.orderGoodsNum}개</span>
                                         <span class="order-price">${order.orderTotalPrice}원</span>
@@ -89,15 +94,19 @@
                 <p>주문이 없습니다.</p>
             </c:if>
         </div>
+        <div class="order-item" data-status="processing" style="display: none;"></div>
+        <div class="order-item" data-status="completed" style="display: none;"></div>
         <%--배달 시작--%>
         <div class="order-item" data-status="processing2">
             <c:if test="${not empty orderList}">
                 <c:forEach items="${orderList}" var="order">
                     <c:forEach items="${rtsResult}" var="rts">
-                        <c:if test="${order.orderNumber == rts.orderNumber.orderNumber}">
+                        <c:if test="${order.orderNumber == rts.orderNumber.orderNumber && order.managerUser.managerSeq eq sessionScope.managerSeq}">
                             <c:if test="${rts.rtsOrderIng eq 1 && rts.rtsRiderIng eq 1 && rts.rtsRiderFinish eq 0}">
                                 <!-- 주문번호 클릭 시 주문 상세 정보를 보여줄 버튼 -->
-                                <span class="order-number" onclick="showOrderDetail('${order.orderNumber}')">주문번호 #${order.orderNumber}</span>
+                                <span class="order-number" onclick="showOrderDetail('${order.orderNumber}')">
+                                    <a>주문번호: ${order.orderNumber}</a>
+                                </span>
                                 <div class="order-details">
                                     <span class="order-quantity">메뉴 ${order.orderGoodsNum}개</span>
                                     <span class="order-price">${order.orderTotalPrice}원</span>
@@ -112,15 +121,19 @@
                 <p>주문이 없습니다.</p>
             </c:if>
         </div>
+        <div class="order-item" data-status="processing" style="display: none;"></div>
+        <div class="order-item" data-status="completed" style="display: none;"></div>
         <%--배달 완료--%>
         <div class="order-item" data-status="completed">
             <c:if test="${not empty orderList}">
                 <c:forEach items="${orderList}" var="order">
                     <c:forEach items="${rtsResult}" var="rts">
-                        <c:if test="${order.orderNumber == rts.orderNumber.orderNumber}">
+                        <c:if test="${order.orderNumber == rts.orderNumber.orderNumber && order.managerUser.managerSeq eq sessionScope.managerSeq}">
                             <c:if test="${rts.rtsOrderIng eq 1  && rts.rtsRiderIng eq 1 && rts.rtsRiderFinish eq 1}">
                                 <!-- 주문번호 클릭 시 주문 상세 정보를 보여줄 버튼 -->
-                                <span class="order-number" onclick="showOrderDetail('${order.orderNumber}')">주문번호 #${order.orderNumber}</span>
+                                <span class="order-number" onclick="showOrderDetail('${order.orderNumber}')">
+                                    <a>주문번호: ${order.orderNumber}</a>
+                                </span>
                                 <div class="order-details">
                                     <span class="order-quantity">메뉴 ${order.orderGoodsNum}개</span>
                                     <span class="order-price">${order.orderTotalPrice}원</span>
@@ -131,14 +144,10 @@
                     </c:forEach>
                 </c:forEach>
             </c:if>
-            <c:if test="${empty rtsResult}">
+            <c:if test="${empty orderList}">
                 <p>주문이 없습니다.</p>
             </c:if>
         </div>
-
-        <div class="order-item" data-status="processing" style="display: none;"></div>
-        <div class="order-item" data-status="completed" style="display: none;"></div>
-
 
         <div class="order-item" data-status="processing" style="display: none;"></div>
         <div class="order-item" data-status="completed" style="display: none;"></div>

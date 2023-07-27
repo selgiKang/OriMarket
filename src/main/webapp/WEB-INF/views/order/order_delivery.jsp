@@ -72,19 +72,16 @@
 				<tr class="orderDelivery_table_tr_1"><td colspan="2">주문 내역</td></tr>
 				<!-- 2023_07_04 입력 받아서 출력할 때 format 이용해서 3번째마다 ,들어가게 출력 -->
 				<c:set var="orderGoodsNumArray" value="${fn:split(orderDelivery.orderGoodsNum, ',')}" />
-				<tr class="orderDelivery_table_tr_2">
-					<td>${orderDelivery.orderGoodsName}</td>
-					<tr>
-						<c:forEach items="${orderGoodsNumArray}" var="goodNum">
-							<td>${goodNum}개</td>
-						</c:forEach>
-					</tr>
+				<c:set var="orderGoodsName" value="${fn:split(orderDelivery.orderGoodsName, ',')}" />
 				<c:set var="orderGoodsPrice" value="${fn:split(orderDelivery.orderGoodsPrice, ',')}" />
-					<tr>
-						<c:forEach items="${orderGoodsPrice}" var="goodPrice">
-							<td>${goodPrice}원</td>
+				<tr class="orderDelivery_table_tr_2">
+					<c:if test="${!empty orderGoodsNumArray}">
+						<c:forEach var="i" begin="0" end="${fn:length(orderGoodsNumArray) - 1}">
+							<tr>
+								<td>${orderGoodsName[i]}&nbsp;&nbsp;&nbsp;${orderGoodsPrice[i]}원 <small style="color: #818083;">&nbsp;&nbsp;&nbsp;x${orderGoodsNumArray[i]}</small></td>
+							</tr>
 						</c:forEach>
-					</tr>
+					</c:if>
 				</tr>
 			</table>
 			<hr>
