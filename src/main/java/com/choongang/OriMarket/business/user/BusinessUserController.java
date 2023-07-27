@@ -3,6 +3,7 @@ package com.choongang.OriMarket.business.user;
 import com.choongang.OriMarket.business.market.Market;
 import com.choongang.OriMarket.business.market.MarketService;
 import com.choongang.OriMarket.business.store.BusinessStore;
+import com.choongang.OriMarket.business.store.BusinessStoreRepository;
 import com.choongang.OriMarket.business.store.BusinessStoreService;
 import com.choongang.OriMarket.user.User;
 import lombok.RequiredArgsConstructor;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequiredArgsConstructor
@@ -23,6 +25,8 @@ public class BusinessUserController {
 
     @Autowired
     private BusinessUserService businessUserService;
+    private final BusinessUserRepository businessUserRepository;
+    private final BusinessStoreRepository businessStoreRepository;
 
     //7.26 테스트중
 //    @GetMapping("/bu_main")
@@ -32,7 +36,17 @@ public class BusinessUserController {
 //    }
 
     @GetMapping("/login1")
-    public String login1(){return "business/businessUser/businesslogin";}
+    public String login1(){
+        return "business/businessUser/businesslogin";
+    }
+    @GetMapping("/buUserLogout")
+    public String buUserLogout(@RequestParam("buUserId") String buUserId){
+        BusinessUser byId = businessUserRepository.findByBuUserId(buUserId);
+        BusinessStore businessStore = byId.getBusinessStores().get(0);
+        businessStore.setStatus("CLOSE");
+        businessStoreRepository.save(businessStore);
+        return "business/businessUser/businesslogin";
+    }
 
     @GetMapping("/join1")
     public String join1(){return "business/businessUser/businessjoin";}

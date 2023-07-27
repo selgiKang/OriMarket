@@ -418,17 +418,61 @@
 
     <div class="store_time_container">
         <div class="store_time">
-            <h3>영업 임시중지</h3>
-            <h6>보유하신 가게에 적용됩니다.</h6>
+            <c:if test="${empty save.status}">
+            <h3 id="switchStoreStatus">CLOSE</h3>
+            </c:if>
+            <c:if test="${!empty save.status}">
+                <h3 id="switchStoreStatus">${save.status}</h3>
+            </c:if>
+            <h6 style="margin-top: 6px;">보유하신 가게에 적용됩니다.</h6>
             <div class="wrapper">
-                <input type="checkbox" id="switch">
+                <form id="statusForm" action="/storeStatus" method="post">
+                <input type="hidden" name="buStoreNumber" value="${save.buStoreNumber}">
+                <input type="checkbox" id="switch" name="status" value="">
                 <label for="switch" class="switch_label">
                     <span class="onf_btn"></span>
                 </label>
+                </form>
             </div>
         </div>
     </div>
+    <script>
+        const switchInput = document.getElementById("switch");
+        const switchStoreStatus = document.getElementById("switchStoreStatus");
+        const saveStatus = "${save.status}"
 
+        if (saveStatus === "OPEN") {
+            switchInput.checked = true;
+            switchInput.value = "open";
+            switchStoreStatus.textContent = "OPEN";
+        } else {
+            switchInput.checked = false;
+            switchInput.value = "close";
+            switchStoreStatus.textContent = "CLOSE";
+        }
+
+        switchInput.addEventListener("change", function () {
+            if (this.checked) {
+                this.value = "OPEN";
+                switchStoreStatus.textContent = "OPEN";
+            } else {
+                this.value = "CLOSE";
+                switchStoreStatus.textContent = "CLOSE";
+            }
+
+            // AJAX 요청
+            const xhr = new XMLHttpRequest();
+            xhr.open("POST", "/storeStatus");
+            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                    // 서버로부터 응답을 받았을 때 추가적인 처리가 필요하다면 이 부분에 작성
+                }
+            };
+            const formData = new FormData(statusForm);
+            xhr.send(new URLSearchParams(formData));
+        });
+    </script>
     <div class="total_menu_container">
         <div class="total_menu">
             <h3>전체 메뉴</h3>
