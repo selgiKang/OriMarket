@@ -113,7 +113,12 @@
 			</ul>
 		</div>
 		<div id="cart_moreBtn">
-			<a href="/shinwon_marketmap"><input type="button" value="+상품 더 담기"></a>
+			<c:if test="${!empty aa}">
+			<a href="/shinwon_marketmap?marketName=${aa}"><input type="button" value="+상품 더 담기"></a>
+			</c:if>
+			<c:if test="${empty aa}">
+			<a href="/"><input type="button" value="+상품 더 담기"></a>
+			</c:if>
 		</div>
 
 

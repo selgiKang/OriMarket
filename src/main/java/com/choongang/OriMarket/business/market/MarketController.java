@@ -34,6 +34,8 @@ public class MarketController {
     @GetMapping("/market_search")
     public String marketSearch(@ModelAttribute Market market, HttpSession session, UserMarket userMarket, Model model){
         Market byMarketName = marketRepository.findByMarketName(market.getMarketName());
+
+        //이거로하는게있나?
         session.setAttribute("marketName",byMarketName.getMarketName());
         session.setAttribute("marketSeq",byMarketName.getMarketSeq());
 
@@ -43,9 +45,25 @@ public class MarketController {
             User userSeq = userRepository.findById((Long) session.getAttribute("userSeq")).orElseThrow();
             userMarket.setUser(userSeq);
             userMarket.setMarket(byMarketName);
-            userMarketRepository.save(userMarket);
 
-            model.addAttribute("userMarket", userSeq.getUserMarkets());
+            //유저 번호로 찾아서
+            if(userMarketRepository.findByUser(userSeq)!=null){
+                //리스트 뽑고
+                List<UserMarket> userMarketResult = userMarketRepository.findByUser(userSeq);
+                //꺼내서 비교
+                for(UserMarket us:userMarketResult){
+                    //만약 같으면
+                    if(us.getMarket().getMarketName().equals(market.getMarketName())){
+                        model.addAttribute("userMarketError","이미 등록된 단골시장입니다.");
+                        model.addAttribute("userMarket", userSeq.getUserMarkets());
+                        return "main/main";
+                    }
+                }
+                //다르면 저장
+                userMarketRepository.save(userMarket);
+                model.addAttribute("userMarket", userSeq.getUserMarkets());
+
+            }
 
 
             return "main/main";

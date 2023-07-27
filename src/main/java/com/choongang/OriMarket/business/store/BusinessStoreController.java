@@ -39,9 +39,24 @@ public class BusinessStoreController {
 
 
     @GetMapping("/storenotice1")
-    public String storenotice1(){
-        return "business/storenotice_new";
+    public String storenotice1(HttpSession session,BusinessUser buUser,Model model){
+
+        if(session.getAttribute("buUserNumber") != null){
+            Long buUserNumber = Long.valueOf(session.getAttribute("buUserNumber").toString());
+            System.out.println(buUserNumber);
+
+            buUser.setBuUserNumber(buUserNumber);
+
+            BusinessStore buStoreResult = businessStoreService.findUserStore(buUser,model);
+            model.addAttribute("save",buStoreResult);
+            return "business/storenotice_new";
+
+        }else {
+
+            return "business/storenotice_new";
         }
+
+    }
 
     @PostMapping("/storenotice1")
     public String storenoticesave(@ModelAttribute BusinessStore businessStore, HttpSession session,Model model, @RequestParam("pictureUrl") MultipartFile file) throws IOException {
@@ -52,9 +67,9 @@ public class BusinessStoreController {
             businessStoreService.save(businessStore, session, model, s);
         }else {
             String s = imageService.saveStoreImage(file);
+            System.out.println("이건먼가요?:" + s);
             businessStoreService.save(businessStore, session, model, s);
         }
-
         return "business/storenotice_new";
     }
 
@@ -107,11 +122,9 @@ public class BusinessStoreController {
     @DeleteMapping("/delete_items")
     @ResponseBody
     public String deleteSelectedItems(@RequestParam("itemIds[]")  List<Long> itemIds) {
-
         for(Long deleteItemId :itemIds){
             itemService.deleteItems(deleteItemId);
         }
-        System.out.println("여기까지는와지는가?11");
         return "success";
     }
 
@@ -136,5 +149,18 @@ public class BusinessStoreController {
     }
 
 
+    @PostMapping("/storeStatus")
+    public String storeStauts(@ModelAttribute BusinessStore businessStore){
+        BusinessStore byId = businessStoreRepository.findById(businessStore.getBuStoreNumber()).orElseThrow();
+        System.out.println("현재상태:"+businessStore.getStatus());
+        if(businessStore.getStatus() == null){
+            byId.setStatus("CLOSE");
+            businessStoreRepository.save(byId);
+        }else{
+            byId.setStatus(businessStore.getStatus());
+            businessStoreRepository.save(byId);
+        }
+        return "redirect:/storenotice1";
+    }
 
 };

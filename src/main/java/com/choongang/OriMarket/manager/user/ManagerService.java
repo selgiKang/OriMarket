@@ -7,6 +7,7 @@ import com.choongang.OriMarket.business.user.BusinessUser;
 import com.choongang.OriMarket.order.Order;
 import com.choongang.OriMarket.order.OrderRepository;
 import com.choongang.OriMarket.review.Review;
+import com.choongang.OriMarket.user.User;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,20 +63,17 @@ public class ManagerService {
         ManagerUser findManagerUser = managerRepository.findByManagerId(managerUser.getManagerId());
 
         //session.setAttribute("managerId",findManagerUser.getManagerId());
-        System.out.println(1);
         if(findManagerUser == null){
             return false;
         }
-        System.out.println(2);
         if(!managerUser.getManagerPassword().equals(findManagerUser.getManagerPassword())){
             return false;
         }
-        System.out.println(3);
         if(findManagerUser.getMarket().getMarketSeq()!=null){
             session.setAttribute("marketSeq",findManagerUser.getMarket().getMarketSeq());
         }
-        System.out.println(4);
         session.setAttribute("managerName",findManagerUser.getManagerName());
+        session.setAttribute("managerSeq",findManagerUser.getManagerSeq());
         return true;
     }
 
@@ -99,5 +97,10 @@ public class ManagerService {
             }
         }
         return userResult;
+    }
+
+    //매니저 아이디 찾기
+    public ManagerUser getManager(String managerName){
+        return managerRepository.findByManagerName(managerName);
     }
 }

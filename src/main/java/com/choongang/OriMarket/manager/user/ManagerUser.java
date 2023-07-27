@@ -8,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.hibernate.mapping.ToOne;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -42,7 +43,6 @@ public class ManagerUser {
     private Market market;
 
     @OneToMany(mappedBy = "managerUser")
-    private List<Order> order;
-
+    private List<Order> orders = new ArrayList();
 }
 

@@ -99,6 +99,14 @@ public class MainController {
         userAddressRepository.delete(byId);
         User findUser = userRepository.findByUserId(String.valueOf(session.getAttribute("userId")));
         List<UserAddress> userAddresses = findUser.getUserAddresses();
+
+        if(userAddresses.isEmpty()){
+            session.removeAttribute("userAddress1");
+            session.removeAttribute("userAddressDetail1");
+        }else {
+            session.setAttribute("userAddress1",userAddresses.get(userAddresses.size()-1).getUserAddress1());
+            session.setAttribute("userAddressDetail1",userAddresses.get(userAddresses.size()-1).getUserAddressDetail1());
+        }
         model.addAttribute("userAd",userAddresses);
         return "main/search";
     }

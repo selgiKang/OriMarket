@@ -49,6 +49,7 @@
             overflow: auto; /* 스크롤 가능하도록 수정 */
             overflow-x: hidden; /* 가로 스크롤 금지 */
             font-family: 'LINESeedKR-Bd', sans-serif; /* 따옴표 추가 */
+            padding-top: 100px;
         }
 
         .main-container::-webkit-scrollbar {
@@ -377,7 +378,6 @@
             font-size: 14px;
             cursor: pointer;
             font-family: 'omyu pretty', Arial, sans-serif;
-        }
 
 
 
@@ -411,24 +411,69 @@
 </head>
 <body>
 
-
-<jsp:include page="../header/business_header_index.jsp" />
-
 <div class="main-container">
+    <div class="header">
+        <jsp:include page="../header/business_header_index.jsp" />
+    </div>
 
     <div class="store_time_container">
         <div class="store_time">
-            <h3>영업 임시중지</h3>
-            <h6>보유하신 가게에 적용됩니다.</h6>
+            <c:if test="${empty save.status}">
+            <h3 id="switchStoreStatus">CLOSE</h3>
+            </c:if>
+            <c:if test="${!empty save.status}">
+                <h3 id="switchStoreStatus">${save.status}</h3>
+            </c:if>
+            <h6 style="margin-top: 6px;">보유하신 가게에 적용됩니다.</h6>
             <div class="wrapper">
-                <input type="checkbox" id="switch">
+                <form id="statusForm" action="/storeStatus" method="post">
+                <input type="hidden" name="buStoreNumber" value="${save.buStoreNumber}">
+                <input type="checkbox" id="switch" name="status" value="">
                 <label for="switch" class="switch_label">
                     <span class="onf_btn"></span>
                 </label>
+                </form>
             </div>
         </div>
     </div>
+    <script>
+        const switchInput = document.getElementById("switch");
+        const switchStoreStatus = document.getElementById("switchStoreStatus");
+        const saveStatus = "${save.status}"
 
+        if (saveStatus === "OPEN") {
+            switchInput.checked = true;
+            switchInput.value = "open";
+            switchStoreStatus.textContent = "OPEN";
+        } else {
+            switchInput.checked = false;
+            switchInput.value = "close";
+            switchStoreStatus.textContent = "CLOSE";
+        }
+
+        switchInput.addEventListener("change", function () {
+            if (this.checked) {
+                this.value = "OPEN";
+                switchStoreStatus.textContent = "OPEN";
+            } else {
+                this.value = "CLOSE";
+                switchStoreStatus.textContent = "CLOSE";
+            }
+
+            // AJAX 요청
+            const xhr = new XMLHttpRequest();
+            xhr.open("POST", "/storeStatus");
+            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                    // 서버로부터 응답을 받았을 때 추가적인 처리가 필요하다면 이 부분에 작성
+                }
+            };
+            const formData = new FormData(statusForm);
+            xhr.send(new URLSearchParams(formData));
+
+        });
+    </script>
     <div class="total_menu_container">
         <div class="total_menu">
             <h3>전체 메뉴</h3>
@@ -492,7 +537,7 @@
                 <div class="storecare_logo">
                     <h3 style="font-size: small">내 가게 사진</h3>
                     <c:if test="${empty save.buStoreImageUrl}">
-                    <input type="file" accept="image/*" name="pictureUrl" id="logo-upload" onchange="previewPicture(event)"/>
+                        <input type="file" accept="image/*" name="pictureUrl" id="logo-upload" onchange="previewPicture(event)"/>
                     </c:if>
                     <div id="logo-preview">
                         <c:if test="${!empty save.buStoreImageUrl}">
@@ -517,6 +562,9 @@
                         <%-- 입력된 가게 이름 --%>
                         <c:if test="${!empty save.buStoreName}">
                             <p style="margin-top: 10px; font-size: 23px; color: #2382f6">${save.buStoreName}</p>
+                        </c:if>
+                        <c:if test="${!empty otherList.buStoreName}">
+                            <p style="margin-top: 10px; font-size: 23px; color: #2382f6">${otherList.buStoreName}</p>
                         </c:if>
                         <h6 style="color: #818083; margin-top: 7px;">※변경이 필요한 경우 고객센터로 문의해주세요.</h6>
                     </div>
@@ -591,32 +639,32 @@
                     <div class="storecare_location">
                         <h3 style="font-size: small" >내 가게 주소</h3>
                         <c:if test="${empty save.buStoreAddress}">
-                        <input type="text" id="store-location-input" name="buStoreAddress" placeholder="가게를 위치를 지정해주세요.">
+                            <input type="text" id="store-location-input" name="buStoreAddress" placeholder="가게를 위치를 지정해주세요.">
                         </c:if>
 
                      <%--입력창--%>
-                            <c:if test="${!empty save.buStoreAddress}">
+                        <c:if test="${!empty save.buStoreAddress}">
                             <input type="hidden" id="store-location-input" name="buStoreAddress" value="${save.buStoreAddress}">
                         </c:if>
 
 
                         <c:if test="${empty save.buStoreAddressDetail}">
-                        <input type="text" name="buStoreAddressDetail" id="buStoreAddressDetail" placeholder="상세위치를 적어주세요.">
+                            <input type="text" name="buStoreAddressDetail" id="buStoreAddressDetail" placeholder="상세위치를 적어주세요.">
                         </c:if>
 
                         <%--입력창--%>
-                            <c:if test="${!empty save.buStoreAddressDetail}">
+                        <c:if test="${!empty save.buStoreAddressDetail}">
                             <input type="hidden" name="buStoreAddressDetail" id="buStoreAddressDetail" value="${save.buStoreAddressDetail}">
                         </c:if>
 
                         <c:if test="${empty save.buStoreAddress}">
-                        <div class="btn_container">
-                            <button type="button" class="btn_round" onclick="searchAddress()">주소검색</button>
-                        </div>
+                            <div class="btn_container">
+                                <button type="button" class="btn_round" onclick="searchAddress()">주소검색</button>
+                            </div>
                         </c:if>
 
                         <br>
-                      <%--  //7.24 테스트 승엽--%>
+
                         <%-- 입력된 가게 위치를 표시합니다. --%>
                         <c:if test="${!empty save.buStoreAddress}">
                             <p style="font-size: 23px; color: #2382f6">${save.buStoreAddress}</p>

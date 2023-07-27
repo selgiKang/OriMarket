@@ -99,8 +99,9 @@ public class RealTimeController {
 
         if(orderList!=null && !orderList.isEmpty()){
 
-            //주문 목록 출력해서
+            //매니저 소속 시장 주문 목록 출력해서
             for(Order orders: orderList){
+
                 //해당 주문번호의
                 String orderNumber = orders.getOrderNumber();
                 finalOrder.setOrderNumber(orderNumber);
@@ -118,7 +119,7 @@ public class RealTimeController {
 
 
         // 주문 번호 보냄
-        rts = realTimeService.update1(order, session);
+        rts = realTimeService.update1(order, session, managerUser);
         if(rts.getRtsOrderIng() == 1 && rts.getRtsRiderIng()==0 && rts.getRtsRiderFinish()==0){
             model.addAttribute("rtsOrderIng",rts.getRtsOrderIng());
             model.addAttribute("rtsRiderIng",rts.getRtsRiderIng());

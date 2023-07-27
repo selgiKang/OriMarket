@@ -45,7 +45,6 @@
                                 <div class="action-buttons">
                                     <form action="/accept" method="get">
                                         <input type="hidden" name="orderNumber" value="${order.orderNumber}">
-                                        <input type="hidden" name="managerUser" value="${userResult.managerSeq}">
                                         <button class="accept-button">수락</button>
                                     </form>
                                     <button class="reject-button">거절</button>
@@ -65,10 +64,9 @@
                 <c:forEach items="${orderList}" var="order">
                     <c:forEach items="${rtsResult}" var="rts">
                         <c:if test="${order.orderNumber == rts.orderNumber.orderNumber}">
-                            <c:if test="${rts.rtsOrderIng eq 1 && rts.rtsRiderIng eq 0 && rts.rtsRiderFinish eq 0}">
-                                <%--주문내역 매니저 seq랑 현재 매니저 seq가 같은 것만--%>
-                               <%-- <c:if test="${order.managerUser.managerSeq eq userResult.managerSeq}">--%>
-                                <!-- 주문번호 클릭 시 주문 상세 정보를 보여줄 버튼 -->
+                            <c:if test="${order.managerUser.managerSeq eq sessionScope.managerSeq}">
+                                <c:if test="${rts.rtsOrderIng eq 1 && rts.rtsRiderIng eq 0 && rts.rtsRiderFinish eq 0}">
+                                    <!-- 주문번호 클릭 시 주문 상세 정보를 보여줄 버튼 -->
                                     <span class="order-number" onclick="showOrderDetail('${order.orderNumber}')">주문번호 #${order.orderNumber}</span>
                                     <div class="order-details">
                                         <span class="order-quantity">메뉴 ${order.orderGoodsNum}개</span>
@@ -82,7 +80,7 @@
                                         </form>
                                     </div>
                                 </c:if>
-                            <%--</c:if>--%>
+                            </c:if>
                         </c:if>
                     </c:forEach>
                 </c:forEach>
@@ -98,16 +96,14 @@
                     <c:forEach items="${rtsResult}" var="rts">
                         <c:if test="${order.orderNumber == rts.orderNumber.orderNumber}">
                             <c:if test="${rts.rtsOrderIng eq 1 && rts.rtsRiderIng eq 1 && rts.rtsRiderFinish eq 0}">
-                             <%--   <c:if test="${order.managerUser.managerSeq eq userResult.managerSeq}">--%>
-                                    <!-- 주문번호 클릭 시 주문 상세 정보를 보여줄 버튼 -->
-                                    <span class="order-number" onclick="showOrderDetail('${order.orderNumber}')">주문번호 #${order.orderNumber}</span>
-                                    <div class="order-details">
-                                        <span class="order-quantity">메뉴 ${order.orderGoodsNum}개</span>
-                                        <span class="order-price">${order.orderTotalPrice}원</span>
-                                    </div>
-                                    <div class="order-menu" style="margin-bottom: 10px;">${order.orderGoodsName}</div>
-                                </c:if>
-                            <%--</c:if>--%>
+                                <!-- 주문번호 클릭 시 주문 상세 정보를 보여줄 버튼 -->
+                                <span class="order-number" onclick="showOrderDetail('${order.orderNumber}')">주문번호 #${order.orderNumber}</span>
+                                <div class="order-details">
+                                    <span class="order-quantity">메뉴 ${order.orderGoodsNum}개</span>
+                                    <span class="order-price">${order.orderTotalPrice}원</span>
+                                </div>
+                                <div class="order-menu" style="margin-bottom: 10px;">${order.orderGoodsName}</div>
+                            </c:if>
                         </c:if>
                     </c:forEach>
                 </c:forEach>
@@ -123,23 +119,19 @@
                     <c:forEach items="${rtsResult}" var="rts">
                         <c:if test="${order.orderNumber == rts.orderNumber.orderNumber}">
                             <c:if test="${rts.rtsOrderIng eq 1  && rts.rtsRiderIng eq 1 && rts.rtsRiderFinish eq 1}">
-                                <c:if test="${!empty order.managerUser.managerSeq}">
-                                    <c:if test="${order.managerUser.managerSeq eq userResult.managerSeq}">
-                                        <!-- 주문번호 클릭 시 주문 상세 정보를 보여줄 버튼 -->
-                                        <span class="order-number" onclick="showOrderDetail('${order.orderNumber}')">주문번호 #${order.orderNumber}</span>
-                                        <div class="order-details">
-                                            <span class="order-quantity">메뉴 ${order.orderGoodsNum}개</span>
-                                            <span class="order-price">${order.orderTotalPrice}원</span>
-                                        </div>
-                                        <div class="order-menu">${order.orderGoodsName}</div>
-                                    </c:if>
-                                </c:if>
+                                <!-- 주문번호 클릭 시 주문 상세 정보를 보여줄 버튼 -->
+                                <span class="order-number" onclick="showOrderDetail('${order.orderNumber}')">주문번호 #${order.orderNumber}</span>
+                                <div class="order-details">
+                                    <span class="order-quantity">메뉴 ${order.orderGoodsNum}개</span>
+                                    <span class="order-price">${order.orderTotalPrice}원</span>
+                                </div>
+                                <div class="order-menu">${order.orderGoodsName}</div>
                             </c:if>
                         </c:if>
                     </c:forEach>
                 </c:forEach>
             </c:if>
-            <c:if test="${empty orderList}">
+            <c:if test="${empty rtsResult}">
                 <p>주문이 없습니다.</p>
             </c:if>
         </div>

@@ -79,4 +79,35 @@ public class BusinessUserService {
     public boolean checkBuId(String buUserId){
         return businessUserRepository.existsByBuUserId(buUserId);
     }
+
+    //회원 정보 조회
+    public BusinessUser buUserNumber(HttpSession session){
+        String buUserId = session.getAttribute("buUserId").toString();
+        System.out.println("아이디:"+buUserId);
+        return businessUserRepository.findByBuUserId(buUserId);
+    }
+    //회원 정보 수정
+    public boolean buUserUpdate(BusinessUser businessUser,HttpSession session){
+        BusinessUser buUserResult = businessUserRepository.save(businessUser);
+        if(buUserResult == null){
+            return false;
+        }else{
+            return true;
+        }
+    }
+    //회원 탈퇴
+    public boolean buUserDelete(HttpSession session){
+        String buUserId=session.getAttribute("buUserId").toString();
+        BusinessUser buUserResult = businessUserRepository.findByBuUserId(buUserId);
+
+        if(buUserResult!=null){
+            try{
+                businessUserRepository.delete(buUserResult);
+                return true;
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+            return false;
+    }
 };

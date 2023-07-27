@@ -3,6 +3,7 @@ package com.choongang.OriMarket.manager.user;
 import com.choongang.OriMarket.RealTimeStatus.RealTimeRepository;
 import com.choongang.OriMarket.RealTimeStatus.RealTimeStatus;
 import com.choongang.OriMarket.order.Order;
+import com.choongang.OriMarket.user.User;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -60,6 +62,32 @@ public class ManagerController {
     @ResponseBody
     public ResponseEntity<Boolean> checkUserIdDuplicate(@PathVariable String managerId) {
         return ResponseEntity.ok(managerService.checkManagerId(managerId));
+    }
+
+    @GetMapping("/findManagerId")
+    public String findUserId(){return "manager/find_manager_id";}
+
+    //아이디 찾기
+    @PostMapping("/findManagerId")
+    public String findUserIdResult(ManagerUser managerUser, Model model, HttpServletRequest request){
+
+        //이름으로 회원정보 찾아서
+        ManagerUser managerUserResult = managerService.getManager(managerUser.getManagerName());
+
+        if(managerUserResult!=null){
+
+            if(managerUserResult.getManagerPhone().equals(managerUser.getManagerPhone())){
+                model.addAttribute("managerUserResult",managerUserResult);
+
+            }else{
+                request.setAttribute("managerloginError","정보가 틀려습니다. 다시 한번 확인해주세요.");
+            }
+
+        }else{
+            request.setAttribute("managerloginError","정보가 틀려습니다. 다시 한번 확인해주세요.");
+        }
+
+        return "manager/find_manager_id";
     }
 
 
