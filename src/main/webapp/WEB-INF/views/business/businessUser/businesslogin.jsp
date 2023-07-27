@@ -12,155 +12,73 @@
 
 </head>
 <style>
-    *{margin: 0; padding: 0; box-sizing: border-box;}
-
-    body{
-        width: 375px;
-        height: 812px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        /* background: rgba(205, 133, 63, 0.4); */
-        background-size: 50%;
-        margin: 0 auto;
-        border: 1px solid black;
-        position: relative;
-
+    @font-face {
+        font-family: 'omyu_pretty';
+        src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-01@1.0/omyu_pretty.woff2') format('woff2');
+        font-weight: normal;
+        font-style: normal;
     }
 
-    h1{
-        margin-top: 50px;
-        margin-bottom: 20px;
-        font-style: italic;
-        font-size: 50px;
-    }
-    h1>sub{
-        font-size: 15px;
-        opacity: 0.7;
-        color: black;
-        overflow: auto;
-    }
-    h1>span{
-        color: green;
-        overflow: auto;
-    }
-    #container{
-        margin-top: 40px;
-        border: 2px solid silver;
-        padding: 20px 60px;
-        background-color: rgba(144, 238, 144, 0.4);
-        font-size: 25px;
-        width: 350px;
-        border-radius: 10px;
-    }
-    #login_box>div{
-        margin-bottom: 10px;
-        border: 1px solid silver;
-        padding: 10px;
-        font-size: 15px;
-        border-radius: 10px;
-        text-align: center;
-        position: relative;
-        right: 40px;
-        width: 310px;
-    }
-    #login_box>p:nth-of-type(2)>input[type="submit"]{
-        background-color: #8BC34A;
-        width: 310px;
-        margin: 0 auto;
-        border-radius: 10px;
-        height: 50px;
-        margin-bottom: 7px;
-        margin-top: 10px;
-        font-size: large;
-        font-weight: bolder;
-        border-right: 1px solid silver;
-        border-bottom: 1px solid silver;
-        position: relative;
-        right: 40px;
-    }
-    #login_box>div>p:nth-of-type(1)>input[type="text"],input[type="password"]{
-        margin-top: 5px;
-        width: 90%;
-        height: 40px;
-        background-color: rgba(255, 255, 255, 0.5);
-        border-radius: 5px;
-        border: none;
-    }
-    #login_box>div>p:nth-of-type(2)>input[type="text"],input[type="password"]{
-        margin-top: 5px;
-        width: 90%;
-        height: 40px;
-        background-color: rgba(255, 255, 255, 0.5);
-        border-radius: 5px;
-        border: none;
-    }
-    #login_box>p:nth-of-type(1){
-        font-size: small;
-        position: relative;
-        right: 37px;
-    }
-    #list{
-        width: 310px;
-        text-align: center;
-        font-size: 0;
-    }
-    #list>div{
-        display: inline-block;
-        font-size: small;
-        text-align: left;
-        position: relative;
-        right: 40px;
-    }
-    #list>div:nth-of-type(1){
-        width: 60%;
-    }
-    #list>div:nth-of-type(2){
-        width: 35%;
-        text-align: right;
-        padding-right: 5px;
-    }
 
-    #list a{
-        text-decoration: none;
-        color: black;
-    }
-    #list a:hover{
-        text-decoration: underline;
-        color: blue;
-    }
-    #footer{
-        position: absolute;
-        bottom: 0;
-        height: 40px;
-        width: 100%;
-        background: #4caf50;
-        text-align: center;
-    }
+    *{margin: 0; padding: 0; box-sizing: border-box; font-family: 'omyu_pretty';}
+
+    body{width: 375px; height: 812px; margin: 0 auto; }
+
+    /* 230727 */
+    #businesslogin_wrap{background-color:#46A973; width:375px; height:812px; margin:auto;}
+    .businesslogin_wrapbox{width:375px; height:812px;}
+    .businesslogin_wrapbox a{text-decoration: none; color:#333;}
+
+    .businesslogin_title_wrap{width:375px; height:200px; margin:auto; padding: 20%; text-align: center;}
+    .businesslogin_title_wrap>h1{font-size: 55px; color:#ffbf41; letter-spacing: 10px; text-align: center;}
+    .businesslogin_title_wrap>h3{color:#fff}
+
+    #container{width: 300px; height: 400px; padding:20px; text-align: center;
+        background-color:#fff; border-radius: 10px; box-shadow: 0 3px 6px 0 rgba(0,0,0, 0.4); margin: 0 10%;}
+
+    h1.login_modal_title{color: #333; letter-spacing: 5px; margin: 20px 20px 30px 20px;}
+    div#login_box{margin:20px 0}
+    div.login_box_wrap{margin-bottom:25px;}
+    div.login_box_wrap p {margin-bottom:10px;}
+
+    input[type=text] {width: 65%; height: 30px; font-size: 15px; border: 0; border-radius: 15px; outline: none; padding-left: 10px; background-color: rgb(233, 233, 233);}
+    input[type=password] {width: 65%; height: 30px; font-size: 15px; border: 0; border-radius: 15px; outline: none; padding-left: 10px; background-color: rgb(233, 233, 233);}
+
+    input.login_btn { width:80%; height:40px; background-color:#46A973; border:none; border-radius: 25px; color:#fff; font-weight: 700; font-size: 16px; font-family: 'omyu_pretty';}
+    input.login_btn:hover{ background-color:#333; color:#ffbf41;}
+
+    div.join_btn_wrap{width:100%;}
+    a.join_btn{width:70%; height:40px; padding: 4% 32%; background-color:#ffbf41; border:none; border-radius: 25px; color:#333; font-weight: 700; font-size: 16px;}
+    a.join_btn:hover {background-color: #333; color:#fff;}
 </style>
 <body>
-<h1>오리시장</h1>
-<h3>&lt;사업자 로그인&gt;</h3>
-<div id="container">
-    <form action="/login1" method="post">
-        <a href="/"><h1 style="position: fixed; left: 20px; top: 0; font-size: 30px; color: red">홈으로 바로가기</h1></a>
-        <div id="login_box">
-            <div>
-                <p>id: <input  type="text"  size="20" placeholder=" 아이디를 입력해주세요.." name="buUserId" required></p>
-                <p>pw: <input  type="password"  size="20" placeholder=" *********" name="buUserPassWord" required></p>
+<div id="businesslogin_wrap">
+    <div class="businesslogin_wrapbox">
+        <div class="businesslogin_title_wrap">
+            <h1>오리시장</h1>
+        </div>
+        <div id="container">
+            <h1 class="login_modal_title">사업자 로그인</h1>
+            <form action="/login1" method="post">
+                <div id="login_box">
+                    <div class="login_box_wrap">
+                        <p>아이디 &nbsp;&nbsp;<input  type="text"  size="20" placeholder=" 아이디를 입력해주세요.." name="buUserId" required></p>
+                        <p>패스워드 <input  type="password"  size="20" placeholder=" *********" name="buUserPassWord" required></p>
+                    </div>
+                    <p style="margin-bottom:10px;"><input type="checkbox" name="login" value=""> 로그인 상태 유지</p>
+                    <p align="center"><input class="login_btn" type="submit" value="로그인"></p>
+                </div>
+            </form>
+            <div id="list" style="margin-top:15px;">
+                <div style="margin-top: 20px;margin-bottom:20px;padding-bottom: 5px;">
+                    <a href="#">아이디 찾기</a> / <span><a href="#">비밀번호 찾기</a></span>
+                </div>
+                <div class="join_btn_wrap" style="margin-bottom:40px;"><a href="/join1" class="join_btn">회원가입</a></div>
             </div>
-            <p><input type="checkbox" name="login" value=""> 로그인 상태 유지</p>
-            <p align="center"><input type="submit" value="로그인"></p>
         </div>
-    </form>
-    <div id="list">
-        <div>
-            <a href="#">아이디 찾기</a> / <span><a href="#">비밀번호 찾기</a></span>
-        </div>
-        <div><a href="/join1">회원가입</a></div>
     </div>
 </div>
-<div id="footer">푸터z</div>
+<%--<div id="footer">푸터z</div>--%>
 </body>
 <script>
     <%-- 서버에서 에러 메시지를 전달할 경우 알림 팝업 띄우기 --%>
