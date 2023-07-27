@@ -63,7 +63,7 @@
                 <table id="infolist_table_2">
                     <td class="infolist_btn_edit" style="width:50%; height:40px; background-color:#ffbf41; border-radius: 25px;"><a id="infolist_btn_edit" href="/buUserUpdate">회원 정보 수정</a></td>
                     <td style="width:50%; height:40px; background-color:#e9e9e9; border-radius: 25px;">
-                        <a id="infolist_btn_delete" href="/buUserLogout">로그아웃</a>
+                        <a id="infolist_btn_delete" href="/buUserLogout?buUserId=${buUserResult.buUserId}">로그아웃</a>
                     </td></input>
 
                 </table>
