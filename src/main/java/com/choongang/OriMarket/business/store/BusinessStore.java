@@ -49,7 +49,7 @@ public class BusinessStore {
     private String buStoreImageUrl;
 
     @Column
-    private String status = "CLOSE";
+    private String status;
 
     //사업자 번호
     @ManyToOne(fetch = FetchType.LAZY) //lazy가 성능최적화
