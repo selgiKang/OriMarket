@@ -232,13 +232,14 @@ public class UserController {
     }
 
     @PostMapping("/usermarketSearch")
+    @ResponseBody
     public String usermarketSearch(@RequestParam("userAddress") String userAddress,Model model,HttpSession session){
         System.out.println("잘나오니?:"+userAddress);
         List<Market> all = marketRepository.findAll();
         for(Market market:all){
             System.out.println("시장이름: "+market.getMarketName());
         }
-        session.setAttribute("aabb",all.get(0).getMarketName());
+        model.addAttribute("aabb",all);
         return "success";
     }
 

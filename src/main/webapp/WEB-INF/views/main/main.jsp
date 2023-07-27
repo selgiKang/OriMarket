@@ -221,10 +221,9 @@
                     data: {
                         userAddress: userAddress,
                     },
-                    success: function(result) {
-                        if(result == "success"){
-                            window.location.href="/";
-                        }
+                    success: function(response) {
+
+                        console.log(response);
                     },
                     error: function (error) {
                         // Ajax 요청이 실패한 경우 처리할 로직 작성
@@ -233,8 +232,7 @@
                 });
             }
         }).open();
-            }
-        }).open();
+
     }
 </script>
 <script type="text/javascript" src="../../js/main/main_slidebanner.js"></script>
