@@ -106,7 +106,6 @@
                     </div>
                 </div>
                 <p style="text-align: left; margin-top: 65px; font-size: 23px;">* 등록한 주소에서 가까운 시장목록 *</p>
-                <%--<ul style="text-align: left; margin-left: 0px;">--%>
                 <ul id="marketList" style="text-align: left; margin-left: 0px;">
                     <!-- 여기에 시장 목록이 동적으로 추가될 것입니다. -->
                     <c:forEach var="marketall" items="${aabb}">
@@ -116,7 +115,6 @@
                         </li>
                     </c:forEach>
                 </ul>
-                <%--</ul>--%>
             </div>
         </div>
         <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
