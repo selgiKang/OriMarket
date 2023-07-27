@@ -13,7 +13,9 @@ import static com.choongang.OriMarket.utill.Constant.*;
 @Service
 public class ImageService {
     public String saveStoreImage(MultipartFile multipartFile) throws IOException {
+
         String originalFilename = multipartFile.getOriginalFilename();
+
         String imageUrl = IMAGE_PATH+originalFilename;
         Path saveImagePath = Paths.get(imageUrl);
 
@@ -26,7 +28,7 @@ public class ImageService {
         File destinationFile = new File(saveImagePath.toUri());
 
         // MultipartFile을 파일로 저장
-        //multipartFile.transferTo(destinationFile);
+        multipartFile.transferTo(destinationFile);
 
         return destinationFile.getName();
     }
