@@ -75,7 +75,7 @@
                         <h2 style="margin:30px 0;"><label for="address_kakao">단골시장 추가하기</label></h2>
                         <a href="/connexion_market0" class="current_location_btn" style="text-decoration:none; color:#333; cursor: pointer;">
                             <i class="fa-solid fa-location-dot header_i" style="font-size: 16px;"></i>&nbsp;가까운 시장찾기 > </a>
-                        <p style="margin-top:30px; font-size: 14px;">현재 내가 설정한 주소: <span style="color: red; font-size: 14px;" id="address_display">주소를 등록해주세요..</span></p>
+                        <p style="margin-top:30px; font-size: 14px;">현재 내가 설정한 주소: <span style="color: red; font-size: 14px;" id="address_display">zzzzz</span></p>
                         <hr style="margin-top:30px;">
                         <div class="input_container" style="margin-top:30px;">
                             <input type="text" id="address_kakao" name="userAddress" readonly style="width:190px; height:30px; border:1px solid #ffbf41; border-radius: 35px; float:left;"  placeholder=" 주소를 입력해 주세요">
