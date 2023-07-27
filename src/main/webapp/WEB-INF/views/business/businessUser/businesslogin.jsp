@@ -84,7 +84,18 @@
     <%-- 서버에서 에러 메시지를 전달할 경우 알림 팝업 띄우기 --%>
     <% if (request.getAttribute("loginError") != null) { %>
     window.onload = function() {
-        alert("<%= request.getAttribute("loginError") %>");
+        var errorMessage = "<%= request.getAttribute("loginError") %>";
+        if (errorMessage.trim() !== "") {
+            alert(errorMessage);
+        }
+    };
+    <% } %>
+    <% if (request.getAttribute("deleteError") != null) { %>
+    window.onload = function() {
+        var errorMessage = "<%= request.getAttribute("deleteError") %>";
+        if (errorMessage.trim() !== "") {
+            alert(errorMessage);
+        }
     };
     <% } %>
 </script>

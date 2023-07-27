@@ -33,7 +33,7 @@
     <div class="nav">
 
         <c:if test="${not empty buUserId}">
-            <span class="addpic">${buUserId} 님, 어서오리</h2></span>
+            <span class="addpic"><a href="/infolist1">${buUserId}님</a>, 어서오리</h2></span>
         </c:if>
 
         <div class="icon" style="margin-top: 5px">

@@ -24,40 +24,69 @@ public class BusinessUserController {
     @Autowired
     private BusinessUserService businessUserService;
 
-    //7.26 테스트중
-//    @GetMapping("/bu_main")
-//    public String main(HttpSession session,BusinessUser buUser,Model model) {
-//
-//
-//    }
-
     @GetMapping("/login1")
     public String login1(){return "business/businessUser/businesslogin";}
 
     @GetMapping("/join1")
     public String join1(){return "business/businessUser/businessjoin";}
 
+    //회원정보
+    @GetMapping("/infolist1")
+    public String list(HttpSession session,Model model) {
+        BusinessUser buUserResult = businessUserService.buUserNumber(session);
+        model.addAttribute("buUserResult",buUserResult);
+        return "business/businessUser/businessuser_infolist";
+    }
+    @GetMapping("/buUserId/{buUserId}/exists")
+    @ResponseBody
+    public ResponseEntity<Boolean> checkUserIdDuplicate(@PathVariable String buUserId) {
+        return ResponseEntity.ok(businessUserService.checkBuId(buUserId));
+    }
+    @GetMapping("/buUserLogout")
+    public String buUserLogout(HttpSession session){
+        session.invalidate();
+        return "redirect:/login1";
+    }
+
+    @GetMapping("/buUserUpdate")
+    public String buUserUpdate(HttpSession session,Model model){
+        BusinessUser buUserResult = businessUserService.buUserNumber(session);
+        model.addAttribute("buUserResult",buUserResult);
+        return "business/businessUser/businessuser_infolist_edit";
+    }
+
+    @GetMapping("/buUserDelete")
+    public String buUserDelete(HttpSession session,Model model){
+        boolean result = businessUserService.buUserDelete(session);
+
+        if(result==false){
+            model.addAttribute("deleteError", "탈퇴에 실패했습니다. 다시 시도해주세요.");
+        }else{
+            model.addAttribute("deleteError", "탈퇴가 완료되었습니다.");
+        }
+
+        return "business/businessUser/businesslogin";
+    }
+    @PostMapping("/buUserUpdate")
+    public String updateResult(@ModelAttribute BusinessUser user,Model model,HttpSession session){
+        if(businessUserService.buUserUpdate(user,session)){
+            return "redirect:/infolist1";
+        }else{
+            model.addAttribute("updateError", "수정에 실패했습니다. 다시 시도해주세요.");
+        }
+        return "redirect:/buUserUpdate";
+    }
+
     @PostMapping("/login1")
     public String loginId(@ModelAttribute BusinessUser businessUser, Model model, HttpSession session) {
-/*
-
-        //7.26 테스트
-        // 사용자가 이미 로그인한 경우, "business/storenotice_new" 페이지로 바로 리다이렉트합니다.
-        if (session.getAttribute("buUserId") != null) {
-            return "redirect:/business/storenotice_new";
-        }
-*/
 
         //사용자 로그인 시도
-        boolean isTrue = businessUserService.login1(businessUser, session, model);
-        if (isTrue) {
+        if (businessUserService.login1(businessUser, session, model)) {
             session.setAttribute("buUserId", businessUser.getBuUserId());
             System.out.println(session.getAttribute("buUserId"));
             return "business/storenotice_new";
 
-
         } else {
-            // If login fails, add an error message to the model
             model.addAttribute("loginError", "아이디 또는 비밀번호가 틀립니다.");
             return "business/businessUser/businesslogin";
         }
@@ -71,12 +100,5 @@ public class BusinessUserController {
         }
         return "business/businessUser/businessjoin";
     }
-
-    @GetMapping("/buUserId/{buUserId}/exists")
-    @ResponseBody
-    public ResponseEntity<Boolean> checkUserIdDuplicate(@PathVariable String buUserId) {
-        return ResponseEntity.ok(businessUserService.checkBuId(buUserId));
-    }
-
 
 };
