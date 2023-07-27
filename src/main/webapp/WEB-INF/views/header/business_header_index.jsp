@@ -1,5 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+         pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"  %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -26,7 +27,7 @@
 </head>
 <body>
 
-<div class="header_wrap" style="background-color: #46A973">
+<div class="header_wrap">
     <div class="logo"><a href="/storenotice1" style="font-size:32px;">오리 사장님</a></div>
 
     <div class="nav">
