@@ -69,6 +69,7 @@ public class FavController {
             }
         }
         double averageRating = (double) totalSum / reviewCount;
+
         model.addAttribute("aveRating",averageRating);
 
         //공지사항

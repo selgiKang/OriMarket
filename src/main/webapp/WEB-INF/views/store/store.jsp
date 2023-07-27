@@ -109,8 +109,11 @@
         <%--가게이름--%>
         <h1><input type="text" value="싱싱과일가게" name="storeName${sessionScope.favNumber}"></h1>
         <span style="float: left;">
-            <c:if test="${!empty aveRating}">
+            <c:if test="${!Double.isNaN(aveRating)}">
               <small style="font-size: 12px;"> &lt; 총 ${aveRating}점 &gt; : </small><span class="rating" data-rating="${Math.round(aveRating * 2) / 2}"></span><br>
+            </c:if>
+            <c:if test="${Double.isNaN(aveRating)}">
+                <small style="font-size: 12px;"> &lt; 아직 등록된 리뷰가 없습니다.!! &gt; </small><span class="rating" data-rating="${Math.round(aveRating * 2) / 2}"></span><br>
             </c:if>
             <small><a href="/storeReview" style="color: #4A98F7">리뷰 보러가기 </a></small>
             <%--리뷰--%>
