@@ -1,12 +1,14 @@
 package com.choongang.OriMarket.manager.user;
 
 import com.choongang.OriMarket.business.market.Market;
+import com.choongang.OriMarket.order.Order;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.mapping.ToOne;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name="manager_user")
@@ -38,6 +40,9 @@ public class ManagerUser {
     @ManyToOne
     @JoinColumn(name = "marketSeq")
     private Market market;
+
+    @OneToMany(mappedBy = "managerUser")
+    private List<Order> order;
 
 }
 

@@ -3,6 +3,7 @@ package com.choongang.OriMarket.RealTimeStatus;
 import com.choongang.OriMarket.manager.user.ManagerService;
 import com.choongang.OriMarket.manager.user.ManagerUser;
 import com.choongang.OriMarket.order.Order;
+import com.choongang.OriMarket.order.OrderRepository;
 import com.choongang.OriMarket.order.OrderService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.catalina.Manager;
@@ -26,17 +27,21 @@ import java.util.Map;
 public class RealTimeController {
 
     private final OrderService orderService;
+    private final OrderRepository orderRepository;
     private final RealTimeService realTimeService;
     private final ManagerService managerService;
-
     private final RealTimeRepository rtsRepository;
 
+
     @Autowired
-    public RealTimeController(OrderService orderService, RealTimeService realTimeService, RealTimeRepository rtsRepository,ManagerService managerService){
+    public RealTimeController(OrderService orderService, OrderRepository orderRepository,
+                              RealTimeService realTimeService, RealTimeRepository rtsRepository,
+                              ManagerService managerService){
         this.orderService = orderService;
         this.realTimeService = realTimeService;
         this.rtsRepository = rtsRepository;
         this.managerService  = managerService;
+        this.orderRepository = orderRepository;
     }
 
 /*    @GetMapping("/accept")
@@ -62,9 +67,22 @@ public class RealTimeController {
 
     //주문 수락
     @GetMapping("/accept")
-    public String orderAccept(Order order, HttpSession session, ManagerUser managerUser, Model model, RealTimeStatus rts){
+    public String orderAccept(@RequestParam("orderNumber") String rOrderNumber,
+                              @RequestParam("managerUser") String managerSeq,
+                              Order order, HttpSession session, ManagerUser managerUser, Model model, RealTimeStatus rts){
 
-       String managerId= session.getAttribute("managerId").toString();
+        managerUser.setManagerSeq(Long.valueOf(managerSeq));
+        Order orderToUpdate = orderRepository.findByOrderNumber(rOrderNumber);
+
+        if (orderToUpdate == null) {
+            orderToUpdate = new Order();
+            orderToUpdate.setOrderNumber(rOrderNumber);
+            orderToUpdate.setManagerUser(managerUser);
+            orderRepository.save(orderToUpdate);
+        }
+
+
+        String managerId= session.getAttribute("managerId").toString();
 
         //매니저 정보 가져오기
         ManagerUser userResult = managerService.findByManagerId(model,session);
@@ -73,11 +91,11 @@ public class RealTimeController {
         //매니저가 소속된 시장의 주문만 리스트에 저장
         List<Order> orderList = (List<Order>) model.getAttribute("managerOrderList");
         model.addAttribute("orderList",orderList);
-        System.out.println("주문 목록: "+orderList.get(0).getOrderNumber());
-
         //불러온 주문의 상태 검색
         List<RealTimeStatus> rtsList = new ArrayList<>();
         Order finalOrder = new Order();
+
+        System.out.println("매니저 아이디"+userResult.getManagerSeq());
 
         if(orderList!=null && !orderList.isEmpty()){
 

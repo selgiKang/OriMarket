@@ -55,7 +55,7 @@ $(document).ready(function() {
 
     function updateOrderList(orderList, rtsResult) {
         // 주문 목록을 표시하는 테이블의 DOM 요소를 선택
-        var orderTable = $('#orderTable'); // 예시로 테이블의 ID가 "orderTable"이라고 가정
+        var orderTable = $('#orderTable');
 
         // 기존에 테이블에 있던 내용을 모두 비우기
         orderTable.empty();

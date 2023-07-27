@@ -1,6 +1,7 @@
 package com.choongang.OriMarket.order;
 
 import com.choongang.OriMarket.business.market.Market;
+import com.choongang.OriMarket.manager.user.ManagerUser;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -23,4 +24,5 @@ public interface OrderRepository extends JpaRepository<Order, String> {
 
     Order findByOrderNumber(String orderNumber);
     List<Order> findByOrderUserId(String orderUserId);
+
 }

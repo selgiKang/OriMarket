@@ -69,17 +69,14 @@ public class ManagerController {
         boolean result = managerService.loginCheck(managerUser,session);
         if(result){
             session.setAttribute("managerId",managerUser.getManagerId());
-            System.out.println(5);
 
             //매니저 정보 가져오기
             ManagerUser userResult = managerService.findByManagerId(model,session);
             model.addAttribute("userResult",userResult);
-            System.out.println(6);
 
             //매니저가 소속된 시장의 주문만 리스트에 저장
            List<Order> orderList = (List<Order>) model.getAttribute("managerOrderList");
            model.addAttribute("orderList",orderList);
-            System.out.println("주문 목록: "+orderList.get(0).getOrderNumber());
 
            //불러온 주문의 상태 검색
            List<RealTimeStatus> rtsList = new ArrayList<>();
