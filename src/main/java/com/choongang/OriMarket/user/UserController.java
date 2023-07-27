@@ -86,6 +86,12 @@ public class UserController {
         return "user/user_infolist_edit";
     }
 
+    //라이더 테스트용으로 잠시 만들어 놨습니다..
+    @GetMapping("/riderfirstscreen")
+    public String riderfirstscreen() {
+        return "rider/rider_firstscreen";
+    }
+
     @PostMapping("/update")
     public String updateUser(@ModelAttribute User user, HttpSession session){
 
