@@ -15,7 +15,7 @@
 <body>
 
 <div class="header_wrap">
-    <div class="logo"><a href="/bu_main"style="font-size:32px;">오리 사장님</a></div>
+    <div class="logo"><a href="/storenotice1" style="font-size:32px;">오리 사장님</a></div>
 
     <div class="nav">
 

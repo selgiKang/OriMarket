@@ -67,9 +67,9 @@ public class BusinessStoreController {
             businessStoreService.save(businessStore, session, model, s);
         }else {
             String s = imageService.saveStoreImage(file);
+            System.out.println("이건먼가요?:" + s);
             businessStoreService.save(businessStore, session, model, s);
         }
-
         return "business/storenotice_new";
     }
 
