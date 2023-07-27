@@ -34,6 +34,7 @@ public class UserController {
 
     private final UserMarketRepository userMarketRepository;
 
+
     // 로그인 get , post 매핑
     @GetMapping("/login")
     public String login() {
@@ -228,6 +229,18 @@ public class UserController {
         }else {
             return "main/main";
         }
+    }
+
+    @PostMapping("/usermarketSearch")
+    @ResponseBody
+    public String usermarketSearch(@RequestParam("userAddress") String userAddress,Model model,HttpSession session){
+        System.out.println("잘나오니?:"+userAddress);
+        List<Market> all = marketRepository.findAll();
+        for(Market market:all){
+            System.out.println("시장이름: "+market.getMarketName());
+        }
+        model.addAttribute("aabb",all);
+        return "success";
     }
 
 

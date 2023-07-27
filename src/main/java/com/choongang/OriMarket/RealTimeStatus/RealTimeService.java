@@ -1,6 +1,8 @@
 package com.choongang.OriMarket.RealTimeStatus;
 
+import com.choongang.OriMarket.manager.user.ManagerUser;
 import com.choongang.OriMarket.order.Order;
+import com.choongang.OriMarket.order.OrderRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.weaver.ast.Or;
@@ -17,6 +19,7 @@ public class RealTimeService {
 
     @Autowired
     private final RealTimeRepository rtsRepository;
+    private final OrderRepository orderRepository;
 
     //주문번호 넣어서 생성, 나머지 값은 디폴트 들어가게
     public boolean insertRts(RealTimeStatus rts){
@@ -29,12 +32,21 @@ public class RealTimeService {
         }
     }
 
-    public RealTimeStatus update1(Order order,HttpSession session){
-        order.setOrderNumber(order.getOrderNumber());
-        RealTimeStatus a = rtsRepository.findByorderNumber(order);
+    public RealTimeStatus update1(Order order,HttpSession session, ManagerUser managerUser ){
+        Order orderResult = orderRepository.findByOrderNumber(order.getOrderNumber());
+
+        //order.setOrderNumber(order.getOrderNumber());
+        RealTimeStatus a = rtsRepository.findByorderNumber(orderResult);
         a.setRtsOrderIng(1);
         a.setOrderNumber(order);
         rtsRepository.save(a);
+
+        Long managerSeq = Long.valueOf(session.getAttribute("managerSeq").toString());
+        managerUser.setManagerSeq(managerSeq);
+
+        orderResult.setManagerUser(managerUser);
+        orderRepository.save(orderResult);
+
         return a;
     }
     public RealTimeStatus update2(Order order,HttpSession session){
