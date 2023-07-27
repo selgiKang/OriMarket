@@ -39,9 +39,24 @@ public class BusinessStoreController {
 
 
     @GetMapping("/storenotice1")
-    public String storenotice1(){
-        return "business/storenotice_new";
+    public String storenotice1(HttpSession session,BusinessUser buUser,Model model){
+
+        if(session.getAttribute("buUserNumber") != null){
+            Long buUserNumber = Long.valueOf(session.getAttribute("buUserNumber").toString());
+            System.out.println(buUserNumber);
+
+            buUser.setBuUserNumber(buUserNumber);
+
+            BusinessStore buStoreResult = businessStoreService.findUserStore(buUser,model);
+            model.addAttribute("save",buStoreResult);
+            return "business/storenotice_new";
+
+        }else {
+
+            return "business/storenotice_new";
         }
+
+    }
 
     @PostMapping("/storenotice1")
     public String storenoticesave(@ModelAttribute BusinessStore businessStore, HttpSession session,Model model, @RequestParam("pictureUrl") MultipartFile file) throws IOException {
