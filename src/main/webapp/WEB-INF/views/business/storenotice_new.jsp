@@ -619,7 +619,7 @@
                         </c:if>
 
                         <br>
-                      <%--  //7.24 테스트 승엽--%>
+
                         <%-- 입력된 가게 위치를 표시합니다. --%>
                         <c:if test="${!empty save.buStoreAddress}">
                             <p style="font-size: 23px; color: #2382f6">${save.buStoreAddress}</p>
