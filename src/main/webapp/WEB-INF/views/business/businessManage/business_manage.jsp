@@ -546,20 +546,7 @@
     }
 
 
-    /*탭*/
-   /* const labels = document.querySelectorAll('.label');
-    labels.forEach((label) => {
-        label.addEventListener('click', () => {
-            const panel = label.nextElementSibling;
-            const isOpen = panel.style.display === 'block';
 
-            if (isOpen) {
-                panel.style.display = 'none';
-            } else {
-                panel.style.display = 'block';
-            }
-        });
-    });*/
 </script>
 
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>

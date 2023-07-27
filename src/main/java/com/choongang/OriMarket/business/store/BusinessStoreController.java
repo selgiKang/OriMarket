@@ -18,8 +18,10 @@ import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
+import java.util.Map;
 
 import static com.choongang.OriMarket.utill.Constant.IMAGE_PATH;
 
@@ -89,6 +91,7 @@ public class BusinessStoreController {
         updateItem.setItemCost(formItem.getItemCost());
         updateItem.setItemInfo(formItem.getItemInfo());
 
+
         itemService.update(updateItem);
 
         BusinessUser buUserNumber = businessUserRepository.findById((Long) session.getAttribute("buUserNumber")).orElseThrow();
@@ -108,6 +111,7 @@ public class BusinessStoreController {
         for(Long deleteItemId :itemIds){
             itemService.deleteItems(deleteItemId);
         }
+        System.out.println("여기까지는와지는가?11");
         return "success";
     }
 

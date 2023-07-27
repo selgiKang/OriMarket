@@ -24,7 +24,7 @@ public class Order {
     @Column(name = "order_number", nullable = false)
     private String orderNumber;
 
-    //가게이름
+    //시장이름
     @Column
     private String orderMarketName;
 
@@ -77,6 +77,10 @@ public class Order {
     //배달기사 요청사항
     @Column
     private String forRider;
+
+    //배달 타입
+    @Column
+    private String deliveryType;
 
     //시장 번호
     @ManyToOne

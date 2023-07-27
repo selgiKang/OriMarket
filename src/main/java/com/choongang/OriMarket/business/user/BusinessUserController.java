@@ -49,6 +49,16 @@ public class BusinessUserController {
 
     @PostMapping("/login1")
     public String loginId(@ModelAttribute BusinessUser businessUser, Model model, HttpSession session) {
+/*
+
+        //7.26 테스트
+        // 사용자가 이미 로그인한 경우, "business/storenotice_new" 페이지로 바로 리다이렉트합니다.
+        if (session.getAttribute("buUserId") != null) {
+            return "redirect:/business/storenotice_new";
+        }
+*/
+
+        //사용자 로그인 시도
         boolean isTrue = businessUserService.login1(businessUser, session, model);
         if (isTrue) {
             session.setAttribute("buUserId", businessUser.getBuUserId());

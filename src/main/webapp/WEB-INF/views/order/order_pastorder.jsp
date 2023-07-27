@@ -268,6 +268,7 @@
         width: 320px;
         padding: 10px;
         border-radius: 10px;
+        position: relative;
 
     }
 
@@ -297,7 +298,6 @@
         display: flex;
         float: left;
         flex-direction: row;
-        justify-content: space-between;
         font-size: 13px;
         font-weight: bolder;
         color: #999999;
@@ -395,42 +395,52 @@
             <section>
                 <div class="inside_tabs">
                     <div role="inside_tablist">
-
-                        <%--주문내역폼--%>
-                        <div class="main-box">
-
-                            <div class="top">
-                                <div class="small-box">
-                                    <p>포장</p>
-                                </div>
-                                <div class="date">
-                                    <p>2023.07.26 15:03</p>
-                                </div>
-                            </div>
-                            <div style="position: absolute; top: 10px; right: 10px;">
-                                배달완료
-                            </div>
-                            <div class="storepicture">
-                                <img src="../../img/store/store.jpg" alt="사진">
-                            </div>
-                            <div class="middle">
-                                <div class="storeinfo">
-                                    <div class="storename">
-                                        <p>파리바게뜨이대자이점</p>
+                        <c:forEach items="${pastOrderList}" var="pastOrder" varStatus="status">
+                            <c:if test="${pastOrder.realTimeStatus.rtsRiderFinish eq 0}">
+                                <%--주문내역폼--%>
+                                <div class="main-box">
+                                    <div class="top">
+                                        <div class="small-box">
+                                            <p>${pastOrder.deliveryType}</p>
+                                        </div>
+                                        <div class="date">
+                                            <p>
+                                                ${fn:substring(pastOrder.orderDate, 0, 4)}.
+                                                ${fn:substring(pastOrder.orderDate, 4, 6)}.
+                                                ${fn:substring(pastOrder.orderDate, 6, 8)}&nbsp;
+                                                ${fn:substring(pastOrder.orderDate, 8, 10)}:
+                                                ${fn:substring(pastOrder.orderDate, 10, 12)}:
+                                                ${fn:substring(pastOrder.orderDate, 12, 14)}
+                                            </p>
+                                        </div>
                                     </div>
-                                    <div class="orderitems">
-                                        <p>두번 쫄깃 블루베리 베이글&허니월넛크림치즈 x 1 외...</p>
+                                    <div style="position: absolute; top: 10px; right: 10px;">
+                                        배달중
+                                    </div>
+                                    <div class="storepicture">
+                                        <img src="../../img/store/store.jpg" alt="사진">
+                                    </div>
+                                    <div class="middle">
+                                        <div class="storeinfo">
+                                            <div class="storename">
+                                                <p>${pastOrder.businessUser.businessStores[0].buStoreName}</p>
+                                            </div>
+                                            <div class="orderitems">
+                                                <p>두번 쫄깃 블루베리 베이글&허니월넛크림치즈 x 1 외...</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class ="mybutton">
+                                        <div class="reorder" onclick="location.href='/store?favStoreName=${pastOrder.businessUser.businessStores[0].buStoreName}'">
+                                            <p>재주문</p>
+                                        </div>
+                                        <div class="orderdetailcheck" onclick="location.href='/order_receiptDelivery?orderNumber=${pastOrder.orderNumber}'">
+                                            <p>주문상세</p>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class ="mybutton">
-                                <div class="reorder">
-                                    <p>재주문</p>
-                                </div>
-                                <div class="orderdetailcheck">
-                                    <p>주문상세</p>
-                                </div>
-                            </div>
+                            </c:if>
+                        </c:forEach>
                         </div>
                     </div>
                 </div>
@@ -440,44 +450,43 @@
                     <div role="inside_tablist">
                         <%-- 과거 주문내역 --%>
                         <c:forEach items="${pastOrderList}" var="pastOrder" varStatus="status">
-                            <div class="order_1">
-                                <%-- 가게사진 --%>
+                            <c:if test="${pastOrder.realTimeStatus.rtsRiderFinish eq 1}">
+                                <div class="order_1">
+                                    <%-- 가게사진 --%>
 
-                                <!-- 주문 정보 출력 -->
-                                <h2 class="mypage1_h2">${pastOrder.marketSeq.marketName}</h2>
-                                <!-- 날짜 출력 -->
-                                <small class="mypage1_small" style="text-align: left;">
-                                        ${fn:substring(pastOrder.orderDate, 0, 4)}년
-                                        ${fn:substring(pastOrder.orderDate, 4, 6)}월
-                                        ${fn:substring(pastOrder.orderDate, 6, 8)}일
-                                </small>
+                                    <!-- 주문 정보 출력 -->
+                                    <h2 class="mypage1_h2">${pastOrder.marketSeq.marketName}</h2>
+                                    <!-- 날짜 출력 -->
+                                    <small class="mypage1_small" style="text-align: left;">
+                                            ${fn:substring(pastOrder.orderDate, 0, 4)}년
+                                            ${fn:substring(pastOrder.orderDate, 4, 6)}월
+                                            ${fn:substring(pastOrder.orderDate, 6, 8)}일
+                                    </small>
 
-                                <!-- RealTimeStatus 가져오기 -->
+                                    <!-- RealTimeStatus 가져오기 -->
 
-                                <!-- 주문 상태 출력 -->
-                                <c:if test="${pastOrder.realTimeStatus.rtsRiderFinish != null}">
+                                    <!-- 주문 상태 출력 -->
+                                    <c:if test="${pastOrder.realTimeStatus.rtsRiderFinish != null}">
+                                        <ul style="text-align: left;">
+                                            <!-- RealTimeStatus의 내용 출력 -->
+                                            <c:if test="${pastOrder.realTimeStatus.rtsRiderFinish eq 1}">
+                                                <li>배달 완료</li>
+                                            </c:if>
+                                            <!-- 여기에 추가적인 RealTimeStatus 정보 출력 -->
+                                        </ul>
+                                    </c:if>
+
+                                    <!-- 나머지 주문 정보 출력 -->
                                     <ul style="text-align: left;">
-                                        <!-- RealTimeStatus의 내용 출력 -->
-                                        <c:if test="${pastOrder.realTimeStatus.rtsRiderFinish eq 0}">
-                                            <li>배송중</li>
-                                        </c:if>
-                                        <c:if test="${pastOrder.realTimeStatus.rtsRiderFinish eq 1}">
-                                            <li>배달 완료</li>
-                                        </c:if>
-                                        <!-- 여기에 추가적인 RealTimeStatus 정보 출력 -->
+                                        <li>${pastOrder.orderStoreName}</li>
+                                        <li>${pastOrder.orderGoodsName}</li>
                                     </ul>
-                                </c:if>
+                                    <h3 style="text-align: left;">합계: ${pastOrder.orderGoodsTotalPrice}원</h3>
 
-                                <!-- 나머지 주문 정보 출력 -->
-                                <ul style="text-align: left;">
-                                    <li>${pastOrder.orderStoreName}</li>
-                                    <li>${pastOrder.orderGoodsName}</li>
-                                </ul>
-                                <h3 style="text-align: left;">합계: ${pastOrder.orderGoodsTotalPrice}원</h3>
-
-                                <!-- 영수증 보기 버튼 -->
-                                <div class="div2" onclick="location.href='/order_receiptDelivery?orderNumber=${pastOrder.orderNumber}'">영수증 보기</div>
-                            </div>
+                                    <!-- 영수증 보기 버튼 -->
+                                    <div class="div2" onclick="location.href='/order_receiptDelivery?orderNumber=${pastOrder.orderNumber}'">영수증 보기</div>
+                                </div>
+                            </c:if>
                         </c:forEach>
                     </div>
                 </div>
