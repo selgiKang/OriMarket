@@ -49,7 +49,7 @@
             overflow: auto; /* 스크롤 가능하도록 수정 */
             overflow-x: hidden; /* 가로 스크롤 금지 */
             font-family: 'LINESeedKR-Bd', sans-serif; /* 따옴표 추가 */
-            /*padding-top: 100px;*/
+            padding-top: 100px;
         }
 
         .main-container::-webkit-scrollbar {
