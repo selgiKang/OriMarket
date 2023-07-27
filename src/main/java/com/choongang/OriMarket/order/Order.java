@@ -93,13 +93,14 @@ public class Order {
     @JoinColumn(name = "bu_user_number")
     private BusinessUser businessUser;
 
+    //매니저 번호
+    @ManyToOne
+    @JoinColumn(name="managerSeq")
+    private ManagerUser managerUser;
+
     // RealTimeStatus와의 연관관계 설정
     @OneToOne(mappedBy = "orderNumber")
     private RealTimeStatus realTimeStatus;
-
-    @ManyToOne
-    @JoinColumn(name="managerUser")
-    private ManagerUser managerUser;
 
 //    @Transient
 //    private String next_redirect_pc_url;
@@ -111,6 +112,7 @@ public class Order {
     //끝나는 날짜
     @Transient
     private String calculate_date_last;
+
 
 
 

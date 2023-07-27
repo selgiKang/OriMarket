@@ -106,8 +106,14 @@
                     </div>
                 </div>
                 <p style="text-align: left; margin-top: 65px; font-size: 23px;">* 등록한 주소에서 가까운 시장목록 *</p>
-                <ul id="marketList" style="text-align: left; margin-left: 20px;">
-
+                <ul id="marketList" style="text-align: left; margin-left: 0px;">
+                    <!-- 여기에 시장 목록이 동적으로 추가될 것입니다. -->
+                    <c:forEach var="marketall" items="${aabb}">
+                        <li style="margin-top: 5px; list-style: none; font-size: 16px; margin-left: 20px;">
+                                ${marketall.marketName}
+                            <a href="#" style="font-size: 16px;">선택</a>
+                        </li>
+                    </c:forEach>
                 </ul>
             </div>
         </div>
@@ -217,17 +223,42 @@
                         userAddress: userAddress,
                     },
                     success: function(response) {
-
-                        console.log(response);
+                        console.log("success")
+                        console.log(response)
+                        updateTable(response);
                     },
                     error: function (error) {
                         // Ajax 요청이 실패한 경우 처리할 로직 작성
-                        console.error("Ajax 요청 실패:", xhr, status, error);
+                        console.error("Ajax 요청 실패:", error);
                     }
                 });
             }
         }).open();
 
+        function updateTable(response) {
+            var ul = $("ul#marketList"); // 시장 목록을 보여줄 <ul> 태그 선택
+            ul.empty(); // 기존 목록 초기화
+            console.log(1);
+            // 받은 response 배열을 순회하면서 <li> 태그로 만들어 목록에 추가
+            for (var i = 0; i < response.length; i++) {
+                console.log(2);
+                var market = response[i];
+                var li = $("<li>").text(market.marketName);
+                var link = $("<a>")
+                    .attr("href", "#")
+                    .text("선택")
+                    .attr("data-marketname", market.marketName)
+                    .on("click", function () {
+                        var selectedMarketName = $(this).data("marketname");
+                        // 선택한 시장 이름을 사용하여 필요한 작업 수행
+                        // 예: 선택한 시장으로 이동하거나 추가적인 Ajax 요청 등
+                    });
+                li.append(link);
+
+                console.log(3);
+                ul.append(li);
+            }
+        }
     }
 </script>
 <script type="text/javascript" src="../../js/main/main_slidebanner.js"></script>

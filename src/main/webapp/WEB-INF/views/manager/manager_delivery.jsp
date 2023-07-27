@@ -16,41 +16,8 @@
 		<input type="submit" value="주문수락">
 	</FORM>--%>
 	<main id="orderDelivery_main">
-		<div id="orderDelivery_btn_cancel"><a href="/order_pastorder"><i class="fas fa-regular fa-xmark"></i></a></div>
+		<div id="orderDelivery_btn_cancel"><a href="/managerMain"><i class="fas fa-regular fa-xmark"></i></a></div>
 		<h2>실시간 주문 내역</h2>
-		<ul id="orderDelivery_ing">
-			<!-- 배달표시 circle 아이콘 -->
-			<!-- 2023-07-04 스크립트로 값 들어오면 아이콘 변경되게 추후 적용 -->
-			<!-- 2023-07-07 if문으로 색상 변경: -->
-			<!-- 픽업중 -->
-			<c:if test="${rtsOrderIng eq 0 }">
-				<li><i class="fa-sharp fa-regular fa-circle" style="color: #b8b8b8;"></i></li>
-				<li class="orderDelivery_li_1">픽업중</li>
-			</c:if>
-			<c:if test="${rtsOrderIng eq 1 }">
-				<li><i class="fa-sharp fa-solid fa-circle" style="color: #46a973;"></i></li>
-				<li class="orderDelivery_li_1" style="color: #46A973;">픽업중</li>
-			</c:if>
-			<!-- 배달중 -->
-			<c:if test="${rtsRiderIng eq 0}">
-				<li><i class="fa-sharp fa-regular fa-circle" style="color: #b8b8b8;"></i></li>
-				<li class="orderDelivery_li_1">배달중</li>
-			</c:if>
-			<c:if test="${rtsRiderIng eq 1}">
-				<li><i class="fa-sharp fa-solid fa-circle" style="color: #b8b8b8;"></i></li>
-				<li class="orderDelivery_li_1">배달중</li>
-			</c:if>
-			<c:if test="${rtsRiderFinish eq 0}">
-				<!-- 배달완료 -->
-				<li><i class="fa-sharp fa-regular fa-circle" style="color: #b8b8b8;"></i></li>
-				<li>배달 완료</li>
-			</c:if>
-			<c:if test="${rtsRiderFinish eq 1}">
-				<!-- 배달완료 -->
-				<li><i class="fa-sharp fa-solid fa-circle" style="color: #b8b8b8;"></i></li>
-				<li>배달 완료</li>
-			</c:if>
-		</ul>
 		<div id="orderDelivery_orderInfo">
 			<h3>${marketName}</h3>
 			<table id="orderDelivery_table_1">
@@ -93,7 +60,6 @@
 				<tr><td class="orderDelivery_table3_td_1">배달 기사님께</td><td class="orderDelivery_table3_td_1">${orderDelivery.forRider}</td></tr>
 				<tr><td id="orderDelivery_table3_total_td_1">총 금액</td><td id="orderDelivery_table3_total_td_2">${orderDelivery.orderGoodsTotalPrice}원</td></tr>
 			</table>
-			
 		</div>
 	</main>
 </body>

@@ -60,11 +60,3 @@
         .nav_footer div.clicked::before {
             opacity: 1;
         }
-
-
-        /* 230727 승원 */
-        #nav_footer_home_img:hover {transform: scale(1.2); transition-duration: 0.5s;}
-        #nav_footer_list_img:hover {transform: scale(1.2); transition-duration: 0.5s;}
-        #nav_footer_cart_img:hover {transform: scale(1.2); transition-duration: 0.5s;}
-        #nav_footer_star_img:hover {transform: scale(1.2); transition-duration: 0.5s;}
-        #nav_footer_user_img:hover {transform: scale(1.2); transition-duration: 0.5s;}

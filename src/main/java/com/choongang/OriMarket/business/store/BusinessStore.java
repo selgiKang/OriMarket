@@ -66,4 +66,9 @@ public class BusinessStore {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "marketSeq")
     private Market market;
+
+    @Override
+    public String toString() {
+        return buStoreName; // 가게 이름 반환
+    }
 }
