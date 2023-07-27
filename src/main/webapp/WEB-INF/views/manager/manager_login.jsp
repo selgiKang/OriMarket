@@ -21,15 +21,16 @@
         <td class="managerLogin_td_2"><input id="managerPassword" style="height: 15px;" type="password" placeholder="비밀번호" name="managerPassword"></td>
       </tr>
       <c:if test="${!empty fail}">
-      <tr>
-        <td style="color: red" colspan="2"><small>아이디와 비밀번호가 틀렸습니다.</small></td>
-      </tr>
+        <tr>
+          <td style="color: red" colspan="2"><small>아이디와 비밀번호가 틀렸습니다.</small></td>
+        </tr>
       </c:if>
     </table>
     <table style="width: 100%;text-align: center;">
       <tr class="managerLogin_tr">
         <td class="managerLogin_td_3"><input type="submit" value="로 그 인"></td>
         <td class="managerLogin_td_3" ><a style="padding: 5px;height: 15px;" href="/managerJoin">회원가입</a></td>
+        <td><a href="/findManagerId">아이디 찾기</a>&nbsp;|&nbsp;<a>비밀번호 찾기</a></td>
       </tr>
     </table>
   </div>
