@@ -25,19 +25,25 @@
     </style>
 </head>
 <body>
+
 <div class="header_wrap" style="background-color: #46A973">
-    <div class="logo"><a href="/bu_main" style="font-size: 32px;">오리 사장님</a></div>
+    <div class="logo"><a href="/storenotice1" style="font-size:32px;">오리 사장님</a></div>
 
     <div class="nav">
+
         <c:if test="${not empty buUserId}">
             <span class="addpic">${buUserId} 님, 어서오리</h2></span>
         </c:if>
 
         <div class="icon" style="margin-top: 5px">
         <a href=""><i class="fa-solid fa-house" style="color: #ffbf41;"></i></a>
+
         <a href="/login1"><i class="fa-solid fa-right-from-bracket" style="color: #ffbf41;"></i></a>
         </div>
     </div>
+
+
 </div>
+
 </body>
 </html>

@@ -3,6 +3,7 @@ package com.choongang.OriMarket.business.user;
 import com.choongang.OriMarket.business.market.Market;
 import com.choongang.OriMarket.business.market.MarketService;
 import com.choongang.OriMarket.business.store.BusinessStore;
+import com.choongang.OriMarket.business.store.BusinessStoreService;
 import com.choongang.OriMarket.user.User;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -23,23 +24,12 @@ public class BusinessUserController {
     @Autowired
     private BusinessUserService businessUserService;
 
-    private final BusinessUserRepository businessUserRepository;
-
     //7.26 테스트중
-    @GetMapping("/bu_main")
-    public String main(HttpSession session, Model model) {
-
-        if(session.getAttribute("buUserId") != null){
-
-            String buUserId = String.valueOf((session.getAttribute("buUserId")).toString());
-            BusinessUser businessUser= businessUserRepository.findByBuUserId(buUserId);
-            //model.addAttribute("userMarket", user.getUserMarkets());
-
-            return "business/storenotice_new";
-        }else {
-            return "business/storenotice_new";
-        }
-    }
+//    @GetMapping("/bu_main")
+//    public String main(HttpSession session,BusinessUser buUser,Model model) {
+//
+//
+//    }
 
     @GetMapping("/login1")
     public String login1(){return "business/businessUser/businesslogin";}

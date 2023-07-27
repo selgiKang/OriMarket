@@ -492,7 +492,7 @@
                 <div class="storecare_logo">
                     <h3 style="font-size: small">내 가게 사진</h3>
                     <c:if test="${empty save.buStoreImageUrl}">
-                    <input type="file" accept="image/*" name="pictureUrl" id="logo-upload" onchange="previewPicture(event)"/>
+                        <input type="file" accept="image/*" name="pictureUrl" id="logo-upload" onchange="previewPicture(event)"/>
                     </c:if>
                     <div id="logo-preview">
                         <c:if test="${!empty save.buStoreImageUrl}">
@@ -517,6 +517,9 @@
                         <%-- 입력된 가게 이름 --%>
                         <c:if test="${!empty save.buStoreName}">
                             <p style="margin-top: 10px; font-size: 23px; color: #2382f6">${save.buStoreName}</p>
+                        </c:if>
+                        <c:if test="${!empty otherList.buStoreName}">
+                            <p style="margin-top: 10px; font-size: 23px; color: #2382f6">${otherList.buStoreName}</p>
                         </c:if>
                         <h6 style="color: #818083; margin-top: 7px;">※변경이 필요한 경우 고객센터로 문의해주세요.</h6>
                     </div>
@@ -591,28 +594,28 @@
                     <div class="storecare_location">
                         <h3 style="font-size: small" >내 가게 주소</h3>
                         <c:if test="${empty save.buStoreAddress}">
-                        <input type="text" id="store-location-input" name="buStoreAddress" placeholder="가게를 위치를 지정해주세요.">
+                            <input type="text" id="store-location-input" name="buStoreAddress" placeholder="가게를 위치를 지정해주세요.">
                         </c:if>
 
                      <%--입력창--%>
-                            <c:if test="${!empty save.buStoreAddress}">
+                        <c:if test="${!empty save.buStoreAddress}">
                             <input type="hidden" id="store-location-input" name="buStoreAddress" value="${save.buStoreAddress}">
                         </c:if>
 
 
                         <c:if test="${empty save.buStoreAddressDetail}">
-                        <input type="text" name="buStoreAddressDetail" id="buStoreAddressDetail" placeholder="상세위치를 적어주세요.">
+                            <input type="text" name="buStoreAddressDetail" id="buStoreAddressDetail" placeholder="상세위치를 적어주세요.">
                         </c:if>
 
                         <%--입력창--%>
-                            <c:if test="${!empty save.buStoreAddressDetail}">
+                        <c:if test="${!empty save.buStoreAddressDetail}">
                             <input type="hidden" name="buStoreAddressDetail" id="buStoreAddressDetail" value="${save.buStoreAddressDetail}">
                         </c:if>
 
                         <c:if test="${empty save.buStoreAddress}">
-                        <div class="btn_container">
-                            <button type="button" class="btn_round" onclick="searchAddress()">주소검색</button>
-                        </div>
+                            <div class="btn_container">
+                                <button type="button" class="btn_round" onclick="searchAddress()">주소검색</button>
+                            </div>
                         </c:if>
 
                         <br>

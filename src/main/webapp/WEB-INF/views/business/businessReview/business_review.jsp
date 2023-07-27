@@ -115,7 +115,12 @@
 </head>
 <body id="business_review_body">
 <header id="business_review_header">
-    <h3>내 가게 리뷰 <small>&lt; 총: ${aveRating}점 &gt;</small></h3>
+    <h3>내 가게 리뷰
+        <c:if test="${empty aveRating}">
+            <small>&lt; 총: 0점 &gt;</small></h3>
+        </c:if>
+        <c:if
+        <small>&lt; 총: ${aveRating}점 &gt;</small></h3>
     <h3 style="margin-top: -20px;" class="rating" data-rating="${Math.round(aveRating * 2) / 2}"></h3>
 </header>
 <main>
