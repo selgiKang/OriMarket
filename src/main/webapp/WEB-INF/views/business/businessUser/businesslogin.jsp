@@ -36,7 +36,7 @@
     #container{width: 300px; height: 400px; padding:20px; text-align: center;
         background-color:#fff; border-radius: 10px; box-shadow: 0 3px 6px 0 rgba(0,0,0, 0.4); margin: 0 10%;}
 
-    h1.login_modal_title{color: #333; letter-spacing: 5px; margin: 20px 20px 30px 20px;}
+    h1.login_title{color: #333; letter-spacing: 5px; margin: 20px 20px 30px 20px;}
     div#login_box{margin:20px 0}
     div.login_box_wrap{margin-bottom:25px;}
     div.login_box_wrap p {margin-bottom:10px;}
@@ -58,7 +58,7 @@
             <h1>오리시장</h1>
         </div>
         <div id="container">
-            <h1 class="login_modal_title">사업자 로그인</h1>
+            <h1 class="login_title">사업자 로그인</h1>
             <form action="/login1" method="post">
                 <div id="login_box">
                     <div class="login_box_wrap">
