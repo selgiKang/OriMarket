@@ -33,11 +33,16 @@ public class BusinessUserController {
         return "business/businessUser/businesslogin";
     }
     @GetMapping("/buUserLogout")
-    public String buUserLogout(@RequestParam("buUserId") String buUserId){
-        BusinessUser byId = businessUserRepository.findByBuUserId(buUserId);
-        BusinessStore businessStore = byId.getBusinessStores().get(0);
-        businessStore.setStatus("CLOSE");
-        businessStoreRepository.save(businessStore);
+    public String buUserLogout(@RequestParam("buUserId") String buUserId,HttpSession session){
+
+        if(businessUserRepository.findByBuUserId(buUserId)!=null){
+            BusinessUser byId = businessUserRepository.findByBuUserId(buUserId);
+            BusinessStore businessStore = byId.getBusinessStores().get(0);
+            businessStore.setStatus("CLOSE");
+            businessStoreRepository.save(businessStore);
+        }
+
+        session.invalidate();
         return "business/businessUser/businesslogin";
     }
 
@@ -55,11 +60,6 @@ public class BusinessUserController {
     @ResponseBody
     public ResponseEntity<Boolean> checkUserIdDuplicate(@PathVariable String buUserId) {
         return ResponseEntity.ok(businessUserService.checkBuId(buUserId));
-    }
-    @GetMapping("/buUserLogout")
-    public String buUserLogout(HttpSession session){
-        session.invalidate();
-        return "redirect:/login1";
     }
 
     @GetMapping("/buUserUpdate")
