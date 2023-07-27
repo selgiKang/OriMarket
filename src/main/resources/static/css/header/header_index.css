@@ -8,29 +8,10 @@
 
 body{margin:0 auto; font-size:18px; font-family: 'omyu_pretty';}
 .header_wrap>.logo>a{margin-top:10px; text-decoration: none; color:#ffbf41; font-weight: 700;}
-.header_wrap{
-    width:375px;
-    height:100px;
-    margin:0 auto;
-    box-sizing:border-box;
-    border-bottom-left-radius: 25px;
-    border-bottom-right-radius: 25px;
-    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.2);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    position: fixed; /* 헤더를 고정시킵니다. */
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 9999; /* 다른 요소들보다 위에 표시되도록 설정합니다. */
-}
-.nav{text-align:right; padding:5px 15px; margin-top:15px;display: flex;align-items: center;}
+.header_wrap{width:375px; height:100px; margin:0 auto; background-color:#46a973; box-sizing:border-box; border-bottom-left-radius: 25px; border-bottom-right-radius: 25px; box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.2);}
+.nav{text-align:right; padding:5px 15px; margin-top:15px;}
 .nav>span{float:left; margin: 5px;}
 .nav>span.addpic{float:left; margin: 5px; width: 230px;overflow: hidden;text-overflow: ellipsis; white-space: nowrap; color: #fff; text-align: initial;}
 .nav>span>a{text-decoration:none; color:#eee;}
 .header_i{color:#ffbf41; font-size:22px; margin:3px;}
 .logo{width:160px; height:35px; margin:auto; text-align:center; font-size:30px;}
-/* 추가한 CSS 스타일 */
-
-
