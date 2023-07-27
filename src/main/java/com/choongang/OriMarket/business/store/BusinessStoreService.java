@@ -65,8 +65,7 @@ public class BusinessStoreService {
         // 모델에 저장해서 view 페이지로쓴다.
         model.addAttribute("save", businessStore1);
 
-        }
-
+    }
 
     public BusinessStore findReview(BusinessStore businessStore, BusinessUser businessUser,HttpSession session){
         Long buUserNumbers = Long.valueOf((session.getAttribute("buUserNumber")).toString());
