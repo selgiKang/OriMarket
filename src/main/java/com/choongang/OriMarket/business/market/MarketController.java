@@ -65,7 +65,6 @@ public class MarketController {
 
             }
 
-
             return "main/main";
         }
     }
