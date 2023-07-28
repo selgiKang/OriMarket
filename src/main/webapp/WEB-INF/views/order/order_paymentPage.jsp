@@ -47,7 +47,7 @@
 							<c:forEach var="cartItems" items="${cartItemList}" varStatus="status">
 							<c:if test="${status.index eq 1}">
 							<input type="hidden" name = "orderMarketName" value="${cartItems.businessStore.market.marketName}" readonly>
-							${cartItems.businessStore.market.marketName}
+								${cartItems.businessStore.market.marketName}
 							</c:if>
 						</th>
 					</tr>

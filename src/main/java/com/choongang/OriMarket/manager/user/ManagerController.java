@@ -175,7 +175,7 @@ public class ManagerController {
     }
 
 
-    //로그인
+    //로그인데
     @PostMapping("/managerLogin")
     public String loginResult(@ModelAttribute ManagerUser managerUser, HttpSession session, Model model){
         boolean result = managerService.loginCheck(managerUser,session);
