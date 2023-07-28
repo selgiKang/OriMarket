@@ -2,6 +2,7 @@ package com.choongang.OriMarket.user;
 
 import com.choongang.OriMarket.business.market.Market;
 import com.choongang.OriMarket.business.market.MarketRepository;
+import com.choongang.OriMarket.business.market.MarketService;
 import com.choongang.OriMarket.order.Order;
 import com.choongang.OriMarket.order.OrderService;
 import com.choongang.OriMarket.review.Review;
@@ -34,6 +35,8 @@ public class UserController {
     private final MarketRepository marketRepository;
 
     private final UserMarketRepository userMarketRepository;
+
+    private final MarketService marketService;
 
 
     // 로그인 get , post 매핑
@@ -240,24 +243,28 @@ public class UserController {
 
     @PostMapping("/usermarketSearch")
     @ResponseBody
-    public ResponseEntity<List<Map<String, String>>> usermarketSearch(@RequestParam("userAddress") String userAddress, Model model, HttpSession session) {
-
-
-
-
+    public ResponseEntity<List<Map<String, String>>> usermarketSearch(@RequestParam double latitude, @RequestParam double longitude, Model model, HttpSession session) {
+        System.out.println("잘나오니?"+latitude);
+        System.out.println("잘나오니?"+longitude);
         try {
             List<Map<String,String>> tableData = new ArrayList<>();
-            List<Market> all = marketRepository.findAll();
-            for(Market a : all){
-                Map<String, String> allData = new HashMap<>();
-                //시장 이름만 우선 넣었어요!
-                allData.put("marketName",(a.getMarketName()).toString());
-                System.out.println(a.getMarketName());
-                tableData.add(allData);
-            }
-            model.addAttribute("tableData", tableData);
-            return ResponseEntity.ok(tableData); // 이 위치에서 응답을 한 번만 보냄
+            double radiusInKm = 5.0;
+            List<Market> marketsWithinRadius = marketService.findMarketsWithinRadius(latitude, longitude, radiusInKm);
 
+            if(marketsWithinRadius.isEmpty()){
+                // 근처에 져희 오라마켓에 등록된 시장이 없습니다. 만넘겨주기
+                return ResponseEntity.ok(tableData);
+            } else {
+                for (Market a : marketsWithinRadius) {
+                    Map<String, String> allData = new HashMap<>();
+                    //시장 이름만 우선 넣었어요!
+                    allData.put("marketName", (a.getMarketName()).toString());
+                    System.out.println(a.getMarketName());
+                    tableData.add(allData);
+                }
+                model.addAttribute("tableData", tableData);
+                return ResponseEntity.ok(tableData); // 이 위치에서 응답을 한 번만 보냄
+            }
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }

@@ -31,10 +31,10 @@ public class Market {
     private String marketName;
 
     @Column
-    private String marketLatitude;
+    private double marketLatitude;
 
     @Column
-    private String marketLongitude;
+    private double marketLongitude;
 
     //시장 주소
     @Column
