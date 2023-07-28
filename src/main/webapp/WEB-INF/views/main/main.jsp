@@ -78,6 +78,24 @@
             cursor: pointer;
             opacity: 0.7;
         }
+        ul#marketList li {
+            margin-top: 5px;
+            list-style: none;
+            margin-left: 18px;
+            font-size: 16px;
+        }
+        ul#marketList li a{
+            text-decoration: none;
+            font-size: 16px;
+            margin-left: 10px;
+            color: #4caf50;
+        }
+
+        ul#marketList li.empty-market {
+            margin-top: 20px;
+            color: red;
+            font-style: italic;
+        }
     </style>
 </head>
 <body>${aabb}
@@ -107,13 +125,6 @@
                 </div>
                 <p style="text-align: left; margin-top: 65px; font-size: 23px;">* 등록한 주소에서 가까운 시장목록 *</p>
                 <ul id="marketList" style="text-align: left; margin-left: 0px;">
-                    <!-- 여기에 시장 목록이 동적으로 추가될 것입니다. -->
-                    <c:forEach var="marketall" items="${aabb}">
-                        <li style="margin-top: 5px; list-style: none; font-size: 16px; margin-left: 20px;">
-                                ${marketall.marketName}
-                            <a href="#" style="font-size: 16px;">선택</a>
-                        </li>
-                    </c:forEach>
                 </ul>
             </div>
         </div>
@@ -251,13 +262,30 @@
             var ul = $("ul#marketList"); // 시장 목록을 보여줄 <ul> 태그 선택
             ul.empty(); // 기존 목록 초기화
             console.log(1);
+
+            // 만약 response 배열에 데이터가 없으면, "근처에 저희 오라마켓에 등록된 시장이 없습니다." 메시지를 직접 <li> 태그로 생성하여 추가합니다.
+            if (response.length === 0) {
+                var li = $("<li>").text("근처에 저희 오라마켓에 등록된 시장이 없습니다.");
+                li.addClass("empty-market");
+                ul.append(li);
+                return; // 메시지를 추가한 후 함수를 종료합니다.
+            }
+
             // 받은 response 배열을 순회하면서 <li> 태그로 만들어 목록에 추가
             for (var i = 0; i < response.length; i++) {
                 console.log(2);
                 var market = response[i];
                 var li = $("<li>").text(market.marketName);
+                // 거리 정보가 있을 경우, 해당 정보를 <li> 태그에 추가
+                if (market.hasOwnProperty("distance")) {
+                    var distanceInfo = $("<span>").text(" (" + market.distance + ")");
+                    distanceInfo.css({
+                        "font-size": "small"
+                    });
+                    li.append(distanceInfo);
+                }
                 var link = $("<a>")
-                    .attr("href", "#")
+                    .attr("href", "/market_search?marketName=" + encodeURIComponent(market.marketName))
                     .text("선택")
                     .attr("data-marketname", market.marketName)
                     .on("click", function () {
