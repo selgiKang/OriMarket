@@ -16,7 +16,7 @@
     <div id="orderDelivery_btn_cancel"><a href="/managerMain"><i class="fas fa-regular fa-xmark"></i></a></div>
 
     <%--왼쪽 화살표--%>
-    <a href=""><i class="fas fa-solid fa-arrow-left" style="color: #fafafa;"></i></a>
+    <a href="#"><i class="fas fa-solid fa-arrow-left" style="color: #fafafa;"></i></a>
     <h2>배달중 #주문번호</h2>
 
     <hr>
@@ -38,7 +38,12 @@
             <h3><tr class="orderDelivery_table_tr_1"><td>배달 주소</td></tr></h3>
             <tr class="orderDelivery_table_tr_2"><td>${orderDelivery.orderAddressNumber}</td></tr>
 
-            <tr>전화번호</tr>
+            <tr class="orderDelivery_table_tr_3">
+                <td>
+                    <a href="tel:전화번호"><button>전화하기</button></a>
+                </td>
+            </tr>
+
         </table>
 
         <hr>
@@ -61,6 +66,12 @@
                 </c:if>
                 </tr>
             </c:forEach>
+
+            <tr class="orderDelivery_table_tr_3">
+                <td>
+                    <a href="tel:전화번호"><button>전화하기</button></a>
+                </td>
+            </tr>
         </table>
 
         <hr>
