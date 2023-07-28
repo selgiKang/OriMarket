@@ -81,7 +81,7 @@
         <div id="map_btns">
             <button class="nowmap_btn" onclick="showCurrentLocationMap()">현재 위치 보기</button>
             <button class="mkmap_btn" onclick="showClosestMarketMap()">가까운 시장 보기</button>
-            <form action="/market_search">
+            <form action="/market_search" method="post">
                 <button class="cnmkmap_btn" type="submit">
                     <input type="hidden" id="closestMarketInfo" name="marketName">
                     단골시장으로 등록하기

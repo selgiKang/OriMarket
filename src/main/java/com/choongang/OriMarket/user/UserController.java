@@ -252,7 +252,6 @@ public class UserController {
             List<Market> marketsWithinRadius = marketService.findMarketsWithinRadius(latitude, longitude, radiusInKm);
 
             if(marketsWithinRadius.isEmpty()){
-                // 근처에 져희 오라마켓에 등록된 시장이 없습니다. 만넘겨주기
                 return ResponseEntity.ok(tableData);
             } else {
                 for (Market a : marketsWithinRadius) {
