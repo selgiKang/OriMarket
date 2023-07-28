@@ -1,5 +1,6 @@
 package com.choongang.OriMarket.rider;
 
+import com.choongang.OriMarket.order.NewOrder;
 import com.choongang.OriMarket.order.Order;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -59,15 +60,22 @@ public class RiderController {
 
     @GetMapping("/rider_order_search")
     public String riderOrderSearch(Model model){
-        List<Order> orders = riderService.riderOrderSearch();
+        List<NewOrder> orders = riderService.riderOrderSearch();
         model.addAttribute("orders",orders);
         return "rider/rider_main";
     }
 
     @GetMapping("/rider_order_accept")
     public String riderOrderAccept(@RequestParam("orderNumber") String orderNumber,Model model,HttpSession session){
-        Order order = riderService.riderOrderAccept(orderNumber,session);
-        model.addAttribute("orderaccept",order);
+        NewOrder newOrder = riderService.riderOrderAccept(orderNumber,session);
+        model.addAttribute("orderaccept", newOrder);
+        return "rider/rider_main";
+    }
+
+    @GetMapping("/rider_order_accept1")
+    public String riderOrderAccept1(@RequestParam("orderNumber") String orderNumber,Model model,HttpSession session){
+        NewOrder newOrder = riderService.riderOrderAccept1(orderNumber,session);
+        model.addAttribute("orderaccept1", newOrder);
         return "rider/rider_main";
     }
 

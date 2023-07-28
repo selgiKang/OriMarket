@@ -9,6 +9,8 @@ import java.util.List;
 
 public interface NewOrderRepository extends JpaRepository<NewOrder, Long> {
 
+    NewOrder findByOrderNumber(String orderNumber);
+
 
 
 }
