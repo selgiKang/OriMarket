@@ -176,6 +176,7 @@ public class ManagerController {
     @PostMapping("/managerLogin")
     public String loginResult(@ModelAttribute ManagerUser managerUser, HttpSession session, Model model){
         boolean result = managerService.loginCheck(managerUser,session);
+        // 매니저가 속한 시장의 NewOrder 를 가지고와서 수락/거절 수락을누르면 NewOrder의 상태가 '주문시작' 으로 업데이트하고 매니저seq도 업데이트 해준다.
         if(result){
             session.setAttribute("managerId",managerUser.getManagerId());
 
@@ -183,7 +184,7 @@ public class ManagerController {
             ManagerUser userResult = managerService.findByManagerId(model,session);
             model.addAttribute("userResult",userResult);
 
-            //매니저가 소속된 시장의 주문만 리스트에 저장
+                        //매니저가 소속된 시장의 주문만 리스트에 저장
            List<Order> orderList = (List<Order>) model.getAttribute("managerOrderList");
            model.addAttribute("orderList",orderList);
 

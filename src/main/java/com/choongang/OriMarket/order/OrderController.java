@@ -223,6 +223,7 @@ public class OrderController {
 
     @PostMapping("/order_paymentPage1/{userId}")
     public String orderDelivery1(@ModelAttribute NewOrder newOrder,HttpSession session,@PathVariable("userId")String userId, Model model, User user) {
+        System.out.println("모로나오는지"+newOrder.getOrderMarketName());
         user.setUserSeq(Long.valueOf((session.getAttribute("userSeq")).toString()));
         newOrder.setUser(user);
 
@@ -254,12 +255,6 @@ public class OrderController {
         newOrderRepository.save(save);
 
         model.addAttribute("newOrder",save);
-
-        System.out.println("이건먼가요?"+save.getNewOrderDetails().get(0).getItemName());
-
-        for(NewOrderDetail newOrderDetail:save.getNewOrderDetails()){
-            System.out.println("이건먼가요?:"+newOrderDetail.getItemName());
-        }
 
         return "order/order_delivery";
     }

@@ -50,22 +50,27 @@
                 <c:if test="${!empty order.forRider}">
                     <h4>${order.forRider}</h4>
                 </c:if>
-                <h3>배달지: ${order.orderAddressNumber}</h3>
+                <h3>배달지: ${order.orderAddress}</h3>
                 <a href="/rider_order_accept?orderNumber=${order.orderNumber}"><button type="submit">수락</button></a>
             </div>
         </c:forEach>
     </div>
     <%--요청 수락 목록--%>
     <div class="order-item" data-status="processing1">
-        ${orderaccept.orderNumber}
+        <c:if test="${!empty orderaccept}">
+            ${orderaccept.orderNumber}
+            <a href="/rider_order_accept1?orderNumber=${orderaccept.orderNumber}"><button type="submit">수락</button></a>
+        </c:if>
     </div>
     <%--배달 시작--%>
     <div class="order-item" data-status="processing2">
-        <h2>아무거나2</h2>
     </div>
     <%--배달 완료--%>
     <div class="order-item" data-status="completed">
-        <h2>아무거나3</h2>
+        <c:if test="${!empty orderaccept1}">
+            <p>${orderaccept1.orderNumber}</p>
+            <p>주문 현황:${orderaccept1.orderStatus}</p>
+        </c:if>
     </div>
     <div class="order-item" data-status="processing" style="display: none;"></div>
     <div class="order-item" data-status="completed" style="display: none;"></div>
