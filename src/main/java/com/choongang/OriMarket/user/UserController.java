@@ -97,6 +97,13 @@ public class UserController {
         return "rider/rider_firstscreen";
     }
 
+    //7.28 라이더 배달중 페이지 테스트
+    @GetMapping("/riderdelivery")
+    public String riderdelivery() {
+        return "rider/rider_delivery";
+    }
+
+
     @PostMapping("/update")
     public String updateUser(@ModelAttribute User user, HttpSession session){
 

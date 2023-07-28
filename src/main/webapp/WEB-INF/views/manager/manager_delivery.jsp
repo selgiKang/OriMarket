@@ -11,15 +11,12 @@
 <link rel= "stylesheet" href= "../../css/order/order_delivery.css">
 </head>
 <body>
-<%--	<FORM action="/accept" method="get">
-		<INPUT TYPE="hidden" name="orderNumber" value="${orderNumber}">
-		<input type="submit" value="주문수락">
-	</FORM>--%>
+
 	<main id="orderDelivery_main">
 		<div id="orderDelivery_btn_cancel"><a href="/managerMain"><i class="fas fa-regular fa-xmark"></i></a></div>
 		<h2>실시간 주문 내역</h2>
 		<div id="orderDelivery_orderInfo">
-			<h3>${marketName}</h3>
+			<h3>${marketName}</h3>			<%--출력안되고있음--%>
 			<table id="orderDelivery_table_1">
 				<tr class="orderDelivery_table_tr_1"><td>${orderDelivery.orderNumber}</td></tr>
 				<tr class="orderDelivery_table_tr_2">

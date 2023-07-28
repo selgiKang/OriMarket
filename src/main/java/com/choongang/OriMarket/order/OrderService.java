@@ -194,13 +194,4 @@ public class OrderService {
             return getOrderUserIdList;
         }
 
-    //7.28    테스트
-    public String getOrderAddressNumber(String orderNumber) {
-        Order order = orderRepository.findByOrderNumber(orderNumber);
-        if (order != null) {
-            return order.getOrderAddressNumber();
-        }
-        return null;
-    }
-
 }
