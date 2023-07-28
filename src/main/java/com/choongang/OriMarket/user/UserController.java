@@ -241,6 +241,10 @@ public class UserController {
     @PostMapping("/usermarketSearch")
     @ResponseBody
     public ResponseEntity<List<Map<String, String>>> usermarketSearch(@RequestParam("userAddress") String userAddress, Model model, HttpSession session) {
+
+
+
+
         try {
             List<Map<String,String>> tableData = new ArrayList<>();
             List<Market> all = marketRepository.findAll();
