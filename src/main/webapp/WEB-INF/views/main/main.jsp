@@ -276,6 +276,14 @@
                 console.log(2);
                 var market = response[i];
                 var li = $("<li>").text(market.marketName);
+                // 거리 정보가 있을 경우, 해당 정보를 <li> 태그에 추가
+                if (market.hasOwnProperty("distance")) {
+                    var distanceInfo = $("<span>").text(" (" + market.distance + ")");
+                    distanceInfo.css({
+                        "font-size": "small"
+                    });
+                    li.append(distanceInfo);
+                }
                 var link = $("<a>")
                     .attr("href", "/market_search?marketName=" + encodeURIComponent(market.marketName))
                     .text("선택")

@@ -6,6 +6,7 @@ import com.choongang.OriMarket.business.market.MarketService;
 import com.choongang.OriMarket.order.Order;
 import com.choongang.OriMarket.order.OrderService;
 import com.choongang.OriMarket.review.Review;
+import com.choongang.OriMarket.utill.DistanceUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -258,6 +259,10 @@ public class UserController {
                     Map<String, String> allData = new HashMap<>();
                     //시장 이름만 우선 넣었어요!
                     allData.put("marketName", (a.getMarketName()).toString());
+                    // 거리 계산
+                    double distance = DistanceUtil.calculateDistance(latitude, longitude, a.getMarketLatitude(), a.getMarketLongitude());
+                    allData.put("distance", String.format("%.2f km", distance));
+
                     System.out.println(a.getMarketName());
                     tableData.add(allData);
                 }
