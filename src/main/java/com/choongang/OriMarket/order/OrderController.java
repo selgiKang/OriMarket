@@ -223,6 +223,7 @@ public class OrderController {
 
     @PostMapping("/order_paymentPage1/{userId}")
     public String orderDelivery1(@ModelAttribute NewOrder newOrder,HttpSession session,@PathVariable("userId")String userId, Model model, User user) {
+        System.out.println(newOrder.getOrderMarketName());
         user.setUserSeq(Long.valueOf((session.getAttribute("userSeq")).toString()));
         newOrder.setUser(user);
 

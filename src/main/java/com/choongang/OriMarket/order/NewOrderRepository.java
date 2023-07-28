@@ -9,6 +9,7 @@ import java.util.List;
 
 public interface NewOrderRepository extends JpaRepository<NewOrder, Long> {
 
+    List<NewOrder> findByOrderMarketName(String marketName);
 
-
+    NewOrder findByOrderNumber(String orderNumber);
 }

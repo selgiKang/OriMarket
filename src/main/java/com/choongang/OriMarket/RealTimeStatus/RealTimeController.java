@@ -66,7 +66,7 @@ public class RealTimeController {
     }*/
 
     //주문 수락
-    @GetMapping("/accept")
+/*    @GetMapping("/accept")
     public String orderAccept(@RequestParam("orderNumber") String rOrderNumber,
                               @RequestParam("managerUser") String managerSeq,
                               Order order, HttpSession session, ManagerUser managerUser, Model model, RealTimeStatus rts){
@@ -128,7 +128,7 @@ public class RealTimeController {
         }
 
         return "manager/order_list";
-    }
+    }*/
 
     //픽업 완료 - 라이더한테 가도록
     @GetMapping("/acceptPickup")
