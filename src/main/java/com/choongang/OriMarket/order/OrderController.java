@@ -223,10 +223,9 @@ public class OrderController {
 
     @PostMapping("/order_paymentPage1/{userId}")
     public String orderDelivery1(@ModelAttribute NewOrder newOrder,HttpSession session,@PathVariable("userId")String userId, Model model, User user) {
-        System.out.println("모로나오는지"+newOrder.getOrderMarketName());
+        System.out.println("시장이름?"+newOrder.getOrderMarketName());
         user.setUserSeq(Long.valueOf((session.getAttribute("userSeq")).toString()));
         newOrder.setUser(user);
-
         NewOrder save = newOrderRepository.save(newOrder);
         // 아이템 아이디로 아이템찾기
         String itemId1 = save.getItemId1();
