@@ -92,6 +92,7 @@ public class RiderService {
         NewOrder byOrderNumber = newOrderRepository.findByOrderNumber(orderNumber);
 
         Rider riderSeq = riderRepository.findById((Long) session.getAttribute("riderSeq")).orElseThrow();
+        System.out.println("이게먽대:"+riderSeq.getRiderName());
         byOrderNumber.setRider(riderSeq);
         byOrderNumber.setOrderStatus("배달완료");
         newOrderRepository.save(byOrderNumber);
