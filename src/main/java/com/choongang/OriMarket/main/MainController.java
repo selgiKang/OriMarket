@@ -26,6 +26,8 @@ public class MainController {
     @GetMapping("/")
     public String main(HttpSession session, Model model) {
 
+        System.out.println("하이버네이트 버전확인:"+org.hibernate.Version.getVersionString());
+
         if(session.getAttribute("userSeq") != null){
             //유저 번호 찾아서
             Long userSeq = Long.valueOf((session.getAttribute("userSeq")).toString());

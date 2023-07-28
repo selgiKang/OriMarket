@@ -77,7 +77,7 @@
     <div class="nav">
         <a href="/"style="font-size:32px;"><i class="fa-solid fa-house" style="padding-left: 6px;font-size: 23px;color: #ffbf41;"></i></a>
         <span>
-            <a href="#" class="address">
+            <a href="/shinwon_marketmap?marketName=신원시장" class="address">
                 <i class="fa-solid fa-location-dot header_i" style="font-size: 15px;color: #ffbf41;"></i>
                 ${marketName}
             </a>

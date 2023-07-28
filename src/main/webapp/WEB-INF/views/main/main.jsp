@@ -118,6 +118,7 @@
             </div>
         </div>
         <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+        <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b256385fdf81fd0ccd4bc7e1b22da770&libraries=services"></script>
         <div id="connextion_market" class="clear">
             <c:if test="${empty userId}">
                 <span class="connextion_title clear" style="font-weight:800;font-size: 18px;font-family: 'omyu pretty';/*border: 2px solid #999;*/width: 290px;border-radius: 5px;height: 25px; display: flex; justify-content: flex-start; align-items: center;">&nbsp;<img class="connextion_title_img clear navicon" src="../../img/main/navi.png">&nbsp;<p>&nbsp나의 단골시장</p></span>
@@ -213,26 +214,37 @@
                 document.getElementById("address_kakao").value = data.address;
                 // 주소 검색 후 선택하면 창이 닫히고 상세주소칸으로 포커스 이동
                 document.getElementById("address_detail").focus();
-                // 주소 검색이 완료되면 폼 자동 제출
                 // 주소 정보를 서버로 전송 (Ajax 요청)
                 var userAddress = data.address;
-                $.ajax({
-                    type: "POST",
-                    url: "/usermarketSearch",
-                    data: {
-                        userAddress: userAddress,
-                    },
-                    success: function(response) {
-                        console.log("success")
-                        console.log(response)
-                        updateTable(response);
-                    },
-                    error: function (error) {
-                        // Ajax 요청이 실패한 경우 처리할 로직 작성
-                        console.error("Ajax 요청 실패:", error);
+                var geocoder = new kakao.maps.services.Geocoder();
+                geocoder.addressSearch(userAddress, function (result, status) {
+                    if (status === kakao.maps.services.Status.OK) {
+                        var latitude = result[0].y; // 위도
+                        var longitude = result[0].x; // 경도
+                        console.log("주소: " + userAddress);
+                        console.log("위도: " + latitude);
+                        console.log("경도: " + longitude);
+                        // 위도와 경도를 서버로 전송 (Ajax 요청)
+                        $.ajax({
+                            type: "POST",
+                            url: "/usermarketSearch",
+                            data: {
+                                latitude: latitude,
+                                longitude: longitude
+                            },
+                            success: function (response) {
+                                console.log("서버 응답:", response);
+                                updateTable(response);
+                            },
+                            error: function (error) {
+                                console.error("Ajax 요청 실패:", error);
+                            },
+                        });
+                    } else {
+                        console.log("주소 검색 실패: " + status);
                     }
                 });
-            }
+            },
         }).open();
 
         function updateTable(response) {
