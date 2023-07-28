@@ -13,8 +13,8 @@ body {
 /* 핸드폰 사이즈 및 스크롤 바 없애기*/
 .main-container {
     width: 375px;
-    height: 812px;
-    margin: 0 auto;
+    height: 712px;
+    margin: 10px auto;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -33,7 +33,7 @@ body {
 
 /* 섹션 스타일 */
 section {
-    padding: 20px;
+    padding: 10px 20px 20px;
 }
 
 /* 링크 스타일 */
@@ -152,8 +152,8 @@ a {
 .heart {
     width: 30px;
     position: absolute;
-    top: 10px;
-    right: 10px;
+/*    top: 10px;
+    right: 10px;*/
     cursor: pointer;
     z-index: 10;
 }
@@ -170,11 +170,14 @@ a {
 .like-container {
     position: relative;
     display: inline-block;
+    width:355px;
+    height:355px;
 }
 
 /*메엔 가게 사진 사이즈*/
 #like_container_img{
-    width: 375px;
+    width:100%;
+    height:100%;
 }
 
 /*별(리뷰) 사진 사이즈*/
@@ -319,7 +322,11 @@ ul {
 .tabmenu ul::-webkit-scrollbar {
     display: none;
 }
-
+#tab1{margin-left: 13px;}
+#tab2{}
+#tab3{margin-left: 10px;}
+#tab4{margin-right: 0;}
+#tab5{margin-right: 10px;}
 .tabmenu ul li {
     display: inline-block;
     text-align: center;
@@ -409,3 +416,15 @@ ul {
     object-fit: cover;
     border-radius: 4px;
 }
+
+/* 230728 승원 */
+.store_wrap{width: 375px; height: 812px; margin: auto; background-color: #eee;}
+.store_favheart_wrap{width:355px; padding:0 10px; overflow: hidden; box-sizing: border-box; margin-top:20px;}
+input.storename_txt{width:53%; float:left; border:none; font-size: 25px; background-color:transparent; font-family: "LINESeedKR-Bd", sans-serif;}
+input.storename_txt:focus {outline:none;}
+.favstoreheart{width:9%; height: 50px; position:relative; float:right;}
+.review_wrap{width:355px; display: flex; justify-content: flex-start;}
+span.review_count{display: flex; justify-content: space-around; align-items: center;}
+span.rating{font-size: 20px;}
+
+.coupon_wrap{padding: 0 20px;}

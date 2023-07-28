@@ -2,6 +2,7 @@ package com.choongang.OriMarket.business.store;
 
 import com.choongang.OriMarket.business.market.Market;
 import com.choongang.OriMarket.business.user.BusinessUser;
+import com.choongang.OriMarket.order.Order;
 import com.choongang.OriMarket.review.Review;
 import com.choongang.OriMarket.store.Item;
 import lombok.AccessLevel;
@@ -66,4 +67,10 @@ public class BusinessStore {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "marketSeq")
     private Market market;
+
+
+    @Override
+    public String toString() {
+        return buStoreName; // 가게 이름 반환
+    }
 }

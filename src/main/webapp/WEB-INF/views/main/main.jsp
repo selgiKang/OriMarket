@@ -78,6 +78,24 @@
             cursor: pointer;
             opacity: 0.7;
         }
+        ul#marketList li {
+            margin-top: 5px;
+            list-style: none;
+            margin-left: 18px;
+            font-size: 16px;
+        }
+        ul#marketList li a{
+            text-decoration: none;
+            font-size: 16px;
+            margin-left: 10px;
+            color: #4caf50;
+        }
+
+        ul#marketList li.empty-market {
+            margin-top: 20px;
+            color: red;
+            font-style: italic;
+        }
     </style>
 </head>
 <body>${aabb}
@@ -111,6 +129,7 @@
             </div>
         </div>
         <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+        <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b256385fdf81fd0ccd4bc7e1b22da770&libraries=services"></script>
         <div id="connextion_market" class="clear">
             <c:if test="${empty userId}">
                 <span class="connextion_title clear" style="font-weight:800;font-size: 18px;font-family: 'omyu pretty';/*border: 2px solid #999;*/width: 290px;border-radius: 5px;height: 25px; display: flex; justify-content: flex-start; align-items: center;">&nbsp;<img class="connextion_title_img clear navicon" src="../../img/main/navi.png">&nbsp;<p>&nbsp나의 단골시장</p></span>
@@ -204,39 +223,67 @@
                 document.getElementById("address_kakao").value = data.address;
                 // 주소 검색 후 선택하면 창이 닫히고 상세주소칸으로 포커스 이동
                 document.getElementById("address_detail").focus();
-                // 주소 검색이 완료되면 폼 자동 제출
                 // 주소 정보를 서버로 전송 (Ajax 요청)
                 var userAddress = data.address;
-                $.ajax({
-                    type: "POST",
-                    url: "/usermarketSearch",
-                    data: {
-                        userAddress: userAddress,
-                    },
-                    success: function(response) {
-                        console.log("success")
-                        console.log(response)
-                        updateTable(response);
-                    },
-                    error: function (error) {
-                        // Ajax 요청이 실패한 경우 처리할 로직 작성
-                        console.error("Ajax 요청 실패:", error);
+                var geocoder = new kakao.maps.services.Geocoder();
+                geocoder.addressSearch(userAddress, function (result, status) {
+                    if (status === kakao.maps.services.Status.OK) {
+                        var latitude = result[0].y; // 위도
+                        var longitude = result[0].x; // 경도
+                        console.log("주소: " + userAddress);
+                        console.log("위도: " + latitude);
+                        console.log("경도: " + longitude);
+                        // 위도와 경도를 서버로 전송 (Ajax 요청)
+                        $.ajax({
+                            type: "POST",
+                            url: "/usermarketSearch",
+                            data: {
+                                latitude: latitude,
+                                longitude: longitude
+                            },
+                            success: function (response) {
+                                console.log("서버 응답:", response);
+                                updateTable(response);
+                            },
+                            error: function (error) {
+                                console.error("Ajax 요청 실패:", error);
+                            },
+                        });
+                    } else {
+                        console.log("주소 검색 실패: " + status);
                     }
                 });
-            }
+            },
         }).open();
 
         function updateTable(response) {
             var ul = $("ul#marketList"); // 시장 목록을 보여줄 <ul> 태그 선택
             ul.empty(); // 기존 목록 초기화
             console.log(1);
+
+            // 만약 response 배열에 데이터가 없으면, "근처에 저희 오라마켓에 등록된 시장이 없습니다." 메시지를 직접 <li> 태그로 생성하여 추가합니다.
+            if (response.length === 0) {
+                var li = $("<li>").text("근처에 저희 오라마켓에 등록된 시장이 없습니다.");
+                li.addClass("empty-market");
+                ul.append(li);
+                return; // 메시지를 추가한 후 함수를 종료합니다.
+            }
+
             // 받은 response 배열을 순회하면서 <li> 태그로 만들어 목록에 추가
             for (var i = 0; i < response.length; i++) {
                 console.log(2);
                 var market = response[i];
                 var li = $("<li>").text(market.marketName);
+                // 거리 정보가 있을 경우, 해당 정보를 <li> 태그에 추가
+                if (market.hasOwnProperty("distance")) {
+                    var distanceInfo = $("<span>").text(" (" + market.distance + ")");
+                    distanceInfo.css({
+                        "font-size": "small"
+                    });
+                    li.append(distanceInfo);
+                }
                 var link = $("<a>")
-                    .attr("href", "#")
+                    .attr("href", "/market_search?marketName=" + encodeURIComponent(market.marketName))
                     .text("선택")
                     .attr("data-marketname", market.marketName)
                     .on("click", function () {

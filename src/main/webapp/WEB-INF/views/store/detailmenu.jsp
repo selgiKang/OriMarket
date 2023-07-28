@@ -135,7 +135,7 @@
 							<h5>가격</h5>
 							<label><input type="radio" value="${item.itemName}" name="itemName" checked/>${item.itemName}</label>
 									<input type="hidden" value="${item.itemId}" name="itemId" id="itemId">
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" value="${item.itemPrice}" name="itemPrice" style="outline: none;border: none;" />
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" value="${item.itemPrice}" name="itemPrice" style="outline: none;border: none; width: 55%;" />
 						</div>
 						<table style="margin-left:20px;">
 							<tr>
@@ -186,7 +186,7 @@
 			//if문 추가해서 재고 보다 많이 담으면 재고 알림?
 			if(itemCnt<countInput+cartCnt){
 				alert("재고 수량보다 많습니다.")
-				window.location.href="/detailmenu/"+itemId;
+				window.location.href="/detailmenu/"+itemId+"/"+userId;
 			}else{
 				const confirmed = confirm("장바구니에 담으시겠습니까?");
 				if (confirmed) {

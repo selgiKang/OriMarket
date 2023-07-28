@@ -53,7 +53,7 @@
                     </tr>
                 </table>
                 <table id="infolist_table_2">
-                    <td class="infolist_btn_edit" style="width:50%; height:40px; background-color:#ffbf41; border-radius: 25px;"><a id="infolist_btn_edit" href="/update">회원 정보 수정</a></td>
+                    <td class="infolist_btn_edit" style="width:50%; height:40px; background-color:#ffbf41; border-radius: 25px;"><a id="infolist_btn_edit" href="/managerUpdate">회원 정보 수정</a></td>
                     <td style="width:50%; height:40px; background-color:#e9e9e9; border-radius: 25px;">
                         <a id="infolist_btn_delete" href="/manager_logout">로그아웃</a></td></input>
                 </table>
