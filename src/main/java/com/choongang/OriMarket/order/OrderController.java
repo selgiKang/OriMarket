@@ -234,8 +234,6 @@ public class OrderController {
         String orderGoodsNum = save.getOrderGoodsNum();
         String[] itemcount = orderGoodsNum.split(",");
 
-
-
         List<Item> items = new ArrayList<>();
         for (String itemId : itemIdsArray) {
                     items.add(itemRepository.findById(Long.valueOf(itemId)).orElseThrow());
@@ -250,6 +248,17 @@ public class OrderController {
             newOrderDetail.setNewOrder(save);
             newOrderDetail.setOrderNumber(save.getOrderNumber());
             newOrderDetailRepository.save(newOrderDetail);
+        }
+        List<NewOrderDetail> byOrderNumber = newOrderDetailRepository.findByOrderNumber(save.getOrderNumber());
+        save.setNewOrderDetails(byOrderNumber);
+        newOrderRepository.save(save);
+
+        model.addAttribute("newOrder",save);
+
+        System.out.println("이건먼가요?"+save.getNewOrderDetails().get(0).getItemName());
+
+        for(NewOrderDetail newOrderDetail:save.getNewOrderDetails()){
+            System.out.println("이건먼가요?:"+newOrderDetail.getItemName());
         }
 
         return "order/order_delivery";
