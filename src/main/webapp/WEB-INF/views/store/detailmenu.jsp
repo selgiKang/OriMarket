@@ -135,7 +135,7 @@
 							<h5>가격</h5>
 							<label><input type="radio" value="${item.itemName}" name="itemName" checked/>${item.itemName}</label>
 									<input type="hidden" value="${item.itemId}" name="itemId" id="itemId">
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" value="${item.itemPrice}" name="itemPrice" style="outline: none;border: none;" />
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" value="${item.itemPrice}" name="itemPrice" style="outline: none;border: none; width: 55%;" />
 						</div>
 						<table style="margin-left:20px;">
 							<tr>
