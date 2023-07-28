@@ -159,11 +159,12 @@ public class OrderController {
 
 
     @PostMapping("/order_paymentPage/{userId}")
-    public String orderDelivery(@ModelAttribute Order order, @ModelAttribute RealTimeStatus rts, HttpSession session, @RequestParam("orderNumber")String orderNumberStr,@PathVariable("userId")String userId, Model model) {
-        order.setOrderNumber(orderNumberStr);
+    public String orderDelivery(@ModelAttribute Order order, @ModelAttribute RealTimeStatus rts, HttpSession session,@PathVariable("userId")String userId, Model model) {
+        order.setOrderNumber(order.getOrderNumber());
+
 
         //주문번호
-        session.setAttribute("orderNumber", orderNumberStr);
+        session.setAttribute("orderNumber", order.getOrderNumber());
 
         //시장 번호 등록
         cartService.cartPayment(userId);
@@ -173,12 +174,14 @@ public class OrderController {
         Long marketSeq = Long.valueOf((session.getAttribute("marketSeq")).toString());
         m.setMarketSeq(marketSeq);
         order.setMarketSeq(m);
+        System.out.println("여기까지와지나1");
 
         // 주문 db에 주문 내역 저장
         if (orderService.orderDelivery(order, session)) {
-
+            System.out.println("여기까지와지나2");
             // 배달 내역에 set
             rts.setOrderNumber(order);
+            System.out.println("여기까지와지나3");
             rts.setRtsOrderIng(0); // "OrderIng" 상태로 설정
             rts.setRtsRiderIng(0);
             rts.setRtsRiderFinish(0);
@@ -194,7 +197,7 @@ public class OrderController {
             //모든 주문 리스트
             List<Order> allOrders = orderService.getAllOrders();
             //주문 번호 비교해서 그 주문 내역만 꺼냄
-            Order onlyUserNowOrder = orderService.getOrderNumberList(orderNumberStr);
+            Order onlyUserNowOrder = orderService.getOrderNumberList(order.getOrderNumber());
 
 
         }
