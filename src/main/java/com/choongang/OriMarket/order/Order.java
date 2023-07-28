@@ -4,6 +4,7 @@ import com.choongang.OriMarket.RealTimeStatus.RealTimeStatus;
 import com.choongang.OriMarket.business.market.Market;
 import com.choongang.OriMarket.business.user.BusinessUser;
 import com.choongang.OriMarket.manager.user.ManagerUser;
+import com.choongang.OriMarket.rider.Rider;
 import com.choongang.OriMarket.user.User;
 import lombok.*;
 import lombok.extern.slf4j.Slf4j;
@@ -102,9 +103,11 @@ public class Order {
     @OneToOne(mappedBy = "orderNumber")
     private RealTimeStatus realTimeStatus;
 
+    @ManyToOne
+    @JoinColumn(name="rider_seq")
+    private Rider rider;
 //    @Transient
 //    private String next_redirect_pc_url;
-
     //출력 날짜
     @Transient
     private String calculate_date;
