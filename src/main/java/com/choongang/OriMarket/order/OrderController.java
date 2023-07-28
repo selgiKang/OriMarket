@@ -1,11 +1,13 @@
 
 package com.choongang.OriMarket.order;
 
-import com.choongang.OriMarket.RealTimeStatus.RealTimeRepository;
 import com.choongang.OriMarket.RealTimeStatus.RealTimeService;
 import com.choongang.OriMarket.RealTimeStatus.RealTimeStatus;
 import com.choongang.OriMarket.business.market.Market;
+import com.choongang.OriMarket.store.Item;
+import com.choongang.OriMarket.store.ItemRepository;
 import com.choongang.OriMarket.user.CartService;
+import com.choongang.OriMarket.user.User;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -27,14 +29,21 @@ public class OrderController {
     private final RealTimeService realTimeService;
     private final CartService cartService;
 
+    private final  NewOrderRepository newOrderRepository;
 
+    private final NewOrderDetailRepository newOrderDetailRepository;
+
+    private final ItemRepository itemRepository;
 
 
     @Autowired
-    public OrderController(OrderService orderService, RealTimeService realTimeService, OrderRepository orderRepository, CartService cartService){
+    public OrderController(OrderService orderService, RealTimeService realTimeService, OrderRepository orderRepository, CartService cartService, NewOrderRepository newOrderRepository, NewOrderDetailRepository newOrderDetailRepository, ItemRepository itemRepository){
         this.orderService = orderService;
         this.realTimeService = realTimeService;
         this.cartService = cartService;
+        this.newOrderRepository = newOrderRepository;
+        this.newOrderDetailRepository = newOrderDetailRepository;
+        this.itemRepository = itemRepository;
     }
 
     //정산내역
@@ -159,12 +168,11 @@ public class OrderController {
 
 
     @PostMapping("/order_paymentPage/{userId}")
-    public String orderDelivery(@ModelAttribute Order order, @ModelAttribute RealTimeStatus rts, HttpSession session,@PathVariable("userId")String userId, Model model) {
-        order.setOrderNumber(order.getOrderNumber());
-
+    public String orderDelivery(@ModelAttribute Order order, @ModelAttribute RealTimeStatus rts, HttpSession session, @RequestParam("orderNumber")String orderNumberStr,@PathVariable("userId")String userId, Model model) {
+        order.setOrderNumber(orderNumberStr);
 
         //주문번호
-        session.setAttribute("orderNumber", order.getOrderNumber());
+        session.setAttribute("orderNumber", orderNumberStr);
 
         //시장 번호 등록
         cartService.cartPayment(userId);
@@ -174,14 +182,12 @@ public class OrderController {
         Long marketSeq = Long.valueOf((session.getAttribute("marketSeq")).toString());
         m.setMarketSeq(marketSeq);
         order.setMarketSeq(m);
-        System.out.println("여기까지와지나1");
 
         // 주문 db에 주문 내역 저장
         if (orderService.orderDelivery(order, session)) {
-            System.out.println("여기까지와지나2");
+
             // 배달 내역에 set
             rts.setOrderNumber(order);
-            System.out.println("여기까지와지나3");
             rts.setRtsOrderIng(0); // "OrderIng" 상태로 설정
             rts.setRtsRiderIng(0);
             rts.setRtsRiderFinish(0);
@@ -197,7 +203,7 @@ public class OrderController {
             //모든 주문 리스트
             List<Order> allOrders = orderService.getAllOrders();
             //주문 번호 비교해서 그 주문 내역만 꺼냄
-            Order onlyUserNowOrder = orderService.getOrderNumberList(order.getOrderNumber());
+            Order onlyUserNowOrder = orderService.getOrderNumberList(orderNumberStr);
 
 
         }
@@ -211,6 +217,40 @@ public class OrderController {
         }
         RealTimeStatus rtsSearchResult = realTimeService.findRts(order,session);
         System.out.println(rts.getRtsOrderIng());
+
+        return "order/order_delivery";
+    }
+
+    @PostMapping("/order_paymentPage1/{userId}")
+    public String orderDelivery1(@ModelAttribute NewOrder newOrder,HttpSession session,@PathVariable("userId")String userId, Model model, User user) {
+        user.setUserSeq(Long.valueOf((session.getAttribute("userSeq")).toString()));
+        newOrder.setUser(user);
+
+        NewOrder save = newOrderRepository.save(newOrder);
+        // 아이템 아이디로 아이템찾기
+        String itemId1 = save.getItemId1();
+        String[] itemIdsArray = itemId1.split(",");
+
+        String orderGoodsNum = save.getOrderGoodsNum();
+        String[] itemcount = orderGoodsNum.split(",");
+
+
+
+        List<Item> items = new ArrayList<>();
+        for (String itemId : itemIdsArray) {
+                    items.add(itemRepository.findById(Long.valueOf(itemId)).orElseThrow());
+                }
+        for (int i=0;i<items.size();i++){
+            NewOrderDetail newOrderDetail = new NewOrderDetail();
+            newOrderDetail.setItemName(items.get(i).getItemName());
+            newOrderDetail.setItemPrice(String.valueOf(items.get(i).getItemPrice()));
+            newOrderDetail.setBuStoreName(items.get(i).getBusinessStore().getBuStoreName());
+            newOrderDetail.setBuStoreNumber(String.valueOf(items.get(i).getBusinessStore().getBusinessUser().getBuUserNumber()));
+            newOrderDetail.setItemCount(itemcount[i]);
+            newOrderDetail.setNewOrder(save);
+            newOrderDetail.setOrderNumber(save.getOrderNumber());
+            newOrderDetailRepository.save(newOrderDetail);
+        }
 
         return "order/order_delivery";
     }
