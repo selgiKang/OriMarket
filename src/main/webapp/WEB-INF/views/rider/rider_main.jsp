@@ -59,7 +59,7 @@
     <div class="order-item" data-status="processing1">
         <c:if test="${!empty orderaccept}">
             ${orderaccept.orderNumber}
-            <a href="/rider_order_accept1?orderNumber=${order.orderNumber}"><button type="submit">수락</button></a>
+            <a href="/rider_order_accept1?orderNumber=${orderaccept.orderNumber}"><button type="submit">수락</button></a>
         </c:if>
     </div>
     <%--배달 시작--%>
