@@ -4,11 +4,12 @@
             width: 375px;
             height: 50px;
             display: flex;
-            justify-content: space-between;
-            align-items: center;
+            justify-content: space-around;
+            align-items: flex-start;
             background-color: #46a973;
-            border-radius: 25px;
-            padding: 10px;
+            border-top-left-radius: 20px;
+            border-top-right-radius: 20px;
+            padding: 10px 20px;
         }
         
         .nav_footer img {
@@ -17,7 +18,7 @@
         }
         
         .nav_footer img.clicked {
-            transform: translateY(-10px);
+            transform: translateY(-15px);
             transition: transform 0.3s ease-in-out;
         }
         
@@ -32,13 +33,17 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            margin-left: 10px;
         }
+        .nav_footer div:first-child{margin-right: 5px;}
+
         .nav_footer div:hover {
             cursor: pointer;
         }
 
         .nav_footer img.clicked + span {
             opacity: 1;
+            transform: translateY(-12px);
         }
         
         /* Added styles for the circular background */
@@ -63,6 +68,7 @@
 
 
         /* 230727 승원 */
+        .nav_footer_wrap{width: 375px; height: 50px; background-color: #fff;}
         #nav_footer_home_img:hover {transform: scale(1.2); transition-duration: 0.5s;}
         #nav_footer_list_img:hover {transform: scale(1.2); transition-duration: 0.5s;}
         #nav_footer_cart_img:hover {transform: scale(1.2); transition-duration: 0.5s;}

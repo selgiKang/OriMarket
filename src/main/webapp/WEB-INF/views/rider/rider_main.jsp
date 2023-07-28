@@ -32,10 +32,10 @@
             <a href="/manager_logout">로그아웃</a></div>
     </div>
     <div class="tab">
-        <span class="tab-link active" data-tab="pending">배달요청 목록</span>
-        <span class="tab-link active" data-tab="pending">요청수락 목록</span>
-        <span class="tab-link active" data-tab="pending">배달 시작</span>
-        <span class="tab-link" data-tab="processing1">배달 완료</span>
+        <span class="tab-link" data-tab="pending">배달요청 목록</span>
+        <span class="tab-link" data-tab="processing1">요청수락 목록</span>
+        <span class="tab-link" data-tab="processing2">배달 시작</span>
+        <span class="tab-link" data-tab="completed">배달 완료</span>
     </div>
     <%--배달 요청 목록--%>
     <div class="order-item" data-status="pending">

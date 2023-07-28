@@ -18,6 +18,9 @@ public class RiderController {
     @Autowired
     private final RiderService riderService;
 
+    @GetMapping("/rider")
+    public String rider(){return "rider/rider_main";}
+
     @GetMapping("/rider_login")
     public String riderLogin() {
         return "rider/rider_login";
