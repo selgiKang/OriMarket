@@ -44,8 +44,11 @@
 				<table id= "paymentpage_table_1">
 					<tr class= "paymentpage_tr_1">
 						<th colspan= "3">
-							<input type="hidden" name = "orderMarketName" value="${cartItemList[0].businessStore.market.marketName}" readonly>
-							${cartItemList[0].businessStore.market.marketName}
+							<c:forEach var="cartItems" items="${cartItemList}" varStatus="status">
+							<c:if test="${status.index eq 1}">
+							<input type="hidden" name = "orderMarketName" value="${cartItems.businessStore.market.marketName}" readonly>
+							${cartItems.businessStore.market.marketName}
+							</c:if>
 						</th>
 					</tr>
 
@@ -53,11 +56,11 @@
 					<!-- 반복문 출력 위치 -->
 					<tr class= "paymentpage_tr_1">
 						<th colspan= "3">
-							<input type="hidden" name = "orderStoreName" value="${cartItemList[0].businessStore.buStoreName}" readonly>
-							${cartItemList[0].businessStore.buStoreName}
+							<input type="hidden" name = "orderStoreName" value="${cartItems.businessStore.buStoreName}" readonly>
+							${cartItems.businessStore.buStoreName}
 						</th>
 					</tr>
-					<c:forEach var="cartItems" items="${cartItemList}">
+
 						<input type="hidden" name="businessUser" value="${cartItems.item.businessStore.businessUser.buUserNumber}">
 						<input type="hidden" name="itemId" id="itemId" value="${cartItems.item.itemId}">
 					<tr class= "paymentpage_tr_2">
