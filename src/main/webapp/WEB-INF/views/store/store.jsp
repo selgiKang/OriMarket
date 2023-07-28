@@ -186,7 +186,7 @@
                             <c:forEach var="a" items="${al}">
                                 <c:if test="${a.itemCnt>0}">
                                     <div class="menu" type="button" onclick="/detailmenu/${a.itemId}">
-                                        <a href="/detailmenu/${a.itemId}" style="position:relative; display:flex;">
+                                        <a href="/detailmenu/${a.itemId}/${userId}" style="position:relative; display:flex;">
                                             <div class="menu-content">
                                                 <h2 class="menu_name">${a.itemName}</h2>
                                                 <input type="hidden" name="itemName">

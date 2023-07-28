@@ -3,6 +3,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 		 pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"  %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html style="width: 375px; margin: 0 auto;">
 <head>
@@ -26,8 +27,8 @@
 			<input type="hidden" name="orderUserId" value="${userId}">
 			<input type="hidden" name="orderDate" value="<%=today%>">
 			<div id="paymentpage_title">
-				<%-- 전 페이지 돌아가기--%>
-				<a href="#"><i class="fas fa-solid fa-arrow-left" style="color: #46a973;"></i></a>
+				<%-- 전 페이지 돌아가기, (넘어올때 담겼던 orderItem은 여기서 삭제)--%>
+				<a href="/cart/order_renew/${userId}"><i class="fas fa-solid fa-arrow-left" style="color: #46a973;"></i></a>
 				<div id="paymentpage_title_inner">주문하기</div>
 			</div>
 			<div id= "paymentpage_section_1">
@@ -58,6 +59,7 @@
 					</tr>
 					<c:forEach var="cartItems" items="${cartItemList}">
 						<input type="hidden" name="businessUser" value="${cartItems.item.businessStore.businessUser.buUserNumber}">
+						<input type="hidden" name="itemId" id="itemId" value="${cartItems.item.itemId}">
 					<tr class= "paymentpage_tr_2">
 						<td colspan="3" class= "paymentpage_td_1">
 							<input type="hidden" name="orderGoodsName" value="${cartItems.item.itemName}" readonly>
