@@ -36,22 +36,22 @@ public class BusinessStoreService {
     public void save(BusinessStore businessStore, HttpSession session, Model model, String s){
 
         Object buUserNumber = session.getAttribute("buUserNumber");
-        System.out.println("1번");
+
         // 사업자가 로그인할때 생성된 마켓번호로 해당마켓번호의 마켓을 찾는다.
         Long marketSeq = Long.valueOf((session.getAttribute("marketSeq")).toString());
-        System.out.println("2번");
+
         Market bymarket = marketRepository.findById(marketSeq).orElseThrow();
-        System.out.println("3번");
+
 
         // 가게등록을 할때 어느 시장의 가게인지 알아야하기 때문에 상인이속한 시장을 가게에 등록해준다.
         businessStore.setMarket(bymarket);
-        System.out.println("4번");
+
 
         // 로그인할 때 생성된 사업자 번호로 사업자를 찾는다.
         BusinessUser businessUser = businessUserRepository.findById((Long)buUserNumber).orElseThrow();
-        System.out.println("5번");
 
-        System.out.println("6번");
+
+
         // 가게등록할때 누구 가게인지 알아야하기 때문에 찾은 사업자를 가게에 등록해준다.
         businessStore.setBusinessUser(businessUser);
         // 가게에 등록한 사진 정보를 등록해준다.
