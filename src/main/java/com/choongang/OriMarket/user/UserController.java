@@ -2,12 +2,15 @@ package com.choongang.OriMarket.user;
 
 import com.choongang.OriMarket.business.market.Market;
 import com.choongang.OriMarket.business.market.MarketRepository;
+import com.choongang.OriMarket.business.market.MarketService;
 import com.choongang.OriMarket.order.Order;
 import com.choongang.OriMarket.order.OrderService;
 import com.choongang.OriMarket.review.Review;
+import com.choongang.OriMarket.utill.DistanceUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -33,6 +36,9 @@ public class UserController {
     private final MarketRepository marketRepository;
 
     private final UserMarketRepository userMarketRepository;
+
+    private final MarketService marketService;
+
 
     // 로그인 get , post 매핑
     @GetMapping("/login")
@@ -73,6 +79,7 @@ public class UserController {
 
     @PostMapping("/join")
     public String joinUser(@ModelAttribute User user, HttpSession session) {
+
         if(userService.join(user,session)){
             return "user/mypage";
         }
@@ -84,6 +91,12 @@ public class UserController {
     @GetMapping("/update")
     public String update() {
         return "user/user_infolist_edit";
+    }
+
+    //라이더 테스트용으로 잠시 만들어 놨습니다..
+    @GetMapping("/riderfirstscreen")
+    public String riderfirstscreen() {
+        return "rider/rider_firstscreen";
     }
 
     @PostMapping("/update")
@@ -158,13 +171,6 @@ public class UserController {
 
         return "user/findID";
     }
-
- /*   @GetMapping("/order_list")
-    public String getOrderList(Model model) {
-        List<Order> orderList = orderService.getAllOrders();
-        model.addAttribute("orders", orderList);
-        return "store/order_list";
-    }*/
 /*
 기존 로그인
     @PostMapping("/login")
@@ -202,10 +208,15 @@ public class UserController {
     }
 
     @GetMapping("/delete")
-    public String deleteUser(@RequestParam("userSeq") Long userSeq){
+    public String deleteUser(@RequestParam("userSeq") Long userSeq,Model model){
         System.out.println("번호: "+userSeq);
-        userService.delete(userSeq);
-        return "user/login";
+        boolean userDeleteResult = userService.delete(userSeq);
+        if(userDeleteResult==false){
+            model.addAttribute("deleteError", "탈퇴에 실패했습니다. 다시 시도해주세요.");
+        }else{
+            model.addAttribute("deleteError", "탈퇴가 완료되었습니다.");
+        }
+        return "main/main";
     }
 
     @PostMapping("/order_list")
@@ -230,6 +241,39 @@ public class UserController {
         }else {
             return "main/main";
         }
+    }
+
+    @PostMapping("/usermarketSearch")
+    @ResponseBody
+    public ResponseEntity<List<Map<String, String>>> usermarketSearch(@RequestParam double latitude, @RequestParam double longitude, Model model, HttpSession session) {
+        System.out.println("잘나오니?"+latitude);
+        System.out.println("잘나오니?"+longitude);
+        try {
+            List<Map<String,String>> tableData = new ArrayList<>();
+            double radiusInKm = 5.0;
+            List<Market> marketsWithinRadius = marketService.findMarketsWithinRadius(latitude, longitude, radiusInKm);
+
+            if(marketsWithinRadius.isEmpty()){
+                return ResponseEntity.ok(tableData);
+            } else {
+                for (Market a : marketsWithinRadius) {
+                    Map<String, String> allData = new HashMap<>();
+                    //시장 이름만 우선 넣었어요!
+                    allData.put("marketName", (a.getMarketName()).toString());
+                    // 거리 계산
+                    double distance = DistanceUtil.calculateDistance(latitude, longitude, a.getMarketLatitude(), a.getMarketLongitude());
+                    allData.put("distance", String.format("%.2f km", distance));
+
+                    System.out.println(a.getMarketName());
+                    tableData.add(allData);
+                }
+                model.addAttribute("tableData", tableData);
+                return ResponseEntity.ok(tableData); // 이 위치에서 응답을 한 번만 보냄
+            }
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+
     }
 
 

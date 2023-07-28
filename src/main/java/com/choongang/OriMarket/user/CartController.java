@@ -1,21 +1,15 @@
 package com.choongang.OriMarket.user;
 
-import com.choongang.OriMarket.business.store.BusinessStore;
-import com.choongang.OriMarket.business.store.BusinessStoreRepository;
 import com.choongang.OriMarket.store.Item;
 import com.choongang.OriMarket.store.ItemRepository;
 import com.choongang.OriMarket.store.ItemService;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -29,15 +23,17 @@ public class CartController {
     private final UserService userService;
     private final ItemService itemService;
     private final CartItemRepository cartItemRepository;
+    private final OrderItemRepository orderItemRepository;
 
 
     private final ItemRepository itemRepository;
 
-    public CartController(CartService cartService, UserService userService, ItemService itemService, CartItemRepository cartItemRepository, ItemRepository itemRepository){
+    public CartController(CartService cartService, UserService userService, ItemService itemService, CartItemRepository cartItemRepository, OrderItemRepository orderItemRepository, ItemRepository itemRepository){
         this.cartService=cartService;
         this.userService=userService;
         this.itemService=itemService;
         this.cartItemRepository = cartItemRepository;
+        this.orderItemRepository = orderItemRepository;
         this.itemRepository = itemRepository;
     }
 
@@ -45,6 +41,8 @@ public class CartController {
     public String c(){
         return "/error/login_error";
     }
+
+
     /*내 장바구니 조회*/
     @GetMapping("/{userId}/cart")
     public String myCartPage(@PathVariable("userId") String userId, Model model){
@@ -69,35 +67,17 @@ public class CartController {
             model.addAttribute("user", userId);
             model.addAttribute("userOrderList", byUserUserSeq);
 
+            if(!byUserUserSeq.isEmpty()) {
+                System.out.println("이게먼대" + byUserUserSeq.get(0).getBusinessStore().getMarket().getMarketName());
+                model.addAttribute("aa",byUserUserSeq.get(0).getBusinessStore().getMarket().getMarketName());
+            }else{
+
+            }
             return "/cart/cart";
         }
     }
 
     /*특정상품 장바구니에 추가*/
-  /*  @PostMapping("/{userId}/cart")
-    public String addMyCart(@PathVariable("userId") String userId, Long itemId, int count,Model model){
-
-        if(userService.getUser(userId) == null){
-            // 장바구니에 물건을 담을때 비회원이면 로그인해달라고 창뛰우고 마이페이지로 넘어가기
-            return "/error/login_error";
-        }else {
-            //유저 찾기
-            User user = userService.getUser(userId);
-            //물건 아이디 찾기..?
-            Item additem = itemService.getItem(itemId);
-
-            CartItem cartItem = cartItemRepository.findByItem_ItemId(itemId);
-
-            model.addAttribute("item", additem);
-
-            //재고보다 많이 담으면 안담기게.
-            if (count <= additem.getItemCnt()) {
-                cartService.addCart(user, additem, count);
-            }
-
-            return "/detailmenu/"+itemId;
-        }
-    }*/
     @PostMapping("/{userId}/cart")
     public String addMyCart(@PathVariable("userId") String userId, @RequestParam("itemId") String itemId, int count,Model model){
 
@@ -108,21 +88,22 @@ public class CartController {
             Long itemIdResult = Long.valueOf(itemId);
             //유저 찾기
             User user = userService.getUser(userId);
+            Cart cart = cartService.getCart(userId);
             //물건 아이디 찾기..?
             Item additem = itemService.getItem(itemIdResult);
 
-            CartItem cartItem = cartItemRepository.findByItem_ItemId(itemIdResult);
             System.out.println("카운트"+count);
             model.addAttribute("item", additem);
 
             //재고보다 많이 담으면 안담기게.
             if (count > additem.getItemCnt()) {
                 // 재고보다 많은 수량을 담을 때 에러 처리
-                return "redirect:/error/login_error"; // 재고가 부족한 경우 에러 페이지로 이동
+                return "error/login_error"; // 재고가 부족한 경우 에러 페이지로 이동
             }
             cartService.addCart(user, additem, count);
 
-            return "redirect:/detailmenu/"+itemIdResult;
+            return "/store/detailmenu";
+//            return "redirect:/detailmenu/"+itemIdResult;
         }
     }
 
@@ -145,44 +126,83 @@ public class CartController {
     }
 
 
+    /*order_paymentPage에서 다시 넘어오면 orderItem 삭제(누적되지않게)*/
+    @GetMapping("/cart/order_renew/{userId}")
+    public String orderItemRenew(@PathVariable("userId")String userId){
+
+        Cart cart = cartService.getCart(userId);
+        List<OrderItem> orderItems = orderItemRepository.findByCart_CartId(cart.getCartId());
+
+        if(orderItems!=null){
+            for(OrderItem orderItem:orderItems){
+                orderItemRepository.deleteById(orderItem.getOrderItemId());
+            }
+        }
+        return "redirect:/"+userId+"/cart";
+    }
+
     /*결제페이지로 넘기기*/
     @PostMapping("/paymentPage/{userId}")
-    public String orderPayment(@PathVariable("userId") String userId, Model model, @ModelAttribute("deliveryType") String cart1) {
-        if(userId.isEmpty()){
+    public String orderPayment(@PathVariable("userId") String userId,
+                               Model model,
+                               @RequestParam("deliveryType") String deliveryType,
+                               @RequestParam(value = "cboxAll", required = false) Boolean cboxAll,
+                               @RequestParam(value = "currentCnt") int[] itemCnts,
+                               @RequestParam(value = "individual_itemPrice") int[] itemPrices,
+                               @RequestParam(value = "individual_cartItemId") Long[] cartItemIds,
+                               @RequestParam(value = "itemId")Long[] itemIds) {
+
+
+        if (userId.isEmpty()) {
             return "/error/login_error";
-        }else {
-            cartService.saveCartInfo(userId, cart1);
+        } else {
+            User user = userService.getUser(userId);
             Cart cart = cartService.getCart(userId);
-            List<CartItem> cartItems = cartService.userCartView(cart);
+            List<OrderItem> orderItemList = new ArrayList<>();
 
-            model.addAttribute("cartItemList", cartItems);
+
+            // 선택된 카트 아이템의 아이디와 수량을 이용하여 OrderItem 엔티티를 생성하고 저장
+            for (int i = 0; i < cartItemIds.length; i++) {
+                Long cartItemId = cartItemIds[i];
+                int itemCnt = itemCnts[i];
+                int itemPrice = itemPrices[i];
+                Long itemId = itemIds[i];
+
+                Item item = itemRepository.findByItemId(itemId);
+                CartItem cartItem = cartItemRepository.findCartItemByCartItemId(cartItemId);
+
+
+                OrderItem orderItem = null;
+                OrderItem existingOrderItem = orderItemRepository.findByUser_UserSeqAndItem_ItemId(user.getUserSeq(), itemId);
+
+                if (existingOrderItem==null) {
+                    if(cartItem.getItem().getItemId()==itemId){
+                        orderItem = OrderItem.createOrderItem(cartItem.getCart(), cartItem.getItem(), cartItem.getCount(), cartItem.getItemPrice(), cartItem.getUser(),cartItem);
+                        orderItemRepository.save(orderItem);
+                        cart.setCartCnt(cart.getCartCnt() + 1);
+                        cart.setCartTotalPrice(cart.getCartTotalPrice() + item.getItemPrice());
+                    }
+                } else {
+                    orderItem = existingOrderItem;
+                    orderItem.addCount(itemCnt);
+                    orderItemRepository.save(orderItem);
+                    cart.setCartTotalPrice(cart.getCartTotalPrice() + item.getItemPrice() * itemCnt);
+                }
+
+                orderItemList.add(orderItem);
+            }
+
+            cartService.processSelectedItems(userId, deliveryType, orderItemList);
+
+            List<OrderItem> orderItems = cartService.userOrderCartView(cart);
+
+            model.addAttribute("cartItemList", orderItems);
+            model.addAttribute("totalPrice", cart.getCartTotalPrice());
+            model.addAttribute("deliveryPrice", cart.getCartDeliveryPrice());
             model.addAttribute("cart", cart);
-
-            return "/order/order_paymentPage";
         }
-
-    }
-
-  /*  *//*결제페이지로 넘기기*//*
-    @PostMapping("/paymentPage/{userId}")
-    public String orderPayment(@PathVariable("userId") String userId, Model model, @ModelAttribute("deliveryType") String cart1) {
-        cartService.saveCartInfo(userId,cart1);
-        Cart cart = cartService.getCart(userId);
-        List<CartItem> cartItems = cartService.userCartView(cart);
-
-        model.addAttribute("cartItemList",cartItems);
-        model.addAttribute("totalPrice",cart.getCartTotalPrice());
-        model.addAttribute("deliveryPrice",cart.getCartDeliveryPrice());
-
         return "/order/order_paymentPage"; // 카카오페이 결제 페이지로 이동
     }
-
-    // 결제 성공 시, paymentResult.jsp로 리다이렉트
-    @PostMapping("/paymentResult")
-    public String paymentResult() {
-        return "/paymentResult";
-    }*/
-
 
 
 

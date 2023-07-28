@@ -42,6 +42,9 @@ public class BusinessUser {
     @Column
     private String buUserPhone;
 
+    @Column
+    private String buUserEmail;
+
     //등록 가게
     @OneToMany(mappedBy = "businessUser")
     private List<BusinessStore> businessStores = new ArrayList<>();

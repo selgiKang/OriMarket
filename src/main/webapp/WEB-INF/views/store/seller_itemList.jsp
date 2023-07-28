@@ -73,6 +73,7 @@
             <a href="/s2/${buUserId}"><input type="button" class="insert_btn" value="신규품목 등록"></a>
         </div>
         <br>
+        그거어케해 그럼
         <div id="goods_list">
             <table>
                 <tr class="goods_listTitle">

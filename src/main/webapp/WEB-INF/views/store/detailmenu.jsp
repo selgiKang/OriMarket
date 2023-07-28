@@ -37,15 +37,11 @@
 		display: none;
 	}
 
-	.mainfood img{
-		width: 100%;
-		height: 100%;
-	}
-
-	.mainfood p{
+	p.pic_not{
 		font-size: 11px;
 		background-color: #eee;
 		padding: 5px;
+		width: 375px;
 	}
 
 	.main_menu_name {
@@ -61,7 +57,6 @@
 
 	.main_menu_name h5{
 		font-size: 12px;
-		margin-top: -7px;
 	}
 
 
@@ -108,11 +103,11 @@
 	button{border-style: none; background: none; display: inline-block;}
 
 	/* 230723 승원 */
-	.mainfood{width:375px; height:375px;}
+	.mainfood{width:300px; height:300px; margin: auto; display: flex; justify-content: center; align-items: center;}
 	.mainfood > img{position:relative;}
 	button.backbtn { position:absolute; top:1%; left:1%; z-index:99; display: flex; align-items: center; font-size: 25px; color: #999; margin: 0 0 0 10px; width: 35px; height: 35px; background-color: #fff; border-radius: 50%; border: 1px solid #999; cursor: pointer; justify-content: center;}
 	button.backbtn:hover {background-color:#333; color:#fff;}
-	.main_menu_wrap{width:100%; padding:25px 10px 20px;}
+	.main_menu_wrap{width:100%; padding:5px 10px 20px;}
 	button.dm_cart{width:90%; height:40px; border-radius: 25px; background-color:#ffbf41; color:#333; font-size: 16px; font-weight: 600;}
 	button.dm_cart:hover {background-color:#333; color:#fff;}
 
@@ -124,9 +119,9 @@
 		<div class="mainfood">
 			<!-- 뒤로가기 -->
 			<button class="backbtn" onclick="window.history.go(-1)">&lt;</button>
-			<img src="../../img/store/item/${item.itemImageUrl}" alt="메뉴이미지" style="width: 100%;height:100%;">
-			<p>위 사진은 연출된 사진으로 실제와 다를 수 있습니다.</p>
+			<img src="../../img/store/item/${item.itemImageUrl}" alt="메뉴이미지" style="width: 90%;height: 90%; margin: auto;box-sizing: border-box;display: inline-block;">
 		</div>
+		<p class="pic_not">위 사진은 연출된 사진으로 실제와 다를 수 있습니다.</p>
 		<div class="main_menu_wrap">
 			<div class="main_menu_name">
 				<h1>${item.itemName}</h1>
@@ -140,7 +135,7 @@
 							<h5>가격</h5>
 							<label><input type="radio" value="${item.itemName}" name="itemName" checked/>${item.itemName}</label>
 									<input type="hidden" value="${item.itemId}" name="itemId" id="itemId">
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" value="${item.itemPrice}" name="itemPrice" style="outline: none;border: none;" />
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" value="${item.itemPrice}" name="itemPrice" style="outline: none;border: none; width: 55%;" />
 						</div>
 						<table style="margin-left:20px;">
 							<tr>
@@ -191,7 +186,7 @@
 			//if문 추가해서 재고 보다 많이 담으면 재고 알림?
 			if(itemCnt<countInput+cartCnt){
 				alert("재고 수량보다 많습니다.")
-				window.location.href="/detailmenu/"+itemId;
+				window.location.href="/detailmenu/"+itemId+"/"+userId;
 			}else{
 				const confirmed = confirm("장바구니에 담으시겠습니까?");
 				if (confirmed) {

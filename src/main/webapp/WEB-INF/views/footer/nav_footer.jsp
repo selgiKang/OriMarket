@@ -50,27 +50,28 @@
     </script>
 </head>
 <body>
-<div class="nav_footer">
-    <div onclick="location.href='/'">
-        <img id="nav_footer_home_img" src="../../img/footer/nav_footer_home1.png" alt="main Icon" onclick="toggleImage(this)">
-        <span>홈</span>
-    </div>
-    <div onclick="location.href='/order_pastorder'">
-        <img id="nav_footer_list_img" src="../../img/footer/nav_footer_list1.png" alt="list Icon" onclick="toggleImage(this)">
-        <span>주문내역</span>
-    </div>
-    <a href="/${userId}/cart">
-        <img id="nav_footer_cart_img" src="../../img/footer/nav_footer_cart1.png" alt="cart Icon" onclick="toggleImage(this)">
-        <br>
-        <span>장바구니</span>
-    </a>
-    <div onclick="location.href='/favList'">
-        <img id="nav_footer_star_img" src="../../img/footer/nav_footer_star1.png" alt="favorite Icon" onclick="toggleImage(this)">
-        <span>단골가게</span>
-    </div>
-    <div onclick="location.href='/mypage'">
-        <img id="nav_footer_user_img" src="../../img/footer/nav_footer_user1.png" alt="user Icon" onclick="toggleImage(this)">
-        <span><a href="/mypage">마이페이지</a></span>
+<div class="nav_footer_wrap">
+    <div class="nav_footer">
+        <div onclick="location.href='/'" style="margin-left:15px;">
+            <img id="nav_footer_home_img" src="../../img/footer/nav_footer_home1.png" alt="main Icon" onclick="toggleImage(this)">
+            <span>홈</span>
+        </div>
+        <div onclick="location.href='/order_pastorder'" style="margin-left:15px;">
+            <img id="nav_footer_list_img" src="../../img/footer/nav_footer_list1.png" alt="list Icon" onclick="toggleImage(this)">
+            <span>주문내역</span>
+        </div>
+        <a href="/${userId}/cart" style="width: 35px;margin-left:20px;margin-right: 10px;">
+            <img id="nav_footer_cart_img" src="../../img/footer/nav_footer_cart1.png" alt="cart Icon" onclick="toggleImage(this)">
+            <span>장바구니</span>
+        </a>
+        <div onclick="location.href='/favList'" style="margin-left:10px;">
+            <img id="nav_footer_star_img" src="../../img/footer/nav_footer_star1.png" alt="favorite Icon" onclick="toggleImage(this)">
+            <span>단골가게</span>
+        </div>
+        <div onclick="location.href='/mypage'" style="margin-left:10px;">
+            <img id="nav_footer_user_img" src="../../img/footer/nav_footer_user1.png" alt="user Icon" onclick="toggleImage(this)">
+            <span><a href="/mypage">마이페이지</a></span>
+        </div>
     </div>
 </div>
 </body>

@@ -69,6 +69,7 @@ public class FavController {
             }
         }
         double averageRating = (double) totalSum / reviewCount;
+
         model.addAttribute("aveRating",averageRating);
 
         //공지사항
@@ -111,7 +112,7 @@ public class FavController {
 
             //session.setAttribute("favNumber", fav.getFavNumber());
             List<BusinessStore> byBuStoreName = businessStoreRepository.findByBuStoreName(favStoreName);
-            System.out.println("이건모라고나올까요??"+byBuStoreName.get(0).getBuStoreImageUrl());
+
 
             //리뷰 평점계산
             List<Review> reviewListResult = reviewRepository.findByBusinessStore(byBuStoreName.get(0));

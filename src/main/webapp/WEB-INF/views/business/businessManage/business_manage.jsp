@@ -346,8 +346,7 @@
                             <input type="text" id="store-name-input" name="buStoreName" placeholder="가게 이름">
                         </c:if>
                         <%--입력창--%>
-                            <input type="hidden" id="store-name-input" name="buStoreName" value="${save.buStoreName}" >
-
+                            <input type="text" id="store-name-input" name="buStoreName" value="${save.buStoreName}">
                         <%-- 7.24 테스트 승엽--%>
                         <%-- 입력된 가게 이름 --%>
                         <c:if test="${!empty save.buStoreName}">
@@ -546,20 +545,7 @@
     }
 
 
-    /*탭*/
-   /* const labels = document.querySelectorAll('.label');
-    labels.forEach((label) => {
-        label.addEventListener('click', () => {
-            const panel = label.nextElementSibling;
-            const isOpen = panel.style.display === 'block';
 
-            if (isOpen) {
-                panel.style.display = 'none';
-            } else {
-                panel.style.display = 'block';
-            }
-        });
-    });*/
 </script>
 
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
