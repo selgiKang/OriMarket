@@ -6,6 +6,8 @@ import com.choongang.OriMarket.business.user.BusinessUser;
 import com.choongang.OriMarket.business.user.BusinessUserRepository;
 import com.choongang.OriMarket.user.CartItem;
 import com.choongang.OriMarket.user.CartItemRepository;
+import com.choongang.OriMarket.user.User;
+import com.choongang.OriMarket.user.UserService;
 import com.choongang.OriMarket.utill.ImageService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -39,6 +41,8 @@ public class StoreController {
     private final CartItemRepository cartItemRepository;
 
     private final ImageService imageService;
+
+    private final UserService userService;
 
 //    @GetMapping("/detailmenu")
 //    public String store_detailmenu(){
@@ -156,16 +160,22 @@ public class StoreController {
         return "store/store";
     }
 
-    @GetMapping("/detailmenu/{itemId}")
-    public String store_detailmenu(@PathVariable("itemId")Long itemId,Model model,Item cartItem){
+    @GetMapping("/detailmenu/{itemId}/{userId}")
+    public String store_detailmenu(@PathVariable("itemId")Long itemId,Model model,Item cartItem,@PathVariable("userId")String userId){
 
         System.out.println("아이템 번호: "+itemId);
         Item item = itemService.getItem(itemId);
         cartItem.setItemId(itemId);
+        User user = userService.getUser(userId);
+
+
+        CartItem cartItemResult = cartItemRepository.findByItem_ItemIdAndUser_UserSeq(itemId,user.getUserSeq());
 
         //카트 아이템에 있으면
-        if(cartItemRepository.findByItem(cartItem) != null){
-            CartItem cartItemResult = cartItemRepository.findByItem(cartItem);
+        if(cartItemResult != null){
+            System.out.println("아이템 수량! "+ cartItem.getItemCnt());
+
+            System.out.println("장바구니 가격! "+ cartItemResult.getItemPrice());
             System.out.println("장바구니 수량! "+ cartItemResult.getCount());
 
             model.addAttribute("cartItem",cartItemResult.getCount());
@@ -173,7 +183,6 @@ public class StoreController {
         }else{
             model.addAttribute("item",item);
         }
-
-        return "store/detailmenu";
+        return "/store/detailmenu";
     }
-};
+}

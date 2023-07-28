@@ -28,18 +28,20 @@ public class CartService {
     private final ItemRepository itemRepository;
     private final BusinessStoreRepository businessStoreRepository;
     private final ItemService itemService;
+    private final OrderItemRepository orderItemRepository;
 
 
     @Autowired
     public CartService(UserRepository userRepository, CartRepository cartRepository,
                        CartItemRepository cartItemRepository, ItemRepository itemRepository,
-                       BusinessStoreRepository businessStoreRepository, ItemService itemService) {
+                       BusinessStoreRepository businessStoreRepository, ItemService itemService, OrderItemRepository orderItemRepository) {
         this.userRepository = userRepository;
         this.cartRepository = cartRepository;
         this.cartItemRepository = cartItemRepository;
         this.itemRepository= itemRepository;
         this.businessStoreRepository=businessStoreRepository;
         this.itemService = itemService;
+        this.orderItemRepository = orderItemRepository;
     }
 
 
@@ -70,34 +72,33 @@ public class CartService {
     public void addCart(User user, Item item, int count) {
 
         Cart cart = cartRepository.findByUserUserId(user.getUserId());
+
         Item saveitem = itemRepository.findByItemId(item.getItemId());
         //물건 가격
         int saveItemPrice = saveitem.getItemPrice();
-
 
 
         /*cart가 없다면 새로 생성*/
         if (cart == null) {
             cart = Cart.createCart(user);
             cartRepository.save(cart);
-        }
-
-
-        /*cartItem생성*/
-        CartItem cartItem = cartItemRepository.findByCart_CartIdAndItem_ItemId(cart.getCartId(), item.getItemId());
-
-        /*cartItem이 없다면 새로 생성*/
-        if (cartItem == null) {
-            cartItem = CartItem.createCartItem(cart, item, count, saveItemPrice, user);
-            cartItemRepository.save(cartItem);
-
-            cart.setCartCnt(cart.getCartCnt() + 1);
-            cart.setCartTotalPrice(cart.getCartTotalPrice() + item.getItemPrice());
         } else {
-            cartItem.addCount(count);
-            cart.setCartTotalPrice(cart.getCartTotalPrice() + item.getItemPrice());
-        }
+            /*cartItem생성*/
+            CartItem cartItem = cartItemRepository.findByCart_CartIdAndItem_ItemId(cart.getCartId(), item.getItemId());
 
+            /*cartItem이 없다면 새로 생성*/
+            if (cartItem == null) {
+                cartItem = CartItem.createCartItem(cart, item, count, saveItemPrice, user);
+                cartItemRepository.save(cartItem);
+
+                cart.setCartCnt(cart.getCartCnt() + 1);
+                cart.setCartTotalPrice(cart.getCartTotalPrice() + item.getItemPrice());
+            } else {
+                cartItem.addCount(count);
+                cart.setCartTotalPrice(cart.getCartTotalPrice() + item.getItemPrice());
+            }
+
+        }
     }
 //
 //    //가게정보조회(goods테이블에 가게id가 들어가지않으면 의미없다)
@@ -137,6 +138,36 @@ public class CartService {
         return userItems;
     }
 
+    //주문상품 조회하기_7.28수정
+
+    @Transactional
+    public List<OrderItem> userOrderCartView(Cart cart) {
+        //  List<OrderItem> orderItems = orderItemRepository.findAll();
+
+        List<OrderItem> orderItems = orderItemRepository.findByCart_CartId(cart.getCartId());
+
+        List<OrderItem> userItems = new ArrayList<>();
+
+        System.out.println("****************************************************");
+        System.out.println("카트의 아이디"+cart.getCartId());
+        // System.out.println("오더카트의 아이디"+oItem.getCart().getCartId());
+
+        for (OrderItem oItem : orderItems) {
+            /*     if (oItem.getCart().getCartId() == cart.getCartId()) {*/
+            userItems.add(oItem);
+            /*      }*/
+        }
+        return userItems;
+    }
+
+
+
+
+
+
+
+
+
     //장바구니에서 Item개별삭제
     public void itemDelete(Long cartItemId) {
         cartItemRepository.deleteById(cartItemId);
@@ -157,42 +188,113 @@ public class CartService {
         return "ok";
     }
 
+//
+//    //장바구니 결제
+//    @Transactional
+//    public void cartPayment(String userId) {
+//        List<CartItem> cartItems = cartItemRepository.findAll();
+//        List<CartItem> userCartItems = new ArrayList<>();
+//        Cart cart = cartRepository.findByUserUserId(userId);
+//
+//
+//        /*접속한 유저의 cartItem만 찾아서 저장*/
+//        for (CartItem cartItem : cartItems) {
+//            if (cartItem.getCart().getCartId().equals(cart.getCartId())) {
+//                userCartItems.add(cartItem);
+//            }
+//        }
+//        /*재고 변경하기*/
+//        for (CartItem cartItem : userCartItems) {
+//            /*현재 재고를 변수에 저장*/
+//            int stock = cartItem.getItem().getItemCnt();
+//            /*저장된 변수에서 결제한 갯수를 빼준다..*/
+//            stock = stock - cartItem.getCount();
+//            /*현 재고 변경*/
+//            cartItem.getItem().setItemCnt(stock);
+//            //재고가 0이면 삭제됨
+////            if(stock==0){
+////                itemService.deleteItems(cartItem.getItem().getItemId());
+////            }
+//        }
+//
+//    }
+//
 
-    //장바구니 결제
+    //장바구니 결제_7.28수정
     @Transactional
     public void cartPayment(String userId) {
         List<CartItem> cartItems = cartItemRepository.findAll();
         List<CartItem> userCartItems = new ArrayList<>();
         Cart cart = cartRepository.findByUserUserId(userId);
+        User user = userRepository.findByUserId(userId);
+        List<OrderItem> orderItems = orderItemRepository.findByUser_UserSeq(user.getUserSeq());
 
 
-        /*접속한 유저의 cartItem만 찾아서 저장*/
-        for (CartItem cartItem : cartItems) {
-            if (cartItem.getCart().getCartId().equals(cart.getCartId())) {
-                userCartItems.add(cartItem);
-            }
-        }
-        /*재고 변경하기*/
-        for (CartItem cartItem : userCartItems) {
-            /*현재 재고를 변수에 저장*/
-            int stock = cartItem.getItem().getItemCnt();
-            /*저장된 변수에서 결제한 갯수를 빼준다..*/
-            stock = stock - cartItem.getCount();
-            /*현 재고 변경*/
-            cartItem.getItem().setItemCnt(stock);
-            //재고가 0이면 삭제됨
-//            if(stock==0){
-//                itemService.deleteItems(cartItem.getItem().getItemId());
+//        /*접속한 유저의 cartItem만 찾아서 저장*/
+//        for (CartItem cartItem : cartItems) {
+//            if (cartItem.getCart().getCartId().equals(cart.getCartId())) {
+//                userCartItems.add(cartItem);
 //            }
+//        }
+        /*재고 변경하기*/
+        for (OrderItem orderItem : orderItems) {
+            /*현재 재고를 변수에 저장*/
+            int stock = orderItem.getItem().getItemCnt();
+            /*저장된 변수에서 결제한 갯수를 빼준다..*/
+            stock = stock - orderItem.getCount();
+            /*현 재고 변경*/
+            orderItem.getItem().setItemCnt(stock);
+
         }
 
     }
 
 
-    //주문결제후 장바구니 비우기
+//    //주문결제후 장바구니 비우기
+//    public void cartDeleteAll(String userId, HttpSession session) {
+//        List<CartItem> cartItems = cartItemRepository.findAll();
+//        Cart cart = cartRepository.findByUserUserId(userId);
+//        int totalPrice = 0;
+//        int deliveryPrice = 0;
+//
+//        //시장 번호 찾기
+//        BusinessStore bu = cartItems.get(0).getBusinessStore();
+//        BusinessStore buNumberResult = businessStoreRepository.findByBuStoreNumber(bu.getBuStoreNumber());
+//        Long marketSeq = buNumberResult.getMarket().getMarketSeq();
+//
+//        session.setAttribute("marketSeq",marketSeq);
+//
+//        /*접속유저의 cartItem만 찾아서 삭제*/
+//        for (CartItem cartItem : cartItems) {
+//            //주문하기 버튼을 누르면 cart테이블에 totalPrice,deliveryPrice저장.
+//            if (cartItem.getCart().getCartId().equals(cart.getCartId())) {
+//                totalPrice += cartItem.getItemPrice() * cartItem.getCount();
+//                cart.setCartTotalPrice(totalPrice);
+//                if (totalPrice < 30000) {
+//                    deliveryPrice += 3000;
+//                    cart.setCartDeliveryPrice(deliveryPrice);
+//
+//                    //cartItem테이블 내역 삭제
+//                    cartItem.getCart().setCartCnt(cartItem.getCart().getCartCnt() - 1);
+//                    cartItemRepository.deleteById(cartItem.getCartItemId());
+//                } else {
+//                    cartItem.getCart().setCartCnt(cartItem.getCart().getCartCnt() - 1);
+//                    cartItemRepository.deleteById(cartItem.getCartItemId());
+//                }
+//            }
+//        }
+//
+//    }
+
+    //주문결제후 장바구니 비우기_7.28수정
     public void cartDeleteAll(String userId, HttpSession session) {
         List<CartItem> cartItems = cartItemRepository.findAll();
+        List<OrderItem> orderItems = orderItemRepository.findAll();
         Cart cart = cartRepository.findByUserUserId(userId);
+        User user = userRepository.findByUserId(userId);
+        List<CartItem> cartItemList = cartItemRepository.findByUser_UserSeq(user.getUserSeq());
+        List<OrderItem> orderItemList = orderItemRepository.findByUser_UserSeq(user.getUserSeq());
+
         int totalPrice = 0;
         int deliveryPrice = 0;
 
@@ -204,40 +306,77 @@ public class CartService {
         session.setAttribute("marketSeq",marketSeq);
 
         /*접속유저의 cartItem만 찾아서 삭제*/
-        for (CartItem cartItem : cartItems) {
+        for (OrderItem orderItem : orderItems) {
             //주문하기 버튼을 누르면 cart테이블에 totalPrice,deliveryPrice저장.
-            if (cartItem.getCart().getCartId().equals(cart.getCartId())) {
-                totalPrice += cartItem.getItemPrice() * cartItem.getCount();
+
+            if (orderItem.getCart().getCartId().equals(cart.getCartId())) {
+                totalPrice += orderItem.getItemPrice() * orderItem.getCount();
                 cart.setCartTotalPrice(totalPrice);
                 if (totalPrice < 30000) {
                     deliveryPrice += 3000;
                     cart.setCartDeliveryPrice(deliveryPrice);
 
                     //cartItem테이블 내역 삭제
-                    cartItem.getCart().setCartCnt(cartItem.getCart().getCartCnt() - 1);
-                    cartItemRepository.deleteById(cartItem.getCartItemId());
+                    for (CartItem cartItem : cartItemList) {
+                        if (cartItem == orderItem.getCartItem()) {
+                            orderItem.getCart().setCartCnt(orderItem.getCart().getCartCnt() - 1);
+                            orderItemRepository.deleteById(orderItem.getOrderItemId());
+                            cartItemRepository.deleteById(cartItem.getCartItemId());
+                        }
+                    }
                 } else {
-                    cartItem.getCart().setCartCnt(cartItem.getCart().getCartCnt() - 1);
-                    cartItemRepository.deleteById(cartItem.getCartItemId());
+                    for (CartItem cartItem : cartItemList) {
+                        if (cartItem == orderItem.getCartItem()) {
+                            orderItem.getCart().setCartCnt(orderItem.getCart().getCartCnt() - 1);
+                            orderItemRepository.deleteById(orderItem.getOrderItemId());
+                            cartItemRepository.deleteById(cartItem.getCartItemId());
+                        }
+                    }
                 }
+
             }
         }
-
     }
 
 
+//    public void saveCartInfo(String userId,String cart1) {
+//        List<CartItem> cartItems = cartItemRepository.findAll();
+//        Cart cart = cartRepository.findByUserUserId(userId);
+//        int totalPrice = 0;
+//        int deliveryPrice = 0;
+//        cart.setDeliveryType(cart1);
+//
+//        for (CartItem cartItemList : cartItems) {
+//            if (cartItemList.getCart().getCartId().equals(cart.getCartId())) {
+//                totalPrice += cartItemList.getItemPrice() * cartItemList.getCount();
+//
+//                cart.setCartTotalPrice(totalPrice);
+//                if (cart.getDeliveryType().equals("배달")) {
+//                    if (totalPrice < 30000 && deliveryPrice == 0) {
+//                        cart.setCartDeliveryPrice(3000);
+//                    } else if (deliveryPrice == 0) {
+//                        cart.setCartDeliveryPrice(0);
+//                    }
+//                }else {
+//                    cart.setCartDeliveryPrice(0);
+//                }
+//            }
+//        }
+//    }
 
-    public void saveCartInfo(String userId,String cart1) {
-        List<CartItem> cartItems = cartItemRepository.findAll();
+    //    선택주문했을경우_7.28수정
+    public void  processSelectedItems(String userId,String deliveryType,List<OrderItem> orderItems){
+        //카트에 저장하고(배달타입에 따라 배달비 저장), 카트아이템에 선택품목만 삭제.
+
         Cart cart = cartRepository.findByUserUserId(userId);
+
         int totalPrice = 0;
         int deliveryPrice = 0;
-        cart.setDeliveryType(cart1);
+        cart.setDeliveryType(deliveryType);
 
-        for (CartItem cartItemList : cartItems) {
-            if (cartItemList.getCart().getCartId().equals(cart.getCartId())) {
-                totalPrice += cartItemList.getItemPrice() * cartItemList.getCount();
-
+        for (OrderItem orderItem : orderItems) {
+            if(orderItem.getCart().getCartId().equals(cart.getCartId())){
+                totalPrice += orderItem.getItemPrice() * orderItem.getCount();
                 cart.setCartTotalPrice(totalPrice);
                 if (cart.getDeliveryType().equals("배달")) {
                     if (totalPrice < 30000 && deliveryPrice == 0) {

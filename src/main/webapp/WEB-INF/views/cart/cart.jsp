@@ -9,13 +9,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<!-- 아이콘 -->
-<script src="https://kit.fontawesome.com/1d53132cda.js" crossorigin="anonymous"></script>
-<script src="../../js/common/jquery-3.6.4.js"></script>
-<script src="../../js/user/cart.js"></script>
+	<meta charset="UTF-8">
+	<!-- 아이콘 -->
+	<script src="https://kit.fontawesome.com/1d53132cda.js" crossorigin="anonymous"></script>
+	<script src="../../js/common/jquery-3.6.4.js"></script>
+	<script src="../../js/user/cart.js"></script>
 
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/user/cart.css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/user/cart.css">
 
 	<title>cart</title>
 </head>
@@ -33,7 +33,7 @@
 			<input type="submit" value="변경">
 		</form>
 	</div>
-	<form action="/paymentPage/${userId}" method="Post">
+	<form action="/paymentPage/${userId}" method="Post" id="cartForm">
 		<div>
 			<input type="checkbox" id="cboxAll" name="cboxAll" checked="checked" onclick="checkAll()">
 			전체선택
@@ -44,20 +44,21 @@
 				<c:set var="prevBuStoreName" value="" />
 				<c:forEach var="orderList" items="${userOrderList}" varStatus="status">
 					<c:if test="${!orderList.businessStore.buStoreName.equals(prevBuStoreName)}">
-					<c:set var="prevBuStoreName" value="${orderList.businessStore.buStoreName}" />
-					<div id="itemList">
+						<c:set var="prevBuStoreName" value="${orderList.businessStore.buStoreName}" />
+						<div id="itemList">
 						<h3>${orderList.businessStore.buStoreName}</h3>
 					</c:if>
 					<ul>
 						<c:if test="${orderList.item.businessStore eq orderList.businessStore}">
-						<c:forEach var="item" items="${orderList.businessStore.items}">
-							<c:if test="${orderList.item eq item}">
-								<li>
+							<c:forEach var="item" items="${orderList.businessStore.items}">
+								<c:if test="${orderList.item eq item}">
+									<li>
 										<div class="cart_info">
-											<input type="checkbox" name="cbox"  class="individual_checkbox" checked="checked">
+											<input type="checkbox" name="cbox" class="individual_checkbox" data-item-index="${status.index}" checked="checked" >
 											<input type="hidden" class="individual_totalCount" value="${orderList.count}">
-											<input type="hidden" class="individual_itemPrice" value="${orderList.itemPrice}">
+											<input type="hidden" class="individual_itemPrice" name="individual_itemPrice" value="${orderList.itemPrice}">
 											<input type="hidden" class="individual_totalPrice" value="${orderList.count*orderList.itemPrice}">
+											<input type="hidden" name="itemId" value="${orderList.item.itemId}">
 											<!-- 상품이미지나 상품타이틀을 클릭하면 상세페이지로 넘어간다(a태그) -->
 											<a href="상품상세페이지">
 												<div class="cart_itemImg">
@@ -68,7 +69,7 @@
 												</div>
 											</a>
 											<input type="hidden" id="userId" value="${sessionScope.userId}">
-											<input type="hidden" id="cartItemId" value="${orderList.cartItemId}">
+											<input type="hidden" data-cart-item-id="${orderList.cartItemId}" name="individual_cartItemId" class="individual_cartItemId" value="${orderList.cartItemId}">
 											<button class="cart_xmark" onclick="deleteBtn(${orderList.cartItemId})"><i class="fas fa-regular fa-xmark"></i></button>
 
 											<!-- 수량선택(-,+),가격표시 -->
@@ -103,7 +104,7 @@
 									</li>
 								</c:if>
 							</c:forEach>
-							</c:if>
+						</c:if>
 					</ul>
 					<c:if test="${!orderList.businessStore.buStoreName.equals(prevBuStoreName)}">
 					</div>
@@ -152,13 +153,47 @@
 		</div>
 		<br>
 		<div id="cart_footer">
-			<input type="submit" value="주문하기" onclick="goOrder()"></a>
+			<input type="button" value="주문하기" onclick="goOrder()"></a>
 		</div>
 	</form>
 </div>
-
 <script src="../../js/user/cartcheck.js"></script>
 
+<script>
+	function goOrder() {
+
+		const checkboxes = document.querySelectorAll('.individual_checkbox');
+		const totalCountElements = document.getElementsByName('currentCnt');
+		const cartItemIds = document.querySelectorAll('[data-cart-item-id]');
+		const itemPrices = document.getElementsByClassName('individual_itemPrice');
+		const itemIds = document.getElementsByName('itemId');
+
+
+
+		const form = document.getElementById('cartForm');
+
+		let totalPrice = 0; // 선택된 품목들의 totalPrice 합계
+		for (const checkbox of checkboxes) {
+			const itemIndex = parseInt(checkbox.getAttribute('data-item-index'));
+			const totalCount = parseInt(totalCountElements[itemIndex].value);
+			const cartItemId = parseInt(cartItemIds[itemIndex].value);
+			const itemPrice = parseInt(itemPrices[itemIndex].value);
+			const itemId = parseInt(itemIds[itemIndex].value);
+
+			if (checkbox.checked) {
+				totalPrice += totalCount * itemPrice;
+			} else {
+				// 체크되지 않은 항목들을 비활성화
+				totalCountElements[itemIndex].disabled = true;
+				cartItemIds[itemIndex].disabled = true;
+				itemPrices[itemIndex].disabled = true;
+				itemIds[itemIndex].disabled = true;
+			}
+		}
+
+		form.submit();
+	}
+</script>
 
 
 </body>
