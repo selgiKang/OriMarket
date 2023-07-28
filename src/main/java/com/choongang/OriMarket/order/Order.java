@@ -34,8 +34,6 @@ public class Order {
     @Column
     private String orderUserId;
 
-    @Column
-    private String orderAddressNumber;
 
     //물건 총 가격 + 배송비
     @Column

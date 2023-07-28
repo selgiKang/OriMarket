@@ -256,12 +256,6 @@ public class OrderController {
 
         model.addAttribute("newOrder",save);
 
-        System.out.println("이건먼가요?"+save.getNewOrderDetails().get(0).getItemName());
-
-        for(NewOrderDetail newOrderDetail:save.getNewOrderDetails()){
-            System.out.println("이건먼가요?:"+newOrderDetail.getItemName());
-        }
-
         return "order/order_delivery";
     }
 
