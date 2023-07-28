@@ -107,13 +107,6 @@
                 </div>
                 <p style="text-align: left; margin-top: 65px; font-size: 23px;">* 등록한 주소에서 가까운 시장목록 *</p>
                 <ul id="marketList" style="text-align: left; margin-left: 0px;">
-                    <!-- 여기에 시장 목록이 동적으로 추가될 것입니다. -->
-                    <c:forEach var="marketall" items="${aabb}">
-                        <li style="margin-top: 5px; list-style: none; font-size: 16px; margin-left: 20px;">
-                                ${marketall.marketName}
-                            <a href="#" style="font-size: 16px;">선택</a>
-                        </li>
-                    </c:forEach>
                 </ul>
             </div>
         </div>
