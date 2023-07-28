@@ -45,8 +45,8 @@
 					<tr class= "paymentpage_tr_1">
 						<th colspan= "3">
 							<c:forEach var="cartItems" items="${cartItemList}" varStatus="status">
-							<c:if test="${status.index eq 1}">
-							<input type="hidden" name = "orderMarketName" value="${cartItems.businessStore.market.marketName}" readonly>
+							<c:if test="${status.index eq 0}">
+								<input type="hidden" name = "orderMarketName" value="${cartItems.businessStore.market.marketName}" readonly>
 								${cartItems.businessStore.market.marketName}
 							</c:if>
 						</th>

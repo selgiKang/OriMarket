@@ -221,7 +221,7 @@ public class ManagerController {
             orderToUpdate.setOrderNumber(rOrderNumber);
             orderToUpdate.setManagerUser(managerUser);
             orderToUpdate.setOrderStatus("주문 수락");
-            newOrderRepository.save(orders);
+            newOrderRepository.save(orderToUpdate);
         }
 
 

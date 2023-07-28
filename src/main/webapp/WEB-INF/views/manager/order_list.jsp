@@ -49,7 +49,7 @@
                         <span class="order-quantity">메뉴</span>
                         <c:forEach var="store" items="${order.newOrderDetails}">
                             <div class="order-details">
-                                <span>${store.orderGoodsName} 총 ${store.orderGoodsNum}개</span>
+                                <span>${store.itemName} 총 ${store.itemCount}개</span>
                             </div>
                         </c:forEach>
                         <div>
