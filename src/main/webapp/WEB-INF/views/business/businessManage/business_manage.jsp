@@ -313,6 +313,7 @@
             font-size: 14px;
             cursor: pointer;
             font-family: 'omyu pretty', Arial, sans-serif;
+        }
 
     </style>
 
