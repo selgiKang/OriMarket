@@ -2,6 +2,7 @@ package com.choongang.OriMarket.order;
 
 import com.choongang.OriMarket.RealTimeStatus.RealTimeStatus;
 import com.choongang.OriMarket.business.market.Market;
+import com.choongang.OriMarket.business.store.BusinessStore;
 import com.choongang.OriMarket.business.user.BusinessUser;
 import com.choongang.OriMarket.manager.user.ManagerUser;
 import com.choongang.OriMarket.rider.Rider;
