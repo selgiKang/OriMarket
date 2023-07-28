@@ -1,11 +1,13 @@
 
 package com.choongang.OriMarket.order;
 
-import com.choongang.OriMarket.RealTimeStatus.RealTimeRepository;
 import com.choongang.OriMarket.RealTimeStatus.RealTimeService;
 import com.choongang.OriMarket.RealTimeStatus.RealTimeStatus;
 import com.choongang.OriMarket.business.market.Market;
+import com.choongang.OriMarket.store.Item;
+import com.choongang.OriMarket.store.ItemRepository;
 import com.choongang.OriMarket.user.CartService;
+import com.choongang.OriMarket.user.User;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -27,14 +29,21 @@ public class OrderController {
     private final RealTimeService realTimeService;
     private final CartService cartService;
 
+    private final  NewOrderRepository newOrderRepository;
 
+    private final NewOrderDetailRepository newOrderDetailRepository;
+
+    private final ItemRepository itemRepository;
 
 
     @Autowired
-    public OrderController(OrderService orderService, RealTimeService realTimeService, OrderRepository orderRepository, CartService cartService){
+    public OrderController(OrderService orderService, RealTimeService realTimeService, OrderRepository orderRepository, CartService cartService, NewOrderRepository newOrderRepository, NewOrderDetailRepository newOrderDetailRepository, ItemRepository itemRepository){
         this.orderService = orderService;
         this.realTimeService = realTimeService;
         this.cartService = cartService;
+        this.newOrderRepository = newOrderRepository;
+        this.newOrderDetailRepository = newOrderDetailRepository;
+        this.itemRepository = itemRepository;
     }
 
     //정산내역
@@ -208,6 +217,49 @@ public class OrderController {
         }
         RealTimeStatus rtsSearchResult = realTimeService.findRts(order,session);
         System.out.println(rts.getRtsOrderIng());
+
+        return "order/order_delivery";
+    }
+
+    @PostMapping("/order_paymentPage1/{userId}")
+    public String orderDelivery1(@ModelAttribute NewOrder newOrder,HttpSession session,@PathVariable("userId")String userId, Model model, User user) {
+        user.setUserSeq(Long.valueOf((session.getAttribute("userSeq")).toString()));
+        newOrder.setUser(user);
+
+        NewOrder save = newOrderRepository.save(newOrder);
+        // 아이템 아이디로 아이템찾기
+        String itemId1 = save.getItemId1();
+        String[] itemIdsArray = itemId1.split(",");
+
+        String orderGoodsNum = save.getOrderGoodsNum();
+        String[] itemcount = orderGoodsNum.split(",");
+
+        List<Item> items = new ArrayList<>();
+        for (String itemId : itemIdsArray) {
+                    items.add(itemRepository.findById(Long.valueOf(itemId)).orElseThrow());
+                }
+        for (int i=0;i<items.size();i++){
+            NewOrderDetail newOrderDetail = new NewOrderDetail();
+            newOrderDetail.setItemName(items.get(i).getItemName());
+            newOrderDetail.setItemPrice(String.valueOf(items.get(i).getItemPrice()));
+            newOrderDetail.setBuStoreName(items.get(i).getBusinessStore().getBuStoreName());
+            newOrderDetail.setBuStoreNumber(String.valueOf(items.get(i).getBusinessStore().getBusinessUser().getBuUserNumber()));
+            newOrderDetail.setItemCount(itemcount[i]);
+            newOrderDetail.setNewOrder(save);
+            newOrderDetail.setOrderNumber(save.getOrderNumber());
+            newOrderDetailRepository.save(newOrderDetail);
+        }
+        List<NewOrderDetail> byOrderNumber = newOrderDetailRepository.findByOrderNumber(save.getOrderNumber());
+        save.setNewOrderDetails(byOrderNumber);
+        newOrderRepository.save(save);
+
+        model.addAttribute("newOrder",save);
+
+        System.out.println("이건먼가요?"+save.getNewOrderDetails().get(0).getItemName());
+
+        for(NewOrderDetail newOrderDetail:save.getNewOrderDetails()){
+            System.out.println("이건먼가요?:"+newOrderDetail.getItemName());
+        }
 
         return "order/order_delivery";
     }

@@ -343,10 +343,10 @@
                         <h3>가게 이름</h3>
                         <input type="hidden" name="buStoreNumber" value="${save.buStoreNumber}">
                         <c:if test="${empty save.buStoreName}">
-                            <input type="text" id="store-name-input" name="buStoreName" placeholder="가게 이름">
+                            <input type="text" id="store-name-input" name="buStoreName" placeholder="  이름">
                         </c:if>
                         <%--입력창--%>
-                            <input type="text" id="store-name-input" name="buStoreName" value="${save.buStoreName}">
+                        <input type="text" id="store-name-input" name="buStoreName" value="${save.buStoreName}">
                         <%-- 7.24 테스트 승엽--%>
                         <%-- 입력된 가게 이름 --%>
                         <c:if test="${!empty save.buStoreName}">

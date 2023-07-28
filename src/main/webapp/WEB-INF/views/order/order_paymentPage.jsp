@@ -22,7 +22,7 @@
 		String today = date1.format(date);
 	%>
 	<div id= "paymentpage_main">
-		<form action="/order_paymentPage/${userId}" method="post">
+		<form action="/order_paymentPage1/${userId}" method="post">
 			<input type="hidden" name="orderNumber" value="<%=today%>${userId}">
 			<input type="hidden" name="orderUserId" value="${userId}">
 			<input type="hidden" name="orderDate" value="<%=today%>">
@@ -33,7 +33,7 @@
 			</div>
 			<div id= "paymentpage_section_1">
 				<div id= "paymentpage_address">
-					<input type="hidden" name="orderAddressNumber" value="${userAddress1}">
+					<input type="hidden" name="orderAddress" value="${userAddress1}">
 					${userAddress1}
 				</div>
 				<%--<div id= "paymentpage_btn_address_edit"><a>수정</a></div>--%>
@@ -56,22 +56,22 @@
 					<!-- 반복문 출력 위치 -->
 					<tr class= "paymentpage_tr_1">
 						<th colspan= "3">
-							<input type="hidden" name = "orderStoreName" value="${cartItems.businessStore.buStoreName}" readonly>
+							<input type="hidden" name = "" value="${cartItems.businessStore.buStoreName}" readonly>
 							${cartItems.businessStore.buStoreName}
 						</th>
 					</tr>
 
-						<input type="hidden" name="businessUser" value="${cartItems.item.businessStore.businessUser.buUserNumber}">
-						<input type="hidden" name="itemId" id="itemId" value="${cartItems.item.itemId}">
+						<input type="hidden" name="" value="${cartItems.item.businessStore.businessUser.buUserNumber}">
+						<input type="hidden" name="itemId1" id="itemId" value="${cartItems.item.itemId}">
 					<tr class= "paymentpage_tr_2">
 						<td colspan="3" class= "paymentpage_td_1">
-							<input type="hidden" name="orderGoodsName" value="${cartItems.item.itemName}" readonly>
+							<input type="hidden" name="" value="${cartItems.item.itemName}" readonly>
 								${cartItems.item.itemName}
 						</td>
 					</tr>
 					<tr>
 						<td colspan= "3" style= "text-align: center;">
-							<input type="hidden" name="orderGoodsPrice" value="${cartItems.itemPrice}" readonly>
+							<input type="hidden" name="" value="${cartItems.itemPrice}" readonly>
 								${cartItems.itemPrice}
 						</td>
 					</tr>
