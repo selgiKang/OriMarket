@@ -83,13 +83,18 @@
     }
 </style>
 
-<body>${buStoreImage}
+<body>
+
+<div class="store_wrap">
+<%--${buStoreImage} 이미지파일명 --%>
 <jsp:include page="../header/header_search.jsp" />
+
 <div class="main-container">
-    <header>
+    <header style="padding:10px;">
         <div class="like-container">
             <img id="like_container_img" src="../../img/store/${sessionScope.buStoreImage}" alt="착한생칼국수">
-        <%-- 찜 --%>
+<%--
+        &lt;%&ndash; 찜 &ndash;%&gt;
             <c:if test="${!empty sessionScope.userId}">
                 <form action="/storeFav" method="get">
                     <input type="hidden" value="${param.favStoreName}" name="favStoreName">
@@ -102,38 +107,65 @@
                        <c:if test="${sessionScope.favNumber eq 1}">
                             <img src="../../img/store/filled_heart.png" alt="찬 하트" class="heart" >
                         </c:if>
-                        <input type="hidden" name="favNumber" value="${sessionScope.favNumber}"><%--<%=session.getAttribute("favNumber")%>--%>
+                        <input type="hidden" name="favNumber" value="${sessionScope.favNumber}">&lt;%&ndash;<%=session.getAttribute("favNumber")%>&ndash;%&gt;
                 </form>
             </c:if>
+--%>
         </div>
-        <%--가게이름--%>
-        <h1><input type="text" value="싱싱과일가게" name="storeName${sessionScope.favNumber}"></h1>
-        <span style="float: left;">
-            <c:if test="${!Double.isNaN(aveRating)}">
-              <small style="font-size: 12px;"> &lt; 총 ${aveRating}점 &gt; : </small><span class="rating" data-rating="${Math.round(aveRating * 2) / 2}"></span><br>
-            </c:if>
-            <c:if test="${Double.isNaN(aveRating)}">
-                <small style="font-size: 12px;"> &lt; 아직 등록된 리뷰가 없습니다.!! &gt; </small><span class="rating" data-rating="${Math.round(aveRating * 2) / 2}"></span><br>
-            </c:if>
-            <small><a href="/storeReview" style="color: #4A98F7">리뷰 보러가기 </a></small>
-            <%--리뷰--%>
-        </span>
-        <br>
-        <%--storeAddress--%>
-        <p>📍 서울 관악구 신림동 1587-39</p>
+        <div class="main_contents_box">
+            <div class="store_favheart_wrap">
+                <%--가게이름--%>
+                <input type="text" class="storename_txt" value="싱싱과일가게" name="storeName${sessionScope.favNumber}" readonly>
+                <%-- 찜 --%>
+                <div class="favstoreheart">
+                <c:if test="${!empty sessionScope.userId}">
+                    <form action="/storeFav" method="get" style="width: 50px; height: 50px; display: flex; position: absolute;">
+                        <input type="hidden" value="${param.favStoreName}" name="favStoreName">
+                        <input type="hidden" value="<%=session.getAttribute("userSeq")%>" name="userSeq">
+
+                        <div type="submit" class="storeFav" onclick="event.preventDefault(); toggleHeart(this);" style="opacity: 1;/* width:50px; height:50px; float:right;*/" />
+                        <c:if test="${sessionScope.favNumber =='' }">
+                            <img src="../../img/store/empty_heart.png" alt="빈 하트" class="heart" >
+                        </c:if>
+                        <c:if test="${sessionScope.favNumber eq 1}">
+                            <img src="../../img/store/filled_heart.png" alt="찬 하트" class="heart" >
+                        </c:if>
+                        <input type="hidden" name="favNumber" value="${sessionScope.favNumber}"><%--<%=session.getAttribute("favNumber")%>--%>
+                    </form>
+                </c:if>
+                </div>
+            </div>
+
+            <div class="review_wrap">
+                <span class="review_count">
+                    <c:if test="${!Double.isNaN(aveRating)}">
+                      <small style="font-size: 16px;margin-right: 5px;"> &lt; 총 ${aveRating}점 &gt; : </small><span class="rating" data-rating="${Math.round(aveRating * 2) / 2}"></span><br>
+                    </c:if>
+                    <c:if test="${Double.isNaN(aveRating)}">
+                        <small style="font-size: 16px;margin-right: 5px;">0</small><span class="rating" data-rating="${Math.round(aveRating * 2) / 2}"></span><br>
+                    </c:if>
+                    <small><a href="/storeReview" style="color: #4A98F7; font-size: 16px; padding-left:10px;">리뷰 보러가기 </a></small>
+                    <%--리뷰--%>
+                </span>
+            </div>
+            <%--storeAddress--%>
+            <p>📍 서울 관악구 신림동 1587-39</p>
+        </div>
     </header>
 
-
-
-    <section>
-        <div class="coupon-container" onmousedown="startDragging(event)" onmousemove="dragging(event)" onmouseup="stopDragging()">
-            <img class="coupon" src="../../img/store/coupon3.png" alt="쿠폰 사진1" onclick="showConfirmationDialog(this)">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <img class="coupon" src="../../img/store/coupon3.png" alt="쿠폰 사진2" onclick="showConfirmationDialog(this)">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <img class="coupon" src="../../img/store/coupon3.png" alt="쿠폰 사진3" onclick="showConfirmationDialog(this)">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <img class="coupon" src="../../img/store/coupon3.png" alt="쿠폰 사진4" onclick="showConfirmationDialog(this)">
-            <!-- 추가적인 쿠폰 사진들 -->
-        </div>
-    </section>
+    <div class="coupon_wrap">
+        <h4 style="margin: 0; color: #333;">쿠폰</h4>
+        <section>
+            <div class="coupon-container" onmousedown="startDragging(event)" onmousemove="dragging(event)" onmouseup="stopDragging()">
+                <img class="coupon" src="../../img/store/coupon3.png" alt="쿠폰 사진1" onclick="showConfirmationDialog(this)">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <img class="coupon" src="../../img/store/coupon3.png" alt="쿠폰 사진2" onclick="showConfirmationDialog(this)">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <img class="coupon" src="../../img/store/coupon3.png" alt="쿠폰 사진3" onclick="showConfirmationDialog(this)">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <img class="coupon" src="../../img/store/coupon3.png" alt="쿠폰 사진4" onclick="showConfirmationDialog(this)">
+                <!-- 추가적인 쿠폰 사진들 -->
+            </div>
+        </section>
+    </div>
+    <hr style="width: 90%; opacity: 0.4;">
 
     <%--공지사항--%>
     <c:if test="${lastM.totalMessage != null}">
@@ -243,9 +275,8 @@
                     </li>
                 </ul>
             </div>
-
+    </div>
 </div>
-
 </script>
 <script src="../../js/store/store_script.js"></script>
 </body>
