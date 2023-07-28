@@ -33,7 +33,7 @@
 			</div>
 			<div id= "paymentpage_section_1">
 				<div id= "paymentpage_address">
-					<input type="hidden" name="orderAddressNumber" value="${userAddress1}">
+					<input type="hidden" name="orderAddress" value="${userAddress1}">
 					${userAddress1}
 				</div>
 				<%--<div id= "paymentpage_btn_address_edit"><a>수정</a></div>--%>

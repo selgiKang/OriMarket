@@ -5,6 +5,7 @@ import com.choongang.OriMarket.manager.user.ManagerUser;
 import com.choongang.OriMarket.rider.Rider;
 import com.choongang.OriMarket.store.Item;
 import com.choongang.OriMarket.user.User;
+import com.choongang.OriMarket.user.UserMarket;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,6 +17,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -96,7 +98,10 @@ public class NewOrder {
     @LastModifiedDate
     private LocalDateTime modified_date;
 
-    @OneToOne(mappedBy = "newOrder", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private NewOrderDetail newOrderDetail;
+    @OneToMany(mappedBy = "newOrder")
+    private List<NewOrderDetail> newOrderDetails = new ArrayList<>();
+
+    @Column
+    private String orderAddress;
 
 }
