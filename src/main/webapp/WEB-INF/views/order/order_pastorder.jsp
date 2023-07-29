@@ -10,6 +10,8 @@
     <title>Insert title here</title>
     <script src="https://kit.fontawesome.com/1cfe6d92db.js" crossorigin="anonymous"></script>
     <link href="../../css/order/order_pastorder.css" rel="stylesheet" media="all">
+
+
 </head>
 <style>
 
@@ -373,6 +375,7 @@
     }
 
 </style>
+
 <body>
     <div class="main-container">
         <jsp:include page="../header/header_index.jsp" />
