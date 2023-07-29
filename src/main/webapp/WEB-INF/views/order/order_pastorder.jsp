@@ -375,6 +375,7 @@
 </style>
 <body>
     <div class="main-container">
+        <jsp:include page="../header/header_index.jsp" />
         <h3 style="margin-top: 5px;">회원 주문내역</h3>
         <div id="search_area" style="width: 95%;">
             <form class="searchbar_wrap">
@@ -502,8 +503,10 @@
             </section>
         </div>
     </div>
+        <jsp:include page="../footer/footer.jsp" />
 </div>
 </body>
+
 <script>
     const tabElements = document.querySelectorAll('button[role="tab"]');
     const panelElements = document.querySelectorAll('[role="tabpanel"]');
