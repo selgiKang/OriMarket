@@ -69,9 +69,9 @@
 				<c:forEach var="store" items="${newOrder.newOrderDetails}">
 					<tr class="orderDelivery_table_tr_1"><td colspan="2">${store.buStoreName}</td></tr>
 					<tr class="orderDelivery_table_tr_2">
-								<tr>
-									<td>${store.itemName}&nbsp;&nbsp;&nbsp;${store.itemPrice}원 <small style="color: #818083;">&nbsp;&nbsp;&nbsp;x${store.itemCount}</small></td>
-								</tr>
+							<tr>
+								<td>${store.itemName}&nbsp;&nbsp;&nbsp;${store.itemPrice}원 <small style="color: #818083;">&nbsp;&nbsp;&nbsp;x${store.itemCount}</small></td>
+							</tr>
 					</tr>
 				</c:forEach>
 			</table>

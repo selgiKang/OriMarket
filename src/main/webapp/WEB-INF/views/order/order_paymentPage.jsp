@@ -41,6 +41,9 @@
 			<hr>
 			<div style="text-align: right;"><a class="order_paymentPage_btn_filter1"><i class="fa-solid fa-caret-up" style="color: #ee9820;"></i></a></div>
 			<div id= "paymentpage_section_2">
+				<c:forEach var="item" items="${itemzzz}">
+					<h1>${item.itemName}</h1>
+				</c:forEach>
 
 			<c:set var="prevBuStoreName" value="" />
 			<c:forEach var="cartItems" items="${cartItemList}" varStatus="status">
@@ -55,24 +58,26 @@
 					<c:set var="prevBuStoreName" value="${cartItems.businessStore.buStoreName}" />
 					<tr class= "paymentpage_tr_1">
 						<th colspan= "3">
-							<input type="hidden" name = "" value="${cartItems.businessStore.buStoreName}" readonly>
 							${cartItems.businessStore.buStoreName}
 						</th>
 					</tr>
 				</c:if>
-						<input type="hidden" name="" value="${cartItems.item.businessStore.businessUser.buUserNumber}">
-						<input type="hidden" name="itemId1" id="itemId" value="${cartItems.item.itemId}">
+					<input type="hidden" name="itemId1" id="itemId" value="${cartItems.item.itemId}">
 					<tr class= "paymentpage_tr_2">
 						<td colspan="3" class= "paymentpage_td_1">
-							<input type="hidden" name="" value="${cartItems.item.itemName}" readonly>
-								<p style="text-align: left; padding-left: 5px; position: relative">
-									${cartItems.item.itemName} &nbsp;&nbsp;&nbsp; 가격: ${cartItems.item.itemPrice} 원
-									<span style="position: absolute; right: 10px;"> 갯수: ${cartItems.count}</span>
-								</p>
+							<c:if test="${cartItems.item.businessStore eq cartItems.businessStore}">
+								<c:forEach var="item" items="${cartItems.businessStore.items}">
+									<c:if test="${cartItems.item eq item}">
+										<p style="text-align: left; padding-left: 5px; position: relative">
+										${cartItems.item.itemName} &nbsp;&nbsp;&nbsp; 가격: ${cartItems.item.itemPrice} 원
+										<span style="position: absolute; right: 10px;"> 갯수: ${cartItems.count}</span>
+										</p>
+									</c:if>
+								</c:forEach>
+							</c:if>
 						</td>
-							<input type="hidden" name="" value="${cartItems.itemPrice}" readonly>
 							<input type="hidden" name="orderGoodsNum" value="${cartItems.count}" readonly>
-					</tr>
+						</tr>
 			</c:forEach>
 
 					<tr>

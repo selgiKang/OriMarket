@@ -11,8 +11,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
-
+import java.util.Set;
 
 
 @Controller
@@ -63,18 +64,37 @@ public class CartController {
                 totalPrice += (cartItem.getItem().getItemPrice() * cartItem.getCount());
             }
 
+            //가게 물건 저장
+            List<Item> items = new ArrayList<>();
+            Set<BusinessStore> businessStores = new HashSet<>();
+
+            for (CartItem cartItem : cartItems) {
+                businessStores.add(cartItem.getBusinessStore());
+            }
+            for(CartItem cartItem: cartItems){
+                        items.add(cartItem.getItem());
+            }
+
+            for (BusinessStore businessStore : businessStores) {
+                System.out.println("가게이름:" + businessStore.getBuStoreName());
+                for (Item item : items) {
+                    if (businessStore.equals(item.getBusinessStore())) {
+                        System.out.println("물건: " + item.getItemName());
+                    }
+                }
+            }
+
+
+            model.addAttribute("itemzzz",items);
+            model.addAttribute("businessStoreszzz",businessStores);
+
+
 
             model.addAttribute("cartItemList", cartItems);
             model.addAttribute("totalPrice", totalPrice);
             model.addAttribute("user", userId);
             model.addAttribute("userOrderList", byUserUserSeq);
 
-            if(!byUserUserSeq.isEmpty()) {
-                System.out.println("이게먼대" + byUserUserSeq.get(0).getBusinessStore().getMarket().getMarketName());
-                model.addAttribute("aa",byUserUserSeq.get(0).getBusinessStore().getMarket().getMarketName());
-            }else{
-
-            }
             return "/cart/cart";
         }
     }
