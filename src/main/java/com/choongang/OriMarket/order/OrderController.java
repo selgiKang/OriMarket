@@ -100,14 +100,15 @@ public class OrderController {
     @GetMapping("/order_paymentPage")
     public String orderPaymentPage(){return "order/order_paymentPage";}
     @GetMapping("/order_pastorder")
-    public String orderPastorder(HttpSession session,Model model){
+    public String orderPastorder(User user,HttpSession session,Model model){
         if(session.getAttribute("userId")==null){
             return "error/login_error";
         }else {
             //아이디로
-            String userId = (session.getAttribute("userId")).toString();
+            Long userSeq = Long.valueOf((session.getAttribute("userSeq")).toString());
+            user.setUserSeq(userSeq);
             //지난 모든 주문들 출력
-            List<Order> pastOrderList = orderService.findByUserIdList(userId);
+            List<NewOrder> pastOrderList = newOrderRepository.findByUser(user);
             model.addAttribute("pastOrderList", pastOrderList);
             return "order/order_pastorder";
         }

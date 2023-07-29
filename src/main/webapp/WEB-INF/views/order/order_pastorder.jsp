@@ -401,7 +401,7 @@
                                 <div>현재 주문 내역이 없습니다.</div>
                             </c:if>
                             <c:if test="${not empty pastOrderList}">
-                                <c:if test="${pastOrder.realTimeStatus.rtsRiderFinish eq 0}">
+                                <c:if test="${!newOrder.orderStatus eq '배달완료'}">
                                     <%--주문내역폼--%>
                                     <div class="main-box">
                                         <div class="top">
@@ -410,12 +410,12 @@
                                             </div>
                                             <div class="date">
                                                 <p>
-                                                    ${fn:substring(pastOrder.orderDate, 0, 4)}.
-                                                    ${fn:substring(pastOrder.orderDate, 4, 6)}.
-                                                    ${fn:substring(pastOrder.orderDate, 6, 8)}&nbsp;
-                                                    ${fn:substring(pastOrder.orderDate, 8, 10)}:
-                                                    ${fn:substring(pastOrder.orderDate, 10, 12)}:
-                                                    ${fn:substring(pastOrder.orderDate, 12, 14)}
+                                                    ${fn:substring(pastOrder.created_date, 0, 4)}.
+                                                    ${fn:substring(pastOrder.created_date, 4, 6)}.
+                                                    ${fn:substring(pastOrder.created_date, 6, 8)}&nbsp;
+                                                    ${fn:substring(pastOrder.created_date, 8, 10)}:
+                                                    ${fn:substring(pastOrder.created_date, 10, 12)}:
+                                                    ${fn:substring(pastOrder.created_date, 12, 14)}
                                                 </p>
                                             </div>
                                         </div>
@@ -428,7 +428,7 @@
                                         <div class="middle">
                                             <div class="storeinfo">
                                                 <div class="storename">
-                                                    <p>${pastOrder.businessUser.businessStores[0].buStoreName}</p>
+                                                    <p>${pastOrder.newOrderDetails.buStoreName}</p>
                                                 </div>
                                                 <div class="orderitems">
                                                     <p>두번 쫄깃 블루베리 베이글&허니월넛크림치즈 x 1 외...</p>
@@ -436,7 +436,7 @@
                                             </div>
                                         </div>
                                         <div class ="mybutton">
-                                            <div class="reorder" onclick="location.href='/store?favStoreName=${pastOrder.businessUser.businessStores[0].buStoreName}'">
+                                            <div class="reorder" onclick="location.href='/store?favStoreName=${pastOrder.newOrderDetails.buStoreName}'">
                                                 <p>재주문</p>
                                             </div>
                                             <div class="orderdetailcheck" onclick="location.href='/order_receiptDelivery?orderNumber=${pastOrder.orderNumber}'">
