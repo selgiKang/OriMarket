@@ -21,6 +21,8 @@ import org.springframework.web.client.RestTemplate;
 
 import javax.servlet.http.HttpSession;
 import java.net.URI;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -35,6 +37,7 @@ public class OrderService {
 
     @Autowired
     private  final OrderRepository orderRepository;
+    private final NewOrderRepository newOrderRepository;
     private final ItemRepository itemRepository;
     private final UserRepository userRepository;
 
@@ -99,23 +102,23 @@ public class OrderService {
             }
         }
 
-        public List<Map<String,String>> getTableData(String calculateDate, String calculateDateLast,Model model,HttpSession session){
+        public List<Map<String,String>> getTableData(LocalDateTime calculateDate, LocalDateTime calculateDateLast, Model model, HttpSession session){
 
             List<Map<String,String>> tableData = new ArrayList<>();
             System.out.println("calculateDate"+calculateDate+", calculateLast"+calculateDateLast);
-            List<Order> orders = orderRepository.findOrdersBetweenDates(calculateDate,calculateDateLast);
+            List<NewOrder> orders = newOrderRepository.findNewOrdersBetweenDates(calculateDate,calculateDateLast);
 
             //사업자 번호 세션꺼 꺼내서
-            //그 스토어 이름이랑 오더의 스토어 이르
+            //그 스토어 이름이랑 오더의 스토어 이름
             Long buUserNumber = Long.valueOf(session.getAttribute("buUserNumber").toString());
-            for(Order order : orders){
-                //사업자 번호 비교
-                if(order.getBusinessUser().getBuUserNumber()!=null){
-                    if(order.getBusinessUser().getBuUserNumber().equals(buUserNumber)){
+            for (NewOrder order : orders) {
+                for (NewOrderDetail orderDetail : order.getNewOrderDetails()) {
+                    String buStoreNumber = orderDetail.getBuStoreNumber();
+                    if (buStoreNumber != null && buStoreNumber.equals(buUserNumber)) {
                         Map<String, String> orderData = new HashMap<>();
-                        orderData.put("date", String.valueOf(order.getOrderDate()));
-                        orderData.put("amount",String.valueOf(order.getOrderGoodsPrice()));
-                        orderData.put("totalPrice",String.valueOf(order.getOrderGoodsTotalPrice()));
+                        orderData.put("date", String.valueOf(order.getCreated_date()));
+                        orderData.put("amount", String.valueOf(orderDetail.getItemPrice()));
+                        orderData.put("totalPrice", String.valueOf(order.getOrderGoodsTotalPrice()));
                         tableData.add(orderData);
                     }
                 }
@@ -176,11 +179,14 @@ public class OrderService {
 
 
     //특정 날짜 조회
-    public List<Order> getDetailsByDate(String date,HttpSession session){
+    public List<NewOrder> getDetailsByDate(String date,HttpSession session){
 
-          List<Order> getDate= orderRepository.findByOrderDateContaining(date);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM");
+        LocalDateTime calculateDate = LocalDateTime.parse(date, formatter);
 
-            return getDate;
+          List<NewOrder> getDate= newOrderRepository.findByCreated_dateContaining(calculateDate);
+
+        return getDate;
     }
 
     //주문 번호로 검색

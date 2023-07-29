@@ -104,4 +104,11 @@ public class NewOrder {
     @Column
     private String orderAddress;
 
+    @Transient
+    private String calculate_date;
+
+    //끝나는 날짜
+    @Transient
+    private String calculate_date_last;
+
 }

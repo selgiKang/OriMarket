@@ -16,6 +16,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -49,9 +51,14 @@ public class OrderController {
     //정산내역
     //calculate get으로 갈 때는 businessmain 코드처럼 해야함! 보고 그 코드 복붙하기!
     @GetMapping("/calculate")
-    public String calculateRequest2(@RequestParam("calculate_date") String calculateDate,
-                                    @RequestParam("calculate_date_last") String calculateDateLast,
+    public String calculateRequest2(@RequestParam("calculate_date") String calculateDateStr,
+                                    @RequestParam("calculate_date_last") String calculateDateLastStr,
                                     Model model,HttpSession session){
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM");
+        LocalDateTime calculateDate = LocalDateTime.parse(calculateDateStr, formatter);
+        LocalDateTime calculateDateLast = LocalDateTime.parse(calculateDateLastStr, formatter);
+
         List<Map<String,String>> tableData = orderService.getTableData(calculateDate,calculateDateLast,model,session);
         System.out.println("getCalculate"+calculateDate+"/"+calculateDateLast);
         int totalCome = 0;
@@ -73,11 +80,18 @@ public class OrderController {
     }
 
     @GetMapping("/sellerList")
-    public String sellerList(@RequestParam("calculate_date") String calculateDate,
-                                    @RequestParam("calculate_date_last") String calculateDateLast,
+    public String sellerList(@RequestParam("calculate_date") String calculateDateStr,
+                                    @RequestParam("calculate_date_last") String calculateDateLastStr,
                                     Model model,HttpSession session){
+        //날짜 데이터로 형변환해서
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM");
+        LocalDateTime calculateDate = LocalDateTime.parse(calculateDateStr, formatter);
+        LocalDateTime calculateDateLast = LocalDateTime.parse(calculateDateLastStr, formatter);
+
         List<Map<String,String>> tableData = orderService.getTableData(calculateDate,calculateDateLast,model,session);
+
         System.out.println("getCalculate"+calculateDate+"/"+calculateDateLast);
+
         int totalCome = 0;
         int orderCount = tableData.size();
         String totalPrice=null;
@@ -132,13 +146,15 @@ public class OrderController {
         // 날짜 정보를 서비스로 전달하여 해당 날짜의 정보를 가져온다.
 
         // detailsService의 메서드 이름과 내용은 프로젝트의 요구사항에 맞게 작성해야 합니다.
-        List<Order> detailsDataList = orderService.getDetailsByDate(date,session);
+        List<NewOrder> detailsDataList = orderService.getDetailsByDate(date,session);
         Long buUserNumber = Long.valueOf(session.getAttribute("buUserNumber").toString());
 
-        for(Order detailsOrder:detailsDataList){
-            if(detailsOrder.getBusinessUser().getBuUserNumber().equals(buUserNumber)){
-                model.addAttribute("detailsDataList", detailsDataList);
-                // 가져온 정보를 뷰에 전달한다.
+        for(NewOrder detailsOrder:detailsDataList){
+            for(NewOrderDetail nod: detailsOrder.getNewOrderDetails()){
+                if(nod.getBuStoreNumber().equals(buUserNumber)){
+                    model.addAttribute("detailsDataList", detailsDataList);
+                    // 가져온 정보를 뷰에 전달한다.
+                }
             }
         }
 
@@ -254,9 +270,14 @@ public class OrderController {
     //정산내역
     @PostMapping("/calculate")
     @ResponseBody
-    public ResponseEntity<List<Map<String,String>>> calculateRequest(@RequestParam("calculate_date") String calculateDate,
-                                                                     @RequestParam("calculate_date_last") String calculateDateLast,
+    public ResponseEntity<List<Map<String,String>>> calculateRequest(@RequestParam("calculate_date") String calculateDateStr,
+                                                                     @RequestParam("calculate_date_last") String calculateDateLastStr,
                                                                      HttpSession session, Model model){
+        //날짜 데이터로 형변환해서
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM");
+        LocalDateTime calculateDate = LocalDateTime.parse(calculateDateStr, formatter);
+        LocalDateTime calculateDateLast = LocalDateTime.parse(calculateDateLastStr, formatter);
+
         List<Map<String,String>> tableData = orderService.getTableData(calculateDate,calculateDateLast,model,session);
 
         int totalCome = 0;

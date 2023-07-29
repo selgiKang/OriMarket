@@ -1,4 +1,6 @@
 <%@ page import="java.util.Date" %>
+<%@ page import="java.time.LocalDateTime" %>
+<%@ page import="java.time.format.DateTimeFormatter" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"  %>
@@ -377,36 +379,50 @@
             border: none;
             font-size: 14px;
             cursor: pointer;
-            font-family: 'omyu pretty', Arial, sans-serif;
+            font-family: 'omyu pretty', Arial, sans-serif;}
 
 
 
     </style>
+<%--    <%--%>
+<%--        Date date = new Date();--%>
+<%--        long utc = date.getTime() + (date.getTimezoneOffset() * 60 * 100);--%>
+<%--        //한국 kst 기준 시간--%>
+<%--        long kstGap = 9 * 60 * 60 * 1000;--%>
+<%--        //한국 시가능로 date 객체 (오늘)--%>
+<%--        Date today = new Date(utc + kstGap);--%>
+
+<%--        int currentYear = today.getYear()+1900; // 전역 변수에 할당--%>
+<%--        int currentMonth = today.getMonth();--%>
+
+<%--        String currentMonthStr = String.valueOf(currentMonth + 1);--%>
+<%--        String currentMonthStr2 = String.valueOf(currentMonth + 2);--%>
+
+<%--        //현재 월 표시--%>
+<%--        if (currentMonthStr.length() == 1) {--%>
+<%--            currentMonthStr = '0' + currentMonthStr;--%>
+<%--        }--%>
+<%--        if (currentMonthStr2.length() == 1) {--%>
+<%--            currentMonthStr2 = '0' + currentMonthStr2;--%>
+<%--        }--%>
+
+<%--        String currentDate = String.valueOf(currentYear) + currentMonthStr;--%>
+<%--        String currentDateLast = String.valueOf(currentYear) + currentMonthStr2;--%>
+
+<%--    %>--%>
     <%
-        Date date = new Date();
-        long utc = date.getTime() + (date.getTimezoneOffset() * 60 * 100);
-        //한국 kst 기준 시간
-        long kstGap = 9 * 60 * 60 * 1000;
-        //한국 시가능로 date 객체 (오늘)
-        Date today = new Date(utc + kstGap);
+        // 현재 시간을 LocalDateTime 형식으로 가져옴
+        LocalDateTime now = LocalDateTime.now();
 
-        int currentYear = today.getYear()+1900; // 전역 변수에 할당
-        int currentMonth = today.getMonth();
+        // 원하는 형식으로 DateTimeFormatter를 생성 (예: "yyyy-MM-dd HH:mm:ss")
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
-        String currentMonthStr = String.valueOf(currentMonth + 1);
-        String currentMonthStr2 = String.valueOf(currentMonth + 2);
+        // LocalDateTime 객체를 문자열로 변환
+        String currentDate = now.format(formatter);
 
-        //현재 월 표시
-        if (currentMonthStr.length() == 1) {
-            currentMonthStr = '0' + currentMonthStr;
-        }
-        if (currentMonthStr2.length() == 1) {
-            currentMonthStr2 = '0' + currentMonthStr2;
-        }
-
-        String currentDate = String.valueOf(currentYear) + currentMonthStr;
-        String currentDateLast = String.valueOf(currentYear) + currentMonthStr2;
-
+        // 한 달 후의 LocalDateTime을 계산
+        LocalDateTime oneMonthLater = now.plusMonths(1);
+        String currentDateLast = oneMonthLater.format(formatter);
     %>
 </head>
 <body>
@@ -794,25 +810,6 @@
             }
         }).open();
     }
-  /*  var posts = []; // 게시글 정보를 저장할 배열
-
-    function previewImage(event) {
-        var imageUpload = event.target;
-        var imageFile = imageUpload.files[0];
-        var imagePreview = document.getElementById("image-preview");
-
-        var reader = new FileReader();
-        reader.onload = function (e) {
-            var img = document.createElement("img");
-            img.src = e.target.result;
-            img.style.maxWidth = "100%";
-            img.style.height = "auto";
-            imagePreview.innerHTML = "";
-            imagePreview.appendChild(img);
-        };
-
-        reader.readAsDataURL(imageFile);
-    }*/
 
     function previewPicture(event) {
         const pictureInput = event.target;

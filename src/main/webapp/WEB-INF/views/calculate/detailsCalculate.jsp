@@ -32,28 +32,21 @@
 </head>
 <body id="detailsCalculate_body">
 <c:forEach items="${detailsDataList}" var="orderList">
-  <c:set var="orderDateStr" value="${orderList.orderDate}" />
+  <c:set var="orderDateStr" value="${orderList.created_date}" />
   <c:set var="formattedDate" value="${fn:substring(orderDateStr, 0, 4)}년 ${fn:substring(orderDateStr, 4, 6)}월 ${fn:substring(orderDateStr, 6, 8)}일" />
 
-  <h3>${formattedDate} 수입</h3>
+  <h3>${orderList.created_date.format(orderDateStr.ofPattern("yyyy년 MM월"))} 수입</h3>
   <table border="1" id="detailsCalculate_table">
-    <tr><th>판매 목록</th>
-      <td>
-        <c:forEach items="${fn:split(orderList.orderGoodsName, ',')}" var="goods">
-          ${goods}<br/>
-        </c:forEach>
-      </td></tr>
-    <tr><th>물건 가격</th>
-      <td>
-        <c:forEach items="${fn:split(orderList.orderGoodsPrice, ',')}" var="goodsPrice">
-        ${goodsPrice}원<br/>
-      </c:forEach>
-      </td></tr>
+    <c:forEach items="${orderList.newOrderDetails}" var="newList">
+      <tr><th>판매 목록</th>
+        <td>${newList.itemName}</td>
+      </tr>
+      <tr><th>물건 가격</th>
+        <td>${newList.itemPrice}</td>
+      </tr>
+    </c:forEach>
     <tr><th>판매 개수</th>
-      <td>
-        <c:forEach items="${fn:split(orderList.orderGoodsNum, ',')}" var="sellNum">
-          ${sellNum}개<br/>
-        </c:forEach>
+      <td>${orderList.orderGoodsNum}
       </td></tr>
     <tr><th>일일 수입</th><td>${orderList.orderGoodsTotalPrice}원</td></tr>
   </table>
