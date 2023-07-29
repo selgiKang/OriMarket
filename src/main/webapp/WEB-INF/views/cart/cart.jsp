@@ -22,7 +22,7 @@
 <body>
 <div id="cart_container">
 	<div id="cart_title">
-		<button onclick="history.go(-1)"><i class="fas fa-regular fa-xmark"></i></button>
+		<button onclick="location.href='/'"><i class="fas fa-regular fa-xmark"></i></button>
 		<p style="display: inline-block; margin-left: 130px;">장바구니</p>
 	</div>
 	<div id="cart_location">
