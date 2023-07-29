@@ -115,7 +115,7 @@
         <div class="main_contents_box">
             <div class="store_favheart_wrap">
                 <%--가게이름--%>
-                <input type="text" class="storename_txt" value="싱싱과일가게" name="storeName${sessionScope.favNumber}" readonly>
+                <input type="text" class="storename_txt" value="${sessionScope.favStoreName}" name="storeName${sessionScope.favNumber}" readonly>
                 <%-- 찜 --%>
                 <div class="favstoreheart">
                 <c:if test="${!empty sessionScope.userId}">
