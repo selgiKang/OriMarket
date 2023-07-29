@@ -253,6 +253,9 @@ public class OrderController {
         save.setNewOrderDetails(byOrderNumber);
         newOrderRepository.save(save);
 
+        cartService.cartPayment(userId);
+        cartService.cartDeleteAll(userId,session);
+
         model.addAttribute("newOrder",save);
 
         return "order/order_delivery";
