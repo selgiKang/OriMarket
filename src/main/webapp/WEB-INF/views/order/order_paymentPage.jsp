@@ -24,8 +24,8 @@
 	<div id= "paymentpage_main">
 		<form action="/order_paymentPage1/${userId}" method="post">
 			<input type="hidden" name="orderNumber" value="<%=today%>${userId}">
-			<input type="hidden" name="orderUserId" value="${userId}">
-			<input type="hidden" name="orderDate" value="<%=today%>">
+			<%--<input type="hidden" name="orderUserId" value="${userId}">--%>
+			<input type="hidden" name="createdDate" value="<%=today%>">
 			<div id="paymentpage_title">
 				<%-- 전 페이지 돌아가기, (넘어올때 담겼던 orderItem은 여기서 삭제)--%>
 				<a href="/cart/order_renew/${userId}"><i class="fas fa-solid fa-arrow-left" style="color: #46a973;"></i></a>

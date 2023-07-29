@@ -89,12 +89,12 @@ public class NewOrder {
     private Rider rider;
 
     //생성일
-    @CreatedDate
-    private LocalDateTime created_date;
+    @Column
+    private String createdDate;
 
     //수정일
     @LastModifiedDate
-    private LocalDateTime modified_date;
+    private LocalDateTime modifiedDate;
 
     @OneToMany(mappedBy = "newOrder")
     private List<NewOrderDetail> newOrderDetails = new ArrayList<>();

@@ -102,23 +102,32 @@ public class OrderService {
             }
         }
 
-        public List<Map<String,String>> getTableData(LocalDateTime calculateDate, LocalDateTime calculateDateLast, Model model, HttpSession session){
+        public List<Map<String,String>> getTableData(String calculateDate, String calculateDateLast, Model model, HttpSession session){
 
             List<Map<String,String>> tableData = new ArrayList<>();
             System.out.println("calculateDate"+calculateDate+", calculateLast"+calculateDateLast);
-            List<NewOrder> orders = newOrderRepository.findNewOrdersBetweenDates(calculateDate,calculateDateLast);
-
+            String calculateDateSixDigits = calculateDate.substring(0, 6);
+            String calculateDateLastSixDigits = calculateDateLast.substring(0, 6);
+            System.out.println(calculateDateSixDigits+"/"+calculateDateLastSixDigits);
+            List<NewOrder> orders = newOrderRepository.findNewOrdersBetweenDates(calculateDateSixDigits,calculateDateLastSixDigits);
+            System.out.println("Found " + orders.size() + " orders.");
+            System.out.println(1);
             //사업자 번호 세션꺼 꺼내서
             //그 스토어 이름이랑 오더의 스토어 이름
-            Long buUserNumber = Long.valueOf(session.getAttribute("buUserNumber").toString());
+            String buUserNumber = session.getAttribute("buUserNumber").toString();
             for (NewOrder order : orders) {
+                System.out.println(2);
                 for (NewOrderDetail orderDetail : order.getNewOrderDetails()) {
-                    String buStoreNumber = orderDetail.getBuStoreNumber();
-                    if (buStoreNumber != null && buStoreNumber.equals(buUserNumber)) {
+                    String buStoreNumbers = orderDetail.getBuStoreNumber();
+                    System.out.println(3+","+buStoreNumbers);
+                    System.out.println(4+","+buUserNumber);
+                    if (buStoreNumbers != null && buStoreNumbers.equals(buUserNumber)) {
+                        System.out.println(5);
                         Map<String, String> orderData = new HashMap<>();
-                        orderData.put("date", String.valueOf(order.getCreated_date()));
+                        orderData.put("date", String.valueOf(order.getCreatedDate()));
                         orderData.put("amount", String.valueOf(orderDetail.getItemPrice()));
                         orderData.put("totalPrice", String.valueOf(order.getOrderGoodsTotalPrice()));
+                        orderData.put("orderNumber",order.getOrderNumber());
                         tableData.add(orderData);
                     }
                 }
@@ -180,11 +189,8 @@ public class OrderService {
 
     //특정 날짜 조회
     public List<NewOrder> getDetailsByDate(String date,HttpSession session){
-
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM");
-        LocalDateTime calculateDate = LocalDateTime.parse(date, formatter);
-
-          List<NewOrder> getDate= newOrderRepository.findByCreated_dateContaining(calculateDate);
+        System.out.println("데이트:"+date);
+          List<NewOrder> getDate= newOrderRepository.findByCreatedDateContaining(date);
 
         return getDate;
     }

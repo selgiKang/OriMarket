@@ -415,7 +415,7 @@
         LocalDateTime now = LocalDateTime.now();
 
         // 원하는 형식으로 DateTimeFormatter를 생성 (예: "yyyy-MM-dd HH:mm:ss")
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd HH:mm:ss");
 
         // LocalDateTime 객체를 문자열로 변환
         String currentDate = now.format(formatter);

@@ -59,6 +59,7 @@ function getCurrentDate(){
     }
     return currentYear+currentMonth;
 }
+
 function getCurrentDateLast(){
     var date = new Date();
     var currentYear = date.getFullYear();
@@ -141,12 +142,16 @@ function updateTable(data) {
     for (var i = 0; i < data.length; i++) {
         var row = $('<tr></tr>');
         var dateCell = $('<td class="calculate_main_table_td_1" style="text-align: center;"></td>');
-        if(data[i].date){
-            dateCell.text(data[i].date.substr(0,8));
-        }else {
-            dateCell.text("")
+        if (data[i].date) {
+            // 기존 날짜 출력 부분 대신 아래 코드로 날짜를 링크로 만들어줍니다.
+            var dateLink = $('<a></a>')
+                .attr('href', '/details?orderNumber=' + data[i].orderNumber)
+                .text(data[i].date.substr(0, 8));
+            dateCell.append(dateLink);
+        } else {
+            dateCell.text("");
         }
-        var amountCell = $('<td class="calculate_main_table_td_2" style="text-align: center;"></td>').text(data[i].totalPrice+"원");
+        var amountCell = $('<td class="calculate_main_table_td_2" style="text-align: center;"></td>').text(data[i].totalPrice + "원");
 
         row.append(dateCell);
         row.append(amountCell);

@@ -57,7 +57,11 @@
 				<tr class="orderDelivery_table_tr_1"><td>${newOrder.orderNumber}</td></tr>
 				<tr class="orderDelivery_table_tr_2">
 					<td>
-						${newOrder.created_date}
+						${fn:substring(newOrder.createdDate, 0, 4)}년
+						${fn:substring(newOrder.createdDate, 4, 6)}월
+						${fn:substring(newOrder.createdDate, 6, 8)}일
+						${fn:substring(newOrder.createdDate, 8, 10)}시
+						${fn:substring(newOrder.createdDate, 10, 12)}분
 					</td>
 				</tr>
 				<tr class="orderDelivery_table_tr_1"><td>배달 주소</td></tr>
