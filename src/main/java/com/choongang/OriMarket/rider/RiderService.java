@@ -70,7 +70,7 @@ public class RiderService {
            String orderStatus = newOrder.getOrderStatus();
            if (orderStatus == null) {
                // 주문 상태가 null인 경우 아무 작업도 하지 않음
-           } else if (orderStatus.equals("배달시작")) {
+           } else if (orderStatus.equals("픽업완료")) {
                newOrders.add(newOrder);
            }
        }

@@ -41,49 +41,50 @@
 		<div id="cart_itemList">
 			<ul>
 				<%--반복문시작--%>
-				<c:set var="prevBuStoreName" value="" />
+				<c:set var="processedStoreNames" value="" scope="page" />
 				<c:forEach var="orderList" items="${userOrderList}" varStatus="status">
-					<c:if test="${!orderList.businessStore.buStoreName.equals(prevBuStoreName)}">
-						<c:set var="prevBuStoreName" value="${orderList.businessStore.buStoreName}" />
+					<c:if test="${orderList.item.businessStore eq orderList.businessStore}">
+					<c:if test="${!processedStoreNames.contains(orderList.businessStore.buStoreName)}">
+						<c:set var="processedStoreNames" value="${processedStoreNames},${orderList.businessStore.buStoreName}" scope="page" />
 						<div id="itemList">
 						<h3>${orderList.businessStore.buStoreName}</h3>
-					</c:if>
 					<ul>
 						<c:if test="${orderList.item.businessStore eq orderList.businessStore}">
-							<c:forEach var="item" items="${orderList.businessStore.items}">
-								<c:if test="${orderList.item eq item}">
+							<c:forEach var="orderList1" items="${userOrderList}">
+							<c:forEach var="item1" items="${orderList.businessStore.items}">
+								<c:if test="${orderList1.item eq item1}">
 									<li>
 										<div class="cart_info">
 											<input type="checkbox" name="cbox" class="individual_checkbox" data-item-index="${status.index}" checked="checked" >
-											<input type="hidden" class="individual_totalCount" value="${orderList.count}">
-											<input type="hidden" class="individual_itemPrice" name="individual_itemPrice" value="${orderList.itemPrice}">
-											<input type="hidden" class="individual_totalPrice" value="${orderList.count*orderList.itemPrice}">
-											<input type="hidden" name="itemId" value="${orderList.item.itemId}">
+											<input type="hidden" class="individual_totalCount" value="${orderList1.count}">
+											<input type="hidden" class="individual_itemPrice" name="individual_itemPrice" value="${orderList1.itemPrice}">
+											<input type="hidden" class="individual_totalPrice" value="${orderList1.count*orderList1.itemPrice}">
+											<input type="hidden" name="itemId" value="${orderList1.item.itemId}">
 											<!-- 상품이미지나 상품타이틀을 클릭하면 상세페이지로 넘어간다(a태그) -->
 											<a href="상품상세페이지">
 												<div class="cart_itemImg">
-													<img src="../../img/store/item/${orderList.item.itemImageUrl}">
+													<img src="../../img/store/item/${orderList1.item.itemImageUrl}">
 												</div>
 												<div class="cart_itemTitle">
-													<p>${orderList.item.itemName}</p>
+													<p>${orderList1.item.itemName}</p>
 												</div>
 											</a>
 											<input type="hidden" id="userId" value="${sessionScope.userId}">
-											<input type="hidden" data-cart-item-id="${orderList.cartItemId}" name="individual_cartItemId" class="individual_cartItemId" value="${orderList.cartItemId}">
-											<button class="cart_xmark" onclick="deleteBtn(${orderList.cartItemId})"><i class="fas fa-regular fa-xmark"></i></button>
+											<input type="hidden" data-cart-item-id="${orderList1.cartItemId}" name="individual_cartItemId" class="individual_cartItemId" value="${orderList.cartItemId}">
+											<button class="cart_xmark" onclick="deleteBtn(${orderList1.cartItemId})"><i class="fas fa-regular fa-xmark"></i></button>
 
 											<!-- 수량선택(-,+),가격표시 -->
 											<div class="cart_itemDescription">
 												<div class="cart_itemOption">
-													<button type="button" onclick="minusBtn('${orderList.cartItemId}',${status.index})"><i class="fas fa-solid fa-circle-minus"></i></button>
-													<input type="text" size="1" name="currentCnt" id="currentCnt${status.index}" value="${orderList.count}">
-													<input type="hidden" name="itemCnt" id="itemCnt${status.index}" value="${orderList.item.itemCnt}">
-													<button type="button" onclick="plusBtn('${orderList.cartItemId}',${status.index})"><i class="fas fa-solid fa-circle-plus"></i></button>
+													<button type="button" onclick="minusBtn('${orderList1.cartItemId}',${status.index})"><i class="fas fa-solid fa-circle-minus"></i></button>
+													<input type="text" size="1" name="currentCnt" id="currentCnt${status.index}" value="${orderList1.count}">
+													<input type="hidden" name="itemCnt" id="itemCnt${status.index}" value="${orderList1.item.itemCnt}">
+													<button type="button" onclick="plusBtn('${orderList1.cartItemId}',${status.index})"><i class="fas fa-solid fa-circle-plus"></i></button>
 												</div>
 												<div class="cart_itemPrice">
-													<input id="sellPrice_${status.index}" type="hidden" value="${orderList.itemPrice}">
+													<input id="sellPrice_${status.index}" type="hidden" value="${orderList1.itemPrice}">
 													<span id="totalPriceCalSpan_${status.index}">
-													${orderList.itemPrice * orderList.count}원
+													${orderList1.itemPrice * orderList1.count}원
 													</span>
 													<script>
 														var user = (session.getAttribute("userId")).toString();
@@ -104,11 +105,14 @@
 									</li>
 								</c:if>
 							</c:forEach>
+							</c:forEach>
 						</c:if>
 					</ul>
 					<c:if test="${!orderList.businessStore.buStoreName.equals(prevBuStoreName)}">
 					</div>
 					<br>
+					</c:if>
+					</c:if>
 					</c:if>
 				</c:forEach>
 			</ul>
