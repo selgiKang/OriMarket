@@ -35,6 +35,10 @@
             right: 8px;
         }
 
+        .line:first-child{
+            margin-top: 100px;
+        }
+
         /* 메인 컨테이너 스타일 */
 
         .main-container {
@@ -314,6 +318,13 @@
             cursor: pointer;
             font-family: 'omyu pretty', Arial, sans-serif;
         }
+        button.backbtn {
+            display: flex;
+            align-items: center;
+            font-size: 20px;
+            color: #999;
+            margin: 0 0 0 10px; width: 30px; height: 30px; background-color: #fff; border-radius: 50%; border: 1px solid #999; cursor: pointer; justify-content: center;}
+        button.backbtn:hover {background-color:#333; color:#fff;}
 
     </style>
 
@@ -323,13 +334,14 @@
 <div class="main-container">
 
     <div class="storecare_container">
-
         <div class="tabs">
             <input class="input" name="tabs-1" type="radio" id="tab-1"checked="checked" />
             <label class="label" for="tab-1">가게 관리</label>
             <div class="panel" >
                 <div class="line"></div>
                 <form action="/storenotice1" method="post" enctype="multipart/form-data">
+                    <button class="backbtn" onclick="window.location.replace('storenotice1')">&lt;</button>
+                    <div class="line"></div>
                     <div class="storecare_logo">
                         <h3>로고</h3>
                         <input type="file" accept="image/*" name="pictureUrl" id="logo-upload" onchange="previewPicture(event)"/>
