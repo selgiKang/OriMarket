@@ -89,8 +89,8 @@ public class NewOrder {
     private Rider rider;
 
     //생성일
-    @CreatedDate
-    private LocalDateTime createdDate;
+    @Column
+    private String createdDate;
 
     //수정일
     @LastModifiedDate
@@ -101,5 +101,12 @@ public class NewOrder {
 
     @Column
     private String orderAddress;
+
+    @Transient
+    private String calculate_date;
+
+    //끝나는 날짜
+    @Transient
+    private String calculate_date_last;
 
 }
