@@ -21,6 +21,8 @@ import org.springframework.web.client.RestTemplate;
 
 import javax.servlet.http.HttpSession;
 import java.net.URI;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -35,6 +37,7 @@ public class OrderService {
 
     @Autowired
     private  final OrderRepository orderRepository;
+    private final NewOrderRepository newOrderRepository;
     private final ItemRepository itemRepository;
     private final UserRepository userRepository;
 
@@ -99,23 +102,32 @@ public class OrderService {
             }
         }
 
-        public List<Map<String,String>> getTableData(String calculateDate, String calculateDateLast,Model model,HttpSession session){
+        public List<Map<String,String>> getTableData(String calculateDate, String calculateDateLast, Model model, HttpSession session){
 
             List<Map<String,String>> tableData = new ArrayList<>();
             System.out.println("calculateDate"+calculateDate+", calculateLast"+calculateDateLast);
-            List<Order> orders = orderRepository.findOrdersBetweenDates(calculateDate,calculateDateLast);
-
+            String calculateDateSixDigits = calculateDate.substring(0, 6);
+            String calculateDateLastSixDigits = calculateDateLast.substring(0, 6);
+            System.out.println(calculateDateSixDigits+"/"+calculateDateLastSixDigits);
+            List<NewOrder> orders = newOrderRepository.findNewOrdersBetweenDates(calculateDateSixDigits,calculateDateLastSixDigits);
+            System.out.println("Found " + orders.size() + " orders.");
+            System.out.println(1);
             //사업자 번호 세션꺼 꺼내서
-            //그 스토어 이름이랑 오더의 스토어 이르
-            Long buUserNumber = Long.valueOf(session.getAttribute("buUserNumber").toString());
-            for(Order order : orders){
-                //사업자 번호 비교
-                if(order.getBusinessUser().getBuUserNumber()!=null){
-                    if(order.getBusinessUser().getBuUserNumber().equals(buUserNumber)){
+            //그 스토어 이름이랑 오더의 스토어 이름
+            String buUserNumber = session.getAttribute("buUserNumber").toString();
+            for (NewOrder order : orders) {
+                System.out.println(2);
+                for (NewOrderDetail orderDetail : order.getNewOrderDetails()) {
+                    String buStoreNumbers = orderDetail.getBuStoreNumber();
+                    System.out.println(3+","+buStoreNumbers);
+                    System.out.println(4+","+buUserNumber);
+                    if (buStoreNumbers != null && buStoreNumbers.equals(buUserNumber)) {
+                        System.out.println(5);
                         Map<String, String> orderData = new HashMap<>();
-                        orderData.put("date", String.valueOf(order.getOrderDate()));
-                        orderData.put("amount",String.valueOf(order.getOrderGoodsPrice()));
-                        orderData.put("totalPrice",String.valueOf(order.getOrderGoodsTotalPrice()));
+                        orderData.put("date", String.valueOf(order.getCreatedDate()));
+                        orderData.put("amount", String.valueOf(orderDetail.getItemPrice()));
+                        orderData.put("totalPrice", String.valueOf(order.getOrderGoodsTotalPrice()));
+                        orderData.put("orderNumber",order.getOrderNumber());
                         tableData.add(orderData);
                     }
                 }
@@ -176,11 +188,11 @@ public class OrderService {
 
 
     //특정 날짜 조회
-    public List<Order> getDetailsByDate(String date,HttpSession session){
+    public List<NewOrder> getDetailsByDate(String date,HttpSession session){
+        System.out.println("데이트:"+date);
+          List<NewOrder> getDate= newOrderRepository.findByCreatedDateContaining(date);
 
-          List<Order> getDate= orderRepository.findByOrderDateContaining(date);
-
-            return getDate;
+        return getDate;
     }
 
     //주문 번호로 검색

@@ -32,10 +32,7 @@ public class ManagerController {
 
     @Autowired
     private final ManagerService managerService;
-    private final RealTimeRepository realTimeRepository;
-    private final OrderService orderService;
     private final NewOrderRepository newOrderRepository;
-    private final RealTimeService realTimeService;
 
     //로그인 페이지
     @GetMapping("/managerLogin")

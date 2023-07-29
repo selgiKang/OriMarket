@@ -57,7 +57,11 @@
 				<tr class="orderDelivery_table_tr_1"><td>${newOrder.orderNumber}</td></tr>
 				<tr class="orderDelivery_table_tr_2">
 					<td>
-						${newOrder.created_date}
+						${fn:substring(newOrder.createdDate, 0, 4)}년
+						${fn:substring(newOrder.createdDate, 4, 6)}월
+						${fn:substring(newOrder.createdDate, 6, 8)}일
+						${fn:substring(newOrder.createdDate, 8, 10)}시
+						${fn:substring(newOrder.createdDate, 10, 12)}분
 					</td>
 				</tr>
 				<tr class="orderDelivery_table_tr_1"><td>배달 주소</td></tr>
@@ -66,12 +70,16 @@
 			<hr>
 			<table id="orderDelivery_table_2">
 				<tr class="orderDelivery_table_tr_1"><td colspan="2">주문 내역</td></tr>
+				<c:set var="prevBuStoreName" value="" />
 				<c:forEach var="store" items="${newOrder.newOrderDetails}">
+					<c:if test="${!store.buStoreName.equals(prevBuStoreName)}">
+					<c:set var="prevBuStoreName" value="${store.buStoreName}" />
 					<tr class="orderDelivery_table_tr_1"><td colspan="2">${store.buStoreName}</td></tr>
+					</c:if>
 					<tr class="orderDelivery_table_tr_2">
-								<tr>
-									<td>${store.itemName}&nbsp;&nbsp;&nbsp;${store.itemPrice}원 <small style="color: #818083;">&nbsp;&nbsp;&nbsp;x${store.itemCount}</small></td>
-								</tr>
+						<tr>
+							<td>${store.itemName}&nbsp;&nbsp;&nbsp;${store.itemPrice}원 <small style="color: #818083;">&nbsp;&nbsp;&nbsp;x${store.itemCount}</small></td>
+						</tr>
 					</tr>
 				</c:forEach>
 			</table>
