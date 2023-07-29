@@ -100,7 +100,7 @@ public class OrderController {
     @GetMapping("/order_paymentPage")
     public String orderPaymentPage(){return "order/order_paymentPage";}
     @GetMapping("/order_pastorder")
-    public String orderPastorder(User user,HttpSession session,Model model){
+    public String orderPastorder(User user,HttpSession session,Model model,NewOrderDetail newOrderDetail){
         if(session.getAttribute("userId")==null){
             return "error/login_error";
         }else {
@@ -148,21 +148,8 @@ public class OrderController {
     @GetMapping("/order_receiptDelivery")
     public String pastOrderDetailList(@RequestParam("orderNumber")String orderNumber,HttpSession session,Model model){
 
-        Order resultPastOrder = orderService.getOrderNumberList(orderNumber);
-        model.addAttribute("orderDelivery",resultPastOrder);
-
-        //배송 상태 찾아서 넣기
-        Order order = new Order();
-        order.setOrderNumber(orderNumber);
-
-
-        RealTimeStatus rResult = realTimeService.findRts(order,session);
-
-        if(rResult!=null) {
-            model.addAttribute("rtsOrderIng", rResult.getRtsOrderIng());
-            model.addAttribute("rtsRiderIng", rResult.getRtsRiderIng());
-            model.addAttribute("rtsRiderFinish", rResult.getRtsRiderFinish());
-        }
+        NewOrder resultPastOrder = newOrderRepository.findByOrderNumber(orderNumber);
+        model.addAttribute("newOrder",resultPastOrder);
 
         return "order/order_delivery";
     }
