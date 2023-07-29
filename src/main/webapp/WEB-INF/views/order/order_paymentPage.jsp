@@ -77,7 +77,7 @@
 							</c:if>
 						</td>
 							<input type="hidden" name="orderGoodsNum" value="${cartItems.count}" readonly>
-						</tr>
+					</tr>
 			</c:forEach>
 
 					<tr>

@@ -83,12 +83,9 @@ public class CartController {
                     }
                 }
             }
-
-
             model.addAttribute("itemzzz",items);
             model.addAttribute("businessStoreszzz",businessStores);
-
-
+            //여기까지 실험
 
             model.addAttribute("cartItemList", cartItems);
             model.addAttribute("totalPrice", totalPrice);

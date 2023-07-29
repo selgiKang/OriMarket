@@ -70,12 +70,16 @@
 			<hr>
 			<table id="orderDelivery_table_2">
 				<tr class="orderDelivery_table_tr_1"><td colspan="2">주문 내역</td></tr>
+				<c:set var="prevBuStoreName" value="" />
 				<c:forEach var="store" items="${newOrder.newOrderDetails}">
+					<c:if test="${!store.buStoreName.equals(prevBuStoreName)}">
+					<c:set var="prevBuStoreName" value="${store.buStoreName}" />
 					<tr class="orderDelivery_table_tr_1"><td colspan="2">${store.buStoreName}</td></tr>
+					</c:if>
 					<tr class="orderDelivery_table_tr_2">
-							<tr>
-								<td>${store.itemName}&nbsp;&nbsp;&nbsp;${store.itemPrice}원 <small style="color: #818083;">&nbsp;&nbsp;&nbsp;x${store.itemCount}</small></td>
-							</tr>
+						<tr>
+							<td>${store.itemName}&nbsp;&nbsp;&nbsp;${store.itemPrice}원 <small style="color: #818083;">&nbsp;&nbsp;&nbsp;x${store.itemCount}</small></td>
+						</tr>
 					</tr>
 				</c:forEach>
 			</table>
