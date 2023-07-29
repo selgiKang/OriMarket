@@ -75,7 +75,7 @@ public class Review {
 
     public String getFormattedCreatedDate() {
         // 원하는 형식으로 DateTimeFormatter를 생성
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd / HH:mm:ss");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy년MM월dd일 / HH시mm분ss초");
 
         // LocalDateTime 객체를 원하는 형식으로 변환하여 문자열로 반환
         return created_date.format(formatter);
@@ -83,7 +83,7 @@ public class Review {
 
     public String getFormattedCreatedDate1() {
         // 원하는 형식으로 DateTimeFormatter를 생성
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd / HH:mm:ss");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy년MM월dd일 / HH시mm분ss초");
 
         // LocalDateTime 객체를 원하는 형식으로 변환하여 문자열로 반환
         return modified_date.format(formatter);
