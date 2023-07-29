@@ -408,7 +408,14 @@
                                             <p>${pastOrder.deliveryType}</p>
                                         </div>
                                         <div class="date">
-                                            <p>${pastOrder.created_date.format(DateTimeFormatter.ofPattern("yyyy.MM.dd HH:mm:ss"))}</p>
+                                            <p>
+                                                ${fn:substring(pastOrder.createdDate, 0, 4)}.
+                                                ${fn:substring(pastOrder.createdDate, 4, 6)}.
+                                                ${fn:substring(pastOrder.createdDate, 6, 8)}&nbsp;
+                                                ${fn:substring(pastOrder.createdDate, 8, 10)}:
+                                                ${fn:substring(pastOrder.createdDate, 10, 12)}:
+                                                ${fn:substring(pastOrder.createdDate, 12, 14)}
+                                            </p>
                                         </div>
                                     </div>
                                     <div style="position: absolute; top: 10px; right: 10px;">
