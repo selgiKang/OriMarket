@@ -1,11 +1,9 @@
 package com.choongang.OriMarket.order;
 
-import com.choongang.OriMarket.business.user.BusinessUser;
+
 import com.choongang.OriMarket.manager.user.ManagerUser;
 import com.choongang.OriMarket.rider.Rider;
-import com.choongang.OriMarket.store.Item;
 import com.choongang.OriMarket.user.User;
-import com.choongang.OriMarket.user.UserMarket;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
