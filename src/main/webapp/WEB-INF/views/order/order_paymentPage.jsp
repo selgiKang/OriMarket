@@ -41,12 +41,11 @@
 			<hr>
 			<div style="text-align: right;"><a class="order_paymentPage_btn_filter1"><i class="fa-solid fa-caret-up" style="color: #ee9820;"></i></a></div>
 			<div id= "paymentpage_section_2">
-				<c:forEach var="item" items="${itemzzz}">
-					<h1>${item.itemName}</h1>
-				</c:forEach>
 
-			<c:set var="prevBuStoreName" value="" />
+			<c:set var="processedStoreNames" value="" scope="page" />
 			<c:forEach var="cartItems" items="${cartItemList}" varStatus="status">
+			<input type="hidden" name="itemId1" id="itemId" value="${cartItems.item.itemId}">
+			<c:if test="${cartItems.item.businessStore eq cartItems.businessStore}">
 			<c:if test="${status.index eq 0}">
 				<input type="hidden" name = "orderMarketName" value="${cartItems.businessStore.market.marketName}" readonly>
 				<h3 style="text-align: center; margin-top: -20px;">${cartItems.businessStore.market.marketName}</h3>
@@ -54,30 +53,30 @@
 			</c:if>
 					<!-- 2023_07_02 같은 가게 물건이면?? 반복문 출력 고민 -->
 					<!-- 반복문 출력 위치 -->
-				<c:if test="${!cartItems.businessStore.buStoreName.equals(prevBuStoreName)}">
-					<c:set var="prevBuStoreName" value="${cartItems.businessStore.buStoreName}" />
+				<c:if test="${!processedStoreNames.contains(cartItems.businessStore.buStoreName)}">
+					<c:set var="processedStoreNames" value="${processedStoreNames},${cartItems.businessStore.buStoreName}" scope="page" />
 					<tr class= "paymentpage_tr_1">
 						<th colspan= "3">
 							${cartItems.businessStore.buStoreName}
 						</th>
 					</tr>
-				</c:if>
-					<input type="hidden" name="itemId1" id="itemId" value="${cartItems.item.itemId}">
 					<tr class= "paymentpage_tr_2">
 						<td colspan="3" class= "paymentpage_td_1">
-							<c:if test="${cartItems.item.businessStore eq cartItems.businessStore}">
-								<c:forEach var="item" items="${cartItems.businessStore.items}">
-									<c:if test="${cartItems.item eq item}">
+							<c:forEach var="cartItems1" items="${cartItemList}">
+								<c:forEach var="item1" items="${cartItems.businessStore.items}">
+									<c:if test="${cartItems1.item eq item1}">
 										<p style="text-align: left; padding-left: 5px; position: relative">
-										${cartItems.item.itemName} &nbsp;&nbsp;&nbsp; 가격: ${cartItems.item.itemPrice} 원
-										<span style="position: absolute; right: 10px;"> 갯수: ${cartItems.count}</span>
+										${cartItems1.item.itemName} &nbsp;&nbsp;&nbsp; 가격: ${cartItems1.item.itemPrice} 원
+										<span style="position: absolute; right: 10px;"> 갯수: ${cartItems1.count}</span>
 										</p>
 									</c:if>
 								</c:forEach>
-							</c:if>
+							</c:forEach>
 						</td>
-							<input type="hidden" name="orderGoodsNum" value="${cartItems.count}" readonly>
 					</tr>
+				</c:if>
+				</c:if>
+				<input type="hidden" name="orderGoodsNum" value="${cartItems.count}" readonly>
 			</c:forEach>
 
 					<tr>

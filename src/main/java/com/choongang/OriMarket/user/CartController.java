@@ -64,28 +64,20 @@ public class CartController {
                 totalPrice += (cartItem.getItem().getItemPrice() * cartItem.getCount());
             }
 
-            //가게 물건 저장
-            List<Item> items = new ArrayList<>();
-            Set<BusinessStore> businessStores = new HashSet<>();
-
-            for (CartItem cartItem : cartItems) {
-                businessStores.add(cartItem.getBusinessStore());
-            }
-            for(CartItem cartItem: cartItems){
-                        items.add(cartItem.getItem());
-            }
-
-            for (BusinessStore businessStore : businessStores) {
-                System.out.println("가게이름:" + businessStore.getBuStoreName());
-                for (Item item : items) {
-                    if (businessStore.equals(item.getBusinessStore())) {
-                        System.out.println("물건: " + item.getItemName());
+           /*   반복물 출력 실험
+           for(int i=0;i<cartItems.size();i++){
+                if(cartItems.get(i).getItem().getBusinessStore().equals(cartItems.get(i).getBusinessStore())){
+                    System.out.println("가게:"+cartItems.get(i).getBusinessStore().getBuStoreName());
+                    for(CartItem cartItem:cartItems){
+                        for(Item item:cartItems.get(i).getBusinessStore().getItems()){
+                            if(cartItem.getItem().equals(item)){
+                                System.out.println("물건이름: "+item.getItemName());
+                            }
+                        }
                     }
                 }
             }
-            model.addAttribute("itemzzz",items);
-            model.addAttribute("businessStoreszzz",businessStores);
-            //여기까지 실험
+            */
 
             model.addAttribute("cartItemList", cartItems);
             model.addAttribute("totalPrice", totalPrice);
