@@ -89,7 +89,7 @@
 					<!-- 반복문 출력 끝 -->
 					<tr align="center">
 						<td colspan="3" class= "paymentpage_td_2">
-							<a href="/"><img id="paymentpage_img_plus" src="../../img/order/paymentpage_img_plus_1.png"></a>
+							<a href="/cart/order_renew/${userId}"><img id="paymentpage_img_plus" src="../../img/order/paymentpage_img_plus_1.png"></a>
 						</td>
 					</tr>
 				</table>
