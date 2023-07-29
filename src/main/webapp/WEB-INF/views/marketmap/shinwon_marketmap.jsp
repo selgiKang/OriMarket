@@ -45,7 +45,7 @@
                 </div>
 
                 <!-- 신림기름집 -->
-                <div class="map_bg_content3_icon store_shinrimoil_box" onclick="">
+                <div class="map_bg_content3_icon store_shinrimoil_box" onclick="location.href='/store?favStoreName=신림기름집'">
                     <img class="store_shinrimoil_icon oil" src="../../img/marketmap/oil.png">
                     <p class="store_shinrimoil_txt">신림기름집</p>
                 </div>

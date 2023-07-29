@@ -37,9 +37,6 @@ public class Rider {
 
     private String driverLicense;
 
-    @OneToMany(mappedBy = "rider")
-    private List<Order> orders = new ArrayList();
-
 
 
 

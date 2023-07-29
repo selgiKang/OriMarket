@@ -118,7 +118,7 @@
 	<div class="selected_menu">
 		<div class="mainfood">
 			<!-- 뒤로가기 -->
-			<button class="backbtn" onclick="window.history.go(-1)">&lt;</button>
+			<button class="backbtn" onclick="location.href='/store?favStoreName=${sessionScope.favStoreName}'"><</button>
 			<img src="../../img/store/item/${item.itemImageUrl}" alt="메뉴이미지" style="width: 90%;height: 90%; margin: auto;box-sizing: border-box;display: inline-block;">
 		</div>
 		<p class="pic_not">위 사진은 연출된 사진으로 실제와 다를 수 있습니다.</p>
@@ -162,50 +162,59 @@
 		</div>
 	</div>
 </div>
+<!-- HTML 코드는 여기에 위치합니다 -->
+
 <script>
+	let isSubmitting = false;
+
 	function submitForm() {
-		//재고
+		if (isSubmitting) return; // 이미 제출 중이면 함수를 빠져나감
+		isSubmitting = true; // 제출 중 상태로 변경
+
+		// 장바구니 담기 로직 시작
+		// 재고
 		var itemCnt = parseInt(document.getElementById("itemCnt").value, 10);
-		//선택 수
+		// 선택 수
 		var countInput = parseInt(document.getElementById("countInput").value, 10);
-		//장바구니 수량
+		// 장바구니 수량
 		var cartCnt = parseInt(document.getElementById("cartCnt").value, 10);
 
 		const itemId = document.getElementById("itemId").value;
 
-		//아이디
+		// 아이디
 		const userId = '<%= session.getAttribute("userId") %>';
 
 		console.log("userId:", userId); // userId의 값을 콘솔에 출력해보세요.
 		if (userId === null || userId === "null") {
 			alert("장바구니를 이용하시려면 로그인이 필요합니다.");
 			window.location.href = "/mypage";
-		}else {
+		} else {
 			console.log("장바구니 수량"+cartCnt);
 			console.log("전체 수량"+countInput+cartCnt);
-			//if문 추가해서 재고 보다 많이 담으면 재고 알림?
-			if(itemCnt<countInput+cartCnt){
+			// if문 추가해서 재고 보다 많이 담으면 재고 알림?
+			if (itemCnt < countInput + cartCnt) {
 				alert("재고 수량보다 많습니다.")
-				window.location.href="/detailmenu/"+itemId+"/"+userId;
-			}else{
+				window.location.href = "/detailmenu/" + itemId + "/" + userId;
+			} else {
 				const confirmed = confirm("장바구니에 담으시겠습니까?");
 				if (confirmed) {
-					// 아이템을 장바구니에 추가하는 동작을 여기에 구현합니다.
-					// 예를 들어, JavaScript를 사용하여 폼을 제출할 수 있습니다.
+					// 아래 두 줄 추가
 					document.getElementById("cartForm").submit();
-
-
+					return;
 				} else {
 					// 사용자가 "취소"를 클릭한 경우 추가적인 동작을 여기에 추가할 수 있습니다.
 				}
 			}
 		}
+
+		isSubmitting = false; // 제출 완료 후 상태 변경
 	}
 
 	function viewCart() {
 		window.location.href="/"+userId+"/cart";
 	}
 </script>
+
 <jsp:include page="../footer/nav_footer.jsp" />
 </body>
 </html>

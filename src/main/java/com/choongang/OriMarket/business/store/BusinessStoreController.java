@@ -62,9 +62,11 @@ public class BusinessStoreController {
     public String storenoticesave(@ModelAttribute BusinessStore businessStore, HttpSession session,Model model, @RequestParam("pictureUrl") MultipartFile file) throws IOException {
 
         if(file.isEmpty()){
-            BusinessStore businessStore1 = businessStoreRepository.findById(businessStore.getBuStoreNumber()).orElseThrow();
-            String s = businessStore1.getBuStoreImageUrl();
-            businessStoreService.save(businessStore, session, model, s);
+            if(businessStore.getBuStoreNumber() != null){
+                BusinessStore businessStore1 = businessStoreRepository.findById(businessStore.getBuStoreNumber()).orElseThrow();
+                String s = businessStore1.getBuStoreImageUrl();
+                businessStoreService.save(businessStore, session, model, s);
+            }
         }else {
             String s = imageService.saveStoreImage(file);
             System.out.println("이건먼가요?:" + s);

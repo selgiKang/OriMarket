@@ -1,5 +1,6 @@
 package com.choongang.OriMarket.user;
 
+import com.choongang.OriMarket.business.store.BusinessStore;
 import com.choongang.OriMarket.store.Item;
 import com.choongang.OriMarket.store.ItemRepository;
 import com.choongang.OriMarket.store.ItemService;
@@ -10,8 +11,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
-
+import java.util.Set;
 
 
 @Controller
@@ -62,17 +64,26 @@ public class CartController {
                 totalPrice += (cartItem.getItem().getItemPrice() * cartItem.getCount());
             }
 
+           /*   반복물 출력 실험
+           for(int i=0;i<cartItems.size();i++){
+                if(cartItems.get(i).getItem().getBusinessStore().equals(cartItems.get(i).getBusinessStore())){
+                    System.out.println("가게:"+cartItems.get(i).getBusinessStore().getBuStoreName());
+                    for(CartItem cartItem:cartItems){
+                        for(Item item:cartItems.get(i).getBusinessStore().getItems()){
+                            if(cartItem.getItem().equals(item)){
+                                System.out.println("물건이름: "+item.getItemName());
+                            }
+                        }
+                    }
+                }
+            }
+            */
+
             model.addAttribute("cartItemList", cartItems);
             model.addAttribute("totalPrice", totalPrice);
             model.addAttribute("user", userId);
             model.addAttribute("userOrderList", byUserUserSeq);
 
-            if(!byUserUserSeq.isEmpty()) {
-                System.out.println("이게먼대" + byUserUserSeq.get(0).getBusinessStore().getMarket().getMarketName());
-                model.addAttribute("aa",byUserUserSeq.get(0).getBusinessStore().getMarket().getMarketName());
-            }else{
-
-            }
             return "/cart/cart";
         }
     }
@@ -151,7 +162,8 @@ public class CartController {
                                @RequestParam(value = "individual_itemPrice") int[] itemPrices,
                                @RequestParam(value = "individual_cartItemId") Long[] cartItemIds,
                                @RequestParam(value = "itemId")Long[] itemIds) {
-
+        System.out.println("유저아이디:"+userId);
+        System.out.println("배달타입:"+deliveryType);
 
         if (userId.isEmpty()) {
             return "/error/login_error";
@@ -188,10 +200,12 @@ public class CartController {
                     orderItemRepository.save(orderItem);
                     cart.setCartTotalPrice(cart.getCartTotalPrice() + item.getItemPrice() * itemCnt);
                 }
-
                 orderItemList.add(orderItem);
             }
-
+            System.out.println(orderItemList.size());
+            for (OrderItem orderItem:orderItemList){
+                System.out.println("이건먼가요?"+orderItem.getItem().getItemName());
+            }
             cartService.processSelectedItems(userId, deliveryType, orderItemList);
 
             List<OrderItem> orderItems = cartService.userOrderCartView(cart);

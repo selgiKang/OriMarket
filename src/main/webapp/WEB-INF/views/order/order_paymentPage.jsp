@@ -22,10 +22,10 @@
 		String today = date1.format(date);
 	%>
 	<div id= "paymentpage_main">
-		<form action="/order_paymentPage/${userId}" method="post">
+		<form action="/order_paymentPage1/${userId}" method="post">
 			<input type="hidden" name="orderNumber" value="<%=today%>${userId}">
-			<input type="hidden" name="orderUserId" value="${userId}">
-			<input type="hidden" name="orderDate" value="<%=today%>">
+			<%--<input type="hidden" name="orderUserId" value="${userId}">--%>
+			<input type="hidden" name="createdDate" value="<%=today%>">
 			<div id="paymentpage_title">
 				<%-- 전 페이지 돌아가기, (넘어올때 담겼던 orderItem은 여기서 삭제)--%>
 				<a href="/cart/order_renew/${userId}"><i class="fas fa-solid fa-arrow-left" style="color: #46a973;"></i></a>
@@ -33,7 +33,7 @@
 			</div>
 			<div id= "paymentpage_section_1">
 				<div id= "paymentpage_address">
-					<input type="hidden" name="orderAddressNumber" value="${userAddress1}">
+					<input type="hidden" name="orderAddress" value="${userAddress1}">
 					${userAddress1}
 				</div>
 				<%--<div id= "paymentpage_btn_address_edit"><a>수정</a></div>--%>
@@ -41,54 +41,51 @@
 			<hr>
 			<div style="text-align: right;"><a class="order_paymentPage_btn_filter1"><i class="fa-solid fa-caret-up" style="color: #ee9820;"></i></a></div>
 			<div id= "paymentpage_section_2">
-				<table id= "paymentpage_table_1">
-					<tr class= "paymentpage_tr_1">
-						<th colspan= "3">
-							<c:forEach var="cartItems" items="${cartItemList}" varStatus="status">
-							<c:if test="${status.index eq 1}">
-							<input type="hidden" name = "orderMarketName" value="${cartItems.businessStore.market.marketName}" readonly>
-							${cartItems.businessStore.market.marketName}
-							</c:if>
-						</th>
-					</tr>
 
+			<c:set var="processedStoreNames" value="" scope="page" />
+			<c:forEach var="cartItems" items="${cartItemList}" varStatus="status">
+			<input type="hidden" name="itemId1" id="itemId" value="${cartItems.item.itemId}">
+			<c:if test="${cartItems.item.businessStore eq cartItems.businessStore}">
+			<c:if test="${status.index eq 0}">
+				<input type="hidden" name = "orderMarketName" value="${cartItems.businessStore.market.marketName}" readonly>
+				<h3 style="text-align: center; margin-top: -20px;">${cartItems.businessStore.market.marketName}</h3>
+				<table id= "paymentpage_table_1" style="margin-top: -18px;">
+			</c:if>
 					<!-- 2023_07_02 같은 가게 물건이면?? 반복문 출력 고민 -->
 					<!-- 반복문 출력 위치 -->
+				<c:if test="${!processedStoreNames.contains(cartItems.businessStore.buStoreName)}">
+					<c:set var="processedStoreNames" value="${processedStoreNames},${cartItems.businessStore.buStoreName}" scope="page" />
 					<tr class= "paymentpage_tr_1">
 						<th colspan= "3">
-							<input type="hidden" name = "orderStoreName" value="${cartItems.businessStore.buStoreName}" readonly>
 							${cartItems.businessStore.buStoreName}
 						</th>
 					</tr>
-
-						<input type="hidden" name="businessUser" value="${cartItems.item.businessStore.businessUser.buUserNumber}">
-						<input type="hidden" name="itemId" id="itemId" value="${cartItems.item.itemId}">
 					<tr class= "paymentpage_tr_2">
 						<td colspan="3" class= "paymentpage_td_1">
-							<input type="hidden" name="orderGoodsName" value="${cartItems.item.itemName}" readonly>
-								${cartItems.item.itemName}
+							<c:forEach var="cartItems1" items="${cartItemList}">
+								<c:forEach var="item1" items="${cartItems.businessStore.items}">
+									<c:if test="${cartItems1.item eq item1}">
+										<p style="text-align: left; padding-left: 5px; position: relative">
+										${cartItems1.item.itemName} &nbsp;&nbsp;&nbsp; 가격: ${cartItems1.item.itemPrice} 원
+										<span style="position: absolute; right: 10px;"> 갯수: ${cartItems1.count}</span>
+										</p>
+									</c:if>
+								</c:forEach>
+							</c:forEach>
 						</td>
 					</tr>
-					<tr>
-						<td colspan= "3" style= "text-align: center;">
-							<input type="hidden" name="orderGoodsPrice" value="${cartItems.itemPrice}" readonly>
-								${cartItems.itemPrice}
-						</td>
-					</tr>
-					<tr>
-						<td colspan= "3" style= "text-align: right;">
-							<input type="hidden" name="orderGoodsNum" value="${cartItems.count}" readonly>
-							${cartItems.count}개
-						</td>
-					</tr>
-					</c:forEach>
+				</c:if>
+				</c:if>
+				<input type="hidden" name="orderGoodsNum" value="${cartItems.count}" readonly>
+			</c:forEach>
+
 					<tr>
 						<td style="color: #EE9820;">${cartItems.cart.deliveryType}</td>
 					</tr>
 					<!-- 반복문 출력 끝 -->
 					<tr align="center">
 						<td colspan="3" class= "paymentpage_td_2">
-							<a href="/"><img id="paymentpage_img_plus" src="../../img/order/paymentpage_img_plus_1.png"></a>
+							<a href="/cart/order_renew/${userId}"><img id="paymentpage_img_plus" src="../../img/order/paymentpage_img_plus_1.png"></a>
 						</td>
 					</tr>
 				</table>
