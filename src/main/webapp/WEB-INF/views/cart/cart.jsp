@@ -49,7 +49,6 @@
 						<div id="itemList">
 						<h3>${orderList.businessStore.buStoreName}</h3>
 					<ul>
-						<c:if test="${orderList.item.businessStore eq orderList.businessStore}">
 							<c:forEach var="orderList1" items="${userOrderList}">
 							<c:forEach var="item1" items="${orderList.businessStore.items}">
 								<c:if test="${orderList1.item eq item1}">
@@ -70,7 +69,7 @@
 												</div>
 											</a>
 											<input type="hidden" id="userId" value="${sessionScope.userId}">
-											<input type="hidden" data-cart-item-id="${orderList1.cartItemId}" name="individual_cartItemId" class="individual_cartItemId" value="${orderList.cartItemId}">
+											<input type="hidden" data-cart-item-id="${orderList1.cartItemId}" name="individual_cartItemId" class="individual_cartItemId" value="${orderList1.cartItemId}">
 											<button class="cart_xmark" onclick="deleteBtn(${orderList1.cartItemId})"><i class="fas fa-regular fa-xmark"></i></button>
 
 											<!-- 수량선택(-,+),가격표시 -->
@@ -106,7 +105,6 @@
 								</c:if>
 							</c:forEach>
 							</c:forEach>
-						</c:if>
 					</ul>
 					<c:if test="${!orderList.businessStore.buStoreName.equals(prevBuStoreName)}">
 					</div>
@@ -194,7 +192,6 @@
 				itemIds[itemIndex].disabled = true;
 			}
 		}
-
 		form.submit();
 	}
 </script>
