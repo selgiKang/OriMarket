@@ -1,8 +1,7 @@
 <%@ page import="java.time.format.DateTimeFormatter" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -397,11 +396,8 @@
                 <div class="inside_tabs">
                     <div role="inside_tablist">
                         <c:forEach items="${pastOrderList}" var="pastOrder">
-                            <c:if test="${empty pastOrder}">
-                                <div>현재 주문 내역이 없습니다.</div>
-                            </c:if>
                             <c:if test="${!empty pastOrder.newOrderDetails and (!pastOrder.orderStatus eq '배달완료' or pastOrder.orderStatus eq null)}">
-                                <%--주문내역폼--%>
+                                <!-- 주문내역폼 -->
                                 <div class="main-box">
                                     <div class="top">
                                         <div class="small-box">
@@ -409,12 +405,12 @@
                                         </div>
                                         <div class="date">
                                             <p>
-                                                ${fn:substring(pastOrder.createdDate, 0, 4)}.
-                                                ${fn:substring(pastOrder.createdDate, 4, 6)}.
-                                                ${fn:substring(pastOrder.createdDate, 6, 8)}&nbsp;
-                                                ${fn:substring(pastOrder.createdDate, 8, 10)}:
-                                                ${fn:substring(pastOrder.createdDate, 10, 12)}:
-                                                ${fn:substring(pastOrder.createdDate, 12, 14)}
+                                                    ${fn:substring(pastOrder.createdDate, 0, 4)}.
+                                                    ${fn:substring(pastOrder.createdDate, 4, 6)}.
+                                                    ${fn:substring(pastOrder.createdDate, 6, 8)}&nbsp;
+                                                    ${fn:substring(pastOrder.createdDate, 8, 10)}:
+                                                    ${fn:substring(pastOrder.createdDate, 10, 12)}:
+                                                    ${fn:substring(pastOrder.createdDate, 12, 14)}
                                             </p>
                                         </div>
                                     </div>
@@ -427,30 +423,21 @@
                                     <div class="middle">
                                         <div class="storeinfo">
                                             <c:forEach items="${pastOrder.newOrderDetails}" var="orderDetail">
-                                                <c:if test="${!empty orderDetail.buStoreName}">
-                                                    <div class="storename">
-                                                        <p>${orderDetail.buStoreName}</p>
-                                                    </div>
-                                                </c:if>
+                                                <div class="storename">
+                                                    <p>${orderDetail.buStoreName}</p>
+                                                </div>
                                             </c:forEach>
-
                                             <div class="orderitems">
                                                 <c:forEach items="${pastOrder.newOrderDetails}" var="orderDetail">
-                                                    <c:if test="${!empty orderDetail.itemName}">
-                                                        <p>${orderDetail.itemName}</p>
-                                                    </c:if>
+                                                    <p>${orderDetail.itemName}</p>
                                                 </c:forEach>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="mybutton">
-                                        <c:forEach items="${pastOrder.newOrderDetails}" var="orderDetail">
-                                            <c:if test="${!empty orderDetail.buStoreName}">
-                                                <div class="reorder" onclick="location.href='/store?favStoreName=${orderDetail.buStoreName}'">
-                                                    <p>재주문</p>
-                                                </div>
-                                            </c:if>
-                                        </c:forEach>
+                                        <div class="reorder" onclick="location.href='/store?favStoreName=${pastOrder.newOrderDetails[0].buStoreName}'">
+                                            <p>재주문</p>
+                                        </div>
                                         <div class="orderdetailcheck" onclick="location.href='/order_receiptDelivery?orderNumber=${pastOrder.orderNumber}'">
                                             <p>주문상세</p>
                                         </div>
@@ -461,6 +448,7 @@
                     </div>
                 </div>
             </section>
+            <!-- 과거 주문 내역 출력 -->
             <section>
                 <div class="inside_tabs">
                     <div role="inside_tablist">
