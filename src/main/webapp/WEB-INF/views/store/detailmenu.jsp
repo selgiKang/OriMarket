@@ -118,7 +118,7 @@
 	<div class="selected_menu">
 		<div class="mainfood">
 			<!-- 뒤로가기 -->
-			<button class="backbtn" onclick="window.history.go(-1)">&lt;</button>
+			<button class="backbtn" onclick="location.href='/store?favStoreName=${sessionScope.favStoreName}'"><</button>
 			<img src="../../img/store/item/${item.itemImageUrl}" alt="메뉴이미지" style="width: 90%;height: 90%; margin: auto;box-sizing: border-box;display: inline-block;">
 		</div>
 		<p class="pic_not">위 사진은 연출된 사진으로 실제와 다를 수 있습니다.</p>

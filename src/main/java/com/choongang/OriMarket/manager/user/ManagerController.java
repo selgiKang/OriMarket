@@ -84,40 +84,16 @@ public class ManagerController {
         model.addAttribute("userResult",userResult);
 
         //매니저가 소속된 시장의 주문만 리스트에 저장
-        List<Order> orderList = (List<Order>) model.getAttribute("managerOrderList");
+        List<NewOrder> orderList = (List<NewOrder>) model.getAttribute("managerOrderList");
         model.addAttribute("orderList",orderList);
-
-        //불러온 주문의 상태 검색
-        List<RealTimeStatus> rtsList = new ArrayList<>();
-        Order finalOrder = new Order();
-
-        if(orderList!=null && !orderList.isEmpty()){
-
-            //주문 목록 출력해서
-            for(Order orders: orderList){
-                //해당 주문번호의
-                String orderNumber = orders.getOrderNumber();
-                finalOrder.setOrderNumber(orderNumber);
-
-                //그 주문번호의 상태를 찾아서
-                RealTimeStatus rtsResult = realTimeRepository.findByorderNumber(finalOrder);
-                System.out.println("rts상태"+rtsResult.getRtsOrderIng());
-                if(rtsResult!=null){
-                    //넣는다.
-                    rtsList.add(rtsResult);
-                }
-            }
-        }
-        model.addAttribute("rtsResult",rtsList);
 
         return "manager/order_list";
     }
-
     //주문 상세 내역
     @GetMapping("/manager_receiptDelivery")
     public String manager_receiptDelivery(@RequestParam("orderNumber")String orderNumber,HttpSession session,Model model){
 
-        Order resultPastOrder = orderService.getOrderNumberList(orderNumber);
+        NewOrder resultPastOrder = newOrderRepository.findByOrderNumber(orderNumber);
         model.addAttribute("orderDelivery",resultPastOrder);
 
         return "manager/manager_delivery";
@@ -206,6 +182,7 @@ public class ManagerController {
         return "manager/manager_login";
     }
 
+    // 수락 누르면
     @GetMapping("/accept")
     public String orderAccept(@RequestParam("orderNumber") String rOrderNumber,
                               @RequestParam("managerUser") String managerSeq,
@@ -220,7 +197,7 @@ public class ManagerController {
             NewOrder orderToUpdate = newOrderRepository.findByOrderNumber(rOrderNumber);
             orderToUpdate.setOrderNumber(rOrderNumber);
             orderToUpdate.setManagerUser(managerUser);
-            orderToUpdate.setOrderStatus("주문 수락");
+            orderToUpdate.setOrderStatus("주문수락");
             newOrderRepository.save(orderToUpdate);
         }
 
@@ -232,6 +209,27 @@ public class ManagerController {
         model.addAttribute("userResult", userResult);
 
         //매니저가 소속된 시장의 주문만 리스트에 저장
+        List<NewOrder> orderList = (List<NewOrder>) model.getAttribute("managerOrderList");
+        model.addAttribute("orderList", orderList);
+
+        return "manager/order_list";
+    }
+
+    @GetMapping("/acceptPickup")
+    public String acceptPickup(NewOrder order, HttpSession session, Model model) {
+
+        if (managerService.findByManagerId(model, session) == null) {
+            model.addAttribute("statusMessage", "주문이 없습니다.");
+        } else {
+            NewOrder orderToUpdate = newOrderRepository.findByOrderNumber(order.getOrderNumber());
+            orderToUpdate.setOrderStatus("픽업완료");
+            newOrderRepository.save(orderToUpdate);
+        }
+        //매니저 정보 가져오기
+        ManagerUser userResult = managerService.findByManagerId(model, session);
+        model.addAttribute("userResult", userResult);
+
+        //매니저 정보
         List<NewOrder> orderList = (List<NewOrder>) model.getAttribute("managerOrderList");
         model.addAttribute("orderList", orderList);
 

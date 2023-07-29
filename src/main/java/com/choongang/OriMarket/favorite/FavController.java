@@ -105,9 +105,11 @@ public class FavController {
 
             if (favService.favFavorite(fav.getUserSeq(), favStoreName)) {
                 session.setAttribute("favNumber", 1);
+                session.setAttribute("favStoreName",favStoreName);
 
             } else {
                 session.setAttribute("favNumber", "");
+                session.setAttribute("favStoreName",favStoreName);
             }
 
             //session.setAttribute("favNumber", fav.getFavNumber());
