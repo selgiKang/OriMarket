@@ -57,7 +57,7 @@
 				<tr class="orderDelivery_table_tr_1"><td>${newOrder.orderNumber}</td></tr>
 				<tr class="orderDelivery_table_tr_2">
 					<td>
-						${newOrder.created_date}
+						${newOrder.createdDate}
 					</td>
 				</tr>
 				<tr class="orderDelivery_table_tr_1"><td>배달 주소</td></tr>

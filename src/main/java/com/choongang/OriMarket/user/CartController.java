@@ -1,5 +1,6 @@
 package com.choongang.OriMarket.user;
 
+import com.choongang.OriMarket.business.store.BusinessStore;
 import com.choongang.OriMarket.store.Item;
 import com.choongang.OriMarket.store.ItemRepository;
 import com.choongang.OriMarket.store.ItemService;
@@ -61,6 +62,7 @@ public class CartController {
             for (CartItem cartItem : cartItems) {
                 totalPrice += (cartItem.getItem().getItemPrice() * cartItem.getCount());
             }
+
 
             model.addAttribute("cartItemList", cartItems);
             model.addAttribute("totalPrice", totalPrice);
