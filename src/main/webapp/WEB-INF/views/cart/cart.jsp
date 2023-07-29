@@ -69,7 +69,7 @@
 												</div>
 											</a>
 											<input type="hidden" id="userId" value="${sessionScope.userId}">
-											<input type="hidden" data-cart-item-id="${orderList1.cartItemId}" name="individual_cartItemId" class="individual_cartItemId" value="${orderList.cartItemId}">
+											<input type="hidden" data-cart-item-id="${orderList1.cartItemId}" name="individual_cartItemId" class="individual_cartItemId" value="${orderList1.cartItemId}">
 											<button class="cart_xmark" onclick="deleteBtn(${orderList1.cartItemId})"><i class="fas fa-regular fa-xmark"></i></button>
 
 											<!-- 수량선택(-,+),가격표시 -->
@@ -192,7 +192,6 @@
 				itemIds[itemIndex].disabled = true;
 			}
 		}
-
 		form.submit();
 	}
 </script>

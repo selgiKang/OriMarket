@@ -200,9 +200,9 @@ public class CartController {
                     orderItemRepository.save(orderItem);
                     cart.setCartTotalPrice(cart.getCartTotalPrice() + item.getItemPrice() * itemCnt);
                 }
-
                 orderItemList.add(orderItem);
             }
+            System.out.println(orderItemList.size());
             for (OrderItem orderItem:orderItemList){
                 System.out.println("이건먼가요?"+orderItem.getItem().getItemName());
             }
