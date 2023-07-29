@@ -49,7 +49,6 @@
 						<div id="itemList">
 						<h3>${orderList.businessStore.buStoreName}</h3>
 					<ul>
-						<c:if test="${orderList.item.businessStore eq orderList.businessStore}">
 							<c:forEach var="orderList1" items="${userOrderList}">
 							<c:forEach var="item1" items="${orderList.businessStore.items}">
 								<c:if test="${orderList1.item eq item1}">
@@ -106,7 +105,6 @@
 								</c:if>
 							</c:forEach>
 							</c:forEach>
-						</c:if>
 					</ul>
 					<c:if test="${!orderList.businessStore.buStoreName.equals(prevBuStoreName)}">
 					</div>

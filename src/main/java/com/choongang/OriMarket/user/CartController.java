@@ -162,7 +162,8 @@ public class CartController {
                                @RequestParam(value = "individual_itemPrice") int[] itemPrices,
                                @RequestParam(value = "individual_cartItemId") Long[] cartItemIds,
                                @RequestParam(value = "itemId")Long[] itemIds) {
-
+        System.out.println("유저아이디:"+userId);
+        System.out.println("배달타입:"+deliveryType);
 
         if (userId.isEmpty()) {
             return "/error/login_error";
@@ -202,7 +203,9 @@ public class CartController {
 
                 orderItemList.add(orderItem);
             }
-
+            for (OrderItem orderItem:orderItemList){
+                System.out.println("이건먼가요?"+orderItem.getItem().getItemName());
+            }
             cartService.processSelectedItems(userId, deliveryType, orderItemList);
 
             List<OrderItem> orderItems = cartService.userOrderCartView(cart);
