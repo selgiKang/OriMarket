@@ -35,6 +35,7 @@
   <c:set var="formattedDate" value="${fn:substring(orderDateStr, 0, 4)}년 ${fn:substring(orderDateStr, 4, 6)}월 ${fn:substring(orderDateStr, 6, 8)}일" />
 
   <h3>${formattedDate} 수입</h3>
+  <tr><th>주문번호: </th><th>${detailsDataList.orderNumber}</th></tr>
   <table border="1" id="detailsCalculate_table">
     <c:forEach items="${detailsDataList.newOrderDetails}" var="newList">
       <tr>

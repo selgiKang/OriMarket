@@ -2,6 +2,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%--특정 위치마다 , 넣도록--%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -373,12 +375,27 @@
         margin-left: 10px;
         padding-left: 9px;
     }
+
+    .header{
+        font-family: 'omyu_pretty';
+    }
+
+    .order_pastorder_footer{
+        font-family: 'omyu_pretty';
+    }
+
     button.backbtn{display: flex; align-items: center; font-size: 20px; color: #999; margin: 0 0 0 10px; width: 30px; height: 30px; background-color: #fff; border-radius: 50%; border: 1px solid #999; cursor: pointer; justify-content: center; margin-right:20%;}
     button.backbtn:hover {background-color:#333; color:#fff;}
     .headermsg_wrap{width:90%; display: flex; justify-content: flex-start; align-items: end;}
 </style>
 <body>
     <div class="main-container">
+
+        <div class="header">
+            <jsp:include page="../header/header_index.jsp" />
+        </div>
+
+        <%--<h3 style="margin-top: 5px;">회원 주문내역</h3>--%>
         <div class="headermsg_wrap">
         <%--뒤로가기--%>
         <button class="backbtn" onclick="window.location.replace('/mypage')">&lt;</button>
@@ -405,7 +422,8 @@
                 <div class="inside_tabs">
                     <div role="inside_tablist">
                         <c:forEach items="${pastOrderList}" var="pastOrder">
-                            <c:if test="${!empty pastOrder.newOrderDetails and (!pastOrder.orderStatus eq '배달완료' or pastOrder.orderStatus eq null)}">
+                            <c:if test="${!empty pastOrder.newOrderDetails}">
+                            <c:if test="${pastOrder.orderStatus ne '배달완료' || pastOrder.orderStatus == null || pastOrder.orderStatus ne '주문거절'}">
                                 <!-- 주문내역폼 -->
                                 <div class="main-box">
                                     <div class="top">
@@ -424,7 +442,7 @@
                                         </div>
                                     </div>
                                     <div style="position: absolute; top: 10px; right: 10px;color: #4caf50;font-size: 14px;font-weight: 600;">
-                                        배달중
+                                           ${pastOrder.orderStatus}
                                     </div>
                                     <div class="storepicture">
                                         <img src="../../img/store/store.jpg" alt="사진">
@@ -453,9 +471,11 @@
                                     </div>
                                 </div>
                             </c:if>
+                            </c:if>
                         </c:forEach>
                     </div>
                 </div>
+
             </section>
             <!-- 과거 주문 내역 출력 -->
             <section>
@@ -463,7 +483,7 @@
                     <div role="inside_tablist">
                         <%-- 과거 주문내역 --%>
                         <c:forEach items="${pastOrderList}" var="pastOrder" varStatus="status">
-                            <c:if test="${pastOrder.orderStatus eq '배달완료'}">
+                            <c:if test="${pastOrder.orderStatus eq '배달완료' || pastOrder.orderStatus eq '주문거절'}">
                                 <div class="order_1">
                                     <%-- 가게사진 --%>
 
@@ -480,18 +500,15 @@
                                             ${fn:substring(pastOrder.createdDate, 12, 14)}
                                         </p>
                                     </small>
-
-                                    <!-- RealTimeStatus 가져오기 -->
-
                                     <!-- 주문 상태 출력 -->
                                         <ul style="text-align: left;">
-                                            <!-- RealTimeStatus의 내용 출력 -->
                                             <c:if test="${pastOrder.orderStatus eq '배달완료'}">
                                                 <li>배달 완료</li>
                                             </c:if>
-                                            <!-- 여기에 추가적인 RealTimeStatus 정보 출력 -->
+                                            <c:if test="${pastOrder.orderStatus eq '주문거절'}">
+                                                <li>주문 거절</li>
+                                            </c:if>
                                         </ul>
-
                                     <c:forEach items="${pastOrder.newOrderDetails}" var="orderDetail">
                                         <c:if test="${orderDetail.buStoreName != null and orderDetail.itemName != null}">
                                         <!-- 나머지 주문 정보 출력 -->
@@ -502,8 +519,7 @@
                                             </ul>
                                         </c:if>
                                     </c:forEach>
-                                    <h3 style="text-align: left;">합계: ${pastOrder.orderTotalPrice}원</h3>
-
+                                    <h3 style="text-align: left;">합계:<fmt:formatNumber value="${pastOrder.orderTotalPrice}" pattern="#,###"/>원
                                     <!-- 영수증 보기 버튼 -->
                                     <div class="div2" onclick="location.href='/order_receiptDelivery?orderNumber=${pastOrder.orderNumber}'">영수증 보기</div>
                                 </div>
@@ -514,6 +530,9 @@
             </section>
         </div>
     </div>
+        <div class="order_pastorder_footer">
+            <jsp:include page="../footer/footer.jsp" />
+        </div>
 </div>
 </body>
 <script>

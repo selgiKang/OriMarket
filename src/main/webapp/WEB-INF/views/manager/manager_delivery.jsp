@@ -2,6 +2,8 @@
 		 pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"  %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%--특정 위치마다 , 넣도록--%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,12 +24,13 @@
 		<!-- 배달표시 circle 아이콘 -->
 		<!-- 2023-07-04 스크립트로 값 들어오면 아이콘 변경되게 추후 적용 -->
 		<!-- 2023-07-07 if문으로 색상 변경: -->
-		<!-- 픽업중 -->
+
+		<%--주문 - 주문수락--%>
 		<c:if test="${orderDelivery.orderStatus eq null}">
 			<li><i class="fa-sharp fa-regular fa-circle" style="color: #b8b8b8;"></i></li>
 			<li class="orderDelivery_li_1">픽업중</li>
 		</c:if>
-		<c:if test="${orderDelivery.orderStatus eq '주문수락' or orderDelivery.orderStatus eq '배달시작' or newOrder.orderStatus eq '배달완료'}">
+		<c:if test="${orderDelivery.orderStatus eq '주문수락' or orderDelivery.orderStatus eq '배달시작' or orderDelivery.orderStatus eq '배달완료'}">
 			<li><i class="fa-sharp fa-solid fa-circle" style="color: #46a973;"></i></li>
 			<li class="orderDelivery_li_1" style="color: #46A973;">픽업중</li>
 		</c:if>
@@ -37,18 +40,24 @@
 			<li class="orderDelivery_li_1">배달중</li>
 		</c:if>
 		<c:if test="${orderDelivery.orderStatus eq '배달시작' or orderDelivery.orderStatus eq '배달완료'}">
-			<li><i class="fa-sharp fa-solid fa-circle" style="color: #b8b8b8;"></i></li>
-			<li class="orderDelivery_li_1">배달중</li>
+			<li><i class="fa-sharp fa-solid fa-circle" style="color: #46a973;"></i></li>
+			<li class="orderDelivery_li_1" style="color: #46a973;">배달중</li>
 		</c:if>
 		<c:if test="${orderDelivery.orderStatus eq null or orderDelivery.orderStatus eq '배달시작' or newOrder.orderStatus eq '주문수락'}">
 			<!-- 배달완료 -->
-			<li><i class="fa-sharp fa-regular fa-circle" style="color: #b8b8b8;"></i></li>
+			<li><i class="fa-sharp fa-regular fa-circle" style="color: #46a973;"></i></li>
 			<li>배달 완료</li>
 		</c:if>
 		<c:if test="${orderDelivery.orderStatus eq '배달완료'}">
 			<!-- 배달완료 -->
-			<li><i class="fa-sharp fa-solid fa-circle" style="color: #b8b8b8;"></i></li>
-			<li>배달 완료</li>
+			<li><i class="fa-sharp fa-solid fa-circle" style="color: #46a973;"></i></li>
+			<li style="color: #46a973;">배달 완료</li>
+		</c:if>
+	</ul>
+	<ul>
+		<c:if test="${orderDelivery.orderStatus eq '주문거절'}">
+			<!-- 배달완료 -->
+			<li style="color: red;">주문이 거절되었습니다.</li>
 		</c:if>
 	</ul>
 	<div id="orderDelivery_orderInfo">
@@ -75,16 +84,26 @@
 				<tr class="orderDelivery_table_tr_1"><td colspan="2">${store.buStoreName}</td></tr>
 				<tr class="orderDelivery_table_tr_2">
 				<tr>
-					<td>${store.itemName}&nbsp;&nbsp;&nbsp;${store.itemPrice}원 <small style="color: #818083;">&nbsp;&nbsp;&nbsp;x${store.itemCount}</small></td>
+					<td>${store.itemName}&nbsp;&nbsp;&nbsp;
+						<fmt:formatNumber value="${store.itemPrice}" pattern="#,###"/>원
+						<small style="color: #818083;">&nbsp;&nbsp;&nbsp;x${store.itemCount}</small></td>
 				</tr>
 				</tr>
 			</c:forEach>
+			<tr>
+				<td>배달비</td><td><fmt:formatNumber value="${orderDelivery.orderDeliveryPrice}" pattern="#,###"/>원</td>
+			</tr>
 		</table>
 		<hr>
 		<table id="orderDelivery_table_3">
 			<tr><td class="orderDelivery_table3_td_1">요청사항</td><td class="orderDelivery_table3_td_1">${orderDelivery.orderRequests}</td>
 			<tr><td class="orderDelivery_table3_td_1">배달 기사님께</td><td class="orderDelivery_table3_td_1">${orderDelivery.forRider}</td></tr>
-			<tr><td id="orderDelivery_table3_total_td_1">총 금액</td><td id="orderDelivery_table3_total_td_2">${orderDelivery.orderTotalPrice}원</td></tr>
+			<tr>
+				<td id="orderDelivery_table3_total_td_1">총 금액</td>
+				<td id="orderDelivery_table3_total_td_2">
+					<fmt:formatNumber value="${orderDelivery.orderTotalPrice}" pattern="#,###"/>원
+				</td>
+			</tr>
 		</table>
 
 	</div>

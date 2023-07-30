@@ -167,10 +167,13 @@
                         <label for="tabmenu1">대표 메뉴</label>
                         <div class="tabCon">
                             <%--메뉴1--%>
-                            <form action="/${userId}/cart/${a.itemId}" method="get">
-                            <c:forEach var="a" items="${al}">
-                                <c:if test="${a.itemCnt>0}">
-                                    <div class="menu" type="button" onclick="/detailmenu/${a.itemId}">
+                                <form action="/${userId}/cart/${a.itemId}" method="get">
+                                    <c:forEach var="a" items="${al}" varStatus="status">
+                                        <c:if test="${status.first || a.itemCategory ne al[status.index - 1].itemCategory}">
+                                            <h3 id="${a.itemCategory}"><c:out value="${a.itemCategory}"/></h3>
+                                        </c:if>
+                                        <c:if test="${a.itemCnt>0}">
+                                        <div class="menu" type="button" onclick="/detailmenu/${a.itemId}">
                                         <a href="/detailmenu/${a.itemId}/${userId}" style="position:relative; display:flex;">
                                             <div class="menu-content">
                                                 <h2 class="menu_name">${a.itemName}</h2>
@@ -206,7 +209,10 @@
                                             </div>
                                         </a>
                                     </div>
-                                </c:if>
+                                    <c:if test="${status.last || a.itemCategory ne al[status.index + 1].itemCategory}">
+                                    <h3></h3>
+                                    </c:if>
+                            </c:if>
                             </c:forEach>
                             </form>
                             <%-- &lt;%&ndash;메뉴2&ndash;%&gt;
@@ -226,7 +232,7 @@
                     <%--여름메뉴 버튼--%>
                     <li id="tab2" class="btnCon">
                         <input type="radio" name="tabmenu" id="tabmenu2">
-                        <label for="tabmenu2"><a href="/storenotice0">여름 메뉴</a></label>
+                        <label for="tabmenu2"><a href="#추천메뉴">사장님추천</a></label>
                         <div class="tabCon">
                             <%--메뉴1--%>
                             <div class="menu">
@@ -243,19 +249,14 @@
                     </li>
                     <li id="tab3" class="btnCon">
                         <input type="radio" name="tabmenu" id="tabmenu3">
-                        <label for="tabmenu3">식사용</label>
+                        <label for="tabmenu3"><a href="#인기메뉴">인기메뉴</a></label>
                         <div class="tabCon">
                             내용 적기
                         </div>
                     </li>
                     <li id="tab4" class="btnCon">
                         <input type="radio" name="tabmenu" id="tabmenu4">
-                        <label for="tabmenu4">사이드</label>
-                        <div class="tabCon"></div>
-                    </li>
-                    <li id="tab5" class="btnCon">
-                        <input type="radio" name="tabmenu" id="tabmenu5">
-                        <label for="tabmenu5">음료</label>
+                        <label for="tabmenu4"><a href="#할인메뉴">할인메뉴</a></label>
                         <div class="tabCon"></div>
                     </li>
                 </ul>

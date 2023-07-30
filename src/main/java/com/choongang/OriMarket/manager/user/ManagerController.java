@@ -169,6 +169,25 @@ public class ManagerController {
         model.addAttribute("fail","아이디 또는 비밀번호가 틀렸습니다. 확인해주세요.");
         return "manager/manager_login";
     }
+    //로그인데
+    @PostMapping("/manager_order_search")
+    public String orderSearch(@ModelAttribute ManagerUser managerUser, HttpSession session, Model model){
+
+        if(managerService.findByManagerId(model,session)!=null){
+            //매니저 정보 가져오기
+            ManagerUser userResult = managerService.findByManagerId(model,session);
+            //매니저 정보
+            model.addAttribute("userResult",userResult);
+
+            //매니저가 소속된 시장의 주문만 리스트에 저장
+            model.addAttribute("orderList", model.getAttribute("managerOrderList"));
+
+            return "manager/order_list";
+        }else{
+            model.addAttribute("pleaseLogin","로그인해주세요.");
+        }
+        return "manager/manager_login";
+    }
 
     //회원가입
     @PostMapping("/managerJoin")
@@ -180,6 +199,37 @@ public class ManagerController {
     }
 
     // 수락 누르면
+    @GetMapping("/reject")
+    public String orderReject(@RequestParam("orderNumber") String rOrderNumber,
+                              @RequestParam("managerUser") String managerSeq,
+                              NewOrder orders, HttpSession session, ManagerUser managerUser, Model model) {
+
+        managerUser.setManagerSeq(Long.valueOf(managerSeq));
+
+
+        if (newOrderRepository.findByOrderNumber(rOrderNumber) == null) {
+            model.addAttribute("statusMessage", "주문이 없습니다.");
+        } else {
+            NewOrder orderToUpdate = newOrderRepository.findByOrderNumber(rOrderNumber);
+            orderToUpdate.setOrderNumber(rOrderNumber);
+            orderToUpdate.setManagerUser(managerUser);
+            orderToUpdate.setOrderStatus("주문거절");
+            newOrderRepository.save(orderToUpdate);
+        }
+
+
+        String managerId = session.getAttribute("managerId").toString();
+
+        //매니저 정보 가져오기
+        ManagerUser userResult = managerService.findByManagerId(model, session);
+        model.addAttribute("userResult", userResult);
+
+        //매니저가 소속된 시장의 주문만 리스트에 저장
+        List<NewOrder> orderList = (List<NewOrder>) model.getAttribute("managerOrderList");
+        model.addAttribute("orderList", orderList);
+
+        return "manager/order_list";
+    }
     @GetMapping("/accept")
     public String orderAccept(@RequestParam("orderNumber") String rOrderNumber,
                               @RequestParam("managerUser") String managerSeq,
