@@ -152,8 +152,8 @@
     <%--공지사항--%>
     <c:if test="${lastM.totalMessage != null}">
         <section>
-            <button class="notice-button" onclick="location.href='/storeMessageInsert'" style="display: flex; justify-content: space-around; align-items: center; padding: 5px; border-radius: 5px; border: 1px solid #46d;">
-                <img src="../../img/store/sound.png" class="order_notice" alt="사장님공지" style="width: 10%; padding: 3px; margin-right: 2px;">
+            <button class="notice-button" onclick="location.href='/storeMessageInsert'" style="display: flex; justify-content: flex-start; align-items: center; padding: 5px; border-radius: 5px; border: 1px solid #46d;">
+                <img src="../../img/store/sound.png" class="order_notice" alt="사장님공지" style="width: 10%; padding: 3px; margin-right: 5px;">
                     ${lastM.totalMessage}
             </button>
         </section>
