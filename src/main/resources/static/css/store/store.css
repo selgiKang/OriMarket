@@ -428,3 +428,6 @@ span.review_count{display: flex; justify-content: space-around; align-items: cen
 span.rating{font-size: 20px;}
 
 .coupon_wrap{padding: 0 20px;}
+/* 230730 안먹음 인라인ㄱㄱ*/
+button.notice-button{display: flex; justify-content: space-around; align-items: center; padding: 5px; border-radius: 5px; border: 1px solid #46d;}
+img.order_notice{width: 10%; padding: 3px; margin-right: 2px;}
