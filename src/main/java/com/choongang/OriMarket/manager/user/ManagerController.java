@@ -169,6 +169,25 @@ public class ManagerController {
         model.addAttribute("fail","아이디 또는 비밀번호가 틀렸습니다. 확인해주세요.");
         return "manager/manager_login";
     }
+    //로그인데
+    @PostMapping("/manager_order_search")
+    public String orderSearch(@ModelAttribute ManagerUser managerUser, HttpSession session, Model model){
+
+        if(managerService.findByManagerId(model,session)!=null){
+            //매니저 정보 가져오기
+            ManagerUser userResult = managerService.findByManagerId(model,session);
+            //매니저 정보
+            model.addAttribute("userResult",userResult);
+
+            //매니저가 소속된 시장의 주문만 리스트에 저장
+            model.addAttribute("orderList", model.getAttribute("managerOrderList"));
+
+            return "manager/order_list";
+        }else{
+            model.addAttribute("pleaseLogin","로그인해주세요.");
+        }
+        return "manager/manager_login";
+    }
 
     //회원가입
     @PostMapping("/managerJoin")

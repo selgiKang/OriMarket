@@ -2,6 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"  %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%--특정 위치마다 , 넣도록--%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -78,8 +80,10 @@
 					</c:if>
 					<tr class="orderDelivery_table_tr_2">
 						<tr>
-							<td>${store.itemName}&nbsp;&nbsp;&nbsp;${store.itemPrice}원 <small style="color: #818083;">&nbsp;&nbsp;&nbsp;x${store.itemCount}</small></td>
-						</tr>
+					<td>${store.itemName}&nbsp;&nbsp;&nbsp;
+						<fmt:formatNumber value="${store.itemPrice}" pattern="#,###"/>원
+						<small style="color: #818083;">&nbsp;&nbsp;&nbsp;x${store.itemCount}</small></td>
+				</tr>
 					</tr>
 				</c:forEach>
 			</table>
@@ -87,7 +91,11 @@
 			<table id="orderDelivery_table_3">
 				<tr><td class="orderDelivery_table3_td_1">요청사항</td><td class="orderDelivery_table3_td_1">${newOrder.orderRequests}</td>
 				<tr><td class="orderDelivery_table3_td_1">배달 기사님께</td><td class="orderDelivery_table3_td_1">${newOrder.forRider}</td></tr>
-				<tr><td id="orderDelivery_table3_total_td_1">총 금액</td><td id="orderDelivery_table3_total_td_2">${newOrder.orderTotalPrice}원</td></tr>
+				<tr>
+					<td id="orderDelivery_table3_total_td_1">총 금액</td><td id="orderDelivery_table3_total_td_2">
+					<fmt:formatNumber value="${newOrder.orderTotalPrice}" pattern="#,###"/>원
+					</td>
+				</tr>
 			</table>
 			
 		</div>

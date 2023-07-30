@@ -2,6 +2,8 @@
 <%@ page import="java.time.format.DateTimeFormatter" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%--특정 위치마다 , 넣도록--%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -30,7 +32,7 @@
     <header id="calculate_header">
         <div id="calculate_title">
             <%--왼쪽 화살표--%>
-            <a href="" onclick="location.href='/location-1'"><i class="fas fa-solid fa-arrow-left" style="color: #fafafa;"></i></a>
+            <a href="" onclick="location.href='/backbuUser'"><i class="fas fa-solid fa-arrow-left" style="color: #fafafa;"></i></a>
             내 수입
         </div>
         <%--정산 날짜 출력--%>
@@ -56,7 +58,8 @@
     <main>
         <div id="calculate_main_totalIncome">
             <p id="calculate_main_totalIncome_title">총 수입</p>
-            <h3>${allTotalPrice}원</h3>
+
+            <h3><fmt:formatNumber value="${allTotalPrice}" pattern="#,###"/>원</h3>
             <div>주문 횟수 ${orderCount}회</div>
             <small style="color: #818083">* 자세한 내역은 날짜를 클릭해주세요. *</small>
         </div>
@@ -71,15 +74,18 @@
                         <a class="dateTag" href="/details?orderNumber=${datas.orderNumber}">
                            <script>
                                var date = "${datas.date}";
-                               var formattedDate = date.substr(0, 8);
-                               document.write(formattedDate);
+                               var year = date.substr(0, 4);
+                               var month = date.substr(4, 2);
+                               var day = date.substr(6, 2);
+                               var formatDate  = year+"년 "+month+"월 "+day+"일";
+                               document.write(formatDate);
                            </script>
                         </a>
                     </td>
                     <td class="calculate_main_table_td_2" style="text-align:center;">
-                       ${datas.totalPrice}원
+                        <h3><fmt:formatNumber value="${datas.totalPrice}" pattern="#,###"/>원</h3>
                     </td>
-                </tr>
+                    </tr>
             </c:forEach>
             </tbody>
           <%--  <tr>

@@ -149,7 +149,6 @@
 <div id="container">
     <c:if test="${empty userInfo}">
         <form action="/findUserId" method="post" onsubmit="return validateLoginForm();">
-            <a href="/"><h1 style="position: fixed; left: 20px; top: 0; font-size: 30px; color: red">홈으로 바로가기</h1></a>
             <div id="login_box">
                 <div>
                     <p>이름: <input type="text" size="20" placeholder="이름만 입력해주세요" name="userId" id="userId" required></p>

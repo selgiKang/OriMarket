@@ -39,6 +39,7 @@
         </div>
         <%--주문--%>
         <div class="order-item" data-status="pending">
+            <form action="/manager_order_search" method="post"><button type="submit">주문 내역 검색</button></form>
             <c:if test="${not empty orderList}">
                 <c:forEach items="${orderList}" var="order">
                     <c:if test="${order.orderStatus eq null}">

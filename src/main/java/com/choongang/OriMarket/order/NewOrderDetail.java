@@ -18,6 +18,7 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+//생성자를 다른곳에서 못쓰게 접근제한해서 무분별한 기본 생성자 만드는 것 제한
 @Slf4j
 public class NewOrderDetail {
 
