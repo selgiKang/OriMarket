@@ -92,25 +92,7 @@
 <div class="main-container">
     <header style="padding:10px;">
         <div class="like-container">
-            <img id="like_container_img" src="../../img/store/${sessionScope.buStoreImage}" alt="착한생칼국수">
-<%--
-        &lt;%&ndash; 찜 &ndash;%&gt;
-            <c:if test="${!empty sessionScope.userId}">
-                <form action="/storeFav" method="get">
-                    <input type="hidden" value="${param.favStoreName}" name="favStoreName">
-                    <input type="hidden" value="<%=session.getAttribute("userSeq")%>" name="userSeq">
-
-                    <button type="submit" class="storeFav" onclick="event.preventDefault(); toggleHeart(this);" style="opacity: 0;" />
-                       <c:if test="${sessionScope.favNumber =='' }">
-                            <img src="../../img/store/empty_heart.png" alt="빈 하트" class="heart" >
-                       </c:if>
-                       <c:if test="${sessionScope.favNumber eq 1}">
-                            <img src="../../img/store/filled_heart.png" alt="찬 하트" class="heart" >
-                        </c:if>
-                        <input type="hidden" name="favNumber" value="${sessionScope.favNumber}">&lt;%&ndash;<%=session.getAttribute("favNumber")%>&ndash;%&gt;
-                </form>
-            </c:if>
---%>
+            <img id="like_container_img" src="../../img/store/${sessionScope.buStoreImage}" alt="가게사진">
         </div>
         <div class="main_contents_box">
             <div class="store_favheart_wrap">
@@ -170,7 +152,10 @@
     <%--공지사항--%>
     <c:if test="${lastM.totalMessage != null}">
         <section>
-            <button class="notice-button" onclick="location.href='/storeMessageInsert'">${lastM.totalMessage}</button>
+            <button class="notice-button" onclick="location.href='/storeMessageInsert'" style="display: flex; justify-content: space-around; align-items: center; padding: 5px; border-radius: 5px; border: 1px solid #46d;">
+                <img src="../../img/store/sound.png" class="order_notice" alt="사장님공지" style="width: 10%; padding: 3px; margin-right: 2px;">
+                    ${lastM.totalMessage}
+            </button>
         </section>
     </c:if>
             <div class="tabmenu out-tabmenu">
