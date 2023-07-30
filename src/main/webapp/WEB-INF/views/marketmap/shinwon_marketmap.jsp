@@ -61,6 +61,7 @@
             </a>
         </div>
         <!--분할 지도-->
+        <!--전체지도 모달-->
         <div class="map_bg_wrap">
             <div class="modal">
                 <div class="modal_body">
