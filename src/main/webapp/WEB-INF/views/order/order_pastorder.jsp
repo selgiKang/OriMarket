@@ -375,7 +375,11 @@
     }
 
     .header{
-    font-family: 'omyu_pretty';
+        font-family: 'omyu_pretty';
+    }
+
+    .order_pastorder_footer{
+        font-family: 'omyu_pretty';
     }
 
     button.backbtn{display: flex; align-items: center; font-size: 20px; color: #999; margin: 0 0 0 10px; width: 30px; height: 30px; background-color: #fff; border-radius: 50%; border: 1px solid #999; cursor: pointer; justify-content: center; margin-right:20%;}
@@ -386,10 +390,10 @@
     <div class="main-container">
 
         <div class="header">
-        <jsp:include page="../header/header_index.jsp" />
-    </div>
+            <jsp:include page="../header/header_index.jsp" />
+        </div>
 
-        <h3 style="margin-top: 5px;">회원 주문내역</h3>
+        <%--<h3 style="margin-top: 5px;">회원 주문내역</h3>--%>
         <div class="headermsg_wrap">
         <%--뒤로가기--%>
         <button class="backbtn" onclick="window.location.replace('/mypage')">&lt;</button>
@@ -467,6 +471,7 @@
                         </c:forEach>
                     </div>
                 </div>
+
             </section>
             <!-- 과거 주문 내역 출력 -->
             <section>
@@ -525,6 +530,9 @@
             </section>
         </div>
     </div>
+        <div class="order_pastorder_footer">
+            <jsp:include page="../footer/footer.jsp" />
+        </div>
 </div>
 </body>
 <script>
