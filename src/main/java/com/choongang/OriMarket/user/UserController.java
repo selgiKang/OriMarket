@@ -99,13 +99,6 @@ public class UserController {
         return "rider/rider_firstscreen";
     }
 
-
-    @GetMapping("/riderdelivery")
-    public String riderdelivery() {
-        return "rider/rider_delivery";
-    }
-
-
     @PostMapping("/update")
     public String updateUser(@ModelAttribute User user, HttpSession session){
 
