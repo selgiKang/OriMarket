@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
-import java.util.List;
+import java.util.*;
 
 @Controller
 @RequiredArgsConstructor
@@ -145,6 +145,7 @@ public class FavController {
 
             //물건 목록
             List<Item> items = byBuStoreName.get(0).getItems();
+            items.sort(Comparator.comparing(Item::getItemCategory));
             model.addAttribute("al", items);
 
             //가게 이미지 정보
