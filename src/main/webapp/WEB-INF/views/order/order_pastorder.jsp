@@ -480,18 +480,12 @@
                                             ${fn:substring(pastOrder.createdDate, 12, 14)}
                                         </p>
                                     </small>
-
-                                    <!-- RealTimeStatus 가져오기 -->
-
                                     <!-- 주문 상태 출력 -->
                                         <ul style="text-align: left;">
-                                            <!-- RealTimeStatus의 내용 출력 -->
                                             <c:if test="${pastOrder.orderStatus eq '배달완료'}">
                                                 <li>배달 완료</li>
                                             </c:if>
-                                            <!-- 여기에 추가적인 RealTimeStatus 정보 출력 -->
                                         </ul>
-
                                     <c:forEach items="${pastOrder.newOrderDetails}" var="orderDetail">
                                         <c:if test="${orderDetail.buStoreName != null and orderDetail.itemName != null}">
                                         <!-- 나머지 주문 정보 출력 -->
