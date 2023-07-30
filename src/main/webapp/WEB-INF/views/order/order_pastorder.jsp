@@ -420,7 +420,8 @@
                 <div class="inside_tabs">
                     <div role="inside_tablist">
                         <c:forEach items="${pastOrderList}" var="pastOrder">
-                            <c:if test="${!empty pastOrder.newOrderDetails and (!pastOrder.orderStatus eq '배달완료' or pastOrder.orderStatus eq null)}">
+                            <c:if test="${!empty pastOrder.newOrderDetails}">
+                                <c:if test="${!pastOrder.orderStatus eq '배달완료' or pastOrder.orderStatus eq null}">
                                 <!-- 주문내역폼 -->
                                 <div class="main-box">
                                     <div class="top">
@@ -467,6 +468,7 @@
                                         </div>
                                     </div>
                                 </div>
+                                </c:if>
                             </c:if>
                         </c:forEach>
                     </div>
