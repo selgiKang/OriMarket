@@ -9,8 +9,6 @@
     <title>Insert title here</title>
     <script src="https://kit.fontawesome.com/1cfe6d92db.js" crossorigin="anonymous"></script>
     <link href="../../css/order/order_pastorder.css" rel="stylesheet" media="all">
-
-
 </head>
 <style>
 
@@ -266,12 +264,12 @@
     /*주문내역 폼*/
 
     .main-box {
-        border: 1px solid #000;
+        border: 1px solid #999;
         width: 320px;
         padding: 10px;
         border-radius: 10px;
         position: relative;
-
+        margin-bottom: 10px;
     }
 
     .top{
@@ -282,8 +280,8 @@
     }
 
     .small-box {
-        background-color: #BEC5D0;
-        color: black;
+        background-color: #4caf50;
+        color: #fff;
         padding: 5px;
         width: 70px;
         height: 10px;
@@ -303,7 +301,7 @@
         font-size: 13px;
         font-weight: bolder;
         color: #999999;
-        margin-right: 125px;
+        margin-right: 83px;
     }
 
 
@@ -312,7 +310,7 @@
         height:84px;
         float: left;
         border-radius: 10px;
-        margin-top: 7px;
+        /*margin-top: 7px;*/
     }
 
     img {
@@ -350,24 +348,27 @@
         justify-content: center;
         align-items: center;
         margin-right: 73px;
+        cursor: pointer;
     }
 
     .orderdetailcheck{
         background-color: white;
-        border: 1px solid dimgray;
+        border: 1px solid #333;
         border-radius: 5px;
         width: 80px;
         height: 25px;
-        color: black;
+        color: #333;
         font-weight: bolder;
         display: flex;
         justify-content: center;
         align-items: center;
         margin-left: -65px;
+        cursor: pointer;
     }
 
     .mybutton{
         display: flex;
+        justify-content: flex-end;
         margin-top: 8px;
         margin-left: 10px;
         padding-left: 9px;
@@ -377,8 +378,10 @@
     font-family: 'omyu_pretty';
     }
 
+    button.backbtn{display: flex; align-items: center; font-size: 20px; color: #999; margin: 0 0 0 10px; width: 30px; height: 30px; background-color: #fff; border-radius: 50%; border: 1px solid #999; cursor: pointer; justify-content: center; margin-right:20%;}
+    button.backbtn:hover {background-color:#333; color:#fff;}
+    .headermsg_wrap{width:90%; display: flex; justify-content: flex-start; align-items: end;}
 </style>
-
 <body>
     <div class="main-container">
 
@@ -387,6 +390,11 @@
     </div>
 
         <h3 style="margin-top: 5px;">회원 주문내역</h3>
+        <div class="headermsg_wrap">
+        <%--뒤로가기--%>
+        <button class="backbtn" onclick="window.location.replace('/mypage')">&lt;</button>
+        <h3 style="margin: 15px 5px 5px; font-size: 20px;">회원 주문내역</h3>
+        </div>
         <div id="search_area" style="width: 95%;">
             <form class="searchbar_wrap">
                 <input type="search" placeholder="주문했던 메뉴와 시장을 검색해보세요." style="width: 88%;">
@@ -426,7 +434,7 @@
                                             </p>
                                         </div>
                                     </div>
-                                    <div style="position: absolute; top: 10px; right: 10px;">
+                                    <div style="position: absolute; top: 10px; right: 10px;color: #4caf50;font-size: 14px;font-weight: 600;">
                                         배달중
                                     </div>
                                     <div class="storepicture">
@@ -471,10 +479,17 @@
                                     <%-- 가게사진 --%>
 
                                     <!-- 주문 정보 출력 -->
-                                    <h2 class="mypage1_h2">${pastOrder.marketName}</h2>
+                                    <h2 class="mypage1_h2">${pastOrder.orderMarketName}</h2>
                                     <!-- 날짜 출력 -->
                                     <small class="mypage1_small" style="text-align: left;">
-                                            ${pastOrder.created_date.format(DateTimeFormatter.ofPattern("yyyy년 MM월 dd일 HH:mm:ss"))}
+                                        <p>
+                                            ${fn:substring(pastOrder.createdDate, 0, 4)}.
+                                            ${fn:substring(pastOrder.createdDate, 4, 6)}.
+                                            ${fn:substring(pastOrder.createdDate, 6, 8)}&nbsp;
+                                            ${fn:substring(pastOrder.createdDate, 8, 10)}:
+                                            ${fn:substring(pastOrder.createdDate, 10, 12)}:
+                                            ${fn:substring(pastOrder.createdDate, 12, 14)}
+                                        </p>
                                     </small>
 
                                     <!-- RealTimeStatus 가져오기 -->
@@ -489,11 +504,12 @@
                                         </ul>
 
                                     <c:forEach items="${pastOrder.newOrderDetails}" var="orderDetail">
-                                        <c:if test="${!orderDetail.buStoreName eq null and !orderDetail.itemName eq null}">
+                                        <c:if test="${orderDetail.buStoreName != null and orderDetail.itemName != null}">
                                         <!-- 나머지 주문 정보 출력 -->
                                             <ul style="text-align: left;">
                                                 <li>${orderDetail.buStoreName}</li>
                                                 <li>${orderDetail.itemName}</li>
+                                                <li>${orderDetail.itemCount}개</li>
                                             </ul>
                                         </c:if>
                                     </c:forEach>
@@ -509,10 +525,8 @@
             </section>
         </div>
     </div>
-        <jsp:include page="../footer/footer.jsp" />
 </div>
 </body>
-
 <script>
     const tabElements = document.querySelectorAll('button[role="tab"]');
     const panelElements = document.querySelectorAll('[role="tabpanel"]');
