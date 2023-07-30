@@ -463,10 +463,17 @@
                                     <%-- 가게사진 --%>
 
                                     <!-- 주문 정보 출력 -->
-                                    <h2 class="mypage1_h2">${pastOrder.marketName}</h2>
+                                    <h2 class="mypage1_h2">${pastOrder.orderMarketName}</h2>
                                     <!-- 날짜 출력 -->
                                     <small class="mypage1_small" style="text-align: left;">
-                                            ${pastOrder.created_date.format(DateTimeFormatter.ofPattern("yyyy년 MM월 dd일 HH:mm:ss"))}
+                                        <p>
+                                            ${fn:substring(pastOrder.createdDate, 0, 4)}.
+                                            ${fn:substring(pastOrder.createdDate, 4, 6)}.
+                                            ${fn:substring(pastOrder.createdDate, 6, 8)}&nbsp;
+                                            ${fn:substring(pastOrder.createdDate, 8, 10)}:
+                                            ${fn:substring(pastOrder.createdDate, 10, 12)}:
+                                            ${fn:substring(pastOrder.createdDate, 12, 14)}
+                                        </p>
                                     </small>
 
                                     <!-- RealTimeStatus 가져오기 -->
@@ -481,11 +488,12 @@
                                         </ul>
 
                                     <c:forEach items="${pastOrder.newOrderDetails}" var="orderDetail">
-                                        <c:if test="${!orderDetail.buStoreName eq null and !orderDetail.itemName eq null}">
+                                        <c:if test="${orderDetail.buStoreName != null and orderDetail.itemName != null}">
                                         <!-- 나머지 주문 정보 출력 -->
                                             <ul style="text-align: left;">
                                                 <li>${orderDetail.buStoreName}</li>
                                                 <li>${orderDetail.itemName}</li>
+                                                <li>${orderDetail.itemCount}개</li>
                                             </ul>
                                         </c:if>
                                     </c:forEach>
