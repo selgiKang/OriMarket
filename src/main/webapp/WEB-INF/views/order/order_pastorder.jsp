@@ -373,11 +373,19 @@
         padding-left: 9px;
     }
 
+    .header{
+    font-family: 'omyu_pretty';
+    }
+
 </style>
 
 <body>
     <div class="main-container">
+
+        <div class="header">
         <jsp:include page="../header/header_index.jsp" />
+    </div>
+
         <h3 style="margin-top: 5px;">회원 주문내역</h3>
         <div id="search_area" style="width: 95%;">
             <form class="searchbar_wrap">
