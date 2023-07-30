@@ -264,12 +264,12 @@
     /*주문내역 폼*/
 
     .main-box {
-        border: 1px solid #000;
+        border: 1px solid #999;
         width: 320px;
         padding: 10px;
         border-radius: 10px;
         position: relative;
-
+        margin-bottom: 10px;
     }
 
     .top{
@@ -280,8 +280,8 @@
     }
 
     .small-box {
-        background-color: #BEC5D0;
-        color: black;
+        background-color: #4caf50;
+        color: #fff;
         padding: 5px;
         width: 70px;
         height: 10px;
@@ -301,7 +301,7 @@
         font-size: 13px;
         font-weight: bolder;
         color: #999999;
-        margin-right: 125px;
+        margin-right: 83px;
     }
 
 
@@ -310,7 +310,7 @@
         height:84px;
         float: left;
         border-radius: 10px;
-        margin-top: 7px;
+        /*margin-top: 7px;*/
     }
 
     img {
@@ -348,33 +348,42 @@
         justify-content: center;
         align-items: center;
         margin-right: 73px;
+        cursor: pointer;
     }
 
     .orderdetailcheck{
         background-color: white;
-        border: 1px solid dimgray;
+        border: 1px solid #333;
         border-radius: 5px;
         width: 80px;
         height: 25px;
-        color: black;
+        color: #333;
         font-weight: bolder;
         display: flex;
         justify-content: center;
         align-items: center;
         margin-left: -65px;
+        cursor: pointer;
     }
 
     .mybutton{
         display: flex;
+        justify-content: flex-end;
         margin-top: 8px;
         margin-left: 10px;
         padding-left: 9px;
     }
-
+    button.backbtn{display: flex; align-items: center; font-size: 20px; color: #999; margin: 0 0 0 10px; width: 30px; height: 30px; background-color: #fff; border-radius: 50%; border: 1px solid #999; cursor: pointer; justify-content: center; margin-right:20%;}
+    button.backbtn:hover {background-color:#333; color:#fff;}
+    .headermsg_wrap{width:90%; display: flex; justify-content: flex-start; align-items: end;}
 </style>
 <body>
     <div class="main-container">
-        <h3 style="margin-top: 5px;">회원 주문내역</h3>
+        <div class="headermsg_wrap">
+        <%--뒤로가기--%>
+        <button class="backbtn" onclick="window.location.replace('/mypage')">&lt;</button>
+        <h3 style="margin: 15px 5px 5px; font-size: 20px;">회원 주문내역</h3>
+        </div>
         <div id="search_area" style="width: 95%;">
             <form class="searchbar_wrap">
                 <input type="search" placeholder="주문했던 메뉴와 시장을 검색해보세요." style="width: 88%;">
@@ -414,7 +423,7 @@
                                             </p>
                                         </div>
                                     </div>
-                                    <div style="position: absolute; top: 10px; right: 10px;">
+                                    <div style="position: absolute; top: 10px; right: 10px;color: #4caf50;font-size: 14px;font-weight: 600;">
                                         배달중
                                     </div>
                                     <div class="storepicture">
