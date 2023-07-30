@@ -423,7 +423,7 @@
                     <div role="inside_tablist">
                         <c:forEach items="${pastOrderList}" var="pastOrder">
                             <c:if test="${!empty pastOrder.newOrderDetails}">
-                            <c:if test="${pastOrder.orderStatus ne '배달완료' || pastOrder.orderStatus == null}">
+                            <c:if test="${pastOrder.orderStatus ne '배달완료' || pastOrder.orderStatus == null || pastOrder.orderStatus ne '주문거절'}">
                                 <!-- 주문내역폼 -->
                                 <div class="main-box">
                                     <div class="top">
@@ -442,7 +442,7 @@
                                         </div>
                                     </div>
                                     <div style="position: absolute; top: 10px; right: 10px;color: #4caf50;font-size: 14px;font-weight: 600;">
-                                        배달중
+                                           ${pastOrder.orderStatus}
                                     </div>
                                     <div class="storepicture">
                                         <img src="../../img/store/store.jpg" alt="사진">
@@ -483,7 +483,7 @@
                     <div role="inside_tablist">
                         <%-- 과거 주문내역 --%>
                         <c:forEach items="${pastOrderList}" var="pastOrder" varStatus="status">
-                            <c:if test="${pastOrder.orderStatus eq '배달완료'}">
+                            <c:if test="${pastOrder.orderStatus eq '배달완료' || pastOrder.orderStatus eq '주문거절'}">
                                 <div class="order_1">
                                     <%-- 가게사진 --%>
 
@@ -504,6 +504,9 @@
                                         <ul style="text-align: left;">
                                             <c:if test="${pastOrder.orderStatus eq '배달완료'}">
                                                 <li>배달 완료</li>
+                                            </c:if>
+                                            <c:if test="${pastOrder.orderStatus eq '주문거절'}">
+                                                <li>주문 거절</li>
                                             </c:if>
                                         </ul>
                                     <c:forEach items="${pastOrder.newOrderDetails}" var="orderDetail">

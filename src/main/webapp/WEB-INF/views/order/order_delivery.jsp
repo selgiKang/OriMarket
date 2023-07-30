@@ -39,23 +39,27 @@
 				<li class="orderDelivery_li_1">배달중</li>
 			</c:if>
 			<c:if test="${newOrder.orderStatus eq '배달시작' or newOrder.orderStatus eq '배달완료'}">
-				<li><i class="fa-sharp fa-solid fa-circle" style="color: #b8b8b8;"></i></li>
-				<li class="orderDelivery_li_1">배달중</li>
+				<li><i class="fa-sharp fa-solid fa-circle" style="color: #46a973;"></i></li>
+				<li class="orderDelivery_li_1" style="color: #46a973;">배달중</li>
 			</c:if>
 			<c:if test="${newOrder.orderStatus eq null or newOrder.orderStatus eq '배달시작' or newOrder.orderStatus eq '주문수락'}">
 				<!-- 배달완료 -->
-				<li><i class="fa-sharp fa-regular fa-circle" style="color: #b8b8b8;"></i></li>
+				<li><i class="fa-sharp fa-regular fa-circle" style="color: #46a973;"></i></li>
 				<li>배달 완료</li>
 			</c:if>
 			<c:if test="${newOrder.orderStatus eq '배달완료'}">
 				<!-- 배달완료 -->
-				<li><i class="fa-sharp fa-solid fa-circle" style="color: #b8b8b8;"></i></li>
-				<li>배달 완료</li>
+				<li><i class="fa-sharp fa-solid fa-circle" style="color: #46a973;"></i></li>
+				<li style="color: #46a973;">배달 완료</li>
 			</c:if>
 		</ul>
 		<div id="orderDelivery_orderInfo">
 			<h3>${newOrder.orderMarketName}</h3>
 			<table id="orderDelivery_table_1">
+				<c:if test="${newOrder.orderStatus eq '주문거절'}">
+					<!-- 배달완료 -->
+					<tr style="color: red;"><td>가게 사정으로 주문이 거절되었습니다. 죄송합니다.</td></tr>
+				</c:if>
 				<tr class="orderDelivery_table_tr_1"><td>${newOrder.orderNumber}</td></tr>
 				<tr class="orderDelivery_table_tr_2">
 					<td>
@@ -80,12 +84,16 @@
 					</c:if>
 					<tr class="orderDelivery_table_tr_2">
 						<tr>
-					<td>${store.itemName}&nbsp;&nbsp;&nbsp;
-						<fmt:formatNumber value="${store.itemPrice}" pattern="#,###"/>원
-						<small style="color: #818083;">&nbsp;&nbsp;&nbsp;x${store.itemCount}</small></td>
-				</tr>
+							<td>${store.itemName}&nbsp;&nbsp;&nbsp;
+								<fmt:formatNumber value="${store.itemPrice}" pattern="#,###"/>원
+								<small style="color: #818083;">&nbsp;&nbsp;&nbsp;x${store.itemCount}</small>
+							</td>
+						</tr>
 					</tr>
 				</c:forEach>
+				<tr>
+					<td>배달비</td><td><fmt:formatNumber value="${newOrder.orderDeliveryPrice}" pattern="#,###"/>원</td>
+				</tr>
 			</table>
 			<hr>
 			<table id="orderDelivery_table_3">
