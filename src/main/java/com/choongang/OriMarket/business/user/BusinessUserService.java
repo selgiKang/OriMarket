@@ -30,9 +30,11 @@ public class BusinessUserService {
     public boolean login1(BusinessUser businessUser, HttpSession session, Model model) {
         BusinessUser findbusinessUser = businessUserRepository.findByBuUserId(businessUser.getBuUserId());
 
-        session.setAttribute("buUserNumber",findbusinessUser.getBuUserNumber());
-        System.out.println("서비스 넘버:"+session.getAttribute("buUserNumber"));
         List<Review> all = reviewRepository.findAll();
+
+        if(findbusinessUser == null){
+            return false;
+        }
 
         if(findbusinessUser.getBusinessStores().isEmpty()) {
         }else{
@@ -43,10 +45,6 @@ public class BusinessUserService {
                     model.addAttribute("save", businessStores.get(0));
                 }
             }
-
-        if(findbusinessUser == null){
-            return false;
-        }
 
         if(!businessUser.getBuUserPassWord().equals(findbusinessUser.getBuUserPassWord())){
             return false;

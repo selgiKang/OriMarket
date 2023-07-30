@@ -37,7 +37,6 @@
         padding: 10px;
         width: 50px;
         text-align: center;
-        font-size: 14px;
     }
     .message_td_2{
         padding: 10px;
@@ -56,7 +55,7 @@
     <h3>공지사항</h3>
 </header>
 <table id="message_table">
-    <tr><th>순번</th><th>날짜</th><th>공지 사항</th></tr>
+    <tr><th>순번</th><th>날짜</th><th>제목</th></tr>
     <c:forEach var="resultMessage" items="${resultMessage}" varStatus="status">
         <tr>
             <td class="message_td_1">${status.index + 1}</td>

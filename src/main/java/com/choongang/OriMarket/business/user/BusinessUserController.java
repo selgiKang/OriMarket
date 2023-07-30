@@ -32,6 +32,10 @@ public class BusinessUserController {
     public String login1(){
         return "business/businessUser/businesslogin";
     }
+    @GetMapping("/backbuUser")
+    public String backbuUser(){
+        return "business/storenotice_new";
+    }
     @GetMapping("/buUserLogout")
     public String buUserLogout(@RequestParam("buUserId") String buUserId,HttpSession session){
 
@@ -97,7 +101,7 @@ public class BusinessUserController {
         //사용자 로그인 시도
         if (businessUserService.login1(businessUser, session, model)) {
             session.setAttribute("buUserId", businessUser.getBuUserId());
-            System.out.println(session.getAttribute("buUserId"));
+
             return "business/storenotice_new";
 
         } else {

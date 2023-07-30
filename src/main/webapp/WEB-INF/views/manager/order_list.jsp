@@ -3,6 +3,8 @@
 <%@ page import="java.util.List" %>
 <%@ page import="com.choongang.OriMarket.RealTimeStatus.RealTimeStatus" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%--특정 위치마다 , 넣도록--%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -32,39 +34,45 @@
             <a href="/manager_logout">로그아웃</a></div>
         </div>
         <div class="tab">
-            <span class="tab-link active" data-tab="pending">주문</span>
-            <span class="tab-link" data-tab="processing1">주문 시작</span>
-            <span class="tab-link" data-tab="processing2">배달 시작</span>
-            <span class="tab-link" data-tab="completed">완료</span>
+            <span class="tab-link active" data-tab="pending">주문 요청 목록</span>
+            <span class="tab-link" data-tab="processing1">픽업중</span>
+            <span class="tab-link" data-tab="processing2">배달중</span>
+            <span class="tab-link" data-tab="completed">배달 완료</span>
         </div>
         <%--주문--%>
         <div class="order-item" data-status="pending">
+            <form action="/manager_order_search" method="post"><button type="submit">주문 내역 검색</button></form>
             <c:if test="${not empty orderList}">
                 <c:forEach items="${orderList}" var="order">
-                    <c:forEach items="${rtsResult}" var="rts">
-                        <c:if test="${order.orderNumber == rts.orderNumber.orderNumber}">
-                            <c:if test="${rts.rtsOrderIng eq 0 && rts.rtsRiderIng eq 0 && rts.rtsRiderFinish eq 0}">
-                                <!-- 주문번호 클릭 시 주문 상세 정보를 보여줄 버튼 -->
-                                <span class="order-number" onclick="showOrderDetail('${order.orderNumber}')">
-                                    <a href="/manager_receiptDelivery?orderNumber=${order.orderNumber}">주문번호: ${order.orderNumber}</a>
-                                </span>
-                                <span class="order-quantity">메뉴</span>
-                                <div class="order-details">
-                                    <span>${order.orderGoodsName} 총 ${order.orderGoodsNum}개</span>
-                                    <span class="order-price">총 금액 ${order.orderTotalPrice}원</span>
-                                </div>
-                               <%-- <div class="order-menu"></div>--%>
-                                <div class="action-buttons">
-                                    <form action="/accept" method="get">
-                                        <input type="hidden" name="orderNumber" value="${order.orderNumber}">
-                                        <input type="hidden" name="managerUser" value="${sessionScope.managerSeq}">
-                                        <button class="accept-button">수락</button>
-                                    </form>
-                                    <button class="reject-button">거절</button>
-                                </div>
-                            </c:if>
-                        </c:if>
-                    </c:forEach>
+                    <c:if test="${order.orderStatus eq null}">
+                        <!-- 주문번호 클릭 시 주문 상세 정보를 보여줄 버튼 -->
+                        <span class="order-number" onclick="showOrderDetail('${order.orderNumber}')">
+                            <a href="/manager_receiptDelivery?orderNumber=${order.orderNumber}">주문번호: ${order.orderNumber}</a>
+                        </span>
+                        <span class="order-quantity">메뉴</span>
+                        <c:forEach var="store" items="${order.newOrderDetails}">
+                            <div class="order-details">
+                                <span>${store.itemName} 총 ${store.itemCount}개</span>
+                            </div>
+                        </c:forEach>
+                        <div>
+                            <span class="order-price">총 금액 <fmt:formatNumber value="${order.orderTotalPrice}" pattern="#,###"/>원</span>
+                        </div>
+
+                        <%-- <div class="order-menu"></div>--%>
+                        <div class="action-buttons">
+                            <form action="/accept" method="get">
+                                <input type="hidden" name="orderNumber" value="${order.orderNumber}">
+                                <input type="hidden" name="managerUser" value="${sessionScope.managerSeq}">
+                                <button class="accept-button">수락</button>
+                            </form>
+                            <form action="/reject" method="get">
+                                <input type="hidden" name="orderNumber" value="${order.orderNumber}">
+                                <input type="hidden" name="managerUser" value="${sessionScope.managerSeq}">
+                                <button class="reject-button">거절</button>
+                            </form>
+                        </div>
+                    </c:if>
                 </c:forEach>
             </c:if>
             <c:if test="${empty orderList}">
@@ -75,29 +83,26 @@
         <div class="order-item" data-status="processing1">
             <c:if test="${not empty orderList}">
                 <c:forEach items="${orderList}" var="order">
-                    <c:forEach items="${rtsResult}" var="rts">
-                        <c:if test="${order.orderNumber == rts.orderNumber.orderNumber}">
-                            <c:if test="${order.managerUser.managerSeq eq sessionScope.managerSeq}">
-                                <c:if test="${rts.rtsOrderIng eq 1 && rts.rtsRiderIng eq 0 && rts.rtsRiderFinish eq 0}">
-                                    <!-- 주문번호 클릭 시 주문 상세 정보를 보여줄 버튼 -->
-                                    <span class="order-number" onclick="showOrderDetail('${order.orderNumber}')">
-                                        <a href="/manager_receiptDelivery?orderNumber=${order.orderNumber}">주문번호: ${order.orderNumber}</a>
-                                    </span>
-                                    <div class="order-details">
-                                        <span class="order-quantity">메뉴 ${order.orderGoodsNum}개</span>
-                                        <span class="order-price">${order.orderTotalPrice}원</span>
-                                    </div>
-                                    <div class="order-menu">${order.orderGoodsName}</div>
-                                    <div class="action-buttons">
-                                        <form action="/acceptPickup" method="get">
-                                            <input type="hidden" name="orderNumber" value="${order.orderNumber}">
-                                            <button class="accept-button">픽업 완료</button>
-                                        </form>
-                                    </div>
-                                </c:if>
-                            </c:if>
-                        </c:if>
-                    </c:forEach>
+                    <c:if test="${order.orderStatus eq '주문수락'}">
+                        <!-- 주문번호 클릭 시 주문 상세 정보를 보여줄 버튼 -->
+                        <span class="order-number" onclick="showOrderDetail('${order.orderNumber}')">
+                            <a href="/manager_receiptDelivery?orderNumber=${order.orderNumber}">주문번호: ${order.orderNumber}</a>
+                        </span>
+                        <c:forEach var="store" items="${order.newOrderDetails}">
+                            <div class="order-details">
+                                <span>${store.itemName} 총 ${store.itemCount}개</span>
+                            </div>
+                        </c:forEach>
+                        <div>
+                            <span class="order-price">총 금액 <fmt:formatNumber value="${order.orderTotalPrice}" pattern="#,###"/>원</span>
+                        </div>
+                        <div class="action-buttons">
+                            <form action="/acceptPickup" method="get">
+                                <input type="hidden" name="orderNumber" value="${order.orderNumber}">
+                                <button class="accept-button">픽업 완료</button>
+                            </form>
+                        </div>
+                    </c:if>
                 </c:forEach>
             </c:if>
             <c:if test="${empty orderList}">
@@ -108,21 +113,20 @@
         <div class="order-item" data-status="processing2">
             <c:if test="${not empty orderList}">
                 <c:forEach items="${orderList}" var="order">
-                    <c:forEach items="${rtsResult}" var="rts">
-                        <c:if test="${order.orderNumber == rts.orderNumber.orderNumber && order.managerUser.managerSeq eq sessionScope.managerSeq}">
-                            <c:if test="${rts.rtsOrderIng eq 1 && rts.rtsRiderIng eq 1 && rts.rtsRiderFinish eq 0}">
-                                <!-- 주문번호 클릭 시 주문 상세 정보를 보여줄 버튼 -->
-                                <span class="order-number" onclick="showOrderDetail('${order.orderNumber}')">
-                                    <a href="/manager_receiptDelivery?orderNumber=${order.orderNumber}">주문번호: ${order.orderNumber}</a>
-                                </span>
-                                <div class="order-details">
-                                    <span class="order-quantity">메뉴 ${order.orderGoodsNum}개</span>
-                                    <span class="order-price">${order.orderTotalPrice}원</span>
-                                </div>
-                                <div class="order-menu" style="margin-bottom: 10px;">${order.orderGoodsName}</div>
-                            </c:if>
-                        </c:if>
-                    </c:forEach>
+                    <c:if test="${order.orderStatus eq '픽업완료'}">
+                        <!-- 주문번호 클릭 시 주문 상세 정보를 보여줄 버튼 -->
+                        <span class="order-number" onclick="showOrderDetail('${order.orderNumber}')">
+                            <a href="/manager_receiptDelivery?orderNumber=${order.orderNumber}">주문번호: ${order.orderNumber}</a>
+                        </span>
+                        <c:forEach var="store" items="${order.newOrderDetails}">
+                            <div class="order-details">
+                                <span>${store.itemName} 총 ${store.itemCount}개</span>
+                            </div>
+                        </c:forEach>
+                        <div>
+                            <span class="order-price">총 금액 <fmt:formatNumber value="${order.orderTotalPrice}" pattern="#,###"/>원</span>
+                        </div>
+                    </c:if>
                 </c:forEach>
             </c:if>
             <c:if test="${empty orderList}">
@@ -133,21 +137,20 @@
         <div class="order-item" data-status="completed">
             <c:if test="${not empty orderList}">
                 <c:forEach items="${orderList}" var="order">
-                    <c:forEach items="${rtsResult}" var="rts">
-                        <c:if test="${order.orderNumber == rts.orderNumber.orderNumber && order.managerUser.managerSeq eq sessionScope.managerSeq}">
-                            <c:if test="${rts.rtsOrderIng eq 1  && rts.rtsRiderIng eq 1 && rts.rtsRiderFinish eq 1}">
-                                <!-- 주문번호 클릭 시 주문 상세 정보를 보여줄 버튼 -->
-                                <span class="order-number" onclick="showOrderDetail('${order.orderNumber}')">
-                                    <a href="/manager_receiptDelivery?orderNumber=${order.orderNumber}">주문번호: ${order.orderNumber}</a>
-                                </span>
-                                <div class="order-details">
-                                    <span class="order-quantity">메뉴 ${order.orderGoodsNum}개</span>
-                                    <span class="order-price">${order.orderTotalPrice}원</span>
-                                </div>
-                                <div class="order-menu">${order.orderGoodsName}</div>
-                            </c:if>
-                        </c:if>
-                    </c:forEach>
+                    <c:if test="${order.orderStatus eq '배달완료' or order.orderStatus eq '주문거절'}">
+                        <!-- 주문번호 클릭 시 주문 상세 정보를 보여줄 버튼 -->
+                        <span class="order-number" onclick="showOrderDetail('${order.orderNumber}')">
+                            <a href="/manager_receiptDelivery?orderNumber=${order.orderNumber}">주문번호: ${order.orderNumber}</a>
+                        </span>
+                        <c:forEach var="store" items="${order.newOrderDetails}">
+                            <div class="order-details">
+                                <span>${store.itemName} 총 ${store.itemCount}개</span>
+                            </div>
+                        </c:forEach>
+                        <div>
+                            <span class="order-price">총 금액 <fmt:formatNumber value="${order.orderTotalPrice}" pattern="#,###"/>원</span>
+                        </div>
+                    </c:if>
                 </c:forEach>
             </c:if>
             <c:if test="${empty orderList}">

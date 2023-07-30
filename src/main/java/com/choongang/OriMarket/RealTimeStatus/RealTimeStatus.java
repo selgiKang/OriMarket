@@ -23,10 +23,13 @@ public class RealTimeStatus {
     @JoinColumn(name="order_number")
     private Order orderNumber;
 
-
     //픽업중
     @Column
     private  int rtsOrderIng;
+
+    //배송시작
+    @Column
+    private Integer rtsRiderStart;
 
     //배송중
     @Column
