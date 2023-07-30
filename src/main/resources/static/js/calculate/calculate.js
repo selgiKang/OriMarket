@@ -125,41 +125,64 @@ function sendAjaxRequest(){
 function updateTable(data) {
 
     //테이블
+    // 테이블
     var tableBody = $('#tableBody');
     tableBody.empty();
     $('#calculate_main_totalIncome h3').empty();
     $('#calculate_main_totalIncome div').empty();
 
-    //총합, 개수
-    var totalCome = 0;
-    var orderCount  = data.length;
-
-
-    for(var i=0;i<data.length;i++){
-        totalCome += parseInt(data[i].totalPrice);
-    }
-
-    for (var i = 0; i < data.length; i++) {
+    if (data === null || data.length === 0) {
         var row = $('<tr></tr>');
-        var dateCell = $('<td class="calculate_main_table_td_1" style="text-align: center;"></td>');
-        if (data[i].date) {
-            // 기존 날짜 출력 부분 대신 아래 코드로 날짜를 링크로 만들어줍니다.
-            var dateLink = $('<a></a>')
-                .attr('href', '/details?orderNumber=' + data[i].orderNumber)
-                .text(data[i].date.substr(0, 8));
-            dateCell.append(dateLink);
-        } else {
-            dateCell.text("");
-        }
-        var amountCell = $('<td class="calculate_main_table_td_2" style="text-align: center;"></td>').text(data[i].totalPrice + "원");
-
-        row.append(dateCell);
-        row.append(amountCell);
+        var noDataCell = $('<td colspan="2" class="no-data-cell" style="text-align: center;">정산 내역이 없습니다.</td>');
+        row.append(noDataCell);
         tableBody.append(row);
-    }
 
-    $('#calculate_main_totalIncome h3').text(totalCome+'원');
-    $('#calculate_main_totalIncome div').text('주문 횟수 '+orderCount+'번');
+        // 총 수입과 주문 횟수도 0으로 표시
+        $('#calculate_main_totalIncome h3').text('총 수입 0원');
+        $('#calculate_main_totalIncome div').text('주문 횟수 0번');
+    }else{
+        // 총합, 개수
+        var totalCome = 0;
+        var orderCount = data.length;
+
+        for (var i = 0; i < data.length; i++) {
+            totalCome += parseInt(data[i].totalPrice);
+        }
+
+        for (var i = 0; i < data.length; i++) {
+            var dateString = data[i].date;
+            var year = dateString.substr(0, 4);
+            var month = dateString.substr(4, 2);
+            var day = dateString.substr(6, 2);
+            var formatDate  = year+"년 "+month+"월 "+day+"일";
+            var row = $('<tr></tr>');
+            var dateCell = $('<td class="calculate_main_table_td_1" style="text-align: center;"></td>');
+            if (data[i].date) {
+                // 기존 날짜 출력 부분 대신 아래 코드로 날짜를 링크로 만들어줍니다.
+                var dateLink = $('<a></a>')
+                    .attr('href', '/details?orderNumber=' + data[i].orderNumber)
+                    .text(formatDate)
+                dateCell.append(dateLink);
+            } else {
+                dateCell.text("");
+            }
+            var formattedTotalPrice = formatNumberWithCommas(data[i].totalPrice);
+            var amountCell = $('<td class="calculate_main_table_td_2" style="text-align: center;"></td>').text(data[i].formattedTotalPrice + "원");
+
+            row.append(dateCell);
+            row.append(amountCell);
+            tableBody.append(row);
+        }
+
+        // 숫자를 3자리마다 ','로 구분하여 한글로 표시하는 함수
+        function formatNumberWithCommas(number) {
+            return new Intl.NumberFormat('ko-KR').format(number);
+        }
+
+        var formattedTotalCome = formatNumberWithCommas(totalCome);
+        $('#calculate_main_totalIncome h3').text('총 수입 ' + formattedTotalCome + '원');
+        $('#calculate_main_totalIncome div').text('주문 횟수 ' + orderCount + '번');
+    }
 
     //날짜 선택
    // $('#tableBody').on('click', 'tr', function () {

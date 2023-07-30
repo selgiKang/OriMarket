@@ -106,29 +106,36 @@ public class OrderService {
 
             List<Map<String,String>> tableData = new ArrayList<>();
             System.out.println("calculateDate"+calculateDate+", calculateLast"+calculateDateLast);
+
             String calculateDateSixDigits = calculateDate.substring(0, 6);
             String calculateDateLastSixDigits = calculateDateLast.substring(0, 6);
-            System.out.println(calculateDateSixDigits+"/"+calculateDateLastSixDigits);
+
             List<NewOrder> orders = newOrderRepository.findNewOrdersBetweenDates(calculateDateSixDigits,calculateDateLastSixDigits);
-            System.out.println("Found " + orders.size() + " orders.");
-            System.out.println(1);
+
             //사업자 번호 세션꺼 꺼내서
             //그 스토어 이름이랑 오더의 스토어 이름
             String buUserNumber = session.getAttribute("buUserNumber").toString();
+
             for (NewOrder order : orders) {
-                System.out.println(2);
                 for (NewOrderDetail orderDetail : order.getNewOrderDetails()) {
                     String buStoreNumbers = orderDetail.getBuStoreNumber();
-                    System.out.println(3+","+buStoreNumbers);
-                    System.out.println(4+","+buUserNumber);
+
+                    //사업자 번호가 일치하는 것 중
                     if (buStoreNumbers != null && buStoreNumbers.equals(buUserNumber)) {
-                        System.out.println(5);
                         Map<String, String> orderData = new HashMap<>();
-                        orderData.put("date", String.valueOf(order.getCreatedDate()));
-                        orderData.put("amount", String.valueOf(orderDetail.getItemPrice()));
-                        orderData.put("totalPrice", String.valueOf(order.getOrderGoodsTotalPrice()));
-                        orderData.put("orderNumber",order.getOrderNumber());
-                        tableData.add(orderData);
+                        //배달완료가 아닌 것은 이렇게
+                        if (order.getOrderStatus() == null || !order.getOrderStatus().equals("배달완료")) {
+                            // 배달완료가 아닌 경우에 대한 처리
+                            orderData=null;
+                        }else{
+                            orderData.put("date", String.valueOf(order.getCreatedDate()));
+                            orderData.put("amount", String.valueOf(orderDetail.getItemPrice()));
+                            orderData.put("totalPrice", String.valueOf(order.getOrderGoodsTotalPrice()));
+                            orderData.put("orderNumber",order.getOrderNumber());
+                        }
+                        if(orderData!=null){
+                            tableData.add(orderData);
+                        }
                     }
                 }
             }

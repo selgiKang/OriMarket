@@ -2,6 +2,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%--특정 위치마다 , 넣도록--%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -420,7 +422,8 @@
                 <div class="inside_tabs">
                     <div role="inside_tablist">
                         <c:forEach items="${pastOrderList}" var="pastOrder">
-                            <c:if test="${!empty pastOrder.newOrderDetails and (!pastOrder.orderStatus eq '배달완료' or pastOrder.orderStatus eq null)}">
+                            <c:if test="${!empty pastOrder.newOrderDetails}">
+                            <c:if test="${pastOrder.orderStatus ne '배달완료' || pastOrder.orderStatus == null}">
                                 <!-- 주문내역폼 -->
                                 <div class="main-box">
                                     <div class="top">
@@ -468,6 +471,7 @@
                                     </div>
                                 </div>
                             </c:if>
+                            </c:if>
                         </c:forEach>
                     </div>
                 </div>
@@ -512,8 +516,7 @@
                                             </ul>
                                         </c:if>
                                     </c:forEach>
-                                    <h3 style="text-align: left;">합계: ${pastOrder.orderTotalPrice}원</h3>
-
+                                    <h3 style="text-align: left;">합계:<fmt:formatNumber value="${pastOrder.orderTotalPrice}" pattern="#,###"/>원
                                     <!-- 영수증 보기 버튼 -->
                                     <div class="div2" onclick="location.href='/order_receiptDelivery?orderNumber=${pastOrder.orderNumber}'">영수증 보기</div>
                                 </div>

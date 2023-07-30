@@ -82,7 +82,7 @@ public class ManagerService {
     //해당 매니저 불러오기
     public ManagerUser findByManagerId(Model model,HttpSession session){
         String managerId = session.getAttribute("managerId").toString();
-        System.out.println("managerId"+managerId);
+
         //매니저 번호 넣어서 매니저 정보 꺼내기(시장 번호도 확인)
         ManagerUser userResult = managerRepository.findByManagerId(managerId);
 
@@ -90,7 +90,7 @@ public class ManagerService {
         if(userResult!=null){
             if(userResult.getMarket().getMarketSeq()!=null){
                 String marketName = userResult.getMarket().getMarketName();
-                System.out.println("매니저 소속 시장이름: "+marketName);
+
                 //시장 번호 가지고 그 시장의 주문 가져오기
                 List<NewOrder> orderResult = newOrderRepository.findByOrderMarketName(marketName);
                 model.addAttribute("managerOrderList",orderResult);

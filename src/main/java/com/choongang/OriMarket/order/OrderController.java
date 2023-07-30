@@ -19,6 +19,7 @@ import javax.servlet.http.HttpSession;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -198,21 +199,23 @@ public class OrderController {
     public ResponseEntity<List<Map<String,String>>> calculateRequest(@RequestParam("calculate_date") String calculateDate,
                                                                      @RequestParam("calculate_date_last") String calculateDateLast,
                                                                      HttpSession session, Model model){
-        List<Map<String,String>> tableData = orderService.getTableData(calculateDate,calculateDateLast,model,session);
+        if(orderService.getTableData(calculateDate,calculateDateLast,model,session)==null){
+            return ResponseEntity.ok(Collections.emptyList());
+        }else{
+            List<Map<String,String>> tableData = orderService.getTableData(calculateDate,calculateDateLast,model,session);
+            int totalCome = 0;
+            int orderCount = tableData.size();
+            int allTotalPrice = 0;
 
-        int totalCome = 0;
-        int orderCount = tableData.size();
-        int allTotalPrice = 0;
-
-        for(Map<String,String>data : tableData){
-            //orders 테이블에 물건 여러개 들어가면 가격 ,표시를 빼고 더애서 가져옴
-            totalCome += orderService.sumCommaSeparatedNumbers(data.get("amount"));
-           //총 수입
-            allTotalPrice += Integer.parseInt(data.get("totalPrice"));
-            System.out.println("가격:"+data.get("tatalPrice"));
+            for(Map<String,String>data : tableData){
+                //orders 테이블에 물건 여러개 들어가면 가격 ,표시를 빼고 더애서 가져옴
+                totalCome += orderService.sumCommaSeparatedNumbers(data.get("amount"));
+                //총 수입
+                allTotalPrice += Integer.parseInt(data.get("totalPrice"));
+                System.out.println("가격:"+data.get("tatalPrice"));
+            }
+            return ResponseEntity.ok(tableData);
         }
-
-        return ResponseEntity.ok(tableData);
     }
 
 
