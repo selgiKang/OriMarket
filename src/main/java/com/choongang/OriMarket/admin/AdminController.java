@@ -7,6 +7,9 @@ import com.choongang.OriMarket.business.user.BusinessUser;
 import com.choongang.OriMarket.business.user.BusinessUserRepository;
 import com.choongang.OriMarket.business.user.BusinessUserService;
 import com.choongang.OriMarket.store.ItemRepository;
+import com.choongang.OriMarket.user.CartRepository;
+import com.choongang.OriMarket.user.OrderItemRepository;
+import com.choongang.OriMarket.user.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +19,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.lang.reflect.Member;
 import java.util.List;
 
 @Controller
@@ -28,6 +32,9 @@ public class AdminController {
     private final BusinessUserRepository businessUserRepository;
     private final BusinessStoreRepository businessStoreRepository;
     private final ItemRepository itemRepository;
+    private final UserRepository userRepository;
+    private final CartRepository cartRepository;
+    private final OrderItemRepository orderItemRepository;
 
 
     //사업자등록현황페이지
@@ -67,5 +74,11 @@ public class AdminController {
 
         model.addAttribute("deleteMessage","삭제되었습니다.");
         return "redirect:/a_buser";
+    }
+
+
+    @GetMapping("/admin_order")
+    public String adminOrder() {
+        return "admin/admin_Order";
     }
 }
