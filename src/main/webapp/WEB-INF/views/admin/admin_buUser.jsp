@@ -19,14 +19,22 @@
         alert("<%= request.getAttribute("deleteMessage") %>");
       };
     <% } %>
+    <h1>사업자등록현황</h1>
+    <form action="/searchBuser" method="get">
+        <table>
+            <tr>
+                <td><input type="text" name="keyword"></td>
+                <td><input type="submit" value="검색"></td>
+            </tr>
+        </table>
+    </form>
     <form action="" method="">
-        <h1>사업자등록현황</h1>
         <table id="b_table">
             <tr>
                 <th>시장</th>
                 <th>사업자번호</th>
                 <th>가게상호명</th>
-                <th>대표</th>
+                <th>사업자명</th>
                 <th>주소</th>
                 <th>아이디</th>
                 <th>연락처</th>
