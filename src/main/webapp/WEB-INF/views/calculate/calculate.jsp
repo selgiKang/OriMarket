@@ -88,10 +88,6 @@
                     </tr>
             </c:forEach>
             </tbody>
-          <%--  <tr>
-                <td class="calculate_main_table_td_1" style="text-align: center;">07/01</td>
-                <td class="calculate_main_table_td_2" style="text-align: center;">30,000원</td>
-            </tr>--%>
         </table>
     </main>
 </body>

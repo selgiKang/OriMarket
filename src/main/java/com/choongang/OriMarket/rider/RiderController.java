@@ -38,8 +38,8 @@ public class RiderController {
     @GetMapping("/rider_detail/{riderId}")
     public String riderDetail(@PathVariable String riderId, Model model) {
         // 라이더 아이디를 사용하여 라이더 정보를 가져옵니다.
-        Rider rider = riderService.getRiderById(riderId);
-        model.addAttribute("rider", rider);
+//        Rider rider = riderService.getRiderById(riderId);
+//        model.addAttribute("rider", rider);
 
         return "rider/rider_detail";
     }
