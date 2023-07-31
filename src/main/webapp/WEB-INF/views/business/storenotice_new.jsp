@@ -434,11 +434,16 @@
 
     <div class="store_time_container">
         <div class="store_time">
-            <c:if test="${empty save.status}">
-            <h3 id="switchStoreStatus">CLOSE</h3>
+            <c:if test="${empty save}">
+                <h3>가게를 등록해주세요!</h3>
             </c:if>
-            <c:if test="${!empty save.status}">
-                <h3 id="switchStoreStatus">${save.status}</h3>
+            <c:if test="${not empty save}">
+                <c:if test="${empty save.status}">
+                <h3 id="switchStoreStatus">CLOSE</h3>
+                </c:if>
+                <c:if test="${!empty save.status}">
+                    <h3 id="switchStoreStatus">${save.status}</h3>
+                </c:if>
             </c:if>
             <h6 style="margin-top: 6px;">보유하신 가게에 적용됩니다.</h6>
             <div class="wrapper">

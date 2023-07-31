@@ -423,13 +423,23 @@ pageEncoding="UTF-8"%>
           </div>
           <div id="tab-panel-1" aria-labelledby="tab-1" role="tabpanel" tabindex="0">
             <c:forEach items="${newOrders}" var="pastOrder">
+              <div style="border: 1px solid #46A973; width: 315px;">
                   <c:set var="processedStoreNames" value="" scope="page" />
+                  <c:set var="firstStoreName" value="true" scope="page" />
                   <c:forEach items="${pastOrder.newOrderDetails}" var="orderDetail">
                     <c:if test="${!processedStoreNames.contains(orderDetail.buStoreName)}">
                       <c:set var="processedStoreNames" value="${processedStoreNames},${orderDetail.buStoreName}" scope="page" />
-                        ${orderDetail.buStoreName} ${orderDetail.itemName}
+                      <p style="font-size: 16px; margin-top: ${firstStoreName eq 'true' ? '0' : '10px'}; margin-bottom: -11px;
+                              border-top: ${firstStoreName eq 'true' ? 'none' : '1px solid #46A973'}; position: relative;">
+                        ${orderDetail.buStoreName}
+                          <button style="position: absolute; right: 0;"
+                                  onclick="location.href='/user_review?buStoreName=${orderDetail.buStoreName}'">리뷰 쓰기</button>
+                      </p>
+                      <c:set var="firstStoreName" value="false" scope="page" />
                     </c:if>
+                        <span style="font-size: x-small; padding-left: 3px;">물건 :${orderDetail.itemName}</span>
                   </c:forEach>
+              </div>
             </c:forEach>
           </div>
           <div id="tab-panel-2" aria-labelledby="tab-2" role="tabpanel" tabindex="-1" hidden>

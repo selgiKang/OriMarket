@@ -42,8 +42,6 @@ public class RiderService {
             }
         }
     }
-
-
     //폼 데이터 출력
 
 
@@ -117,7 +115,6 @@ public class RiderService {
 
     public NewOrder riderOrderAccept1(String orderNumber,HttpSession session){
         NewOrder byOrderNumber = newOrderRepository.findByOrderNumber(orderNumber);
-
         byOrderNumber.setOrderStatus("배달시작");
         newOrderRepository.save(byOrderNumber);
 
@@ -126,10 +123,8 @@ public class RiderService {
 
     public List<NewOrder> riderOrderAccept2(String orderNumber,HttpSession session){
         NewOrder byOrderNumber = newOrderRepository.findByOrderNumber(orderNumber);
-
         byOrderNumber.setOrderStatus("배달완료");
         newOrderRepository.save(byOrderNumber);
-
         List<NewOrder> byRiderOrder = newOrderRepository.findByRider(byOrderNumber.getRider());
 
         return byRiderOrder;

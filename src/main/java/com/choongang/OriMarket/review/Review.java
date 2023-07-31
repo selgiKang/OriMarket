@@ -54,10 +54,16 @@ public class Review {
     private String taste;
 
     @Column
-    private String delivery;
+    private String amount;
 
     @Column
     private String status;
+
+    @Column
+    private String itemName;
+
+    @Column
+    private String buStoreName;
 
     @ManyToOne(fetch = FetchType.LAZY) //lazy가 성능최적화
     @JoinColumn(name ="business_store")
