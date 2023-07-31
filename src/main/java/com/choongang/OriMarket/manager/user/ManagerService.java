@@ -13,14 +13,11 @@ import com.choongang.OriMarket.user.User;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.yaml.snakeyaml.error.Mark;
 
 import javax.servlet.http.HttpSession;
-import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
@@ -130,5 +127,20 @@ public class ManagerService {
         }
         return false;
     }
+
+    public List<ManagerUser> getAllManagerUsers(){
+        return managerRepository.findAll();
+
+    }
+
+    //매니저 삭제
+    public void deleteManagerUsers(List<Long> managerSeqList) {
+        for (Long managerSeq : managerSeqList) {
+            managerRepository.deleteById(managerSeq);
+        }
+    }
+
+
+
 
 }

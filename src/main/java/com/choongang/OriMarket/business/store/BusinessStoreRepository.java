@@ -17,6 +17,8 @@ public interface BusinessStoreRepository extends JpaRepository<BusinessStore,Lon
 
     BusinessStore findByBuStoreNumber(Long businessStoreNumber);
 
+    BusinessStore findByBusinessUser_BuUserNumber(Long buUserNumber);
+
 
 
 }

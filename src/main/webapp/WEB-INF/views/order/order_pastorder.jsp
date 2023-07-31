@@ -13,7 +13,6 @@
     <link href="../../css/order/order_pastorder.css" rel="stylesheet" media="all">
 </head>
 <style>
-
     /*가운데 정렬*/
     * {
         margin: 0;
@@ -27,7 +26,7 @@
     /*핸드폰화면 사이즈*/
     .main-container {
         width: 375px;
-        height: 812px;
+/*        height: 812px;*/
         margin: 0 auto;
         display: flex;
         flex-direction: column;
@@ -60,7 +59,7 @@
         max-width: 365px;
         width: 100%;
         margin-top: 15px; /*리뷰관리 제목이랑 간격 조절*/
-
+        margin-bottom:15px;
     }
 
 
@@ -174,6 +173,16 @@
         line-height: 1.4;
         /* 텍스트가 넘어가면 다음 줄로 바뀌게 하려면 아래 속성을 추가합니다. */
         word-wrap: break-word;
+        /* 스크롤생성 */
+        height:424px;
+        overflow-y: scroll;
+    }
+    .tabs .content section {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+    }
+    .tabs .content section::-webkit-scrollbar {
+        display: none;
     }
 
     .tabs
@@ -352,7 +361,6 @@
         margin-right: 73px;
         cursor: pointer;
     }
-
     .orderdetailcheck{
         background-color: white;
         border: 1px solid #333;
@@ -383,7 +391,6 @@
     .order_pastorder_footer{
         font-family: 'omyu_pretty';
     }
-
     button.backbtn{display: flex; align-items: center; font-size: 20px; color: #999; margin: 0 0 0 10px; width: 30px; height: 30px; background-color: #fff; border-radius: 50%; border: 1px solid #999; cursor: pointer; justify-content: center; margin-right:20%;}
     button.backbtn:hover {background-color:#333; color:#fff;}
     .headermsg_wrap{width:90%; display: flex; justify-content: flex-start; align-items: end;}
@@ -420,15 +427,15 @@
         <div class="content">
             <section>
                 <div class="inside_tabs">
-                    <div role="inside_tablist">
+                    <div role="inside_tablist" id="infiniteScrollContainer">
                         <c:forEach items="${pastOrderList}" var="pastOrder">
                             <c:if test="${!empty pastOrder.newOrderDetails}">
-                            <c:if test="${pastOrder.orderStatus ne '배달완료' || pastOrder.orderStatus == null || pastOrder.orderStatus ne '주문거절'}">
+                            <c:if test="${pastOrder.orderStatus != '배달완료' and pastOrder.orderStatus != '주문거절'}">
                                 <!-- 주문내역폼 -->
                                 <div class="main-box">
                                     <div class="top">
                                         <div class="small-box">
-                                            <p>${pastOrder.deliveryType}</p>
+                                            <p style="font-size: 15px;">${pastOrder.deliveryType}</p>
                                         </div>
                                         <div class="date">
                                             <p>
@@ -480,7 +487,7 @@
             <!-- 과거 주문 내역 출력 -->
             <section>
                 <div class="inside_tabs">
-                    <div role="inside_tablist">
+                    <div role="inside_tablist" id="infiniteScrollContainerPast">
                         <%-- 과거 주문내역 --%>
                         <c:forEach items="${pastOrderList}" var="pastOrder" varStatus="status">
                             <c:if test="${pastOrder.orderStatus eq '배달완료' || pastOrder.orderStatus eq '주문거절'}">
@@ -503,7 +510,7 @@
                                     <!-- 주문 상태 출력 -->
                                         <ul style="text-align: left;">
                                             <c:if test="${pastOrder.orderStatus eq '배달완료'}">
-                                                <li>배달 완료</li>
+                                                <li style="text-align: end; margin-right:12%; color:red;">배달 완료</li>
                                             </c:if>
                                             <c:if test="${pastOrder.orderStatus eq '주문거절'}">
                                                 <li>주문 거절</li>
@@ -519,7 +526,7 @@
                                             </ul>
                                         </c:if>
                                     </c:forEach>
-                                    <h3 style="text-align: left;">합계:<fmt:formatNumber value="${pastOrder.orderTotalPrice}" pattern="#,###"/>원
+                                    <h3 style="text-align: right; margin:10px;">합계:<fmt:formatNumber value="${pastOrder.orderTotalPrice}" pattern="#,###"/>원
                                     <!-- 영수증 보기 버튼 -->
                                     <div class="div2" onclick="location.href='/order_receiptDelivery?orderNumber=${pastOrder.orderNumber}'">영수증 보기</div>
                                 </div>
@@ -533,7 +540,7 @@
         <div class="order_pastorder_footer">
             <jsp:include page="../footer/footer.jsp" />
         </div>
-</div>
+    </div>
 </body>
 <script>
     const tabElements = document.querySelectorAll('button[role="tab"]');

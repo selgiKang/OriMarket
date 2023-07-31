@@ -1,3 +1,4 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -161,14 +162,8 @@
 
 
     /*배달 수단 선택*/
-    .chooseride {
-        margin-left: 20px;
-        margin-top: 25px;
-
-    }
-
     .chooseride{
-        margin-top: 30px;
+        margin-top: 25px;
         background-color: #E3F2FD;
         width: 345px;
         border-radius: 15px;
@@ -177,27 +172,37 @@
 
     }
 
+    .chooseride p{
+        margin-top: 10px;
+        margin-left: 10px;
+    }
+
+
     .chooseride-container {
         display: flex; /* 가로 정렬을 위해 display 속성을 flex로 설정합니다. */
         align-items: center; /* 버튼들을 수직 가운데로 정렬합니다. */
         margin-top: 10px;
     }
 
+    .chooseride-container button{
+        margin-left: 10px;
+        width: 70px;
+        justify-content: space-between;
+    }
+
+
+
+    /*배댈 선택 버튼*/
     .selectable-button {
         border-radius: 50px;
         border-width: revert;
         padding: 6px;
         background-color: white;
-        margin-right: 5px; /* 버튼들 사이에 일정한 간격을 추가합니다. */
+        margin-right: 4px; /* 버튼들 사이에 일정한 간격을 추가합니다. */
     }
 
     .selectable-button:last-child {
         margin-right: 0; /* 마지막 버튼의 오른쪽 간격을 없애서 불필요한 여백을 제거합니다. */
-    }
-
-    .chooseride-container button{
-        width: 80px;
-        justify-content: space-between;
     }
 
 
@@ -256,6 +261,9 @@
             <button class="selectable-button" onclick="toggleSelected(this)">자동차</button>
         </div>
     </div>
+
+    <div class="line"></div>
+
 
 
 </div>

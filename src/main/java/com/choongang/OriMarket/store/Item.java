@@ -31,18 +31,22 @@ public class Item {
     @Column
     private Integer itemCnt;
 
+    //원가
     @Column
     private Integer itemCost;
 
+    //판매 가격
     @Column
     private Integer itemPrice;
 
     @Column
     private Integer itemG;
 
+    //물건 원산지
     @Column
     private String itemFrom;
 
+    //물건 등록일
     @Column
     private String itemRegDate;
 
@@ -64,6 +68,7 @@ public class Item {
 
     @OneToMany(mappedBy = "item", cascade =  CascadeType.REMOVE)
     private List<CartItem> cartItems = new ArrayList<>();
+
 
 
 }

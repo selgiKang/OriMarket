@@ -92,7 +92,7 @@
 				<table id= "paymentpage_table_2">
 					<tr>
 						<td>
-							<input style="outline: none;border: none;" type="text" name="deliveryType" value="${cart.deliveryType}" readonly>
+							<input style="outline: none;border: none;" type="hidden" name="deliveryType" value="${cart.deliveryType}" readonly>
 							${cart.deliveryType}
 						</td>
 					</tr>
