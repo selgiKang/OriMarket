@@ -37,7 +37,6 @@ public class ManagerController {
     @Autowired
     private final ManagerService managerService;
     private final NewOrderRepository newOrderRepository;
-    private final OrderService orderService;
 
     //로그인 페이지
     @GetMapping("/managerLogin")
@@ -156,7 +155,7 @@ public class ManagerController {
     //로그인데
     @PostMapping("/managerLogin")
     public String loginResult(@ModelAttribute ManagerUser managerUser, HttpSession session, Model model,
-                             @RequestParam(required = false,defaultValue = "0",value = "page") int page,
+                              @PageableDefault(sort = "createdDate", direction = Sort.Direction.DESC)
                               Pageable pageable){
         boolean result = managerService.loginCheck(managerUser,session);
         // 매니저가 속한 시장의 NewOrder 를 가지고와서 수락/거절 수락을누르면 NewOrder의 상태가 '주문시작' 으로 업데이트하고 매니저seq도 업데이트 해준다.
@@ -203,6 +202,18 @@ public class ManagerController {
             return "manager/manager_login";
         }
         return "manager/manager_login";
+    }
+
+    //매니저 회원 CRUD 관리
+    @GetMapping("/managercrud")
+    public String managercrud(Model model) {
+        List<ManagerUser> managerUsers = managerService.getAllManagerUsers();
+
+        for (ManagerUser managerUser:managerUsers){
+            System.out.println("매니저:"+managerUser.getManagerName());
+        }
+        model.addAttribute("managerUsers",managerUsers);
+        return "manager/manager_CRUD";
     }
 
     // 거절 누르면
