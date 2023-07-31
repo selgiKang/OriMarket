@@ -42,7 +42,7 @@
 			<ul>
 				<%--반복문시작--%>
 				<c:set var="processedStoreNames" value="" scope="page" />
-				<c:forEach var="orderList" items="${userOrderList}" varStatus="status">
+				<c:forEach var="orderList" items="${userOrderList}" >
 					<c:if test="${orderList.item.businessStore eq orderList.businessStore}">
 					<c:if test="${!processedStoreNames.contains(orderList.businessStore.buStoreName)}">
 						<c:set var="processedStoreNames" value="${processedStoreNames},${orderList.businessStore.buStoreName}" scope="page" />
@@ -50,7 +50,7 @@
 						<h3>${orderList.businessStore.buStoreName}</h3>
 					<ul>
 							<c:forEach var="orderList1" items="${userOrderList}">
-							<c:forEach var="item1" items="${orderList.businessStore.items}">
+							<c:forEach var="item1" items="${orderList.businessStore.items}" varStatus="status">
 								<c:if test="${orderList1.item eq item1}">
 									<li>
 										<div class="cart_info">

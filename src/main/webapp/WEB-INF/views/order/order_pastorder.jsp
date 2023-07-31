@@ -13,7 +13,6 @@
     <link href="../../css/order/order_pastorder.css" rel="stylesheet" media="all">
 </head>
 <style>
-
     /*가운데 정렬*/
     * {
         margin: 0;
@@ -362,7 +361,6 @@
         margin-right: 73px;
         cursor: pointer;
     }
-
     .orderdetailcheck{
         background-color: white;
         border: 1px solid #333;
@@ -393,7 +391,6 @@
     .order_pastorder_footer{
         font-family: 'omyu_pretty';
     }
-
     button.backbtn{display: flex; align-items: center; font-size: 20px; color: #999; margin: 0 0 0 10px; width: 30px; height: 30px; background-color: #fff; border-radius: 50%; border: 1px solid #999; cursor: pointer; justify-content: center; margin-right:20%;}
     button.backbtn:hover {background-color:#333; color:#fff;}
     .headermsg_wrap{width:90%; display: flex; justify-content: flex-start; align-items: end;}
