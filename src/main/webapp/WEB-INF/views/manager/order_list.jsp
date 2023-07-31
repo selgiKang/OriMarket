@@ -47,7 +47,7 @@
                     <c:if test="${order.orderStatus eq null}">
                         <!-- 주문번호 클릭 시 주문 상세 정보를 보여줄 버튼 -->
                         <span class="order-number" onclick="showOrderDetail('${order.orderNumber}')">
-                            <a href="/manager_receiptDelivery?orderNumber=${order.orderNumber}">주문번호: ${order.orderNumber}</a>
+                            <a href="/manager_receiptDelivery?orderNumber=${order.orderNumber}" style="color: #4caf50">주문번호: ${order.orderNumber}</a>
                         </span>
                         <span class="order-quantity">메뉴</span>
                         <c:forEach var="store" items="${order.newOrderDetails}">
@@ -86,7 +86,7 @@
                     <c:if test="${order.orderStatus eq '주문수락'}">
                         <!-- 주문번호 클릭 시 주문 상세 정보를 보여줄 버튼 -->
                         <span class="order-number" onclick="showOrderDetail('${order.orderNumber}')">
-                            <a href="/manager_receiptDelivery?orderNumber=${order.orderNumber}">주문번호: ${order.orderNumber}</a>
+                            <a href="/manager_receiptDelivery?orderNumber=${order.orderNumber}" style="color: #4caf50">주문번호: ${order.orderNumber}</a>
                         </span>
                         <c:forEach var="store" items="${order.newOrderDetails}">
                             <div class="order-details">
@@ -116,7 +116,7 @@
                     <c:if test="${order.orderStatus eq '배달시작'}">
                         <!-- 주문번호 클릭 시 주문 상세 정보를 보여줄 버튼 -->
                         <span class="order-number" onclick="showOrderDetail('${order.orderNumber}')">
-                            <a href="/manager_receiptDelivery?orderNumber=${order.orderNumber}">주문번호: ${order.orderNumber}</a>
+                            <a href="/manager_receiptDelivery?orderNumber=${order.orderNumber}" style="color: #4caf50">주문번호: ${order.orderNumber}</a>
                         </span>
                         <c:forEach var="store" items="${order.newOrderDetails}">
                             <div class="order-details">
@@ -140,7 +140,7 @@
                     <c:if test="${order.orderStatus eq '배달완료' or order.orderStatus eq '주문거절'}">
                         <!-- 주문번호 클릭 시 주문 상세 정보를 보여줄 버튼 -->
                         <span class="order-number" onclick="showOrderDetail('${order.orderNumber}')">
-                            <a href="/manager_receiptDelivery?orderNumber=${order.orderNumber}">주문번호: ${order.orderNumber}</a>
+                            <a href="/manager_receiptDelivery?orderNumber=${order.orderNumber}" style="color: #4caf50">주문번호: ${order.orderNumber}</a>
                         </span>
                         <c:forEach var="store" items="${order.newOrderDetails}">
                             <div class="order-details">
@@ -156,10 +156,6 @@
             <c:if test="${empty orderList}">
                 <p>주문이 없습니다.</p>
             </c:if>
-            <div class="pagination justify-content-center">
-                <a href="/managerList?page=${previous}}" role="button" class="btn btn-lg bi bi-caret-left-square-fill"><</a>
-                <a href="/managerList?page=${next}" role="button" class="btn btn-lg bi bi-caret-right-square-fill">></a>
-            </div>
         </div>
         <div class="order-item" data-status="processing" style="display: none;"></div>
         <div class="order-item" data-status="completed" style="display: none;"></div>
