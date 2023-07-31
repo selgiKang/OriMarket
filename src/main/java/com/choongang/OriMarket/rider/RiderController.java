@@ -21,6 +21,20 @@ public class RiderController {
     @Autowired
     private final RiderService riderService;
 
+
+    //7.31 라이더 테스트
+    @GetMapping("/rider_list")
+    public String riderlist(Model model) {
+        List<Rider> riders = riderService.getAllRiders();
+        model.addAttribute("riders", riders);
+        return "admin/rider_List";
+    }
+
+
+
+
+
+
     @GetMapping("/rider")
     public String rider(){return "rider/rider_main";}
 

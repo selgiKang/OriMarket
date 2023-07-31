@@ -5,6 +5,8 @@ import com.choongang.OriMarket.RealTimeStatus.RealTimeRepository;
 import com.choongang.OriMarket.order.NewOrder;
 import com.choongang.OriMarket.order.NewOrderRepository;
 
+import com.choongang.OriMarket.store.Item;
+import com.choongang.OriMarket.user.CartItem;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +17,7 @@ import org.springframework.ui.Model;
 import org.w3c.dom.ls.LSException;
 
 import javax.servlet.http.HttpSession;
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,6 +33,16 @@ public class RiderService {
     private final NewOrderRepository newOrderRepository;
 
     private final RealTimeRepository rtsRepository;
+
+
+    //7.31 라이더 테스트
+    public List<Rider> getAllRiders() {
+        return riderRepository.findAll();
+    }
+
+
+
+
 
 
     public boolean checkRiderId(String riderId){

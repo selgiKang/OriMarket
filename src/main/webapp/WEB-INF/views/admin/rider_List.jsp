@@ -56,8 +56,10 @@
 <div id="rider_container">
     <div id="rider_store">
         <div class="snun_wrap">
-            <div>${riderStore.riderStoreName}</div>
-            <small>대표:${riderUser.riderUserName}</small>
+            <c:forEach var="rider" items="${riders}" varStatus="status">
+            <div>${rider.riderId}</div>
+            <small>이름:${rider.riderName}</small>
+            </c:forEach>
         </div>
     </div>
     <div class="rider_store_wrap">
@@ -67,8 +69,8 @@
                 <button class="backbtn" onclick="window.location.replace('/ridernotice1')">&lt;</button>
                 <h1>라이더 목록</h1>
             </div>
-            <a><input type="button" class="delete_btn" value="선택품목 삭제" onclick="deleteSelectedItems()"></a>
-            <a href="/s2/${riderUserId}"><input type="button" class="insert_btn" value="신규품목 등록"></a>
+            <a><input type="button" class="delete_btn" value="라이더 삭제" onclick="deleteSelectedIds()"></a>
+            <a href="/s2/${riderUserId}"><input type="button" class="insert_btn" value="라이더 정보 수정"></a>
         </div>
         <br>
         <div id="rider_list">
@@ -77,6 +79,7 @@
                     <td></td>
                     <td>순번</td>
                     <td>라이더명</td>
+                    <td>아이디</td>
                     <td>전화번호</td>
                     <td>주소</td>
                     <td>운전면허</td>
@@ -86,6 +89,7 @@
                         <td><input type="checkbox" value="${rider.riderId}"></td>
                         <td><a href="/rider_detail/${rider.riderId}">${status.index+1}</a></td>
                         <td>${rider.riderName}</td>
+                        <td>${rider.riderId}</td>
                         <td>${rider.riderPhone}</td>
                         <td>${rider.riderAddress}</td>
                         <td>${rider.driverLicense}</td>
@@ -98,25 +102,25 @@
 </body>
 <script>
     // 선택된 체크박스 항목들을 삭제하는 함수
-    function deleteSelectedItems() {
+    function deleteSelectedIds() {
         var checkboxes = document.querySelectorAll('input[type="checkbox"]');
-        var selectedItems = [];
+        var selectedIds = [];
 
         for (var i = 0; i < checkboxes.length; i++) {
             if (checkboxes[i].checked) {
                 var riderId = checkboxes[i].value;
-                selectedItems.push(riderId);
+                selectedIds.push(riderId);
             }
         }
 
         // 선택된 항목들을 서버로 보내어 삭제 처리
-        if (selectedItems.length > 0) {
-            console.log(selectedItems);
-            console.log({ riderIds: selectedItems });
+        if (selectedIds.length > 0) {
+            console.log(selectedIds);
+            console.log({ riderIds: selectedIds });
             $.ajax({
                 url: "/delete_riders",
                 type: "DELETE",
-                data: { riderIds: selectedItems },
+                data: { riderIds: selectedIds },
                 success: function(result) {
                     // 삭제 성공 시, 페이지를 새로고침하여 목록을 업데이트
                     if (result === "success") {

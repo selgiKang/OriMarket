@@ -4,6 +4,8 @@ package com.choongang.OriMarket.admin;
 import com.choongang.OriMarket.business.user.BusinessUser;
 import com.choongang.OriMarket.business.user.BusinessUserRepository;
 import com.choongang.OriMarket.business.user.BusinessUserService;
+import com.choongang.OriMarket.rider.Rider;
+import com.choongang.OriMarket.rider.RiderRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
