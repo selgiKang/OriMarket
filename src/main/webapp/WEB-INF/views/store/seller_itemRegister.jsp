@@ -104,9 +104,9 @@
                     <tr>
                         <td>상품 카테고리</td>
                         <td><select type="" name="itemCategory" class="select" id="lang">
-                                <option value="추천메뉴">사장님추천</option>
-                                <option value="인기메뉴">인기메뉴</option>
-                                <option value="할인메뉴">할인메뉴</option>
+                                <option value="사장님추천">사장님추천</option>
+                                <option value="BEST">인기메뉴</option>
+                                <option value="선착순특가">할인메뉴</option>
                             </select>
                         </td>
                     </tr>
