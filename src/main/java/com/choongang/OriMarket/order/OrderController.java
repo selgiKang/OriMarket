@@ -4,12 +4,18 @@ package com.choongang.OriMarket.order;
 import com.choongang.OriMarket.RealTimeStatus.RealTimeService;
 import com.choongang.OriMarket.RealTimeStatus.RealTimeStatus;
 import com.choongang.OriMarket.business.market.Market;
+import com.choongang.OriMarket.business.user.BusinessUser;
+import com.choongang.OriMarket.manager.user.ManagerUser;
 import com.choongang.OriMarket.store.Item;
 import com.choongang.OriMarket.store.ItemRepository;
 import com.choongang.OriMarket.user.CartService;
 import com.choongang.OriMarket.user.User;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -216,6 +222,25 @@ public class OrderController {
             }
             return ResponseEntity.ok(tableData);
         }
+    }
+
+    //매니저 목록
+    @GetMapping("/managerList")                 /* default size = 10 */
+    public String index(Model model, ManagerUser managerUser,HttpSession session,
+                        @PageableDefault(sort = "createdDate", direction = Sort.Direction.DESC)
+                        Pageable pageable) {
+
+        //매니저 seq비교해서 목록 가져오기
+        managerUser.setManagerSeq(Long.valueOf(session.getAttribute("managerSeq").toString()));
+        Page<NewOrder> managerList = orderService.pageList(managerUser,pageable);
+        model.addAttribute("posts", managerList);
+        model.addAttribute("previous", pageable.previousOrFirst().getPageNumber());
+        model.addAttribute("next", pageable.next().getPageNumber());
+        //게시판 맨 끝, 맨 처음 처리
+        model.addAttribute("hasNext",managerList.hasNext());
+        model.addAttribute("hasPrev",managerList.hasPrevious());
+
+        return "manager/order_list";
     }
 
 

@@ -135,8 +135,8 @@
         </div>
         <%--배달 완료--%>
         <div class="order-item" data-status="completed">
-            <c:if test="${not empty orderList}">
-                <c:forEach items="${orderList}" var="order">
+            <c:if test="${not empty posts}">
+                <c:forEach items="${posts}" var="order">
                     <c:if test="${order.orderStatus eq '배달완료' or order.orderStatus eq '주문거절'}">
                         <!-- 주문번호 클릭 시 주문 상세 정보를 보여줄 버튼 -->
                         <span class="order-number" onclick="showOrderDetail('${order.orderNumber}')">
@@ -156,6 +156,10 @@
             <c:if test="${empty orderList}">
                 <p>주문이 없습니다.</p>
             </c:if>
+            <div class="pagination justify-content-center">
+                <a href="/managerList?page=${previous}}" role="button" class="btn btn-lg bi bi-caret-left-square-fill"><</a>
+                <a href="/managerList?page=${next}" role="button" class="btn btn-lg bi bi-caret-right-square-fill">></a>
+            </div>
         </div>
         <div class="order-item" data-status="processing" style="display: none;"></div>
         <div class="order-item" data-status="completed" style="display: none;"></div>
