@@ -12,8 +12,14 @@
         #b_table{border: 1px solid black;}
 
     </style>
+
 </head>
 <body>
+    <% if (request.getAttribute("deleteMessage") != null) { %>
+        window.onload = function() {
+        alert("<%= request.getAttribute("deleteMessage") %>");
+      };
+    <% } %>
     <form action="" method="">
         <h1>사업자등록현황</h1>
         <table id="b_table">
@@ -31,7 +37,7 @@
             <c:forEach var="buser" items="${busers}">
             <tr>
                 <td>${buser.market.marketName}</td>
-                <td>${buser.buUserNumber}</td>
+                <td><a href="/storeInfo?buUserNumber=${buser.buUserNumber}">${buser.buUserNumber}</a></td>
                 <td>${buser.businessStores.get(0).buStoreName}</td>
                 <td>${buser.buUserName}</td>
                 <td>${buser.buUserAddress}</td>

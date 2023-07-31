@@ -430,10 +430,10 @@
         <div class="content">
             <section>
                 <div class="inside_tabs">
-                    <div role="inside_tablist">
+                    <div role="inside_tablist" id="infiniteScrollContainer">
                         <c:forEach items="${pastOrderList}" var="pastOrder">
                             <c:if test="${!empty pastOrder.newOrderDetails}">
-                            <c:if test="${pastOrder.orderStatus ne '배달완료' || pastOrder.orderStatus == null || pastOrder.orderStatus ne '주문거절'}">
+                            <c:if test="${pastOrder.orderStatus != '배달완료' and pastOrder.orderStatus != '주문거절'}">
                                 <!-- 주문내역폼 -->
                                 <div class="main-box">
                                     <div class="top">
@@ -490,7 +490,7 @@
             <!-- 과거 주문 내역 출력 -->
             <section>
                 <div class="inside_tabs">
-                    <div role="inside_tablist">
+                    <div role="inside_tablist" id="infiniteScrollContainerPast">
                         <%-- 과거 주문내역 --%>
                         <c:forEach items="${pastOrderList}" var="pastOrder" varStatus="status">
                             <c:if test="${pastOrder.orderStatus eq '배달완료' || pastOrder.orderStatus eq '주문거절'}">

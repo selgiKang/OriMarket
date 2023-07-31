@@ -73,8 +73,8 @@ $(document).ready(function() {
             newRow.append(orderNumberCell);
 
             // 주문 상태 열(td) 추가
-            var orderStatusCell = $('<td>').text(getOrderStatus(rts));
-            newRow.append(orderStatusCell);
+            // var orderStatusCell = $('<td>').text(getOrderStatus(rts));
+            // newRow.append(orderStatusCell);
 
             // 메뉴 열(td) 추가 (이하 필요한 열들도 마찬가지로 추가 가능)
             var menuCell = $('<td>').text(order.orderGoodsName + ' 총 ' + order.orderGoodsNum + '개');
@@ -85,27 +85,27 @@ $(document).ready(function() {
         }
     }
 
-// 주문 상태에 따라 표시할 문자열 반환 함수 (예시로 만든 함수)
-    function getOrderStatus(rts) {
-        if (rts.rtsOrderIng === 0 && rts.rtsRiderIng === 0 && rts.rtsRiderFinish === 0) {
-            return '주문';
-        } else if (rts.rtsOrderIng === 1 && rts.rtsRiderIng === 0 && rts.rtsRiderFinish === 0) {
-            return '주문 시작';
-        } else if (rts.rtsOrderIng === 1 && rts.rtsRiderIng === 1 && rts.rtsRiderFinish === 0) {
-            return '배달 시작';
-        } else if (rts.rtsOrderIng === 1 && rts.rtsRiderIng === 1 && rts.rtsRiderFinish === 1) {
-            return '완료';
-        } else {
-            return '알 수 없음';
-        }
-    }
+// // 주문 상태에 따라 표시할 문자열 반환 함수 (예시로 만든 함수)
+//     function getOrderStatus(rts) {
+//         if (rts.rtsOrderIng === 0 && rts.rtsRiderIng === 0 && rts.rtsRiderFinish === 0) {
+//             return '주문';
+//         } else if (rts.rtsOrderIng === 1 && rts.rtsRiderIng === 0 && rts.rtsRiderFinish === 0) {
+//             return '주문 시작';
+//         } else if (rts.rtsOrderIng === 1 && rts.rtsRiderIng === 1 && rts.rtsRiderFinish === 0) {
+//             return '배달 시작';
+//         } else if (rts.rtsOrderIng === 1 && rts.rtsRiderIng === 1 && rts.rtsRiderFinish === 1) {
+//             return '완료';
+//         } else {
+//             return '알 수 없음';
+//         }
+//     }
 
 });
 
 
-function showOrderDetail(orderNumber) {
-    // 주문 상세 정보를 보여줄 코드 추가
-    // 여기에 주문 상세 정보를 표시하는 로직을 구현하세요.
-}
+// function showOrderDetail(orderNumber) {
+//     // 주문 상세 정보를 보여줄 코드 추가
+//     // 여기에 주문 상세 정보를 표시하는 로직을 구현하세요.
+// }
 
 
