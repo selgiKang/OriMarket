@@ -21,4 +21,6 @@ public class AdminController {
     public String buUserAccess(){
         return "admin/admin_buUser";
     }
+
+    
 }
