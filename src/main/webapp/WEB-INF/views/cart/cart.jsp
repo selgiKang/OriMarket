@@ -164,6 +164,15 @@
 <script>
 	function goOrder() {
 
+		//주소없이 주문할 경우
+		const userAddress = "${userAddress1}";
+
+		// Check if userAddress is empty or not
+		if (userAddress.trim() === "") {
+			alert("주소를 먼저 등록해 주세요.");
+			return;
+		}
+
 		const checkboxes = document.querySelectorAll('.individual_checkbox');
 		const totalCountElements = document.getElementsByName('currentCnt');
 		const cartItemIds = document.querySelectorAll('[data-cart-item-id]');
