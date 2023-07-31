@@ -13,6 +13,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -151,7 +155,9 @@ public class ManagerController {
 
     //로그인데
     @PostMapping("/managerLogin")
-    public String loginResult(@ModelAttribute ManagerUser managerUser, HttpSession session, Model model){
+    public String loginResult(@ModelAttribute ManagerUser managerUser, HttpSession session, Model model,
+                              @PageableDefault(sort = "createdDate", direction = Sort.Direction.DESC)
+                              Pageable pageable){
         boolean result = managerService.loginCheck(managerUser,session);
         // 매니저가 속한 시장의 NewOrder 를 가지고와서 수락/거절 수락을누르면 NewOrder의 상태가 '주문시작' 으로 업데이트하고 매니저seq도 업데이트 해준다.
         if(result){
@@ -159,11 +165,11 @@ public class ManagerController {
 
             //매니저 정보 가져오기
             ManagerUser userResult = managerService.findByManagerId(model,session);
-            //매니저 정보
+           //매니저 정보
             model.addAttribute("userResult",userResult);
 
             //매니저가 소속된 시장의 주문만 리스트에 저장
-            model.addAttribute("orderList", model.getAttribute("managerOrderList"));
+           model.addAttribute("orderList", model.getAttribute("managerOrderList"));
 
             return "manager/order_list";
         }
