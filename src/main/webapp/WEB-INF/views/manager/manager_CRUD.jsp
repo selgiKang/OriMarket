@@ -66,7 +66,7 @@
     </div>
     <div class="goods_store_wrap">
         <div id="goods_title">
-            <a><input type="button" class="delete_btn" value="선택회원 삭제" onclick="deleteSelectedItems()"></a>
+            <a><input type="button" class="delete_btn" value="선택회원 삭제" onclick="deleteSelectedManagerUsers()"></a>
             <a href="#"><input type="button" class="insert_btn" value="선택회원 수정"></a>
         </div>
         <br>
@@ -96,6 +96,43 @@
         </div>
     </div>
 </div>
+<script>
+    function deleteSelectedManagerUsers() {
+        // 선택된 회원들의 managerSeq 값을 배열로 저장
+        var selectedManagerSeqs = [];
+        var checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
+        for (var i = 0; i < checkboxes.length; i++) {
+            selectedManagerSeqs.push(checkboxes[i].value);
+        }
+
+        // 선택된 회원이 없는 경우 알림창 띄우기
+        if (selectedManagerSeqs.length === 0) {
+            alert('회원을 선택해 주세요.');
+            return;
+        }
+
+        // 선택된 회원들의 managerSeq 값을 서버로 전송하여 삭제 요청
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', '/deleteManagerUsers', true);
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === XMLHttpRequest.DONE) {
+                if (xhr.status === 200) {
+                    // 삭제 요청이 성공적으로 처리되었을 경우, 선택된 회원들을 테이블에서 삭제
+                    for (var i = 0; i < selectedManagerSeqs.length; i++) {
+                        var row = document.querySelector('input[value="' + selectedManagerSeqs[i] + '"]').parentNode.parentNode;
+                        row.parentNode.removeChild(row);
+                    }
+                    alert('회원 삭제가 완료되었습니다.');
+                } else {
+                    // 삭제 요청이 실패한 경우
+                    alert('회원 삭제에 실패했습니다. 다시 시도해주세요.');
+                }
+            }
+        };
+        xhr.send(JSON.stringify(selectedManagerSeqs));
+    }
+</script>
 </body>
 </html>
 

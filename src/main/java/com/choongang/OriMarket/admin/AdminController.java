@@ -18,6 +18,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.lang.reflect.Member;
 import java.util.List;
@@ -46,7 +47,6 @@ public class AdminController {
             model.addAttribute("busers",busers);
         }
 
-
         return "admin/admin_buUser";
     }
 
@@ -73,6 +73,24 @@ public class AdminController {
         businessStoreRepository.delete(store);
 
         model.addAttribute("deleteMessage","삭제되었습니다.");
+        return "redirect:/a_buser";
+    }
+
+
+    //등록된 사업자 삭제
+    @GetMapping("delete_buser/{buUserNumber}")
+    public String deleteBuser(@PathVariable("buUserNumber")Long buUserNumber){
+
+        BusinessStore buStore = businessStoreRepository.findByBusinessUser_BuUserNumber(buUserNumber);
+
+        if(buStore.getItems().size()!=0){
+            for(int i=0;i<buStore.getItems().size();i++){
+                itemRepository.delete(buStore.getItems().get(i));
+            }
+        }
+        businessStoreRepository.deleteById(buStore.getBuStoreNumber());
+        businessUserRepository.deleteById(buUserNumber);
+
         return "redirect:/a_buser";
     }
 
