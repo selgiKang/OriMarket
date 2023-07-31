@@ -27,7 +27,7 @@
     /*핸드폰화면 사이즈*/
     .main-container {
         width: 375px;
-        height: 812px;
+/*        height: 812px;*/
         margin: 0 auto;
         display: flex;
         flex-direction: column;
@@ -174,6 +174,16 @@
         line-height: 1.4;
         /* 텍스트가 넘어가면 다음 줄로 바뀌게 하려면 아래 속성을 추가합니다. */
         word-wrap: break-word;
+        /* 스크롤생성 */
+        height:424px;
+        overflow-y: scroll;
+    }
+    .tabs .content section {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+    }
+    .tabs .content section::-webkit-scrollbar {
+        display: none;
     }
 
     .tabs
@@ -533,7 +543,7 @@
         <div class="order_pastorder_footer">
             <jsp:include page="../footer/footer.jsp" />
         </div>
-</div>
+    </div>
 </body>
 <script>
     const tabElements = document.querySelectorAll('button[role="tab"]');
