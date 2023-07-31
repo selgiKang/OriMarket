@@ -17,6 +17,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -37,7 +38,6 @@ public class ManagerController {
     @Autowired
     private final ManagerService managerService;
     private final NewOrderRepository newOrderRepository;
-    private final OrderService orderService;
 
     //로그인 페이지
     @GetMapping("/managerLogin")
@@ -171,18 +171,6 @@ public class ManagerController {
             //매니저가 소속된 시장의 주문만 리스트에 저장
            model.addAttribute("orderList", model.getAttribute("managerOrderList"));
 
-           //---------------------------------------------------------------------------------------------------
-            //매니저 seq비교해서 목록 가져오기
-            Page<NewOrder> managerList = orderService.pageList(userResult,pageable);
-            model.addAttribute("posts", managerList);
-            model.addAttribute("previous", pageable.previousOrFirst().getPageNumber());
-            model.addAttribute("next", pageable.next().getPageNumber());
-
-            //게시판 맨 끝, 맨 처음 처리
-            model.addAttribute("hasNext",managerList.hasNext());
-            model.addAttribute("hasPrev",managerList.hasPrevious());
-            //---------------------------------------------------------------------------------------------------
-
             return "manager/order_list";
         }
         model.addAttribute("fail","아이디 또는 비밀번호가 틀렸습니다. 확인해주세요.");
@@ -228,8 +216,6 @@ public class ManagerController {
         model.addAttribute("managerUsers",managerUsers);
         return "manager/manager_CRUD";
     }
-
-    //매니저 회원 CRUD 관리_삭제
 
     // 수락 누르면
     @GetMapping("/reject")
@@ -314,5 +300,17 @@ public class ManagerController {
         model.addAttribute("orderList", orderList);
 
         return "manager/order_list";
+    }
+
+    @PostMapping("/deleteManagerUsers")
+    @ResponseBody
+    public ResponseEntity<String> deleteManagerUsers(@RequestBody List<Long> selectedManagerSeqs) {
+        try {
+            managerService.deleteManagerUsers(selectedManagerSeqs);
+            return ResponseEntity.ok("회원 삭제가 완료되었습니다.");
+        } catch (Exception e) {
+            log.error("회원 삭제 중 오류 발생: " + e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("회원 삭제에 실패했습니다.");
+        }
     }
 }

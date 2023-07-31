@@ -12,7 +12,9 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Service;
@@ -218,8 +220,9 @@ public class OrderService {
 //        }
 
     @Transactional
-    public Page<NewOrder> pageList(ManagerUser managerUser, Pageable pageable) {
-        return newOrderRepository.findByManagerUser(managerUser,pageable);
+    public Page<NewOrder> pageList(int page) {
+        return  newOrderRepository.findAll(PageRequest.of(page,3, Sort.by(Sort.Direction.DESC,"newOrderSeq")));
     }
+
 
 }

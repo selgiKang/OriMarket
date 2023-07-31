@@ -225,25 +225,6 @@ public class OrderController {
         }
     }
 
-    //매니저 목록
-    @GetMapping("/managerList")                 /* default size = 10 */
-    public String index(Model model, ManagerUser managerUser,HttpSession session,
-                        @PageableDefault(sort = "createdDate", direction = Sort.Direction.DESC)
-                        Pageable pageable) {
-
-        //매니저 seq비교해서 목록 가져오기
-        managerUser.setManagerSeq(Long.valueOf(session.getAttribute("managerSeq").toString()));
-        Page<NewOrder> managerList = orderService.pageList(managerUser,pageable);
-        model.addAttribute("posts", managerList);
-        model.addAttribute("previous", pageable.previousOrFirst().getPageNumber());
-        model.addAttribute("next", pageable.next().getPageNumber());
-        //게시판 맨 끝, 맨 처음 처리
-        model.addAttribute("hasNext",managerList.hasNext());
-        model.addAttribute("hasPrev",managerList.hasPrevious());
-
-        return "manager/order_list";
-    }
-
 
 //순번     order_Num : pk auto_intended
 //시퀀스 - 시행횟수    시퀀스넘

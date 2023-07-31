@@ -12,7 +12,6 @@
         #b_table{border: 1px solid black;}
 
     </style>
-
 </head>
 <body>
     <% if (request.getAttribute("deleteMessage") != null) { %>
@@ -32,6 +31,7 @@
                 <th>아이디</th>
                 <th>연락처</th>
                 <th>이메일</th>
+                <th>관리</th>
             </tr>
             <%--반복문시작--%>
             <c:forEach var="buser" items="${busers}">
@@ -44,6 +44,9 @@
                 <td>${buser.buUserId}</td>
                 <td>${buser.buUserPhone}</td>
                 <td>${buser.buUserEmail}</td>
+                <td>
+                    <button><a href="/delete_buser/${buser.buUserNumber}">삭제</a></button>
+                </td>
             </tr>
             </c:forEach>
         </table>

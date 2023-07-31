@@ -18,7 +18,7 @@ import java.util.List;
 @Slf4j
 public class SearchController {
 
-    @Autowired
+   @Autowired
     private final ItemService itemService;
     private final BusinessStoreService businessStoreService;
 
@@ -35,6 +35,17 @@ public class SearchController {
         return "test/test";
     }
 
+/*
+    private final ItemService itemService;
+    private final BusinessStoreService businessStoreService;
+
+    @GetMapping("/header_search1")
+    public String header_search(@RequestParam(value = "searchKeyword") String searchKeyword, Model model) {
+        List<Item> items = itemService.searchItem(searchKeyword);
+        model.addAttribute("it1", items);
+        return "test/test";
+    }
+*/
 
 }
 
