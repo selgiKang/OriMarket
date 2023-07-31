@@ -384,46 +384,46 @@
 
 
     </style>
-<%--    <%--%>
-<%--        Date date = new Date();--%>
-<%--        long utc = date.getTime() + (date.getTimezoneOffset() * 60 * 100);--%>
-<%--        //한국 kst 기준 시간--%>
-<%--        long kstGap = 9 * 60 * 60 * 1000;--%>
-<%--        //한국 시가능로 date 객체 (오늘)--%>
-<%--        Date today = new Date(utc + kstGap);--%>
-
-<%--        int currentYear = today.getYear()+1900; // 전역 변수에 할당--%>
-<%--        int currentMonth = today.getMonth();--%>
-
-<%--        String currentMonthStr = String.valueOf(currentMonth + 1);--%>
-<%--        String currentMonthStr2 = String.valueOf(currentMonth + 2);--%>
-
-<%--        //현재 월 표시--%>
-<%--        if (currentMonthStr.length() == 1) {--%>
-<%--            currentMonthStr = '0' + currentMonthStr;--%>
-<%--        }--%>
-<%--        if (currentMonthStr2.length() == 1) {--%>
-<%--            currentMonthStr2 = '0' + currentMonthStr2;--%>
-<%--        }--%>
-
-<%--        String currentDate = String.valueOf(currentYear) + currentMonthStr;--%>
-<%--        String currentDateLast = String.valueOf(currentYear) + currentMonthStr2;--%>
-
-<%--    %>--%>
     <%
-        // 현재 시간을 LocalDateTime 형식으로 가져옴
-        LocalDateTime now = LocalDateTime.now();
+        Date date = new Date();
+        long utc = date.getTime() + (date.getTimezoneOffset() * 60 * 100);
+        //한국 kst 기준 시간
+        long kstGap = 9 * 60 * 60 * 1000;
+        //한국 시가능로 date 객체 (오늘)
+        Date today = new Date(utc + kstGap);
 
-        // 원하는 형식으로 DateTimeFormatter를 생성 (예: "yyyy-MM-dd HH:mm:ss")
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd HH:mm:ss");
+        int currentYear = today.getYear()+1900; // 전역 변수에 할당
+        int currentMonth = today.getMonth();
 
-        // LocalDateTime 객체를 문자열로 변환
-        String currentDate = now.format(formatter);
+        String currentMonthStr = String.valueOf(currentMonth + 1);
+        String currentMonthStr2 = String.valueOf(currentMonth + 2);
 
-        // 한 달 후의 LocalDateTime을 계산
-        LocalDateTime oneMonthLater = now.plusMonths(1);
-        String currentDateLast = oneMonthLater.format(formatter);
+        //현재 월 표시
+        if (currentMonthStr.length() == 1) {
+            currentMonthStr = '0' + currentMonthStr;
+        }
+        if (currentMonthStr2.length() == 1) {
+            currentMonthStr2 = '0' + currentMonthStr2;
+        }
+
+        String currentDate = String.valueOf(currentYear) + currentMonthStr;
+        String currentDateLast = String.valueOf(currentYear) + currentMonthStr2;
+
     %>
+<%--    <%--%>
+<%--        // 현재 시간을 LocalDateTime 형식으로 가져옴--%>
+<%--        LocalDateTime now = LocalDateTime.now();--%>
+
+<%--        // 원하는 형식으로 DateTimeFormatter를 생성 (예: "yyyy-MM-dd HH:mm:ss")--%>
+<%--        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd HH:mm:ss");--%>
+
+<%--        // LocalDateTime 객체를 문자열로 변환--%>
+<%--        String currentDate = now.format(formatter);--%>
+
+<%--        // 한 달 후의 LocalDateTime을 계산--%>
+<%--        LocalDateTime oneMonthLater = now.plusMonths(1);--%>
+<%--        String currentDateLast = oneMonthLater.format(formatter);--%>
+<%--    %>--%>
 </head>
 <body>
 

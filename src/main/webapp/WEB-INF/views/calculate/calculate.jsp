@@ -50,7 +50,7 @@
                 </td>
             <%--오른쪽 화살표--%>
                 <td>
-                    <a <%--id="calculate_right_arrow"--%>class="go-next"><i id="calculate_search_rightArrow" class="fas fa-solid fa-angle-right" style="color: #f5f5f5;"></i></a>
+                    <a class="go-next"><i id="calculate_search_rightArrow" class="fas fa-solid fa-angle-right" style="color: #f5f5f5;"></i></a>
                 </td>
             </tr>
         </table>
