@@ -11,4 +11,6 @@ public interface BusinessUserRepository extends JpaRepository<BusinessUser, Long
     BusinessUser findByBuUserId(String buUserId);
 
 
+
+
 }

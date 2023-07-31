@@ -4,9 +4,6 @@ import com.choongang.OriMarket.order.NewOrder;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,17 +21,16 @@ public class RiderController {
     @Autowired
     private final RiderService riderService;
 
+//    @GetMapping("/rider")
+//    public String rider(){return "rider/rider_main";}
     @GetMapping("/rider")
-    public String rider(){return "rider/rider_main";}
-
-    @GetMapping("/rider_login")
     public String riderLogin() {
         return "rider/rider_login";
     }
 
     @PostMapping("/rider_login")
     public String riderLogin1(@ModelAttribute Rider rider, HttpSession session, Model model){
-        if(riderService.riderLogin(rider, session,model)){
+        if(riderService.riderLogin(rider,session,model)){
             return "rider/rider_main";
         }else {
             return "rider/rider_login";
