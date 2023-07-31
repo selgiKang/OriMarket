@@ -12,8 +12,14 @@
         #b_table{border: 1px solid black;}
 
     </style>
+
 </head>
 <body>
+    <% if (request.getAttribute("deleteMessage") != null) { %>
+        window.onload = function() {
+        alert("<%= request.getAttribute("deleteMessage") %>");
+      };
+    <% } %>
     <form action="" method="">
         <h1>사업자등록현황</h1>
         <table id="b_table">

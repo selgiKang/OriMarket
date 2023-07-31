@@ -339,7 +339,7 @@
             <label class="label" for="tab-1">가게 관리</label>
             <div class="panel" >
                 <div class="line"></div>
-                <form action="/storenotice1" method="post" enctype="multipart/form-data">
+                <form action="/storeInfoDelete?buUserNumber=${storeInfo.businessUser.buUserNumber}" method="post" enctype="multipart/form-data">
                     <c:if test="${!empty storeInfo}">
                         <button class="backbtn" onclick="window.location.replace('a_buser')">&lt;</button>
                         <div class="line"></div>
@@ -388,6 +388,7 @@
                             </div>
                         </div>
                     </c:if>
+                    <div><input type="submit" value="삭제"></div>
                 </form>
             </div>
 
