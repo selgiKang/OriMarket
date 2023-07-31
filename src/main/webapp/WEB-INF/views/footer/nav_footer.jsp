@@ -52,7 +52,7 @@
 <body>
 <div class="nav_footer_wrap">
     <div class="nav_footer">
-        <div onclick="location.href='/'" style="margin-left:10px;">
+        <div onclick="location.href='/'" style="margin-left:15px;">
             <img id="nav_footer_home_img" src="../../img/footer/nav_footer_home1.png" alt="main Icon" onclick="toggleImage(this)">
             <span>홈</span>
         </div>
@@ -60,9 +60,8 @@
             <img id="nav_footer_list_img" src="../../img/footer/nav_footer_list1.png" alt="list Icon" onclick="toggleImage(this)">
             <span>주문내역</span>
         </div>
-        <a href="/${userId}/cart" style="margin-left:20px;">
+        <a href="/${userId}/cart" style="width: 35px;margin-left:20px;margin-right: 10px;">
             <img id="nav_footer_cart_img" src="../../img/footer/nav_footer_cart1.png" alt="cart Icon" onclick="toggleImage(this)">
-            <br>
             <span>장바구니</span>
         </a>
         <div onclick="location.href='/favList'" style="margin-left:10px;">

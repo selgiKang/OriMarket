@@ -104,15 +104,9 @@
                     <tr>
                         <td>상품 카테고리</td>
                         <td><select type="" name="itemCategory" class="select" id="lang">
-                                <option value="한식">한식</option>
-                                <option value="양식">양식</option>
-                                <option value="일식">일식</option>
-                                <option value="분식">분식</option>
-                                <option value="카페">카페</option>
-                                <option value="음료">음료</option>
-                                <option value="채소">채소</option>
-                                <option value="패스트푸드">패스트푸드</option>
-                                <option value="과일">과일</option>
+                                <option value="추천메뉴">사장님추천</option>
+                                <option value="인기메뉴">인기메뉴</option>
+                                <option value="할인메뉴">할인메뉴</option>
                             </select>
                         </td>
                     </tr>

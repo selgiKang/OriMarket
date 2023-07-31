@@ -2,6 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"  %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%--특정 위치마다 , 넣도록--%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,75 +25,85 @@
 			<!-- 2023-07-04 스크립트로 값 들어오면 아이콘 변경되게 추후 적용 -->
 			<!-- 2023-07-07 if문으로 색상 변경: -->
 			<!-- 픽업중 -->
-			<c:if test="${rtsOrderIng eq 0 }">
+			<c:if test="${newOrder.orderStatus eq null}">
 				<li><i class="fa-sharp fa-regular fa-circle" style="color: #b8b8b8;"></i></li>
 				<li class="orderDelivery_li_1">픽업중</li>
 			</c:if>
-			<c:if test="${rtsOrderIng eq 1 }">
+			<c:if test="${newOrder.orderStatus eq '주문수락' or newOrder.orderStatus eq '배달시작' or newOrder.orderStatus eq '배달완료'}">
 				<li><i class="fa-sharp fa-solid fa-circle" style="color: #46a973;"></i></li>
 				<li class="orderDelivery_li_1" style="color: #46A973;">픽업중</li>
 			</c:if>
 			<!-- 배달중 -->
-			<c:if test="${rtsRiderIng eq 0}">
+			<c:if test="${newOrder.orderStatus eq null or newOrder.orderStatus eq '주문수락'}">
 				<li><i class="fa-sharp fa-regular fa-circle" style="color: #b8b8b8;"></i></li>
 				<li class="orderDelivery_li_1">배달중</li>
 			</c:if>
-			<c:if test="${rtsRiderIng eq 1}">
-				<li><i class="fa-sharp fa-solid fa-circle" style="color: #b8b8b8;"></i></li>
-				<li class="orderDelivery_li_1">배달중</li>
+			<c:if test="${newOrder.orderStatus eq '배달시작' or newOrder.orderStatus eq '배달완료'}">
+				<li><i class="fa-sharp fa-solid fa-circle" style="color: #46a973;"></i></li>
+				<li class="orderDelivery_li_1" style="color: #46a973;">배달중</li>
 			</c:if>
-			<c:if test="${rtsRiderFinish eq 0}">
+			<c:if test="${newOrder.orderStatus eq null or newOrder.orderStatus eq '배달시작' or newOrder.orderStatus eq '주문수락'}">
 				<!-- 배달완료 -->
-				<li><i class="fa-sharp fa-regular fa-circle" style="color: #b8b8b8;"></i></li>
+				<li><i class="fa-sharp fa-regular fa-circle" style="color: #46a973;"></i></li>
 				<li>배달 완료</li>
 			</c:if>
-			<c:if test="${rtsRiderFinish eq 1}">
+			<c:if test="${newOrder.orderStatus eq '배달완료'}">
 				<!-- 배달완료 -->
-				<li><i class="fa-sharp fa-solid fa-circle" style="color: #b8b8b8;"></i></li>
-				<li>배달 완료</li>
+				<li><i class="fa-sharp fa-solid fa-circle" style="color: #46a973;"></i></li>
+				<li style="color: #46a973;">배달 완료</li>
 			</c:if>
 		</ul>
 		<div id="orderDelivery_orderInfo">
-			<h3>${marketName}</h3>
+			<h3>${newOrder.orderMarketName}</h3>
 			<table id="orderDelivery_table_1">
-				<tr class="orderDelivery_table_tr_1"><td>${orderDelivery.orderNumber}</td></tr>
+				<c:if test="${newOrder.orderStatus eq '주문거절'}">
+					<!-- 배달완료 -->
+					<tr style="color: red;"><td>가게 사정으로 주문이 거절되었습니다. 죄송합니다.</td></tr>
+				</c:if>
+				<tr class="orderDelivery_table_tr_1"><td>${newOrder.orderNumber}</td></tr>
 				<tr class="orderDelivery_table_tr_2">
 					<td>
-						${fn:substring(orderDelivery.orderDate, 0, 4)}년
-						${fn:substring(orderDelivery.orderDate, 4, 6)}월
-						${fn:substring(orderDelivery.orderDate, 6, 8)}일
-						${fn:substring(orderDelivery.orderDate, 8, 10)}시
-						${fn:substring(orderDelivery.orderDate, 10, 12)}분
+						${fn:substring(newOrder.createdDate, 0, 4)}년
+						${fn:substring(newOrder.createdDate, 4, 6)}월
+						${fn:substring(newOrder.createdDate, 6, 8)}일
+						${fn:substring(newOrder.createdDate, 8, 10)}시
+						${fn:substring(newOrder.createdDate, 10, 12)}분
 					</td>
 				</tr>
 				<tr class="orderDelivery_table_tr_1"><td>배달 주소</td></tr>
-				<tr class="orderDelivery_table_tr_2"><td>${orderDelivery.orderAddressNumber}</td></tr>
+				<tr class="orderDelivery_table_tr_2"><td>${newOrder.orderAddress}</td></tr>
 			</table>
 			<hr>
 			<table id="orderDelivery_table_2">
 				<tr class="orderDelivery_table_tr_1"><td colspan="2">주문 내역</td></tr>
-				<c:forEach var="store" items="${orderDelivery.businessUser.businessStores}">
-					<tr class="orderDelivery_table_tr_1"><td colspan="2">${store}</td></tr>
-					<!-- 2023_07_04 입력 받아서 출력할 때 format 이용해서 3번째마다 ,들어가게 출력 -->
-					<c:set var="orderGoodsNumArray" value="${fn:split(orderDelivery.orderGoodsNum, ',')}" />
-					<c:set var="orderGoodsName" value="${fn:split(orderDelivery.orderGoodsName, ',')}" />
-					<c:set var="orderGoodsPrice" value="${fn:split(orderDelivery.orderGoodsPrice, ',')}" />
+				<c:set var="prevBuStoreName" value="" />
+				<c:forEach var="store" items="${newOrder.newOrderDetails}">
+					<c:if test="${!store.buStoreName.equals(prevBuStoreName)}">
+					<c:set var="prevBuStoreName" value="${store.buStoreName}" />
+					<tr class="orderDelivery_table_tr_1"><td colspan="2">${store.buStoreName}</td></tr>
+					</c:if>
 					<tr class="orderDelivery_table_tr_2">
-						<c:if test="${!empty orderGoodsNumArray}">
-							<c:forEach var="i" begin="0" end="${fn:length(orderGoodsNumArray) - 1}">
-								<tr>
-									<td>${orderGoodsName[i]}&nbsp;&nbsp;&nbsp;${orderGoodsPrice[i]}원 <small style="color: #818083;">&nbsp;&nbsp;&nbsp;x${orderGoodsNumArray[i]}</small></td>
-								</tr>
-							</c:forEach>
-						</c:if>
+						<tr>
+							<td>${store.itemName}&nbsp;&nbsp;&nbsp;
+								<fmt:formatNumber value="${store.itemPrice}" pattern="#,###"/>원
+								<small style="color: #818083;">&nbsp;&nbsp;&nbsp;x${store.itemCount}</small>
+							</td>
+						</tr>
 					</tr>
 				</c:forEach>
+				<tr>
+					<td>배달비</td><td><fmt:formatNumber value="${newOrder.orderDeliveryPrice}" pattern="#,###"/>원</td>
+				</tr>
 			</table>
 			<hr>
 			<table id="orderDelivery_table_3">
-				<tr><td class="orderDelivery_table3_td_1">요청사항</td><td class="orderDelivery_table3_td_1">${orderDelivery.orderRequests}</td>
-				<tr><td class="orderDelivery_table3_td_1">배달 기사님께</td><td class="orderDelivery_table3_td_1">${orderDelivery.forRider}</td></tr>
-				<tr><td id="orderDelivery_table3_total_td_1">총 금액</td><td id="orderDelivery_table3_total_td_2">${orderDelivery.orderTotalPrice}원</td></tr>
+				<tr><td class="orderDelivery_table3_td_1">요청사항</td><td class="orderDelivery_table3_td_1">${newOrder.orderRequests}</td>
+				<tr><td class="orderDelivery_table3_td_1">배달 기사님께</td><td class="orderDelivery_table3_td_1">${newOrder.forRider}</td></tr>
+				<tr>
+					<td id="orderDelivery_table3_total_td_1">총 금액</td><td id="orderDelivery_table3_total_td_2">
+					<fmt:formatNumber value="${newOrder.orderTotalPrice}" pattern="#,###"/>원
+					</td>
+				</tr>
 			</table>
 			
 		</div>

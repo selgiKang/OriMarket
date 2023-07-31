@@ -4,6 +4,8 @@ import com.choongang.OriMarket.business.market.Market;
 import com.choongang.OriMarket.business.market.MarketService;
 import com.choongang.OriMarket.business.store.BusinessStore;
 import com.choongang.OriMarket.business.user.BusinessUser;
+import com.choongang.OriMarket.order.NewOrder;
+import com.choongang.OriMarket.order.NewOrderRepository;
 import com.choongang.OriMarket.order.Order;
 import com.choongang.OriMarket.order.OrderRepository;
 import com.choongang.OriMarket.review.Review;
@@ -24,13 +26,13 @@ public class ManagerService {
 
     private  final ManagerRepository managerRepository;
     private  final MarketService marketService;
-    private  final OrderRepository orderRepository;
+    private  final NewOrderRepository newOrderRepository;
 
     @Autowired
-    public ManagerService(ManagerRepository managerRepository,MarketService marketService,OrderRepository orderRepository){
+    public ManagerService(ManagerRepository managerRepository,MarketService marketService,NewOrderRepository newOrderRepository){
         this.managerRepository = managerRepository;
         this.marketService = marketService;
-        this.orderRepository = orderRepository;
+        this.newOrderRepository = newOrderRepository;
     }
 
 
@@ -80,20 +82,18 @@ public class ManagerService {
     //해당 매니저 불러오기
     public ManagerUser findByManagerId(Model model,HttpSession session){
         String managerId = session.getAttribute("managerId").toString();
-        System.out.println("managerId"+managerId);
+
         //매니저 번호 넣어서 매니저 정보 꺼내기(시장 번호도 확인)
         ManagerUser userResult = managerRepository.findByManagerId(managerId);
 
         //시장 번호
         if(userResult!=null){
             if(userResult.getMarket().getMarketSeq()!=null){
-                Long marketSeq = userResult.getMarket().getMarketSeq();
-                Market market = new Market();
-                market.setMarketSeq(marketSeq);
-                System.out.println("매니저 소속 시장번호: "+marketSeq);
+                String marketName = userResult.getMarket().getMarketName();
+
                 //시장 번호 가지고 그 시장의 주문 가져오기
-                List<Order> managerOrderList = orderRepository.findByMarketSeq(market);
-                model.addAttribute("managerOrderList",managerOrderList);
+                List<NewOrder> orderResult = newOrderRepository.findByOrderMarketName(marketName);
+                model.addAttribute("managerOrderList",orderResult);
             }
         }
         return userResult;

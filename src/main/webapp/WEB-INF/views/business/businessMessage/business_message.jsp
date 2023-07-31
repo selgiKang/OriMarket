@@ -49,9 +49,31 @@
         opacity: 0.7;
     }
 
+    /*뒤로가기*/
+    .line {
+        border-top: 1px solid #c4c4c4;
+        width: 330px;
+        margin: 30px auto;
+        position: relative;
+        right: 8px;
+        margin-top: 20px;
+    }
+
+    button.backbtn {
+        display: flex;
+        align-items: center;
+        font-size: 20px;
+        color: #999;
+
+        margin: 10px 0 0 10px; width: 30px; height: 30px; background-color: #fff; border-radius: 50%; border: 1px solid #999; cursor: pointer; justify-content: center;}
+    button.backbtn:hover {background-color:#333; color:#fff;}
+
 </style>
 <body id="message_body">
     <header id="message_header">
+        <%--뒤로가기 디자인 바꿔도 됩니다--%>
+        <button class="backbtn" onclick="window.location.replace('storenotice1')">&lt;</button>
+        <div class="line"></div>
         <h3>공지사항</h3>
         <a href="businessInsertMessage">공지사항 작성하기</a>
     </header>

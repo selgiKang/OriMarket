@@ -1,15 +1,23 @@
 package com.choongang.OriMarket.rider;
 
 
+import com.choongang.OriMarket.RealTimeStatus.RealTimeRepository;
+import com.choongang.OriMarket.RealTimeStatus.RealTimeStatus;
 import com.choongang.OriMarket.business.market.Market;
 import com.choongang.OriMarket.business.user.BusinessUser;
+import com.choongang.OriMarket.order.NewOrder;
+import com.choongang.OriMarket.order.NewOrderRepository;
+import com.choongang.OriMarket.order.Order;
+import com.choongang.OriMarket.order.OrderRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -18,6 +26,11 @@ public class RiderService {
 
     @Autowired
     private final RiderRepository riderRepository;
+
+    private final NewOrderRepository newOrderRepository;
+
+    private final RealTimeRepository rtsRepository;
+
 
     public boolean checkRiderId(String riderId){
         return riderRepository.existsByRiderId(riderId);
@@ -44,7 +57,46 @@ public class RiderService {
         if(!byRiderId.getRiderPassword().equals(rider.getRiderPassword())){
             return false;
         }else {
+            session.setAttribute("riderSeq",byRiderId.getRiderSeq());
             return true;
         }
+    }
+
+   public List<NewOrder> riderOrderSearch(){
+       List<NewOrder> allNewOrder = newOrderRepository.findAll();
+       List<NewOrder> newOrders = new ArrayList<>();
+
+       for(NewOrder newOrder:allNewOrder){
+           String orderStatus = newOrder.getOrderStatus();
+           if (orderStatus == null) {
+               // 주문 상태가 null인 경우 아무 작업도 하지 않음
+           } else if (orderStatus.equals("픽업완료")) {
+               newOrders.add(newOrder);
+           }
+       }
+        return newOrders;
+    }
+
+    public NewOrder riderOrderAccept(String orderNumber,HttpSession session){
+        NewOrder byOrderNumber = newOrderRepository.findByOrderNumber(orderNumber);
+
+        Rider riderSeq = riderRepository.findById((Long) session.getAttribute("riderSeq")).orElseThrow();
+        byOrderNumber.setRider(riderSeq);
+        byOrderNumber.setOrderStatus("배달시작");
+        newOrderRepository.save(byOrderNumber);
+
+        return byOrderNumber;
+    }
+
+    public NewOrder riderOrderAccept1(String orderNumber,HttpSession session){
+        NewOrder byOrderNumber = newOrderRepository.findByOrderNumber(orderNumber);
+
+        Rider riderSeq = riderRepository.findById((Long) session.getAttribute("riderSeq")).orElseThrow();
+        System.out.println("이게먽대:"+riderSeq.getRiderName());
+        byOrderNumber.setRider(riderSeq);
+        byOrderNumber.setOrderStatus("배달완료");
+        newOrderRepository.save(byOrderNumber);
+
+        return byOrderNumber;
     }
 }

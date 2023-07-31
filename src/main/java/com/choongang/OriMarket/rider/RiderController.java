@@ -1,13 +1,17 @@
 package com.choongang.OriMarket.rider;
 
+import com.choongang.OriMarket.order.NewOrder;
+import com.choongang.OriMarket.order.Order;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 
 @Controller
@@ -54,8 +58,25 @@ public class RiderController {
         return ResponseEntity.ok(riderService.checkRiderId(riderId));
     }
 
-    @GetMapping("/rider_mypage")
-    public String riderMypage() {
-        return "rider/rider_mypage";
+    @GetMapping("/rider_order_search")
+    public String riderOrderSearch(Model model){
+        List<NewOrder> orders = riderService.riderOrderSearch();
+        model.addAttribute("orders",orders);
+        return "rider/rider_main";
     }
+
+    @GetMapping("/rider_order_accept")
+    public String riderOrderAccept(@RequestParam("orderNumber") String orderNumber,Model model,HttpSession session){
+        NewOrder newOrder = riderService.riderOrderAccept(orderNumber,session);
+        model.addAttribute("orderaccept", newOrder);
+        return "rider/rider_main";
+    }
+
+    @GetMapping("/rider_order_accept1")
+    public String riderOrderAccept1(@RequestParam("orderNumber") String orderNumber,Model model,HttpSession session){
+        NewOrder newOrder = riderService.riderOrderAccept1(orderNumber,session);
+        model.addAttribute("orderaccept1", newOrder);
+        return "rider/rider_main";
+    }
+
 };

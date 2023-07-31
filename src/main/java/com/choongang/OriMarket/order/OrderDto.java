@@ -21,9 +21,6 @@ public class OrderDto {
     private String orderUserId;
 
 
-    private Integer orderAddressNumber;
-
-
     private Integer orderTotalPrice;
 
 
@@ -71,7 +68,6 @@ public class OrderDto {
         this.orderNumber = orderNumber;
         this.orderMarketName = orderMarketName;
         this.orderUserId = orderUserId;
-        this.orderAddressNumber = orderAddressNumber;
         this.orderTotalPrice = orderTotalPrice;
         this.orderDate = orderDate;
         this.orderType = orderType;
