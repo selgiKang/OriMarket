@@ -54,4 +54,8 @@ public class RiderController {
         return ResponseEntity.ok(riderService.checkRiderId(riderId));
     }
 
+    @GetMapping("/rider_mypage")
+    public String riderMypage() {
+        return "rider/rider_mypage";
+    }
 };
