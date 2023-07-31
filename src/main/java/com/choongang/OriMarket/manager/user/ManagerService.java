@@ -127,4 +127,20 @@ public class ManagerService {
         }
         return false;
     }
+
+    public List<ManagerUser> getAllManagerUsers(){
+        return managerRepository.findAll();
+
+    }
+
+    //매니저 삭제
+    public void deleteManagerUsers(List<Long> managerSeqList) {
+        for (Long managerSeq : managerSeqList) {
+            managerRepository.deleteById(managerSeq);
+        }
+    }
+
+
+
+
 }
