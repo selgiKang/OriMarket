@@ -133,4 +133,14 @@ public class ManagerService {
 
     }
 
+    //매니저 삭제
+    public void deleteManagerUsers(List<Long> managerSeqList) {
+        for (Long managerSeq : managerSeqList) {
+            managerRepository.deleteById(managerSeq);
+        }
+    }
+
+
+
+
 }

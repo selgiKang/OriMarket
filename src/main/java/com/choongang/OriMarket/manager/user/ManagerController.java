@@ -13,6 +13,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -293,5 +294,17 @@ public class ManagerController {
         model.addAttribute("orderList", orderList);
 
         return "manager/order_list";
+    }
+
+    @PostMapping("/deleteManagerUsers")
+    @ResponseBody
+    public ResponseEntity<String> deleteManagerUsers(@RequestBody List<Long> selectedManagerSeqs) {
+        try {
+            managerService.deleteManagerUsers(selectedManagerSeqs);
+            return ResponseEntity.ok("회원 삭제가 완료되었습니다.");
+        } catch (Exception e) {
+            log.error("회원 삭제 중 오류 발생: " + e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("회원 삭제에 실패했습니다.");
+        }
     }
 }
