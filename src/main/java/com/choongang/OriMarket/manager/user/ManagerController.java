@@ -158,11 +158,11 @@ public class ManagerController {
 
             //매니저 정보 가져오기
             ManagerUser userResult = managerService.findByManagerId(model,session);
-           //매니저 정보
+            //매니저 정보
             model.addAttribute("userResult",userResult);
 
             //매니저가 소속된 시장의 주문만 리스트에 저장
-           model.addAttribute("orderList", model.getAttribute("managerOrderList"));
+            model.addAttribute("orderList", model.getAttribute("managerOrderList"));
 
             return "manager/order_list";
         }
@@ -196,6 +196,18 @@ public class ManagerController {
             return "manager/manager_login";
         }
         return "manager/manager_login";
+    }
+
+    //매니저 회원 CRUD 관리
+    @GetMapping("/managercrud")
+    public String managercrud(Model model) {
+        List<ManagerUser> managerUsers = managerService.getAllManagerUsers();
+
+        for (ManagerUser managerUser:managerUsers){
+            System.out.println("매니저:"+managerUser.getManagerName());
+        }
+        model.addAttribute("managerUsers",managerUsers);
+        return "manager/manager_CRUD";
     }
 
     // 수락 누르면
