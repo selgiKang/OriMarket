@@ -91,6 +91,18 @@ public class AdminController {
         return "redirect:/a_buser";
     }
 
+    @GetMapping("/searchBuser")
+    public String searchKeyword(@RequestParam(value = "keyword")String keyword,Model model){
+
+        List<BusinessUser> busers = businessUserRepository.findByBuUserNameContaining(keyword);
+
+        model.addAttribute("busers",busers);
+
+        return "/admin/admin_buUser";
+    }
+
+
+
 
     @GetMapping("/admin_order")
     public String adminOrder() {
