@@ -21,46 +21,15 @@ public class AdminController {
     @Autowired
     private final BusinessUserService businessUserService;
     private final BusinessUserRepository businessUserRepository;
-    private final BusinessStoreRepository businessStoreRepository;
-    private final ItemRepository itemRepository;
 
 
     //사업자등록현황페이지
     @GetMapping("/a_buser")
     public String buUserAccess(Model model){
-
-        if(businessUserRepository.findAll()!=null){
-            List<BusinessUser> busers = businessUserRepository.findAll();
-            model.addAttribute("busers",busers);
-        }
+        List<BusinessUser> busers = businessUserRepository.findAll();
+        model.addAttribute("busers",busers);
 
 
         return "admin/admin_buUser";
-    }
-
-    @GetMapping("/storeInfo")
-    public String buUserStoreInfo(@RequestParam("buUserNumber") String buUserNumber,Model model,BusinessUser businessUser){
-        Long buNumber = Long.valueOf(buUserNumber);
-        businessUser.setBuUserNumber(buNumber);
-        BusinessStore store = businessStoreRepository.findByBusinessUser(businessUser);
-        model.addAttribute("storeInfo",store);
-
-        return "admin/storeInfo";
-    }
-    @PostMapping("/storeInfoDelete")
-    public String buUserStoreInfoDelete(@RequestParam("buUserNumber") String buUserNumber,Model model,BusinessUser businessUser){
-        Long buNumber = Long.valueOf(buUserNumber);
-        businessUser.setBuUserNumber(buNumber);
-        BusinessStore store = businessStoreRepository.findByBusinessUser(businessUser);
-
-        if(store.getItems().size()!=0){
-            for(int i=0;i<store.getItems().size();i++){
-                itemRepository.delete(store.getItems().get(i));
-            }
-        }
-        businessStoreRepository.delete(store);
-
-        model.addAttribute("deleteMessage","삭제되었습니다.");
-        return "redirect:/a_buser";
     }
 }

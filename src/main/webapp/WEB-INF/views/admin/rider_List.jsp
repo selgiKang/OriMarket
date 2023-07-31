@@ -69,7 +69,7 @@
                 <button class="backbtn" onclick="window.location.replace('/ridernotice1')">&lt;</button>
                 <h1>라이더 목록</h1>
             </div>
-            <a><input type="button" class="delete_btn" value="라이더 삭제" onclick="deleteSelectedIds()"></a>
+            <a><input type="button" class="delete_btn" value="라이더 삭제" onclick="deleteSelectedRiders()"></a>
             <a href="/s2/${riderUserId}"><input type="button" class="insert_btn" value="라이더 정보 수정"></a>
         </div>
         <br>
@@ -101,30 +101,29 @@
 </div>
 </body>
 <script>
-    // 선택된 체크박스 항목들을 삭제하는 함수
-    function deleteSelectedIds() {
+    function deleteSelectedRiders() {
         var checkboxes = document.querySelectorAll('input[type="checkbox"]');
-        var selectedIds = [];
+        var selectedRiders = [];
 
         for (var i = 0; i < checkboxes.length; i++) {
             if (checkboxes[i].checked) {
-                var riderId = checkboxes[i].value;
-                selectedIds.push(riderId);
+                var riderSeq = checkboxes[i].value;
+                selectedRiders.push(riderSeq);
             }
         }
 
         // 선택된 항목들을 서버로 보내어 삭제 처리
-        if (selectedIds.length > 0) {
-            console.log(selectedIds);
-            console.log({ riderIds: selectedIds });
+        if (selectedRiders.length > 0) {
             $.ajax({
                 url: "/delete_riders",
                 type: "DELETE",
-                data: { riderIds: selectedIds },
+                contentType: "application/json", // 데이터 전송 형식을 JSON으로 설정
+                data: JSON.stringify(selectedRiders), // JSON 형식으로 변환하여 전송
                 success: function(result) {
                     // 삭제 성공 시, 페이지를 새로고침하여 목록을 업데이트
                     if (result === "success") {
-                        window.location.href="/s1/${riderUserId}";
+                        alert("라이더 삭제가 완료되었습니다.");
+                        window.location.reload();
                     }
                 },
                 error: function(xhr, status, error) {

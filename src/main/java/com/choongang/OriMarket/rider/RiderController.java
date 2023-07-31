@@ -1,15 +1,20 @@
 package com.choongang.OriMarket.rider;
 
+import com.choongang.OriMarket.business.user.BusinessUser;
 import com.choongang.OriMarket.order.NewOrder;
+import com.choongang.OriMarket.store.Item;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
 import java.util.List;
 
 
@@ -30,7 +35,31 @@ public class RiderController {
         return "admin/rider_List";
     }
 
+    @GetMapping("/rider_detail/{riderId}")
+    public String riderDetail(@PathVariable String riderId, Model model) {
+        // 라이더 아이디를 사용하여 라이더 정보를 가져옵니다.
+        Rider rider = riderService.getRiderById(riderId);
+        model.addAttribute("rider", rider);
 
+        return "rider/rider_detail";
+    }
+
+
+    @DeleteMapping("/delete_riders")
+    public ResponseEntity<String> deleteSelectedRiders(@RequestBody List<String> riderIds) {
+        try {
+            riderService.deleteRiders(riderIds); // RiderService의 deleteRiders 메서드 호출
+            return ResponseEntity.ok("success");
+        } catch (Exception e) {
+            log.error("Error occurred while deleting riders: {}", e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error occurred while deleting riders.");
+        }
+    }
+
+    @GetMapping("/rider_detail")
+    public String rider_Detail() {
+        return "rider/rider_detail";
+    }
 
 
 

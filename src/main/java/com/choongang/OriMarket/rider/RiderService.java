@@ -40,7 +40,19 @@ public class RiderService {
         return riderRepository.findAll();
     }
 
+    // 선택된 라이더들을 삭제하는 메서드
+    @Transactional
+    public void deleteRiders(List<String> riderIds) {
+        for (String riderId : riderIds) {
+            Rider rider = riderRepository.findByRiderId(riderId);
+            if (rider != null) {
+                riderRepository.delete(rider);
+            }
+        }
+    }
 
+
+    //폼 데이터 출력
 
 
 
@@ -130,4 +142,6 @@ public class RiderService {
 
         return byRiderOrder;
     }
+
+
 }
