@@ -60,7 +60,7 @@
         max-width: 365px;
         width: 100%;
         margin-top: 15px; /*리뷰관리 제목이랑 간격 조절*/
-
+        margin-bottom:15px;
     }
 
 
@@ -428,7 +428,7 @@
                                 <div class="main-box">
                                     <div class="top">
                                         <div class="small-box">
-                                            <p>${pastOrder.deliveryType}</p>
+                                            <p style="font-size: 15px;">${pastOrder.deliveryType}</p>
                                         </div>
                                         <div class="date">
                                             <p>
@@ -503,7 +503,7 @@
                                     <!-- 주문 상태 출력 -->
                                         <ul style="text-align: left;">
                                             <c:if test="${pastOrder.orderStatus eq '배달완료'}">
-                                                <li>배달 완료</li>
+                                                <li style="text-align: end; margin-right:12%; color:red;">배달 완료</li>
                                             </c:if>
                                             <c:if test="${pastOrder.orderStatus eq '주문거절'}">
                                                 <li>주문 거절</li>
@@ -519,7 +519,7 @@
                                             </ul>
                                         </c:if>
                                     </c:forEach>
-                                    <h3 style="text-align: left;">합계:<fmt:formatNumber value="${pastOrder.orderTotalPrice}" pattern="#,###"/>원
+                                    <h3 style="text-align: right; margin:10px;">합계:<fmt:formatNumber value="${pastOrder.orderTotalPrice}" pattern="#,###"/>원
                                     <!-- 영수증 보기 버튼 -->
                                     <div class="div2" onclick="location.href='/order_receiptDelivery?orderNumber=${pastOrder.orderNumber}'">영수증 보기</div>
                                 </div>

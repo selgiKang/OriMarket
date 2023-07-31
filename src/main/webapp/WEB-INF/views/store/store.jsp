@@ -232,7 +232,7 @@
                     <%--여름메뉴 버튼--%>
                     <li id="tab2" class="btnCon">
                         <input type="radio" name="tabmenu" id="tabmenu2">
-                        <label for="tabmenu2"><a href="#추천메뉴">사장님추천</a></label>
+                        <label for="tabmenu2"><a href="#사장님추천">사장님추천</a></label>
                         <div class="tabCon">
                             <%--메뉴1--%>
                             <div class="menu">
@@ -249,14 +249,14 @@
                     </li>
                     <li id="tab3" class="btnCon">
                         <input type="radio" name="tabmenu" id="tabmenu3">
-                        <label for="tabmenu3"><a href="#인기메뉴">인기메뉴</a></label>
+                        <label for="tabmenu3"><a href="#BEST">BEST</a></label>
                         <div class="tabCon">
                             내용 적기
                         </div>
                     </li>
                     <li id="tab4" class="btnCon">
                         <input type="radio" name="tabmenu" id="tabmenu4">
-                        <label for="tabmenu4"><a href="#할인메뉴">할인메뉴</a></label>
+                        <label for="tabmenu4"><a href="#선착순특가">선착순특가</a></label>
                         <div class="tabCon"></div>
                     </li>
                 </ul>

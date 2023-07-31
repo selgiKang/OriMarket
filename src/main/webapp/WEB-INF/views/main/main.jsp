@@ -78,6 +78,15 @@
             cursor: pointer;
             opacity: 0.7;
         }
+        #orderReceipt_btn_cancel2{
+            width:100%;
+            text-align: right;
+        }
+        #orderReceipt_btn_cancel2>a:hover {
+            text-decoration: none;
+            cursor: pointer;
+            opacity: 0.7;
+        }
         ul#marketList li {
             margin-top: 5px;
             list-style: none;
@@ -185,7 +194,25 @@
                     <c:if test="${empty userMarket}">
                         <div class="connextion_mk3_wrap btn-open-popup" onclick="modal"><a class="connextion_mk3" href=""><p>단골시장등록</p></a><p style="font-size: 40px;">+</p></div>
                     </c:if>
+
+                    <c:if test="${!empty userMarket}">
+                        <c:forEach var="i" items="${userMarket}" varStatus="status">
+                            <c:if test="${status.index == 2}">
+                                <c:if test="${!empty i.market.marketName}">
+                                    <div class="connextion_mk3_wrap change_marketimg_wrap" style="margin-right:20px; background:none; position: relative;" >
+                                        <div id="orderReceipt_btn_cancel2" style="position: absolute; right: -7px; top: 12px; z-index: 9999;"><a href="/deleteUserMarket?userMarketSeq=${i.userMarketSeq}"><i class="fas fa-regular fa-xmark"></i></a></div>
+                                        <img class="connexion_market_img" src="../../img/main/market2.png">
+                                        <a class="connextion_mk3 change_marketimg" href="${i.market.marketHref}?marketName=${market.marketName}">
+                                            <p>${i.market.marketName}</p>
+                                        </a>
+                                    </div>
+                                </c:if>
+                            </c:if>
+                        </c:forEach>
+                    </c:if>
+                    <c:if test="${userMarket.size() ne 3}">
                     <div class="connextion_mk4_wrap btn-open-popup" onclick="modal"><a class="connextion_mk4" href=""><p>단골시장등록</p></a><p style="font-size: 40px;">+</p></div>
+                    </c:if>
                 </div>
             </div>
         </div>
