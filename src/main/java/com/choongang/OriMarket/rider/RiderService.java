@@ -57,8 +57,11 @@ public class RiderService {
         if(!byRiderId.getRiderPassword().equals(rider.getRiderPassword())){
             return false;
         }else {
-            List<NewOrder> byRiderOrderPage = newOrderRepository.findByRider(byRiderId);
-            model.addAttribute("orderaccept2", byRiderOrderPage);
+            List<NewOrder> byRiderOrderByCreatedDateAsc = newOrderRepository.findByRiderOrderByCreatedDateDesc(byRiderId);
+            for(NewOrder newOrder:byRiderOrderByCreatedDateAsc){
+                System.out.println("요청사항:"+newOrder.getForRider());
+            }
+            model.addAttribute("orderaccept2", byRiderOrderByCreatedDateAsc);
             session.setAttribute("riderSeq",byRiderId.getRiderSeq());
             return true;
         }

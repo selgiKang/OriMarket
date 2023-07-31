@@ -4,6 +4,7 @@ import com.choongang.OriMarket.business.market.Market;
 import com.choongang.OriMarket.rider.Rider;
 import com.choongang.OriMarket.user.User;
 import org.geolatte.geom.M;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -27,4 +28,6 @@ public interface NewOrderRepository extends JpaRepository<NewOrder, Long> {
     List<NewOrder> findByCreatedDateContaining(String orderDate);
 
     List<NewOrder> findByRider(Rider rider);
+
+    List<NewOrder> findByRiderOrderByCreatedDateDesc(Rider rider);
 }
