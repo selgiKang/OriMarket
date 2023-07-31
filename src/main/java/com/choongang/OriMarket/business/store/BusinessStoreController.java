@@ -9,12 +9,15 @@ import com.choongang.OriMarket.utill.ImageService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
+import java.awt.print.Pageable;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -84,7 +87,6 @@ public class BusinessStoreController {
 
         return "/store/seller_itemDetail";
     }
-
 
     //등록된 item수정하기
     @PostMapping("/update_itemDetail")

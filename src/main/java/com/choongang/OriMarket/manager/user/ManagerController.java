@@ -282,4 +282,6 @@ public class ManagerController {
 
         return "manager/order_list";
     }
+
+
 }

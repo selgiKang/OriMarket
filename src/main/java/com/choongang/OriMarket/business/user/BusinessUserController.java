@@ -85,6 +85,9 @@ public class BusinessUserController {
 
         return "business/businessUser/businesslogin";
     }
+
+    //사업자 스토어 목록 페이징
+
     @PostMapping("/buUserUpdate")
     public String updateResult(@ModelAttribute BusinessUser user,Model model,HttpSession session){
         if(businessUserService.buUserUpdate(user,session)){
