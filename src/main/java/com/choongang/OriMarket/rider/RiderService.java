@@ -72,7 +72,7 @@ public class RiderService {
         }
     }
 
-    public boolean riderLogin(Rider rider, HttpSession session, Model model){
+    public boolean riderLogin(Rider rider, HttpSession session, Model model, Pageable pageable){
         Rider byRiderId = riderRepository.findByRiderId(rider.getRiderId());
 
         if(byRiderId == null){return false;}
@@ -80,11 +80,13 @@ public class RiderService {
         if(!byRiderId.getRiderPassword().equals(rider.getRiderPassword())){
             return false;
         }else {
-            List<NewOrder> byRiderOrderByCreatedDateAsc = newOrderRepository.findByRiderOrderByCreatedDateDesc(byRiderId);
-            for(NewOrder newOrder:byRiderOrderByCreatedDateAsc){
-                System.out.println("요청사항:"+newOrder.getForRider());
+            Page<NewOrder> byRiderOrderByCreatedDateDesc = newOrderRepository.findByRiderOrderByCreatedDateDesc(byRiderId, pageable);
+            for(NewOrder newOrder:byRiderOrderByCreatedDateDesc){
+                System.out.println("실행:"+newOrder.getOrderMarketName());
             }
-            model.addAttribute("orderaccept2", byRiderOrderByCreatedDateAsc);
+
+            List<NewOrder> byRiderOrderByCreatedDateAsc = newOrderRepository.findByRiderOrderByCreatedDateDesc(byRiderId);
+            model.addAttribute("orderaccept2", byRiderOrderByCreatedDateDesc.getContent());
             session.setAttribute("riderSeq",byRiderId.getRiderSeq());
             return true;
         }
