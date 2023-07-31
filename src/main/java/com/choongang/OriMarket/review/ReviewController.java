@@ -6,6 +6,8 @@ import com.choongang.OriMarket.business.store.BusinessStoreService;
 import com.choongang.OriMarket.business.user.BusinessUser;
 import com.choongang.OriMarket.business.user.BusinessUserRepository;
 import com.choongang.OriMarket.order.NewOrder;
+import com.choongang.OriMarket.order.NewOrderDetail;
+import com.choongang.OriMarket.order.NewOrderDetailRepository;
 import com.choongang.OriMarket.order.NewOrderRepository;
 import com.choongang.OriMarket.store.*;
 import lombok.RequiredArgsConstructor;
@@ -31,11 +33,12 @@ public class ReviewController {
     private final ReviewService reviewService;
     private final BusinessStoreService businessStoreService;
     private final NewOrderRepository newOrderRepository;
+    private final NewOrderDetailRepository newOrderDetailRepository;
 
     @GetMapping("/user_review")
-    public String userReview(@RequestParam("orderNumber") String orderNumber,HttpSession session,Model model) {
-        NewOrder byOrderNumber = newOrderRepository.findByOrderNumber(orderNumber);
-        model.addAttribute("abcde",byOrderNumber);
+    public String userReview(@RequestParam("buStoreName") String buStoreName,HttpSession session,Model model) {
+        List<NewOrderDetail> byBuStoreName = newOrderDetailRepository.findByBuStoreName(buStoreName);
+        model.addAttribute("abcde",byBuStoreName);
         return "user/user_review";
     }
 
@@ -97,7 +100,6 @@ public class ReviewController {
 
     @PostMapping("/user_review")
     public String userReivew1(@ModelAttribute Review review, HttpSession session, Model model){
-        System.out.println(review.getItem().getItemId());
         reviewService.save(review,session,model);
         return  "user/user_reviewlist";
     }

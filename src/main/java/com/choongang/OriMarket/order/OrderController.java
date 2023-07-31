@@ -184,6 +184,7 @@ public class OrderController {
             newOrderDetail.setItemCount(itemcount[i]);
             newOrderDetail.setNewOrder(save);
             newOrderDetail.setOrderNumber(save.getOrderNumber());
+            newOrderDetail.setItemImageUrl(items.get(i).getItemImageUrl());
             newOrderDetailRepository.save(newOrderDetail);
         }
         List<NewOrderDetail> byOrderNumber = newOrderDetailRepository.findByOrderNumber(save.getOrderNumber());
