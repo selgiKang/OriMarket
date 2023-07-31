@@ -32,23 +32,23 @@ public class RealTimeService {
         }
     }
 
-    public RealTimeStatus update1(Order order,HttpSession session, ManagerUser managerUser ){
-        Order orderResult = orderRepository.findByOrderNumber(order.getOrderNumber());
-
-        //order.setOrderNumber(order.getOrderNumber());
-        RealTimeStatus a = rtsRepository.findByorderNumber(orderResult);
-        a.setRtsOrderIng(1);
-        a.setOrderNumber(order);
-        rtsRepository.save(a);
-
-        Long managerSeq = Long.valueOf(session.getAttribute("managerSeq").toString());
-        managerUser.setManagerSeq(managerSeq);
-
-        orderResult.setManagerUser(managerUser);
-        orderRepository.save(orderResult);
-
-        return a;
-    }
+//    public RealTimeStatus update1(Order order,HttpSession session, ManagerUser managerUser ){
+//        Order orderResult = orderRepository.findByOrderNumber(order.getOrderNumber());
+//
+//        //order.setOrderNumber(order.getOrderNumber());
+//        RealTimeStatus a = rtsRepository.findByorderNumber(orderResult);
+//        a.setRtsOrderIng(1);
+//        a.setOrderNumber(order);
+//        rtsRepository.save(a);
+//
+//        Long managerSeq = Long.valueOf(session.getAttribute("managerSeq").toString());
+//        managerUser.setManagerSeq(managerSeq);
+//
+//        orderResult.setManagerUser(managerUser);
+//        orderRepository.save(orderResult);
+//
+//        return a;
+//    }
     public RealTimeStatus update2(Order order,HttpSession session){
         order.setOrderNumber(order.getOrderNumber());
         RealTimeStatus a = rtsRepository.findByorderNumber(order);

@@ -2,22 +2,22 @@ package com.choongang.OriMarket.rider;
 
 
 import com.choongang.OriMarket.RealTimeStatus.RealTimeRepository;
-import com.choongang.OriMarket.RealTimeStatus.RealTimeStatus;
-import com.choongang.OriMarket.business.market.Market;
-import com.choongang.OriMarket.business.user.BusinessUser;
 import com.choongang.OriMarket.order.NewOrder;
 import com.choongang.OriMarket.order.NewOrderRepository;
-import com.choongang.OriMarket.order.Order;
-import com.choongang.OriMarket.order.OrderRepository;
+
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
+import org.w3c.dom.ls.LSException;
 
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
+
 
 @Service
 @RequiredArgsConstructor
@@ -49,7 +49,7 @@ public class RiderService {
         }
     }
 
-    public boolean riderLogin(Rider rider,HttpSession session){
+    public boolean riderLogin(Rider rider, HttpSession session, Model model){
         Rider byRiderId = riderRepository.findByRiderId(rider.getRiderId());
 
         if(byRiderId == null){return false;}
@@ -57,6 +57,11 @@ public class RiderService {
         if(!byRiderId.getRiderPassword().equals(rider.getRiderPassword())){
             return false;
         }else {
+            List<NewOrder> byRiderOrderByCreatedDateAsc = newOrderRepository.findByRiderOrderByCreatedDateDesc(byRiderId);
+            for(NewOrder newOrder:byRiderOrderByCreatedDateAsc){
+                System.out.println("요청사항:"+newOrder.getForRider());
+            }
+            model.addAttribute("orderaccept2", byRiderOrderByCreatedDateAsc);
             session.setAttribute("riderSeq",byRiderId.getRiderSeq());
             return true;
         }
@@ -68,10 +73,12 @@ public class RiderService {
 
        for(NewOrder newOrder:allNewOrder){
            String orderStatus = newOrder.getOrderStatus();
-           if (orderStatus == null) {
-               // 주문 상태가 null인 경우 아무 작업도 하지 않음
-           } else if (orderStatus.equals("픽업완료")) {
-               newOrders.add(newOrder);
+           if(newOrder.getRider() == null) {
+               if (orderStatus == null) {
+                   // 주문 상태가 null인 경우 아무 작업도 하지 않음
+               } else if (orderStatus.equals("픽업완료")) {
+                   newOrders.add(newOrder);
+               }
            }
        }
         return newOrders;
@@ -80,10 +87,13 @@ public class RiderService {
     public NewOrder riderOrderAccept(String orderNumber,HttpSession session){
         NewOrder byOrderNumber = newOrderRepository.findByOrderNumber(orderNumber);
 
-        Rider riderSeq = riderRepository.findById((Long) session.getAttribute("riderSeq")).orElseThrow();
-        byOrderNumber.setRider(riderSeq);
-        byOrderNumber.setOrderStatus("배달시작");
-        newOrderRepository.save(byOrderNumber);
+        if(byOrderNumber.getRider() == null) {
+            Rider riderSeq = riderRepository.findById((Long) session.getAttribute("riderSeq")).orElseThrow();
+            byOrderNumber.setRider(riderSeq);
+            newOrderRepository.save(byOrderNumber);
+        }else{
+            System.out.println("이미 배차요청이 완료된 주문입니다.");
+        }
 
         return byOrderNumber;
     }
@@ -91,12 +101,20 @@ public class RiderService {
     public NewOrder riderOrderAccept1(String orderNumber,HttpSession session){
         NewOrder byOrderNumber = newOrderRepository.findByOrderNumber(orderNumber);
 
-        Rider riderSeq = riderRepository.findById((Long) session.getAttribute("riderSeq")).orElseThrow();
-        System.out.println("이게먽대:"+riderSeq.getRiderName());
-        byOrderNumber.setRider(riderSeq);
-        byOrderNumber.setOrderStatus("배달완료");
+        byOrderNumber.setOrderStatus("배달시작");
         newOrderRepository.save(byOrderNumber);
 
         return byOrderNumber;
+    }
+
+    public List<NewOrder> riderOrderAccept2(String orderNumber,HttpSession session){
+        NewOrder byOrderNumber = newOrderRepository.findByOrderNumber(orderNumber);
+
+        byOrderNumber.setOrderStatus("배달완료");
+        newOrderRepository.save(byOrderNumber);
+
+        List<NewOrder> byRiderOrder = newOrderRepository.findByRider(byOrderNumber.getRider());
+
+        return byRiderOrder;
     }
 }
