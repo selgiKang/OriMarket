@@ -4,9 +4,11 @@ import com.choongang.OriMarket.order.NewOrderRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.data.web.PageableDefault;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -106,6 +108,30 @@ public class ManagerController {
         }
         return "manager/manager_login";
     }
+    //----page-----
+    @GetMapping("/managerPage")
+    public String managerPage(@ModelAttribute ManagerUser managerUser, HttpSession session, Model model,
+                              @RequestParam(defaultValue = "0") int page,
+                              @RequestParam(defaultValue = "3") int size){
+
+        session.setAttribute("managerId",managerUser.getManagerId());
+
+        //매니저 정보 가져오기
+        ManagerUser userResult = managerService.findByManagerId(model,session);
+        //매니저 정보
+        model.addAttribute("userResult",userResult);
+
+        //매니저가 소속된 시장의 주문만 리스트에 저장
+        model.addAttribute("orderList", model.getAttribute("managerOrderList"));
+
+        //------페이징-------
+        Pageable pageable = PageRequest.of(page, size,Sort.by("createdDate").descending());
+        Page<NewOrder> pageList = managerService.getNewOrderPaging(userResult,pageable);
+        model.addAttribute("pageList",pageList);
+
+        return "manager/order_list";
+    }
+
     @PostMapping("/managerUpdate")
     public String managerUpdateResult(@ModelAttribute ManagerUser managerUser, Model model, HttpSession session){
         if(managerService.managerUpdate(managerUser,session)){
@@ -140,11 +166,11 @@ public class ManagerController {
     }
 
 
-    //로그인데
+    //로그인
     @PostMapping("/managerLogin")
     public String loginResult(@ModelAttribute ManagerUser managerUser, HttpSession session, Model model,
-                              @PageableDefault(sort = "createdDate", direction = Sort.Direction.DESC)
-                              Pageable pageable){
+                              @RequestParam(defaultValue = "0") int page,
+                              @RequestParam(defaultValue = "3") int size){
         boolean result = managerService.loginCheck(managerUser,session);
         // 매니저가 속한 시장의 NewOrder 를 가지고와서 수락/거절 수락을누르면 NewOrder의 상태가 '주문시작' 으로 업데이트하고 매니저seq도 업데이트 해준다.
         if(result){
@@ -157,6 +183,11 @@ public class ManagerController {
 
             //매니저가 소속된 시장의 주문만 리스트에 저장
            model.addAttribute("orderList", model.getAttribute("managerOrderList"));
+
+           //------페이징-------
+            Pageable pageable = PageRequest.of(page, size, Sort.Direction.DESC, "createdDate");
+            Page<NewOrder> pageList = managerService.getNewOrderPaging(userResult,pageable);
+            model.addAttribute("pageList",pageList);
 
             return "manager/order_list";
         }

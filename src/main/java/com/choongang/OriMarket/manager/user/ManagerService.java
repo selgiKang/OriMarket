@@ -6,6 +6,8 @@ import com.choongang.OriMarket.order.NewOrder;
 import com.choongang.OriMarket.order.NewOrderRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
@@ -132,7 +134,14 @@ public class ManagerService {
         }
     }
 
-
+    //------페이징-------
+    public Page<NewOrder> getNewOrderPaging(ManagerUser managerUser, Pageable pageable){
+        Page<NewOrder> l = newOrderRepository.findByManagerUserOrderByCreatedDateDesc(managerUser,pageable);
+        for(NewOrder n : l){
+            System.out.println(n.getOrderNumber());
+        }
+        return newOrderRepository.findByManagerUserOrderByCreatedDateDesc(managerUser,pageable);
+    }
 
 
 }

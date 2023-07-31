@@ -137,8 +137,8 @@
                     <c:if test="${order.orderStatus eq '배달완료' or order.orderStatus eq '주문거절'}">
                         <!-- 주문번호 클릭 시 주문 상세 정보를 보여줄 버튼 -->
                         <span class="order-number" onclick="showOrderDetail('${order.orderNumber}')">
-                            <a href="/manager_receiptDelivery?orderNumber=${order.orderNumber}" style="color: #4caf50">주문번호: ${order.orderNumber}</a>
-                        </span>
+                    <a href="/manager_receiptDelivery?orderNumber=${order.orderNumber}" style="color: #4caf50">주문번호: ${order.orderNumber}</a>
+                </span>
                         <c:forEach var="store" items="${order.newOrderDetails}">
                             <div class="order-details">
                                 <span>${store.itemName} 총 ${store.itemCount}개</span>
@@ -150,10 +150,17 @@
                     </c:if>
                 </c:forEach>
             </c:if>
-            <c:if test="${empty orderList}">
+            <c:if test="${empty orderList.content}">
                 <p>주문이 없습니다.</p>
             </c:if>
         </div>
+   <%--     <div>
+            <ul>
+                <li th:each="pageItem : ${#numbers.sequence(pageList.getNumber() - 3, pageList.getNumber() + 2)}">
+                    <a th:href="@{/managerPage(page=${pageItem})}" th:text="${pageItem + 1}"></a>
+                </li>
+            </ul>
+        </div>--%>
         <div class="order-item" data-status="processing" style="display: none;"></div>
         <div class="order-item" data-status="completed" style="display: none;"></div>
     </div>
