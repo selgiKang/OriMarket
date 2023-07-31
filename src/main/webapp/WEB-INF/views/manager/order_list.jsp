@@ -135,8 +135,8 @@
         </div>
         <%--배달 완료--%>
         <div class="order-item" data-status="completed">
-            <c:if test="${not empty posts}">
-                <c:forEach items="${posts}" var="order">
+            <c:if test="${not empty orderList}">
+                <c:forEach items="${orderList}" var="order">
                     <c:if test="${order.orderStatus eq '배달완료' or order.orderStatus eq '주문거절'}">
                         <!-- 주문번호 클릭 시 주문 상세 정보를 보여줄 버튼 -->
                         <span class="order-number" onclick="showOrderDetail('${order.orderNumber}')">

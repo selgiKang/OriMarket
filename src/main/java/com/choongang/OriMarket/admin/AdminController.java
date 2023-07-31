@@ -69,15 +69,21 @@ public class AdminController {
         return "redirect:/a_buser";
     }
 
+
     //등록된 사업자 삭제
     @GetMapping("delete_buser/{buUserNumber}")
     public String deleteBuser(@PathVariable("buUserNumber")Long buUserNumber){
 
         BusinessStore buStore = businessStoreRepository.findByBusinessUser_BuUserNumber(buUserNumber);
 
+        if(buStore.getItems().size()!=0){
+            for(int i=0;i<buStore.getItems().size();i++){
+                itemRepository.delete(buStore.getItems().get(i));
+            }
+        }
         businessStoreRepository.deleteById(buStore.getBuStoreNumber());
         businessUserRepository.deleteById(buUserNumber);
 
-        return "redirect:/admin/a_buUser";
+        return "redirect:/a_buser";
     }
 }

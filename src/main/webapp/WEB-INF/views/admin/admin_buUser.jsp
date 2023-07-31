@@ -45,7 +45,7 @@
                 <td>${buser.buUserPhone}</td>
                 <td>${buser.buUserEmail}</td>
                 <td>
-                    <a href="/delete_buser/${buser.buUserNumber}"><button>삭제</button></a>
+                    <button><a href="/delete_buser/${buser.buUserNumber}">삭제</a></button>
                 </td>
             </tr>
             </c:forEach>

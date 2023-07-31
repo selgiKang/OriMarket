@@ -165,6 +165,11 @@ public class CartController {
         System.out.println("유저아이디:"+userId);
         System.out.println("배달타입:"+deliveryType);
 
+        for(Long item:itemIds){
+            System.out.println("넘어온아이템은??"+item);
+        }
+
+
         if (userId.isEmpty()) {
             return "/error/login_error";
         } else {
