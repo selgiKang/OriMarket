@@ -1,19 +1,9 @@
 package com.choongang.OriMarket.manager.user;
-
-import com.choongang.OriMarket.RealTimeStatus.RealTimeRepository;
-import com.choongang.OriMarket.RealTimeStatus.RealTimeService;
-import com.choongang.OriMarket.RealTimeStatus.RealTimeStatus;
 import com.choongang.OriMarket.order.NewOrder;
 import com.choongang.OriMarket.order.NewOrderRepository;
-import com.choongang.OriMarket.order.Order;
-import com.choongang.OriMarket.order.OrderService;
-import com.choongang.OriMarket.user.User;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
@@ -25,14 +15,11 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Controller
 @RequiredArgsConstructor
-@Slf4j
+@Log4j2
 public class ManagerController {
 
     @Autowired

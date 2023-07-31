@@ -1,16 +1,12 @@
 package com.choongang.OriMarket.store;
 
 import com.choongang.OriMarket.business.store.BusinessStore;
-import com.choongang.OriMarket.business.user.BusinessUser;
-import com.choongang.OriMarket.order.Order;
 import com.choongang.OriMarket.review.Review;
 import com.choongang.OriMarket.user.CartItem;
-import com.choongang.OriMarket.user.User;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import javax.print.attribute.standard.MediaSize;
 import java.util.ArrayList;
 import java.util.List;
 

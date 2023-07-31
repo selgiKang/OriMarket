@@ -36,4 +36,5 @@ public interface NewOrderRepository extends JpaRepository<NewOrder, Long> {
     List<NewOrder> findByOrderStatusAndUserOrderByCreatedDateDesc(String status,User user);
 
     Page<NewOrder> findByRiderOrderByCreatedDateDesc(Rider rider,Pageable pageable);
+    Page<NewOrder> findByManagerUser(ManagerUser managerUser, Pageable pageable);
 }

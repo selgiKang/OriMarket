@@ -76,7 +76,7 @@ public class NewOrder {
     private User user;
 
     //매니저 번호
-    @OneToOne(fetch =  FetchType.LAZY)
+    @ManyToOne(fetch =  FetchType.LAZY)
     @JoinColumn(name="managerSeq")
     private ManagerUser managerUser;
 

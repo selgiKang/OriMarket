@@ -1,20 +1,14 @@
 package com.choongang.OriMarket.rider;
 
 
-import com.choongang.OriMarket.RealTimeStatus.RealTimeRepository;
 import com.choongang.OriMarket.order.NewOrder;
 import com.choongang.OriMarket.order.NewOrderRepository;
 
-import com.choongang.OriMarket.store.Item;
-import com.choongang.OriMarket.user.CartItem;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
-import org.w3c.dom.ls.LSException;
 
 import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
@@ -24,15 +18,13 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-@Slf4j
+@Log4j2
 public class RiderService {
 
     @Autowired
     private final RiderRepository riderRepository;
 
     private final NewOrderRepository newOrderRepository;
-
-    private final RealTimeRepository rtsRepository;
 
 
     //7.31 라이더 테스트

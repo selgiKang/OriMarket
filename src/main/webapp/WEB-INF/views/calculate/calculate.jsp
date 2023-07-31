@@ -50,7 +50,7 @@
                 </td>
             <%--오른쪽 화살표--%>
                 <td>
-                    <a <%--id="calculate_right_arrow"--%>class="go-next"><i id="calculate_search_rightArrow" class="fas fa-solid fa-angle-right" style="color: #f5f5f5;"></i></a>
+                    <a class="go-next"><i id="calculate_search_rightArrow" class="fas fa-solid fa-angle-right" style="color: #f5f5f5;"></i></a>
                 </td>
             </tr>
         </table>
@@ -88,10 +88,6 @@
                     </tr>
             </c:forEach>
             </tbody>
-          <%--  <tr>
-                <td class="calculate_main_table_td_1" style="text-align: center;">07/01</td>
-                <td class="calculate_main_table_td_2" style="text-align: center;">30,000원</td>
-            </tr>--%>
         </table>
     </main>
 </body>
