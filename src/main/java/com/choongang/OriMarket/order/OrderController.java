@@ -109,6 +109,7 @@ public class OrderController {
     public String order(){return "order/order_delivery";}
     @GetMapping("/order_paymentPage")
     public String orderPaymentPage(){return "order/order_paymentPage";}
+
     @GetMapping("/order_pastorder")
     public String orderPastorder(User user,HttpSession session,Model model,NewOrderDetail newOrderDetail){
         if(session.getAttribute("userId")==null){

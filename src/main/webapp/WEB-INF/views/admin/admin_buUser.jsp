@@ -31,7 +31,7 @@
             <c:forEach var="buser" items="${busers}">
             <tr>
                 <td>${buser.market.marketName}</td>
-                <td>${buser.buUserNumber}</td>
+                <td><a href="/storeInfo?buUserNumber=${buser.buUserNumber}">${buser.buUserNumber}</a></td>
                 <td>${buser.businessStores.get(0).buStoreName}</td>
                 <td>${buser.buUserName}</td>
                 <td>${buser.buUserAddress}</td>
