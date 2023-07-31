@@ -2,10 +2,13 @@ package com.choongang.OriMarket.rider;
 
 import com.choongang.OriMarket.business.user.BusinessUser;
 import com.choongang.OriMarket.order.NewOrder;
+import com.choongang.OriMarket.order.NewOrderRepository;
 import com.choongang.OriMarket.store.Item;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -25,7 +28,7 @@ public class RiderController {
 
     @Autowired
     private final RiderService riderService;
-
+    private final NewOrderRepository newOrderRepository;
 
     //7.31 라이더 테스트
     @GetMapping("/rider_list")
@@ -73,8 +76,8 @@ public class RiderController {
     }
 
     @PostMapping("/rider_login")
-    public String riderLogin1(@ModelAttribute Rider rider, HttpSession session, Model model){
-        if(riderService.riderLogin(rider,session,model)){
+    public String riderLogin1(@ModelAttribute Rider rider, HttpSession session, Model model, @PageableDefault(size = 3) Pageable pageable){
+        if(riderService.riderLogin(rider,session,model,pageable)){
             return "rider/rider_main";
         }else {
             return "rider/rider_login";
