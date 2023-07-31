@@ -198,6 +198,20 @@ public class ManagerController {
         return "manager/manager_login";
     }
 
+    //매니저 회원 CRUD 관리
+    @GetMapping("/managercrud")
+    public String managercrud(Model model) {
+        List<ManagerUser> managerUsers = managerService.getAllManagerUsers();
+
+        for (ManagerUser managerUser:managerUsers){
+            System.out.println("매니저:"+managerUser.getManagerName());
+        }
+        model.addAttribute("managerUsers",managerUsers);
+        return "manager/manager_CRUD";
+    }
+
+    //매니저 회원 CRUD 관리_삭제
+
     // 수락 누르면
     @GetMapping("/reject")
     public String orderReject(@RequestParam("orderNumber") String rOrderNumber,

@@ -127,4 +127,10 @@ public class ManagerService {
         }
         return false;
     }
+
+    public List<ManagerUser> getAllManagerUsers(){
+        return managerRepository.findAll();
+
+    }
+
 }
