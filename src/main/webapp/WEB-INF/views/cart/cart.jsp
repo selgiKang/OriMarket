@@ -166,6 +166,22 @@
 <script>
 	function goOrder() {
 
+		//상품 선택안하고 주문하기 눌렀을 때
+		const checkboxes = document.querySelectorAll('.individual_checkbox');
+		let atLeastOneItemChecked = false;
+		for (const checkbox of checkboxes) {
+			if (checkbox.checked) {
+				atLeastOneItemChecked = true;
+				break;
+			}
+		}
+
+		if (!atLeastOneItemChecked) {
+			alert("상품을 담아주세요!");
+			return;
+		}
+
+
 		//주소없이 주문할 경우
 		const userAddress = "${userAddress1}";
 
@@ -175,7 +191,7 @@
 			return;
 		}
 
-		const checkboxes = document.querySelectorAll('.individual_checkbox');
+
 		const totalCountElements = document.getElementsByName('currentCnt');
 		const cartItemIds = document.querySelectorAll('[data-cart-item-id]');
 		const itemPrices = document.getElementsByClassName('individual_itemPrice');
