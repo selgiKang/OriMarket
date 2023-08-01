@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <link href="../code/loginpage.css" rel="stylesheet" media="all">
-    <title>Orimarket_findId</title>
+    <title>Orimarket 아이디찾기</title>
     <style>
         @font-face {
             font-family: 'omyu_pretty';
