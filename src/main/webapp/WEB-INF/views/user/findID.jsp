@@ -44,6 +44,8 @@
         div.dologin_btn_wrap{width:100%;}
         a.dologin_btn{width:40%; height:40px; padding: 4% 25%; background-color:#ffbf41; border:none; border-radius: 25px; color:#333; font-weight: 700; font-size: 16px;}
         a.dologin_btn:hover {background-color: #333; color:#fff;}
+        a.findpw_btn{color:#333; font-weight: 600;}
+        a.findpw_btn:hover{text-decoration: underline; color:#46A973;}
     </style>
     <script>
         <%-- 서버에서 에러 메시지를 전달할 경우 알림 팝업 띄우기 --%>
@@ -81,8 +83,8 @@
                 </div>
             </c:if>
             <div id="list" style="margin-top:15px;">
-                <div style="margin-top: 20px;margin-bottom:20px;padding-bottom: 5px;">
-                    <span><a href="#" style="color:#333; font-weight: 600;">비밀번호 찾기</a></span>
+                <div style="margin-top: 25px;margin-bottom:25px;padding-bottom: 5px;">
+                    <span><a href="#" class="findpw_btn">비밀번호 찾기 ></a></span>
                 </div>
                 <div class="dologin_btn_wrap" style="margin-bottom:40px;"><a href="/mypage" class="dologin_btn">로그인 하러가기</a></div>
             </div>
