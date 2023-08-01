@@ -34,29 +34,36 @@
     <script>
         function loadPage(pageNumber) {
             $.ajax({
-                url: '/orderListResult?page=' + pageNumber,
+                url: '/orderListResult',
                 type: 'GET',
+                data: {'page':pageNumber},
+                dataType: 'json',
                 success: function (data) {
-                    // 서버에서 전달된 JSON 데이터를 JavaScript 객체로 파싱
-                    var jsonData = JSON.parse(data);
+                    try {
+                        // 서버에서 전달된 JSON 데이터를 JavaScript 객체로 파싱
+                        var jsonData = JSON.parse(data);
 
-                    // jsonData에서 필요한 정보를 추출하여 페이지에 추가하는 로직을 작성
-                    var orderList = jsonData.content;
+                        // jsonData에서 필요한 정보를 추출하여 페이지에 추가하는 로직을 작성
+                        var orderList = jsonData.content;
 
-                    // 주문 정보를 표시할 HTML을 생성하는 함수
-                    function generateOrderHTML(order) {
-                        // ... 주문 정보를 HTML 문자열로 변환하는 코드 ...
-                    }
-
-                    // 주문 정보를 추가할 요소를 선택하고, 기존 내용을 지우고 새로운 주문 정보를 추가
-                    var orderItemDiv = document.querySelector('.order-item[data-status="completed"]');
-                    orderItemDiv.innerHTML = ''; // 기존 내용 초기화
-
-                    orderList.forEach(function(order) {
-                        if (order.orderStatus === '배달완료' || order.orderStatus === '주문거절') {
-                            orderItemDiv.insertAdjacentHTML('beforeend', generateOrderHTML(order));
+                        // 주문 정보를 표시할 HTML을 생성하는 함수
+                        function generateOrderHTML(order) {
+                            // ... 주문 정보를 HTML 문자열로 변환하는 코드 ...
                         }
-                    });
+
+                        // 주문 정보를 추가할 요소를 선택하고, 기존 내용을 지우고 새로운 주문 정보를 추가
+                        var orderItemDiv = document.querySelector('.order-item[data-status="completed"]');
+                        orderItemDiv.innerHTML = ''; // 기존 내용 초기화
+
+                        orderList.forEach(function(order) {
+                            if (order.orderStatus === '배달완료' || order.orderStatus === '주문거절') {
+                                orderItemDiv.insertAdjacentHTML('beforeend', generateOrderHTML(order));
+                            }
+                        });
+                    } catch (e) {
+                        // 에러가 발생한 경우 처리
+                        console.error('에러 발생:', e);
+                    }
                 },
                 error: function () {
                     alert("서버와 통신 중 오류가 발생했습니다.");
