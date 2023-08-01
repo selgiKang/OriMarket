@@ -11,18 +11,17 @@ import com.choongang.OriMarket.user.CartRepository;
 import com.choongang.OriMarket.user.OrderItemRepository;
 import com.choongang.OriMarket.user.UserRepository;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.lang.reflect.Member;
 import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
-@Slf4j
+@Log4j2
 public class AdminController {
 
     @Autowired
@@ -34,6 +33,9 @@ public class AdminController {
     private final CartRepository cartRepository;
     private final OrderItemRepository orderItemRepository;
 
+    //로그인
+    @GetMapping("/adminLogin")
+    public String adminLogin(){return "admin/admin_login";}
 
     //사업자등록현황페이지
     @GetMapping("/a_buser")
@@ -53,6 +55,18 @@ public class AdminController {
 
         return "admin/storeInfo";
     }
+
+    @PostMapping("/adminLogin")
+    public String adminLoginResult(@RequestParam("adminId")String adminId,
+                                   @RequestParam("adminPassword")String adminPassword,Model model){
+        if(adminId.equals("admin")&&adminPassword.equals("admin1@")){
+            return "admin/admin_main";
+        }else{
+            model.addAttribute("loginError","아이디나 비밀번호가 틀렸습니다.");
+        }
+        return "admin/admin_login";
+    }
+
     @PostMapping("/storeInfoDelete")
     public String buUserStoreInfoDelete(@RequestParam("buUserNumber") String buUserNumber,Model model,BusinessUser businessUser){
         Long buNumber = Long.valueOf(buUserNumber);
