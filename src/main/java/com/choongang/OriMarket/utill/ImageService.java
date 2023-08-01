@@ -73,6 +73,26 @@ public class ImageService {
         return destinationFile.getName();
     }
 
+    public String saveRiderImage(MultipartFile multipartFile) throws IOException {
+
+        String originalFilename = multipartFile.getOriginalFilename();
+        String imageUrl = ITEM_IMAGE_PATH+originalFilename;
+        Path saveImagePath = Paths.get(imageUrl);
+
+        // 저장할 디렉토리 생성
+        File directory = new File(ITEM_IMAGE_PATH);
+        if (!directory.exists()) {
+            directory.mkdirs();
+        }
+        // 파일을 저장할 경로 생성
+        File destinationFile = new File(saveImagePath.toUri());
+
+        // MultipartFile을 파일로 저장
+        multipartFile.transferTo(destinationFile);
+
+        return destinationFile.getName();
+    }
+
 }
 
 

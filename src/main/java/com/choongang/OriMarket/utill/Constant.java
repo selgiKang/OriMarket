@@ -10,4 +10,6 @@ public class Constant {
 
     public static final String ITEM_IMAGE_PATH = "src\\main\\resources\\static\\img\\store\\item\\";
 
+    public static final String RIDER_IMAGE_PATH = "src\\main\\resources\\static\\img\\rider\\";
+
 }

@@ -1,9 +1,12 @@
 package com.choongang.OriMarket.rider;
 
+import com.choongang.OriMarket.business.market.Market;
+import com.choongang.OriMarket.business.market.MarketRepository;
 import com.choongang.OriMarket.business.user.BusinessUser;
 import com.choongang.OriMarket.order.NewOrder;
 import com.choongang.OriMarket.order.NewOrderRepository;
 import com.choongang.OriMarket.store.Item;
+import com.choongang.OriMarket.utill.ImageService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.List;
 
 
@@ -28,8 +32,8 @@ public class RiderController {
 
     @Autowired
     private final RiderService riderService;
-    private final RiderRepository riderRepository;
-    private final NewOrderRepository newOrderRepository;
+    private final ImageService imageService;
+    private final MarketRepository marketRepository;
 
     //7.31 라이더 테스트
     @GetMapping("/rider_list")
@@ -91,8 +95,10 @@ public class RiderController {
     }
 
     @PostMapping("/rider_join")
-    public String riderJoin1(@ModelAttribute Rider rider, HttpSession session) {
-        if(riderService.riderJoin(rider,session)){
+    public String riderJoin1(@ModelAttribute Rider rider, HttpSession session,@RequestParam("pictureUrl") MultipartFile file) throws IOException {
+        String s = imageService.saveRiderImage(file);
+        if(riderService.riderJoin(rider,session,s)){
+
             return "rider/rider_login";
         }else {
             return "rider/rider_join";
@@ -130,6 +136,35 @@ public class RiderController {
         List<NewOrder> newOrders = riderService.riderOrderAccept2(orderNumber, session);
         model.addAttribute("orderaccept2", newOrders);
         return "rider/rider_main";
+    }
+
+    @GetMapping("/deliveryLocation")
+    public String deliveryLocation(@RequestParam("orderAddress") String orderAddress,Model model){
+        model.addAttribute("userAddress1",orderAddress);
+        return "rider/rider_mylocation";
+    }
+
+    @GetMapping("/MarketLocation")
+    public String MarketLocation(@RequestParam("marketName") String marketName,Model model){
+        Market byMarketName = marketRepository.findByMarketName(marketName);
+        // 가정: 위도와 경도 값을 변수에 저장한 상태라고 가정합니다.
+        double latitude = byMarketName.getMarketLatitude();
+        double longitude = byMarketName.getMarketLongitude();
+
+        // 원하는 포맷 패턴으로 DecimalFormat 인스턴스 생성
+        DecimalFormat df = new DecimalFormat("#.######"); // 여섯 자리까지
+
+        // DecimalFormat을 사용하여 위도와 경도를 포맷
+        String formattedLatitude = df.format(latitude);
+        String formattedLongitude = df.format(longitude);
+
+        System.out.println("이건먼데용:"+formattedLatitude);
+        System.out.println("이건먼데용:"+formattedLongitude);
+
+        model.addAttribute("marketName",byMarketName.getMarketName());
+        model.addAttribute("formattedLatitude",formattedLatitude);
+        model.addAttribute("formattedLongitude",formattedLongitude);
+        return "rider/rider_mylocation1";
     }
 
 };
