@@ -41,5 +41,19 @@ public class MarketMapController {
         return "marketmap/tongin_marketmap";
     }
 
+    @GetMapping("/dongdaemun_marketmap")
+    public String marketmap4() {
+        return "marketmap/dongdaemun_marketmap";
+    }
+
+    @GetMapping("/gyoengdong_marketmap")
+    public String marketmap5() {
+        return "marketmap/gyoengdong_marketmap";
+    }
+
+    @GetMapping("/namdaemun_marketmap")
+    public String marketmap6() {
+        return "marketmap/namdaemun_marketmap";
+    }
 };
 

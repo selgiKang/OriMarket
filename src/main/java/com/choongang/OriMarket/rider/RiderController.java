@@ -2,10 +2,7 @@ package com.choongang.OriMarket.rider;
 
 import com.choongang.OriMarket.business.market.Market;
 import com.choongang.OriMarket.business.market.MarketRepository;
-import com.choongang.OriMarket.business.user.BusinessUser;
 import com.choongang.OriMarket.order.NewOrder;
-import com.choongang.OriMarket.order.NewOrderRepository;
-import com.choongang.OriMarket.store.Item;
 import com.choongang.OriMarket.utill.ImageService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -27,7 +24,7 @@ import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
-@Slf4j
+@Slf4j //log.error("Error occurred while deleting riders: {}", e.getMessage()); 이거쓸라고하는거임
 public class RiderController {
 
     @Autowired
@@ -88,7 +85,6 @@ public class RiderController {
             return "rider/rider_login";
         }
     }
-
     @GetMapping("/rider_join")
     public String riderJoin() {
         return "rider/rider_join";

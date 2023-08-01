@@ -92,7 +92,7 @@
             <c:forEach var="riderOrder" items="${orderaccept2}">
                 <c:if test="${riderOrder.orderStatus eq '배달완료'}">
                     <div style="border-bottom: ${loopStatus.last ? 'none' : '1px solid #000000;'};">
-                        <h3>요청시장: ${riderOrder.orderMarketName} <a href="/MarketLocation?marketName=${riderOrder.orderMarketName}">위치보기</a>/h3>
+                        <h3>요청시장: ${riderOrder.orderMarketName} <a href="/MarketLocation?marketName=${riderOrder.orderMarketName}">위치보기</a></h3>
                         <h4>주문번호: ${riderOrder.orderNumber}</h4>
                         <c:if test="${empty riderOrder.forRider}">
                             <h4>요청사항이 없습니다.!</h4>
