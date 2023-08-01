@@ -41,7 +41,7 @@ public class ReviewService {
     private final BusinessStoreRepository businessStoreRepository;
 
     private final NewOrderDetailRepository newOrderDetailRepository;
-    public void save(Review review, HttpSession session, Model model, List<String> imageUrls){
+    public void save(Review review, HttpSession session, Model model, String s){
 
         System.out.println("뉴오더시퀀스:"+review.getNewOrder());
         System.out.println("주문번호"+review.getOrderNumber());
@@ -51,11 +51,7 @@ public class ReviewService {
         System.out.println("맛:"+review.getTaste());
         System.out.println("양:"+review.getAmount());
         System.out.println("내용:"+review.getContent());
-
-        for(String s:imageUrls) {
-            System.out.println("히히히정보:" + s);
-        }
-
+        System.out.println("사진정보:"+s);
 
         List<NewOrderDetail> byBuStoreNameAndOrderNumber = newOrderDetailRepository.findByBuStoreNameAndOrderNumber(review.getBuStoreName(), review.getOrderNumber());
         for(NewOrderDetail newOrderDetail:byBuStoreNameAndOrderNumber){
@@ -65,23 +61,25 @@ public class ReviewService {
 
         String[] itemNames = review.getItemName().split(",");
         for(String item:itemNames) {
-            Review newReview = new Review();
-            User byUser = userRepository.findById((Long) session.getAttribute("userSeq")).orElseThrow();
-            Item byItemName = itemRepository.findByItemNameAndBusinessStore_BuStoreName(item, review.getBuStoreName());
-            BusinessStore byBuStore = businessStoreRepository.findById(byItemName.getBusinessStore().getBuStoreNumber()).orElseThrow();
-            newReview.setNewOrder(review.getNewOrder());
-            newReview.setBuStoreName(review.getBuStoreName());
-            newReview.setItemName(review.getItemName());
-            newReview.setRating(review.getRating());
-            newReview.setTaste(review.getTaste());
-            newReview.setAmount(review.getAmount());
-            newReview.setContent(review.getContent());
-            newReview.setOrderNumber(review.getOrderNumber());
-            newReview.setItem(byItemName);
-            newReview.setBusinessStore(byBuStore);
-            newReview.setUser(byUser);
-            reviewRepository.save(newReview);
         }
+
+        Review newReview = new Review();
+        User byUser = userRepository.findById((Long) session.getAttribute("userSeq")).orElseThrow();
+        Item byItemName = itemRepository.findByItemNameAndBusinessStore_BuStoreName(itemNames[0], review.getBuStoreName());
+        BusinessStore byBuStore = businessStoreRepository.findById(byItemName.getBusinessStore().getBuStoreNumber()).orElseThrow();
+        newReview.setNewOrder(review.getNewOrder());
+        newReview.setBuStoreName(review.getBuStoreName());
+        newReview.setItemName(review.getItemName());
+        newReview.setRating(review.getRating());
+        newReview.setTaste(review.getTaste());
+        newReview.setAmount(review.getAmount());
+        newReview.setContent(review.getContent());
+        newReview.setOrderNumber(review.getOrderNumber());
+        /*newReview.setItem(byItemName);*/
+        newReview.setBusinessStore(byBuStore);
+        newReview.setUser(byUser);
+        newReview.setPictureUrl(s);
+        reviewRepository.save(newReview);
 
         /*//리뷰 총점 계산
         int totalSum = 0;

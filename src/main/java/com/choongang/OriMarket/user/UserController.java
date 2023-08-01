@@ -5,6 +5,7 @@ import com.choongang.OriMarket.business.market.MarketRepository;
 import com.choongang.OriMarket.business.market.MarketService;
 import com.choongang.OriMarket.order.*;
 import com.choongang.OriMarket.review.Review;
+import com.choongang.OriMarket.review.ReviewRepository;
 import com.choongang.OriMarket.utill.DistanceUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -38,6 +39,8 @@ public class UserController {
 
     private final NewOrderRepository newOrderRepository;
     private final NewOrderDetailRepository newOrderDetailRepository;
+
+    private final ReviewRepository reviewRepository;
 
 
     // 로그인 get , post 매핑
@@ -123,9 +126,13 @@ public class UserController {
             User byId = userRepository.findById((Long) session.getAttribute("userSeq")).orElseThrow();
             List<NewOrder> newOrders = newOrderRepository.findByOrderStatusAndUserOrderByCreatedDateDesc("배달완료", byId);
             List<Review> reviews = byId.getReviews();
+            for(Review review:reviews){
+                review.getItem().getReviews();
+            }
 
             model.addAttribute("re", reviews);
             model.addAttribute("newOrders",newOrders);
+
             return "store/delivery_pickup";
         }
     }

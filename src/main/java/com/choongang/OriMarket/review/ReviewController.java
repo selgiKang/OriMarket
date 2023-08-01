@@ -103,10 +103,11 @@ public class ReviewController {
     }
 
     @PostMapping("/user_review")
-    public String userReivew1(@ModelAttribute Review review, @RequestParam("pictureUrls") List<MultipartFile> files, HttpSession session, Model model) throws IOException {
-        List<String> imageUrls = imageService.saveReviewImages(files);
-        reviewService.save(review,session,model,imageUrls);
-        return  "redirect:/review";
+    public String userReivew1(@ModelAttribute Review review, @RequestParam("pictureUrl1") MultipartFile file, HttpSession session, Model model) throws IOException {
+        String s = imageService.saveReviewImage(file);
+        reviewService.save(review,session,model,s);
+
+        return "redirect:/reivew";
     }
 
     @PostMapping("/ReplyInsert")
