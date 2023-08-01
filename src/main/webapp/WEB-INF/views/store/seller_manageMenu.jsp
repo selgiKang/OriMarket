@@ -22,7 +22,7 @@
 
         /* 전체 크기 */
         body{margin: 0; padding: 0; font-family:'LINESeedKR-Bd'; font-size: 16px; text-align: center;}
-        #goods_container{width: 305px; border: 1px solid black;}
+        #goods_container{width: 305px; /*border: 1px solid black;*/}
 
         /* 가게상호명,업주 */
         #goods_store{text-align: right;}

@@ -298,7 +298,7 @@ button[role="tab"][aria-selected="false"]:hover {
 }
 
 div[role="tabpanel"] {
-    padding: 1rem;
+    padding:0.5rem 1rem;
 }
 
 .slider{

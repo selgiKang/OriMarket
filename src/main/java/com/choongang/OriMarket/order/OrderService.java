@@ -102,9 +102,9 @@ public class OrderService {
  //   @Transactional : 단순 읽기 작업만하고 변경하지 않는다면 필요 X
     //트랜잭션 없는 상태에서 LazyLoading으로 연관 객체 접근하면 예외 발생
     //이 어노테이션 사용 시 트랜잭션 내에서 LazyLoading 사용 가능해짐
-    public Page<NewOrder> pageList(ManagerUser managerUser,String OrderStatus, String orderStatusNo,Pageable pageable) {
+    public Page<NewOrder> pageList(String managerUser,String OrderStatus, String orderStatusNo,Pageable pageable) {
 
-            return newOrderRepository.findByManagerUser(managerUser,OrderStatus,orderStatusNo,pageable);
+            return newOrderRepository.findByManagerUser_managerIdAndOrderStatusOrOrderStatus(managerUser,OrderStatus,orderStatusNo,pageable);
     }
 
 

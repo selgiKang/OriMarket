@@ -53,11 +53,11 @@ public class RiderService {
         return riderRepository.existsByRiderId(riderId);
     }
 
-    public boolean riderJoin(Rider rider, HttpSession session) {
+    public boolean riderJoin(Rider rider, HttpSession session,String s) {
 
         // 만약 가입하려는 운전면허증으로 가입된 라이더가있으면 false반환
         if(riderRepository.findByDriverLicense(rider.getDriverLicense()) != null){return false;}
-
+        rider.setDriverLicense(s);
         Rider saverider = riderRepository.save(rider);
         if(saverider == null){
             return false;

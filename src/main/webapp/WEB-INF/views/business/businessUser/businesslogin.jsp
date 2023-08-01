@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <link href="../code/loginpage.css" rel="stylesheet" media="all">
-    <title>Insert title here</title>
+    <title>오리마켓 사업자 로그인</title>
     <style>
     </style>
 

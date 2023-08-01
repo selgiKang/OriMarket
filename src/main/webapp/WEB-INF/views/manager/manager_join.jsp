@@ -11,10 +11,10 @@
   <script src="../../../../js/user/join.js"></script>
   <script src="../../js/manager/manager_join.js"></script>
 </head>
-<body>
+<body style="margin:0;">
 <div class="container">
   <div class="logo_container">
-    <img src="../../../../img/user/ori.png" alt="logo">
+    <a href="/managerLogin"><img src="../../../../img/user/ori.png" alt="logo"></a>
     <img src="../../../../img/user/smoke.png" alt="smoke">
 
     <span class="logo-text">Ori Market</span>

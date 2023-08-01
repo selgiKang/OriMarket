@@ -2,6 +2,8 @@ package com.choongang.OriMarket.manager.user;
 
 import com.choongang.OriMarket.business.market.Market;
 import com.choongang.OriMarket.order.NewOrder;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -40,6 +42,7 @@ public class ManagerUser {
     @JoinColumn(name = "marketSeq")
     private Market market;
 
+    @JsonManagedReference
     @OneToMany(mappedBy = "managerUser")
     private List<NewOrder> orders = new ArrayList();
 }
