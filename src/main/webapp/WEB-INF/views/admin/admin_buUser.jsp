@@ -23,6 +23,12 @@
     <form action="/searchBuser" method="get">
         <table>
             <tr>
+                <td>
+                    <select name="selectType">
+                        <option value="buUserName">사업자명</option>
+                        <option value="buUserNumber">사업자번호</option>
+                    </select>
+                </td>
                 <td><input type="text" name="keyword"></td>
                 <td><input type="submit" value="검색"></td>
             </tr>
