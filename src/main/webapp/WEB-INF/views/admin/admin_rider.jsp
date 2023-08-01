@@ -21,15 +21,29 @@
         }
 
         /* 전체 크기 */
-        body{margin: 0; padding: 0; font-family:'LINESeedKR-Bd'; font-size: 16px; text-align: center; width: 100%; height: 100%}
-        #rider_container{width: 375px; height:812px; margin: 0 auto;}
+        body{
+            margin: 0;
+            padding: 0;
+            font-family:'LINESeedKR-Bd';
+            font-size: 16px;
+            text-align: center; width: 1920px; }
+
+       /* #rider_container{width: 375px; height:812px; margin: 0 auto;}*/
 
 
-        #rider_store{height:100px; background-color:#46A973; color:#fff; text-align: right; display: flex; justify-content: end; align-items: center;}
-        .snun_wrap{margin-right:20px}
+        #rider_store{
+            height:100px;
+            background-color:#46A973;
+            color:#fff;
+            text-align: right;
+            display: flex;
+            justify-content: end;
+            align-items: center;}
+
+        .snun_wrap{width: 1920px; text-align: center;}
 
 
-        .rider_store_wrap{background-color:#eee; height:712px;}
+        .rider_store_wrap{background-color:#eee; width: 100%;}
         .top_title_wrap h1{text-align:center; margin:15px 18%;}
 
         #rider_title{padding:20px 0 0;}
@@ -40,12 +54,24 @@
 
         /* ------------------------------------------ 공통적용css---------------------------------------------- */
 
-        #rider_list{font-size: 14px; margin: auto;}
+        #rider_list{font-size: 14px; margin: 1px;}
 
-        #rider_list table{ border-radius: 5px; background-color:#fff; padding:20px 5px; margin:auto;}
+        #rider_list table{ border-radius: 5px; background-color:#fff; width: 1920px;}
+
+        .rider_listTitle td{
+            padding: 12px;
+        }
 
 
-        #rider_title > a > input{ background-color: #ffbf41; color: #333; font-weight:600; padding: 8px 8px; border:none; border-radius:5px; cursor:pointer;}
+        #rider_title > a > input{
+            background-color: #ffbf41;
+            color: #333;
+            font-weight:600;
+            padding: 8px 8px;
+            border:none;
+            border-radius:5px;
+            cursor:pointer;}
+
         #rider_title > a > input:hover {background-color:#333; color:#fff;}
 
         .rider_listTitle{color: #46A973; margin-bottom:15px;}
@@ -56,6 +82,7 @@
 <div id="rider_container">
     <div id="rider_store">
         <div class="snun_wrap">
+            <h1>라이더 목록</h1>
             <%--<c:forEach var="rider" items="${riders}" varStatus="status">
             <div>${rider.riderId}</div>
             <small>이름:${rider.riderName}</small>
@@ -67,10 +94,11 @@
             <div class="top_title_wrap">
                 <!-- 뒤로가기 -->
                 <button class="backbtn" onclick="window.location.replace('/ridernotice1')">&lt;</button>
-                <h1>라이더 목록</h1>
+
             </div>
             <a><input type="button" class="delete_btn" value="라이더 삭제" onclick="deleteSelectedRiders()"></a>
-           <%-- <a href="/s2/${riderUserId}"><input type="button" class="insert_btn" value="라이더 정보 수정"></a>--%>
+            <a><input type="button" class="show_all_btn" value="전체회원 보기" onclick="showAllManagerUsers()"></a>
+            <%-- <a href="/s2/${riderUserId}"><input type="button" class="insert_btn" value="라이더 정보 수정"></a>--%>
         </div>
 
 
@@ -187,5 +215,17 @@
             searchRiders(); // 검색 기능 함수를 호출
         }
     });
+
+    // 전체회원 보기
+    function showAllManagerUsers() {
+        // 라이더 목록의 모든 행을 가져옴
+        var riders = document.querySelectorAll('#rider_list table tr');
+
+        // 모든 행을 보여줌
+        for (var i = 1; i < riders.length; i++) { // 1부터 시작하여 테이블 헤더 행을 건너뜀
+            riders[i].style.display = '';
+        }
+    }
+
 
 </script>

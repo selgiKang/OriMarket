@@ -29,7 +29,7 @@
             font-size: 16px;
             text-align: center; width: 1920px;}
 
-        /* 가게상호명,업주 */ /* 230723 승원 */
+
         #goods_store{
             height:100%;
             background-color:#46A973;

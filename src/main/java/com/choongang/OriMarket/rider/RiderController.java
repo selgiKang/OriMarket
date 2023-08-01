@@ -35,7 +35,7 @@ public class RiderController {
     public String riderlist(Model model) {
         List<Rider> riders = riderService.getAllRiders();
         model.addAttribute("riders", riders);
-        return "admin/rider_List";
+        return "admin/admin_rider";
     }
 
    /* @GetMapping("/rider_detail/{riderId}")
