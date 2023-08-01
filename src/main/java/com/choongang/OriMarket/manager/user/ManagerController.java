@@ -11,13 +11,14 @@ import com.choongang.OriMarket.user.User;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.data.web.PageableDefault;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -32,7 +33,7 @@ import java.util.Map;
 
 @Controller
 @RequiredArgsConstructor
-@Slf4j
+@Log4j2
 public class ManagerController {
 
     @Autowired
@@ -176,6 +177,7 @@ public class ManagerController {
         return "manager/find_manager_id";
     }
 
+
     //로그인데
     @PostMapping("/managerLogin")
     public String loginResult(@ModelAttribute ManagerUser managerUser, HttpSession session, Model model){
@@ -252,7 +254,7 @@ public class ManagerController {
             System.out.println("매니저:"+managerUser.getManagerName());
         }
         model.addAttribute("managerUsers",managerUsers);
-        return "manager/manager_CRUD";
+        return "admin/admin_manager";
     }
 
     // 거절 누르면
@@ -285,14 +287,6 @@ public class ManagerController {
         List<NewOrder> orderList = (List<NewOrder>) model.getAttribute("managerOrderList");
         model.addAttribute("orderList", orderList);
 
-        int pageNumber = 0; // 2번째 페이지를 가져올 때는 1을 사용 (0부터 시작)
-        int pageSize = 4; // 한 페이지에 4개씩 보여줄 때
-        Pageable pageable = PageRequest.of(pageNumber, pageSize);
-        String orderStatus = "배달완료";
-        String orderStatusNo ="주문거절";
-        Page<NewOrder> resultPage = orderService.pageList(userResult, orderStatus, orderStatusNo,pageable);
-        model.addAttribute("resultPage",resultPage);
-
         return "manager/order_list";
     }
     @GetMapping("/accept")
@@ -324,14 +318,6 @@ public class ManagerController {
         List<NewOrder> orderList = (List<NewOrder>) model.getAttribute("managerOrderList");
         model.addAttribute("orderList", orderList);
 
-        int pageNumber = 0; // 2번째 페이지를 가져올 때는 1을 사용 (0부터 시작)
-        int pageSize = 4; // 한 페이지에 4개씩 보여줄 때
-        Pageable pageable = PageRequest.of(pageNumber, pageSize);
-        String orderStatus = "배달완료";
-        String orderStatusNo ="주문거절";
-        Page<NewOrder> resultPage = orderService.pageList(userResult, orderStatus, orderStatusNo,pageable);
-        model.addAttribute("resultPage",resultPage);
-
         return "manager/order_list";
     }
 
@@ -352,14 +338,6 @@ public class ManagerController {
         //매니저 정보
         List<NewOrder> orderList = (List<NewOrder>) model.getAttribute("managerOrderList");
         model.addAttribute("orderList", orderList);
-
-        int pageNumber = 0; // 2번째 페이지를 가져올 때는 1을 사용 (0부터 시작)
-        int pageSize = 4; // 한 페이지에 4개씩 보여줄 때
-        Pageable pageable = PageRequest.of(pageNumber, pageSize);
-        String orderStatus = "배달완료";
-        String orderStatusNo ="주문거절";
-        Page<NewOrder> resultPage = orderService.pageList(userResult, orderStatus, orderStatusNo,pageable);
-        model.addAttribute("resultPage",resultPage);
 
         return "manager/order_list";
     }

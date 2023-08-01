@@ -7,15 +7,17 @@ import com.choongang.OriMarket.business.user.BusinessUser;
 import com.choongang.OriMarket.business.user.BusinessUserRepository;
 import com.choongang.OriMarket.business.user.BusinessUserService;
 import com.choongang.OriMarket.store.ItemRepository;
+import com.choongang.OriMarket.user.CartRepository;
+import com.choongang.OriMarket.user.OrderItemRepository;
+import com.choongang.OriMarket.user.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
+import java.lang.reflect.Member;
 import java.util.List;
 
 @Controller
@@ -28,17 +30,16 @@ public class AdminController {
     private final BusinessUserRepository businessUserRepository;
     private final BusinessStoreRepository businessStoreRepository;
     private final ItemRepository itemRepository;
+    private final UserRepository userRepository;
+    private final CartRepository cartRepository;
+    private final OrderItemRepository orderItemRepository;
 
 
     //사업자등록현황페이지
     @GetMapping("/a_buser")
     public String buUserAccess(Model model){
-
-        if(businessUserRepository.findAll()!=null){
-            List<BusinessUser> busers = businessUserRepository.findAll();
-            model.addAttribute("busers",busers);
-        }
-
+        List<BusinessUser> busers = businessUserRepository.findAll();
+        model.addAttribute("busers",busers);
 
         return "admin/admin_buUser";
     }
@@ -67,5 +68,50 @@ public class AdminController {
 
         model.addAttribute("deleteMessage","삭제되었습니다.");
         return "redirect:/a_buser";
+    }
+
+
+    //등록된 사업자 삭제
+    @GetMapping("delete_buser/{buUserNumber}")
+    public String deleteBuser(@PathVariable("buUserNumber")Long buUserNumber){
+
+        BusinessStore buStore = businessStoreRepository.findByBusinessUser_BuUserNumber(buUserNumber);
+
+        if(buStore.getItems().size()!=0){
+            for(int i=0;i<buStore.getItems().size();i++){
+                itemRepository.delete(buStore.getItems().get(i));
+            }
+        }
+        businessStoreRepository.deleteById(buStore.getBuStoreNumber());
+        businessUserRepository.deleteById(buUserNumber);
+
+        return "redirect:/a_buser";
+    }
+
+    //사업자 검색기능
+    @GetMapping("/searchBuser")
+    public String searchKeyword(@RequestParam(value = "keyword")String keyword,@RequestParam(value = "selectType")String selectType, Model model){
+
+        if(keyword !=null || keyword!=""){
+            if(selectType.equals("buUserName")){
+                List<BusinessUser> busers = businessUserRepository.findByBuUserNameContaining(keyword);
+                model.addAttribute("busers",busers);
+            } else if (selectType.equals("buUserNumber")) {
+                List<BusinessUser> busers = businessUserRepository.findByBuUserNumber(Long.parseLong(keyword));
+                model.addAttribute("busers",busers);
+            }
+
+        }else{
+            List<BusinessUser> busers = businessUserRepository.findAll();
+            model.addAttribute("busers",busers);
+        }
+        return "/admin/admin_buUser";
+    }
+
+
+
+    @GetMapping("/admin_order")
+    public String adminOrder() {
+        return "admin/admin_Order";
     }
 }

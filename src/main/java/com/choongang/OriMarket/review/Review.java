@@ -1,6 +1,7 @@
 package com.choongang.OriMarket.review;
 
 import com.choongang.OriMarket.business.store.BusinessStore;
+import com.choongang.OriMarket.order.NewOrder;
 import com.choongang.OriMarket.store.Item;
 import com.choongang.OriMarket.user.User;
 import com.choongang.OriMarket.user.UserAddress;
@@ -43,20 +44,26 @@ public class Review {
 
     //생성일
     @CreatedDate
-    private LocalDateTime created_date;
+    private LocalDateTime createdDate;
 
     //수정일
     @LastModifiedDate
-    private LocalDateTime modified_date;
+    private LocalDateTime modifiedDate;
 
     @Column
     private String taste;
 
     @Column
-    private String delivery;
+    private String amount;
 
     @Column
     private String status;
+
+    @Column
+    private String itemName;
+
+    @Column
+    private String buStoreName;
 
     @ManyToOne(fetch = FetchType.LAZY) //lazy가 성능최적화
     @JoinColumn(name ="business_store")
@@ -70,6 +77,10 @@ public class Review {
     @JoinColumn(name ="item_id")
     private Item item;
 
+    @OneToOne(fetch =  FetchType.LAZY)
+    @JoinColumn(name = "new_order_seq")
+    private NewOrder newOrder;
+
     @Column(length = 500)
     private String  businessReplyMessage;
 
@@ -78,7 +89,7 @@ public class Review {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy년MM월dd일 / HH시mm분ss초");
 
         // LocalDateTime 객체를 원하는 형식으로 변환하여 문자열로 반환
-        return created_date.format(formatter);
+        return createdDate.format(formatter);
     }
 
     public String getFormattedCreatedDate1() {
@@ -86,6 +97,6 @@ public class Review {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy년MM월dd일 / HH시mm분ss초");
 
         // LocalDateTime 객체를 원하는 형식으로 변환하여 문자열로 반환
-        return modified_date.format(formatter);
+        return modifiedDate.format(formatter);
     }
 }

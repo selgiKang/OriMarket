@@ -2,20 +2,14 @@ package com.choongang.OriMarket.manager.user;
 
 import com.choongang.OriMarket.business.market.Market;
 import com.choongang.OriMarket.business.market.MarketService;
-import com.choongang.OriMarket.business.store.BusinessStore;
-import com.choongang.OriMarket.business.user.BusinessUser;
 import com.choongang.OriMarket.order.NewOrder;
 import com.choongang.OriMarket.order.NewOrderRepository;
-import com.choongang.OriMarket.order.Order;
-import com.choongang.OriMarket.order.OrderRepository;
-import com.choongang.OriMarket.review.Review;
-import com.choongang.OriMarket.user.User;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
-import org.yaml.snakeyaml.error.Mark;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
@@ -132,5 +126,22 @@ public class ManagerService {
         return managerRepository.findAll();
 
     }
+
+    //매니저 삭제
+    public void deleteManagerUsers(List<Long> managerSeqList) {
+        for (Long managerSeq : managerSeqList) {
+            managerRepository.deleteById(managerSeq);
+        }
+    }
+
+    //------페이징-------
+    public Page<NewOrder> getNewOrderPaging(ManagerUser managerUser, Pageable pageable){
+        Page<NewOrder> l = newOrderRepository.findByManagerUserOrderByCreatedDateDesc(managerUser,pageable);
+        for(NewOrder n : l){
+            System.out.println(n.getOrderNumber());
+        }
+        return newOrderRepository.findByManagerUserOrderByCreatedDateDesc(managerUser,pageable);
+    }
+
 
 }

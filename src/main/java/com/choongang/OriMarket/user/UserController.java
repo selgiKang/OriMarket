@@ -3,8 +3,7 @@ package com.choongang.OriMarket.user;
 import com.choongang.OriMarket.business.market.Market;
 import com.choongang.OriMarket.business.market.MarketRepository;
 import com.choongang.OriMarket.business.market.MarketService;
-import com.choongang.OriMarket.order.Order;
-import com.choongang.OriMarket.order.OrderService;
+import com.choongang.OriMarket.order.*;
 import com.choongang.OriMarket.review.Review;
 import com.choongang.OriMarket.utill.DistanceUtil;
 import lombok.RequiredArgsConstructor;
@@ -33,11 +32,12 @@ public class UserController {
 
     private final UserRepository userRepository;
 
-    private final MarketRepository marketRepository;
-
     private final UserMarketRepository userMarketRepository;
 
     private final MarketService marketService;
+
+    private final NewOrderRepository newOrderRepository;
+    private final NewOrderDetailRepository newOrderDetailRepository;
 
 
     // 로그인 get , post 매핑
@@ -121,8 +121,11 @@ public class UserController {
             return "error/login_error";
         }else {
             User byId = userRepository.findById((Long) session.getAttribute("userSeq")).orElseThrow();
+            List<NewOrder> newOrders = newOrderRepository.findByOrderStatusAndUserOrderByCreatedDateDesc("배달완료", byId);
             List<Review> reviews = byId.getReviews();
+
             model.addAttribute("re", reviews);
+            model.addAttribute("newOrders",newOrders);
             return "store/delivery_pickup";
         }
     }
@@ -171,27 +174,6 @@ public class UserController {
 
         return "user/findID";
     }
-/*
-기존 로그인
-    @PostMapping("/login")
-    public String loginId(@ModelAttribute User user, Model model, HttpSession session) {
-        boolean isTrue = userService.login(user, session, model);
-        if (isTrue) {
-            User findUser = userRepository.findByUserId(String.valueOf(session.getAttribute("userId")));
-            List<UserAddress> userAddresses = findUser.getUserAddresses();
-            model.addAttribute("userAd", userAddresses);
-            model.addAttribute("userId", user.getUserId());
-            return "main/main";
-        } else {
-            model.addAttribute("loginError", "아이디 또는 비밀번호가 틀립니다.");
-            return "user/login";
-        }
-    }
-*/
-    /* 모달로그인 230724 */
-
-
-
 
     @GetMapping("/logout")
     public String logout(HttpSession session){

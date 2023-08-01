@@ -19,7 +19,7 @@
     .line {
       border-top: 1px solid #c4c4c4;
       width: 330px;
-      margin: 30px auto;
+      margin: 0px auto;
       position: relative;
       right: 8px;
     }
@@ -189,14 +189,27 @@
     }
   </style>
 </head>
-
 <body>
 <form action="/user_review" method="post">
   <div class="main-container">
     <div class="user_total_review">
-      <input type="hidden" name="item.itemId" value="${abcde.itemId}">
-      <h4><input type="hidden" name="businessStore">싱싱과일나라</h4>
-      <div class="line"></div>
+        <c:forEach var="abcd" items="${abcde}" varStatus="status">
+          <c:if test="${status.index == 0}">
+          <input type="hidden" name="newOrder.newOrderSeq" value="${abcd.newOrder.newOrderSeq}">
+          <h3 style="text-align: center; margin-top: 5px;"><input type="hidden" name="buStoreName" value="${abcd.buStoreName}">
+            ${abcd.buStoreName}
+          </h3>
+            <div class="line" style="margin-top: 10px;"></div>
+            <p style="text-align: center; font-size: small; padding-top: 10px;">
+            <c:forEach var="abcd1" items="${abcde}">
+              <input type="hidden" name="itemName" value="${abcd1.itemName}">
+              ${abcd1.itemName}
+            </c:forEach>
+            </p>
+          </c:if>
+        </c:forEach>
+      <div class="line" style="margin-top: 10px; margin-bottom: 30px;"></div>
+      <h4 style="text-align: center;">이 가게를 추천하시겠어요?</h4>
       <div class="stars">
         <input type="radio" id="star5" name="rating" value="5" />
         <label for="star5"></label>
@@ -211,9 +224,9 @@
       </div>
       <br><br>
     </div>
-    <div class="line"></div>
+    <div class="line" style="margin-top: 30px; margin-bottom: 30px;"></div>
+      <h5 style="text-align: center; color: #999999;">이 가게에 대한 상세한 평가를 해주세요</h5>
     <div class="store_review">
-
       <div class="taste_review">
         <h3>맛</h3>
       </div>
@@ -236,25 +249,40 @@
 
     <div class="store_review">
       <div class="delivery_review">
-        <h3>배달</h3>
+        <h3>양</h3>
       </div>
 
       <div class="stars">
-        <input type="radio" id="star15" name="delivery" value="5" />
+        <input type="radio" id="star15" name="amount" value="5" />
         <label for="star15"></label>
-        <input type="radio" id="star14" name="delivery" value="4" />
+        <input type="radio" id="star14" name="amount" value="4" />
         <label for="star14"></label>
-        <input type="radio" id="star13" name="delivery" value="3" />
+        <input type="radio" id="star13" name="amount" value="3" />
         <label for="star13"></label>
-        <input type="radio" id="star12" name="delivery" value="2" />
+        <input type="radio" id="star12" name="amount" value="2" />
         <label for="star12"></label>
-        <input type="radio" id="star11" name="delivery" value="1" />
+        <input type="radio" id="star11" name="amount" value="1" />
         <label for="star11"></label>
       </div>
     </div>
-    <br><br>
+    <br><br><br>
+    <h5 style="text-align: center;">포토리뷰 작성시 <span style="color: #cc4444">100포인트</span> 지급!</h5>
+    <textarea class="review_textbox" placeholder="사진과 함께 리뷰를 작성하시면 100포인트가 적립됩니다." name="content"
+              oninput="checkMaxLength(this, 300); updateCharacterCount(this, 'charCount')"></textarea>
+    <div id="charCount">0 / 300</div>
 
-    <textarea class="review_textbox" placeholder="리뷰를 작성해주세요." name="content"></textarea>
+    <script>
+      function checkMaxLength(textarea, maxLength) {
+        if (textarea.value.length > maxLength) {
+          textarea.value = textarea.value.slice(0, maxLength); // 글자 수를 제한
+        }
+      }
+
+      function updateCharacterCount(textarea, countElementId) {
+        const charCountElement = document.getElementById(countElementId);
+        charCountElement.textContent = textarea.value.length + ' / 300';
+      }
+    </script>
 
     <ul class="image-preview" id="imagePreview">
       <li class="box"><span class="plus-icon">+</span></li>

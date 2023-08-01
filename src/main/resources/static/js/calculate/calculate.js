@@ -167,7 +167,7 @@ function updateTable(data) {
                 dateCell.text("");
             }
             var formattedTotalPrice = formatNumberWithCommas(data[i].totalPrice);
-            var amountCell = $('<td class="calculate_main_table_td_2" style="text-align: center;"></td>').text(data[i].formattedTotalPrice + "원");
+            var amountCell = $('<td class="calculate_main_table_td_2" style="text-align: center;"></td>').text(formattedTotalPrice + "원");
 
             row.append(dateCell);
             row.append(amountCell);

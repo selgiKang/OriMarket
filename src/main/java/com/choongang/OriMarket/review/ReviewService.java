@@ -38,10 +38,14 @@ public class ReviewService {
     private final BusinessStoreRepository businessStoreRepository;
 
     public void save(Review review, HttpSession session, Model model){
+        String[] itemNames = review.getItemName().split(",");
+        for (int i = 0; i < itemNames.length; i++) {
+            System.out.println("실행: " + itemNames[i].trim());
+        }
         User byId = userRepository.findById((Long) session.getAttribute("userSeq")).orElseThrow();
         review.setUser(byId);
-        Item byId1 = itemRepository.findById(review.getItem().getItemId()).orElseThrow();
-        review.setBusinessStore(byId1.getBusinessStore());
+        Item byId1 = itemRepository.findByItemName(review.getItemName());
+        review.setBuStoreName(byId1.getBusinessStore().getBuStoreName());
         reviewRepository.save(review);
         BusinessStore businessStore = byId1.getBusinessStore();
         List<Review> reviews = byId.getReviews();

@@ -1,41 +1,29 @@
 
 package com.choongang.OriMarket.order;
 
-import com.choongang.OriMarket.RealTimeStatus.RealTimeService;
-import com.choongang.OriMarket.RealTimeStatus.RealTimeStatus;
-import com.choongang.OriMarket.business.market.Market;
-import com.choongang.OriMarket.business.user.BusinessUser;
-import com.choongang.OriMarket.manager.user.ManagerUser;
 import com.choongang.OriMarket.store.Item;
 import com.choongang.OriMarket.store.ItemRepository;
 import com.choongang.OriMarket.user.CartService;
 import com.choongang.OriMarket.user.User;
-import lombok.extern.slf4j.Slf4j;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
 @Controller
-@Slf4j
+@Log4j2
 public class OrderController {
 
 
     private final OrderService orderService;
-    private final RealTimeService realTimeService;
     private final CartService cartService;
 
     private final  NewOrderRepository newOrderRepository;
@@ -46,9 +34,8 @@ public class OrderController {
 
 
     @Autowired
-    public OrderController(OrderService orderService, RealTimeService realTimeService, OrderRepository orderRepository, CartService cartService, NewOrderRepository newOrderRepository, NewOrderDetailRepository newOrderDetailRepository, ItemRepository itemRepository){
+    public OrderController(OrderService orderService, CartService cartService, NewOrderRepository newOrderRepository, NewOrderDetailRepository newOrderDetailRepository, ItemRepository itemRepository){
         this.orderService = orderService;
-        this.realTimeService = realTimeService;
         this.cartService = cartService;
         this.newOrderRepository = newOrderRepository;
         this.newOrderDetailRepository = newOrderDetailRepository;
@@ -120,6 +107,7 @@ public class OrderController {
             user.setUserSeq(userSeq);
             //지난 모든 주문들 출력
             List<NewOrder> pastOrderList = newOrderRepository.findByUser(user);
+            //역순 정렬
             Collections.reverse(pastOrderList);
             model.addAttribute("pastOrderList", pastOrderList);
             return "order/order_pastorder";
@@ -127,16 +115,6 @@ public class OrderController {
     }
 
 
-    @GetMapping("/order/order_list")
-    public String getOrderList(Model model) {
-        List<Order> orderList = orderService.getAllOrders();
-        model.addAttribute("orders", orderList);
-
-        //log.info("Number of orders retrieved: {}", orderList.size());
-
-
-        return "order/order_list";
-    }
 
     //특정 날짜 정보
     @GetMapping("/details")
@@ -185,6 +163,7 @@ public class OrderController {
             newOrderDetail.setItemCount(itemcount[i]);
             newOrderDetail.setNewOrder(save);
             newOrderDetail.setOrderNumber(save.getOrderNumber());
+            //newOrderDetail.setItemImageUrl(items.get(i).getItemImageUrl());
             newOrderDetailRepository.save(newOrderDetail);
         }
         List<NewOrderDetail> byOrderNumber = newOrderDetailRepository.findByOrderNumber(save.getOrderNumber());

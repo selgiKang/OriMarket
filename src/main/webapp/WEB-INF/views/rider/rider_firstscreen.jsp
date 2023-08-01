@@ -87,6 +87,7 @@
 </div>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=259217c849691d825026ea7a9f71af88"></script>
 <script>
+
     var container = document.getElementById('map');
     var options = {
         center: new kakao.maps.LatLng(33.450701, 126.570667),
@@ -162,6 +163,8 @@
         isDragging = false;
         modal.classList.remove('dragging');
     });
+
+    document.addEventListener('DOMContentLoaded', showMapWithOrders);
 </script>
 </body>
 </html>

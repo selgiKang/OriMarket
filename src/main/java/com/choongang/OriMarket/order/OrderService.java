@@ -1,34 +1,17 @@
 package com.choongang.OriMarket.order;
 
-import com.choongang.OriMarket.RealTimeStatus.RealTimeRepository;
-import com.choongang.OriMarket.RealTimeStatus.RealTimeService;
-import com.choongang.OriMarket.RealTimeStatus.RealTimeStatus;
 import com.choongang.OriMarket.manager.user.ManagerUser;
-import com.choongang.OriMarket.store.Item;
-import com.choongang.OriMarket.store.ItemRepository;
-import com.choongang.OriMarket.user.User;
-import com.choongang.OriMarket.user.UserRepository;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.client.RestTemplate;
-
 import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
-import java.net.URI;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -38,33 +21,15 @@ import java.util.Map;
 //필드 생성자 자동 생성
 @RequiredArgsConstructor
 //추상화 역할 라이브러리
-@Slf4j
+@Log4j2
 public class OrderService {
 
     @Autowired
-    private  final OrderRepository orderRepository;
     private final NewOrderRepository newOrderRepository;
-    private final ItemRepository itemRepository;
-    private final UserRepository userRepository;
 
     static final String cid = "TC0ONETIME";
     static final String admin_key = "${e584b59b9f572556fbac3673883cb029}";
-    private  Order order;
 
-
-        public boolean orderDelivery(Order order, HttpSession session){
-
-            RealTimeStatus rtsStatus = new RealTimeStatus();
-            //결제하기 누르면 주문내역에 저장, 여기서 주문내역 생성됨
-            rtsStatus.setOrderNumber(order);
-            Order saveOrder = orderRepository.save(order);
-            if(saveOrder==null){
-                return false;
-            }else{
-                session.setAttribute("orderNumber",saveOrder.getOrderNumber());
-                return true;
-            }
-        }
 
         public List<Map<String,String>> getTableData(String calculateDate, String calculateDateLast, Model model, HttpSession session){
 
@@ -117,13 +82,6 @@ public class OrderService {
 
         return sum;
     }
-
-        //7.18 테스트 승엽
-        public List<Order> getAllOrders() {
-            List<Order> all = orderRepository.findAll();
-
-            return all; // 모든 주문 목록을 가져오는 방식에 맞게 구현
-        }
 
 
     //특정 날짜 조회

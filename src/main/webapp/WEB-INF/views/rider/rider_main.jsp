@@ -1,7 +1,4 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="com.choongang.OriMarket.order.Order" %>
-<%@ page import="java.util.List" %>
-<%@ page import="com.choongang.OriMarket.RealTimeStatus.RealTimeStatus" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
@@ -91,7 +88,7 @@
     </div>
     <%--배달 완료--%>
     <div class="order-item" data-status="completed">
-        <c:forEach var="riderOrder" items="${orderaccept2}" varStatus="loopStatus">
+        <c:forEach var="riderOrder" items="${orderaccept2}">
         <c:if test="${riderOrder.orderStatus eq '배달완료'}">
             <div style="border-bottom: ${loopStatus.last ? 'none' : '1px solid #000000;'}">
                 <h3>요청시장: ${riderOrder.orderMarketName}</h3>
@@ -107,9 +104,28 @@
             </div>
         </c:if>
         </c:forEach>
+        <button onclick="goprevpage()">이전페이지</button><button onclick="location.href='/nextpage'">다음페이지</button>
     </div>
     <div class="order-item" data-status="processing" style="display: none;"></div>
     <div class="order-item" data-status="completed" style="display: none;"></div>
 </div>
 </body>
+<script>
+    var cntpage = 1;
+    function goprevpage(){
+        cntpage--;
+            $.ajax({
+                type: "POST",
+                url: "/usermarketSearch",
+                data: {
+                    page: cntpage,
+                    size: 3
+                },
+                success: function (response) {
+                },
+                error: function (error) {
+                },
+            });
+         }
+</script>
 </html>

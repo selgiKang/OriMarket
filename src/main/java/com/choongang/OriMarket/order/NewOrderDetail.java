@@ -49,7 +49,7 @@ public class NewOrderDetail {
     @Column
     private String itemCount;
 
-
-
+    @Column
+    private String itemImageUrl;
 
 }

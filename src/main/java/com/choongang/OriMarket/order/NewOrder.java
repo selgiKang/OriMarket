@@ -1,6 +1,4 @@
 package com.choongang.OriMarket.order;
-
-
 import com.choongang.OriMarket.manager.user.ManagerUser;
 import com.choongang.OriMarket.rider.Rider;
 import com.choongang.OriMarket.user.User;
@@ -12,7 +10,6 @@ import lombok.extern.log4j.Log4j2;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -82,7 +79,7 @@ public class NewOrder {
     private User user;
 
     //매니저 번호
-    @OneToOne(fetch =  FetchType.LAZY)
+    @ManyToOne(fetch =  FetchType.LAZY)
     @JoinColumn(name="managerSeq")
     private ManagerUser managerUser;
 

@@ -1,11 +1,9 @@
 package com.choongang.OriMarket.manager.user;
 
 import com.choongang.OriMarket.business.market.Market;
-import com.choongang.OriMarket.order.Order;
+import com.choongang.OriMarket.order.NewOrder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import org.hibernate.mapping.ToOne;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -43,6 +41,6 @@ public class ManagerUser {
     private Market market;
 
     @OneToMany(mappedBy = "managerUser")
-    private List<Order> orders = new ArrayList();
+    private List<NewOrder> orders = new ArrayList();
 }
 

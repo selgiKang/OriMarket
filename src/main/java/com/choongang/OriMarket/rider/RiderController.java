@@ -1,15 +1,23 @@
 package com.choongang.OriMarket.rider;
 
+import com.choongang.OriMarket.business.user.BusinessUser;
 import com.choongang.OriMarket.order.NewOrder;
+import com.choongang.OriMarket.order.NewOrderRepository;
+import com.choongang.OriMarket.store.Item;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
 import java.util.List;
 
 
@@ -20,17 +28,56 @@ public class RiderController {
 
     @Autowired
     private final RiderService riderService;
+    private final NewOrderRepository newOrderRepository;
+
+    //7.31 라이더 테스트
+    @GetMapping("/rider_list")
+    public String riderlist(Model model) {
+        List<Rider> riders = riderService.getAllRiders();
+        model.addAttribute("riders", riders);
+        return "admin/admin_rider";
+    }
+
+   /* @GetMapping("/rider_detail/{riderId}")
+    public String riderDetail(@PathVariable String riderId, Model model) {
+        // 라이더 아이디를 사용하여 라이더 정보를 가져옵니다.
+//        Rider rider = riderService.getRiderById(riderId);
+//        model.addAttribute("rider", rider);
+
+        return "rider/rider_detail";
+    }*/
+
+
+    @DeleteMapping("/delete_riders")
+    public ResponseEntity<String> deleteSelectedRiders(@RequestBody List<String> riderIds) {
+        try {
+            riderService.deleteRiders(riderIds); // RiderService의 deleteRiders 메서드 호출
+            return ResponseEntity.ok("success");
+        } catch (Exception e) {
+            log.error("Error occurred while deleting riders: {}", e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error occurred while deleting riders.");
+        }
+    }
+
+    @GetMapping("/rider_detail")
+    public String rider_Detail() {
+        return "rider/rider_detail";
+    }
+
+
+
 
 //    @GetMapping("/rider")
-//    public String rider(){return "rider/rider_main";}
-    @GetMapping("/rider")
+//    public String rider(){return "rider/rider_
+//    main";}
+    @GetMapping("/rider_login")
     public String riderLogin() {
         return "rider/rider_login";
     }
 
     @PostMapping("/rider_login")
-    public String riderLogin1(@ModelAttribute Rider rider, HttpSession session, Model model){
-        if(riderService.riderLogin(rider,session,model)){
+    public String riderLogin1(@ModelAttribute Rider rider, HttpSession session, Model model, @PageableDefault(size = 3) Pageable pageable){
+        if(riderService.riderLogin(rider,session,model,pageable)){
             return "rider/rider_main";
         }else {
             return "rider/rider_login";

@@ -17,4 +17,5 @@ public interface RiderRepository extends JpaRepository<Rider,Long> {
 
     Rider findByRiderId(String riderId);
 
+
 }
