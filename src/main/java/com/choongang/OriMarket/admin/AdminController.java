@@ -15,10 +15,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.*;
 
 import java.lang.reflect.Member;
 import java.util.List;
@@ -91,16 +88,25 @@ public class AdminController {
         return "redirect:/a_buser";
     }
 
+    //사업자 검색기능
     @GetMapping("/searchBuser")
-    public String searchKeyword(@RequestParam(value = "keyword")String keyword,Model model){
+    public String searchKeyword(@RequestParam(value = "keyword")String keyword,@RequestParam(value = "selectType")String selectType, Model model){
 
-        List<BusinessUser> busers = businessUserRepository.findByBuUserNameContaining(keyword);
+        if(keyword !=null || keyword!=""){
+            if(selectType.equals("buUserName")){
+                List<BusinessUser> busers = businessUserRepository.findByBuUserNameContaining(keyword);
+                model.addAttribute("busers",busers);
+            } else if (selectType.equals("buUserNumber")) {
+                List<BusinessUser> busers = businessUserRepository.findByBuUserNumber(Long.parseLong(keyword));
+                model.addAttribute("busers",busers);
+            }
 
-        model.addAttribute("busers",busers);
-
+        }else{
+            List<BusinessUser> busers = businessUserRepository.findAll();
+            model.addAttribute("busers",busers);
+        }
         return "/admin/admin_buUser";
     }
-
 
 
 
