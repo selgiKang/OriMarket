@@ -63,7 +63,7 @@ public class ManagerController {
     //배달완료 page
     @GetMapping("/orderListResult")
     @ResponseBody
-    public ResponseEntity<HashMap<String, Object>> orderListResult(@RequestParam("page") int pageNumberReuslt,Model model,HttpSession session) {
+    public ResponseEntity<Page<NewOrder>> orderListResult(@RequestParam("page") int pageNumberReuslt,Model model,HttpSession session) {
 
         HashMap<String, Object> result = new HashMap<>();
 
@@ -84,8 +84,8 @@ public class ManagerController {
         for(NewOrder n:resultPage){
             System.out.println("ajax: "+n.getOrderNumber());
         }
-        result.put("result",resultPage);
-        return ResponseEntity.ok(result);
+
+        return ResponseEntity.ok(resultPage);
     }
 
     @GetMapping("/managerId/{managerId}/exists")
