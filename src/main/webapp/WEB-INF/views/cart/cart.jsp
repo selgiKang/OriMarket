@@ -6,6 +6,8 @@
 		 pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"  %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%--특정 위치마다 , 넣도록--%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -49,8 +51,8 @@
 						<div id="itemList">
 						<h3>${orderList.businessStore.buStoreName}</h3>
 					<ul>
-							<c:forEach var="orderList1" items="${userOrderList}">
-							<c:forEach var="item1" items="${orderList.businessStore.items}" varStatus="status">
+							<c:forEach var="orderList1" items="${userOrderList}" varStatus="status">
+							<c:forEach var="item1" items="${orderList.businessStore.items}">
 								<c:if test="${orderList1.item eq item1}">
 									<li>
 										<div class="cart_info">
@@ -83,7 +85,7 @@
 												<div class="cart_itemPrice">
 													<input id="sellPrice_${status.index}" type="hidden" value="${orderList1.itemPrice}">
 													<span id="totalPriceCalSpan_${status.index}">
-													${orderList1.itemPrice * orderList1.count}원
+														<fmt:formatNumber value="${orderList1.itemPrice * orderList1.count}" pattern="#,###"/>원
 													</span>
 													<script>
 														var user = (session.getAttribute("userId")).toString();

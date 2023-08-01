@@ -44,7 +44,7 @@
 			</c:if>
 			<c:if test="${newOrder.orderStatus eq null or newOrder.orderStatus eq '배달시작' or newOrder.orderStatus eq '주문수락'}">
 				<!-- 배달완료 -->
-				<li><i class="fa-sharp fa-regular fa-circle" style="color: #46a973;"></i></li>
+				<li><i class="fa-sharp fa-regular fa-circle" style="color: #b8b8b8;"></i></li>
 				<li>배달 완료</li>
 			</c:if>
 			<c:if test="${newOrder.orderStatus eq '배달완료'}">

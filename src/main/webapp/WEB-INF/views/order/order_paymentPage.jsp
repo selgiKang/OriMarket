@@ -4,6 +4,8 @@
 		 pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"  %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%--특정 위치마다 , 넣도록--%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html style="width: 375px; margin: 0 auto;">
 <head>
@@ -29,7 +31,7 @@
 			<div id="paymentpage_title">
 				<%-- 전 페이지 돌아가기, (넘어올때 담겼던 orderItem은 여기서 삭제)--%>
 				<a href="/cart/order_renew/${userId}"><i class="fas fa-solid fa-arrow-left" style="color: #46a973;"></i></a>
-				<div id="paymentpage_title_inner">주문하기</div>
+					&nbsp;&nbsp;<div id="paymentpage_title_inner">주문하기</div>
 			</div>
 			<div id= "paymentpage_section_1">
 				<div id= "paymentpage_address">
@@ -66,7 +68,8 @@
 								<c:forEach var="item1" items="${cartItems.businessStore.items}">
 									<c:if test="${cartItems1.item eq item1}">
 										<p style="text-align: left; padding-left: 5px; position: relative">
-										${cartItems1.item.itemName} &nbsp;&nbsp;&nbsp; 가격: ${cartItems1.item.itemPrice} 원
+										${cartItems1.item.itemName} &nbsp;&nbsp;&nbsp;
+										가격: <fmt:formatNumber value="${cartItems1.item.itemPrice}" pattern="#,###"/>원
 										<span style="position: absolute; right: 10px;"> 갯수: ${cartItems1.count}</span>
 										</p>
 									</c:if>
@@ -100,14 +103,14 @@
 						<th colspan= "2">물건 금액</th>
 						<td class= "paymentpage_td_3">
 							<input type="hidden" name="orderGoodsTotalPrice" value="${cart.cartTotalPrice}" readonly>
-							${cart.cartTotalPrice}원
+							<fmt:formatNumber value="${cart.cartTotalPrice}" pattern="#,###"/>원
 						</td>
 					</tr>
 					<tr class= "paymentpage_tr_3" >
 						<th colspan= "2">배달비</th>
 						<td class= "paymentpage_td_3">
 							<input type="hidden" name="orderDeliveryPrice" value="${cart.cartDeliveryPrice}" readonly>
-							${cart.cartDeliveryPrice}원
+							<fmt:formatNumber value="${cart.cartDeliveryPrice}" pattern="#,###"/>원
 						</td>
 					</tr>
 				</table>
@@ -116,7 +119,7 @@
 						<th colspan= "2">총 결제 금액</th>
 						<td class= "paymentpage_td_4">
 							<input type="hidden" name="orderTotalPrice" value="${cart.cartTotalPrice+cart.cartDeliveryPrice}" readonly>
-							${cart.cartTotalPrice+cart.cartDeliveryPrice}원
+							<fmt:formatNumber value="${cart.cartTotalPrice+cart.cartDeliveryPrice}" pattern="#,###"/>원
 						</td>
 					</tr>
 				</table>
@@ -172,7 +175,7 @@
 					배송이 진행됩니다.
 				</div>
 			</div>
-			<button id="paymentpage_btn_pay" type="submit">총 ${cart.cartTotalPrice+cart.cartDeliveryPrice}원 결제하기</button>
+			<button id="paymentpage_btn_pay" type="submit">총 <fmt:formatNumber value="${cart.cartTotalPrice+cart.cartDeliveryPrice}" pattern="#,###"/>원 결제하기</button>
 		</form>
 	</div>
 </body>
