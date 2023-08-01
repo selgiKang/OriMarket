@@ -9,6 +9,6 @@ public interface NewOrderDetailRepository extends JpaRepository<NewOrderDetail, 
 
     List<NewOrderDetail> findByOrderNumber(String orderNumber);
 
-    List<NewOrderDetail> findByBuStoreName(String buStoreName);
+    List<NewOrderDetail> findByBuStoreNameAndOrderNumber(String buStoreName,String orderNumber);
 
 }

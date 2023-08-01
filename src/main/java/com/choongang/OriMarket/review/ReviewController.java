@@ -10,6 +10,7 @@ import com.choongang.OriMarket.order.NewOrderDetail;
 import com.choongang.OriMarket.order.NewOrderDetailRepository;
 import com.choongang.OriMarket.order.NewOrderRepository;
 import com.choongang.OriMarket.store.*;
+import com.choongang.OriMarket.utill.ImageService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,8 +20,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
@@ -34,10 +37,11 @@ public class ReviewController {
     private final BusinessStoreService businessStoreService;
     private final NewOrderRepository newOrderRepository;
     private final NewOrderDetailRepository newOrderDetailRepository;
+    private final ImageService imageService;
 
     @GetMapping("/user_review")
-    public String userReview(@RequestParam("buStoreName") String buStoreName,HttpSession session,Model model) {
-        List<NewOrderDetail> byBuStoreName = newOrderDetailRepository.findByBuStoreName(buStoreName);
+    public String userReview(@RequestParam("buStoreName") String buStoreName,@RequestParam("orderNumber") String orderNumber, HttpSession session,Model model) {
+        List<NewOrderDetail> byBuStoreName = newOrderDetailRepository.findByBuStoreNameAndOrderNumber(buStoreName,orderNumber);
         model.addAttribute("abcde",byBuStoreName);
         return "user/user_review";
     }
@@ -99,9 +103,11 @@ public class ReviewController {
     }
 
     @PostMapping("/user_review")
-    public String userReivew1(@ModelAttribute Review review, HttpSession session, Model model){
-        reviewService.save(review,session,model);
-        return  "user/user_reviewlist";
+    public String userReivew1(@ModelAttribute Review review, @RequestParam("pictureUrl1") MultipartFile file, HttpSession session, Model model) throws IOException {
+        String s = imageService.saveReviewImage(file);
+        reviewService.save(review,session,model,s);
+
+        return "redirect:/reivew";
     }
 
     @PostMapping("/ReplyInsert")

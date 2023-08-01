@@ -190,11 +190,12 @@
   </style>
 </head>
 <body>
-<form action="/user_review" method="post">
+<form action="/user_review" method="post" enctype="multipart/form-data">
   <div class="main-container">
     <div class="user_total_review">
-        <c:forEach var="abcd" items="${abcde}" varStatus="status">
+        <c:forEach var="abcd" items="${abcde}" varStatus="status" >
           <c:if test="${status.index == 0}">
+          <input type="hidden" name="orderNumber" value="${abcd.orderNumber}">
           <input type="hidden" name="newOrder.newOrderSeq" value="${abcd.newOrder.newOrderSeq}">
           <h3 style="text-align: center; margin-top: 5px;"><input type="hidden" name="buStoreName" value="${abcd.buStoreName}">
             ${abcd.buStoreName}
@@ -289,7 +290,7 @@
       <li class="box"><span class="plus-icon">+</span></li>
       <li class="box"><span class="plus-icon">+</span></li>
     </ul>
-    <input type="file" class="real-upload" name="" accept="image/*" required multiple>
+    <input type="file" accept="image/*" name="pictureUrl1" id="logo-upload" onchange="previewPicture(event)" class="real-upload" required multiple>
     <button class="submit-button" type="submit">리뷰 작성하기</button>
 </div>
   </form>
@@ -397,6 +398,25 @@
     console.log('리뷰 작성하기 버튼이 클릭되었습니다.');
     document.querySelector('form').submit(); // 필요에 따라 폼 제출을 직접 호출할 수도 있습니다.
   });
+
+  function previewPicture(event) {
+    const pictureInput = event.target;
+    const picturePreview = document.getElementById('logo-preview');
+
+    if (pictureInput.files && pictureInput.files[0]) {
+      const reader = new FileReader();
+
+      reader.onload = function (e) {
+        const imgElement = document.createElement('img');
+        imgElement.src = e.target.result;
+        imgElement.style.maxWidth = '100%'; // 이미지 크기 조절 (선택사항)
+        imgElement.style.height = "auto";
+        picturePreview.innerHTML = ''; // 이미지 미리보기 업데이트
+        picturePreview.appendChild(imgElement);
+      };
+      reader.readAsDataURL(pictureInput.files[0]);
+    }
+  }
 </script>
 </body>
 

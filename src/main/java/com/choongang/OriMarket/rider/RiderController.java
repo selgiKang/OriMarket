@@ -28,6 +28,7 @@ public class RiderController {
 
     @Autowired
     private final RiderService riderService;
+    private final RiderRepository riderRepository;
     private final NewOrderRepository newOrderRepository;
 
     //7.31 라이더 테스트

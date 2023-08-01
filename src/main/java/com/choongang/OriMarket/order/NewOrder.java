@@ -1,5 +1,6 @@
 package com.choongang.OriMarket.order;
 import com.choongang.OriMarket.manager.user.ManagerUser;
+import com.choongang.OriMarket.review.Review;
 import com.choongang.OriMarket.rider.Rider;
 import com.choongang.OriMarket.user.User;
 import lombok.AccessLevel;

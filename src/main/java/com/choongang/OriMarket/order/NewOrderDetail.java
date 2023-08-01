@@ -52,4 +52,7 @@ public class NewOrderDetail {
     @Column
     private String itemImageUrl;
 
+    @Column
+    private String reviewtrue;
+
 }
