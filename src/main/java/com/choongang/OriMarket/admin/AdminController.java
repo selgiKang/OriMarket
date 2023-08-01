@@ -17,6 +17,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -36,6 +37,13 @@ public class AdminController {
     //로그인
     @GetMapping("/adminLogin")
     public String adminLogin(){return "admin/admin_login";}
+
+    //로그아웃
+    @GetMapping("/admin_logout")
+    public String adminLogout(HttpSession session){
+        session.invalidate();
+        return "redirect:/adminLogin";
+    }
 
     //사업자등록현황페이지
     @GetMapping("/a_buser")
