@@ -492,7 +492,6 @@
             };
             const formData = new FormData(statusForm);
             xhr.send(new URLSearchParams(formData));
-
         });
     </script>
     <div class="total_menu_container">
