@@ -127,6 +127,8 @@ public class UserController {
             List<NewOrder> newOrders = newOrderRepository.findByOrderStatusAndUserOrderByCreatedDateDesc("배달완료", byId);
             List<Review> reviews = byId.getReviews();
 
+            Collections.reverse(reviews);
+
             model.addAttribute("re", reviews);
             model.addAttribute("newOrders",newOrders);
 
