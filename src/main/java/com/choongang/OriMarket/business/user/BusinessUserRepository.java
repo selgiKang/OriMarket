@@ -14,7 +14,7 @@ public interface BusinessUserRepository extends JpaRepository<BusinessUser, Long
 
     List<BusinessUser> findByBuUserNameContaining(String keyword);
 
-
+    List<BusinessUser> findByBuUserNumber(Long keyword);
 
 
 
