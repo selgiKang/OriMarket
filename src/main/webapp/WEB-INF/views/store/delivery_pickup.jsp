@@ -502,10 +502,17 @@ pageEncoding="UTF-8"%>
             <c:forEach items="${re}" var="r">
               <c:if test="${r.newOrder.deliveryType eq '포장'}">
                 <div style="border: 1px solid #46A973; width: 315px; margin-top: 10px;">
+                  <img src="../../img/store/${r.businessStore.buStoreImageUrl}" style="max-width: 100%; height: auto;">
                   <p style="font-size: 16px; margin-top: ${firstStoreName eq 'true' ? '0' : '10px'}; margin-bottom: -11px;
                           border-top: ${firstStoreName eq 'true' ? 'none' : '1px solid #46A973'}; position: relative;">
                       ${r.buStoreName} <span style="font-size: x-small;">물건 :${r.itemName}</span>
                   </p>
+                  <p>
+                      ${r.content}
+                  </p>
+                  <p>별점: ${r.rating}</p>
+                  <p>맛: ${r.taste}</p>
+                  <p>양: ${r.amount}</p>
                 </div>
               </c:if>
             </c:forEach>

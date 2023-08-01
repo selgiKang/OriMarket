@@ -24,4 +24,5 @@ public interface BusinessStoreRepository extends JpaRepository<BusinessStore,Lon
 
 
 
+
 }
