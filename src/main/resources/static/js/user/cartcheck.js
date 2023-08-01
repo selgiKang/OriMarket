@@ -39,7 +39,18 @@ function setTotalInfo(){
     }
     finalTotalPrice = totalPrice+deliveryPrice;
 
-    $(".cart_cost_totalPrice").text(totalPrice+"원");
-    $(".cart_cost_deliveryPrice").text(deliveryPrice+"원");
-    $(".cart_cost_finalTotalPrice").text(finalTotalPrice+"원");
+    $(".cart_cost_totalPrice").text(addCommasToNumber(totalPrice)+"원");
+    $(".cart_cost_deliveryPrice").text(addCommasToNumber(deliveryPrice)+"원");
+    $(".cart_cost_finalTotalPrice").text(addCommasToNumber(finalTotalPrice)+"원");
+}
+
+function addCommasToNumber(number) {
+    let numStr = number.toString();
+    if (numStr.length <= 3) {
+        return numStr;
+    }
+
+    let reversedStr = numStr.split('').reverse().join('');
+    let formattedStr = reversedStr.match(/.{1,3}/g).join(',');
+    return formattedStr.split('').reverse().join('');
 }
