@@ -14,6 +14,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
@@ -37,6 +38,7 @@ public class ManagerController {
     @Autowired
     private final ManagerService managerService;
     private final NewOrderRepository newOrderRepository;
+    private final OrderService orderService;
 
     //로그인 페이지
     @GetMapping("/managerLogin")
@@ -66,6 +68,21 @@ public class ManagerController {
     }
 
     //아이디 중복 확인
+    @GetMapping("/orderListResult")
+    public Page<NewOrder> orderListResult(@RequestParam("page") int pageNumberReuslt,Model model,HttpSession session) {
+
+        ManagerUser userResult = managerService.findByManagerId(model,session);
+
+        int pageNumber = pageNumberReuslt;
+        int pageSize = 4; // 한 페이지에 4개씩 보여줄 때
+        Pageable pageable = PageRequest.of(pageNumber, pageSize);
+        String orderStatus = "배달완료";
+        String orderStatusNo ="주문거절";
+        Page<NewOrder> resultPage = orderService.pageList(userResult, orderStatus, orderStatusNo,pageable);
+
+        return resultPage;
+    }
+
     @GetMapping("/managerId/{managerId}/exists")
     @ResponseBody
     public ResponseEntity<Boolean> checkUserIdDuplicate(@PathVariable String managerId) {
@@ -87,6 +104,14 @@ public class ManagerController {
         //매니저가 소속된 시장의 주문만 리스트에 저장
         List<NewOrder> orderList = (List<NewOrder>) model.getAttribute("managerOrderList");
         model.addAttribute("orderList",orderList);
+
+        int pageNumber = 0; // 2번째 페이지를 가져올 때는 1을 사용 (0부터 시작)
+        int pageSize = 4; // 한 페이지에 4개씩 보여줄 때
+        Pageable pageable = PageRequest.of(pageNumber, pageSize);
+        String orderStatus = "배달완료";
+        String orderStatusNo ="주문거절";
+        Page<NewOrder> resultPage = orderService.pageList(userResult, orderStatus, orderStatusNo,pageable);
+        model.addAttribute("resultPage",resultPage);
 
         return "manager/order_list";
     }
@@ -151,12 +176,9 @@ public class ManagerController {
         return "manager/find_manager_id";
     }
 
-
     //로그인데
     @PostMapping("/managerLogin")
-    public String loginResult(@ModelAttribute ManagerUser managerUser, HttpSession session, Model model,
-                              @PageableDefault(sort = "createdDate", direction = Sort.Direction.DESC)
-                              Pageable pageable){
+    public String loginResult(@ModelAttribute ManagerUser managerUser, HttpSession session, Model model){
         boolean result = managerService.loginCheck(managerUser,session);
         // 매니저가 속한 시장의 NewOrder 를 가지고와서 수락/거절 수락을누르면 NewOrder의 상태가 '주문시작' 으로 업데이트하고 매니저seq도 업데이트 해준다.
         if(result){
@@ -170,12 +192,21 @@ public class ManagerController {
             //매니저가 소속된 시장의 주문만 리스트에 저장
            model.addAttribute("orderList", model.getAttribute("managerOrderList"));
 
+            int pageNumber = 0; // 2번째 페이지를 가져올 때는 1을 사용 (0부터 시작)
+            int pageSize = 4; // 한 페이지에 4개씩 보여줄 때
+            Pageable pageable = PageRequest.of(pageNumber, pageSize);
+            String orderStatus = "배달완료";
+            String orderStatusNo ="주문거절";
+            Page<NewOrder> resultPage = orderService.pageList(userResult, orderStatus, orderStatusNo,pageable);
+            model.addAttribute("resultPage",resultPage);
+
             return "manager/order_list";
+        }else{
+            model.addAttribute("fail","아이디 또는 비밀번호가 틀렸습니다. 확인해주세요.");
         }
-        model.addAttribute("fail","아이디 또는 비밀번호가 틀렸습니다. 확인해주세요.");
         return "manager/manager_login";
     }
-    //로그인데
+
     @PostMapping("/manager_order_search")
     public String orderSearch(@ModelAttribute ManagerUser managerUser, HttpSession session, Model model){
 
@@ -187,6 +218,14 @@ public class ManagerController {
 
             //매니저가 소속된 시장의 주문만 리스트에 저장
             model.addAttribute("orderList", model.getAttribute("managerOrderList"));
+
+            int pageNumber = 0; // 2번째 페이지를 가져올 때는 1을 사용 (0부터 시작)
+            int pageSize = 4; // 한 페이지에 4개씩 보여줄 때
+            Pageable pageable = PageRequest.of(pageNumber, pageSize);
+            String orderStatus = "배달완료";
+            String orderStatusNo ="주문거절";
+            Page<NewOrder> resultPage = orderService.pageList(userResult, orderStatus, orderStatusNo,pageable);
+            model.addAttribute("resultPage",resultPage);
 
             return "manager/order_list";
         }else{
@@ -246,6 +285,14 @@ public class ManagerController {
         List<NewOrder> orderList = (List<NewOrder>) model.getAttribute("managerOrderList");
         model.addAttribute("orderList", orderList);
 
+        int pageNumber = 0; // 2번째 페이지를 가져올 때는 1을 사용 (0부터 시작)
+        int pageSize = 4; // 한 페이지에 4개씩 보여줄 때
+        Pageable pageable = PageRequest.of(pageNumber, pageSize);
+        String orderStatus = "배달완료";
+        String orderStatusNo ="주문거절";
+        Page<NewOrder> resultPage = orderService.pageList(userResult, orderStatus, orderStatusNo,pageable);
+        model.addAttribute("resultPage",resultPage);
+
         return "manager/order_list";
     }
     @GetMapping("/accept")
@@ -277,6 +324,14 @@ public class ManagerController {
         List<NewOrder> orderList = (List<NewOrder>) model.getAttribute("managerOrderList");
         model.addAttribute("orderList", orderList);
 
+        int pageNumber = 0; // 2번째 페이지를 가져올 때는 1을 사용 (0부터 시작)
+        int pageSize = 4; // 한 페이지에 4개씩 보여줄 때
+        Pageable pageable = PageRequest.of(pageNumber, pageSize);
+        String orderStatus = "배달완료";
+        String orderStatusNo ="주문거절";
+        Page<NewOrder> resultPage = orderService.pageList(userResult, orderStatus, orderStatusNo,pageable);
+        model.addAttribute("resultPage",resultPage);
+
         return "manager/order_list";
     }
 
@@ -297,6 +352,14 @@ public class ManagerController {
         //매니저 정보
         List<NewOrder> orderList = (List<NewOrder>) model.getAttribute("managerOrderList");
         model.addAttribute("orderList", orderList);
+
+        int pageNumber = 0; // 2번째 페이지를 가져올 때는 1을 사용 (0부터 시작)
+        int pageSize = 4; // 한 페이지에 4개씩 보여줄 때
+        Pageable pageable = PageRequest.of(pageNumber, pageSize);
+        String orderStatus = "배달완료";
+        String orderStatusNo ="주문거절";
+        Page<NewOrder> resultPage = orderService.pageList(userResult, orderStatus, orderStatusNo,pageable);
+        model.addAttribute("resultPage",resultPage);
 
         return "manager/order_list";
     }

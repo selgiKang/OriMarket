@@ -8,6 +8,7 @@ import com.choongang.OriMarket.order.Order;
 import com.choongang.OriMarket.store.Store;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.catalina.Manager;
 
@@ -19,7 +20,7 @@ import java.util.List;
 @Table(name="market")
 @Data
 @NoArgsConstructor
-@Slf4j
+@Log4j2
 public class Market {
 
     @Id

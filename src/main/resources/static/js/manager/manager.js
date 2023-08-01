@@ -84,28 +84,7 @@ $(document).ready(function() {
             orderTable.append(newRow);
         }
     }
-
-// // 주문 상태에 따라 표시할 문자열 반환 함수 (예시로 만든 함수)
-//     function getOrderStatus(rts) {
-//         if (rts.rtsOrderIng === 0 && rts.rtsRiderIng === 0 && rts.rtsRiderFinish === 0) {
-//             return '주문';
-//         } else if (rts.rtsOrderIng === 1 && rts.rtsRiderIng === 0 && rts.rtsRiderFinish === 0) {
-//             return '주문 시작';
-//         } else if (rts.rtsOrderIng === 1 && rts.rtsRiderIng === 1 && rts.rtsRiderFinish === 0) {
-//             return '배달 시작';
-//         } else if (rts.rtsOrderIng === 1 && rts.rtsRiderIng === 1 && rts.rtsRiderFinish === 1) {
-//             return '완료';
-//         } else {
-//             return '알 수 없음';
-//         }
-//     }
-
 });
 
-
-// function showOrderDetail(orderNumber) {
-//     // 주문 상세 정보를 보여줄 코드 추가
-//     // 여기에 주문 상세 정보를 표시하는 로직을 구현하세요.
-// }
 
 

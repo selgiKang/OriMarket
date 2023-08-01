@@ -8,19 +8,16 @@ import com.choongang.OriMarket.manager.user.ManagerUser;
 import com.choongang.OriMarket.rider.Rider;
 import com.choongang.OriMarket.user.User;
 import lombok.*;
-import lombok.extern.slf4j.Slf4j;
+import lombok.extern.log4j.Log4j2;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 
 @Entity
 @Table (name = "orders")
 @Getter
 @Setter
 @NoArgsConstructor
-@Slf4j
+@Log4j2
 public class Order {
 
     @Id

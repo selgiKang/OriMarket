@@ -120,6 +120,7 @@ public class OrderController {
             user.setUserSeq(userSeq);
             //지난 모든 주문들 출력
             List<NewOrder> pastOrderList = newOrderRepository.findByUser(user);
+            Collections.reverse(pastOrderList);
             model.addAttribute("pastOrderList", pastOrderList);
             return "order/order_pastorder";
         }

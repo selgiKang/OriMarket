@@ -52,48 +52,6 @@ public class OrderService {
     private  Order order;
 
 
-
-       /*
-       public Order kakaoPayReady() {
-
-
-            RestTemplate restTemplate = new RestTemplate();
-
-            HttpHeaders headers = new HttpHeaders();
-            //!!!! 개인코드 다른 곳 공개X !!!!!
-            headers.add("Authorization","KakaoAK"+"e584b59b9f572556fbac3673883cb029");
-            headers.add("Accept", org.springframework.http.MediaType.APPLICATION_JSON_UTF8_VALUE);
-            headers.add("Content-Type", org.springframework.http.MediaType.APPLICATION_FORM_URLENCODED_VALUE + ";charset=UTF-8");
-
-            MultiValueMap<String,String> params = new LinkedMultiValueMap<String,String>();
-            //가맹점 코드 test코드 카카오 제공
-            params.add("cid",cid);
-            //주문번호
-            params.add("partner_order_id", String.valueOf(order.getOrderNumber()));
-            //주문자 id
-            params.add("partner_user_id",order.getOrderUserId());
-            //총 금액
-            params.add("total_amount", String.valueOf(order.getOrderTotalPrice()));
-            //부과세(값을 보내지 않을 경우 vat 자동 계산)
-            params.add("vat_amount",null);
-            //성공
-            params.add("approval_url","https://localhost:8080/order_delivery");
-            //취소
-            params.add("cancel_url","https://localhost:8080/order_paymentpage");
-            //실패
-            params.add("fail_url","https://localhost:8080/cart");
-
-            HttpEntity<MultiValueMap<String,String>> requestEntity = new HttpEntity<>(params,headers);
-
-           order = restTemplate.postForObject(
-                   "https://kapi.kakao.com/v1/payment/ready",
-                   requestEntity,
-                   KakaoReadyResponse.class);
-           return order;
-
-        }
-        */
-
         public boolean orderDelivery(Order order, HttpSession session){
 
             RealTimeStatus rtsStatus = new RealTimeStatus();
@@ -149,38 +107,6 @@ public class OrderService {
             return tableData;
         }
 
-//        public List<Map<String,String>> allOrderList(String calculateDate, String calculateDateLast,Model model,HttpSession session){
-//
-//            List<Map<String,String>> tableAllList = new ArrayList<>();
-//            System.out.println("calculateDate"+calculateDate+", calculateLast"+calculateDateLast);
-//            List<Order> orders = orderRepository.findOrdersBetweenDates(calculateDate,calculateDateLast);
-//
-//            //사업자 번호 세션꺼 꺼내서
-//            //그 스토어 이름이랑 오더의 스토어 이르
-//            Long buUserNumber = Long.valueOf(session.getAttribute("buUserNumber").toString());
-//
-//            for(Order order : orders){
-//                //사업자 번호 비교
-//                if(order.getBusinessUser().getBuUserNumber().equals(buUserNumber)){
-//                    Map<String, String> orderAllList = new HashMap<>();
-//                    //주문 날짜
-//                    orderAllList.put("date", String.valueOf(order.getOrderDate()));
-//                    //아이템 갯수
-//                    orderAllList.put("goodsCount",order.getOrderGoodsNum());
-//                    //아이템 이름
-//                    orderAllList.put("goodsName",order.getOrderGoodsName());
-//                    //아이템 가격
-//                    orderAllList.put("amount",order.getOrderGoodsPrice());
-//                    //아이템 총가격
-//                    orderAllList.put("totalPrice",order.getOrderGoodsTotalPrice());
-//                    tableAllList.add(orderAllList);
-//                }
-//            }
-//            model.addAttribute("tableAllList",tableAllList);
-//            return tableAllList;
-//        }
-
-        // , 를 +로 바꿔서 더해서 반환
     public int sumCommaSeparatedNumbers(String csNumbers) {
         int sum = 0;
         String[] numbers = csNumbers.split(",");
@@ -208,20 +134,13 @@ public class OrderService {
         return getDate;
     }
 
-    //주문 번호로 검색
-//    public Order getOrderNumberList(String orderNumber){
-//            Order orderNumberResult = orderRepository.findByOrderNumber(orderNumber);
-//            return orderNumberResult;
-//    }
 
-//    public List<Order> findByUserIdList(String userId){
-//            List<Order> getOrderUserIdList = orderRepository.findByOrderUserId(userId);
-//            return getOrderUserIdList;
-//        }
+ //   @Transactional : 단순 읽기 작업만하고 변경하지 않는다면 필요 X
+    //트랜잭션 없는 상태에서 LazyLoading으로 연관 객체 접근하면 예외 발생
+    //이 어노테이션 사용 시 트랜잭션 내에서 LazyLoading 사용 가능해짐
+    public Page<NewOrder> pageList(ManagerUser managerUser,String OrderStatus, String orderStatusNo,Pageable pageable) {
 
-    @Transactional
-    public Page<NewOrder> pageList(int page) {
-        return  newOrderRepository.findAll(PageRequest.of(page,3, Sort.by(Sort.Direction.DESC,"newOrderSeq")));
+            return newOrderRepository.findByManagerUser(managerUser,OrderStatus,orderStatusNo,pageable);
     }
 
 

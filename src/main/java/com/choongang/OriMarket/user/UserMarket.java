@@ -6,6 +6,7 @@ import com.choongang.OriMarket.business.user.BusinessUser;
 import com.choongang.OriMarket.manager.user.ManagerUser;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.persistence.*;
@@ -16,7 +17,7 @@ import java.util.List;
 @Table(name="user_market")
 @Data
 @NoArgsConstructor
-@Slf4j
+@Log4j2
 public class UserMarket {
 
     @Id
