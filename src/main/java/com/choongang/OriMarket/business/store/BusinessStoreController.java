@@ -7,6 +7,7 @@ import com.choongang.OriMarket.store.ItemService;
 import com.choongang.OriMarket.store.Store;
 import com.choongang.OriMarket.utill.ImageService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
@@ -30,7 +31,7 @@ import static com.choongang.OriMarket.utill.Constant.IMAGE_PATH;
 
 @Controller
 @RequiredArgsConstructor
-@Slf4j
+@Log4j2
 public class BusinessStoreController {
 
     @Autowired
