@@ -134,14 +134,4 @@ public class ManagerService {
         }
     }
 
-    //------페이징-------
-    public Page<NewOrder> getNewOrderPaging(ManagerUser managerUser, Pageable pageable){
-        Page<NewOrder> l = newOrderRepository.findByManagerUserOrderByCreatedDateDesc(managerUser,pageable);
-        for(NewOrder n : l){
-            System.out.println(n.getOrderNumber());
-        }
-        return newOrderRepository.findByManagerUserOrderByCreatedDateDesc(managerUser,pageable);
-    }
-
-
 }

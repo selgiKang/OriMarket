@@ -3,6 +3,7 @@ package com.choongang.OriMarket.manager.user;
 import com.choongang.OriMarket.order.NewOrder;
 import com.choongang.OriMarket.order.NewOrderRepository;
 import com.choongang.OriMarket.order.OrderService;
+import com.fasterxml.jackson.databind.util.JSONPObject;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,12 +59,21 @@ public class ManagerController {
         return "manager/manager_info_list";
     }
 
-    //아이디 중복 확인
+
+    //배달완료 page
     @GetMapping("/orderListResult")
     @ResponseBody
-    public ResponseEntity<Page<NewOrder>> orderListResult(@RequestParam("page") int pageNumberReuslt,Model model,HttpSession session) {
+    public ResponseEntity<HashMap<String, Object>> orderListResult(@RequestParam("page") int pageNumberReuslt,Model model,HttpSession session) {
 
+        HashMap<String, Object> result = new HashMap<>();
+
+        //매니저 정보 가져오기
         ManagerUser userResult = managerService.findByManagerId(model,session);
+        model.addAttribute("userResult",userResult);
+
+        //매니저가 소속된 시장의 주문만 리스트에 저장
+        List<NewOrder> orderList = (List<NewOrder>) model.getAttribute("managerOrderList");
+        model.addAttribute("orderList",orderList);
 
         int pageNumber = pageNumberReuslt;
         int pageSize = 4; // 한 페이지에 4개씩 보여줄 때
@@ -71,8 +81,11 @@ public class ManagerController {
         String orderStatus = "배달완료";
         String orderStatusNo ="주문거절";
         Page<NewOrder> resultPage = orderService.pageList(userResult, orderStatus, orderStatusNo,pageable);
-
-        return ResponseEntity.ok(resultPage);
+        for(NewOrder n:resultPage){
+            System.out.println("ajax: "+n.getOrderNumber());
+        }
+        result.put("result",resultPage);
+        return ResponseEntity.ok(result);
     }
 
     @GetMapping("/managerId/{managerId}/exists")
