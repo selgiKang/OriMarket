@@ -121,13 +121,15 @@ public class FavController {
             //리뷰 총점 계산
             int totalSum = 0;
             int reviewCount = reviewListResult.size();
+
             for(Review review1:reviewListResult){
-                if(review1.getRating()!=null){
+                if(review1.getRating() != null){
                     int rating = review1.getRating();
                     totalSum += rating;
                 }
             }
             double averageRating = (double) totalSum / reviewCount;
+            System.out.println("이거왜안나오냐"+averageRating);
             model.addAttribute("aveRating",averageRating);
 
             //확실해지면 model로 변해도 됨
