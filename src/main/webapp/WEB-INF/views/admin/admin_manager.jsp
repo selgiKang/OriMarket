@@ -67,7 +67,6 @@
     <div class="goods_store_wrap">
         <div id="goods_title">
             <a><input type="button" class="delete_btn" value="선택회원 삭제" onclick="deleteSelectedManagerUsers()"></a>
-            <a href="#"><input type="button" class="insert_btn" value="선택회원 수정"></a>
         </div>
         <br>
         <div id="goods_list">
