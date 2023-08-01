@@ -75,19 +75,19 @@
                     </tr>
                     <tr>
                         <td>상품수량</td>
-                        <td><input type="text" name="itemCnt" placeholder="판매단위로 입력해주세요."></td>
+                        <td><input type="text" name="itemCnt" placeholder="판매단위 수량만 입력해주세요"></td>
                     </tr>
                     <tr>
                         <td>원가</td>
-                        <td><input type="text" name="itemCost"></td>
+                        <td><input type="text" name="itemCost" placeholder="원가금액만 입력해주세요"></td>
                     </tr>
                     <tr>
                         <td>판매가</td>
-                        <td><input type="text" name="itemPrice"></td>
+                        <td><input type="text" name="itemPrice" placeholder="판매금액만 입력해주세요"></td>
                     </tr>
                     <tr>
                         <td>무게</td>
-                        <td><input type="text" name="itemG" placeholder="g(그램)단위로 작성해주세요."></td>
+                        <td><input type="text" name="itemG" placeholder="그램(g)수만 입력해주세요."></td>
                     </tr>
                     <tr>
                         <td>원산지</td>
@@ -99,7 +99,7 @@
                     </tr>
                     <tr>
                         <td>상세정보</td>
-                        <td><textarea name="itemInfo"></textarea></td>
+                        <td><textarea name="itemInfo" placeholder="등록상품과 관련된 상세정보만 입력해주세요."></textarea></td>
                     </tr>
                     <tr>
                         <td>상품 카테고리</td>
