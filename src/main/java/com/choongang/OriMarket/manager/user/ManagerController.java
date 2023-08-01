@@ -232,7 +232,7 @@ public class ManagerController {
             System.out.println("매니저:"+managerUser.getManagerName());
         }
         model.addAttribute("managerUsers",managerUsers);
-        return "manager/manager_CRUD";
+        return "admin/admin_manager";
     }
 
     // 수락 누르면
@@ -331,4 +331,5 @@ public class ManagerController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("회원 삭제에 실패했습니다.");
         }
     }
+
 }
