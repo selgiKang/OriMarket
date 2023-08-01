@@ -17,6 +17,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -36,6 +37,13 @@ public class AdminController {
     //로그인
     @GetMapping("/adminLogin")
     public String adminLogin(){return "admin/admin_login";}
+
+    //로그아웃
+    @GetMapping("/admin_logout")
+    public String adminLogout(HttpSession session){
+        session.invalidate();
+        return "redirect:/adminLogin";
+    }
 
     //사업자등록현황페이지
     @GetMapping("/a_buser")
@@ -57,9 +65,10 @@ public class AdminController {
     }
 
     @PostMapping("/adminLogin")
-    public String adminLoginResult(@RequestParam("adminId")String adminId,
-                                   @RequestParam("adminPassword")String adminPassword,Model model){
+    public String adminLoginResult(@RequestParam("adminId")String adminId,@RequestParam("adminPassword")String adminPassword,
+                                   Model model,HttpSession session){
         if(adminId.equals("admin")&&adminPassword.equals("admin1@")){
+            session.setAttribute("adminId","admin");
             return "admin/admin_main";
         }else{
             model.addAttribute("loginError","아이디나 비밀번호가 틀렸습니다.");

@@ -105,26 +105,9 @@ function sendAjaxRequest(){
         }
     });
 }
-// function sendAjaxRequestGet(calculateDate, calculateDateLast){
-//     $.ajax({
-//         type: 'GET',
-//         url: '/calculate',
-//         data: {
-//             calculate_date: calculateDate,
-//             calculate_date_last: calculateDateLast
-//         },
-//         success: function (response){
-//             updateTable(response)
-//         },
-//         error(xhr, status, error){
-//             console.log(error);
-//         }
-//     })
-// }
 
 function updateTable(data) {
 
-    //테이블
     // 테이블
     var tableBody = $('#tableBody');
     tableBody.empty();
