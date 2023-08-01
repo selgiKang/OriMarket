@@ -75,4 +75,4 @@ button{border-style: none; background: none; display: inline-block;}
 
 
 /* 푸터(주문하기버튼) */
-#cart_footer input{width: 375px; height: 50px; background-color: #46a973; color: white;font-family:'LINESeedKR-Bd'; font-size: 20px; border: none;}
+#cart_footer input{position:fixed; bottom:0; border-radius: 7px 7px 0 0; width: 375px; height: 50px; background-color: #46a973; color: white;font-family:'LINESeedKR-Bd'; font-size: 20px; border: none;}

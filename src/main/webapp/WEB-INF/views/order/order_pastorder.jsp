@@ -513,7 +513,7 @@
                                                 <li style="text-align: end; margin-right:12%; color:red;">배달 완료</li>
                                             </c:if>
                                             <c:if test="${pastOrder.orderStatus eq '주문거절'}">
-                                                <li>주문 거절</li>
+                                                <li style="text-align: end; margin-right:12%; color:red;">주문 거절</li>
                                             </c:if>
                                         </ul>
                                     <c:forEach items="${pastOrder.newOrderDetails}" var="orderDetail">

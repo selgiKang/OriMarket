@@ -12,7 +12,6 @@
   <script src="../../js/manager/manager_join.js"></script>
 </head>
 <body>
-<a href="/"><h1 style="position: fixed; left: 20px; top: 0; font-size: 30px; color: red">홈으로 바로가기</h1></a>
 <div class="container">
   <div class="logo_container">
     <img src="../../../../img/user/ori.png" alt="logo">
