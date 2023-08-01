@@ -4,44 +4,86 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>Orimarket_ManagerLogin</title>
-  <link rel="stylesheet" href="../../css/manager/manager_login.css">
+  <title>오리마켓 매니저 로그인</title>
+ <%-- <link rel="stylesheet" href="../../css/manager/manager_login.css">--%>
 </head>
-<body id="managerLogin_body">
+<style>
+  @font-face {
+    font-family: 'omyu_pretty';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-01@1.0/omyu_pretty.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+  }
+
+
+  *{margin: 0; padding: 0; box-sizing: border-box; font-family: 'omyu_pretty';}
+
+  body{width: 375px; height: 812px; margin: 0 auto; }
+
+  /* 230727 */
+  #businesslogin_wrap{background-color:#46A973; width:375px; height:812px; margin:auto;}
+  .businesslogin_wrapbox{width:375px; height:812px;}
+  .businesslogin_wrapbox a{text-decoration: none; color:#333;}
+
+  .businesslogin_title_wrap{width:375px; height:200px; margin:auto; padding: 20%; text-align: center;}
+  .businesslogin_title_wrap>h1{font-size: 55px; color:#ffbf41; letter-spacing: 10px; text-align: center;}
+  .businesslogin_title_wrap>h3{color:#fff}
+
+  #container{width: 300px; height: 400px; padding:20px; text-align: center;
+    background-color:#fff; border-radius: 10px; box-shadow: 0 3px 6px 0 rgba(0,0,0, 0.4); margin: 0 10%;}
+
+  h1.login_title{color: #333; letter-spacing: 5px; margin: 20px 20px 30px 20px;}
+  div#login_box{margin:20px 0}
+  div.login_box_wrap{margin-bottom:25px;}
+  div.login_box_wrap p {margin-bottom:10px;}
+
+  input[type=text] {width: 65%; height: 30px; font-size: 15px; border: 0; border-radius: 15px; outline: none; padding-left: 10px; background-color: rgb(233, 233, 233);}
+  input[type=password] {width: 65%; height: 30px; font-size: 15px; border: 0; border-radius: 15px; outline: none; padding-left: 10px; background-color: rgb(233, 233, 233);}
+
+  input.login_btn { width:80%; height:40px; background-color:#46A973; border:none; border-radius: 25px; color:#fff; font-weight: 700; font-size: 16px; font-family: 'omyu_pretty';}
+  input.login_btn:hover{ background-color:#333; color:#ffbf41;}
+
+  div.join_btn_wrap{width:100%;}
+  a.join_btn{width:70%; height:40px; padding: 4% 32%; background-color:#ffbf41; border:none; border-radius: 25px; color:#333; font-weight: 700; font-size: 16px;}
+  a.join_btn:hover {background-color: #333; color:#fff;}
+</style>
+<body <%--id="managerLogin_body"--%>>
   <% if (request.getAttribute("pleaseLogin") != null) { %>
   window.onload = function() {
   alert("<%= request.getAttribute("pleaseLogin") %>");
   };
   <% } %>
-  <h2> 매니저 로그인</h2>
-  <form action="/managerLogin" method="post">
-    <div class="managerLogin_table_border">
-      <table class="managerLogin_table">
-        <tr>
-          <td class="managerLogin_td_1">아 이 디</td>
-          <td class="managerLogin_td_2"><input id="managerId" style="height: 20px;" type="text" placeholder="아이디" name="managerId"></td>
-        </tr>
-        <tr>
-          <td class="managerLogin_td_1">비밀번호</td>
-          <td class="managerLogin_td_2"><input id="managerPassword" style="height: 20px;" type="password" placeholder="비밀번호" name="managerPassword"></td>
-        </tr>
+  <div id="businesslogin_wrap">
+    <div class="businesslogin_wrapbox">
+      <div class="businesslogin_title_wrap">
+        <h1>오리시장</h1>
+      </div>
+      <div id="container">
+        <h1 class="login_title">매니저 로그인</h1>
+        <form action="/managerLogin" method="post">
+          <div id="login_box">
+            <div class="login_box_wrap">
+              <p>아이디 &nbsp;&nbsp;<input id="managerId" type="text" size="20" placeholder=" 아이디를 입력해주세요.." name="managerId" required></p>
+              <p>패스워드 <input id="managerPassword" type="password"  size="20" placeholder=" *********" name="managerPassword" required></p>
+            </div>
+            <p style="margin-bottom:10px;"><input type="checkbox" name="login" value=""> 로그인 상태 유지</p>
+            <p align="center"><input class="login_btn" type="submit" value="로그인"></p>
+          </div>
+        </form>
         <c:if test="${!empty fail}">
           <tr>
-            <td style="color: red" colspan="2"><small>아이디와 비밀번호가 틀렸습니다.</small></td>
+            <td colspan="2"><small style="color:red;">아이디와 비밀번호가 틀렸습니다.</small></td>
           </tr>
         </c:if>
         <%-- 서버에서 에러 메시지를 전달할 경우 알림 팝업 띄우기 --%>
-      </table>
-      <table style="width: 100%;text-align: center;">
-        <tr class="managerLogin_tr">
-          <td class="managerLogin_td_3"><input type="submit" value="로 그 인"></td>
-          <td class="managerLogin_td_3" ><a style="padding: 5px;height: 15px;" href="/managerJoin">회원가입</a></td>
-        </tr>
-        <tr>
-          <td colspan="2"><a href="/findManagerId">아이디 찾기</a>&nbsp;|&nbsp;<a>비밀번호 찾기</a></td>
-        </tr>
-      </table>
+        <div id="list" style="margin-top:15px;">
+          <div style="margin-top: 20px;margin-bottom:20px;padding-bottom: 5px;">
+            <a href="/findManagerId">아이디 찾기</a>&nbsp;/ <span><a href="#">비밀번호 찾기</a></span>
+          </div>
+          <div class="join_btn_wrap" style="margin-bottom:40px;"><a class="join_btn" href="/managerJoin">회원가입</a></div>
+        </div>
     </div>
-  </form>
+  </div>
+</div>
 </body>
 </html>

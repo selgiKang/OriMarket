@@ -393,13 +393,23 @@ pageEncoding="UTF-8"%>
   button.backbtn{display: flex; align-items: center; font-size: 20px; color: #999; margin: 0 0 0 10px; width: 30px; height: 30px; background-color: #fff; border-radius: 50%; border: 1px solid #999; cursor: pointer; justify-content: center; margin-right:20%;}
   button.backbtn:hover {background-color:#333; color:#fff;}
   .headermsg_wrap{width:90%; display: flex; justify-content: flex-start; align-items: end;}
+
+  /* 230802 */
+  .review_item_wrap{padding: 0 15px 20px;}
+  .review_chk_wrap{display: flex; justify-content: space-between; margin: 6px 0;}
+  .review_chk_wrap p{font-size:14px;}
+  .review_txt_wrap{padding: 5px 10px;background-color: #ededed;border-radius: 4px;}
 </style>
 <body>
 <div class="main-container">
   <div class="header">
     <jsp:include page="../header/header_index.jsp" />
   </div>
-  <h3 style="margin-top: 5px;">회원 리뷰관리</h3>
+  <div class="headermsg_wrap">
+    <%--뒤로가기--%>
+    <button class="backbtn" onclick="window.location.replace('/mypage')">&lt;</button>
+    <h3 style="margin: 15px 5px 5px; font-size: 20px;">회원 리뷰관리</h3>
+  </div>
   <div class="tabs">
     <input type="radio" id="tab1" name="tab-control" checked>
     <input type="radio" id="tab2" name="tab-control">
@@ -447,18 +457,22 @@ pageEncoding="UTF-8"%>
           <div id="tab-panel-2" aria-labelledby="tab-2" role="tabpanel" tabindex="-1" hidden>
             <c:forEach items="${re}" var="r">
               <c:if test="${r.newOrder.deliveryType eq '배달'}">
-              <div style="border: 1px solid #46A973; width: 315px; margin-top: 10px;">
-                <img src="../../img/store/${r.businessStore.buStoreImageUrl}" style="max-width: 100%; height: auto;">
-                      <p style="font-size: 16px; margin-top: ${firstStoreName eq 'true' ? '0' : '10px'}; margin-bottom: -11px;
-                              border-top: ${firstStoreName eq 'true' ? 'none' : '1px solid #46A973'}; position: relative;">
-                          ${r.buStoreName} <span style="font-size: x-small;">물건 :${r.itemName}</span>
-                      </p>
-                      <p>
-                        ${r.content}
-                      </p>
-                    <p>별점: ${r.rating}</p>
-                    <p>맛: ${r.taste}</p>
-                    <p>양: ${r.amount}</p>
+              <div style="width: 315px; margin-top: 10px;border-radius: 7px;box-shadow: 0px 1px 10px rgba(0,0,0,0.2);">
+                <img src="../../img/store/${r.businessStore.buStoreImageUrl}" style="max-width: 90%;margin: 11px 11px 0;padding: 5px;/* padding: 5px; */height: auto;border-radius: 8px;">
+                <div class="review_item_wrap">
+                  <p style="font-size: 16px; margin-top: ${firstStoreName eq 'true' ? '0' : '10px'};/* margin-bottom: -11px;*/
+                                border-top: ${firstStoreName eq 'true' ? 'none' : '1px solid #46A973'}; position: relative;">
+                            ${r.buStoreName} <span style="font-size: x-small;">구매상품 : ${r.itemName}</span>
+                  </p>
+                  <div class="review_chk_wrap">
+                    <p>별점 : ${r.rating}점 </p>
+                    <p>맛 : ${r.taste}점 </p>
+                    <p>양 : ${r.amount}점 </p>
+                  </div>
+                  <div class="review_txt_wrap">
+                    <p>${r.content}</p>
+                  </div>
+                </div>
               </div>
               </c:if>
             </c:forEach>
@@ -501,18 +515,24 @@ pageEncoding="UTF-8"%>
           <div id="tab-panel-4" aria-labelledby="tab-4" role="tabpanel" tabindex="-1" hidden>
             <c:forEach items="${re}" var="r">
               <c:if test="${r.newOrder.deliveryType eq '포장'}">
-                <div style="border: 1px solid #46A973; width: 315px; margin-top: 10px;">
-                  <img src="../../img/store/${r.businessStore.buStoreImageUrl}" style="max-width: 100%; height: auto;">
-                  <p style="font-size: 16px; margin-top: ${firstStoreName eq 'true' ? '0' : '10px'}; margin-bottom: -11px;
-                          border-top: ${firstStoreName eq 'true' ? 'none' : '1px solid #46A973'}; position: relative;">
-                      ${r.buStoreName} <span style="font-size: x-small;">물건 :${r.itemName}</span>
-                  </p>
-                  <p>
-                      ${r.content}
-                  </p>
-                  <p>별점: ${r.rating}</p>
-                  <p>맛: ${r.taste}</p>
-                  <p>양: ${r.amount}</p>
+                <div style="width: 315px; margin-top: 10px;border-radius: 7px;box-shadow: 0px 1px 10px rgba(0,0,0,0.2);">
+                  <img src="../../img/store/${r.businessStore.buStoreImageUrl}" style="max-width: 90%;margin: 11px 11px 0;padding: 5px;/* padding: 5px; */height: auto;border-radius: 8px;">
+                  <div class="review_item_wrap">
+                    <p style="font-size: 16px; margin-top: ${firstStoreName eq 'true' ? '0' : '10px'}; /*margin-bottom: -11px;*/
+                            border-top: ${firstStoreName eq 'true' ? 'none' : '1px solid #46A973'}; position: relative;">
+                        ${r.buStoreName} <span style="font-size: x-small;">구매상품 : ${r.itemName}</span>
+                    </p>
+                    <div class="review_chk_wrap">
+                         <p>별점 : ${r.rating}점</p>
+                        <p>맛 : ${r.taste}점</p>
+                        <p>양 : ${r.amount}점</p>
+                    </div>
+                    <div class="review_txt_wrap">
+                        <p>
+                            ${r.content}
+                        </p>
+                    </div>
+                    </div>
                 </div>
               </c:if>
             </c:forEach>

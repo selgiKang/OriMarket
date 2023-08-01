@@ -41,7 +41,7 @@
         input.search_btn:hover{ background-color:#333; color:#ffbf41;}
 
         div.manager_join_btn_wrap{width:100%;}
-        a.manager_join_btn{width:40%; height:40px; padding: 4% 25%; background-color:#ffbf41; border:none; border-radius: 25px; color:#333; font-weight: 700; font-size: 16px;}
+        a.manager_join_btn{width:40%; height:40px; padding: 4% 32%; background-color:#ffbf41; border:none; border-radius: 25px; color:#333; font-weight: 700; font-size: 16px;}
         a.manager_join_btn:hover {background-color: #333; color:#fff;}
         a.findpw_btn{color:#333; font-weight: 600;}
         a.findpw_btn:hover{text-decoration: underline; color:#46A973;}
@@ -72,7 +72,7 @@
                     <div id="login_box">
                         <div class="login_box_wrap">
                             <p>이름 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" size="20" placeholder="이름만 입력해주세요" name="managerName" id="managerName" required></p>
-                            <p>핸드폰 번호 <input type="tel" size="20" placeholder="'-' 없이 숫자만 입력해주세요" name="managerPhone" id="managerPhone" required></p>
+                            <p>휴대폰번호 <input type="tel" size="20" placeholder="'-' 없이 숫자만 입력해주세요" name="managerPhone" id="managerPhone" required></p>
                         </div>
                         <p align="center"><input class="search_btn" type="submit" value="찾기"></p>
                     </div>
