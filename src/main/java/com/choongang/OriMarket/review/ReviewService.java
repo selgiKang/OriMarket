@@ -65,8 +65,8 @@ public class ReviewService {
 
         Review newReview = new Review();
         User byUser = userRepository.findById((Long) session.getAttribute("userSeq")).orElseThrow();
-        Item byItemName = itemRepository.findByItemNameAndBusinessStore_BuStoreName(itemNames[0], review.getBuStoreName());
-        BusinessStore byBuStore = businessStoreRepository.findById(byItemName.getBusinessStore().getBuStoreNumber()).orElseThrow();
+        List<Item> byItemName = itemRepository.findByItemNameAndBusinessStore_BuStoreName(itemNames[0], review.getBuStoreName());
+        BusinessStore byBuStore = businessStoreRepository.findById(byItemName.get(0).getBusinessStore().getBuStoreNumber()).orElseThrow();
         newReview.setNewOrder(review.getNewOrder());
         newReview.setBuStoreName(review.getBuStoreName());
         newReview.setItemName(review.getItemName());

@@ -234,8 +234,7 @@ public class UserController {
     @PostMapping("/usermarketSearch")
     @ResponseBody
     public ResponseEntity<List<Map<String, String>>> usermarketSearch(@RequestParam double latitude, @RequestParam double longitude, Model model, HttpSession session) {
-        System.out.println("잘나오니?"+latitude);
-        System.out.println("잘나오니?"+longitude);
+        ;
         try {
             List<Map<String,String>> tableData = new ArrayList<>();
             double radiusInKm = 5.0;
