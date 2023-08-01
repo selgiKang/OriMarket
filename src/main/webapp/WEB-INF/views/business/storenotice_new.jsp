@@ -34,7 +34,7 @@
             width: 330px;
             margin: 30px auto;
             position: relative;
-            right: 8px;
+            right: 20px;
         }
 
         /* 메인 컨테이너 스타일 */
@@ -184,19 +184,19 @@
             margin: 20px;
         }
 
-        .board {
+        /*.board {
             width: 270px;
             background-color: #f0f8ff;
             padding: 20px;
             border: 1px solid #ccc;
             border-radius: 5px;
             margin-top: 5px;
-        }
+        }*/
 
 
 
 
-        .board .content {
+        /*.board .content {
             margin-top: 20px;
             background-color: #fff;
             padding: 10px;
@@ -218,7 +218,7 @@
         .board .buttons {
             display: flex;
             justify-content: space-between;
-        }
+        }*/
 
         .board .buttons button {
             padding: 10px 20px;
@@ -381,8 +381,46 @@
             cursor: pointer;
             font-family: 'omyu pretty', Arial, sans-serif;}
 
+        /*공지사항 디자인*/
+
+        .buttons {
+            text-align: center;
+        }
+
+        .buttons button {
+            background-color: #4CAF50;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .buttons button:hover {
+            background-color: #45a049;
+        }
 
 
+        .content {
+            margin-bottom: 20px;
+            margin-right: 20px;
+        }
+
+        .content input[type="text"],
+        .content textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+
+        .content textarea {
+            resize: none;
+        }
     </style>
     <%
         Date date = new Date();
@@ -492,7 +530,6 @@
             };
             const formData = new FormData(statusForm);
             xhr.send(new URLSearchParams(formData));
-
         });
     </script>
     <div class="total_menu_container">
@@ -707,7 +744,7 @@
             <input class="input" name="tabs-2" type="radio" id="tab-2"/>
             <label class="label" for="tab-2">공지사항</label>
             <div class="panel">
-                <div class="line"></div>
+<%--                <div class="line"></div>--%>
                 <h4>사장님 공지사항</h4>
                 <div class="board">
                     <div class="content">
@@ -727,7 +764,7 @@
             <input class="input" name="tabs-3" type="radio" id="tab-3"/>
             <label class="label" for="tab-3">리뷰 관리</label>
             <div class="panel">
-                <c:if test="${empty re}"><h3>현재 등록된 리뷰가 없습니다.!</h3></c:if>
+                <c:if test="${empty re}"><h3>아직 등록된 리뷰가 없어요&#128546;</h3></c:if>
                 <c:if test="${!empty re}">
                     <c:forEach var="r" items="${re}" varStatus="status">
                         <c:set var="reverseIndex" value="${re.size() - status.index - 1}" />
@@ -764,7 +801,7 @@
             <input class="input" name="tabs-5" type="radio" id="tab-5"/>
             <label class="label" for="tab-5">주문 내역</label>
             <div class="panel">
-                ㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎ
+                아직 주문내역이 없어요&#128546;
             </div>
 
             <br>
@@ -772,7 +809,7 @@
             <input class="input" name="tabs-6" type="radio" id="tab-6"/>
             <label class="label" for="tab-6">쿠폰 관리</label>
             <div class="panel">
-                ㄹㄹㅀㅀㅀㄹ
+                준비 중입니다...⌛
             </div>
 
             <br>

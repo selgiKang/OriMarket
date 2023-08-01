@@ -38,6 +38,9 @@ public class ReviewController {
     private final NewOrderRepository newOrderRepository;
     private final NewOrderDetailRepository newOrderDetailRepository;
     private final ImageService imageService;
+    private final BusinessStoreRepository businessStoreRepository;
+    private final ReviewRepository reviewRepository;
+    private final BusinessUserRepository businessUserRepository;
 
     @GetMapping("/user_review")
     public String userReview(@RequestParam("buStoreName") String buStoreName,@RequestParam("orderNumber") String orderNumber, HttpSession session,Model model) {
@@ -81,7 +84,6 @@ public class ReviewController {
        // businessStore.setBuStoreNumber(findReview.getBuStoreNumber());
         //사업자 번호 일치하는 리뷰만 골라오기
         List<Review> reviewListResult = reviewService.findReview(review,findReviewResult);
-
         //리뷰 총점 계산
         int totalSum = 0;
         int reviewCount = reviewListResult.size();
@@ -98,7 +100,6 @@ public class ReviewController {
         for(Review r : reviewListResult){
             System.out.println(r.getReview_id());
         }
-
         return "/store/store_review";
     }
 
@@ -119,6 +120,30 @@ public class ReviewController {
     public String replyInsert2(@ModelAttribute Review review,Model model){
         reviewService.replyMessageInsert(review,model);
         return "business/businessReview/business_review";
+    }
+
+    @GetMapping("/storeReview1")
+    public String storeReview1(HttpSession session,Model model){
+        BusinessUser businessNumber1 = businessUserRepository.findById((Long) session.getAttribute("businessNumber")).orElseThrow();
+        BusinessStore businessNumber = businessStoreRepository.findByBusinessUser(businessNumber1);
+        List<Review> reviews = businessNumber.getReviews();
+        model.addAttribute("reviewList",reviews);
+        model.addAttribute("buStore",businessNumber);
+
+        List<Review> reviewListResult = reviewRepository.findByBusinessStore(businessNumber);
+
+        int totalSum = 0;
+        int reviewCount = reviewListResult.size();
+        for(Review review1:reviewListResult){
+            if(review1.getRating()!=null){
+                int rating = review1.getRating();
+                totalSum += rating;
+            }
+        }
+        double averageRating = (double) totalSum / reviewCount;
+        model.addAttribute("aveRating",averageRating);
+
+        return "store/store_review1";
     }
 
 

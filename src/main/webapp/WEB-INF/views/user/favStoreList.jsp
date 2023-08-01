@@ -3,39 +3,155 @@
 <html>
 <head>
   <title>Orimarket_단골가게</title>
-<style>
+  <style>
     @font-face {
       font-family: 'LINESeedKR-Bd';
       src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/LINESeedKR-Bd.woff2') format('woff2');
       font-weight: 700;
       font-style: normal;
     }
-    #favStoreList_table_body{
-      font-family: "LINESeedKR-Bd",sans-serif;
+
+    body {
+      font-family: "LINESeedKR-Bd", sans-serif;
       font-size: 16px;
       margin: 0 auto;
+      max-width: 375px;
+      padding: 20px;
+    }
+
+    /*핸드폰화면 사이즈*/
+    .main-container {
       width: 375px;
-    }
-    #favStoreList_table_body>h3{
+      /*        height: 812px;*/
       margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background-color: #eee;
+      overflow: auto;
+      overflow-x: hidden;
+      position: relative;
     }
-    #favStoreList_table{
+
+    h3 {
+      /* 제목 텍스트 스타일 */
+      /*margin: 15px 5px 5px;*/
+      font-size: 20px;
+      display: inline;
+      white-space: nowrap; /* 한 줄로 표시 */
+    }
+
+    .sub-container{
+      border-radius: 5px;
+      background: white;
+      height: 100%;
+      max-width: 365px;
+      width: 100%;
+      margin-top: 15px; /*리뷰관리 제목이랑 간격 조절*/
+      margin-bottom:15px;
+    }
+
+    table {
       border-collapse: collapse;
-      text-align: center;
       width: 100%;
     }
-</style>
+
+    th, td {
+      border: 1px solid #ccc;
+      padding: 8px;
+      text-align: center;
+    }
+
+    th {
+      background-color: #f2f2f2;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+
+    a {
+      color: #007bff;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .headermsg_wrap {
+      display: flex;
+      align-items: center;
+
+    }
+
+
+    button.backbtn{
+      display: flex;
+      align-items: center;
+      font-size: 20px;
+      color: #999;
+      margin: 0 0 0 10px;
+      width: 30px;
+      height: 30px;
+      background-color: #fff;
+      border-radius: 50%;
+      border: 1px solid #999;
+      cursor: pointer;
+      justify-content: center;
+      margin-right:20%;}
+
+    button.backbtn:hover {background-color:#333; color:#fff;}
+
+    .header{
+      font-family: 'omyu_pretty';
+    }
+
+    .fav_footer{
+      font-family: 'omyu_pretty';
+      width: 100%;
+      margin-top: 20px;
+
+    }
+  </style>
 </head>
-<body id="favStoreList_table_body">
-  <h3>단골 가게 목록</h3>
-  <table border="1" id="favStoreList_table">
-    <tr><th>순번</th><th>가게 이름</th></tr>
-    <c:forEach var="favResult" items="${favResult}" varStatus="status">
+<body>
+
+
+
+<div class="main-container">
+<div class="header">
+  <jsp:include page="../header/header_index.jsp" />
+</div>
+
+  <div class="headermsg_wrap">
+  <%--뒤로가기--%>
+  <button class="backbtn" onclick="window.location.replace('/mypage')">&lt;</button>
+    <h3>단골 가게 목록</h3>
+  </div>
+
+  <div class="sub-container">
+    <table>
       <tr>
-        <td>${status.index+1}</td>
-        <td><a href="/store?favStoreName=${favResult.favStoreName}">${favResult.favStoreName}</a></td>
+        <th>순번</th>
+        <th>가게 이름</th>
       </tr>
-    </c:forEach>
-  </table>
+      <c:forEach var="favResult" items="${favResult}" varStatus="status">
+        <tr>
+          <td>${status.index+1}</td>
+          <td><a href="/store?favStoreName=${favResult.favStoreName}">${favResult.favStoreName}</a></td>
+        </tr>
+      </c:forEach>
+
+
+    </table>
+  </div>
+
+  <div class="fav_footer">
+    <jsp:include page="../footer/footer.jsp" />
+  </div>
+
+</div>
+
 </body>
 </html>

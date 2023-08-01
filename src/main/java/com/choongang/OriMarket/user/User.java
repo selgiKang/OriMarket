@@ -14,6 +14,7 @@ import java.util.List;
 //생성자
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class User {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "seq", nullable = false)

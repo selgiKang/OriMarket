@@ -40,6 +40,7 @@
                 dataType: 'json',
                 success: function (data) {
                     try {
+                        console.log("여기");
                         // 서버에서 전달된 JSON 데이터를 JavaScript 객체로 파싱
                         var jsonData = JSON.parse(data);
 
@@ -48,7 +49,6 @@
 
                         // 주문 정보를 표시할 HTML을 생성하는 함수
                         function generateOrderHTML(order) {
-                            // ... 주문 정보를 HTML 문자열로 변환하는 코드 ...
                         }
 
                         // 주문 정보를 추가할 요소를 선택하고, 기존 내용을 지우고 새로운 주문 정보를 추가
@@ -202,34 +202,14 @@
                 </c:forEach>
                 <c:if test="${resultPage.totalPages > 1}">
                     <ul class="pagination">
-                        <c:choose>
-                            <c:when test="${not resultPage.first}">
-                                <li><a href="javascript:void(0);" onclick="loadPage(${resultPage.number - 1})">이전</a></li>
-                            </c:when>
-                            <c:otherwise>
-                                <li class="disabled"><span>이전</span></li>
-                            </c:otherwise>
-                        </c:choose>
-
+                        <!-- 이전 페이지 버튼 -->
+                        <li><a href="javascript:void(0);" onclick="loadPage(${resultPage.number - 1})">이전</a></li>
+                        <!-- 페이지 버튼들 -->
                         <c:forEach var="i" begin="0" end="${resultPage.totalPages - 1}">
-                            <c:choose>
-                                <c:when test="${i == resultPage.number}">
-                                    <li class="active"><span>${i + 1}</span></li>
-                                </c:when>
-                                <c:otherwise>
-                                    <li><a href="javascript:void(0);" onclick="loadPage(${i})">${i + 1}</a></li>
-                                </c:otherwise>
-                            </c:choose>
+                            <li><a href="javascript:void(0);" onclick="loadPage(${i})">${i + 1}</a></li>
                         </c:forEach>
-
-                        <c:choose>
-                            <c:when test="${not resultPage.last}">
-                                <li><a href="javascript:void(0);" onclick="loadPage(${resultPage.number + 1})">다음</a></li>
-                            </c:when>
-                            <c:otherwise>
-                                <li class="disabled"><span>다음</span></li>
-                            </c:otherwise>
-                        </c:choose>
+                        <!-- 다음 페이지 버튼 -->
+                        <li><a href="javascript:void(0);" onclick="loadPage(${resultPage.number + 1})">다음</a></li>
                     </ul>
                 </c:if>
 <%--                <c:if test="${resultPage.totalPages > 1}">--%>

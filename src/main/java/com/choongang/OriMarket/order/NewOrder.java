@@ -3,6 +3,8 @@ import com.choongang.OriMarket.manager.user.ManagerUser;
 import com.choongang.OriMarket.review.Review;
 import com.choongang.OriMarket.rider.Rider;
 import com.choongang.OriMarket.user.User;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -80,6 +82,7 @@ public class NewOrder {
     private User user;
 
     //매니저 번호
+    @JsonBackReference
     @ManyToOne(fetch =  FetchType.LAZY)
     @JoinColumn(name="managerSeq")
     private ManagerUser managerUser;

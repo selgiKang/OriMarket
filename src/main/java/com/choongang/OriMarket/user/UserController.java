@@ -8,7 +8,7 @@ import com.choongang.OriMarket.review.Review;
 import com.choongang.OriMarket.review.ReviewRepository;
 import com.choongang.OriMarket.utill.DistanceUtil;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,7 +25,7 @@ import java.util.*;
 
 @Controller
 @RequiredArgsConstructor
-@Slf4j
+@Log4j2
 public class UserController {
 
     @Autowired
@@ -234,8 +234,7 @@ public class UserController {
     @PostMapping("/usermarketSearch")
     @ResponseBody
     public ResponseEntity<List<Map<String, String>>> usermarketSearch(@RequestParam double latitude, @RequestParam double longitude, Model model, HttpSession session) {
-        System.out.println("잘나오니?"+latitude);
-        System.out.println("잘나오니?"+longitude);
+        ;
         try {
             List<Map<String,String>> tableData = new ArrayList<>();
             double radiusInKm = 5.0;
