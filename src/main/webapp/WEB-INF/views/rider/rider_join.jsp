@@ -28,7 +28,7 @@
           <span class="logo-text">Ori Market (라이더)</span>
       </div>
 
-      <form action="/rider_join" method="post" onsubmit="return validateForm()">
+      <form action="/rider_join" method="post" onsubmit="return validateForm()" enctype="multipart/form-data">
           <div class="form_field">
               <label for="id">아이디</label>
                 <div class="input_container">
@@ -44,7 +44,9 @@
 
           <div class="form_field">
               <label for="phone">운전면허증</label>
-              <input type="text" id="email" name="driverLicense" required>
+              <input type="file" accept="image/*" name="pictureUrl" id="logo-upload" onchange="previewPicture(event)"/>
+              <div id="logo-preview">
+              </div>
           </div>
 
           <div class="form_field">
@@ -256,6 +258,27 @@
       passwordError.style.marginLeft = "3px";
     }
   });
+
+  function previewPicture(event) {
+      const pictureInput = event.target;
+      const picturePreview = document.getElementById('logo-preview');
+
+      if (pictureInput.files && pictureInput.files[0]) {
+          const reader = new FileReader();
+
+          reader.onload = function (e) {
+              const imgElement = document.createElement('img');
+              imgElement.src = e.target.result;
+              imgElement.style.width = '310px'; // 이미지 크기 조절 (선택사항)
+              imgElement.style.height = "150px";
+              imgElement.style.marginTop = "6px";
+              imgElement.style.marginLeft = "4px";
+              picturePreview.innerHTML = ''; // 이미지 미리보기 업데이트
+              picturePreview.appendChild(imgElement);
+          };
+          reader.readAsDataURL(pictureInput.files[0]);
+      }
+  }
 </script>
 </html>
 
