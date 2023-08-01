@@ -21,15 +21,29 @@
         }
 
         /* 전체 크기 */
-        body{margin: 0; padding: 0; font-family:'LINESeedKR-Bd'; font-size: 16px; text-align: center; width: 100%; height: 100%}
-        #rider_container{width: 375px; height:812px; margin: 0 auto;}
+        body{
+            margin: 0;
+            padding: 0;
+            font-family:'LINESeedKR-Bd';
+            font-size: 16px;
+            text-align: center; width: 1920px; }
+
+       /* #rider_container{width: 375px; height:812px; margin: 0 auto;}*/
 
 
-        #rider_store{height:100px; background-color:#46A973; color:#fff; text-align: right; display: flex; justify-content: end; align-items: center;}
-        .snun_wrap{margin-right:20px}
+        #rider_store{
+            height:100px;
+            background-color:#46A973;
+            color:#fff;
+            text-align: right;
+            display: flex;
+            justify-content: end;
+            align-items: center;}
+
+        .snun_wrap{width: 1920px; text-align: center;}
 
 
-        .rider_store_wrap{background-color:#eee; height:712px;}
+        .rider_store_wrap{background-color:#eee; width: 100%;}
         .top_title_wrap h1{text-align:center; margin:15px 18%;}
 
         #rider_title{padding:20px 0 0;}
@@ -40,12 +54,24 @@
 
         /* ------------------------------------------ 공통적용css---------------------------------------------- */
 
-        #rider_list{font-size: 14px; margin: auto;}
+        #rider_list{font-size: 14px; margin: 1px;}
 
-        #rider_list table{ border-radius: 5px; background-color:#fff; padding:20px 5px; margin:auto;}
+        #rider_list table{ border-radius: 5px; background-color:#fff; width: 1920px;}
+
+        .rider_listTitle td{
+            padding: 12px;
+        }
 
 
-        #rider_title > a > input{ background-color: #ffbf41; color: #333; font-weight:600; padding: 8px 8px; border:none; border-radius:5px; cursor:pointer;}
+        #rider_title > a > input{
+            background-color: #ffbf41;
+            color: #333;
+            font-weight:600;
+            padding: 8px 8px;
+            border:none;
+            border-radius:5px;
+            cursor:pointer;}
+
         #rider_title > a > input:hover {background-color:#333; color:#fff;}
 
         .rider_listTitle{color: #46A973; margin-bottom:15px;}
@@ -56,10 +82,11 @@
 <div id="rider_container">
     <div id="rider_store">
         <div class="snun_wrap">
-            <c:forEach var="rider" items="${riders}" varStatus="status">
+            <h1>라이더 목록</h1>
+            <%--<c:forEach var="rider" items="${riders}" varStatus="status">
             <div>${rider.riderId}</div>
             <small>이름:${rider.riderName}</small>
-            </c:forEach>
+            </c:forEach>--%>
         </div>
     </div>
     <div class="rider_store_wrap">
@@ -67,11 +94,25 @@
             <div class="top_title_wrap">
                 <!-- 뒤로가기 -->
                 <button class="backbtn" onclick="window.location.replace('/ridernotice1')">&lt;</button>
-                <h1>라이더 목록</h1>
+
             </div>
             <a><input type="button" class="delete_btn" value="라이더 삭제" onclick="deleteSelectedRiders()"></a>
-            <a href="/s2/${riderUserId}"><input type="button" class="insert_btn" value="라이더 정보 수정"></a>
+            <a><input type="button" class="show_all_btn" value="전체회원 보기" onclick="showAllManagerUsers()"></a>
+            <%-- <a href="/s2/${riderUserId}"><input type="button" class="insert_btn" value="라이더 정보 수정"></a>--%>
         </div>
+
+
+        <td>
+            <select type="" name="rider_search" class="select" id="searchType">
+                <option value="id">아이디 검색</option>
+                <option value="name">이름 검색</option>
+            </select>
+            <input type="text" id="searchText" placeholder="검색어를 입력하세요">
+            <!-- 검색 버튼 -->
+            <button onclick="searchRiders()">검색</button>
+        </td>
+
+
         <br>
         <div id="rider_list">
             <table>
@@ -133,4 +174,58 @@
             });
         }
     }
+
+
+    //검색기능
+    function searchRiders() {
+        // 선택한 검색 조건을 가져옴
+        var searchType = document.getElementById('searchType').value;
+        // 입력한 검색어를 가져와 소문자로 변환
+        var searchText = document.getElementById('searchText').value.toLowerCase();
+
+        // 라이더 목록의 모든 행을 가져옴
+        var riders = document.querySelectorAll('#rider_list table tr');
+
+        for (var i = 1; i < riders.length; i++) { // 1부터 시작하여 테이블 헤더 행을 건너뜀
+            // 행에서 라이더 아이디와 이름을 가져옴
+            var riderId = riders[i].querySelector('td:nth-child(4)').textContent.toLowerCase();
+            var riderName = riders[i].querySelector('td:nth-child(3)').textContent.toLowerCase();
+
+            // 검색어가 비어있으면 모든 행을 보여줌
+            if (searchText === '') {
+                riders[i].style.display = '';
+            } else {
+                // 검색 조건과 검색어를 기준으로 행을 필터링하여 보여줄지 숨길지 결정
+                if (
+                    (searchType === 'id' && riderId.includes(searchText)) || // 검색 조건이 '라이더 아이디 검색'이면 라이더 아이디로 필터링
+                    (searchType === 'name' && riderName.includes(searchText)) // 검색 조건이 '라이더 이름 검색'이면 라이더 이름으로 필터링
+                ) {
+                    riders[i].style.display = ''; // 일치하는 행은 보여줌
+                } else {
+                    riders[i].style.display = 'none'; // 일치하지 않는 행은 숨김
+                }
+            }
+        }
+    }
+
+    //엔터키로 검색되게
+    var searchText = document.getElementById('searchText');
+    searchText.addEventListener('keyup', function(event) {
+        if (event.keyCode === 13) { // Enter 키를 누른 경우
+            searchRiders(); // 검색 기능 함수를 호출
+        }
+    });
+
+    // 전체회원 보기
+    function showAllManagerUsers() {
+        // 라이더 목록의 모든 행을 가져옴
+        var riders = document.querySelectorAll('#rider_list table tr');
+
+        // 모든 행을 보여줌
+        for (var i = 1; i < riders.length; i++) { // 1부터 시작하여 테이블 헤더 행을 건너뜀
+            riders[i].style.display = '';
+        }
+    }
+
+
 </script>
