@@ -126,9 +126,8 @@ public class UserController {
             User byId = userRepository.findById((Long) session.getAttribute("userSeq")).orElseThrow();
             List<NewOrder> newOrders = newOrderRepository.findByOrderStatusAndUserOrderByCreatedDateDesc("배달완료", byId);
             List<Review> reviews = byId.getReviews();
-            for(Review review:reviews){
-                review.getItem().getReviews();
-            }
+
+            Collections.reverse(reviews);
 
             model.addAttribute("re", reviews);
             model.addAttribute("newOrders",newOrders);

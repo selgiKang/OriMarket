@@ -448,10 +448,17 @@ pageEncoding="UTF-8"%>
             <c:forEach items="${re}" var="r">
               <c:if test="${r.newOrder.deliveryType eq '배달'}">
               <div style="border: 1px solid #46A973; width: 315px; margin-top: 10px;">
+                <img src="../../img/store/${r.businessStore.buStoreImageUrl}" style="max-width: 100%; height: auto;">
                       <p style="font-size: 16px; margin-top: ${firstStoreName eq 'true' ? '0' : '10px'}; margin-bottom: -11px;
                               border-top: ${firstStoreName eq 'true' ? 'none' : '1px solid #46A973'}; position: relative;">
                           ${r.buStoreName} <span style="font-size: x-small;">물건 :${r.itemName}</span>
                       </p>
+                      <p>
+                        ${r.content}
+                      </p>
+                    <p>별점: ${r.rating}</p>
+                    <p>맛: ${r.taste}</p>
+                    <p>양: ${r.amount}</p>
               </div>
               </c:if>
             </c:forEach>
@@ -492,26 +499,13 @@ pageEncoding="UTF-8"%>
             </c:forEach>
           </div>
           <div id="tab-panel-4" aria-labelledby="tab-4" role="tabpanel" tabindex="-1" hidden>
-            <c:forEach items="${newOrders}" var="pastOrder">
-              <c:if test="${pastOrder.deliveryType eq '포장'}">
+            <c:forEach items="${re}" var="r">
+              <c:if test="${r.newOrder.deliveryType eq '포장'}">
                 <div style="border: 1px solid #46A973; width: 315px; margin-top: 10px;">
-                  <c:set var="processedStoreNames" value="" scope="page" />
-                  <c:set var="firstStoreName" value="true" scope="page" />
-                  <c:forEach items="${pastOrder.newOrderDetails}" var="orderDetail">
-                    <c:if test="${orderDetail.reviewtrue eq '리뷰'}">
-                      <c:if test="${!processedStoreNames.contains(orderDetail.buStoreName)}">
-                        <c:set var="processedStoreNames" value="${processedStoreNames},${orderDetail.buStoreName}" scope="page" />
-                        <p style="font-size: 16px; margin-top: ${firstStoreName eq 'true' ? '0' : '10px'}; margin-bottom: -11px;
-                                border-top: ${firstStoreName eq 'true' ? 'none' : '1px solid #46A973'}; position: relative;">
-                            ${orderDetail.buStoreName}
-                          <button style="position: absolute; right: 0;"
-                                  onclick="location.href='/user_review?buStoreName=${orderDetail.buStoreName}&orderNumber=${orderDetail.orderNumber}'">리뷰 쓰기</button>
-                        </p>
-                        <c:set var="firstStoreName" value="false" scope="page" />
-                      </c:if>
-                      <span style="font-size: x-small; padding-left: 3px;">물건 :${orderDetail.itemName}</span>
-                    </c:if>
-                  </c:forEach>
+                  <p style="font-size: 16px; margin-top: ${firstStoreName eq 'true' ? '0' : '10px'}; margin-bottom: -11px;
+                          border-top: ${firstStoreName eq 'true' ? 'none' : '1px solid #46A973'}; position: relative;">
+                      ${r.buStoreName} <span style="font-size: x-small;">물건 :${r.itemName}</span>
+                  </p>
                 </div>
               </c:if>
             </c:forEach>

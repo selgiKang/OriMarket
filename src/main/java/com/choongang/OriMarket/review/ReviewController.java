@@ -107,7 +107,7 @@ public class ReviewController {
         String s = imageService.saveReviewImage(file);
         reviewService.save(review,session,model,s);
 
-        return "redirect:/reivew";
+        return "redirect:/review";
     }
 
     @PostMapping("/ReplyInsert")
