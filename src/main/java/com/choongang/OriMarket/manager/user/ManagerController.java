@@ -1,6 +1,15 @@
 package com.choongang.OriMarket.manager.user;
+
+import com.choongang.OriMarket.RealTimeStatus.RealTimeRepository;
+import com.choongang.OriMarket.RealTimeStatus.RealTimeService;
+import com.choongang.OriMarket.RealTimeStatus.RealTimeStatus;
 import com.choongang.OriMarket.order.NewOrder;
 import com.choongang.OriMarket.order.NewOrderRepository;
+import com.choongang.OriMarket.order.Order;
+import com.choongang.OriMarket.order.OrderService;
+import com.choongang.OriMarket.user.User;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +26,10 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequiredArgsConstructor
@@ -27,6 +39,7 @@ public class ManagerController {
     @Autowired
     private final ManagerService managerService;
     private final NewOrderRepository newOrderRepository;
+    private final OrderService orderService;
 
     //로그인 페이지
     @GetMapping("/managerLogin")
@@ -56,6 +69,21 @@ public class ManagerController {
     }
 
     //아이디 중복 확인
+    @GetMapping("/orderListResult")
+    public Page<NewOrder> orderListResult(@RequestParam("page") int pageNumberReuslt,Model model,HttpSession session) {
+
+        ManagerUser userResult = managerService.findByManagerId(model,session);
+
+        int pageNumber = pageNumberReuslt;
+        int pageSize = 4; // 한 페이지에 4개씩 보여줄 때
+        Pageable pageable = PageRequest.of(pageNumber, pageSize);
+        String orderStatus = "배달완료";
+        String orderStatusNo ="주문거절";
+        Page<NewOrder> resultPage = orderService.pageList(userResult, orderStatus, orderStatusNo,pageable);
+
+        return resultPage;
+    }
+
     @GetMapping("/managerId/{managerId}/exists")
     @ResponseBody
     public ResponseEntity<Boolean> checkUserIdDuplicate(@PathVariable String managerId) {
@@ -77,6 +105,14 @@ public class ManagerController {
         //매니저가 소속된 시장의 주문만 리스트에 저장
         List<NewOrder> orderList = (List<NewOrder>) model.getAttribute("managerOrderList");
         model.addAttribute("orderList",orderList);
+
+        int pageNumber = 0; // 2번째 페이지를 가져올 때는 1을 사용 (0부터 시작)
+        int pageSize = 4; // 한 페이지에 4개씩 보여줄 때
+        Pageable pageable = PageRequest.of(pageNumber, pageSize);
+        String orderStatus = "배달완료";
+        String orderStatusNo ="주문거절";
+        Page<NewOrder> resultPage = orderService.pageList(userResult, orderStatus, orderStatusNo,pageable);
+        model.addAttribute("resultPage",resultPage);
 
         return "manager/order_list";
     }
@@ -108,30 +144,6 @@ public class ManagerController {
         }
         return "manager/manager_login";
     }
-    //----page-----
-    @GetMapping("/managerPage")
-    public String managerPage(@ModelAttribute ManagerUser managerUser, HttpSession session, Model model,
-                              @RequestParam(defaultValue = "0") int page,
-                              @RequestParam(defaultValue = "3") int size){
-
-        session.setAttribute("managerId",managerUser.getManagerId());
-
-        //매니저 정보 가져오기
-        ManagerUser userResult = managerService.findByManagerId(model,session);
-        //매니저 정보
-        model.addAttribute("userResult",userResult);
-
-        //매니저가 소속된 시장의 주문만 리스트에 저장
-        model.addAttribute("orderList", model.getAttribute("managerOrderList"));
-
-        //------페이징-------
-        Pageable pageable = PageRequest.of(page, size,Sort.by("createdDate").descending());
-        Page<NewOrder> pageList = managerService.getNewOrderPaging(userResult,pageable);
-        model.addAttribute("pageList",pageList);
-
-        return "manager/order_list";
-    }
-
     @PostMapping("/managerUpdate")
     public String managerUpdateResult(@ModelAttribute ManagerUser managerUser, Model model, HttpSession session){
         if(managerService.managerUpdate(managerUser,session)){
@@ -166,11 +178,9 @@ public class ManagerController {
     }
 
 
-    //로그인
+    //로그인데
     @PostMapping("/managerLogin")
-    public String loginResult(@ModelAttribute ManagerUser managerUser, HttpSession session, Model model,
-                              @RequestParam(defaultValue = "0") int page,
-                              @RequestParam(defaultValue = "3") int size){
+    public String loginResult(@ModelAttribute ManagerUser managerUser, HttpSession session, Model model){
         boolean result = managerService.loginCheck(managerUser,session);
         // 매니저가 속한 시장의 NewOrder 를 가지고와서 수락/거절 수락을누르면 NewOrder의 상태가 '주문시작' 으로 업데이트하고 매니저seq도 업데이트 해준다.
         if(result){
@@ -184,17 +194,21 @@ public class ManagerController {
             //매니저가 소속된 시장의 주문만 리스트에 저장
            model.addAttribute("orderList", model.getAttribute("managerOrderList"));
 
-           //------페이징-------
-            Pageable pageable = PageRequest.of(page, size, Sort.Direction.DESC, "createdDate");
-            Page<NewOrder> pageList = managerService.getNewOrderPaging(userResult,pageable);
-            model.addAttribute("pageList",pageList);
+            int pageNumber = 0; // 2번째 페이지를 가져올 때는 1을 사용 (0부터 시작)
+            int pageSize = 4; // 한 페이지에 4개씩 보여줄 때
+            Pageable pageable = PageRequest.of(pageNumber, pageSize);
+            String orderStatus = "배달완료";
+            String orderStatusNo ="주문거절";
+            Page<NewOrder> resultPage = orderService.pageList(userResult, orderStatus, orderStatusNo,pageable);
+            model.addAttribute("resultPage",resultPage);
 
             return "manager/order_list";
+        }else{
+            model.addAttribute("fail","아이디 또는 비밀번호가 틀렸습니다. 확인해주세요.");
         }
-        model.addAttribute("fail","아이디 또는 비밀번호가 틀렸습니다. 확인해주세요.");
         return "manager/manager_login";
     }
-    //로그인데
+
     @PostMapping("/manager_order_search")
     public String orderSearch(@ModelAttribute ManagerUser managerUser, HttpSession session, Model model){
 
@@ -206,6 +220,14 @@ public class ManagerController {
 
             //매니저가 소속된 시장의 주문만 리스트에 저장
             model.addAttribute("orderList", model.getAttribute("managerOrderList"));
+
+            int pageNumber = 0; // 2번째 페이지를 가져올 때는 1을 사용 (0부터 시작)
+            int pageSize = 4; // 한 페이지에 4개씩 보여줄 때
+            Pageable pageable = PageRequest.of(pageNumber, pageSize);
+            String orderStatus = "배달완료";
+            String orderStatusNo ="주문거절";
+            Page<NewOrder> resultPage = orderService.pageList(userResult, orderStatus, orderStatusNo,pageable);
+            model.addAttribute("resultPage",resultPage);
 
             return "manager/order_list";
         }else{
@@ -235,7 +257,7 @@ public class ManagerController {
         return "admin/admin_manager";
     }
 
-    // 수락 누르면
+    // 거절 누르면
     @GetMapping("/reject")
     public String orderReject(@RequestParam("orderNumber") String rOrderNumber,
                               @RequestParam("managerUser") String managerSeq,
@@ -319,17 +341,4 @@ public class ManagerController {
 
         return "manager/order_list";
     }
-
-    @PostMapping("/deleteManagerUsers")
-    @ResponseBody
-    public ResponseEntity<String> deleteManagerUsers(@RequestBody List<Long> selectedManagerSeqs) {
-        try {
-            managerService.deleteManagerUsers(selectedManagerSeqs);
-            return ResponseEntity.ok("회원 삭제가 완료되었습니다.");
-        } catch (Exception e) {
-            log.error("회원 삭제 중 오류 발생: " + e.getMessage());
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("회원 삭제에 실패했습니다.");
-        }
-    }
-
 }
