@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <link href="../code/loginpage.css" rel="stylesheet" media="all">
     <link href="../../user/css/user_find_id.css" rel="stylesheet">
-    <title>Orimarket_findId</title>
+    <title>Orimarket 아이디찾기</title>
     <script>
         <%-- 서버에서 에러 메시지를 전달할 경우 알림 팝업 띄우기 --%>
         <% if (request.getAttribute("loginError") != null) { %>
