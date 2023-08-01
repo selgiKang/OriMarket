@@ -190,11 +190,12 @@
   </style>
 </head>
 <body>
-<form action="/user_review" method="post">
+<form action="/user_review" method="post" enctype="multipart/form-data">
   <div class="main-container">
     <div class="user_total_review">
-        <c:forEach var="abcd" items="${abcde}" varStatus="status">
+        <c:forEach var="abcd" items="${abcde}" varStatus="status" >
           <c:if test="${status.index == 0}">
+          <input type="hidden" name="orderNumber" value="${abcd.orderNumber}">
           <input type="hidden" name="newOrder.newOrderSeq" value="${abcd.newOrder.newOrderSeq}">
           <h3 style="text-align: center; margin-top: 5px;"><input type="hidden" name="buStoreName" value="${abcd.buStoreName}">
             ${abcd.buStoreName}
@@ -289,49 +290,50 @@
       <li class="box"><span class="plus-icon">+</span></li>
       <li class="box"><span class="plus-icon">+</span></li>
     </ul>
-    <input type="file" class="real-upload" name="" accept="image/*" required multiple>
-    <button class="submit-button" type="submit">리뷰 작성하기</button>
+    <input type="file" accept="image/*" name="pictureUrls" id="logo-upload" onchange="previewPicture(event)" class="real-upload" required multiple>
+    <%--<button class="submit-button" type="submit">리뷰 작성하기</button>--%>
+    <button class="submit-button" type="button" onclick="uploadImagesAndSubmit()">리뷰 작성하기</button>
 </div>
   </form>
 
 
 <script>
   let selectedBoxIndex; // 선택한 박스 인덱스 추적 변수
-  function getImageFiles(e) {
-    const uploadFiles = [];
-    const files = e.currentTarget.files;
 
+  function getImageFiles(e) {
+    const files = e.currentTarget.files;
     const imagePreview = document.getElementById('imagePreview');
     const boxes = imagePreview.querySelectorAll('.box');
 
-    if ([...files].length > 3) {
-      alert('이미지는 최대 3장까지만 업로드 할 수 있습니다.');
-      return;
-    }
+    // 파일 선택 수와 최대 허용 개수 비교
+    const maxFiles = 3; // 최대 허용 이미지 개수
+    const numFiles = Math.min(files.length, maxFiles);
 
-    // File type and count validation
-    [...files].forEach((file, index) => {
-      if (!file.type.match("image/.*")) {
-        alert('이미지 파일만 업로드가 가능합니다.');
-        return;
-      }
+    // 박스 개수에 맞게 이미지를 미리보기로 채웁니다.
+    for (let i = 0; i < maxFiles; i++) {
+      const previewBox = boxes[i];
+      const plusIcon = previewBox.querySelector('.plus-icon');
 
-      if (index < 3) {
-        uploadFiles.push(file);
+      if (i < numFiles) {
+        // 파일 선택한 경우
+        const file = files[i];
         const reader = new FileReader();
         reader.onload = (e) => {
-          const preview = createElement(e, file);
-          const selectedBox = boxes[selectedBoxIndex]; // 선택한 박스 가져오기
-          if (selectedBox) {
-            selectedBox.innerHTML = '';
-            selectedBox.appendChild(preview);
-            hidePlusIcon(selectedBox); // 선택한 박스의 플러스 아이콘 숨기기
-            addDeleteIcon(selectedBox, file); // 선택한 박스에 삭제 아이콘 추가하기
-          }
+          const imgElement = createElement(e, file);
+          previewBox.innerHTML = '';
+          previewBox.appendChild(imgElement);
+          addDeleteIcon(previewBox, file); // 삭제 아이콘 추가
         };
         reader.readAsDataURL(file);
+      } else {
+        // 파일 선택하지 않은 경우
+        previewBox.innerHTML = '<span class="plus-icon">+</span>';
+        hidePlusIcon(previewBox);
       }
-    });
+    }
+
+    // 선택한 박스 인덱스 재설정
+    selectedBoxIndex = numFiles - 1;
   }
 
   function createElement(e, file) {
@@ -397,6 +399,56 @@
     console.log('리뷰 작성하기 버튼이 클릭되었습니다.');
     document.querySelector('form').submit(); // 필요에 따라 폼 제출을 직접 호출할 수도 있습니다.
   });
+
+  function previewPicture(event) {
+    const pictureInput = event.target;
+    const picturePreview = document.getElementById('logo-preview');
+
+    if (pictureInput.files && pictureInput.files[0]) {
+      const reader = new FileReader();
+
+      reader.onload = function (e) {
+        const imgElement = document.createElement('img');
+        imgElement.src = e.target.result;
+        imgElement.style.maxWidth = '100%'; // 이미지 크기 조절 (선택사항)
+        imgElement.style.height = "auto";
+        picturePreview.innerHTML = ''; // 이미지 미리보기 업데이트
+        picturePreview.appendChild(imgElement);
+      };
+      reader.readAsDataURL(pictureInput.files[0]);
+    }
+  }
+  function uploadImagesAndSubmit() {
+    const realUpload = document.querySelector('.real-upload');
+    const formData = new FormData();
+
+    // 선택된 파일들을 FormData에 추가
+    if (realUpload.files && realUpload.files.length > 0) {
+      for (const file of realUpload.files) {
+        formData.append('pictureUrls', file);
+      }
+    }
+
+    // 기존 폼 데이터도 추가 (평가, 리뷰 등 다른 필드들)
+    const formElement = document.querySelector('form');
+    const formDataFromForm = new FormData(formElement);
+    for (const [key, value] of formDataFromForm.entries()) {
+      formData.append(key, value);
+    }
+
+    // AJAX를 사용하여 FormData 전송
+    fetch('/user_review', {
+      method: 'POST',
+      body: formData
+    })
+            .then(response => response.json())
+            .then(data => {
+              // 서버로부터 온 응답에 따른 처리 (필요한 경우)
+            })
+            .catch(error => {
+              // 에러 처리 (필요한 경우)
+            });
+  }
 </script>
 </body>
 

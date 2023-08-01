@@ -3,6 +3,9 @@ package com.choongang.OriMarket.review;
 import com.choongang.OriMarket.business.store.BusinessStore;
 import com.choongang.OriMarket.business.store.BusinessStoreRepository;
 import com.choongang.OriMarket.business.user.BusinessUser;
+import com.choongang.OriMarket.order.NewOrderDetail;
+import com.choongang.OriMarket.order.NewOrderDetailRepository;
+import com.choongang.OriMarket.order.NewOrderRepository;
 import com.choongang.OriMarket.store.Item;
 import com.choongang.OriMarket.store.ItemRepository;
 import com.choongang.OriMarket.store.Store;
@@ -37,21 +40,50 @@ public class ReviewService {
 
     private final BusinessStoreRepository businessStoreRepository;
 
-    public void save(Review review, HttpSession session, Model model){
-        String[] itemNames = review.getItemName().split(",");
-        for (int i = 0; i < itemNames.length; i++) {
-            System.out.println("실행: " + itemNames[i].trim());
-        }
-        User byId = userRepository.findById((Long) session.getAttribute("userSeq")).orElseThrow();
-        review.setUser(byId);
-        Item byId1 = itemRepository.findByItemName(review.getItemName());
-        review.setBuStoreName(byId1.getBusinessStore().getBuStoreName());
-        reviewRepository.save(review);
-        BusinessStore businessStore = byId1.getBusinessStore();
-        List<Review> reviews = byId.getReviews();
+    private final NewOrderDetailRepository newOrderDetailRepository;
+    public void save(Review review, HttpSession session, Model model, List<String> imageUrls){
 
-        List<Review> reviewListResult = reviewRepository.findByBusinessStore(businessStore);
-        //리뷰 총점 계산
+        System.out.println("뉴오더시퀀스:"+review.getNewOrder());
+        System.out.println("주문번호"+review.getOrderNumber());
+        System.out.println("가게이름:"+review.getBuStoreName());
+        System.out.println("물건이름:"+review.getItemName());
+        System.out.println("별점:"+review.getRating());
+        System.out.println("맛:"+review.getTaste());
+        System.out.println("양:"+review.getAmount());
+        System.out.println("내용:"+review.getContent());
+
+        for(String s:imageUrls) {
+            System.out.println("히히히정보:" + s);
+        }
+
+
+        List<NewOrderDetail> byBuStoreNameAndOrderNumber = newOrderDetailRepository.findByBuStoreNameAndOrderNumber(review.getBuStoreName(), review.getOrderNumber());
+        for(NewOrderDetail newOrderDetail:byBuStoreNameAndOrderNumber){
+            newOrderDetail.setReviewtrue("리뷰");
+            newOrderDetailRepository.save(newOrderDetail);
+        }
+
+        String[] itemNames = review.getItemName().split(",");
+        for(String item:itemNames) {
+            Review newReview = new Review();
+            User byUser = userRepository.findById((Long) session.getAttribute("userSeq")).orElseThrow();
+            Item byItemName = itemRepository.findByItemNameAndBusinessStore_BuStoreName(item, review.getBuStoreName());
+            BusinessStore byBuStore = businessStoreRepository.findById(byItemName.getBusinessStore().getBuStoreNumber()).orElseThrow();
+            newReview.setNewOrder(review.getNewOrder());
+            newReview.setBuStoreName(review.getBuStoreName());
+            newReview.setItemName(review.getItemName());
+            newReview.setRating(review.getRating());
+            newReview.setTaste(review.getTaste());
+            newReview.setAmount(review.getAmount());
+            newReview.setContent(review.getContent());
+            newReview.setOrderNumber(review.getOrderNumber());
+            newReview.setItem(byItemName);
+            newReview.setBusinessStore(byBuStore);
+            newReview.setUser(byUser);
+            reviewRepository.save(newReview);
+        }
+
+        /*//리뷰 총점 계산
         int totalSum = 0;
         int reviewCount = reviewListResult.size();
         for(Review review1:reviewListResult){
@@ -61,10 +93,8 @@ public class ReviewService {
             }
         }
         double averageRating = (double) totalSum / reviewCount;
-        model.addAttribute("aveRating",averageRating);
-
-
-        model.addAttribute("re",reviews);
+        model.addAttribute("aveRating",averageRating);*/
+        /*model.addAttribute("re",reviews);*/
     }
 
     public List<Review> findReview(Review review,BusinessStore businessStore){

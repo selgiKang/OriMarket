@@ -1,5 +1,6 @@
 package com.choongang.OriMarket.business.store;
 
+import com.choongang.OriMarket.business.market.Market;
 import com.choongang.OriMarket.business.user.BusinessUser;
 import com.choongang.OriMarket.review.Review;
 import com.choongang.OriMarket.store.Store;
@@ -14,6 +15,8 @@ public interface BusinessStoreRepository extends JpaRepository<BusinessStore,Lon
     BusinessStore findByBusinessUser(BusinessUser businessUser);
 
     List<BusinessStore> findByBuStoreName(String searchKeyword);
+
+    BusinessStore findByBuStoreNameAndMarket(String buStoreName, Market market);
 
     BusinessStore findByBuStoreNumber(Long businessStoreNumber);
 

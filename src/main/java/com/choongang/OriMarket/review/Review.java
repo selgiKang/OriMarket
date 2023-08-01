@@ -65,6 +65,9 @@ public class Review {
     @Column
     private String buStoreName;
 
+    @Column
+    private String orderNumber;
+
     @ManyToOne(fetch = FetchType.LAZY) //lazy가 성능최적화
     @JoinColumn(name ="business_store")
     private BusinessStore businessStore;

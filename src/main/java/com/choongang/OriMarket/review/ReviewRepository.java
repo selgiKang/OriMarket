@@ -10,5 +10,5 @@ import java.util.List;
 
 public interface ReviewRepository extends JpaRepository<Review,Long> {
 
-    List<Review> findByBusinessStore(BusinessStore businessStoreNumber);
+    List<Review> findByBusinessStore(BusinessStore businessStore);
 }

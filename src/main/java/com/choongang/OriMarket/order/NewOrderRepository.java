@@ -28,14 +28,10 @@ public interface NewOrderRepository extends JpaRepository<NewOrder, Long> {
 
     //containing = 특정 문자열을 포함하는 데이터를 검색 가능
     List<NewOrder> findByCreatedDateContaining(String orderDate);
-
     List<NewOrder> findByRider(Rider rider);
-
     List<NewOrder> findByRiderOrderByCreatedDateDesc(Rider rider);
     List<NewOrder> findByOrderStatusAndUserOrderByCreatedDateDesc(String string,User user);
-
     Page<NewOrder> findByManagerUserOrderByCreatedDateDesc(ManagerUser managerUser, Pageable pageable);
-
     Page<NewOrder> findByRiderOrderByCreatedDateDesc(Rider rider,Pageable pageable);
     Page<NewOrder> findByManagerUser(ManagerUser managerUser, Pageable pageable);
 }
