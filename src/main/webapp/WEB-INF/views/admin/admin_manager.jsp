@@ -22,15 +22,27 @@
         }
 
         /* 전체 크기 */
-        body{margin: 0; padding: 0; font-family:'LINESeedKR-Bd'; font-size: 16px; text-align: center; width: 100%; height: 100%}
-        #goods_container{width: 375px; height:812px; margin: 0 auto;}
+        body{
+            margin: 0;
+            padding: 0;
+            font-family:'LINESeedKR-Bd';
+            font-size: 16px;
+            text-align: center; width: 1920px;}
 
         /* 가게상호명,업주 */ /* 230723 승원 */
-        #goods_store{height:100px; background-color:#46A973; color:#fff; text-align: right; display: flex; justify-content: end; align-items: center;}
-        .snun_wrap{margin-right:80px}
+        #goods_store{
+            height:100%;
+            background-color:#46A973;
+            color:#fff;
+            text-align: right;
+            display: flex;
+            justify-content: end;
+            align-items: center;}
+
+        .snun_wrap{width: 1920px; text-align: center;}
 
         /* 230723 승원 */
-        .goods_store_wrap{background-color:#eee; height:712px;}
+        .goods_store_wrap{background-color:#eee; width: 100%;}
         .top_title_wrap h1{text-align:center; margin:15px 18%;}
 
         #goods_title{padding:20px 0 0;}
@@ -41,17 +53,25 @@
 
         /* ------------------------------------------ 공통적용css---------------------------------------------- */
 
-        #goods_list{font-size: 10px; margin: 1px;}
+        #goods_list{font-size: 15px; margin: 1px;}
 
         /* 230723 승원 */
-        #goods_list table{ border-radius: 5px; background-color:#fff; margin:auto; }
+        #goods_list table{ border-radius: 5px; background-color:#fff; width: 1920px; }
 
         .goods_listTitle td{
             padding: 12px;
         }
 
         /* 230723 승원 */
-        #goods_title > a > input{ background-color: #ffbf41; color: #333; font-weight:600; padding: 8px 8px; border:none; border-radius:5px; cursor:pointer;}
+        #goods_title > a > input{
+            background-color: #ffbf41;
+            color: #333;
+            font-weight:600;
+            padding: 8px 8px;
+            border:none;
+            border-radius:5px;
+            cursor:pointer;}
+
         #goods_title > a > input:hover {background-color:#333; color:#fff;}
 
         .goods_listTitle{color: #46A973; margin-bottom:15px;}
@@ -67,6 +87,17 @@
     <div class="goods_store_wrap">
         <div id="goods_title">
             <a><input type="button" class="delete_btn" value="선택회원 삭제" onclick="deleteSelectedManagerUsers()"></a>
+            <a><input type="button" class="show_all_btn" value="전체회원 보기" onclick="showAllManagerUsers()"></a>
+            <form id="searchForm">
+                <select id="searchType" name="searchType">
+                    <option value="managerId">아이디</option>
+                    <option value="managerName">이름</option>
+                    <option value="managerEmail">이메일</option>
+                    <option value="managerPhone">휴대폰 번호</option>
+                </select>
+                <input type="text" id="searchValue" name="searchValue">
+                <input type="button" value="검색" onclick="searchManagerUsers()">
+            </form>
         </div>
         <br>
         <div id="goods_list">
@@ -130,6 +161,71 @@
             }
         };
         xhr.send(JSON.stringify(selectedManagerSeqs));
+    }
+
+
+    //매니저 회원검색 crud
+    function searchManagerUsers() {
+        // 선택한 검색 조건을 가져옴
+        var searchType = document.getElementById('searchType').value;
+        // 입력한 검색어를 가져와 소문자로 변환
+        var searchText = document.getElementById('searchValue').value.toLowerCase();
+
+        // 매니저 목록의 모든 행을 가져옴
+        var managers = document.querySelectorAll('#goods_list table tr');
+
+        var hasResults = false; // 검색 결과가 있는지 확인하기 위한 변수
+
+        for (var i = 1; i < managers.length; i++) { // 1부터 시작하여 테이블 헤더 행을 건너뜀
+            // 행에서 매니저 아이디, 이름, 이메일, 휴대폰번호를 가져옴
+            var managerId = managers[i].querySelector('td:nth-child(3)').textContent.toLowerCase();
+            var managerName = managers[i].querySelector('td:nth-child(5)').textContent.toLowerCase();
+            var managerEmail = managers[i].querySelector('td:nth-child(7)').textContent.toLowerCase();
+            var managerPhone = managers[i].querySelector('td:nth-child(6)').textContent.toLowerCase();
+
+            // 검색어가 비어있으면 모든 행을 보여줌
+            if (searchText === '') {
+                managers[i].style.display = '';
+                hasResults = true;
+            } else {
+                // 검색 조건과 검색어를 기준으로 행을 필터링하여 보여줄지 숨길지 결정
+                if (
+                    (searchType === 'managerId' && managerId.includes(searchText)) || // 검색 조건이 '아이디'이면 매니저 아이디로 필터링
+                    (searchType === 'managerName' && managerName.includes(searchText)) || // 검색 조건이 '이름'이면 매니저 이름으로 필터링
+                    (searchType === 'managerEmail' && managerEmail.includes(searchText)) || // 검색 조건이 '이메일'이면 매니저 이메일로 필터링
+                    (searchType === 'managerPhone' && managerPhone.includes(searchText)) // 검색 조건이 '휴대폰'이면 매니저 휴대폰번호로 필터링
+                ) {
+                    managers[i].style.display = ''; // 일치하는 행은 보여줌
+                    hasResults = true;
+                } else {
+                    managers[i].style.display = 'none'; // 일치하지 않는 행은 숨김
+                }
+            }
+        }
+
+        // 검색 결과가 없는 경우 알림창 띄우기
+        if (!hasResults) {
+            alert('잘못 입력하셨거나 해당 회원정보가 없습니다.');
+        }
+    }
+
+    //엔터키로 검색되게
+    var searchValue = document.getElementById('searchValue');
+    searchValue.addEventListener('keyup', function(event) {
+        if (event.keyCode === 13) { // Enter 키를 누른 경우
+            searchManagerUsers(); // 검색 기능 함수를 호출
+        }
+    });
+
+    // 전체회원 보기
+    function showAllManagerUsers() {
+        // 매니저 목록의 모든 행을 가져옴
+        var managers = document.querySelectorAll('#goods_list table tr');
+
+        // 모든 행을 보여줌
+        for (var i = 1; i < managers.length; i++) { // 1부터 시작하여 테이블 헤더 행을 건너뜀
+            managers[i].style.display = '';
+        }
     }
 </script>
 </body>
