@@ -183,12 +183,17 @@
 
 
 		//주소없이 주문할 경우
-		const userAddress = "${userAddress1}";
+		const deliveryType = document.querySelector('input[name="deliveryType"]:checked').value;
 
-		// Check if userAddress is empty or not
-		if (userAddress.trim() === "") {
-			alert("주소를 먼저 등록해 주세요.");
-			return;
+		// If delivery option is selected
+		if (deliveryType === "배달") {
+			const userAddress = "${userAddress1}";
+
+			// Check if userAddress is empty or not
+			if (userAddress.trim() === "") {
+				alert("주소를 먼저 등록해 주세요.");
+				return;
+			}
 		}
 
 
