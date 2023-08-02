@@ -163,10 +163,6 @@ public class AdminController {
         return "admin/admin_manager";
     }
 
-
-
-
-
     //일반사용자출력
     @GetMapping("/a_user")
     public String userAccess(Model model){
@@ -208,6 +204,26 @@ public class AdminController {
     public String adminOrder(Model model){
         List<NewOrder> orderList = newOrderRepository.findAll();
         model.addAttribute("orders",orderList);
+        return "/admin/admin_Order";
+    }
+
+    @GetMapping("/searchOrder")
+    public String searchOrder(@RequestParam(value = "keyword")String keyword,@RequestParam(value = "selectType")String selectType, Model model){
+        if (selectType.equals("marketName")) {
+            List<NewOrder> orderList = newOrderRepository.findByOrderMarketNameContaining(keyword);
+            model.addAttribute("orders", orderList);
+
+        } else if (selectType.equals("userId")) {
+
+            User user = userRepository.findByUserId(keyword);
+            List<NewOrder> orderList = newOrderRepository.findByUser_UserSeq(user.getUserSeq());
+            model.addAttribute("orders", orderList);
+
+        } else if (selectType.equals("orderNum")) {
+            List<NewOrder> orderList = newOrderRepository.findByOrderNumberContaining(keyword);
+            model.addAttribute("orders", orderList);
+
+        }
         return "/admin/admin_Order";
     }
 

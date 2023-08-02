@@ -87,12 +87,8 @@
     </div>
     <div class="rider_store_wrap">
         <div id="rider_title">
-            <div class="top_title_wrap">
-                <!-- 뒤로가기 -->
-                <button class="backbtn" onclick="window.location.replace('/ridernotice1')">&lt;</button>
-            </div>
             <form action="/admin_logout" method="get">
-                <input type="button" class="delete_btn" value="로그아웃">
+                <input type="submit" class="delete_btn" value="로그아웃">
             </form>
         </div>
         <br>
