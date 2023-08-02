@@ -2,6 +2,7 @@ package com.choongang.OriMarket.order;
 
 import com.choongang.OriMarket.business.user.BusinessUser;
 import com.choongang.OriMarket.user.User;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -27,6 +28,7 @@ public class NewOrderDetail {
     @Column(name = "new_order_detail_seq")
     private Long newOrderDetailSeq;
 
+    @JsonBackReference
     @ManyToOne(fetch = FetchType.LAZY) //lazy가 성능최적화
     @JoinColumn(name ="new_order_seq")
     private NewOrder newOrder;

@@ -33,43 +33,106 @@
     </style>
     <script>
         function loadPage(pageNumber) {
+            var pageSize = 4;
             $.ajax({
                 url: '/orderListResult',
-                type: 'GET',
-                data: {'page':pageNumber},
+                type: 'POST',
+                data: {'page': pageNumber,"size": pageSize},
                 dataType: 'json',
-                success: function (data) {
+                success: function (response) {
+                    console.log("된다");
                     try {
-                        console.log("여기");
                         // 서버에서 전달된 JSON 데이터를 JavaScript 객체로 파싱
-                        var jsonData = JSON.parse(data);
-
+                        console.log(1);
                         // jsonData에서 필요한 정보를 추출하여 페이지에 추가하는 로직을 작성
-                        var orderList = jsonData.content;
+                        var orderList = response.content;
+                        console.log(2);
 
-                        // 주문 정보를 표시할 HTML을 생성하는 함수
-                        function generateOrderHTML(order) {
-                        }
+                        // // 주문 정보를 표시할 HTML을 생성하는 함수
+                        // function generateOrderHTML(order) {
+                        //     // ... 주문 정보를 HTML 문자열로 변환하는 코드 ...
+                        // }
 
                         // 주문 정보를 추가할 요소를 선택하고, 기존 내용을 지우고 새로운 주문 정보를 추가
-                        var orderItemDiv = document.querySelector('.order-item[data-status="completed"]');
-                        orderItemDiv.innerHTML = ''; // 기존 내용 초기화
-
+                        var orderItemDiv = $('.order-item[data-status="completed"]');
+                        orderItemDiv.empty(); // 기존 내용 초기화
+                        console.log(3);
                         orderList.forEach(function(order) {
+                            console.log(4);
                             if (order.orderStatus === '배달완료' || order.orderStatus === '주문거절') {
-                                orderItemDiv.insertAdjacentHTML('beforeend', generateOrderHTML(order));
+                                var orderDiv = generateOrderHTML(order);
+                                orderItemDiv.append(orderDiv);
                             }
                         });
+                        console.log(5);
+                        var paginationHTML = generatePaginationHTML(response);
+                        $('.pagination').replaceWith(paginationHTML);
                     } catch (e) {
-                        // 에러가 발생한 경우 처리
-                        console.error('에러 발생:', e);
+                        console.log("e");
                     }
                 },
-                error: function () {
-                    alert("서버와 통신 중 오류가 발생했습니다.");
+                error: function (xhr, status, errorThrown) {
+                    console.log(errorThrown);
+                    alert('서버와 통신 중 오류가 발생했습니다.');
                 }
             });
         }
+        function generateOrderHTML(order) {
+            // 주문번호 클릭 시 주문 상세 정보를 보여줄 버튼
+            var orderNumberLink = $('<a></a>')
+                .attr('href', '/manager_receiptDelivery?orderNumber=' + order.orderNumber)
+                .text('주문번호: ' + order.orderNumber)
+                .css('color', '#4caf50');
+
+            var orderNumberSpan = $('<span></span>')
+                .addClass('order-number')
+                .append(orderNumberLink);
+
+            var orderDetailsDiv = $('<div></div>').addClass('order-details');
+            order.newOrderDetails.forEach(function(detail) {
+                var itemInfoSpan = $('<span></span>')
+                    .text(detail.itemName + ' 총 ' + detail.itemCount + '개');
+                orderDetailsDiv.append(itemInfoSpan);
+            });
+
+            var orderPriceSpan = $('<span></span>')
+                .addClass('order-price')
+                .text('총 금액 ' + order.orderTotalPrice + '원');
+
+            var orderDiv = $('<div></div>')
+                .addClass('order-item')
+                .attr('data-status', 'completed')
+                .append(orderNumberSpan, orderDetailsDiv, orderPriceSpan);
+
+            return orderDiv;
+        }
+
+        function generatePaginationHTML(resultPage) {
+            var paginationHTML = $('<ul></ul>').addClass('pagination');
+
+            if (!resultPage.first) {
+                paginationHTML.append($('<li></li>').append($('<a href="javascript:void(0);">이전</a>').attr('onclick', 'loadPage(' + (resultPage.number - 1) + ')')));
+            } else {
+                paginationHTML.append($('<li></li>').addClass('disabled').append($('<span>이전</span>')));
+            }
+
+            for (var i = 0; i < resultPage.totalPages; i++) {
+                if (i === resultPage.number) {
+                    paginationHTML.append($('<li></li>').addClass('active').append($('<span>' + (i + 1) + '</span>')));
+                } else {
+                    paginationHTML.append($('<li></li>').append($('<a href="javascript:void(0);">' + (i + 1) + '</a>').attr('onclick', 'loadPage(' + i + ')')));
+                }
+            }
+
+            if (!resultPage.last) {
+                paginationHTML.append($('<li></li>').append($('<a href="javascript:void(0);">다음</a>').attr('onclick', 'loadPage(' + (resultPage.number + 1) + ')')));
+            } else {
+                paginationHTML.append($('<li></li>').addClass('disabled').append($('<span>다음</span>')));
+            }
+
+            return paginationHTML;
+        }
+
     </script>
 </head>
 <body id="orderList_body">
@@ -202,47 +265,36 @@
                 </c:forEach>
                 <c:if test="${resultPage.totalPages > 1}">
                     <ul class="pagination">
-                        <!-- 이전 페이지 버튼 -->
-                        <li><a href="javascript:void(0);" onclick="loadPage(${resultPage.number - 1})">이전</a></li>
-                        <!-- 페이지 버튼들 -->
+                        <c:choose>
+                            <c:when test="${not resultPage.first}">
+                                <li><a href="javascript:void(0);" onclick="loadPage(${resultPage.number - 1})">이전</a></li>
+                            </c:when>
+                            <c:otherwise>
+                                <li class="disabled"><span>이전</span></li>
+                            </c:otherwise>
+                        </c:choose>
+
                         <c:forEach var="i" begin="0" end="${resultPage.totalPages - 1}">
-                            <li><a href="javascript:void(0);" onclick="loadPage(${i})">${i + 1}</a></li>
+                            <c:choose>
+                                <c:when test="${i == resultPage.number}">
+                                    <li class="active"><span>${i + 1}</span></li>
+                                </c:when>
+                                <c:otherwise>
+                                    <li><a href="javascript:void(0);" onclick="loadPage(${i})">${i + 1}</a></li>
+                                </c:otherwise>
+                            </c:choose>
                         </c:forEach>
-                        <!-- 다음 페이지 버튼 -->
-                        <li><a href="javascript:void(0);" onclick="loadPage(${resultPage.number + 1})">다음</a></li>
+
+                        <c:choose>
+                            <c:when test="${not resultPage.last}">
+                                <li><a href="javascript:void(0);" onclick="loadPage(${resultPage.number + 1})">다음</a></li>
+                            </c:when>
+                            <c:otherwise>
+                                <li class="disabled"><span>다음</span></li>
+                            </c:otherwise>
+                        </c:choose>
                     </ul>
                 </c:if>
-<%--                <c:if test="${resultPage.totalPages > 1}">--%>
-<%--                    <ul class="pagination">--%>
-<%--                        <c:choose>--%>
-<%--                            <c:when test="${not resultPage.first}">--%>
-<%--                                <li><a href="/managerMain?page=${resultPage.number - 1}">이전</a></li>--%>
-<%--                            </c:when>--%>
-<%--                            <c:otherwise>--%>
-<%--                                <li class="disabled"><span>이전</span></li>--%>
-<%--                            </c:otherwise>--%>
-<%--                        </c:choose>--%>
-<%--                        <c:forEach var="i" begin="0" end="${resultPage.totalPages - 1}">--%>
-<%--                            <c:choose>--%>
-<%--                                <c:when test="${i == resultPage.number}">--%>
-<%--                                    <li class="active"><span>${i + 1}</span></li>--%>
-<%--                                </c:when>--%>
-<%--                                <c:otherwise>--%>
-<%--                                    <li><a href="/managerMain?page=${i}">${i + 1}</a></li>--%>
-<%--                                </c:otherwise>--%>
-<%--                            </c:choose>--%>
-<%--                        </c:forEach>--%>
-
-<%--                        <c:choose>--%>
-<%--                            <c:when test="${not resultPage.last}">--%>
-<%--                                <li><a href="/managerMain?page=${resultPage.number + 1}">다음</a></li>--%>
-<%--                            </c:when>--%>
-<%--                            <c:otherwise>--%>
-<%--                                <li class="disabled"><span>다음</span></li>--%>
-<%--                            </c:otherwise>--%>
-<%--                        </c:choose>--%>
-<%--                    </ul>--%>
-<%--                </c:if>--%>
             </c:if>
             <c:if test="${empty resultPage}">
                 <p>주문이 없습니다.</p>
