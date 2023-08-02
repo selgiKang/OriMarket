@@ -9,10 +9,6 @@
                 // 서버에서 전달된 JSON 데이터를 JavaScript 객체로 파싱
                 // jsonData에서 필요한 정보를 추출하여 페이지에 추가하는 로직을 작성
                 var orderList = response.content;
-                // // 주문 정보를 표시할 HTML을 생성하는 함수
-                // function generateOrderHTML(order) {
-                //     // ... 주문 정보를 HTML 문자열로 변환하는 코드 ...
-                // }
                 // 주문 정보를 추가할 요소를 선택하고, 기존 내용을 지우고 새로운 주문 정보를 추가
                 var orderItemDiv = $('.order_pageing').eq(0);
                 orderItemDiv.empty(); // 기존 내용 초기화
