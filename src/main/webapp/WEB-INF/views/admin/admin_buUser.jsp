@@ -34,8 +34,6 @@
 
         .goods_listTitle{color: #46A973; margin-bottom:15px;}
     </style>
-
-    </style>
 </head>
 <body>
     <% if (request.getAttribute("deleteMessage") != null) { %>

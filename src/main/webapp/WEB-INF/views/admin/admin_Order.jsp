@@ -14,6 +14,30 @@
         .admin_orderlist{width:60%; border:1px solid #eee;}
         .admin_orderlist > tr {background-color:#eee;}
 
+
+        #goods_list{font-size: 15px; margin: 1px;}
+
+        /* 230723 승원 */
+        #goods_list table{ border-radius: 5px; background-color:#fff; width: 1920px; }
+
+        .goods_listTitle td{
+            padding: 12px;
+        }
+
+        /* 230723 승원 */
+        #goods_title > a > input{
+            background-color: #ffbf41;
+            color: #333;
+            font-weight:600;
+            padding: 8px 8px;
+            border:none;
+            border-radius:5px;
+            cursor:pointer;}
+
+        #goods_title > a > input:hover {background-color:#333; color:#fff;}
+
+        .goods_listTitle{color: #46A973; margin-bottom:15px;}
+
     </style>
 </head>
 <body>
@@ -52,32 +76,36 @@
             <form action="" method="">
                 <table id="b_table">
                     <tr class="goods_listTitle">
-                        <td>주문일자</td>
                         <td>주문번호</td>
                         <td>주문자</td>
                         <td>시장명</td>
                         <td>주문상품</td>
-                        <td>금액</td>
+                        <td>물건금액</td>
                         <td>수량</td>
+                        <td>배달/포장</td>
+                        <td>배달비</td>
+                        <td>총결제금액</td>
                         <td>결제수단</td>
-                        <td>가게요청사항</td>
-                        <td>배달요청사항</td>
-                        <td>가게</td>
+                        <td>상태</td>
+                        <td>매니저배정</td>
+                        <td>라이더배정</td>
                     </tr>
                     <%--반복문시작--%>
                     <c:forEach var="order" items="${orders}">
                         <tr>
-                            <td>${order.createdDate}</td>
-                            <td>${order.}</a></td>
-                            <td>${buser.businessStores.get(0).buStoreName}</td>
-                            <td>${buser.buUserName}</td>
-                            <td>${buser.buUserAddress}</td>
-                            <td>${buser.buUserId}</td>
-                            <td>${buser.buUserPhone}</td>
-                            <td>${buser.buUserEmail}</td>
-                            <td>
-                                <button><a href="/delete_buser/${buser.buUserNumber}">삭제</a></button>
-                            </td>
+                            <td>${order.orderNumber}</td>
+                            <td>${order.user.userId}</td>
+                            <td>${order.orderMarketName}</td>
+                            <td>${order.itemId1}</td>
+                            <td>${order.orderGoodsTotalPrice}</td>
+                            <td>${order.orderGoodsNum}</td>
+                            <td>${order.deliveryType}</td>
+                            <td>${order.orderDeliveryPrice}</td>
+                            <td>${order.orderTotalPrice}</td>
+                            <td>${order.orderType}</td>
+                            <td>${order.orderStatus}</td>
+                            <td>${order.managerUser.managerId}</td>
+                            <td>${order.rider.riderId}</td>
                         </tr>
                     </c:forEach>
                 </table>

@@ -152,11 +152,6 @@ public class AdminController {
 
 
 
-    @GetMapping("/admin_order")
-    public String adminOrder() {
-        return "admin/admin_Order";
-    }
-
     @PostMapping("/deleteManagerUsers")
     public String deleteManagerUsers(@RequestBody String[] selectedManagerSeqs){
 
