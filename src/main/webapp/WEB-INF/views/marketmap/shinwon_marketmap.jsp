@@ -82,7 +82,7 @@
                 <img class="map_bg_content3_img" src="../../img/marketmap/shinwon_noicon_04.png" alt="신원시장3컷">
 
                 <!-- 영광마트 -->
-                <div class="map_bg_content3_icon store_ygmart_box" onclick="">
+                <div class="map_bg_content3_icon store_ygmart_box" onclick="location.href='/store?favStoreName=영광마트'">
                     <img class="store_ygmart_icon mart" src="../../img/marketmap/mart.png">
                     <p class="store_ygmart_txt">영광마트</p>
                 </div>
@@ -94,7 +94,7 @@
                 </div>
 
                 <!-- 오떡순 -->
-                <div class="map_bg_content3_icon store_odducksun_box" onclick="">
+                <div class="map_bg_content3_icon store_odducksun_box" onclick="location.href='/store?favStoreName=오떡순'">
                     <img class="store_odducksun_icon snackbar" src="../../img/marketmap/snackbar.png">
                     <p class="store_odducksun_txt">오떡순</p>
                 </div>
@@ -126,13 +126,13 @@
                 </c:if>
 
                 <!-- 못난이꽈배기 -->
-                <div class="map_bg_content3_icon store_uglypretzel_box" onclick="">
+                <div class="map_bg_content3_icon store_uglypretzel_box" onclick="location.href='/store?favStoreName=못난이꽈배기'">
                     <img class="store_uglypretzel_icon pretzel" src="../../img/marketmap/pretzel.png">
                     <p class="store_uglypretzel_txt">못난이꽈배기</p>
                 </div>
 
                 <!-- 중국 슈퍼 -->
-                <div class="map_bg_content3_icon store_chinamart_box" onclick="">
+                <div class="map_bg_content3_icon store_chinamart_box" onclick="location.href='/store?favStoreName=중국슈퍼'">
                     <img class="store_chinamart_icon mart" src="../../img/marketmap/mart.png">
                     <p class="store_chinamart_txt">중국슈퍼</p>
                 </div>
