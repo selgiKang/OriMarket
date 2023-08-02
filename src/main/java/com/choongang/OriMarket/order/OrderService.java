@@ -104,7 +104,7 @@ public class OrderService {
     //이 어노테이션 사용 시 트랜잭션 내에서 LazyLoading 사용 가능해짐
     public Page<NewOrder> pageList(String managerUser,String OrderStatus, String orderStatusNo,Pageable pageable) {
 
-            return newOrderRepository.findByManagerUser_managerIdAndOrderStatusOrOrderStatus(managerUser,OrderStatus,orderStatusNo,pageable);
+            return newOrderRepository.findByManagerUser_managerIdAndOrderStatusOrOrderStatusOrderByCreatedDateDesc(managerUser,OrderStatus,orderStatusNo,pageable);
     }
 
 

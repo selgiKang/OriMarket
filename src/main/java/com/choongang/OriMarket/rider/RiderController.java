@@ -122,6 +122,17 @@ public class RiderController {
     public String riderOrderAccept(@RequestParam("orderNumber") String orderNumber,Model model,HttpSession session){
         NewOrder newOrder = riderService.riderOrderAccept(orderNumber,session);
         model.addAttribute("orderaccept", newOrder);
+
+
+        Rider riderSeq = riderRepository.findById((Long) session.getAttribute("riderSeq")).orElseThrow();
+
+        int pageNumber = 0;
+        int pageSize = 4;
+        Pageable pageable = PageRequest.of(pageNumber, pageSize);
+        String orderStatus = "배달완료";
+        String orderStatusNo ="주문거절";
+        Page<NewOrder> resultPage = riderService.pageList(riderSeq, orderStatus, orderStatusNo,pageable);
+        model.addAttribute("resultPage",resultPage);
         return "rider/rider_main";
     }
 
@@ -129,6 +140,16 @@ public class RiderController {
     public String riderOrderAccept1(@RequestParam("orderNumber") String orderNumber,Model model,HttpSession session){
         NewOrder newOrder = riderService.riderOrderAccept1(orderNumber,session);
         model.addAttribute("orderaccept1", newOrder);
+
+        Rider riderSeq = riderRepository.findById((Long) session.getAttribute("riderSeq")).orElseThrow();
+
+        int pageNumber = 0;
+        int pageSize = 4;
+        Pageable pageable = PageRequest.of(pageNumber, pageSize);
+        String orderStatus = "배달완료";
+        String orderStatusNo ="주문거절";
+        Page<NewOrder> resultPage = riderService.pageList(riderSeq, orderStatus, orderStatusNo,pageable);
+        model.addAttribute("resultPage",resultPage);
         return "rider/rider_main";
     }
 
@@ -136,6 +157,17 @@ public class RiderController {
     public String riderOrderAccept2(@RequestParam("orderNumber") String orderNumber,Model model,HttpSession session){
         List<NewOrder> newOrders = riderService.riderOrderAccept2(orderNumber, session);
         model.addAttribute("orderaccept2", newOrders);
+
+        Rider riderSeq = riderRepository.findById((Long) session.getAttribute("riderSeq")).orElseThrow();
+
+        int pageNumber = 0;
+        int pageSize = 4;
+        Pageable pageable = PageRequest.of(pageNumber, pageSize);
+        String orderStatus = "배달완료";
+        String orderStatusNo ="주문거절";
+        Page<NewOrder> resultPage = riderService.pageList(riderSeq, orderStatus, orderStatusNo,pageable);
+        model.addAttribute("resultPage",resultPage);
+
         return "rider/rider_main";
     }
 

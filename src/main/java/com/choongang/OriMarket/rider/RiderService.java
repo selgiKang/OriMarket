@@ -82,6 +82,9 @@ public class RiderService {
             String orderStatusNo ="주문거절";
             Page<NewOrder> byRiderAndOrderStatusOrOrderStatus = newOrderRepository.findByRiderAndOrderStatusOrOrderStatus(byRiderId, orderStatus, orderStatusNo, pageable);
             model.addAttribute("resultPage", byRiderAndOrderStatusOrOrderStatus);
+           for(NewOrder n : byRiderAndOrderStatusOrOrderStatus){
+               System.out.println(n.getOrderNumber());
+           }
             session.setAttribute("riderSeq",byRiderId.getRiderSeq());
             return true;
         }

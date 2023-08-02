@@ -53,19 +53,15 @@
                 <!-- 뒤로가기 -->
                 <a href="/adminMain"><button class="backbtn">&lt;</button></a>
             </div>
+            <a href="/a_buser"><input type="button" class="show_all_btn" value="전체회원 보기"></a>
+            <br>
             <form action="/searchBuser" method="get">
-                <table>
-                    <tr>
-                        <td>
-                            <select name="selectType" id="searchType">
-                                <option value="buUserName">사업자명</option>
-                                <option value="buUserNumber">사업자번호</option>
-                            </select>
-                        </td>
-                        <td><input type="text" name="keyword" id="searchValue"></td>
-                        <td><input type="submit" value="검색"></td>
-                    </tr>
-                </table>
+                <select name="selectType" id="searchType">
+                    <option value="buUserName">사업자명</option>
+                    <option value="buUserNumber">사업자번호</option>
+                </select>
+                <input type="text" name="keyword" id="searchValue">
+                <input type="submit" value="검색">
             </form>
         </div>
         <br>
