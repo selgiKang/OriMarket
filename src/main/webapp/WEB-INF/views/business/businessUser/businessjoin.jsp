@@ -197,10 +197,23 @@
     var phoneNumber = phoneInput.value;
     var numericPhoneNumber = phoneNumber.replace(/[^0-9]/g, "");
 
+    // Limit the numericPhoneNumber to 11 digits
+    numericPhoneNumber = numericPhoneNumber.slice(0, 11);
+
+    // Format the phone number with hyphens
+    if (numericPhoneNumber.length >= 3 && numericPhoneNumber.length <= 7) {
+      numericPhoneNumber = numericPhoneNumber.slice(0, 3) + "-" + numericPhoneNumber.slice(3);
+    } else if (numericPhoneNumber.length > 7) {
+      numericPhoneNumber =
+              numericPhoneNumber.slice(0, 3) + "-" +
+              numericPhoneNumber.slice(3, 7) + "-" +
+              numericPhoneNumber.slice(7);
+    }
     phoneInput.value = numericPhoneNumber;
 
+    // Check if the input value matches the numericPhoneNumber
     if (phoneNumber !== numericPhoneNumber) {
-      phoneError.textContent = "휴대폰 번호는 숫자만 입력 가능합니다.";
+      phoneError.textContent = "휴대폰 번호는 숫자 11자리만 입력 가능합니다.";
       phoneError.style.color = "red";
       phoneError.style.display = "block";
       phoneError.style.marginTop = "2px";
