@@ -113,9 +113,17 @@
                             </form>
                         </div>
                     </c:if>
-                        <c:if test="${order.orderStatus eq '픽업완료'}">
+                        <c:if test="${order.orderStatus eq '픽업완료' and order.deliveryType ne '포장'}">
                             <div class="action-buttons">
                                     <button class="accept-button">배차 요청중..</button>
+                            </div>
+                        </c:if>
+                        <c:if test="${order.orderStatus eq '픽업완료' and order.deliveryType eq '포장'}">
+                            <div class="action-buttons">
+                                <form action="/acceptPickupman" method="get">
+                                    <input type="hidden" name="orderNumber" value="${order.orderNumber}">
+                                    <button class="accept-button">전달 완료</button>
+                                </form>
                             </div>
                         </c:if>
                     </c:if>

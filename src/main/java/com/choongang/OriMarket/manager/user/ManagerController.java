@@ -342,4 +342,24 @@ public class ManagerController {
 
         return "manager/order_list";
     }
+    @GetMapping("/acceptPickupman")
+    public String acceptPickupman(NewOrder order, HttpSession session, Model model) {
+
+        if (managerService.findByManagerId(model, session) == null) {
+            model.addAttribute("statusMessage", "주문이 없습니다.");
+        } else {
+            NewOrder orderToUpdate = newOrderRepository.findByOrderNumber(order.getOrderNumber());
+            orderToUpdate.setOrderStatus("배달완료");
+            newOrderRepository.save(orderToUpdate);
+        }
+        //매니저 정보 가져오기
+        ManagerUser userResult = managerService.findByManagerId(model, session);
+        model.addAttribute("userResult", userResult);
+
+        //매니저 정보
+        List<NewOrder> orderList = (List<NewOrder>) model.getAttribute("managerOrderList");
+        model.addAttribute("orderList", orderList);
+
+        return "manager/order_list";
+    }
 }
