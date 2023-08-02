@@ -26,9 +26,8 @@ public class MarketMapController {
     public String marketmap() {
         return "marketmap/marketmap";
     }
-
     @GetMapping("/shinwon_marketmap")
-    public String marketmap2(@RequestParam("marketName") String marketName, Model model) {
+    public String marketmap2(@RequestParam("marketName") String marketName, Model model){
         model.addAttribute("marketName",marketName);
         Market byMarketName = marketRepository.findByMarketName(marketName);
         List<BusinessStore> businessStore = byMarketName.getBusinessStore();
