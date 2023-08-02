@@ -132,7 +132,7 @@
                     <h4>불닭발</h4>
                 <br>
                 <div class="rate_and_date">
-                    <h4 class="rating" data-rating="${currentItem.rating}"></h4>&nbsp;<h6 class="date">${currentItem.created_date}</h6>
+                    <h4 class="rating" data-rating="${currentItem.rating}"></h4>&nbsp;<h6 class="date">${currentItem.createdDate}</h6>
                 </div>
                 <div class="line"></div>
                 <div class="my_review_photo">

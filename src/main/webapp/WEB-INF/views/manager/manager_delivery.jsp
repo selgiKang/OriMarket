@@ -71,7 +71,7 @@
 					${fn:substring(orderDelivery.createdDate, 6, 8)}일
 					${fn:substring(orderDelivery.createdDate, 8, 10)}시
 					${fn:substring(orderDelivery.createdDate, 10, 12)}분
-					<%--${orderDelivery.created_date}--%>
+					<%--${orderDelivery.createdDate}--%>
 				</td>
 			</tr>
 			<tr class="orderDelivery_table_tr_1"><td>배달 주소</td></tr>

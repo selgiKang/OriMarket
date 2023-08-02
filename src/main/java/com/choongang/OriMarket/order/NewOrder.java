@@ -89,6 +89,7 @@ public class NewOrder {
     @JoinColumn(name="managerSeq")
     private ManagerUser managerUser;
 
+    @JsonIgnore
     @OneToOne(fetch =  FetchType.LAZY)
     @JoinColumn(name="rider_seq")
     private Rider rider;
