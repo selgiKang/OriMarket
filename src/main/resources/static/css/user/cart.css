@@ -63,7 +63,7 @@ button{border-style: none; background: none; display: inline-block;}
 /* 주문금액칸*/
 #cart_delivertTotal{width: 350px;}
 #cart_delivertTotal table{margin: 0 auto;}
-#cart_deliveryTotal,#cart_pickTotal{position: relative; width: 300px; height: 120px; padding:auto auto; padding-top:20px; background: #ffbf41; -webkit-border-radius: 10px; -moz-border-radius: 10px; border-radius: 10px; margin: 0 auto;}
+#cart_deliveryTotal,#cart_pickTotal{position: relative; width: 300px; height: 120px; padding: auto auto; padding-top:20px; background: #ffbf41; -webkit-border-radius: 10px; -moz-border-radius: 10px; border-radius: 10px; margin: 0 auto;}
 
 #cart_deliveryTotal:after{content: ''; position: absolute;  border-style: solid; border-width: 0 14px 15px; border-color: #ffbf41 transparent; display: block; width: 0; z-index: 1; top: -15px; left: 25px;}
 #cart_pickTotal:after{content: ''; position: absolute;  border-style: solid; border-width: 0 14px 15px; border-color: #ffbf41 transparent; display: block; width: 0; z-index: 1; top: -15px; left: 85px;}

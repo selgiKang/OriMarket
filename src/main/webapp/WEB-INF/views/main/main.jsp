@@ -109,6 +109,7 @@
 </head>
 <body>${aabb}
 <div id="main">
+    <input type="hidden" id="address_kakao" value="${userAddress1}">
     <jsp:include page="../header/header_index.jsp" />
     <div id="main_wrap_box">
         <div class="modal">
@@ -157,7 +158,7 @@
                                     <div class="connextion_mk2_wrap change_marketimg_wrap" style="margin-right:20px; background:none; position: relative">
                                         <div id="orderReceipt_btn_cancel0" style="position: absolute; right: -7px; top: 12px; z-index: 9999;"><a href="/deleteUserMarket?userMarketSeq=${i.userMarketSeq}"><i class="fas fa-regular fa-xmark"></i></a></div>
                                         <img class="connexion_market_img" src="../../img/main/market2.png">
-                                        <a class="connextion_mk2 change_marketimg" href="${i.market.marketHref}?marketName=${i.market.marketName}">
+                                        <a class="connextion_mk2 change_marketimg" onclick="sendLatLngToServer('${i.market.marketName}','${i.market.marketHref}')">
                                             <p>${i.market.marketName}</p>
                                         </a>
                                     </div>
@@ -175,7 +176,7 @@
                                     <div class="connextion_mk2_wrap change_marketimg_wrap" style="margin-right:20px; background:none; position: relative">
                                         <div id="orderReceipt_btn_cancel" style="position: absolute; right: -7px; top: 12px; z-index: 9999;"><a href="/deleteUserMarket?userMarketSeq=${i.userMarketSeq}"><i class="fas fa-regular fa-xmark"></i></a></div>
                                         <img class="connexion_market_img" src="../../img/main/market2.png">
-                                        <a class="connextion_mk2 change_marketimg" href="${i.market.marketHref}?marketName=${i.market.marketName}">
+                                        <a class="connextion_mk2 change_marketimg" onclick="sendLatLngToServer('${i.market.marketName}','${i.market.marketHref}')">
                                             <p>${i.market.marketName}</p>
                                         </a>
                                     </div>
@@ -198,7 +199,7 @@
                                     <div class="connextion_mk3_wrap change_marketimg_wrap" style="margin-right:20px; background:none; position: relative;" >
                                         <div id="orderReceipt_btn_cancel1" style="position: absolute; right: -7px; top: 12px; z-index: 9999;"><a href="/deleteUserMarket?userMarketSeq=${i.userMarketSeq}"><i class="fas fa-regular fa-xmark"></i></a></div>
                                         <img class="connexion_market_img" src="../../img/main/market2.png">
-                                        <a class="connextion_mk3 change_marketimg" href="${i.market.marketHref}?marketName=${market.marketName}">
+                                        <a class="connextion_mk3 change_marketimg" onclick="sendLatLngToServer('${i.market.marketName}','${i.market.marketHref}')">
                                             <p>${i.market.marketName}</p>
                                         </a>
                                     </div>
@@ -217,7 +218,7 @@
                                     <div class="connextion_mk3_wrap change_marketimg_wrap" style="margin-right:20px; background:none; position: relative;" >
                                         <div id="orderReceipt_btn_cancel2" style="position: absolute; right: -7px; top: 12px; z-index: 9999;"><a href="/deleteUserMarket?userMarketSeq=${i.userMarketSeq}"><i class="fas fa-regular fa-xmark"></i></a></div>
                                         <img class="connexion_market_img" src="../../img/main/market2.png">
-                                        <a class="connextion_mk3 change_marketimg" href="${i.market.marketHref}?marketName=${market.marketName}">
+                                        <a class="connextion_mk3 change_marketimg" onclick="sendLatLngToServer('${i.market.marketName}','${i.market.marketHref}')">
                                             <p>${i.market.marketName}</p>
                                         </a>
                                     </div>
@@ -339,6 +340,49 @@
                 ul.append(li);
             }
         }
+    }
+</script>
+<%--배달지의 위도경도값얻기--%>
+<script>
+    function sendLatLngToServer(marketName, marketHref) {
+        const address = document.getElementById('address_kakao').value;
+        const geocoder = new kakao.maps.services.Geocoder();
+        geocoder.addressSearch(address, function(result, status) {
+            if (status === kakao.maps.services.Status.OK) {
+                const latitude = result[0].y; // 위도
+                const longitude = result[0].x; // 경도
+
+                // 폼을 생성하고 데이터를 입력
+                const form = document.createElement('form');
+                form.method = 'GET';
+                form.action = marketHref;
+
+                // hidden input을 추가하여 데이터 전송
+                const inputMarketName = document.createElement('input');
+                inputMarketName.type = 'hidden';
+                inputMarketName.name = 'marketName';
+                inputMarketName.value = marketName;
+                form.appendChild(inputMarketName);
+
+                const inputLatitude = document.createElement('input');
+                inputLatitude.type = 'hidden';
+                inputLatitude.name = 'latitude';
+                inputLatitude.value = latitude;
+                form.appendChild(inputLatitude);
+
+                const inputLongitude = document.createElement('input');
+                inputLongitude.type = 'hidden';
+                inputLongitude.name = 'longitude';
+                inputLongitude.value = longitude;
+                form.appendChild(inputLongitude);
+
+                // 폼을 body에 추가하고 전송
+                document.body.appendChild(form);
+                form.submit();
+            } else {
+                console.log("주소 검색 실패: " + status);
+            }
+        });
     }
 </script>
 <script type="text/javascript" src="../../js/main/main_slidebanner.js"></script>
