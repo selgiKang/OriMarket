@@ -36,9 +36,7 @@
             $.ajax({
                 url: '/orderListResult',
                 type: 'POST',
-                data: {
-                    'page': pageNumber,
-                    },
+                data: { 'page': pageNumber},
                 dataType: 'json',
                 success: function (response) {
                     try {
@@ -50,8 +48,8 @@
                         //     // ... 주문 정보를 HTML 문자열로 변환하는 코드 ...
                         // }
                         // 주문 정보를 추가할 요소를 선택하고, 기존 내용을 지우고 새로운 주문 정보를 추가
-                        var orderItemDiv = $('.order-item[data-status="completed"]');
-                        orderItemDiv.remove(); // 기존 내용 초기화
+                        var orderItemDiv = $('.order-item[data-status="completed"]').eq(0);
+                        orderItemDiv.empty(); // 기존 내용 초기화
 
                         orderList.forEach(function(order) {
                             console.log(4);
