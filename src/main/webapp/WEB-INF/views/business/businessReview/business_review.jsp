@@ -125,7 +125,7 @@
     <c:if test="${not empty reviewList}">
         <c:forEach var="list" items="${reviewList}" varStatus="status">
             ${status.index + 1}
-            <table class="review_table" border="1" style="border-collapse: collapse;">
+            <table class="review_table" border="1" style="border-collapse: collapse; width: 375px;" >
                 <form action="/ReplyInsert" method="post">
                     <input type="hidden" name="review_id" value="${list.review_id}">
                     <tr>
@@ -140,8 +140,8 @@
                         <td><h4 class="rating" data-rating="${list.rating}"></h4></td>
                     </tr>
                     <tr>
-                        <td class="my_review_photo" colspan="2">
-                            <img src="../../../img/review/${list.pictureUrl}">
+                        <td class="my_review_photo" colspan="2" style="width: 70%;">
+                            <img src="../../../img/review/${list.pictureUrl}" >
                         </td>
                     </tr>
                     <tr>
