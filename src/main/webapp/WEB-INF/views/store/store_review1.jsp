@@ -114,8 +114,15 @@
 </head>
 <body id="business_review_body">
 <header id="business_review_header">
+    <c:if test="${reviewcount eq 1}">
+        <h3>${buStore.buStoreName} 리뷰 <small>&lt; 총: ${aveRating}점 &gt;</small></h3>
+        <h3 style="margin-top: -20px;" class="rating" data-rating="${aveRating}"></h3>
+    </c:if>
+
+    <c:if test="${reviewcount ne 1}">
     <h3>${buStore.buStoreName} 리뷰 <small>&lt; 총: ${aveRating}점 &gt;</small></h3>
     <h3 style="margin-top: -20px;" class="rating" data-rating="${Math.round(aveRating * 2) / 2}"></h3>
+    </c:if>
 </header>
 <main>
     <c:if test="${not empty reviewList}">
