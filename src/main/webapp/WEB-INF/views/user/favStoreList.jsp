@@ -135,11 +135,11 @@
     }
 
     .hoverable-row:hover td {
-      background-color: rgb(70, 169, 115); /* 변경하고자 하는 배경색 지정 */
+      background-color: #46a973; /* 변경하고자 하는 배경색 지정 */
     }
 
     .hoverable-row:hover a {
-      color: #f8f6f6; /* 변경하고자 하는 가게 이름 색상 지정 */
+      color: #eee; /* 변경하고자 하는 가게 이름 색상 지정 */
     }
   </style>
 </head>
