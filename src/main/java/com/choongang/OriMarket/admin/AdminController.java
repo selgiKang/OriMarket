@@ -8,9 +8,14 @@ import com.choongang.OriMarket.business.user.BusinessUserRepository;
 import com.choongang.OriMarket.business.user.BusinessUserService;
 import com.choongang.OriMarket.manager.user.ManagerRepository;
 import com.choongang.OriMarket.manager.user.ManagerUser;
+import com.choongang.OriMarket.order.NewOrder;
+import com.choongang.OriMarket.order.NewOrderRepository;
+import com.choongang.OriMarket.review.Review;
+import com.choongang.OriMarket.review.ReviewRepository;
 import com.choongang.OriMarket.store.ItemRepository;
 import com.choongang.OriMarket.user.CartRepository;
 import com.choongang.OriMarket.user.OrderItemRepository;
+import com.choongang.OriMarket.user.User;
 import com.choongang.OriMarket.user.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -21,6 +26,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Controller
@@ -37,6 +43,8 @@ public class AdminController {
     private final CartRepository cartRepository;
     private final OrderItemRepository orderItemRepository;
     private final ManagerRepository managerRepository;
+    private final ReviewRepository reviewRepository;
+    private final NewOrderRepository newOrderRepository;
 
     //로그인
     @GetMapping("/adminLogin")
@@ -104,11 +112,18 @@ public class AdminController {
 
         BusinessStore buStore = businessStoreRepository.findByBusinessUser_BuUserNumber(buUserNumber);
 
+        List<Review> review = reviewRepository.findByBusinessStore_BuStoreNumber(buStore.getBuStoreNumber());
+
         if(buStore.getItems().size()!=0){
             for(int i=0;i<buStore.getItems().size();i++){
                 itemRepository.delete(buStore.getItems().get(i));
             }
         }
+
+        for(Review rv : review){
+            reviewRepository.deleteById(rv.getReview_id());
+        }
+
         businessStoreRepository.deleteById(buStore.getBuStoreNumber());
         businessUserRepository.deleteById(buUserNumber);
 
@@ -135,10 +150,7 @@ public class AdminController {
         return "/admin/admin_buUser";
     }
 
-    @GetMapping("/admin_order")
-    public String adminOrder() {
-        return "admin/admin_Order";
-    }
+
 
     @PostMapping("/deleteManagerUsers")
     public String deleteManagerUsers(@RequestBody String[] selectedManagerSeqs){
@@ -150,5 +162,53 @@ public class AdminController {
         }
         return "admin/admin_manager";
     }
-}
 
+
+
+
+
+    //일반사용자출력
+    @GetMapping("/a_user")
+    public String userAccess(Model model){
+        List<User> users = userRepository.findAll();
+        model.addAttribute("users",users);
+
+        return "admin/admin_user";
+    }
+
+    //일반회원검색
+    @GetMapping("/searchUser")
+    public String searchUsers(@RequestParam(value = "keyword")String keyword,@RequestParam(value = "selectType")String selectType, Model model){
+
+        if (selectType.equals("userId")) {
+            List<User> users = userRepository.findByUserIdContaining(keyword);
+            model.addAttribute("users", users);
+
+        } else if (selectType.equals("userName")) {
+            List<User> users = userRepository.findByUserNameContaining(keyword);
+            model.addAttribute("users", users);
+
+        } else if (selectType.equals("userEmail")) {
+            List<User> users = userRepository.findByUserEmailContaining(keyword);
+            model.addAttribute("users", users);
+
+        } else if (selectType.equals("userNickname")) {
+            List<User> users = userRepository.findByUserNicknameContaining(keyword);
+            model.addAttribute("users", users);
+        }
+        return "/admin/admin_user";
+    }
+
+    //메인으로가기
+    @GetMapping("/adminMain")
+    public String goMain(){return "/admin/admin_main";}
+
+
+    @GetMapping("/admin_order")
+    public String adminOrder(Model model){
+        List<NewOrder> orderList = newOrderRepository.findAll();
+        model.addAttribute("orders",orderList);
+        return "/admin/admin_Order";
+    }
+
+}

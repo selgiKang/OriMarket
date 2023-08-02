@@ -28,6 +28,7 @@ import java.util.List;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @EntityListeners(AuditingEntityListener.class)
 public class Review {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "review_id", nullable = false)

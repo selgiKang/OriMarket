@@ -508,17 +508,17 @@ pageEncoding="UTF-8"%>
                       <c:if test="${!processedStoreNames.contains(orderDetail.buStoreName)}">
                         <c:set var="processedStoreNames" value="${processedStoreNames},${orderDetail.buStoreName}" scope="page" />
                         <div class="createable_review_box">
-                          <p style="font-size: 16px; margin-top: ${firstStoreName eq 'true' ? '0' : '10px'}; /*margin-bottom: -11px;*/
-                                  border-top: ${firstStoreName eq 'true' ? 'none' : '1px solid #eee;'}; position: relative; padding-top:10px;">
-                              ${orderDetail.buStoreName}
-                            <button style="position: absolute; right: 0;border: none;padding: 3px 8px;background-color: #4caf50;color: #fff;border-radius: 4px;"
-                                    onclick="location.href='/user_review?buStoreName=${orderDetail.buStoreName}&orderNumber=${orderDetail.orderNumber}'">리뷰 쓰기</button>
-                          </p>
-                          <c:set var="firstStoreName" value="false" scope="page" />
-                        </c:if>
-                        <span style="font-size: x-small; padding-left: 3px;">구매상품 :${orderDetail.itemName}</span>
+                        <p style="font-size: 16px; margin-top: ${firstStoreName eq 'true' ? '0' : '10px'}; /*margin-bottom: -11px;*/
+                                border-top: ${firstStoreName eq 'true' ? 'none' : '1px solid #eee;'}; position: relative; padding-top:10px;">
+                            ${orderDetail.buStoreName}
+                          <button style="position: absolute; right: 0;border: none;padding: 3px 8px;background-color: #4caf50;color: #fff;border-radius: 4px;"
+                                  onclick="location.href='/user_review?buStoreName=${orderDetail.buStoreName}&orderNumber=${orderDetail.orderNumber}'">리뷰 쓰기</button>
+                        </p>
+                        <c:set var="firstStoreName" value="false" scope="page" />
                       </c:if>
-                    </c:forEach>
+                      <span style="font-size: x-small; padding-left: 3px;">구매상품 :${orderDetail.itemName}</span>
+                    </c:if>
+                  </c:forEach>
                   </div>
                 </c:if>
               </c:forEach>
@@ -530,21 +530,19 @@ pageEncoding="UTF-8"%>
                 <div style="width: 315px; margin-top: 10px;border-radius: 7px;box-shadow: 0px 1px 10px rgba(0,0,0,0.2);">
                   <img src="../../img/store/${r.businessStore.buStoreImageUrl}" style="max-width: 90%;margin: 11px 11px 0;padding: 5px;/* padding: 5px; */height: auto;border-radius: 8px;">
                   <div class="review_item_wrap">
-                    <p style="font-size: 16px; margin-top: ${firstStoreName eq 'true' ? '0' : '10px'}; /*margin-bottom: -11px;*/
+                    <p style="font-size: 16px; margin-top: ${firstStoreName eq 'true' ? '0' : '10px'};/* margin-bottom: -11px;*/
                             border-top: ${firstStoreName eq 'true' ? 'none' : '1px solid #46A973'}; position: relative;">
                         ${r.buStoreName} <span style="font-size: x-small;">구매상품 : ${r.itemName}</span>
                     </p>
                     <div class="review_chk_wrap">
-                         <p>별점 : ${r.rating}점</p>
-                        <p>맛 : ${r.taste}점</p>
-                        <p>양 : ${r.amount}점</p>
+                      <p>별점 : ${r.rating}점 </p>
+                      <p>맛 : ${r.taste}점 </p>
+                      <p>양 : ${r.amount}점 </p>
                     </div>
                     <div class="review_txt_wrap">
-                        <p>
-                            ${r.content}
-                        </p>
+                      <p>${r.content}</p>
                     </div>
-                    </div>
+                  </div>
                 </div>
               </c:if>
             </c:forEach>
