@@ -156,9 +156,11 @@
                             <c:if test="${status.index == 0}">
                                 <c:if test="${!empty i.market.marketName}">
                                     <div class="connextion_mk2_wrap change_marketimg_wrap" style="margin-right:20px; background:none; position: relative">
-                                        <div id="orderReceipt_btn_cancel0" style="position: absolute; right: -7px; top: 12px; z-index: 9999;"><a href="/deleteUserMarket?userMarketSeq=${i.userMarketSeq}"><i class="fas fa-regular fa-xmark"></i></a></div>
+                                        <div id="orderReceipt_btn_cancel0" style="position: absolute; right: -7px; top: 12px; z-index: 9999;">
+                                            <a href="/deleteUserMarket?userMarketSeq=${i.userMarketSeq}"><i class="fas fa-regular fa-xmark"></i></a>
+                                        </div>
                                         <img class="connexion_market_img" src="../../img/main/market2.png">
-                                        <a class="connextion_mk2 change_marketimg" onclick="sendLatLngToServer('${i.market.marketName}','${i.market.marketHref}')">
+                                        <a class="connextion_mk2 change_marketimg" onclick="checkAddressAndProceed('${i.market.marketName}','${i.market.marketHref}')">
                                             <p>${i.market.marketName}</p>
                                         </a>
                                     </div>
@@ -384,6 +386,17 @@
             }
         });
     }
+
+    function checkAddressAndProceed(marketName, marketHref) {
+        const userAddress = document.getElementById('address_kakao').value;
+        if (!userAddress || userAddress.trim() === "") {
+            alert("주소를 먼저 설정해 주세요.");
+        } else {
+            // 주소가 존재하는 경우에만 다음 동작 수행
+            sendLatLngToServer(marketName, marketHref);
+        }
+    }
+
 </script>
 <script type="text/javascript" src="../../js/main/main_slidebanner.js"></script>
 <script type="text/javascript" src="../../js/main/connexion_market.js"></script>

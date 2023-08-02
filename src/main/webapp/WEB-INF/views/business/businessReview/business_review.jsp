@@ -120,7 +120,7 @@
 </header>
 <main>
     <c:if test="${empty reviewList}">
-        <h2>등록된 리뷰가 없습니다.ㅎㅎ</h2>
+        <h2>아직 등록된 리뷰가 없어요&#128546;</h2>
     </c:if>
     <c:if test="${not empty reviewList}">
         <c:forEach var="list" items="${reviewList}" varStatus="status">

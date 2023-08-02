@@ -54,10 +54,10 @@ public class ReviewService {
         System.out.println("사진정보:"+s);
 
         List<NewOrderDetail> byBuStoreNameAndOrderNumber = newOrderDetailRepository.findByBuStoreNameAndOrderNumber(review.getBuStoreName(), review.getOrderNumber());
-//        for(NewOrderDetail newOrderDetail:byBuStoreNameAndOrderNumber){
-//            newOrderDetail.setReviewtrue("리뷰");
-//            newOrderDetailRepository.save(newOrderDetail);
-//        }
+        for(NewOrderDetail newOrderDetail:byBuStoreNameAndOrderNumber){
+            newOrderDetail.setReviewtrue("리뷰");
+            newOrderDetailRepository.save(newOrderDetail);
+        }
 
         String[] itemNames = review.getItemName().split(",");
         for(String item:itemNames) {
