@@ -64,21 +64,6 @@ public class CartController {
                 totalPrice += (cartItem.getItem().getItemPrice() * cartItem.getCount());
             }
 
-           /*   반복물 출력 실험
-           for(int i=0;i<cartItems.size();i++){
-                if(cartItems.get(i).getItem().getBusinessStore().equals(cartItems.get(i).getBusinessStore())){
-                    System.out.println("가게:"+cartItems.get(i).getBusinessStore().getBuStoreName());
-                    for(CartItem cartItem:cartItems){
-                        for(Item item:cartItems.get(i).getBusinessStore().getItems()){
-                            if(cartItem.getItem().equals(item)){
-                                System.out.println("물건이름: "+item.getItemName());
-                            }
-                        }
-                    }
-                }
-            }
-            */
-
             model.addAttribute("cartItemList", cartItems);
             model.addAttribute("totalPrice", totalPrice);
             model.addAttribute("user", userId);

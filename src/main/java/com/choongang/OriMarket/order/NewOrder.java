@@ -5,6 +5,7 @@ import com.choongang.OriMarket.rider.Rider;
 import com.choongang.OriMarket.user.User;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -77,16 +78,18 @@ public class NewOrder {
     @Column
     private String orderRequests;
 
+    @JsonIgnore
     @OneToOne(fetch =  FetchType.LAZY)
     @JoinColumn(name = "seq")
     private User user;
 
     //매니저 번호
-    @JsonBackReference
+    @JsonBackReference // 순환 참조 막는 어노테이션
     @ManyToOne(fetch =  FetchType.LAZY)
     @JoinColumn(name="managerSeq")
     private ManagerUser managerUser;
 
+    @JsonIgnore
     @OneToOne(fetch =  FetchType.LAZY)
     @JoinColumn(name="rider_seq")
     private Rider rider;
@@ -99,6 +102,7 @@ public class NewOrder {
     @LastModifiedDate
     private LocalDateTime modifiedDate;
 
+    @JsonManagedReference
     @OneToMany(mappedBy = "newOrder")
     private List<NewOrderDetail> newOrderDetails = new ArrayList<>();
 

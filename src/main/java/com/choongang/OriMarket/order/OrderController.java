@@ -132,7 +132,6 @@ public class OrderController {
 
         NewOrder resultPastOrder = newOrderRepository.findByOrderNumber(orderNumber);
         model.addAttribute("newOrder",resultPastOrder);
-
         return "order/order_delivery";
     }
 

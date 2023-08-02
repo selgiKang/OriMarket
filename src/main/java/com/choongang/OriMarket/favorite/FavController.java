@@ -131,6 +131,7 @@ public class FavController {
             double averageRating = (double) totalSum / reviewCount;
             System.out.println("이거왜안나오냐"+averageRating);
             model.addAttribute("aveRating",averageRating);
+            model.addAttribute("reviewcount",reviewCount);
 
             //확실해지면 model로 변해도 됨
             //시장 번호

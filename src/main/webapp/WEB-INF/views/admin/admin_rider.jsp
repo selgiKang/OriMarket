@@ -42,14 +42,30 @@
 
         .snun_wrap{width: 1920px; text-align: center;}
 
-
         .rider_store_wrap{background-color:#eee; width: 100%;}
+
         .top_title_wrap h1{text-align:center; margin:15px 18%;}
 
         #rider_title{padding:20px 0 0;}
+
         #rider_title a{color:#333; margin:10px 5px; margin-right: 0;}
+
         .top_title_wrap{ display: flex; align-items: center;}
-        button.backbtn { display: flex; align-items: center; font-size: 20px; color: #999; margin: 0 0 0 10px; width: 30px; height: 30px; background-color: #fff; border-radius: 50%; border: 1px solid #999; cursor: pointer; justify-content: center;}
+
+        button.backbtn {
+            display: flex;
+            align-items: center;
+            font-size: 20px;
+            color: #999;
+            margin: 0 0 0 10px;
+            width: 30px;
+            height: 30px;
+            background-color: #fff;
+            border-radius: 50%;
+            border: 1px solid #999;
+            cursor: pointer;
+            justify-content: center;}
+
         button.backbtn:hover {background-color:#333; color:#fff;}
 
         /* ------------------------------------------ 공통적용css---------------------------------------------- */
