@@ -45,24 +45,36 @@
 
     .sub-container{
       border-radius: 5px;
-      background: white;
+      background-color: white;
       height: 100%;
       max-width: 365px;
-      width: 100%;
-      margin-top: 15px; /*리뷰관리 제목이랑 간격 조절*/
-      margin-bottom:15px;
+      width: 90%;
+      margin-top: 5px;
+      margin-bottom:5px;
+      border: 10px solid transparent;
+      margin-bottom: 5px;
+
+    }
+
+    .content{
+      margin: 10px;
     }
 
     table {
       border-collapse: collapse;
       width: 100%;
       background-color: white;
+      overflow: hidden;
+      border-radius: 3px;
     }
+
+
 
     th, td {
       border: 1px solid #ccc;
       padding: 8px;
       text-align: center;
+
     }
 
     th {
@@ -123,8 +135,6 @@
 </head>
 <body>
 
-
-
 <div class="main-container">
 
   <div class="header">
@@ -138,20 +148,23 @@
   </div>
 
   <div class="sub-container">
-    <table>
-      <tr>
-        <th>순번</th>
-        <th>가게 이름</th>
-      </tr>
-      <c:forEach var="favResult" items="${favResult}" varStatus="status">
+    <div class="content">
+      <table>
         <tr>
-          <td>${status.index+1}</td>
-          <td><a href="/store?favStoreName=${favResult.favStoreName}">${favResult.favStoreName}</a></td>
+          <th>순번</th>
+          <th>가게 이름</th>
         </tr>
-      </c:forEach>
+        <c:forEach var="favResult" items="${favResult}" varStatus="status">
+          <tr>
+            <td>${status.index+1}</td>
+            <td><a href="/store?favStoreName=${favResult.favStoreName}">${favResult.favStoreName}</a></td>
+          </tr>
+        </c:forEach>
 
+      </table>
 
-    </table>
+    </div>
+
   </div>
 
   <div class="fav_footer">
