@@ -29,12 +29,12 @@
 				<li><i class="fa-sharp fa-regular fa-circle" style="color: #b8b8b8;"></i></li>
 				<li class="orderDelivery_li_1">픽업중</li>
 			</c:if>
-			<c:if test="${newOrder.orderStatus eq '주문수락' or newOrder.orderStatus eq '배달시작' or newOrder.orderStatus eq '배달완료'}">
+			<c:if test="${newOrder.orderStatus eq '주문수락' or newOrder.orderStatus eq '배달시작' or newOrder.orderStatus eq '배달완료' or newOrder.orderStatus eq '픽업완료'}">
 				<li><i class="fa-sharp fa-solid fa-circle" style="color: #46a973;"></i></li>
 				<li class="orderDelivery_li_1" style="color: #46A973;">픽업중</li>
 			</c:if>
 			<!-- 배달중 -->
-			<c:if test="${newOrder.orderStatus eq null or newOrder.orderStatus eq '주문수락'}">
+			<c:if test="${newOrder.orderStatus eq null or newOrder.orderStatus eq '주문수락' or newOrder.orderStatus eq '픽업완료'}">
 				<li><i class="fa-sharp fa-regular fa-circle" style="color: #b8b8b8;"></i></li>
 				<li class="orderDelivery_li_1">배달중</li>
 			</c:if>
@@ -42,7 +42,7 @@
 				<li><i class="fa-sharp fa-solid fa-circle" style="color: #46a973;"></i></li>
 				<li class="orderDelivery_li_1" style="color: #46a973;">배달중</li>
 			</c:if>
-			<c:if test="${newOrder.orderStatus eq null or newOrder.orderStatus eq '배달시작' or newOrder.orderStatus eq '주문수락'}">
+			<c:if test="${newOrder.orderStatus eq null or newOrder.orderStatus eq '배달시작' or newOrder.orderStatus eq '주문수락' or newOrder.orderStatus eq '픽업완료'}">
 				<!-- 배달완료 -->
 				<li><i class="fa-sharp fa-regular fa-circle" style="color: #b8b8b8;"></i></li>
 				<li>배달 완료</li>
