@@ -37,11 +37,6 @@
             width: 100px;
             text-align: center;
         }
-        .rating::before {
-            content: "☆☆☆☆☆";
-            color: lightgray;
-        }
-
         .rating[data-rating="1"]::before {
             content: "★☆☆☆☆";
             color: gold;
@@ -65,32 +60,28 @@
         .rating[data-rating="5"]::before {
             content: "★★★★★";
             color: gold;
-        }  .rating::before {
-               content: "☆☆☆☆☆";
-               color: lightgray;
-           }
-
-        .rating[data-rating="1"]::before {
+        }
+        .rating::before {
+            content: "☆☆☆☆☆";
+            color: lightgray;
+        }
+        .rating[data-rating="1.0"]::before {
             content: "★☆☆☆☆";
             color: gold;
         }
-
-        .rating[data-rating="2"]::before {
+        .rating[data-rating="2.0"]::before {
             content: "★★☆☆☆";
             color: gold;
         }
-
-        .rating[data-rating="3"]::before {
+        .rating[data-rating="3.0"]::before {
             content: "★★★☆☆";
             color: gold;
         }
-
-        .rating[data-rating="4"]::before {
+        .rating[data-rating="4.0"]::before {
             content: "★★★★☆";
             color: gold;
         }
-
-        .rating[data-rating="5"]::before {
+        .rating[data-rating="5.0"]::before {
             content: "★★★★★";
             color: gold;
         }

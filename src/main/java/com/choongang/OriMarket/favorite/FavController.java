@@ -131,6 +131,8 @@ public class FavController {
                     }
                 }
                 double averageRating = (double) totalSum / reviewCount;
+
+                System.out.println("이거실행되잖아");
                 model.addAttribute("aveRating",averageRating);
                 model.addAttribute("reviewcount",reviewCount);
             }
