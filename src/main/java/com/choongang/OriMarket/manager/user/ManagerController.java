@@ -3,7 +3,6 @@ package com.choongang.OriMarket.manager.user;
 import com.choongang.OriMarket.order.NewOrder;
 import com.choongang.OriMarket.order.NewOrderRepository;
 import com.choongang.OriMarket.order.OrderService;
-import com.fasterxml.jackson.databind.util.JSONPObject;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,10 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Controller
 @RequiredArgsConstructor
@@ -31,7 +27,6 @@ public class ManagerController {
     private final ManagerService managerService;
     private final NewOrderRepository newOrderRepository;
     private final OrderService orderService;
-    private final ManagerRepository managerRepository;
 
     //로그인 페이지
     @GetMapping("/managerLogin")
@@ -62,27 +57,33 @@ public class ManagerController {
 
 
     //배달완료 page
-    @GetMapping("/orderListResult")
+    @PostMapping("/orderListResult")
     @ResponseBody
-    public Page<NewOrder> orderListResult(@RequestParam("page") int pageNumber,Model model,HttpSession session) {
+    public ResponseEntity<Page<NewOrder>> orderListResult(@RequestParam("page") int pageNumberReuslt,Model model,HttpSession session) {
 
-        HashMap<String, Object> result = new HashMap<>();
+        //매니저 정보 가져오기
+        ManagerUser userResult = managerService.findByManagerId(model,session);
+        //매니저 정보
+        model.addAttribute("userResult",userResult);
+
+        //매니저가 소속된 시장의 주문만 리스트에 저장
+        model.addAttribute("orderList", model.getAttribute("managerOrderList"));
 
         //매니저가 소속된 시장의 주문만 리스트에 저장
         List<NewOrder> orderList = (List<NewOrder>) model.getAttribute("managerOrderList");
         model.addAttribute("orderList",orderList);
-        System.out.println("페이지번호"+pageNumber);
-        int pageNumbe1 = pageNumber;
+
+        int pageNumber = pageNumberReuslt;
         int pageSize = 4; // 한 페이지에 4개씩 보여줄 때
-        Pageable pageable = PageRequest.of(pageNumbe1, pageSize);
+        Pageable pageable = PageRequest.of(pageNumber, pageSize);
         String orderStatus = "배달완료";
         String orderStatusNo ="주문거절";
-        Page<NewOrder> resultPage = orderService.pageList((String)session.getAttribute("managerId"), orderStatus, orderStatusNo,pageable);
+        Page<NewOrder> resultPage = orderService.pageList(userResult.getManagerId(), orderStatus, orderStatusNo,pageable);
         for(NewOrder n:resultPage){
             System.out.println("ajax: "+n.getOrderNumber());
         }
-        System.out.println("여기까지왔따.");
-        return resultPage;
+        model.addAttribute("resultPage",resultPage);
+        return ResponseEntity.ok(resultPage);
     }
 
     @GetMapping("/managerId/{managerId}/exists")
