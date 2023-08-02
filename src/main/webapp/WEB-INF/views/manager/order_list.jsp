@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="../../css/manager/order_list.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="../../js/manager/manager.js"></script>
+    <script src="../../js/order/order_list.js"></script>
     <style>
         .order-number>a{
             color: #333333;
@@ -323,4 +324,5 @@
 --%>
     </div>
 </body>
+
 </html>

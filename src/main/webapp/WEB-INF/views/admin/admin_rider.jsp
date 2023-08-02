@@ -51,6 +51,7 @@
         #rider_title a{color:#333; margin:10px 5px; margin-right: 0;}
 
         .top_title_wrap{ display: flex; align-items: center;}
+        .top_title_wrap a{text-decoration: none;}
 
         button.backbtn {
             display: flex;
@@ -109,8 +110,7 @@
         <div id="rider_title">
             <div class="top_title_wrap">
                 <!-- 뒤로가기 -->
-                <button class="backbtn" onclick="window.location.replace('/ridernotice1')">&lt;</button>
-
+                <a href="/adminMain"><button class="backbtn">&lt;</button></a>
             </div>
             <a><input type="button" class="delete_btn" value="라이더 삭제" onclick="deleteSelectedRiders()"></a>
             <a><input type="button" class="show_all_btn" value="전체회원 보기" onclick="showAllManagerUsers()"></a>

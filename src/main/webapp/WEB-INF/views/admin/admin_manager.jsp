@@ -48,6 +48,7 @@
         #goods_title{padding:20px 0 0;}
         #goods_title a{color:#333; margin:10px 5px; margin-right: 0;}
         .top_title_wrap{ display: flex; align-items: center;}
+        .top_title_wrap a{text-decoration: none;}
         button.backbtn { display: flex; align-items: center; font-size: 20px; color: #999; margin: 0 0 0 10px; width: 30px; height: 30px; background-color: #fff; border-radius: 50%; border: 1px solid #999; cursor: pointer; justify-content: center;}
         button.backbtn:hover {background-color:#333; color:#fff;}
 
@@ -86,6 +87,10 @@
     </div>
     <div class="goods_store_wrap">
         <div id="goods_title">
+            <div class="top_title_wrap">
+                <!-- 뒤로가기 -->
+                <a href="/adminMain"><button class="backbtn">&lt;</button></a>
+            </div>
             <a><input type="button" class="delete_btn" value="선택회원 삭제" onclick="deleteSelectedManagerUsers()"></a>
             <a><input type="button" class="show_all_btn" value="전체회원 보기" onclick="showAllManagerUsers()"></a>
             <form id="searchForm">

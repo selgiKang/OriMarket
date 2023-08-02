@@ -32,7 +32,8 @@ public interface NewOrderRepository extends JpaRepository<NewOrder, Long> {
     List<NewOrder> findByRider(Rider rider);
 
     List<NewOrder> findByRiderOrderByCreatedDateDesc(Rider rider);
-    List<NewOrder> findByOrderStatusAndUserOrderByCreatedDateDesc(String string,User user);
+
+    List<NewOrder> findByOrderStatusAndUserOrderByCreatedDateDesc(String string, User user);
 
     @Query("SELECT n FROM NewOrder n WHERE n.managerUser=?1 AND (n.orderStatus=?2 OR n.orderStatus=?3) ")
     Page<NewOrder> findByManagerUser(String managerUser,String orderStatus,String orderStatusNo,Pageable pageable);
