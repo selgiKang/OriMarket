@@ -12,7 +12,6 @@
         content: "☆☆☆☆☆";
         color: lightgray;
     }
-
     .rating[data-rating="1"]::before {
         content: "★☆☆☆☆";
         color: gold;
@@ -40,27 +39,22 @@
            content: "☆☆☆☆☆";
            color: lightgray;
        }
-
     .rating[data-rating="1"]::before {
         content: "★☆☆☆☆";
         color: gold;
     }
-
     .rating[data-rating="2"]::before {
         content: "★★☆☆☆";
         color: gold;
     }
-
     .rating[data-rating="3"]::before {
         content: "★★★☆☆";
         color: gold;
     }
-
     .rating[data-rating="4"]::before {
         content: "★★★★☆";
         color: gold;
     }
-
     .rating[data-rating="5"]::before {
         content: "★★★★★";
         color: gold;
