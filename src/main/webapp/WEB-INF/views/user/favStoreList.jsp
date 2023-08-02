@@ -39,6 +39,8 @@
       font-size: 20px;
       display: inline;
       white-space: nowrap; /* 한 줄로 표시 */
+      margin-right: 100px;
+
     }
 
     .sub-container{
@@ -54,6 +56,7 @@
     table {
       border-collapse: collapse;
       width: 100%;
+      background-color: white;
     }
 
     th, td {
@@ -63,11 +66,11 @@
     }
 
     th {
-      background-color: #f2f2f2;
+      background-color: white;
     }
 
     tr:nth-child(even) {
-      background-color: #f2f2f2;
+      background-color: white;
     }
 
     a {
@@ -80,8 +83,11 @@
     }
 
     .headermsg_wrap {
+      width: 90%;
       display: flex;
       align-items: center;
+      justify-content: flex-start;
+      align-items: end;
 
     }
 
@@ -120,14 +126,15 @@
 
 
 <div class="main-container">
-<div class="header">
-  <jsp:include page="../header/header_index.jsp" />
-</div>
+
+  <div class="header">
+    <jsp:include page="../header/header_index.jsp" />
+  </div>
 
   <div class="headermsg_wrap">
   <%--뒤로가기--%>
   <button class="backbtn" onclick="window.location.replace('/mypage')">&lt;</button>
-    <h3>단골 가게 목록</h3>
+    <h3 style="margin: 15px 5px 5px; font-size: 20px; text-align: center;">단골 가게 목록</h3>
   </div>
 
   <div class="sub-container">
