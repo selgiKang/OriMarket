@@ -57,7 +57,7 @@
 									<li>
 										<div class="cart_info">
 											<input type="checkbox" name="cbox" class="individual_checkbox" data-item-index="${status.index}" checked="checked" >
-											<input type="hidden" class="individual_totalCount" value="${orderList1.count}">
+											<input type="hidden" id="cartItem${status.index}" class="individual_totalCount" value="${orderList1.count}">
 											<input type="hidden" class="individual_itemPrice" name="individual_itemPrice" value="${orderList1.itemPrice}">
 											<input type="hidden" class="individual_totalPrice" value="${orderList1.count*orderList1.itemPrice}">
 											<input type="hidden" name="itemId" value="${orderList1.item.itemId}">
@@ -93,11 +93,18 @@
 														var currentCnt = parseInt(document.getElementById("currentCnt${status.index}").value);
 														//재고 수량
 														var itemCnt = parseInt(document.getElementById("itemCnt${status.index}").value);
+														//카트의 재고
+														var cartItemCnt = document.getElementById("cartItem${status.index}").value;
 
-														if(itemCnt<currentCnt){
-															alert("재고보다 수량이 많습니다.")
-															document.getElementById("currentCnt${status.index}").value = itemCnt;
-															window.location.href="/"+user+"/cart";
+														if(cartItemCnt!=null){
+
+															var cartItemCnt = parseInt(document.getElementById("cartItem${status.index}").value);
+
+															if(itemCnt<(currentCnt+cartItemCnt)){
+																alert("재고보다 수량이 많습니다.")
+																document.getElementById("currentCnt${status.index}").value = itemCnt;
+																window.location.href="/"+user+"/cart";
+															}
 														}
 													</script>
 												</div>

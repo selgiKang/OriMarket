@@ -82,7 +82,6 @@ public class ManagerController {
         for(NewOrder n:resultPage){
             System.out.println("ajax: "+n.getOrderNumber());
         }
-        model.addAttribute("resultPage",resultPage);
         return ResponseEntity.ok(resultPage);
     }
 
