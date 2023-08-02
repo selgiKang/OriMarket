@@ -186,6 +186,9 @@
                     <c:if test="${empty userMarket}">
                         <div class="connextion_mk2_wrap btn-open-popup" onclick="modal"><a class="connextion_mk2" href=""><p>단골시장등록</p></a><p style="font-size: 40px;">+</p></div>
                     </c:if>
+                    <c:if test="${userMarket.size() eq 1}">
+                        <div class="connextion_mk4_wrap btn-open-popup" onclick="modal"><a class="connextion_mk4" href=""><p>단골시장등록</p></a><p style="font-size: 40px;">+</p></div>
+                    </c:if>
                 </div>
                 <div class="connexion_marketbox_wrap" style="padding:0 20px 0 25px;">
                     <c:if test="${!empty userMarket}">
