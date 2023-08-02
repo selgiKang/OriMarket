@@ -72,7 +72,8 @@
 
 
     th, td {
-      border: 1px solid #ccc;
+      /*border: 1px solid #ccc;*/
+      border: none;
       padding: 8px;
       text-align: center;
 
@@ -132,6 +133,14 @@
       margin-top: 20px;
 
     }
+
+    .hoverable-row:hover td {
+      background-color: rgb(70, 169, 115); /* 변경하고자 하는 배경색 지정 */
+    }
+
+    .hoverable-row:hover a {
+      color: #f8f6f6; /* 변경하고자 하는 가게 이름 색상 지정 */
+    }
   </style>
 </head>
 <body>
@@ -151,21 +160,18 @@
   <div class="sub-container">
     <div class="content">
       <table>
-        <tr>
+        <tr class="hoverable-row">
           <th>순번</th>
           <th>가게 이름</th>
         </tr>
         <c:forEach var="favResult" items="${favResult}" varStatus="status">
-          <tr>
-            <td>${status.index+1}</td>
+          <tr class="hoverable-row">
+            <td>${status.index + 1}</td>
             <td><a href="/store?favStoreName=${favResult.favStoreName}">${favResult.favStoreName}</a></td>
           </tr>
         </c:forEach>
-
       </table>
-
     </div>
-
   </div>
 
   <div class="fav_footer">
