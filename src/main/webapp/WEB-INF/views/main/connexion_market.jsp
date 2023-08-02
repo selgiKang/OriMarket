@@ -81,16 +81,13 @@
         <div id="map_btns">
             <button class="nowmap_btn" onclick="showCurrentLocationMap()">현재 위치 보기</button>
             <button class="mkmap_btn" onclick="showClosestMarketMap()">가까운 시장 보기</button>
-            <form action="/market_search" method="post">
-                <button class="cnmkmap_btn" type="submit">
-                    <input type="hidden" id="closestMarketInfo" name="marketName">
-                    단골시장으로 등록하기
-                </button>
-            </form>
-
+            <!-- 아래 버튼의 클릭 이벤트를 추가하고, 사용자 닉네임이 비어있으면 알림을 표시합니다. -->
+            <button class="cnmkmap_btn" type="button" onclick="checkUserNickname()">
+                <input type="hidden" id="closestMarketInfo" name="marketName">
+                단골시장으로 등록하기
+            </button>
         </div>
     </div>
-
 </div>
 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a2de38dfc66e99ae9e3a132ffb7b217c"></script>
@@ -222,6 +219,29 @@
         var distance = R * c;
 
         return distance;
+    }
+
+    //비회원 가까운시장 시도할때
+    function checkUserNickname() {
+        var userNickname = "${userNickname}"; // 여기서 사용자의 닉네임을 가져와서 확인합니다.
+        if (userNickname === '') {
+            alert("로그인을 먼저 해주세요."); // 사용자 닉네임이 비어있을 경우 알림을 표시합니다.
+        } else {
+            // 사용자 닉네임이 있을 경우 폼을 서버로 제출합니다.
+            var closestMarketForm = document.createElement('form');
+            closestMarketForm.method = 'post';
+            closestMarketForm.action = '/market_search';
+
+            var hiddenInput = document.createElement('input');
+            hiddenInput.type = 'hidden';
+            hiddenInput.name = 'marketName';
+            hiddenInput.value = document.getElementById('closestMarketInfo').value;
+
+            closestMarketForm.appendChild(hiddenInput);
+            document.body.appendChild(closestMarketForm);
+
+            closestMarketForm.submit();
+        }
     }
 </script>
 </body>
