@@ -33,11 +33,10 @@
     </style>
     <script>
         function loadPage(pageNumber) {
-            var pageSize = 4;
             $.ajax({
                 url: '/orderListResult',
                 type: 'POST',
-                data: {'page': pageNumber,"size": pageSize},
+                data: {'page': pageNumber},
                 dataType: 'json',
                 success: function (response) {
                     console.log("된다");
