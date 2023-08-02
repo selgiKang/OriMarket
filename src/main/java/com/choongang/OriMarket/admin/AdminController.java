@@ -206,11 +206,14 @@ public class AdminController {
 
     //메인으로가기
     @GetMapping("/adminMain")
-    public String goMain(){
+    public String goMain(){return "/admin/admin_main";}
 
 
-        return "/admin/admin_main";
+    @GetMapping("/admin_order")
+    public String adminOrder(Model model){
+        List<NewOrder> orderList = newOrderRepository.findAll();
+        model.addAttribute("orders",orderList);
+        return "/admin/admin_Order";
     }
-
 
 }
