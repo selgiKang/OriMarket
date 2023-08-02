@@ -165,8 +165,8 @@
                     <c:if test="${order.orderStatus eq '배달완료' or order.orderStatus eq '주문거절'}">
                         <!-- 주문번호 클릭 시 주문 상세 정보를 보여줄 버튼 -->
                         <span class="order-number" onclick="showOrderDetail('${order.orderNumber}')">
-                        <a href="/manager_receiptDelivery?orderNumber=${order.orderNumber}" style="color: #4caf50">주문번호: ${order.orderNumber}</a>
-                </span>
+                            <a href="/manager_receiptDelivery?orderNumber=${order.orderNumber}" style="color: #4caf50">주문번호: ${order.orderNumber}</a>
+                        </span>
                         <c:forEach var="store" items="${order.newOrderDetails}">
                             <div class="order-details">
                                 <span>${store.itemName} 총 ${store.itemCount}개</span>
@@ -175,6 +175,7 @@
                         <div>
                             <span class="order-price">총 금액 <fmt:formatNumber value="${order.orderTotalPrice}" pattern="#,###"/>원</span>
                         </div>
+                        <hr style="color: #666666">
                     </c:if>
                 </c:forEach>
             </div>
