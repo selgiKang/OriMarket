@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
@@ -66,7 +67,7 @@ public class RiderService {
         }
     }
 
-    public boolean riderLogin(Rider rider, HttpSession session, Model model, Pageable pageable){
+    public boolean riderLogin(Rider rider, HttpSession session, Model model){
         Rider byRiderId = riderRepository.findByRiderId(rider.getRiderId());
 
         if(byRiderId == null){return false;}
@@ -74,13 +75,13 @@ public class RiderService {
         if(!byRiderId.getRiderPassword().equals(rider.getRiderPassword())){
             return false;
         }else {
-            Page<NewOrder> byRiderOrderByCreatedDateDesc = newOrderRepository.findByRiderOrderByCreatedDateDesc(byRiderId, pageable);
-            for(NewOrder newOrder:byRiderOrderByCreatedDateDesc){
-                System.out.println("실행:"+newOrder.getOrderMarketName());
-            }
-
-            List<NewOrder> byRiderOrderByCreatedDateAsc = newOrderRepository.findByRiderOrderByCreatedDateDesc(byRiderId);
-            model.addAttribute("orderaccept2", byRiderOrderByCreatedDateDesc.getContent());
+            int pageNumber = 0; // 2번째 페이지를 가져올 때는 1을 사용 (0부터 시작)
+            int pageSize = 4; // 한 페이지에 4개씩 보여줄 때
+            Pageable pageable = PageRequest.of(pageNumber, pageSize);
+            String orderStatus = "배달완료";
+            String orderStatusNo ="주문거절";
+            Page<NewOrder> byRiderAndOrderStatusOrOrderStatus = newOrderRepository.findByRiderAndOrderStatusOrOrderStatus(byRiderId, orderStatus, orderStatusNo, pageable);
+            model.addAttribute("resultPage", byRiderAndOrderStatusOrOrderStatus);
             session.setAttribute("riderSeq",byRiderId.getRiderSeq());
             return true;
         }
@@ -132,6 +133,11 @@ public class RiderService {
         List<NewOrder> byRiderOrder = newOrderRepository.findByRider(byOrderNumber.getRider());
 
         return byRiderOrder;
+    }
+
+    public Page<NewOrder> pageList(Rider rider,String OrderStatus, String orderStatusNo,Pageable pageable) {
+
+        return newOrderRepository.findByRiderAndOrderStatusOrOrderStatus(rider,OrderStatus,orderStatusNo,pageable);
     }
 
 

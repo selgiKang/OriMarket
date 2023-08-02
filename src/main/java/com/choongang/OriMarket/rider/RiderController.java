@@ -2,11 +2,14 @@ package com.choongang.OriMarket.rider;
 
 import com.choongang.OriMarket.business.market.Market;
 import com.choongang.OriMarket.business.market.MarketRepository;
+import com.choongang.OriMarket.manager.user.ManagerUser;
 import com.choongang.OriMarket.order.NewOrder;
 import com.choongang.OriMarket.utill.ImageService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
@@ -20,6 +23,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.List;
+import java.util.Optional;
 
 
 @Controller
@@ -31,6 +35,7 @@ public class RiderController {
     private final RiderService riderService;
     private final ImageService imageService;
     private final MarketRepository marketRepository;
+    private final RiderRepository riderRepository;
 
     //7.31 라이더 테스트
     @GetMapping("/rider_list")
@@ -78,8 +83,8 @@ public class RiderController {
     }
 
     @PostMapping("/rider_login")
-    public String riderLogin1(@ModelAttribute Rider rider, HttpSession session, Model model, @PageableDefault(size = 3) Pageable pageable){
-        if(riderService.riderLogin(rider,session,model,pageable)){
+    public String riderLogin1(@ModelAttribute Rider rider, HttpSession session, Model model){
+        if(riderService.riderLogin(rider,session,model)){
             return "rider/rider_main";
         }else {
             return "rider/rider_login";
@@ -161,6 +166,22 @@ public class RiderController {
         model.addAttribute("formattedLatitude",formattedLatitude);
         model.addAttribute("formattedLongitude",formattedLongitude);
         return "rider/rider_mylocation1";
+    }
+
+    @PostMapping("/riderResult")
+    @ResponseBody
+    public ResponseEntity<Page<NewOrder>> orderListResult(@RequestParam("page") int pageNumberReuslt, Model model, HttpSession session) {
+        Rider riderSeq = riderRepository.findById((Long) session.getAttribute("riderSeq")).orElseThrow();
+        int pageNumber = pageNumberReuslt;
+        int pageSize = 4;
+        Pageable pageable = PageRequest.of(pageNumber, pageSize);
+        String orderStatus = "배달완료";
+        String orderStatusNo ="주문거절";
+        Page<NewOrder> resultPage = riderService.pageList(riderSeq, orderStatus, orderStatusNo,pageable);
+        for(NewOrder n:resultPage){
+            System.out.println("ajax: "+n.getOrderNumber());
+        }
+        return ResponseEntity.ok(resultPage);
     }
 
 };
