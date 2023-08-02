@@ -76,6 +76,7 @@
 			</tr>
 			<tr class="orderDelivery_table_tr_1"><td>배달 주소</td></tr>
 			<tr class="orderDelivery_table_tr_2"><td>${orderDelivery.orderAddress}</td></tr>
+			<tr class="orderDelivery_table_tr_1"><td>${orderDelivery.deliveryType}</td></tr>
 		</table>
 		<hr>
 		<table id="orderDelivery_table_2">
