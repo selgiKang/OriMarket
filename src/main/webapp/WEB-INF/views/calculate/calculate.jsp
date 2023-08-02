@@ -32,7 +32,7 @@
     <header id="calculate_header">
         <div id="calculate_title">
             <%--왼쪽 화살표--%>
-            <a href="/backbuUser" onclick="location.href='/backbuUser'"><i class="fas fa-solid fa-arrow-left" style="color: #fafafa;"></i></a>
+            <a href="/storenotice1" onclick="location.href='/storenotice1'"><i class="fas fa-solid fa-arrow-left" style="color: #fafafa;"></i></a>
             내 수입
         </div>
         <%--정산 날짜 출력--%>
