@@ -192,6 +192,9 @@
 			console.log("장바구니 수량"+cartCnt);
 			console.log("전체 수량"+countInput+cartCnt);
 			// if문 추가해서 재고 보다 많이 담으면 재고 알림?
+			if(isNaN(cartCnt)){
+				cartCnt=0;
+			}
 			if (itemCnt < countInput + cartCnt) {
 				alert("재고 수량보다 많습니다.")
 				window.location.href = "/detailmenu/" + itemId + "/" + userId;
