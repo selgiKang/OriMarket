@@ -189,7 +189,7 @@
         <div class="order-item" data-status="processing1">
             <c:if test="${not empty orderList}">
                 <c:forEach items="${orderList}" var="order">
-                    <c:if test="${order.orderStatus eq '주문수락'}">
+                    <c:if test="${order.orderStatus eq '주문수락' or order.orderStatus eq '픽업완료'}">
                         <!-- 주문번호 클릭 시 주문 상세 정보를 보여줄 버튼 -->
                         <span class="order-number" onclick="showOrderDetail('${order.orderNumber}')">
                             <a href="/manager_receiptDelivery?orderNumber=${order.orderNumber}" style="color: #4caf50">주문번호: ${order.orderNumber}</a>
@@ -202,12 +202,19 @@
                         <div>
                             <span class="order-price">총 금액 <fmt:formatNumber value="${order.orderTotalPrice}" pattern="#,###"/>원</span>
                         </div>
+                    <c:if test="${order.orderStatus eq '주문수락'}">
                         <div class="action-buttons">
                             <form action="/acceptPickup" method="get">
                                 <input type="hidden" name="orderNumber" value="${order.orderNumber}">
                                 <button class="accept-button">픽업 완료</button>
                             </form>
                         </div>
+                    </c:if>
+                        <c:if test="${order.orderStatus eq '픽업완료'}">
+                            <div class="action-buttons">
+                                    <button class="accept-button">배차 요청중..</button>
+                            </div>
+                        </c:if>
                     </c:if>
                 </c:forEach>
             </c:if>
