@@ -19,7 +19,10 @@
     <div class="order_container">
         <div class="order_chk">
                 <form action="" method="post">
-                    <button class="backbtn" onclick="window.location.replace('')">&lt;</button>
+                    <div class="top_title_wrap">
+                        <!-- 뒤로가기 -->
+                        <a href="/adminMain"><button class="backbtn">&lt;</button></a>
+                    </div>
                         <div class="admin_orderlist_box">
                             <h3 class="admin_orderlist_title">주문 리스트</h3>
                             <table class="admin_orderlist">

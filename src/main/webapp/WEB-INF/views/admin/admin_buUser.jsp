@@ -53,7 +53,7 @@
         <div id="goods_title">
             <div class="top_title_wrap">
                 <!-- 뒤로가기 -->
-                <a href="/admin_main"><button class="backbtn">&lt;</button></a>
+                <a href="/adminMain"><button class="backbtn">&lt;</button></a>
             </div>
             <form action="/searchBuser" method="get">
                 <table>
@@ -74,16 +74,16 @@
         <div id="goods_list">
             <form action="" method="">
                 <table id="b_table">
-                    <tr>
-                        <th>시장</th>
-                        <th>사업자번호</th>
-                        <th>가게상호명</th>
-                        <th>사업자명</th>
-                        <th>주소</th>
-                        <th>아이디</th>
-                        <th>연락처</th>
-                        <th>이메일</th>
-                        <th>관리</th>
+                    <tr class="goods_listTitle">
+                        <td>시장</td>
+                        <td>사업자번호</td>
+                        <td>가게상호명</td>
+                        <td>사업자명</td>
+                        <td>주소</td>
+                        <td>아이디</td>
+                        <td>연락처</td>
+                        <td>이메일</td>
+                        <td>관리</td>
                     </tr>
                     <%--반복문시작--%>
                     <c:forEach var="buser" items="${busers}">

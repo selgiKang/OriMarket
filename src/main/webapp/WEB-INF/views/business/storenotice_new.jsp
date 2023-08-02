@@ -421,6 +421,8 @@
         .content textarea {
             resize: none;
         }
+        .first_menu{text-decoration: none;}
+        .first_menu a{text-decoration: none;}
     </style>
     <%
         Date date = new Date();
