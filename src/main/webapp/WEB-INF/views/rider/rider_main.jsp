@@ -253,8 +253,6 @@
             <p>주문이 없습니다.</p>
         </c:if>
     </div>
-    <div class="order-item" data-status="processing" style="display: none;"></div>
-    <div class="order-item" data-status="completed" style="display: none;"></div>
 </div>
 </body>
 </html>
