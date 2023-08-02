@@ -6,6 +6,8 @@ import com.choongang.OriMarket.business.store.BusinessStoreRepository;
 import com.choongang.OriMarket.business.user.BusinessUser;
 import com.choongang.OriMarket.business.user.BusinessUserRepository;
 import com.choongang.OriMarket.business.user.BusinessUserService;
+import com.choongang.OriMarket.manager.user.ManagerRepository;
+import com.choongang.OriMarket.manager.user.ManagerUser;
 import com.choongang.OriMarket.store.ItemRepository;
 import com.choongang.OriMarket.user.CartRepository;
 import com.choongang.OriMarket.user.OrderItemRepository;
@@ -19,6 +21,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequiredArgsConstructor
@@ -33,6 +36,7 @@ public class AdminController {
     private final UserRepository userRepository;
     private final CartRepository cartRepository;
     private final OrderItemRepository orderItemRepository;
+    private final ManagerRepository managerRepository;
 
     //로그인
     @GetMapping("/adminLogin")
@@ -131,10 +135,20 @@ public class AdminController {
         return "/admin/admin_buUser";
     }
 
-
-
     @GetMapping("/admin_order")
     public String adminOrder() {
         return "admin/admin_Order";
     }
+
+    @PostMapping("/deleteManagerUsers")
+    public String deleteManagerUsers(@RequestBody String[] selectedManagerSeqs){
+
+        for(String s:selectedManagerSeqs){
+            System.out.println("잘나오니"+s);
+            ManagerUser byId = managerRepository.findById(Long.valueOf(s)).orElseThrow();
+            managerRepository.delete(byId);
+        }
+        return "admin/admin_manager";
+    }
 }
+
