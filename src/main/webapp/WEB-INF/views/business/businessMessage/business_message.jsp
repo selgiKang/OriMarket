@@ -72,7 +72,7 @@
 <body id="message_body">
     <header id="message_header">
         <%--뒤로가기 디자인 바꿔도 됩니다--%>
-        <button class="backbtn" onclick="window.location.replace('storenotice1')">&lt;</button>
+        <button class="backbtn" onclick="window.location.replace('storenotice1')" style="float: left;">&lt;</button>
         <div class="line"></div>
         <h3>공지사항</h3>
         <a href="businessInsertMessage">공지사항 작성하기</a>
