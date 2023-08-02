@@ -37,13 +37,16 @@ public class MarketMapController {
         System.out.println("경도:"+longitude);
         model.addAttribute("marketName",marketName);
         Market byMarketName = marketRepository.findByMarketName(marketName);
+        model.addAttribute("marketUrl",byMarketName.getMarketHref());
+        model.addAttribute("latitude",latitude);
+        model.addAttribute("longitude",longitude);
 
         double radiusInKm = 6.0;
         boolean b = DistanceUtil.calculateDistance(latitude, longitude, byMarketName.getMarketLatitude(), byMarketName.getMarketLongitude()) > radiusInKm;
         if(b){
-            System.out.println("거리가 너무멀어 배달 할수없습니다.");
+            model.addAttribute("b",b);
         }else {
-            System.out.println("아무것도실행안해버리기");
+            model.addAttribute("b",b);
         }
 
 
@@ -53,22 +56,26 @@ public class MarketMapController {
     }
 
     @GetMapping("/tongin_marketmap")
-    public String marketmap3() {
+    public String marketmap3(@RequestParam("marketName") String marketName,Model model) {
+        model.addAttribute("marketName",marketName);
         return "marketmap/tongin_marketmap";
     }
 
     @GetMapping("/dongdaemun_marketmap")
-    public String marketmap4() {
+    public String marketmap4(@RequestParam("marketName") String marketName,Model model) {
+        model.addAttribute("marketName",marketName);
         return "marketmap/dongdaemun_marketmap";
     }
 
     @GetMapping("/gyoengdong_marketmap")
-    public String marketmap5() {
+    public String marketmap5(@RequestParam("marketName") String marketName,Model model) {
+        model.addAttribute("marketName",marketName);
         return "marketmap/gyoengdong_marketmap";
     }
 
     @GetMapping("/namdaemun_marketmap")
-    public String marketmap6() {
+    public String marketmap6(@RequestParam("marketName") String marketName,Model model) {
+        model.addAttribute("marketName",marketName);
         return "marketmap/namdaemun_marketmap";
     }
 };

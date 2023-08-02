@@ -141,7 +141,7 @@
                     </tr>
                     <tr>
                         <td class="my_review_photo" colspan="2">
-                            <img src="../../../../resources/static/img/store/kal.jpg">
+                            <img src="../../../img/review/${list.pictureUrl}">
                         </td>
                     </tr>
                     <tr>
