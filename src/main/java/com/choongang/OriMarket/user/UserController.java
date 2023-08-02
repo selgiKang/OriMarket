@@ -30,16 +30,11 @@ public class UserController {
 
     @Autowired
     private final UserService userService;
-
     private final UserRepository userRepository;
-
     private final UserMarketRepository userMarketRepository;
-
     private final MarketService marketService;
-
     private final NewOrderRepository newOrderRepository;
     private final NewOrderDetailRepository newOrderDetailRepository;
-
     private final ReviewRepository reviewRepository;
 
 

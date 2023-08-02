@@ -98,7 +98,7 @@
         <br>
         <div id="rider_list">
             <table>
-                <tr class="rider_listTitle"><td><a href="">일반 회원 페이지</a></td></tr>
+                <tr class="rider_listTitle"><td><a href="/a_user">일반 회원 페이지</a></td></tr>
                 <tr class="rider_listTitle"><td><a href="/a_buser">사업자 페이지</a></td></tr>
                 <tr class="rider_listTitle"><td><a href="/managercrud">매니저 페이지</a></td></tr>
                 <tr class="rider_listTitle"><td><a href="/rider_list">라이더 페이지</a></td></tr>

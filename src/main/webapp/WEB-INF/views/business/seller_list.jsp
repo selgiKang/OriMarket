@@ -14,7 +14,7 @@
     <header id="calculate_header">
         <div id="calculate_title">
             <%--왼쪽 화살표--%>
-            <a href=""><i class="fas fa-solid fa-arrow-left" style="color: #fafafa;"></i></a>
+            <a href="/backbuUser"><i class="fas fa-solid fa-arrow-left" style="color: #fafafa;"></i></a>
             판매 목록
         </div>
         <%--정산 날짜 출력--%>

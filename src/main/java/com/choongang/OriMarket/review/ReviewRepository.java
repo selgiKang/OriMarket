@@ -14,4 +14,6 @@ public interface ReviewRepository extends JpaRepository<Review,Long> {
 
     List<Review> findByBusinessStore(BusinessStore businessStore);
 
+    List<Review> findByBusinessStore_BuStoreNumber(Long buStoreNumber);
+
 }
