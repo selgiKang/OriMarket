@@ -38,6 +38,8 @@
 
         .goods_listTitle{color: #46A973; margin-bottom:15px;}
 
+
+
     </style>
 </head>
 <body>
@@ -53,22 +55,14 @@
                 <!-- 뒤로가기 -->
                 <a href="/adminMain"><button class="backbtn">&lt;</button></a>
             </div>
-            <form action="/searchOrder" method="get">
-                <table>
-                    <tr>
-                        <td>
-                            <select name="selectType" id="searchType">
-                                <option value="">시장</option>
-                                <option value="">사업자명</option>
-                                <option value="">일반회원</option>
-                                <option value="">주문번호</option>
-                                <option value="orderType">결제수단</option>
-                            </select>
-                        </td>
-                        <td><input type="text" name="keyword" id="searchValue"></td>
-                        <td><input type="submit" value="검색"></td>
-                    </tr>
-                </table>
+            <form action="/searchOrder" method="get" id="searchForm">
+                <select name="selectType" id="searchType">
+                    <option value="marketName">시장</option>
+                    <option value="userId">일반회원</option>
+                    <option value="orderNum">주문번호</option>
+                </select>
+                <input type="text" name="keyword" id="searchValue">
+                <input type="submit" value="검색">
             </form>
         </div>
         <br>
