@@ -36,34 +36,29 @@
             $.ajax({
                 url: '/orderListResult',
                 type: 'POST',
-                data: {'page': pageNumber},
+                data: {
+                    'page': pageNumber,
+                    },
                 dataType: 'json',
                 success: function (response) {
-                    console.log("된다");
                     try {
                         // 서버에서 전달된 JSON 데이터를 JavaScript 객체로 파싱
-                        console.log(1);
-                        // jsonData에서 필요한 정보를 추출하여 페이지에 추가하는 로직을 작성
+                            // jsonData에서 필요한 정보를 추출하여 페이지에 추가하는 로직을 작성
                         var orderList = response.content;
-                        console.log(2);
-
                         // // 주문 정보를 표시할 HTML을 생성하는 함수
                         // function generateOrderHTML(order) {
                         //     // ... 주문 정보를 HTML 문자열로 변환하는 코드 ...
                         // }
-
                         // 주문 정보를 추가할 요소를 선택하고, 기존 내용을 지우고 새로운 주문 정보를 추가
                         var orderItemDiv = $('.order-item[data-status="completed"]');
-                        orderItemDiv.empty(); // 기존 내용 초기화
-                        console.log(3);
+                        orderItemDiv.remove(); // 기존 내용 초기화
+
                         orderList.forEach(function(order) {
                             console.log(4);
                             if (order.orderStatus === '배달완료' || order.orderStatus === '주문거절') {
-                                var orderDiv = generateOrderHTML(order);
-                                orderItemDiv.append(orderDiv);
+                                orderItemDiv.append(generateOrderHTML(order));
                             }
                         });
-                        console.log(5);
                         var paginationHTML = generatePaginationHTML(response);
                         $('.pagination').replaceWith(paginationHTML);
                     } catch (e) {
@@ -76,6 +71,7 @@
                 }
             });
         }
+
         function generateOrderHTML(order) {
             // 주문번호 클릭 시 주문 상세 정보를 보여줄 버튼
             var orderNumberLink = $('<a></a>')
@@ -102,7 +98,6 @@
                 .addClass('order-item')
                 .attr('data-status', 'completed')
                 .append(orderNumberSpan, orderDetailsDiv, orderPriceSpan);
-
             return orderDiv;
         }
 
@@ -245,13 +240,14 @@
         </div>
         <%--배달 완료--%>
         <div class="order-item" data-status="completed">
+            <div class="order_pageing">
             <c:if test="${not empty resultPage}">
                 <c:forEach items="${resultPage.content}" var="order">
                     <c:if test="${order.orderStatus eq '배달완료' or order.orderStatus eq '주문거절'}">
                         <!-- 주문번호 클릭 시 주문 상세 정보를 보여줄 버튼 -->
                         <span class="order-number" onclick="showOrderDetail('${order.orderNumber}')">
-                            <a href="/manager_receiptDelivery?orderNumber=${order.orderNumber}" style="color: #4caf50">주문번호: ${order.orderNumber}</a>
-                        </span>
+                        <a href="/manager_receiptDelivery?orderNumber=${order.orderNumber}" style="color: #4caf50">주문번호: ${order.orderNumber}</a>
+                </span>
                         <c:forEach var="store" items="${order.newOrderDetails}">
                             <div class="order-details">
                                 <span>${store.itemName} 총 ${store.itemCount}개</span>
@@ -262,6 +258,7 @@
                         </div>
                     </c:if>
                 </c:forEach>
+            </div>
                 <c:if test="${resultPage.totalPages > 1}">
                     <ul class="pagination">
                         <c:choose>
@@ -299,6 +296,8 @@
                 <p>주문이 없습니다.</p>
             </c:if>
         </div>
+
+
 <%--
         <div class="order-item" data-status="completed">
             <c:if test="${not empty orderList}">

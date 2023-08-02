@@ -144,7 +144,7 @@
                     <tr>
                         <td style="text-align: left;" class="review_table_td_1">리뷰 작성일</td>
                         <td class="rate_and_date">
-                            <h6 class="date">${list.created_date}</h6>
+                            <h6 class="date">${list.createdDate}</h6>
                         </td>
                     </tr>
                     <tr>
