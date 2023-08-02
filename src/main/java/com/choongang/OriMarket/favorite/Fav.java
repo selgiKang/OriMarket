@@ -27,5 +27,4 @@ public class Fav {
 
     @Transient
     private String favNumber;
-
 }
