@@ -74,6 +74,7 @@
                         <h3>가게 카테고리</h3>
                         <c:if test="${empty save.buStoreCategory}">
                             <select name="buStoreCategory">
+                                <option value="마트">마트</option>
                                 <option value="채소">채소</option>
                                 <option value="과일,견과,쌀">과일,견과,쌀</option>
                                 <option value="수산,해산물,건어물">수산,해산물,건어물</option>

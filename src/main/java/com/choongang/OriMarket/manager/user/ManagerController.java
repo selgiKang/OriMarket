@@ -59,7 +59,7 @@ public class ManagerController {
     //배달완료 page
     @PostMapping("/orderListResult")
     @ResponseBody
-    public ResponseEntity<Page<NewOrder>> orderListResult(@RequestParam("page") int pageNumberReuslt,Model model,HttpSession session) {
+    public ResponseEntity<Page<NewOrder>> orderListResult(@RequestParam("page") int pageNumberReuslt, Model model,HttpSession session) {
 
         //매니저 정보 가져오기
         ManagerUser userResult = managerService.findByManagerId(model,session);
@@ -74,7 +74,7 @@ public class ManagerController {
         model.addAttribute("orderList",orderList);
 
         int pageNumber = pageNumberReuslt;
-        int pageSize = 4; // 한 페이지에 4개씩 보여줄 때
+        int pageSize = 4;
         Pageable pageable = PageRequest.of(pageNumber, pageSize);
         String orderStatus = "배달완료";
         String orderStatusNo ="주문거절";
