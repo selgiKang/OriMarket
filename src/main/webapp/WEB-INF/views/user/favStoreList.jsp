@@ -65,7 +65,8 @@
       width: 100%;
       background-color: white;
       overflow: hidden;
-      border-radius: 3px;
+     /* border-radius: 3px;*/
+      border: none;
     }
 
 
