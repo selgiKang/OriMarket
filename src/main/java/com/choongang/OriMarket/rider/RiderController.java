@@ -112,9 +112,19 @@ public class RiderController {
     }
 
     @GetMapping("/rider_order_search")
-    public String riderOrderSearch(Model model){
+    public String riderOrderSearch(Model model,HttpSession session){
         List<NewOrder> orders = riderService.riderOrderSearch();
         model.addAttribute("orders",orders);
+
+        Rider riderSeq = riderRepository.findById((Long) session.getAttribute("riderSeq")).orElseThrow();
+
+        int pageNumber = 0;
+        int pageSize = 4;
+        Pageable pageable = PageRequest.of(pageNumber, pageSize);
+        String orderStatus = "배달완료";
+        String orderStatusNo ="주문거절";
+        Page<NewOrder> resultPage = riderService.pageList(riderSeq, orderStatus, orderStatusNo,pageable);
+        model.addAttribute("resultPage",resultPage);
         return "rider/rider_main";
     }
 

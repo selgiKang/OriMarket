@@ -269,8 +269,8 @@
     <br><br><br>
     <h5 style="text-align: center;">포토리뷰 작성시 <span style="color: #cc4444">100포인트</span> 지급!</h5>
     <textarea class="review_textbox" placeholder="사진과 함께 리뷰를 작성하시면 100포인트가 적립됩니다." name="content"
-              oninput="checkMaxLength(this, 300); updateCharacterCount(this, 'charCount')"></textarea>
-    <div id="charCount">0 / 300</div>
+              oninput="checkMaxLength(this, 200); updateCharacterCount(this, 'charCount')"></textarea>
+    <div id="charCount">0 / 200</div>
 
     <script>
       function checkMaxLength(textarea, maxLength) {

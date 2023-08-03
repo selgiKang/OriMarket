@@ -13,17 +13,10 @@
         .admin_orderlist_title, .admin_orderlist{text-align: center; margin:auto;}
         .admin_orderlist{width:60%; border:1px solid #eee;}
         .admin_orderlist > tr {background-color:#eee;}
-
-
         #goods_list{font-size: 15px; margin: 1px;}
-
         /* 230723 승원 */
         #goods_list table{ border-radius: 5px; background-color:#fff; width: 1920px; }
-
-        .goods_listTitle td{
-            padding: 12px;
-        }
-
+        .goods_listTitle td{ padding: 12px;}
         /* 230723 승원 */
         #goods_title > a > input{
             background-color: #ffbf41;
@@ -33,13 +26,8 @@
             border:none;
             border-radius:5px;
             cursor:pointer;}
-
         #goods_title > a > input:hover {background-color:#333; color:#fff;}
-
         .goods_listTitle{color: #46A973; margin-bottom:15px;}
-
-
-
     </style>
 </head>
 <body>

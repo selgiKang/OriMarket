@@ -434,7 +434,6 @@ pageEncoding="UTF-8"%>
               작성한 리뷰(__)
             </button>
           </div>
-
           <div class="createable_review_wrapbox">
           <div id="tab-panel-1" aria-labelledby="tab-1" role="tabpanel" tabindex="0" class="createable_review_wrap">
             <c:forEach items="${newOrders}" var="pastOrder">
@@ -443,21 +442,21 @@ pageEncoding="UTF-8"%>
                   <c:set var="firstStoreName" value="true" scope="page" />
                   <c:forEach items="${pastOrder.newOrderDetails}" var="orderDetail">
                     <c:if test="${orderDetail.reviewtrue ne '리뷰'}">
-                    <c:if test="${!processedStoreNames.contains(orderDetail.buStoreName)}">
-                      <c:set var="processedStoreNames" value="${processedStoreNames},${orderDetail.buStoreName}" scope="page" />
-                      <div class="createable_review_box">
-                      <p style="font-size: 16px; margin-top: ${firstStoreName eq 'true' ? '0' : '10px'}; /*margin-bottom: -11px;*/
+                      <c:if test="${!processedStoreNames.contains(orderDetail.buStoreName)}">
+                        <c:set var="processedStoreNames" value="${processedStoreNames},${orderDetail.buStoreName}" scope="page" />
+                        <div class="createable_review_box">
+                          <p style="font-size: 16px; margin-top: ${firstStoreName eq 'true' ? '0' : '10px'}; /*margin-bottom: -11px;*/
                               border-top: ${firstStoreName eq 'true' ? 'none' : '1px solid #eee;'}; position: relative; padding-top:10px;">
-                        ${orderDetail.buStoreName}
-                          <button style="position: absolute; right: 0;border: none;padding: 3px 8px;background-color: #4caf50;color: #fff;border-radius: 4px;"
-                                  onclick="location.href='/user_review?buStoreName=${orderDetail.buStoreName}&orderNumber=${orderDetail.orderNumber}'">리뷰 쓰기</button>
-                      </p>
-                      <c:set var="firstStoreName" value="false" scope="page" />
-                    </c:if>
+                              ${orderDetail.buStoreName}
+                              <button style="position: absolute; right: 0;border: none;padding: 3px 8px;background-color: #4caf50;color: #fff;border-radius: 4px;"
+                                      onclick="location.href='/user_review?buStoreName=${orderDetail.buStoreName}&orderNumber=${orderDetail.orderNumber}'">리뷰 쓰기</button>
+                          </p>
+                        <c:set var="firstStoreName" value="false" scope="page" />
                         <span style="font-size: x-small; padding-left: 3px;">구매상품 :${orderDetail.itemName}</span>
+                        </div>
+                      </c:if>
                     </c:if>
                   </c:forEach>
-                </div>
               </c:if>
             </c:forEach>
           </div>
