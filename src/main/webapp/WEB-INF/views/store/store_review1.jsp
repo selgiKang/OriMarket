@@ -37,11 +37,6 @@
             width: 100px;
             text-align: center;
         }
-        .rating::before {
-            content: "☆☆☆☆☆";
-            color: lightgray;
-        }
-
         .rating[data-rating="1"]::before {
             content: "★☆☆☆☆";
             color: gold;
@@ -65,32 +60,28 @@
         .rating[data-rating="5"]::before {
             content: "★★★★★";
             color: gold;
-        }  .rating::before {
-               content: "☆☆☆☆☆";
-               color: lightgray;
-           }
-
-        .rating[data-rating="1"]::before {
+        }
+        .rating::before {
+            content: "☆☆☆☆☆";
+            color: lightgray;
+        }
+        .rating[data-rating="1.0"]::before {
             content: "★☆☆☆☆";
             color: gold;
         }
-
-        .rating[data-rating="2"]::before {
+        .rating[data-rating="2.0"]::before {
             content: "★★☆☆☆";
             color: gold;
         }
-
-        .rating[data-rating="3"]::before {
+        .rating[data-rating="3.0"]::before {
             content: "★★★☆☆";
             color: gold;
         }
-
-        .rating[data-rating="4"]::before {
+        .rating[data-rating="4.0"]::before {
             content: "★★★★☆";
             color: gold;
         }
-
-        .rating[data-rating="5"]::before {
+        .rating[data-rating="5.0"]::before {
             content: "★★★★★";
             color: gold;
         }
@@ -130,7 +121,6 @@
         <h3>${buStore.buStoreName} 리뷰 <small>&lt; 총: ${aveRating}점 &gt;</small></h3>
         <h3 style="margin-top: -20px;" class="rating" data-rating="${aveRating}"></h3>
     </c:if>
-
     <c:if test="${reviewcount ne 1}">
     <h3>${buStore.buStoreName} 리뷰 <small>&lt; 총: ${aveRating}점 &gt;</small></h3>
     <h3 style="margin-top: -20px;" class="rating" data-rating="${Math.round(aveRating * 2) / 2}"></h3>
