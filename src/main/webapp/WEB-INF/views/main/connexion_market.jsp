@@ -81,16 +81,13 @@
         <div id="map_btns">
             <button class="nowmap_btn" onclick="showCurrentLocationMap()">현재 위치 보기</button>
             <button class="mkmap_btn" onclick="showClosestMarketMap()">가까운 시장 보기</button>
-            <form action="/market_search" method="post">
-                <button class="cnmkmap_btn" type="submit">
-                    <input type="hidden" id="closestMarketInfo" name="marketName">
-                    단골시장으로 등록하기
-                </button>
-            </form>
-
+            <!-- 아래 버튼의 클릭 이벤트를 추가하고, 사용자 닉네임이 비어있으면 알림을 표시합니다. -->
+            <button class="cnmkmap_btn" type="button" onclick="checkUserNickname()">
+                <input type="hidden" id="closestMarketInfo" name="marketName">
+                단골시장으로 등록하기
+            </button>
         </div>
     </div>
-
 </div>
 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a2de38dfc66e99ae9e3a132ffb7b217c"></script>
@@ -222,6 +219,72 @@
         var distance = R * c;
 
         return distance;
+    }
+
+    //비회원 가까운시장 시도할때 그리고 가까운 시장 안누르고 바로 등록시도시 알림창
+
+    var isClosestMarketViewed = false;
+
+    function checkUserNickname() {
+        var userNickname = "${userNickname}"; // 여기서 사용자의 닉네임을 가져와서 확인합니다.
+
+        if (userNickname === '') {
+            alert("로그인을 먼저 해주세요."); // 사용자 닉네임이 비어있을 경우 알림을 표시합니다.
+        } else {
+            if (isClosestMarketViewed) {
+                // '가까운 시장 보기' 버튼을 먼저 클릭한 경우, 정상적으로 실행됩니다.
+                var closestMarketForm = document.createElement('form');
+                closestMarketForm.method = 'post';
+                closestMarketForm.action = '/market_search';
+
+                var hiddenInput = document.createElement('input');
+                hiddenInput.type = 'hidden';
+                hiddenInput.name = 'marketName';
+                hiddenInput.value = document.getElementById('closestMarketInfo').value;
+
+                closestMarketForm.appendChild(hiddenInput);
+                document.body.appendChild(closestMarketForm);
+
+                closestMarketForm.submit();
+            } else {
+                // '가까운 시장 보기' 버튼을 먼저 클릭하라는 알림을 표시합니다.
+                alert("'가까운 시장 보기'를 먼저 클릭해주세요.");
+            }
+        }
+    }
+
+    function showClosestMarketMap() {
+        if (!currentPositionMarker) {
+            alert('현재 위치를 먼저 가져와주세요.');
+            return;
+        }
+
+        // 현재 위치에서 가장 가까운 전통시장 찾기
+        var closestMarket = findClosestMarket(currentPositionMarker.getPosition().getLat(), currentPositionMarker.getPosition().getLng());
+        var marketPosition = new kakao.maps.LatLng(closestMarket.latitude, closestMarket.longitude);
+
+        // 가까운 전통시장을 지도에 표시하는 마커 생성
+        var marketMarker = new kakao.maps.Marker({
+            map: map,
+            position: marketPosition,
+            title: closestMarket.name
+        });
+
+        // 마커에 커스텀 오버레이를 추가하여 텍스트 표시
+        var marketContent = '<div style="padding:7px; background-color:#fff; font-size:14px; color:#333; border:2px solid #ffbf41; border-radius: 5px; letter-spacing:-2px;">' + closestMarket.name + '</div>';
+        var marketCustomOverlay = new kakao.maps.CustomOverlay({
+            content: marketContent,
+            position: marketPosition,
+            xAnchor: 0.5,
+            yAnchor: 2
+        });
+        marketCustomOverlay.setMap(map);
+
+        // 지도 중심을 해당 전통시장으로 이동
+        map.setCenter(marketPosition);
+
+        // '가까운 시장 보기' 버튼을 클릭한 플래그를 true로 설정합니다.
+        isClosestMarketViewed = true;
     }
 </script>
 </body>

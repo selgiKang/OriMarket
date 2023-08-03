@@ -229,7 +229,7 @@ public class UserController {
     @PostMapping("/usermarketSearch")
     @ResponseBody
     public ResponseEntity<List<Map<String, String>>> usermarketSearch(@RequestParam double latitude, @RequestParam double longitude, Model model, HttpSession session) {
-        ;
+
         try {
             List<Map<String,String>> tableData = new ArrayList<>();
             double radiusInKm = 5.0;

@@ -37,11 +37,6 @@
             width: 100px;
             text-align: center;
         }
-        .rating::before {
-            content: "☆☆☆☆☆";
-            color: lightgray;
-        }
-
         .rating[data-rating="1"]::before {
             content: "★☆☆☆☆";
             color: gold;
@@ -65,32 +60,28 @@
         .rating[data-rating="5"]::before {
             content: "★★★★★";
             color: gold;
-        }  .rating::before {
-               content: "☆☆☆☆☆";
-               color: lightgray;
-           }
-
-        .rating[data-rating="1"]::before {
+        }
+        .rating::before {
+            content: "☆☆☆☆☆";
+            color: lightgray;
+        }
+        .rating[data-rating="1.0"]::before {
             content: "★☆☆☆☆";
             color: gold;
         }
-
-        .rating[data-rating="2"]::before {
+        .rating[data-rating="2.0"]::before {
             content: "★★☆☆☆";
             color: gold;
         }
-
-        .rating[data-rating="3"]::before {
+        .rating[data-rating="3.0"]::before {
             content: "★★★☆☆";
             color: gold;
         }
-
-        .rating[data-rating="4"]::before {
+        .rating[data-rating="4.0"]::before {
             content: "★★★★☆";
             color: gold;
         }
-
-        .rating[data-rating="5"]::before {
+        .rating[data-rating="5.0"]::before {
             content: "★★★★★";
             color: gold;
         }
@@ -110,15 +101,26 @@
             content: "★★★★½";
             color: gold;
         }
+
+
+        button.backbtn {
+            display: flex;
+            align-items: center;
+            font-size: 20px;
+            color: #999;
+
+            margin: 10px 0 0 10px; width: 30px; height: 30px; background-color: #fff; border-radius: 50%; border: 1px solid #999; cursor: pointer; justify-content: center;}
+        button.backbtn:hover {background-color:#333; color:#fff;}
     </style>
 </head>
 <body id="business_review_body">
 <header id="business_review_header">
+    <%--뒤로가기--%>
+    <button class="backbtn" onclick="window.location.replace('storenotice1')">&lt;</button>
     <c:if test="${reviewcount eq 1}">
         <h3>${buStore.buStoreName} 리뷰 <small>&lt; 총: ${aveRating}점 &gt;</small></h3>
         <h3 style="margin-top: -20px;" class="rating" data-rating="${aveRating}"></h3>
     </c:if>
-
     <c:if test="${reviewcount ne 1}">
     <h3>${buStore.buStoreName} 리뷰 <small>&lt; 총: ${aveRating}점 &gt;</small></h3>
     <h3 style="margin-top: -20px;" class="rating" data-rating="${Math.round(aveRating * 2) / 2}"></h3>
@@ -144,7 +146,7 @@
                     </tr>
                     <tr>
                         <td class="my_review_photo" colspan="2">
-                            <img src="${pageContext.request.contextPath}/img/review/${list.pictureUrl}">
+                            <img src="${pageContext.request.contextPath}/img/review/${list.pictureUrl}" style="max-width: 100%;">
                             <p>${list.content}</p>
                         </td>
                     </tr>

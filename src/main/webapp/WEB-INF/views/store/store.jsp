@@ -8,10 +8,6 @@
     <link rel="stylesheet" type="text/css" href="../../css/store/store.css">
 </head>
 <style>
-    .rating::before {
-        content: "☆☆☆☆☆";
-        color: lightgray;
-    }
     .rating[data-rating="1"]::before {
         content: "★☆☆☆☆";
         color: gold;
@@ -35,27 +31,28 @@
     .rating[data-rating="5"]::before {
         content: "★★★★★";
         color: gold;
-    }  .rating::before {
+    }
+    .rating::before {
            content: "☆☆☆☆☆";
            color: lightgray;
        }
-    .rating[data-rating="1"]::before {
+    .rating[data-rating="1.0"]::before {
         content: "★☆☆☆☆";
         color: gold;
     }
-    .rating[data-rating="2"]::before {
+    .rating[data-rating="2.0"]::before {
         content: "★★☆☆☆";
         color: gold;
     }
-    .rating[data-rating="3"]::before {
+    .rating[data-rating="3.0"]::before {
         content: "★★★☆☆";
         color: gold;
     }
-    .rating[data-rating="4"]::before {
+    .rating[data-rating="4.0"]::before {
         content: "★★★★☆";
         color: gold;
     }
-    .rating[data-rating="5"]::before {
+    .rating[data-rating="5.0"]::before {
         content: "★★★★★";
         color: gold;
     }
@@ -76,9 +73,7 @@
         color: gold;
     }
 </style>
-
 <body>
-
 <div class="store_wrap">
 <%--${buStoreImage} 이미지파일명 --%>
 <jsp:include page="../header/header_search.jsp" />
@@ -118,12 +113,12 @@
                         <small style="font-size: 16px;margin-right: 5px;"> &lt;리뷰 총 ${reviewcount}개 &gt; : </small><span class="rating" data-rating="${aveRating}"></span><br>
                     </c:if>
                     <c:if test="${reviewcount ne 1}">
-                    <c:if test="${!Double.isNaN(aveRating)}">
-                      <small style="font-size: 16px;margin-right: 5px;"> &lt;리뷰 총 ${reviewcount}개 &gt; : </small><span class="rating" data-rating="${Math.round(aveRating * 2) / 2}"></span><br>
-                    </c:if>
-                    <c:if test="${Double.isNaN(aveRating)}">
-                        <small style="font-size: 16px;margin-right: 5px;"> &lt; 총 0개 &gt; : </small><span class="rating" data-rating="${Math.round(aveRating * 2) / 2}"></span><br>
-                    </c:if>
+                        <c:if test="${!Double.isNaN(aveRating)}">
+                          <small style="font-size: 16px;margin-right: 5px;"> &lt;리뷰 총 ${reviewcount}개 &gt; : </small><span class="rating" data-rating="${Math.round(aveRating * 2) / 2}"></span><br>
+                        </c:if>
+                        <c:if test="${Double.isNaN(aveRating)}">
+                            <small style="font-size: 16px;margin-right: 5px;"> &lt; 총 0개 &gt; : </small><span class="rating" data-rating="${Math.round(aveRating * 2) / 2}"></span><br>
+                        </c:if>
                     </c:if>
                     <small><a href="/storeReview1" style="color: #4A98F7; font-size: 16px; padding-left:10px;">리뷰 보러가기 </a></small>
                     <%--리뷰--%>
