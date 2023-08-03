@@ -140,7 +140,7 @@
                     </tr>
                     <tr>
                         <td class="my_review_photo" colspan="2">
-                            <img src="../../../img/review/${list.pictureUrl}">
+                            <img src="../../../img/review/${list.pictureUrl}" style="max-width:100%;">
                         </td>
                     </tr>
                     <tr>
