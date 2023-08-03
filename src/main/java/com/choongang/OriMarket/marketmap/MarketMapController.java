@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -32,14 +33,14 @@ public class MarketMapController {
     public String marketmap2(@RequestParam("marketName") String marketName,
                              @RequestParam("latitude") Double latitude,
                              @RequestParam("longitude") Double longitude,
-                             Model model){
+                             Model model, HttpSession session){
         System.out.println("위도:"+latitude);
         System.out.println("경도:"+longitude);
         model.addAttribute("marketName",marketName);
         Market byMarketName = marketRepository.findByMarketName(marketName);
-        model.addAttribute("marketUrl",byMarketName.getMarketHref());
-        model.addAttribute("latitude",latitude);
-        model.addAttribute("longitude",longitude);
+        session.setAttribute("marketUrl",byMarketName.getMarketHref());
+        session.setAttribute("latitude",latitude);
+        session.setAttribute("longitude",longitude);
 
         double radiusInKm = 6.0;
         boolean b = DistanceUtil.calculateDistance(latitude, longitude, byMarketName.getMarketLatitude(), byMarketName.getMarketLongitude()) > radiusInKm;
