@@ -161,6 +161,9 @@ public class FavController {
             System.out.println("이건머라고나오띾요?:"+buStoreImageUrl);
             session.setAttribute("buStoreImage",buStoreImageUrl);
 
+            //8.3 테스트
+            model.addAttribute("favStoreImg", buStoreImageUrl);
+
             //공지사항
             BusinessUser buStoreNumber = items.get(0).getBusinessStore().getBusinessUser();
             session.setAttribute("buUserNumber",buStoreNumber.getBuUserNumber());
