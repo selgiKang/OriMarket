@@ -90,8 +90,10 @@
                 <%-- 찜 --%>
                 <div class="favstoreheart">
                 <c:if test="${!empty sessionScope.userId}">
-                    <form action="/storeFav" method="get" style="width: 50px; height: 50px; display: flex; position: absolute;">
-                        <input type="hidden" value="${param.favStoreName}" name="favStoreName">
+                    <form action="/storeFav" method="get" style="width: 50px; height: 50px; display: flex; position: absolute;" enctype="multipart/form-data">
+                        <input type="hidden" value="${favStoreName}" name="favStoreName">
+                        <input type="hidden" name="favStoreImg" value="${buStoreImage}">
+                        <%--//8.3 테스트--%>
                         <input type="hidden" value="<%=session.getAttribute("userSeq")%>" name="userSeq">
 
                         <div type="submit" class="storeFav" onclick="event.preventDefault(); toggleHeart(this);" style="opacity: 1;/* width:50px; height:50px; float:right;*/" />

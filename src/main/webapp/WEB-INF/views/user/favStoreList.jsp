@@ -162,11 +162,14 @@
       <table>
         <tr class="hoverable-row">
           <th>순번</th>
+          <th>가게 이미지</th>
           <th>가게 이름</th>
         </tr>
         <c:forEach var="favResult" items="${favResult}" varStatus="status">
           <tr class="hoverable-row">
             <td>${status.index + 1}</td>
+            <%--8.3 테스트--%>
+            <td><img src="../../img/store/${favResult.favStoreImg}" alt="가게 이미지" style="width: 100px; height: 100px;"></td>
             <td><a href="/store?favStoreName=${favResult.favStoreName}">${favResult.favStoreName}</a></td>
           </tr>
         </c:forEach>
