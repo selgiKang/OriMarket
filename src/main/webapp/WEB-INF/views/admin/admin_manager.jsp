@@ -1,82 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8"%>
+         pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
     <title>현 재고 리스트</title>
-    <style type="text/css">
-        /* 전체적용 */
-        @font-face {
-            font-family: 'omyu_pretty';
-            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-01@1.0/omyu_pretty.woff2') format('woff2');
-            font-weight: normal;
-            font-style: normal;
-        }
-        @font-face {
-            font-family: 'LINESeedKR-Bd';
-            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/LINESeedKR-Bd.woff2') format('woff2');
-            font-weight: 700;
-            font-style: normal;
-        }
-
-        /* 전체 크기 */
-        body{
-            margin: 0;
-            padding: 0;
-            font-family:'LINESeedKR-Bd';
-            font-size: 16px;
-            text-align: center; width: 1920px;}
-
-
-        #goods_store{
-            height:100%;
-            background-color:#46A973;
-            color:#fff;
-            text-align: right;
-            display: flex;
-            justify-content: end;
-            align-items: center;}
-
-        .snun_wrap{width: 1920px; text-align: center;}
-
-        /* 230723 승원 */
-        .goods_store_wrap{background-color:#eee; width: 100%;}
-        .top_title_wrap h1{text-align:center; margin:15px 18%;}
-
-        #goods_title{padding:20px 0 0;}
-        #goods_title a{color:#333; margin:10px 5px; margin-right: 0;}
-        .top_title_wrap{ display: flex; align-items: center;}
-        .top_title_wrap a{text-decoration: none;}
-        button.backbtn { display: flex; align-items: center; font-size: 20px; color: #999; margin: 0 0 0 10px; width: 30px; height: 30px; background-color: #fff; border-radius: 50%; border: 1px solid #999; cursor: pointer; justify-content: center;}
-        button.backbtn:hover {background-color:#333; color:#fff;}
-
-        /* ------------------------------------------ 공통적용css---------------------------------------------- */
-
-        #goods_list{font-size: 15px; margin: 1px;}
-
-        /* 230723 승원 */
-        #goods_list table{ border-radius: 5px; background-color:#fff; width: 1920px; }
-
-        .goods_listTitle td{
-            padding: 12px;
-        }
-
-        /* 230723 승원 */
-        #goods_title > a > input{
-            background-color: #ffbf41;
-            color: #333;
-            font-weight:600;
-            padding: 8px 8px;
-            border:none;
-            border-radius:5px;
-            cursor:pointer;}
-
-        #goods_title > a > input:hover {background-color:#333; color:#fff;}
-
-        .goods_listTitle{color: #46A973; margin-bottom:15px;}
-    </style>
+    <link rel="stylesheet" href="../../css/admin/manager.css">
 </head>
 <body>
 <div id="goods_container">
@@ -89,7 +19,9 @@
         <div id="goods_title">
             <div class="top_title_wrap">
                 <!-- 뒤로가기 -->
-                <a href="/adminMain"><button class="backbtn">&lt;</button></a>
+                <a href="/adminMain">
+                    <button class="backbtn">&lt;</button>
+                </a>
             </div>
             <a><input type="button" class="delete_btn" value="선택회원 삭제" onclick="deleteSelectedManagerUsers()"></a>
             <a><input type="button" class="show_all_btn" value="전체회원 보기" onclick="showAllManagerUsers()"></a>
@@ -117,15 +49,15 @@
                     <td>이메일</td>
                 </tr>
                 <c:forEach var="manageruser" items="${managerUsers}">
-                <tr>
-                    <td><input type="checkbox" value="${manageruser.managerSeq}"></td>
-                    <td>${manageruser.market.marketName}</td>
-                    <td>${manageruser.managerId}</td>
-                    <td>${manageruser.managerPassword}</td>
-                    <td>${manageruser.managerName}</td>
-                    <td>${manageruser.managerPhone}</td>
-                    <td>${manageruser.managerEmail}</td>
-                </tr>
+                    <tr>
+                        <td><input type="checkbox" value="${manageruser.managerSeq}"></td>
+                        <td>${manageruser.market.marketName}</td>
+                        <td>${manageruser.managerId}</td>
+                        <td>${manageruser.managerPassword}</td>
+                        <td>${manageruser.managerName}</td>
+                        <td>${manageruser.managerPhone}</td>
+                        <td>${manageruser.managerEmail}</td>
+                    </tr>
                 </c:forEach>
             </table>
         </div>
@@ -150,7 +82,7 @@
         var xhr = new XMLHttpRequest();
         xhr.open('POST', '/deleteManagerUsers', true);
         xhr.setRequestHeader('Content-Type', 'application/json');
-        xhr.onreadystatechange = function() {
+        xhr.onreadystatechange = function () {
             if (xhr.readyState === XMLHttpRequest.DONE) {
                 if (xhr.status === 200) {
                     // 삭제 요청이 성공적으로 처리되었을 경우, 선택된 회원들을 테이블에서 삭제
@@ -216,7 +148,7 @@
 
     //엔터키로 검색되게
     var searchValue = document.getElementById('searchValue');
-    searchValue.addEventListener('keyup', function(event) {
+    searchValue.addEventListener('keyup', function (event) {
         if (event.keyCode === 13) { // Enter 키를 누른 경우
             searchManagerUsers(); // 검색 기능 함수를 호출
         }

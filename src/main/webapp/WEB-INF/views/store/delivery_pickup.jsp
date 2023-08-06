@@ -425,7 +425,7 @@ pageEncoding="UTF-8"%>
     </div>
     <div class="content">
       <section>
-        <div class="inside_tabs" style="min-height:0;">
+        <div class="inside_tabs">
           <div role="inside_tablist">
             <button id="tab-1" aria-selected="true" aria-controls="tab-panel-1" role="tab" type="button" tabindex="0">
               작성 가능한 리뷰(__)
@@ -434,7 +434,6 @@ pageEncoding="UTF-8"%>
               작성한 리뷰(__)
             </button>
           </div>
-
           <div class="createable_review_wrapbox">
           <div id="tab-panel-1" aria-labelledby="tab-1" role="tabpanel" tabindex="0" class="createable_review_wrap">
             <c:forEach items="${newOrders}" var="pastOrder">
@@ -443,21 +442,21 @@ pageEncoding="UTF-8"%>
                   <c:set var="firstStoreName" value="true" scope="page" />
                   <c:forEach items="${pastOrder.newOrderDetails}" var="orderDetail">
                     <c:if test="${orderDetail.reviewtrue ne '리뷰'}">
-                    <c:if test="${!processedStoreNames.contains(orderDetail.buStoreName)}">
-                      <c:set var="processedStoreNames" value="${processedStoreNames},${orderDetail.buStoreName}" scope="page" />
-                      <div class="createable_review_box">
-                      <p style="font-size: 16px; margin-top: ${firstStoreName eq 'true' ? '0' : '10px'}; /*margin-bottom: -11px;*/
+                      <c:if test="${!processedStoreNames.contains(orderDetail.buStoreName)}">
+                        <c:set var="processedStoreNames" value="${processedStoreNames},${orderDetail.buStoreName}" scope="page" />
+                        <div class="createable_review_box">
+                          <p style="font-size: 16px; margin-top: ${firstStoreName eq 'true' ? '0' : '10px'}; /*margin-bottom: -11px;*/
                               border-top: ${firstStoreName eq 'true' ? 'none' : '1px solid #eee;'}; position: relative; padding-top:10px;">
-                        ${orderDetail.buStoreName}
-                          <button style="position: absolute; right: 0;border: none;padding: 3px 8px;background-color: #4caf50;color: #fff;border-radius: 4px;"
-                                  onclick="location.href='/user_review?buStoreName=${orderDetail.buStoreName}&orderNumber=${orderDetail.orderNumber}'">리뷰 쓰기</button>
-                      </p>
-                      <c:set var="firstStoreName" value="false" scope="page" />
-                    </c:if>
+                              ${orderDetail.buStoreName}
+                              <button style="position: absolute; right: 0;border: none;padding: 3px 8px;background-color: #4caf50;color: #fff;border-radius: 4px;"
+                                      onclick="location.href='/user_review?buStoreName=${orderDetail.buStoreName}&orderNumber=${orderDetail.orderNumber}'">리뷰 쓰기</button>
+                          </p>
+                        <c:set var="firstStoreName" value="false" scope="page" />
                         <span style="font-size: x-small; padding-left: 3px;">구매상품 :${orderDetail.itemName}</span>
+                        </div>
+                      </c:if>
                     </c:if>
                   </c:forEach>
-                </div>
               </c:if>
             </c:forEach>
           </div>
@@ -469,7 +468,7 @@ pageEncoding="UTF-8"%>
                 <img src="../../img/store/${r.businessStore.buStoreImageUrl}" style="max-width: 90%;margin: 11px 11px 0;padding: 5px;/* padding: 5px; */height: auto;border-radius: 8px;">
                 <div class="review_item_wrap">
                   <p style="font-size: 16px; margin-top: ${firstStoreName eq 'true' ? '0' : '10px'};/* margin-bottom: -11px;*/
-                                border-top: ${firstStoreName eq 'true' ? 'none' : 'none'}; position: relative;">
+                                border-top: ${firstStoreName eq 'true' ? 'none' : '1px solid #46A973'}; position: relative;">
                             ${r.buStoreName} <span style="font-size: x-small;">구매상품 : ${r.itemName}</span>
                   </p>
                   <div class="review_chk_wrap">
@@ -487,8 +486,8 @@ pageEncoding="UTF-8"%>
           </div>
         </div>
       </section>
-      <section><!-- ** 배달리뷰 쪽에 포장리뷰 탭이 자꾸 나와서 플젝발표 시현할 때까지 display:none 처리 해놓겠습니다. 이거 포장쪽에 정상적으로 나오게 수정해야해용~ ** -->
-        <div class="inside_tabs" style="display:none;">
+      <section>
+        <div class="inside_tabs">
           <div role="inside_tablist">
             <button id="tab-3" aria-selected="true" aria-controls="tab-panel-3" role="tab" type="button" tabindex="0">
               작성 가능한 리뷰(__)
@@ -498,7 +497,7 @@ pageEncoding="UTF-8"%>
             </button>
           </div>
           <div class="createable_review_wrapbox">
-            <div id="tab-panel-3" aria-labelledby="tab-3" role="tabpanel" tabindex="0" class="createable_review_wrap" style="padding:0.5rem 1.5rem;">
+            <div id="tab-panel-3" aria-labelledby="tab-3" role="tabpanel" tabindex="0" class="createable_review_wrap">
               <c:forEach items="${newOrders}" var="pastOrder">
                 <c:if test="${pastOrder.deliveryType eq '포장'}">
                   <c:set var="processedStoreNames" value="" scope="page" />
@@ -524,7 +523,7 @@ pageEncoding="UTF-8"%>
               </c:forEach>
             </div>
           </div>
-          <div id="tab-panel-4" aria-labelledby="tab-4" role="tabpanel" tabindex="-1" hidden style="padding:0.5rem 1.5rem;">
+          <div id="tab-panel-4" aria-labelledby="tab-4" role="tabpanel" tabindex="-1" hidden>
             <c:forEach items="${re}" var="r">
               <c:if test="${r.newOrder.deliveryType eq '포장'}">
                 <div style="width: 315px; margin-top: 10px;border-radius: 7px;box-shadow: 0px 1px 10px rgba(0,0,0,0.2);">
@@ -550,9 +549,9 @@ pageEncoding="UTF-8"%>
         </div>
       </section>
     </div>
-    <div class="order_pastorder_footer">
-      <jsp:include page="../footer/footer.jsp" />
-    </div>
+  </div>
+  <div class="order_pastorder_footer">
+    <jsp:include page="../footer/footer.jsp" />
   </div>
 </div>
 <script src="../../js/store/delivery_pickup.js"></script>

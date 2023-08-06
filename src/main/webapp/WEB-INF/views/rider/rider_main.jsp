@@ -214,6 +214,7 @@
                     <div>
                         <span class="order-price">총 금액 <fmt:formatNumber value="${order.orderTotalPrice}" pattern="#,###"/>원</span>
                     </div>
+                    <hr style="color: #666666">
                 </c:if>
             </c:forEach>
         </div>
