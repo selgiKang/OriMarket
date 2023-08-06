@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"  %>
+         pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="for" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
@@ -8,27 +8,7 @@
     <meta charset="UTF-8">
     <title>관리자_주문관리</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/admin/common.css">
-    <style>
-        .admin_orderlist_box{width:100%; margin:auto;}
-        .admin_orderlist_title, .admin_orderlist{text-align: center; margin:auto;}
-        .admin_orderlist{width:60%; border:1px solid #eee;}
-        .admin_orderlist > tr {background-color:#eee;}
-        #goods_list{font-size: 15px; margin: 1px;}
-        /* 230723 승원 */
-        #goods_list table{ border-radius: 5px; background-color:#fff; width: 1920px; }
-        .goods_listTitle td{ padding: 12px;}
-        /* 230723 승원 */
-        #goods_title > a > input{
-            background-color: #ffbf41;
-            color: #333;
-            font-weight:600;
-            padding: 8px 8px;
-            border:none;
-            border-radius:5px;
-            cursor:pointer;}
-        #goods_title > a > input:hover {background-color:#333; color:#fff;}
-        .goods_listTitle{color: #46A973; margin-bottom:15px;}
-    </style>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/admin/order.css">
 </head>
 <body>
 <div id="goods_container">
@@ -41,7 +21,9 @@
         <div id="goods_title">
             <div class="top_title_wrap">
                 <!-- 뒤로가기 -->
-                <a href="/adminMain"><button class="backbtn">&lt;</button></a>
+                <a href="/adminMain">
+                    <button class="backbtn">&lt;</button>
+                </a>
             </div>
             <form action="/searchOrder" method="get" id="searchForm">
                 <select name="selectType" id="searchType">

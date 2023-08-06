@@ -1,45 +1,39 @@
 package com.choongang.OriMarket.business.user;
 
-import com.choongang.OriMarket.business.market.Market;
-import com.choongang.OriMarket.business.market.MarketService;
 import com.choongang.OriMarket.business.store.BusinessStore;
 import com.choongang.OriMarket.business.store.BusinessStoreRepository;
-import com.choongang.OriMarket.business.store.BusinessStoreService;
-import com.choongang.OriMarket.user.User;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
-import java.util.List;
-import java.util.Optional;
 
 @Controller
 @RequiredArgsConstructor
-@Slf4j
+@Log4j2
 public class BusinessUserController {
 
-    @Autowired
-    private BusinessUserService businessUserService;
+    private final BusinessUserService businessUserService;
     private final BusinessUserRepository businessUserRepository;
     private final BusinessStoreRepository businessStoreRepository;
 
     @GetMapping("/login1")
-    public String login1(){
+    public String login1() {
         return "business/businessUser/businesslogin";
     }
+
     @GetMapping("/backbuUser")
-    public String backbuUser(){
+    public String backbuUser() {
         return "business/storenotice_new";
     }
-    @GetMapping("/buUserLogout")
-    public String buUserLogout(@RequestParam("buUserId") String buUserId,HttpSession session){
 
-        if(businessUserRepository.findByBuUserId(buUserId)!=null){
+    @GetMapping("/buUserLogout")
+    public String buUserLogout(@RequestParam("buUserId") String buUserId, HttpSession session) {
+
+        if (businessUserRepository.findByBuUserId(buUserId) != null) {
             BusinessUser byId = businessUserRepository.findByBuUserId(buUserId);
             BusinessStore businessStore = byId.getBusinessStores().get(0);
             businessStore.setStatus("CLOSE");
@@ -51,15 +45,18 @@ public class BusinessUserController {
     }
 
     @GetMapping("/join1")
-    public String join1(){return "business/businessUser/businessjoin";}
+    public String join1() {
+        return "business/businessUser/businessjoin";
+    }
 
     //회원정보
     @GetMapping("/infolist1")
-    public String list(HttpSession session,Model model) {
+    public String list(HttpSession session, Model model) {
         BusinessUser buUserResult = businessUserService.buUserNumber(session);
-        model.addAttribute("buUserResult",buUserResult);
+        model.addAttribute("buUserResult", buUserResult);
         return "business/businessUser/businessuser_infolist";
     }
+
     @GetMapping("/buUserId/{buUserId}/exists")
     @ResponseBody
     public ResponseEntity<Boolean> checkUserIdDuplicate(@PathVariable String buUserId) {
@@ -67,19 +64,19 @@ public class BusinessUserController {
     }
 
     @GetMapping("/buUserUpdate")
-    public String buUserUpdate(HttpSession session,Model model){
+    public String buUserUpdate(HttpSession session, Model model) {
         BusinessUser buUserResult = businessUserService.buUserNumber(session);
-        model.addAttribute("buUserResult",buUserResult);
+        model.addAttribute("buUserResult", buUserResult);
         return "business/businessUser/businessuser_infolist_edit";
     }
 
     @GetMapping("/buUserDelete")
-    public String buUserDelete(HttpSession session,Model model){
+    public String buUserDelete(HttpSession session, Model model) {
         boolean result = businessUserService.buUserDelete(session);
 
-        if(result==false){
+        if (result == false) {
             model.addAttribute("deleteError", "탈퇴에 실패했습니다. 다시 시도해주세요.");
-        }else{
+        } else {
             model.addAttribute("deleteError", "탈퇴가 완료되었습니다.");
         }
 
@@ -89,10 +86,10 @@ public class BusinessUserController {
     //사업자 스토어 목록 페이징
 
     @PostMapping("/buUserUpdate")
-    public String updateResult(@ModelAttribute BusinessUser user,Model model,HttpSession session){
-        if(businessUserService.buUserUpdate(user,session)){
+    public String updateResult(@ModelAttribute BusinessUser user, Model model, HttpSession session) {
+        if (businessUserService.buUserUpdate(user, session)) {
             return "redirect:/infolist1";
-        }else{
+        } else {
             model.addAttribute("updateError", "수정에 실패했습니다. 다시 시도해주세요.");
         }
         return "redirect:/buUserUpdate";
@@ -115,11 +112,11 @@ public class BusinessUserController {
 
 
     @PostMapping("/join1")
-    public String joinUser(@ModelAttribute BusinessUser businessUser,HttpSession session) {
-        if(businessUserService.join1(businessUser,session)){
+    public String joinUser(@ModelAttribute BusinessUser businessUser, HttpSession session) {
+        if (businessUserService.join1(businessUser, session)) {
             return "business/businessUser/businesslogin";
         }
         return "business/businessUser/businessjoin";
     }
 
-};
+}
