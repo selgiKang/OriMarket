@@ -37,6 +37,7 @@ public class FavController {
     private final ReviewRepository reviewRepository;
 
 
+
     @GetMapping("/storeFav")
     public String storeFav(@RequestParam(value = "favId",required = false) Long favId, User user, Fav fav, HttpSession session,Model model){
 
