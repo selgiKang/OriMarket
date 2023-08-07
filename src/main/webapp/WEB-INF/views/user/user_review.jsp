@@ -7,6 +7,7 @@
 <head>
   <meta charset="UTF-8">
   <title>리뷰쓰기</title>
+  <link rel="stylesheet" href="../../css/user/user_review.css">
 </head>
 <body>
 <form action="/user_review" method="post" enctype="multipart/form-data">

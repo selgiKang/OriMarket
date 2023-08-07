@@ -6,6 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <title>리뷰보기</title>
+    <link rel="stylesheet" href="../../css/user/user_reviewlist.css">
 </head>
 <!-- JavaScript 코드 추가 -->
 
