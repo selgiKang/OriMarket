@@ -1,0 +1,82 @@
+body{
+    width:375px; height: 712px; box-sizing: border-box; margin:0 auto;
+    background-color: #eef;
+}
+
+/* 230723 승원 */
+#detailmenu_wrap{width:375px; height:712px; position:relative; box-sizing: border-box; margin:0 auto; display: flex; justify-content: center; align-items: center;}
+
+.selected_menu {
+    width: 375px;
+    height: 712px;
+    background-color: white;
+    text-align: center;
+    position: static;
+    overflow-y: scroll; /* 세로 스크롤바 활성화 */
+    -ms-overflow-style: none; /* 인터넷 익스플로러 및 엣지에서 스크롤바 숨기기 */
+    scrollbar-width: none; /* 파이어폭스에서 스크롤바 숨기기 */
+}
+
+.selected_menu::-webkit-scrollbar {
+    /* 크롬 및 사파리에서 스크롤바 숨기기 */
+    display: none;
+}
+
+p.pic_not{
+    font-size: 11px;
+    background-color: #eee;
+    padding: 5px;
+    width: 375px;
+}
+
+.main_menu_name {
+
+    text-align: left; /* 왼쪽 정렬 */
+    margin: 15px;
+}
+
+.main_menu_name h1{
+    font-size: 30px;
+
+}
+
+.main_menu_name h5{
+    font-size: 12px;
+}
+
+
+.mymenu_container{
+    background-color: white;
+    width: 90%;
+    height: auto;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5); /* 그림자 설정 */
+    border-radius: 15px;
+    margin: 15px;
+    flex-wrap: nowrap; /* 줄바꿈 방지 */
+}
+
+.mymenu{
+    text-align: left; /* 왼쪽 정렬 */
+    padding: 15px;
+}
+.mymenuoption .radio {
+    display: flex;
+    flex-direction: column; /* 라디오 버튼과 레이블을 세로로 나열 */
+    align-items: flex-start; /* 좌측 정렬 */
+    margin-top: 10px; /* 항목 사이의 간격 조정 */
+}
+.radio{margin-bottom:10px;}
+
+.mymenuoption .radio label {
+    margin-bottom: 5px; /* 라디오 버튼과 레이블 사이의 간격 조정 */
+}
+button{border-style: none; background: none; display: inline-block;}
+
+/* 230723 승원 */
+.mainfood{width:300px; height:300px; margin: auto; display: flex; justify-content: center; align-items: center;}
+.mainfood > img{position:relative;}
+button.backbtn { position:absolute; top:1%; left:1%; z-index:99; display: flex; align-items: center; font-size: 25px; color: #999; margin: 0 0 0 10px; width: 35px; height: 35px; background-color: #fff; border-radius: 50%; border: 1px solid #999; cursor: pointer; justify-content: center;}
+button.backbtn:hover {background-color:#333; color:#fff;}
+.main_menu_wrap{width:100%; padding:5px 10px 20px;}
+button.dm_cart{width:90%; height:40px; border-radius: 25px; background-color:#ffbf41; color:#333; font-size: 16px; font-weight: 600;}
+button.dm_cart:hover {background-color:#333; color:#fff;}

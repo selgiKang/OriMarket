@@ -30,7 +30,6 @@ body {
 }
 
 
-
 /* 섹션 스타일 */
 section {
     padding: 10px 20px 20px;
@@ -57,7 +56,9 @@ a {
     box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.2);
 }
 
-.menu:hover {border:2px solid #46A973;}
+.menu:hover {
+    border: 2px solid #46A973;
+}
 
 .menu-content {
     /*flex: 1;*/
@@ -152,8 +153,8 @@ a {
 .heart {
     width: 30px;
     position: absolute;
-/*    top: 10px;
-    right: 10px;*/
+    /*    top: 10px;
+        right: 10px;*/
     cursor: pointer;
     z-index: 10;
 }
@@ -170,26 +171,27 @@ a {
 .like-container {
     position: relative;
     display: inline-block;
-    width:355px;
-    height:355px;
+    width: 355px;
+    height: 355px;
 }
 
 /*메엔 가게 사진 사이즈*/
-#like_container_img{
-    width:100%;
-    height:100%;
+#like_container_img {
+    width: 100%;
+    height: 100%;
 }
 
 /*별(리뷰) 사진 사이즈*/
-.star{
+.star {
     width: 15px;
 }
 
 
 /*쿠폰 이미지 사이즈*/
-.coupon{
+.coupon {
     width: 180px;
 }
+
 /*쿠폰 이미지 가로정렬*/
 .coupon-container {
     display: flex;
@@ -322,11 +324,26 @@ ul {
 .tabmenu ul::-webkit-scrollbar {
     display: none;
 }
-#tab1{margin-left: 13px;}
-#tab2{}
-#tab3{margin-left: 10px;}
-#tab4{margin-right: 0;}
-#tab5{margin-right: 10px;}
+
+#tab1 {
+    margin-left: 13px;
+}
+
+#tab2 {
+}
+
+#tab3 {
+    margin-left: 10px;
+}
+
+#tab4 {
+    margin-right: 0;
+}
+
+#tab5 {
+    margin-right: 10px;
+}
+
 .tabmenu ul li {
     display: inline-block;
     text-align: center;
@@ -334,7 +351,7 @@ ul {
     line-height: 40px;
     flex-shrink: 0;
     margin-right: 10px;
-   /* width: calc((100% - 50px) / 4); !* 5개의 라벨이므로 5로 나눈 값으로 너비 설정 *!*/
+    /* width: calc((100% - 50px) / 4); !* 5개의 라벨이므로 5로 나눈 값으로 너비 설정 *!*/
 }
 
 .tabmenu label {
@@ -357,7 +374,7 @@ ul {
     left: 0;
     top: 20px;
     box-sizing: border-box;
-/*    border: 3px solid #f9f9f9;*/
+    /*    border: 3px solid #f9f9f9;*/
     margin-top: 30px;
 }
 
@@ -395,8 +412,6 @@ ul {
 }
 
 
-
-
 .menu-description.multiline {
     display: -webkit-box;
     -webkit-line-clamp: 4;
@@ -407,27 +422,159 @@ ul {
 .menu-content h5 {
     margin-top: 25px;
     font-size: 18px;
-    color:#333;
+    color: #333;
 }
 
 .menu-image img {
-/*    width: 100px;
-    height: 100px;*/
+    /*    width: 100px;
+        height: 100px;*/
     object-fit: cover;
     border-radius: 4px;
 }
 
-/* 230728 승원 */
-.store_wrap{width: 375px; height: 812px; margin: auto; background-color: #eee;}
-.store_favheart_wrap{width:355px; padding:0 10px; overflow: hidden; box-sizing: border-box; margin-top:20px;}
-input.storename_txt{width:53%; float:left; border:none; font-size: 25px; background-color:transparent; font-family: "LINESeedKR-Bd", sans-serif;}
-input.storename_txt:focus {outline:none;}
-.favstoreheart{width:9%; height: 50px; position:relative; float:right;}
-.review_wrap{width:355px; display: flex; justify-content: flex-start;}
-span.review_count{display: flex; justify-content: space-around; align-items: center;}
-span.rating{font-size: 20px;}
+.rating[data-rating="1"]::before {
+    content: "★☆☆☆☆";
+    color: gold;
+}
 
-.coupon_wrap{padding: 0 20px;}
+.rating[data-rating="2"]::before {
+    content: "★★☆☆☆";
+    color: gold;
+}
+
+.rating[data-rating="3"]::before {
+    content: "★★★☆☆";
+    color: gold;
+}
+
+.rating[data-rating="4"]::before {
+    content: "★★★★☆";
+    color: gold;
+}
+
+.rating[data-rating="5"]::before {
+    content: "★★★★★";
+    color: gold;
+}
+
+.rating::before {
+    content: "☆☆☆☆☆";
+    color: lightgray;
+}
+
+.rating[data-rating="1.0"]::before {
+    content: "★☆☆☆☆";
+    color: gold;
+}
+
+.rating[data-rating="2.0"]::before {
+    content: "★★☆☆☆";
+    color: gold;
+}
+
+.rating[data-rating="3.0"]::before {
+    content: "★★★☆☆";
+    color: gold;
+}
+
+.rating[data-rating="4.0"]::before {
+    content: "★★★★☆";
+    color: gold;
+}
+
+.rating[data-rating="5.0"]::before {
+    content: "★★★★★";
+    color: gold;
+}
+
+.rating[data-rating="1.5"]::before {
+    content: "★½☆☆☆";
+    color: gold;
+}
+
+.rating[data-rating="2.5"]::before {
+    content: "★★½☆☆";
+    color: gold;
+}
+
+.rating[data-rating="3.5"]::before {
+    content: "★★★½☆";
+    color: gold;
+}
+
+.rating[data-rating="4.5"]::before {
+    content: "★★★★½";
+    color: gold;
+}
+
+/* 230728 승원 */
+.store_wrap {
+    width: 375px;
+    height: 812px;
+    margin: auto;
+    background-color: #eee;
+}
+
+.store_favheart_wrap {
+    width: 355px;
+    padding: 0 10px;
+    overflow: hidden;
+    box-sizing: border-box;
+    margin-top: 20px;
+}
+
+input.storename_txt {
+    width: 53%;
+    float: left;
+    border: none;
+    font-size: 25px;
+    background-color: transparent;
+    font-family: "LINESeedKR-Bd", sans-serif;
+}
+
+input.storename_txt:focus {
+    outline: none;
+}
+
+.favstoreheart {
+    width: 9%;
+    height: 50px;
+    position: relative;
+    float: right;
+}
+
+.review_wrap {
+    width: 355px;
+    display: flex;
+    justify-content: flex-start;
+}
+
+span.review_count {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+span.rating {
+    font-size: 20px;
+}
+
+.coupon_wrap {
+    padding: 0 20px;
+}
+
 /* 230730 안먹음 인라인ㄱㄱ*/
-button.notice-button{display: flex; justify-content: space-around; align-items: center; padding: 5px; border-radius: 5px; border: 1px solid #46d;}
-img.order_notice{width: 10%; padding: 3px; margin-right: 2px;}
+button.notice-button {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #46d;
+}
+
+img.order_notice {
+    width: 10%;
+    padding: 3px;
+    margin-right: 2px;
+}

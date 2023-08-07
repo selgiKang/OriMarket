@@ -38,7 +38,6 @@
 
 %>
 
-
     <main>
         <h3></h3>
         <a id="calculateLink" href="/calculate?calculate_date=<%=currentDate%>&calculate_date_last=<%=currentDateLast%>">이전 주문 내역</a>

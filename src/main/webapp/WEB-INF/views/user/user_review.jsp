@@ -15,7 +15,6 @@
       font-weight: 700;
       font-style: normal;
     }
-
     .line {
       border-top: 1px solid #c4c4c4;
       width: 330px;
@@ -23,16 +22,13 @@
       position: relative;
       right: 8px;
     }
-
     * {
       margin: 0;
       padding: 0;
     }
-
     body {
       margin: 0 auto;
     }
-
     .main-container {
       width: 375px;
       height: 812px;
@@ -45,17 +41,14 @@
       overflow-x: hidden;
       font-family: 'LINESeedKR-Bd', sans-serif;
     }
-
     .main-container::-webkit-scrollbar {
       display: none;
     }
-
     .stars {
       display: flex;
       justify-content: center;
       flex-direction: row-reverse;
     }
-
     .stars input {
       display: none;
     }

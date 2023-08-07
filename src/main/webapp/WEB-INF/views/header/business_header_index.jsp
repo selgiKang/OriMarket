@@ -1,14 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"  %>
+         pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
     <title>Insert title here</title>
     <script src="https://kit.fontawesome.com/1cfe6d92db.js" crossorigin="anonymous"></script>
-    <link rel= "stylesheet" href= "../../css/header/header_index.css">
-
+    <link rel="stylesheet" href="../../css/header/header_index.css">
     <style>
         추가한 CSS 스타일
         body {
@@ -25,28 +24,19 @@
             z-index: 9999; /* 다른 요소들보다 위에 표시되도록 설정합니다. */
         }
     </style>
-
-
 </head>
 <body>
-
 <div class="header_wrap">
     <div class="logo"><a href="/storenotice1" style="font-size:32px;">오리 사장님</a></div>
 
     <div class="nav">
-
         <c:if test="${not empty buUserId}">
             <span class="addpic"><a href="/infolist1">${buUserId}님</a>, 어서오리</h2></span>
         </c:if>
-
         <a href=""><i class="fa-solid fa-house" style="color: #ffbf41;"></i></a>
-
-        <a href="/buUserLogout?buUserId=${buUserId}"><i class="fa-solid fa-right-from-bracket" style="color: #ffbf41;"></i></a>
-
-
+        <a href="/buUserLogout?buUserId=${buUserId}"><i class="fa-solid fa-right-from-bracket"
+                                                        style="color: #ffbf41;"></i></a>
     </div>
-
-
 </div>
 
 </body>
