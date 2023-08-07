@@ -19,7 +19,7 @@ public class UserService {
     private final UserRepository userRepository;
     private final UserAddressRepository userAddressRepository;
 
-    public boolean login(User member, HttpSession session,Model model) {
+    public boolean login(User member, HttpSession session) {
         session.removeAttribute("userAddress1");
         session.removeAttribute("userAddressDetail1");
         //값이 null일 떄 Optinal이 처리

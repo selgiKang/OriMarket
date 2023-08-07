@@ -51,7 +51,7 @@ public class UserController {
         user.setUserId(userId);
         user.setUserPassword(userPassword);
 
-        boolean isTrue = userService.login(user, session, model);
+        boolean isTrue = userService.login(user, session);
 
         if (isTrue) {
             User findUser = userRepository.findByUserId(String.valueOf(session.getAttribute("userId")));

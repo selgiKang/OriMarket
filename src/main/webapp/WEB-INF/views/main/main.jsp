@@ -107,7 +107,7 @@
         }
     </style>
 </head>
-<body>${aabb}
+<body>
 <div id="main">
     <input type="hidden" id="address_kakao" value="${userAddress1}">
     <jsp:include page="../header/header_index.jsp" />
