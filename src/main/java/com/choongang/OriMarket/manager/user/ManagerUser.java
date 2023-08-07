@@ -2,10 +2,8 @@ package com.choongang.OriMarket.manager.user;
 
 import com.choongang.OriMarket.business.market.Market;
 import com.choongang.OriMarket.order.NewOrder;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -13,8 +11,9 @@ import java.util.List;
 
 @Entity
 @Table(name="manager_user")
-@Data
-@NoArgsConstructor
+@Getter
+@Setter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class ManagerUser {
 
     @Id

@@ -4,37 +4,22 @@ import com.choongang.OriMarket.business.user.BusinessUser;
 import com.choongang.OriMarket.business.user.BusinessUserRepository;
 import com.choongang.OriMarket.store.Item;
 import com.choongang.OriMarket.store.ItemService;
-import com.choongang.OriMarket.store.Store;
 import com.choongang.OriMarket.utill.ImageService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-
 import javax.servlet.http.HttpSession;
-import java.awt.print.Pageable;
-import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Optional;
-import java.util.Map;
-
-import static com.choongang.OriMarket.utill.Constant.IMAGE_PATH;
 
 @Controller
 @RequiredArgsConstructor
 @Log4j2
 public class BusinessStoreController {
 
-    @Autowired
     private final BusinessStoreService businessStoreService;
     private final BusinessStoreRepository businessStoreRepository;
     private final ItemService itemService;

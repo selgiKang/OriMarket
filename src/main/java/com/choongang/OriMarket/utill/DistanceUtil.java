@@ -3,6 +3,7 @@ package com.choongang.OriMarket.utill;
 public class DistanceUtil {
 
     private static final double EARTH_RADIUS_KM = 6371.01;
+
     // 하버사인 공식을 통해 위도, 경도 값 비교하여 거리 계산
     public static double calculateDistance(double lat1, double lon1, double lat2, double lon2) {
         double dLat = Math.toRadians(lat2 - lat1);
