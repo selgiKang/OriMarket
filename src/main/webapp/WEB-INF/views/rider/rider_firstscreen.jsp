@@ -6,72 +6,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Kakao 지도 시작하기</title>
-    <style>
-        .main-container {
-            position: relative;
-            width: 375px;
-            height: 812px;
-            margin: 0 auto;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-start;
-            align-items: flex-start;
-            background-color: #eee;
-            overflow: auto;
-            overflow-x: hidden;
-            font-family: 'LINESeedKR-Bd', sans-serif;
-        }
-
-        .main-container::-webkit-scrollbar {
-            display: none;
-        }
-
-        #map {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 1; /* 지도를 모달창 아래로 배치 */
-        }
-
-        .modal {
-            position: absolute;
-            bottom: 0px;
-            left: 50%;
-            transform: translateX(-50%);
-            background-color: #fefefe;
-            width: 350px;
-            max-height: 81vh;
-            overflow-y: hidden;
-            padding: 20px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-            transition: bottom 0.3s ease-in-out;
-            border-radius: 30px 30px 0 0;
-            z-index: 2; /* 모달창을 지도 위로 배치 */
-        }
-
-        .modal-content {
-            text-align: center; /* 가운데 정렬을 위해 추가 */
-        }
-
-        #closeModalBtn{
-            width: 295px;
-            height: 60px;
-            background-color: #46A973;
-            color: white;
-            font-weight: bolder;
-            border-radius: 16px;
-            margin-top: -20px;
-            border: none;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-        }
-
-        .modal-content img{
-            width: 80px;
-
-        }
-    </style>
+    <link rel="stylesheet" href="../../css/rider/rider_firstscreen.css">
 </head>
 <body>
 <div class="main-container">
@@ -87,7 +22,6 @@
 </div>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=259217c849691d825026ea7a9f71af88"></script>
 <script>
-
     var container = document.getElementById('map');
     var options = {
         center: new kakao.maps.LatLng(33.450701, 126.570667),

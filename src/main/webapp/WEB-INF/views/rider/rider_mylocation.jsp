@@ -1,21 +1,41 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8"%>
+         pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8">
     <title>주소로 장소 표시하기</title>
     <style>
-        button.backbtn { display: flex; align-items: center; font-size: 26px; color: #fff; margin: 0 0 0 10px; width: 40px; height: 40px; background-color: #46A973; border-radius: 50%; border: 1px solid #eee; cursor: pointer; justify-content: center;}
-        button.backbtn:hover {background-color:#333; color:#ffbf41;}
+        button.backbtn {
+            display: flex;
+            align-items: center;
+            font-size: 26px;
+            color: #fff;
+            margin: 0 0 0 10px;
+            width: 40px;
+            height: 40px;
+            background-color: #46A973;
+            border-radius: 50%;
+            border: 1px solid #eee;
+            cursor: pointer;
+            justify-content: center;
+        }
+
+        button.backbtn:hover {
+            background-color: #333;
+            color: #ffbf41;
+        }
     </style>
 </head>
 <body>
 <div id="map" style="width:375px; height:812px; margin: 0 auto;">
     <!-- 뒤로가기 -->
-    <button class="backbtn" onclick="window.history.go(-1)" style="position:absolute; top:3%; left:3%; z-index:999;">&lt;</button>
+    <button class="backbtn" onclick="window.history.go(-1)" style="position:absolute; top:3%; left:3%; z-index:999;">
+        &lt;
+    </button>
 </div>
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=259217c849691d825026ea7a9f71af88&libraries=services"></script>
+<script type="text/javascript"
+        src="//dapi.kakao.com/v2/maps/sdk.js?appkey=259217c849691d825026ea7a9f71af88&libraries=services"></script>
 <script>
     var mapContainer = document.getElementById('map'), // 지도를 표시할 div
         mapOption = {
@@ -30,7 +50,7 @@
     var geocoder = new kakao.maps.services.Geocoder();
 
     // 주소로 좌표를 검색합니다
-    geocoder.addressSearch('${userAddress1}}', function(result, status) {
+    geocoder.addressSearch('${userAddress1}}', function (result, status) {
 
         // 정상적으로 검색이 완료됐으면
         if (status === kakao.maps.services.Status.OK) {
@@ -58,7 +78,7 @@
     if (navigator.geolocation) {
 
         // GeoLocation을 이용해서 접속 위치를 얻어옵니다
-        navigator.geolocation.getCurrentPosition(function(position) {
+        navigator.geolocation.getCurrentPosition(function (position) {
 
             var lat = position.coords.latitude, // 위도
                 lon = position.coords.longitude; // 경도
@@ -93,8 +113,8 @@
 
         // 인포윈도우를 생성합니다
         var infowindow = new kakao.maps.InfoWindow({
-            content : iwContent,
-            removable : iwRemoveable
+            content: iwContent,
+            removable: iwRemoveable
         });
 
         // 인포윈도우를 마커위에 표시합니다

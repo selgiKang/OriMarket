@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
@@ -10,14 +10,16 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="../../js/manager/manager.js"></script>
     <style>
-        .order-number>a{
+        .order-number > a {
             color: #333333;
             text-decoration: none;
         }
-        .order-number>a:hover {
+
+        .order-number > a:hover {
             cursor: pointer;
             opacity: 0.7;
         }
+
         /* 페이지네이션 가로 정렬 스타일 */
         .pagination {
             display: flex;
@@ -53,7 +55,7 @@
                     var orderItemDiv = $('.order_pageing').eq(0);
                     orderItemDiv.empty(); // 기존 내용 초기화
 
-                    orderList.forEach(function(order) {
+                    orderList.forEach(function (order) {
                         console.log(4);
                         if (order.orderStatus === '배달완료' || order.orderStatus === '주문거절') {
                             orderItemDiv.append(generateOrderHTML(order));
@@ -84,7 +86,7 @@
             .append(orderNumberLink);
 
         var orderDetailsDiv = $('<div></div>').addClass('order-details');
-        order.newOrderDetails.forEach(function(detail) {
+        order.newOrderDetails.forEach(function (detail) {
             var itemInfoSpan = $('<span></span>')
                 .text(detail.itemName + ' 총 ' + detail.itemCount + '개');
             orderDetailsDiv.append(itemInfoSpan);
@@ -145,19 +147,25 @@
     </div>
     <%--배달 요청 목록--%>
     <div class="order-item" data-status="pending">
-        <form action="/rider_order_search" method="get"><button type="submit">배달요청검색</button></form>
+        <form action="/rider_order_search" method="get">
+            <button type="submit">배달요청검색</button>
+        </form>
         <c:forEach var="order" items="${orders}">
             <div>
-            <h3>요청시장: ${order.orderMarketName} <a href="/MarketLocation?marketName=${order.orderMarketName}">위치보기</a></h3>
-            <h4>주문번호: ${order.orderNumber}</h4>
+                <h3>요청시장: ${order.orderMarketName} <a
+                        href="/MarketLocation?marketName=${order.orderMarketName}">위치보기</a></h3>
+                <h4>주문번호: ${order.orderNumber}</h4>
                 <c:if test="${empty order.forRider}">
-                <h4>요청사항이 없습니다.!</h4>
+                    <h4>요청사항이 없습니다.!</h4>
                 </c:if>
                 <c:if test="${!empty order.forRider}">
                     <h4>요청사항: ${order.forRider}</h4>
                 </c:if>
-                <h3>배달지: ${order.orderAddress} <a href="/deliveryLocation?orderAddress=${order.orderAddress}">위치보기</a></h3>
-                <a href="/rider_order_accept?orderNumber=${order.orderNumber}"><button type="submit">요청 수락</button></a>
+                <h3>배달지: ${order.orderAddress} <a href="/deliveryLocation?orderAddress=${order.orderAddress}">위치보기</a>
+                </h3>
+                <a href="/rider_order_accept?orderNumber=${order.orderNumber}">
+                    <button type="submit">요청 수락</button>
+                </a>
             </div>
         </c:forEach>
     </div>
@@ -165,7 +173,8 @@
     <div class="order-item" data-status="processing1">
         <c:if test="${!empty orderaccept}">
             <div>
-                <h3>요청시장: ${orderaccept.orderMarketName} <a href="/MarketLocation?marketName=${orderaccept.orderMarketName}">위치보기</a></h3>
+                <h3>요청시장: ${orderaccept.orderMarketName} <a
+                        href="/MarketLocation?marketName=${orderaccept.orderMarketName}">위치보기</a></h3>
                 <h4>주문번호: ${orderaccept.orderNumber}</h4>
                 <c:if test="${empty orderaccept.forRider}">
                     <h4>요청사항이 없습니다.!</h4>
@@ -173,8 +182,11 @@
                 <c:if test="${!empty orderaccept.forRider}">
                     <h4>요청사항: ${orderaccept.forRider}</h4>
                 </c:if>
-                <h3>배달지: ${orderaccept.orderAddress} <a href="/deliveryLocation?orderAddress=${order.orderAddress}">위치보기</a></h3>
-                <a href="/rider_order_accept1?orderNumber=${orderaccept.orderNumber}"><button type="submit">배달시작</button></a>
+                <h3>배달지: ${orderaccept.orderAddress} <a
+                        href="/deliveryLocation?orderAddress=${order.orderAddress}">위치보기</a></h3>
+                <a href="/rider_order_accept1?orderNumber=${orderaccept.orderNumber}">
+                    <button type="submit">배달시작</button>
+                </a>
             </div>
         </c:if>
     </div>
@@ -182,7 +194,8 @@
     <div class="order-item" data-status="processing2">
         <c:if test="${!empty orderaccept1}">
             <div>
-                <h3>요청시장: ${orderaccept1.orderMarketName} <a href="/MarketLocation?marketName=${orderaccept1.orderMarketName}">위치보기</a></h3>
+                <h3>요청시장: ${orderaccept1.orderMarketName} <a
+                        href="/MarketLocation?marketName=${orderaccept1.orderMarketName}">위치보기</a></h3>
                 <h4>주문번호: ${orderaccept1.orderNumber}</h4>
                 <c:if test="${empty orderaccept1.forRider}">
                     <h4>요청사항이 없습니다.!</h4>
@@ -190,8 +203,11 @@
                 <c:if test="${!empty orderaccept1.forRider}">
                     <h4>요청사항: ${orderaccept1.forRider}</h4>
                 </c:if>
-                <h3>배달지: ${orderaccept1.orderAddress} <a href="/deliveryLocation?orderAddress=${orderaccept1.orderAddress}">위치보기</a></h3>
-                <a style="text-align: right;" href="/rider_order_accept2?orderNumber=${orderaccept1.orderNumber}"><button type="submit">배달완료</button></a>
+                <h3>배달지: ${orderaccept1.orderAddress} <a
+                        href="/deliveryLocation?orderAddress=${orderaccept1.orderAddress}">위치보기</a></h3>
+                <a style="text-align: right;" href="/rider_order_accept2?orderNumber=${orderaccept1.orderNumber}">
+                    <button type="submit">배달완료</button>
+                </a>
             </div>
         </c:if>
     </div>
@@ -204,7 +220,8 @@
                 <c:if test="${order.orderStatus eq '배달완료' or order.orderStatus eq '주문거절'}">
                     <!-- 주문번호 클릭 시 주문 상세 정보를 보여줄 버튼 -->
                     <span class="order-number" onclick="showOrderDetail('${order.orderNumber}')">
-                        <a href="/manager_receiptDelivery?orderNumber=${order.orderNumber}" style="color: #4caf50">주문번호: ${order.orderNumber}</a>
+                        <a href="/manager_receiptDelivery?orderNumber=${order.orderNumber}"
+                           style="color: #4caf50">주문번호: ${order.orderNumber}</a>
                 </span>
                     <c:forEach var="store" items="${order.newOrderDetails}">
                         <div class="order-details">
@@ -212,7 +229,8 @@
                         </div>
                     </c:forEach>
                     <div>
-                        <span class="order-price">총 금액 <fmt:formatNumber value="${order.orderTotalPrice}" pattern="#,###"/>원</span>
+                        <span class="order-price">총 금액 <fmt:formatNumber value="${order.orderTotalPrice}"
+                                                                         pattern="#,###"/>원</span>
                     </div>
                     <hr style="color: #666666">
                 </c:if>
