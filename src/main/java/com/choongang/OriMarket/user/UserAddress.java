@@ -28,5 +28,5 @@ public class UserAddress {
     @ManyToOne(fetch = FetchType.LAZY) //lazy가 성능최적화
     @JoinColumn(name = "user_seq")
     private User user;
-
+//방금
 }
