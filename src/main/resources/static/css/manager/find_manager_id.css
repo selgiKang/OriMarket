@@ -1,0 +1,38 @@
+@font-face {
+    font-family: 'omyu_pretty';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-01@1.0/omyu_pretty.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+*{margin: 0; padding: 0; box-sizing: border-box; font-family: 'omyu_pretty';}
+
+body{width: 375px; height: 812px; margin: 0 auto; }
+
+/* 230727 */
+#loginpage_wrap{background-color:#eee; width:375px; height:712px; margin:0 auto;}
+.loginpage_wrapbox{width:375px; height:612px;}
+.loginpage_wrapbox a{text-decoration: none; color:#333;}
+
+.loginpage_title_wrap{width:375px; height:160px; margin:auto; padding: 10% 20%; text-align: center;}
+.loginpage_title_wrap > a{text-decoration: none;}
+.loginpage_title_wrap > a >h1{font-size: 55px; color:#46A973; letter-spacing: 10px; text-align: center;}
+
+#container{width: 300px; height: 400px; padding:20px; text-align: center;
+    background-color:#fff; border-radius: 10px; box-shadow: 0 3px 6px 0 rgba(0,0,0, 0.4); margin: 0 10%;}
+
+h1.login_title{color: #333; letter-spacing: 5px; margin: 20px 20px 30px 20px;}
+div#login_box{margin:20px 0}
+div.login_box_wrap{margin-bottom:25px;}
+div.login_box_wrap p {margin-bottom:10px;}
+
+input[type=text] {width: 65%; height: 30px; font-size: 15px; border: 0; border-radius: 15px; outline: none; padding-left: 10px; background-color: rgb(233, 233, 233);}
+input[type=tel] {width: 65%; height: 30px; font-size: 15px; border: 0; border-radius: 15px; outline: none; padding-left: 10px; background-color: rgb(233, 233, 233);}
+input.search_btn { width:82%; height:40px; background-color:#46A973; border:none; border-radius: 25px; color:#fff; font-weight: 700; font-size: 16px; font-family: 'omyu_pretty';}
+input.search_btn:hover{ background-color:#333; color:#ffbf41;}
+
+div.manager_join_btn_wrap{width:100%;}
+a.manager_join_btn{width:40%; height:40px; padding: 4% 32%; background-color:#ffbf41; border:none; border-radius: 25px; color:#333; font-weight: 700; font-size: 16px;}
+a.manager_join_btn:hover {background-color: #333; color:#fff;}
+a.findpw_btn{color:#333; font-weight: 600;}
+a.findpw_btn:hover{text-decoration: underline; color:#46A973;}

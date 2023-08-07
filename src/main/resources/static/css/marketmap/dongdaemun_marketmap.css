@@ -1,0 +1,84 @@
+/* 230730 전체지도 모달창 추가 */
+.modal {
+    position: absolute;
+    width: 375px; /*height: 935px;*/
+    height: 745px;
+    top: 0px;
+    z-index: 999999;
+    display: none;
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+.modal.show {
+    display: block;
+}
+
+.modal_body {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 320px;
+    height: 650px;
+    border-radius: 30px;
+    padding: 5px;
+    text-align: center;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 3px 0 rgba(34, 36, 38, 0.15);
+    transform: translateX(-50%) translateY(-50%);
+    overflow-y: scroll;
+}
+
+.dongdaemunmarket_allmap {
+    width: 80px;
+    padding: 6px 5px 6px 10px;
+    background-color: #ffbf41;
+    color: #333;
+    border-radius: 5px;
+    margin-top: 8px;
+    margin-left: 15px;
+    cursor: pointer;
+}
+
+.dongdaemunmarket_allmap:hover {
+    background-color: #333;
+    color: #fff;
+}
+
+.modal_body {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.modal_body::-webkit-scrollbar {
+    display: none;
+}
+
+button.backbtn {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    color: #fff;
+    margin: 0 0 0 10px;
+    width: 35%;
+    height: 40px;
+    background-color: #46a973;
+    border-radius: 35px;
+    border: 1px solid #999;
+    cursor: pointer;
+    justify-content: center;
+    position: absolute;
+    z-index: 99999;
+    top: 320px;
+    left: 31%;
+}
+
+button.backbtn:hover {
+    background-color: #333;
+    color: #fff;
+}
+
+h2 {
+    text-align: center;
+}
+
