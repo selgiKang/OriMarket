@@ -32,17 +32,12 @@
                 </td>
             <%--오른쪽 화살표--%>
                 <td>
-                    <a <%--id="calculate_right_arrow"--%>class="go-next"><i id="calculate_search_rightArrow" class="fas fa-solid fa-angle-right" style="color: #f5f5f5;"></i></a>
+                    <a class="go-next"><i id="calculate_search_rightArrow" class="fas fa-solid fa-angle-right" style="color: #f5f5f5;"></i></a>
                 </td>
             </tr>
         </table>
     </header>
     <main>
-       <%-- <div id="calculate_main_totalIncome">
-            <p id="calculate_main_totalIncome_title">총 수입</p>
-            <h3>${totalCome}원</h3>
-            <div>주문 횟수 ${orderCount}회</div>
-        </div>--%>
         <table id="calculate_main_table">
             <tr id="calculate_main_table_tr_1">
                 <td>날짜</td><td>수입</td><td>판매 물건</td><td>개수</td><td>총 가격</td>
@@ -69,10 +64,6 @@
                 </tr>
             </c:forEach>
             </tbody>
-          <%--  <tr>
-                <td class="calculate_main_table_td_1" style="text-align: center;">07/01</td>
-                <td class="calculate_main_table_td_2" style="text-align: center;">30,000원</td>
-            </tr>--%>
         </table>
     </main>
 </body>

@@ -1,429 +1,16 @@
 <%@ page import="java.util.Date" %>
 <%@ page import="java.time.LocalDateTime" %>
 <%@ page import="java.time.format.DateTimeFormatter" %>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"  %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html lang="ko">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Page Title</title>
+    <link rel="stylesheet" href="../../css/business/storenotice_new.css">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <style>
-
-        @font-face {
-            font-family: 'LINESeedKR-Bd', sans-serif;
-            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/LINESeedKR-Bd.woff2') format('woff2');
-            font-weight: 700;
-            font-style: normal;
-        }
-
-        *{
-            margin: 0;
-            padding: 0;
-        }
-
-        body {
-            margin: 0 auto;
-        }
-
-        .line {
-            border-top: 1px solid #c4c4c4;
-            width: 330px;
-            margin: 30px auto;
-            position: relative;
-            right: 20px;
-        }
-
-        /* 메인 컨테이너 스타일 */
-
-        .main-container {
-            width: 375px;
-            height: 812px;
-            margin: 0 auto;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-start;
-            align-items: flex-start;
-            background-color: #eee;
-            overflow: auto; /* 스크롤 가능하도록 수정 */
-            overflow-x: hidden; /* 가로 스크롤 금지 */
-            font-family: 'LINESeedKR-Bd', sans-serif; /* 따옴표 추가 */
-            padding-top: 100px;
-        }
-
-        .main-container::-webkit-scrollbar {
-            display: none;
-        }
-
-        .store_time_container {
-            background-color: white;
-            border-radius: 25px;
-            margin: 10px;
-            width: 355px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
-        }
-
-        .store_time {
-            margin: 20px;
-        }
-
-        .store_time h6 {
-            margin-top: -5px;
-            color: gray;
-        }
-
-        /*버튼*/
-        .wrapper {
-            width: 50px;
-            height: 50px;
-            text-align: center;
-            position: relative;
-            bottom: 45px;
-            left: 265px;
-        }
-
-        #switch {
-            position: absolute;
-            /* hidden */
-            appearance: none;
-            -webkit-appearance: none;
-            -moz-appearance: none;
-        }
-
-        .switch_label {
-            position: relative;
-            cursor: pointer;
-            display: inline-block;
-            width: 48px;
-            height: 18px;
-            background: #fff;
-            border: 2px solid #daa;
-            border-radius: 20px;
-            transition: 0.2s;
-        }
-
-        .switch_label:hover {
-            background: #efefef;
-        }
-
-        .onf_btn {
-            position: absolute;
-            top: 4px;
-            left: 3px;
-            display: inline-block;
-            width: 10px;
-            height: 10px;
-            border-radius: 20px;
-            background: #daa;
-            transition: 0.2s;
-        }
-
-        /* checking style */
-        #switch:checked + .switch_label {
-            background: #c44;
-            border: 2px solid #c44;
-        }
-
-        #switch:checked + .switch_label:hover {
-            background: #e55;
-        }
-
-        /* move */
-        #switch:checked + .switch_label .onf_btn {
-            left: 34px;
-            background: #fff;
-            box-shadow: 1px 2px 3px #00000020;
-        }
-
-        .total_menu_container {
-            background-color: white;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
-            border-radius: 25px;
-            margin: 10px;
-            width: 355px;
-        }
-
-        .total_menu {
-            margin: 20px;
-        }
-
-        .first_menu {
-            margin-left: 10px;
-            flex: 1;
-            display: block;
-            clear: both;
-            flex-basis: calc(25% - 10px);
-        }
-
-        .first_menu img {
-            width: 50px;
-        }
-
-        .first_menu h5 {
-            margin-top: -2px;
-        }
-
-        .detail_total_menu {
-            display: flex;
-            flex-wrap: wrap;
-            margin-left: 5px;
-        }
-
-        .storecare_container {
-            background:transparent;
-            border-radius: 25px;
-            margin: 10px;
-            width: 355px;
-            position: relative; /* main-container 내에 위치하도록 설정 */
-        }
-
-        .storecare {
-            margin: 20px;
-        }
-
-        /*.board {
-            width: 270px;
-            background-color: #f0f8ff;
-            padding: 20px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            margin-top: 5px;
-        }*/
-
-
-
-
-        /*.board .content {
-            margin-top: 20px;
-            background-color: #fff;
-            padding: 10px;
-        }
-
-        .board .content img {
-            max-width: 100%;
-            height: auto;
-            margin-bottom: 10px;
-        }
-
-        .board .content textarea {
-            width: 100%;
-            height: 100px;
-            margin-bottom: 10px;
-            resize: vertical;
-        }
-
-        .board .buttons {
-            display: flex;
-            justify-content: space-between;
-        }*/
-
-        .board .buttons button {
-            padding: 10px 20px;
-            background-color: #333;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        .storecare_logo img{
-            width: 80px;
-        }
-
-        /*탭메뉴관련*/
-
-        .tabs {
-            display: flex;
-            flex-direction: column;
-        }
-/*
-        .manager_main_tabs {
-            display: flex;
-            flex-wrap: wrap;
-            max-width: 700px;
-            !* box-shadow: 0 48px 80px -32px rgba(0,0,0,0.3);*!
-        }*/
-
-        .input {
-            display: none;
-            position: absolute;
-            opacity: 0;
-            border-radius: 25px;
-            margin-bottom: 50px;
-        }
-
-        .label {
-            border-radius: 25px;
-            width: 295px;
-            padding: 20px 30px;
-            background: white;
-            cursor: pointer;
-            font-weight: bold;
-            font-size: 18px;
-            color: #000000;
-            transition: background 0.1s, color 0.1s;
-            margin-bottom: 1px;
-
-        }
-
-        .label:active {
-
-            box-shadow: inset -.3rem -.1rem 1.4rem  #FBFBFB, inset .3rem .4rem .8rem #BEC5D0;
-            cursor: pointer;
-
-        }
-
-
-        .input:focus + .label {
-            z-index: 1;
-        }
-
-
-        /*탭안에 내용들*/
-        .panel {
-            border-radius: 0 0 15px 15px;
-            display: none;
-            padding: 20px 30px 30px;
-            background: #fff;
-            width: 295px;
-            margin-top: -22px;
-        }
-
-
-        .input:checked + .label + .panel {
-            display: block;
-        }
-
-        .first_menu:hover {opacity: 0.7;}
-
-
-/*        .my_review_list{
-            margin-top: 10px;
-            margin: 20px;
-        }*/
-
-        .my_review_list_store{
-            background-color: white;
-            margin: 15px;
-            padding: 15px;
-
-        }
-
-        .rating, .date {
-            display: inline-block;
-        }
-
-        .rate_and_date{
-            margin-top: -20px;
-        }
-
-        .my_review_photo {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .my_review_photo img {
-            width: 300px;
-        }
-        .rating {
-            font-size: 24px;
-        }
-
-        .rating::before {
-            content: "☆☆☆☆☆";
-            color: lightgray;
-        }
-
-        .rating[data-rating="1"]::before {
-            content: "★☆☆☆☆";
-            color: gold;
-        }
-
-        .rating[data-rating="2"]::before {
-            content: "★★☆☆☆";
-            color: gold;
-        }
-
-        .rating[data-rating="3"]::before {
-            content: "★★★☆☆";
-            color: gold;
-        }
-
-        .rating[data-rating="4"]::before {
-            content: "★★★★☆";
-            color: gold;
-        }
-
-        .rating[data-rating="5"]::before {
-            content: "★★★★★";
-            color: gold;
-        }
-
-
-        /* 주소검색 css */
-        .btn_container {
-            display: flex;
-            justify-content: center;
-            margin-top: 10px;
-        }
-
-        .btn_round {
-            border-radius: 20px;
-            padding: 5px 10px;
-            background-color: #ffbf41;
-            color: white;
-            border: none;
-            font-size: 14px;
-            cursor: pointer;
-            font-family: 'omyu pretty', Arial, sans-serif;}
-
-        /*공지사항 디자인*/
-
-        .buttons {
-            text-align: center;
-        }
-
-        .buttons button {
-            background-color: #4CAF50;
-            color: #fff;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 4px;
-            font-size: 16px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-        .buttons button:hover {
-            background-color: #45a049;
-        }
-
-
-        .content {
-            margin-bottom: 20px;
-            margin-right: 20px;
-        }
-
-        .content input[type="text"],
-        .content textarea {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            font-size: 16px;
-            margin-bottom: 10px;
-        }
-
-        .content textarea {
-            resize: none;
-        }
-        .first_menu{text-decoration: none; color: black;}
-        .first_menu a{text-decoration: none; color: black;}
-    </style>
     <%
         Date date = new Date();
         long utc = date.getTime() + (date.getTimezoneOffset() * 60 * 100);
@@ -432,7 +19,7 @@
         //한국 시가능로 date 객체 (오늘)
         Date today = new Date(utc + kstGap);
 
-        int currentYear = today.getYear()+1900; // 전역 변수에 할당
+        int currentYear = today.getYear() + 1900; // 전역 변수에 할당
         int currentMonth = today.getMonth();
 
         String currentMonthStr = String.valueOf(currentMonth + 1);
@@ -450,26 +37,13 @@
         String currentDateLast = String.valueOf(currentYear) + currentMonthStr2;
 
     %>
-<%--    <%--%>
-<%--        // 현재 시간을 LocalDateTime 형식으로 가져옴--%>
-<%--        LocalDateTime now = LocalDateTime.now();--%>
 
-<%--        // 원하는 형식으로 DateTimeFormatter를 생성 (예: "yyyy-MM-dd HH:mm:ss")--%>
-<%--        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd HH:mm:ss");--%>
-
-<%--        // LocalDateTime 객체를 문자열로 변환--%>
-<%--        String currentDate = now.format(formatter);--%>
-
-<%--        // 한 달 후의 LocalDateTime을 계산--%>
-<%--        LocalDateTime oneMonthLater = now.plusMonths(1);--%>
-<%--        String currentDateLast = oneMonthLater.format(formatter);--%>
-<%--    %>--%>
 </head>
 <body>
 
 <div class="main-container">
     <div class="header">
-        <jsp:include page="../header/business_header_index.jsp" />
+        <jsp:include page="../header/business_header_index.jsp"/>
     </div>
 
     <div class="store_time_container">
@@ -479,7 +53,7 @@
             </c:if>
             <c:if test="${not empty save}">
                 <c:if test="${empty save.status}">
-                <h3 id="switchStoreStatus">CLOSE</h3>
+                    <h3 id="switchStoreStatus">CLOSE</h3>
                 </c:if>
                 <c:if test="${!empty save.status}">
                     <h3 id="switchStoreStatus">${save.status}</h3>
@@ -488,11 +62,11 @@
             <h6 style="margin-top: 6px;">보유하신 가게에 적용됩니다.</h6>
             <div class="wrapper">
                 <form id="statusForm" action="/storeStatus" method="post">
-                <input type="hidden" name="buStoreNumber" value="${save.buStoreNumber}">
-                <input type="checkbox" id="switch" name="status" value="">
-                <label for="switch" class="switch_label">
-                    <span class="onf_btn"></span>
-                </label>
+                    <input type="hidden" name="buStoreNumber" value="${save.buStoreNumber}">
+                    <input type="checkbox" id="switch" name="status" value="">
+                    <label for="switch" class="switch_label">
+                        <span class="onf_btn"></span>
+                    </label>
                 </form>
             </div>
         </div>
@@ -540,43 +114,46 @@
             <div class="detail_total_menu">
                 <div class="first_menu">
                     <a href="/business_manage">
-                    <img src="../../img/store/가게관리.png" alt="가게 관리"> <!-- alt 속성 추가 -->
-                    <h5>가게 관리</h5>
+                        <img src="../../img/store/가게관리.png" alt="가게 관리">
+                        <h5>가게 관리</h5>
                     </a>
                 </div>
 
                 <a class="first_menu" href="/messageInsert">
-                    <img src="../../img/store/게시판.png" alt="공지사항"> <!-- alt 속성 추가 -->
+                    <img src="../../img/store/게시판.png" alt="공지사항">
                     <h5>공지사항</h5>
                 </a>
 
                 <a class="first_menu" href="/businessReview">
-                    <img src="../../img/store/리뷰.png" alt="리뷰 관리"> <!-- alt 속성 추가 -->
+                    <img src="../../img/store/리뷰.png" alt="리뷰 관리">
                     <h5>리뷰 관리</h5>
                 </a>
 
                 <div class="first_menu">
-                    <img src="../../img/store/메뉴관리.png" alt="메뉴 관리"> <!-- alt 속성 추가 -->
+                    <img src="../../img/store/메뉴관리.png" alt="메뉴 관리">
                     <h5>메뉴 관리</h5>
                 </div>
 
-                <a class="first_menu" href="/sellerList?calculate_date=<%=currentDate%>&calculate_date_last=<%=currentDateLast%>">
-                    <img src="../../img/store/주문내역.png" alt="주문 내역"> <!-- alt 속성 추가 -->
+                <a class="first_menu"
+                   href="/sellerList?calculate_date=<%=currentDate%>&calculate_date_last=<%=currentDateLast%>">
+                    <img src="../../img/store/주문내역.png" alt="주문 내역">
                     <h5>주문 내역</h5>
                 </a>
 
                 <div class="first_menu">
-                    <img src="../../img/store/쿠폰.png" alt="쿠폰 관리"> <!-- alt 속성 추가 -->
+                    <img src="../../img/store/쿠폰.png" alt="쿠폰 관리">
                     <h5>쿠폰 관리</h5>
                 </div>
 
-                <a class="first_menu" href="/calculate?calculate_date=<%=currentDate%>&calculate_date_last=<%=currentDateLast%>" style="color: #333333;text-decoration: none;">
-                    <img src="../../img/store/정산내역.png" alt="정산 내역"> <!-- alt 속성 추가 -->
+                <a class="first_menu"
+                   href="/calculate?calculate_date=<%=currentDate%>&calculate_date_last=<%=currentDateLast%>"
+                   style="color: #333333;text-decoration: none;">
+                    <img src="../../img/store/정산내역.png" alt="정산 내역">
                     <h5>정산 내역</h5>
                 </a>
 
                 <div class="first_menu">
-                    <img src="../../img/store/확성기.png" alt="오리시장 공지사항"> <!-- alt 속성 추가 -->
+                    <img src="../../img/store/확성기.png" alt="오리시장 공지사항">
                     <a href="/business_manage1"><h5>고객센터</h5></a>
                 </div>
             </div>
@@ -584,28 +161,29 @@
     </div>
 
 
-
     <div class="storecare_container">
 
         <div class="tabs">
-            <input class="input" name="tabs-1" type="radio" id="tab-1" />
+            <input class="input" name="tabs-1" type="radio" id="tab-1"/>
             <label class="label" for="tab-1">가게 관리</label>
             <div class="panel">
                 <h6 style="color: #818083; margin-top: 7px;">※가게 정보수정은 전체메뉴 가게관리에서 해주세요.</h6>
                 <div class="line"></div>
                 <form action="/storenotice1" method="post" enctype="multipart/form-data">
-                <div class="storecare_logo">
-                    <h3 style="font-size: small">내 가게 사진</h3>
-                    <c:if test="${empty save.buStoreImageUrl}">
-                        <input type="file" accept="image/*" name="pictureUrl" id="logo-upload" onchange="previewPicture(event)"/>
-                    </c:if>
-                    <div id="logo-preview">
-                        <c:if test="${!empty save.buStoreImageUrl}">
-                            <img src="../../img/store/${save.buStoreImageUrl}" style="max-width: 100%; height: auto;">
+                    <div class="storecare_logo">
+                        <h3 style="font-size: small">내 가게 사진</h3>
+                        <c:if test="${empty save.buStoreImageUrl}">
+                            <input type="file" accept="image/*" name="pictureUrl" id="logo-upload"
+                                   onchange="previewPicture(event)"/>
                         </c:if>
+                        <div id="logo-preview">
+                            <c:if test="${!empty save.buStoreImageUrl}">
+                                <img src="../../img/store/${save.buStoreImageUrl}"
+                                     style="max-width: 100%; height: auto;">
+                            </c:if>
+                        </div>
                     </div>
-                </div>
-                <div class="line"></div>
+                    <div class="line"></div>
                     <div class="storecare_name">
                         <h3 style="font-size: small">내 가게 이름</h3>
                         <input type="hidden" name="buStoreNumber" value="${save.buStoreNumber}">
@@ -618,7 +196,6 @@
                             <input type="hidden" id="store-name-input" name="buStoreName" value="${save.buStoreName}">
                         </c:if>
 
-                       <%-- 7.24 테스트 승엽--%>
                         <%-- 입력된 가게 이름 --%>
                         <c:if test="${!empty save.buStoreName}">
                             <p style="margin-top: 10px; font-size: 23px; color: #2382f6">${save.buStoreName}</p>
@@ -634,17 +211,17 @@
                     <div class="storecare_storenumber">
                         <h3 style="font-size: small">내 가게 전화번호</h3>
                         <c:if test="${empty save.buStorePhone}">
-                        <input type="text" id="store-number-input" name="buStorePhone" placeholder="가게 번호"/>
+                            <input type="text" id="store-number-input" name="buStorePhone" placeholder="가게 번호"/>
                         </c:if>
 
                         <%--입력창--%>
-                            <c:if test="${!empty save.buStorePhone}">
-                            <input type="hidden" id="store-number-input" name="buStorePhone" value="${save.buStorePhone}"/>
+                        <c:if test="${!empty save.buStorePhone}">
+                            <input type="hidden" id="store-number-input" name="buStorePhone"
+                                   value="${save.buStorePhone}"/>
                         </c:if>
 
-                        <%--//7.24 테스트 승엽--%>
-                        <%-- 입력된 가게 번호를 표시합니다. --%>
-                       <c:if test="${!empty save.buStorePhone}">
+                        <%-- 입력된 가게 번호--%>
+                        <c:if test="${!empty save.buStorePhone}">
                             <p style="margin-top: 10px; font-size: 23px; color: #2382f6">${save.buStorePhone}</p>
                         </c:if>
                     </div>
@@ -668,28 +245,7 @@
                             </select>
                         </c:if>
 
-                        <%--입력창--%>
-                        <c:if test="${!empty save.buStoreCategory}">
-                            <%--<input type="text" id="store-category-input" name="buStoreCategory" value="${save.buStoreCategory}"/>--%>
-                        </c:if>
-
-                       <%-- <c:if test="${!empty save.buStoreCategory}">
-                            <select name="buStoreCategory">
-                                <c:forEach var="category" items="${['채소', '과일,견과,쌀', '수산,해산물,건어물', '정육,계란', '국,반찬', '베이커리', '양념,오일', '음료,커피', '간식', '생활용품']}">
-                                    <c:choose>
-                                        <c:when test="${save.buStoreCategory eq category}">
-                                            <option value="${category}" selected>${category}</option>
-                                        </c:when>
-                                        <c:otherwise>
-                                            <option value="${category}">${category}</option>
-                                        </c:otherwise>
-                                    </c:choose>
-                                </c:forEach>
-                            </select>
-                        </c:if>--%>
-
-                        <%--//7.24 테스트 승엽--%>
-                        <%-- 입력된 가게 카테고리를 표시합니다. --%>
+                        <%-- 입력된 가게 카테고리를 표시 --%>
                         <c:if test="${!empty save.buStoreCategory}">
                             <p style="margin-top: 10px; font-size: 23px; color: #2382f6">${save.buStoreCategory}</p>
                         </c:if>
@@ -697,24 +253,28 @@
                     <div class="line"></div>
 
                     <div class="storecare_location">
-                        <h3 style="font-size: small" >내 가게 주소</h3>
+                        <h3 style="font-size: small">내 가게 주소</h3>
                         <c:if test="${empty save.buStoreAddress}">
-                            <input type="text" id="store-location-input" name="buStoreAddress" placeholder="가게를 위치를 지정해주세요.">
+                            <input type="text" id="store-location-input" name="buStoreAddress"
+                                   placeholder="가게를 위치를 지정해주세요.">
                         </c:if>
 
-                     <%--입력창--%>
+                        <%--입력창--%>
                         <c:if test="${!empty save.buStoreAddress}">
-                            <input type="hidden" id="store-location-input" name="buStoreAddress" value="${save.buStoreAddress}">
+                            <input type="hidden" id="store-location-input" name="buStoreAddress"
+                                   value="${save.buStoreAddress}">
                         </c:if>
 
 
                         <c:if test="${empty save.buStoreAddressDetail}">
-                            <input type="text" name="buStoreAddressDetail" id="buStoreAddressDetail" placeholder="상세위치를 적어주세요.">
+                            <input type="text" name="buStoreAddressDetail" id="buStoreAddressDetail"
+                                   placeholder="상세위치를 적어주세요.">
                         </c:if>
 
                         <%--입력창--%>
                         <c:if test="${!empty save.buStoreAddressDetail}">
-                            <input type="hidden" name="buStoreAddressDetail" id="buStoreAddressDetail" value="${save.buStoreAddressDetail}">
+                            <input type="hidden" name="buStoreAddressDetail" id="buStoreAddressDetail"
+                                   value="${save.buStoreAddressDetail}">
                         </c:if>
 
                         <c:if test="${empty save.buStoreAddress}">
@@ -739,20 +299,17 @@
                 </form>
             </div>
 
-
-
             <br>
 
             <input class="input" name="tabs-2" type="radio" id="tab-2"/>
             <label class="label" for="tab-2">공지사항</label>
             <div class="panel">
-<%--                <div class="line"></div>--%>
                 <h4>사장님 공지사항</h4>
                 <div class="board">
                     <div class="content">
                         <input type="text" name="messageTitle" placeholder="공지 제목">
-<%--                        <div id="image-preview"></div>--%>
-                        <textarea type="textarea" rows="10" maxlength="700" name="totalMessage" placeholder="공지 내용"></textarea>
+                        <textarea type="textarea" rows="10" maxlength="700" name="totalMessage"
+                                  placeholder="공지 내용"></textarea>
                     </div>
                     <div class="buttons">
                         <button onclick="uploadPost()">업로드</button>
@@ -769,13 +326,14 @@
                 <c:if test="${empty re}"><h3>아직 등록된 리뷰가 없어요&#128546;</h3></c:if>
                 <c:if test="${!empty re}">
                     <c:forEach var="r" items="${re}" varStatus="status">
-                        <c:set var="reverseIndex" value="${re.size() - status.index - 1}" />
-                        <c:set var="currentItem" value="${re[reverseIndex]}" />
+                        <c:set var="reverseIndex" value="${re.size() - status.index - 1}"/>
+                        <c:set var="currentItem" value="${re[reverseIndex]}"/>
                         <div class="my_review_list_store">
                             <h4>불닭발</h4>
                             <br>
                             <div class="rate_and_date">
-                                <h4 class="rating" data-rating="${currentItem.rating}"></h4>&nbsp;<h6 class="date">${currentItem.createdDate}</h6>
+                                <h4 class="rating" data-rating="${currentItem.rating}"></h4>&nbsp;<h6
+                                    class="date">${currentItem.createdDate}</h6>
                             </div>
                             <div class="line"></div>
                             <div class="my_review_photo">
@@ -790,15 +348,13 @@
 
             <br>
 
-
             <input class="input" name="tabs-4" type="radio" id="tab-4"/>
             <label class="label" for="tab-4">메뉴 관리</label>
             <div class="panel">
-                <jsp:include page="../store/seller_manageMenu.jsp" />
+                <jsp:include page="../store/seller_manageMenu.jsp"/>
             </div>
 
             <br>
-
 
             <input class="input" name="tabs-5" type="radio" id="tab-5"/>
             <label class="label" for="tab-5">주문 내역</label>
@@ -818,29 +374,15 @@
 
             <input class="input" name="tabs-7" type="radio" id="tab-7"/>
             <label class="label" for="tab-7">정산 내역</label>
-            <div class="panel">
-               <%-- <jsp:include page="../calculate">
-                    <jsp:param name="calculate_date" value="<%=currentDate%>" />
-                    <jsp:param name="calculate_date_last" value="<%=currentDateLast%>" />
-                </jsp:include>--%>
-            </div>
 
             <br>
 
             <input class="input" name="tabs-8" type="radio" id="tab-8"/>
             <label class="label" for="tab-8">고객센터</label>
-            <div class="panel">
 
-
-            </div>
         </div>
-
-
-
     </div>
 </div>
-
-
 <script>
 
     //주소API
@@ -875,74 +417,6 @@
         }
     }
 
-    // function uploadPost() {
-    //     var imageUpload = document.getElementById("image-upload");
-    //     var imageFile = imageUpload.files[0];
-    //     var postContent = document.querySelector(".board .content textarea").value;
-    //
-    //     var post = {
-    //         content: postContent,
-    //         image: imageFile,
-    //         date: new Date(),
-    //         isNotice: true, // 최신 게시글은 공지로 표시
-    //     };
-    //
-    //     posts.unshift(post); // 배열의 맨 앞에 게시글 정보 추가
-    //
-    //     // 게시글을 생성하여 화면에 표시
-    //     var boardDiv = document.querySelector(".storecare .board");
-    //     var newPostDiv = document.createElement("div");
-    //     newPostDiv.className = "post";
-    //
-    //     var titleDiv = document.createElement("div");
-    //     titleDiv.className = "title";
-    //
-    //     if (post.isNotice) {
-    //         var noticeDiv = document.createElement("div");
-    //         noticeDiv.className = "notice";
-    //         noticeDiv.innerText = "공지";
-    //         titleDiv.appendChild(noticeDiv);
-    //     }
-    //
-    //     var dateDiv = document.createElement("div");
-    //     dateDiv.className = "date";
-    //     dateDiv.style.float = "right";
-    //     dateDiv.innerText = post.date.toLocaleString();
-    //     titleDiv.appendChild(dateDiv);
-    //
-    //     newPostDiv.appendChild(titleDiv);
-    //
-    //     var contentDiv = document.createElement("div");
-    //     contentDiv.className = "content";
-    //
-    //     if (imageFile) {
-    //         var img = document.createElement("img");
-    //         img.src = URL.createObjectURL(imageFile);
-    //         img.style.maxWidth = "100%";
-    //         img.style.height = "auto";
-    //         contentDiv.appendChild(img);
-    //     }
-    //
-    //
-    //     contentDiv.innerHTML += postContent;
-    //     newPostDiv.appendChild(contentDiv);
-    //     boardDiv.prepend(newPostDiv);
-    //
-    //     // 게시글 업로드 후 입력 내용 초기화
-    //     imageUpload.value = "";
-    //     document.querySelector(".board .content textarea").value = "";
-    //     document.getElementById("image-preview").innerHTML = "";
-    //
-    //     // 이전 게시글에서 공지 표시 제거
-    //     for (var i = 1; i < posts.length; i++) {
-    //         var otherPostElement = document.querySelectorAll(".storecare .board .post")[i];
-    //         var otherNoticeDiv = otherPostElement.querySelector(".notice");
-    //         if (otherNoticeDiv) {
-    //             otherNoticeDiv.remove();
-    //         }
-    //     }
-    // }
-
 
     // 컨트롤러로 요청을 보내고 처리하는 함수
     function uploadPost() {
@@ -952,8 +426,8 @@
 
         // 요청 데이터 생성
         var requestData = {
-                messageTitle: messageTitle,
-                totalMessage: totalMessage
+            messageTitle: messageTitle,
+            totalMessage: totalMessage
         };
 
         // AJAX 요청 생성
@@ -962,7 +436,7 @@
         xhr.setRequestHeader("Content-Type", "application/json");
 
         // 요청 완료 처리
-        xhr.onload = function() {
+        xhr.onload = function () {
             if (xhr.status === 200) {
 
                 console.log("요청이 성공적으로 처리되었습니다.");
@@ -997,11 +471,8 @@
     });
 
 
-
 </script>
-
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 </body>
-
 </html>
 
