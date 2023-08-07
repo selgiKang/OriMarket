@@ -1,14 +1,15 @@
 package com.choongang.OriMarket.favorite;
 
 import com.choongang.OriMarket.user.User;
-import lombok.*;
+import lombok.AccessLevel;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 @Entity
-@Table(name = "fav")
-@Getter
-@Setter
+@Table(name="fav")
+@Data
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Fav {
 
@@ -18,7 +19,7 @@ public class Fav {
     private Long favId;
 
     @ManyToOne
-    @JoinColumn(name = "userSeq")
+    @JoinColumn(name="userSeq")
     private User userSeq;
 
     @Column
@@ -27,6 +28,7 @@ public class Fav {
     @Transient
     private String favNumber;
 
+    //8.3 테스트
     @Column
     private String favStoreImg;
 

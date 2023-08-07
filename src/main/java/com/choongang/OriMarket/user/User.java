@@ -17,7 +17,7 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "seq")
+    @Column(name = "seq", nullable = false)
     private Long userSeq;
 
     @Column(unique = true)
@@ -52,5 +52,8 @@ public class User {
 
     @OneToMany(mappedBy = "user")
     private List<UserMarket> userMarkets = new ArrayList<>();
+
+
+    //fav원투매니를 해야할까?? menuname, menuprice, menudetail 만들어놓고
 
 }

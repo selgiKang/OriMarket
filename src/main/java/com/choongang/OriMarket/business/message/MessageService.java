@@ -2,52 +2,59 @@ package com.choongang.OriMarket.business.message;
 
 import com.choongang.OriMarket.business.user.BusinessUser;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.log4j.Log4j2;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
+import javax.servlet.http.HttpSession;
+import java.lang.reflect.Member;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
-@Log4j2
+@Slf4j
 public class MessageService {
 
+    @Autowired
     private final MessageRepository messageRepository;
 
     //게시글 등록
-    public boolean insertMessage(Message message) {
+    public boolean insertMessage(Message message){
         Message savemessage = messageRepository.save(message);
 
-        if (savemessage == null) {
-            return false;
-        } else {
-            return true;
-        }
+       if(savemessage == null){
+           return false;
+       }else {
+           return true;
+       }
     }
 
     //게시글 찾기
-    public List<Message> getMessages(BusinessUser buUserNumber, Model model) {
+    public List<Message> getMessages(BusinessUser buUserNumber, Model model){
         List<Message> getMessage = messageRepository.findByBuUserNumber(buUserNumber);
         return getMessage;
     }
 
-    public Message getDetailMessage(Long messageId) {
+    public Message getDetailMessage(Long messageId){
         Message getDetailMessage = messageRepository.findByMessageId(messageId);
         return getDetailMessage;
     }
 
-    public boolean getEditMessage(Message message) {
+    public boolean getEditMessage(Message message){
         Message editmessage = messageRepository.save(message);
-        if (editmessage == null) {
+        if(editmessage==null){
             return false;
-        } else {
-            return true;
+        }else {
+           return true;
         }
     }
 
     //삭제
-    public void getDeleteMessage(Long messageId) {
+    public void getDeleteMessage(Long messageId){
         Message getDeleteMessage = messageRepository.findByMessageId(messageId);
         messageRepository.delete(getDeleteMessage);
     }

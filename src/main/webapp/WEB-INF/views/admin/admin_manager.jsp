@@ -1,12 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8" %>
+         pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
     <title>현 재고 리스트</title>
-    <link rel="stylesheet" href="../../css/admin/manager.css">
+    <link rel="stylesheet" href="../../css/manager.css">
 </head>
 <body>
 <div id="goods_container">
@@ -19,9 +19,7 @@
         <div id="goods_title">
             <div class="top_title_wrap">
                 <!-- 뒤로가기 -->
-                <a href="/adminMain">
-                    <button class="backbtn">&lt;</button>
-                </a>
+                <a href="/adminMain"><button class="backbtn">&lt;</button></a>
             </div>
             <a><input type="button" class="delete_btn" value="선택회원 삭제" onclick="deleteSelectedManagerUsers()"></a>
             <a><input type="button" class="show_all_btn" value="전체회원 보기" onclick="showAllManagerUsers()"></a>
@@ -49,15 +47,15 @@
                     <td>이메일</td>
                 </tr>
                 <c:forEach var="manageruser" items="${managerUsers}">
-                    <tr>
-                        <td><input type="checkbox" value="${manageruser.managerSeq}"></td>
-                        <td>${manageruser.market.marketName}</td>
-                        <td>${manageruser.managerId}</td>
-                        <td>${manageruser.managerPassword}</td>
-                        <td>${manageruser.managerName}</td>
-                        <td>${manageruser.managerPhone}</td>
-                        <td>${manageruser.managerEmail}</td>
-                    </tr>
+                <tr>
+                    <td><input type="checkbox" value="${manageruser.managerSeq}"></td>
+                    <td>${manageruser.market.marketName}</td>
+                    <td>${manageruser.managerId}</td>
+                    <td>${manageruser.managerPassword}</td>
+                    <td>${manageruser.managerName}</td>
+                    <td>${manageruser.managerPhone}</td>
+                    <td>${manageruser.managerEmail}</td>
+                </tr>
                 </c:forEach>
             </table>
         </div>
@@ -82,7 +80,7 @@
         var xhr = new XMLHttpRequest();
         xhr.open('POST', '/deleteManagerUsers', true);
         xhr.setRequestHeader('Content-Type', 'application/json');
-        xhr.onreadystatechange = function () {
+        xhr.onreadystatechange = function() {
             if (xhr.readyState === XMLHttpRequest.DONE) {
                 if (xhr.status === 200) {
                     // 삭제 요청이 성공적으로 처리되었을 경우, 선택된 회원들을 테이블에서 삭제
@@ -148,7 +146,7 @@
 
     //엔터키로 검색되게
     var searchValue = document.getElementById('searchValue');
-    searchValue.addEventListener('keyup', function (event) {
+    searchValue.addEventListener('keyup', function(event) {
         if (event.keyCode === 13) { // Enter 키를 누른 경우
             searchManagerUsers(); // 검색 기능 함수를 호출
         }

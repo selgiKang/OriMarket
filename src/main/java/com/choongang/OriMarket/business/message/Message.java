@@ -2,13 +2,17 @@ package com.choongang.OriMarket.business.message;
 
 import com.choongang.OriMarket.business.user.BusinessUser;
 import lombok.*;
+import lombok.extern.slf4j.Slf4j;
+
 import javax.persistence.*;
+import javax.validation.constraints.Size;
+import java.util.Date;
 
 @Entity
 @Table(name="business_message")
 @Getter
 @Setter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor
 public class Message {
 
     @Id

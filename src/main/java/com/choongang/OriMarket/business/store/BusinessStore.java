@@ -4,7 +4,11 @@ import com.choongang.OriMarket.business.market.Market;
 import com.choongang.OriMarket.business.user.BusinessUser;
 import com.choongang.OriMarket.review.Review;
 import com.choongang.OriMarket.store.Item;
-import lombok.*;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,11 +21,10 @@ import java.util.List;
 @Setter
 //생성자
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-
 public class BusinessStore {
 
     @Id
-    @Column(name="bu_store_number")
+    @Column(name="bu_store_number",nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long buStoreNumber;
 

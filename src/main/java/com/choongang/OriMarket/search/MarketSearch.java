@@ -2,6 +2,7 @@ package com.choongang.OriMarket.search;
 
 import lombok.*;
 import org.locationtech.jts.geom.Point;
+
 import javax.persistence.*;
 
 
@@ -9,7 +10,8 @@ import javax.persistence.*;
 @Table(name = "market_search")
 @Getter
 @Setter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor
+@NoArgsConstructor
 public class MarketSearch {
 
     @Id
@@ -19,7 +21,7 @@ public class MarketSearch {
     @Column
     private String MarketSearchAddress;
 
-    @Column(columnDefinition = "GEOMETRY")
+    @Column(nullable = false, columnDefinition = "GEOMETRY")
     private Point geography;
 
 }

@@ -1,5 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,21 +24,11 @@
         <br>
         <div id="rider_list">
             <table>
-                <tr class="rider_listTitle">
-                    <td><a href="/a_user">일반 회원 페이지</a></td>
-                </tr>
-                <tr class="rider_listTitle">
-                    <td><a href="/a_buser">사업자 페이지</a></td>
-                </tr>
-                <tr class="rider_listTitle">
-                    <td><a href="/managercrud">매니저 페이지</a></td>
-                </tr>
-                <tr class="rider_listTitle">
-                    <td><a href="/rider_list">라이더 페이지</a></td>
-                </tr>
-                <tr class="rider_listTitle">
-                    <td><a href="/admin_order">주문 페이지</a></td>
-                </tr>
+                <tr class="rider_listTitle"><td><a href="/a_user">일반 회원 페이지</a></td></tr>
+                <tr class="rider_listTitle"><td><a href="/a_buser">사업자 페이지</a></td></tr>
+                <tr class="rider_listTitle"><td><a href="/managercrud">매니저 페이지</a></td></tr>
+                <tr class="rider_listTitle"><td><a href="/rider_list">라이더 페이지</a></td></tr>
+                <tr class="rider_listTitle"><td><a href="/admin_order">주문 페이지</a></td></tr>
             </table>
         </div>
     </div>

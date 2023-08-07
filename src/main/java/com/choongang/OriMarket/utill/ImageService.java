@@ -16,7 +16,7 @@ public class ImageService {
 
         String originalFilename = multipartFile.getOriginalFilename();
 
-        String imageUrl = IMAGE_PATH + originalFilename;
+        String imageUrl = IMAGE_PATH+originalFilename;
         Path saveImagePath = Paths.get(imageUrl);
 
         // 저장할 디렉토리 생성
@@ -36,7 +36,7 @@ public class ImageService {
     public String saveReviewImage(MultipartFile multipartFile) throws IOException {
 
         String originalFilename = multipartFile.getOriginalFilename();
-        String imageUrl = REVIEW_IMAGE_PATH + originalFilename;
+        String imageUrl = REVIEW_IMAGE_PATH+originalFilename;
         Path saveImagePath = Paths.get(imageUrl);
 
         // 저장할 디렉토리 생성
@@ -56,7 +56,7 @@ public class ImageService {
     public String saveItemImage(MultipartFile multipartFile) throws IOException {
 
         String originalFilename = multipartFile.getOriginalFilename();
-        String imageUrl = ITEM_IMAGE_PATH + originalFilename;
+        String imageUrl = ITEM_IMAGE_PATH+originalFilename;
         Path saveImagePath = Paths.get(imageUrl);
 
         // 저장할 디렉토리 생성
@@ -76,7 +76,7 @@ public class ImageService {
     public String saveRiderImage(MultipartFile multipartFile) throws IOException {
 
         String originalFilename = multipartFile.getOriginalFilename();
-        String imageUrl = ITEM_IMAGE_PATH + originalFilename;
+        String imageUrl = ITEM_IMAGE_PATH+originalFilename;
         Path saveImagePath = Paths.get(imageUrl);
 
         // 저장할 디렉토리 생성
