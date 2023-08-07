@@ -59,7 +59,7 @@
     <div id="mypage">
         <jsp:include page="../header/header_index.jsp" />
 
-<!-- 로그인 모달창 추가 - 230724 승원  -->
+<!-- 로그인 모달창 추가 - 230724 승원 -->
 <div class="modal">
     <div class="modal_body"><h1 class="login_modal_title">로그인</h1>
         <div id="container">
