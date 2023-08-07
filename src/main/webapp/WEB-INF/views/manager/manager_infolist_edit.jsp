@@ -10,6 +10,8 @@
     <title>Ori_UserInfo</title>
     <link rel="stylesheet" href="../../css/user/user_infolist.css">
     <link rel="stylesheet" href="../../css/manager/manager_infolist_edit.css">
+
+    <script src="../../js/manager/manager_infolist_edit.js"></script>
     <script>
         <%-- 서버에서 에러 메시지를 전달할 경우 알림 팝업 띄우기 --%>
         <% if (request.getAttribute("managerUpdateError") != null) { %>
