@@ -61,10 +61,10 @@
 
 <!-- 로그인 모달창 추가 - 230724 승원  -->
 <div class="modal">
-    <div class="modal_body">
-        <h1 class="login_modal_title">로그인</h1>
+    <div class="modal_body"><h1 class="login_modal_title">로그인</h1>
         <div id="container">
             <form action="/login" method="post" onsubmit="return validateLoginForm();">
+
                 <div id="login_box">
                     <div class="login_box_wrap">
                         <p>아이디 &nbsp;<input type="text" size="20" placeholder=" 아이디를 입력해주세요.." name="userId" id="userId" required></p>
