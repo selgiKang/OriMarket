@@ -4,7 +4,6 @@ import com.choongang.OriMarket.business.store.BusinessStore;
 import com.choongang.OriMarket.order.NewOrder;
 import com.choongang.OriMarket.store.Item;
 import com.choongang.OriMarket.user.User;
-import com.choongang.OriMarket.user.UserAddress;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,11 +13,8 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Table(name = "userReview")
@@ -31,7 +27,7 @@ public class Review {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "review_id", nullable = false)
+    @Column(name = "review_id")
     private Long review_id;
 
     @Column
@@ -73,11 +69,11 @@ public class Review {
     @JoinColumn(name ="business_store")
     private BusinessStore businessStore;
 
-    @ManyToOne(fetch = FetchType.LAZY) //lazy가 성능최적화
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name ="user_seq")
     private User user;
 
-    @ManyToOne(fetch = FetchType.LAZY) //lazy가 성능최적화
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name ="item_id")
     private Item item;
 
@@ -87,20 +83,4 @@ public class Review {
 
     @Column(length = 500)
     private String  businessReplyMessage;
-
-    public String getFormattedCreatedDate() {
-        // 원하는 형식으로 DateTimeFormatter를 생성
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy년MM월dd일 / HH시mm분ss초");
-
-        // LocalDateTime 객체를 원하는 형식으로 변환하여 문자열로 반환
-        return createdDate.format(formatter);
-    }
-
-    public String getFormattedCreatedDate1() {
-        // 원하는 형식으로 DateTimeFormatter를 생성
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy년MM월dd일 / HH시mm분ss초");
-
-        // LocalDateTime 객체를 원하는 형식으로 변환하여 문자열로 반환
-        return modifiedDate.format(formatter);
-    }
 }
