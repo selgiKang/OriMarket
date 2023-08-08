@@ -7,7 +7,7 @@
     <meta charset="UTF-8">
     <title>Insert title here</title>
     <link href="../code/loginpage.css" rel="stylesheet" media="all">
-    <link rel="stylesheet" href="../../css/rider_login.css">
+    <link rel="stylesheet" href="../../css/rider/rider_login.css">
 </head>
 <body>
 <div id="businesslogin_wrap">
