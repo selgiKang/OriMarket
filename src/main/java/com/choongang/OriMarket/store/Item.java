@@ -3,7 +3,9 @@ package com.choongang.OriMarket.store;
 import com.choongang.OriMarket.business.store.BusinessStore;
 import com.choongang.OriMarket.review.Review;
 import com.choongang.OriMarket.user.CartItem;
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -14,6 +16,7 @@ import java.util.List;
 @Table(name = "goods")
 @Getter
 @Setter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Item {
 
     @Id
@@ -56,15 +59,14 @@ public class Item {
     private String itemImageUrl;
 
     @ManyToOne(fetch = FetchType.LAZY) //lazy가 성능최적화
-    @JoinColumn(name ="bu_store_number")
+    @JoinColumn(name = "bu_store_number")
     private BusinessStore businessStore;
 
     @OneToMany(mappedBy = "item")
     private List<Review> reviews = new ArrayList<>();
 
-    @OneToMany(mappedBy = "item", cascade =  CascadeType.REMOVE)
+    @OneToMany(mappedBy = "item", cascade = CascadeType.REMOVE)
     private List<CartItem> cartItems = new ArrayList<>();
-
 
 
 }

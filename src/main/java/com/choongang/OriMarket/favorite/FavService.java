@@ -2,18 +2,16 @@ package com.choongang.OriMarket.favorite;
 
 import com.choongang.OriMarket.user.User;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-@Slf4j
+@Log4j2
 public class FavService {
 
-    @Autowired
     private final FavRepository favRepository;
 
     public boolean favInsert(Fav fav) {
@@ -40,10 +38,10 @@ public class FavService {
         return true;
     }
 
-    public List<Fav> favList(User userSeq){
-       List<Fav> favListResult = favRepository.findByUserSeq(userSeq);
+    public List<Fav> favList(User userSeq) {
+        List<Fav> favListResult = favRepository.findByUserSeq(userSeq);
 
-       return favListResult;
+        return favListResult;
     }
 }
 

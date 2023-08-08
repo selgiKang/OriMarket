@@ -2,7 +2,9 @@ package com.choongang.OriMarket.user;
 
 import com.choongang.OriMarket.business.store.BusinessStore;
 import com.choongang.OriMarket.store.Item;
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -12,11 +14,12 @@ import javax.persistence.*;
 @Table(name = "cart_item")
 @Getter
 @Setter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class CartItem {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "cart_item_id",unique = true)
+    @Column(name = "cart_item_id", unique = true)
     private Long cartItemId;
 
     /*하나의 장바구니에는 여러개의 상품을 담을 수 있으니까 다대일*/
@@ -39,12 +42,12 @@ public class CartItem {
     private User user;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="bu_store_number")
+    @JoinColumn(name = "bu_store_number")
     private BusinessStore businessStore;
 
     /*장바구니에 담을 상품엔티티를 생성하는 메소드*/
 
-    public static CartItem createCartItem(Cart cart,Item item, int count,int itemPrice,User user){
+    public static CartItem createCartItem(Cart cart, Item item, int count, int itemPrice, User user) {
         CartItem cartItem = new CartItem();
         cartItem.setCart(cart);
         cartItem.setItem(item);
@@ -53,13 +56,11 @@ public class CartItem {
         cartItem.setUser(user);
         cartItem.setBusinessStore(item.getBusinessStore());
         return cartItem;
-
-
     }
 
     /*장바구니에 담을 수량을 증가시켜주는 메소드 추가*/
-    public void addCount(int count){
-        this.count += count;;
+    public void addCount(int count) {
+        this.count += count;
 
     }
 }

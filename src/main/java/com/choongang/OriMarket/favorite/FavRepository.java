@@ -5,9 +5,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-public interface FavRepository extends JpaRepository<Fav,Long> {
+public interface FavRepository extends JpaRepository<Fav, Long> {
 
     Fav findByUserSeqAndFavStoreName(User userSeq, String favStoreName);
-   List <Fav> findByUserSeq(User userSeq);
+
+    List<Fav> findByUserSeq(User userSeq);
 
 }
