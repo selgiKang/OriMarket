@@ -1,12 +1,17 @@
 package com.choongang.OriMarket.order;
 import com.choongang.OriMarket.manager.user.ManagerUser;
+import com.choongang.OriMarket.review.Review;
 import com.choongang.OriMarket.rider.Rider;
 import com.choongang.OriMarket.user.User;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import lombok.*;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.extern.log4j.Log4j2;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import javax.persistence.*;
@@ -84,7 +89,7 @@ public class NewOrder {
     @JoinColumn(name="managerSeq")
     private ManagerUser managerUser;
 
-    @JsonIgnore // 순환 참조 안되게! null
+    @JsonIgnore
     @OneToOne(fetch =  FetchType.LAZY)
     @JoinColumn(name="rider_seq")
     private Rider rider;

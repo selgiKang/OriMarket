@@ -6,12 +6,77 @@
     font-style: normal;
 }
 
-body{margin:0 auto; font-size:18px; font-family: 'omyu_pretty';}
-.header_wrap>.logo>a{margin-top:10px; text-decoration: none; color:#ffbf41; font-weight: 700;}
-.header_wrap{width:375px; height:100px; margin:0 auto; background-color:#46a973; box-sizing:border-box; border-bottom-left-radius: 25px; border-bottom-right-radius: 25px; box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.2);}
-.nav{text-align:right; padding:5px 15px; margin-top:15px;}
-.nav>span{float:left; margin: 5px;}
-.nav>span.addpic{float:left; margin: 5px; width: 230px;overflow: hidden;text-overflow: ellipsis; white-space: nowrap; color: #fff; text-align: initial;}
-.nav>span>a{text-decoration:none; color:#eee;}
-.header_i{color:#ffbf41; font-size:22px; margin:3px;}
-.logo{width:160px; height:35px; margin:auto; text-align:center; font-size:30px;}
+body {
+    margin: 0 auto;
+    font-size: 18px;
+    font-family: 'omyu_pretty';
+}
+
+.header_wrap > .logo > a {
+    margin-top: 10px;
+    text-decoration: none;
+    color: #ffbf41;
+    font-weight: 700;
+}
+
+.header_wrap {
+    width: 375px;
+    height: 100px;
+    margin: 0 auto;
+    background-color: #46a973;
+    box-sizing: border-box;
+    border-bottom-left-radius: 25px;
+    border-bottom-right-radius: 25px;
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.2);
+}
+
+.nav {
+    text-align: right;
+    padding: 5px 15px;
+    margin-top: 15px;
+}
+
+.nav > span {
+    float: left;
+    margin: 5px;
+}
+
+.nav > span.addpic {
+    float: left;
+    margin: 5px;
+    width: 230px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: #fff;
+    text-align: initial;
+}
+
+.nav > span > a {
+    text-decoration: none;
+    color: #eee;
+}
+
+.header_i {
+    color: #ffbf41;
+    font-size: 22px;
+    margin: 3px;
+}
+
+.logo {
+    width: 160px;
+    height: 35px;
+    margin: auto;
+    text-align: center;
+    font-size: 30px;
+}
+
+body {
+    margin: 0; /* body의 기본 마진을 제거하여 헤더를 화면 맨 위에 배치합니다. */
+}
+
+.header_wrap {
+    background-color: #46A973; /* 헤더 배경색을 지정해주세요. */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* 헤더에 그림자 효과를 추가할 수 있습니다. */
+    z-index: 9999; /* 다른 요소들보다 위에 표시되도록 설정합니다. */
+}

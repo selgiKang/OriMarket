@@ -16,12 +16,18 @@ import java.util.List;
 @Slf4j
 public class StoreService {
 
+    @Autowired
     private final StoreRepository storeRepository;
 
-    public Store update(Store store) {
-        storeRepository.save(store);
 
+    EntityManager em;
+
+    public Store update(Store store){
+
+        storeRepository.save(store);
         return store;
     }
+
+
 
 }

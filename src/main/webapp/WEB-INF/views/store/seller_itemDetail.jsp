@@ -5,64 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <title>신규상품등록</title>
-    <style type="text/css">
-        /* 전체적용 */
-        @font-face {
-            font-family: 'omyu_pretty';
-            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-01@1.0/omyu_pretty.woff2') format('woff2');
-            font-weight: normal;
-            font-style: normal;
-        }
-        @font-face {
-            font-family: 'LINESeedKR-Bd';
-            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/LINESeedKR-Bd.woff2') format('woff2');
-            font-weight: 700;
-            font-style: normal;
-        }
-
-
-        /* 전체 크기 */
-        body{margin: 0; padding: 0; font-family:'LINESeedKR-Bd'; font-size: 16px; text-align: center; width: 100%; height: 100%}
-        #goods_container{width: 375px; height:812px; margin: 0 auto;}
-
-        /* 가게상호명,업주 */ /* 230723 승원 */
-        #goods_store{height:100px; background-color:#46A973; color:#fff; display: flex; justify-content: end; align-items: center;}
-        .sn_wrap{margin-right:20px}
-
-        /* 버튼 */
-        #goods_btn{vertical-align: center;}
-        #goods_btn input{width:80px; background-color: #FFBF41; font-family:'LINESeedKR-Bd'; border-style: none; font-size: 16px; padding: 10px 8px 8px; border:none; border-radius:5px; cursor:pointer;}
-        #goods_btn > input:hover {background-color:#333; color:#fff;}
-        #goods_btn > a > input:hover {background-color:#46A973; color:#fff;}
-
-        /* 230723 승원 */
-        .goods_store_wrap{background-color:#eee; height:712px; display: flex;}
-        .goods_store_list_wrap{width: 90%; height: 612px; overflow-y: scroll; border-radius: 25px; border-radius: 25px; background-color:#fff; padding:20px 5px; margin:auto; box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.2);}
-        .top_title_wrap{ display: flex; align-items: center;}
-        button.backbtn { display: flex; align-items: center; font-size: 20px; color: #999; margin: 0 0 0 10px; width: 30px; height: 30px; background-color: #fff; border-radius: 50%; border: 1px solid #999; cursor: pointer; justify-content: center;}
-        button.backbtn:hover {background-color:#333; color:#fff;}
-        .top_title_wrap h1{text-align:center; margin:18px 17%;}
-
-        #goods_table{margin: 0 auto;}
-        #goods_table tr{line-height: 30px;}
-        #goods_table td{color: #46A973;}
-
-        input[type=text] {width: 80%; height: 30px; font-size: 15px; border: 0; border-radius: 15px; outline: none; padding-left: 10px; background-color: rgb(233, 233, 233);}
-        textarea { width: 80%;height: 50px; padding: 10px; box-sizing: border-box; border: solid 2px #e6e6e6; border-radius: 5px;font-size: 16px; resize: both;}
-        .select {width:80%; height:30px; border-radius:5px; border:2px solid #e9e9e9;}
-        td.input_wrap{width:70%;}
-
-        /* 스크롤바 숨기기 (Hide Scrollbar) */
-        .goods_store_list_wrap {
-            -ms-overflow-style: none; /* IE and Edge */
-            scrollbar-width: none; /* Firefox */
-        }
-        .goods_store_list_wrap::-webkit-scrollbar {
-            display: none; /* Chrome, Safari, Opera*/
-        }
-
-    </style>
-
+    <link rel="stylesheet" type="text/css" href="../../css/store/seller_itemDetail.css">
 </head>
 <body>
 <div id="goods_container">

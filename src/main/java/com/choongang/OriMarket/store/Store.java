@@ -1,5 +1,7 @@
 package com.choongang.OriMarket.store;
 
+import com.choongang.OriMarket.order.OrderService;
+import com.choongang.OriMarket.user.User;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,7 +18,7 @@ public class Store {
 
 
     @Id
-    @Column(name = "store_number")
+    @Column(name="store_number",nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 

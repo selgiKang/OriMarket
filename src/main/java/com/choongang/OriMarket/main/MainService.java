@@ -5,37 +5,45 @@ import com.choongang.OriMarket.user.UserAddress;
 import com.choongang.OriMarket.user.UserAddressRepository;
 import com.choongang.OriMarket.user.UserRepository;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.log4j.Log4j2;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
+import java.util.Optional;
 
 @Service
-@RequiredArgsConstructor
-@Log4j2
+@RequiredArgsConstructor 
+@Slf4j
 public class MainService {
 
-    private final UserRepository userRepository;
+    @Autowired
+    private final MainRepository userRepository;
+
+    @Autowired
     private final UserAddressRepository userAddressRepository;
 
-    public void updateAddress(HttpSession session, UserAddress userAddress, Model model) {
+    public void updateAddress(HttpSession session, UserAddress userAddress, Model model){
 
-        if (session.getAttribute("userId") == null) {
-            session.setAttribute("userAddress1", userAddress.getUserAddress1());
-            session.setAttribute("userAddressDetail1", userAddress.getUserAddressDetail1());
-        } else {
+        if(session.getAttribute("userId")==null){
+                session.setAttribute("userAddress1", userAddress.getUserAddress1());
+                session.setAttribute("userAddressDetail1", userAddress.getUserAddressDetail1());
+        }else {
             Object userId = session.getAttribute("userSeq");
             User user = userRepository.findById((Long) userId).orElseThrow();
             userAddress.setUser(user);
             userAddressRepository.save(userAddress);
 
             List<UserAddress> userAddresses = user.getUserAddresses();
-            model.addAttribute("userAd", userAddresses);
+            model.addAttribute("userAd",userAddresses);
 
             session.setAttribute("userAddress1", userAddress.getUserAddress1());
             session.setAttribute("userAddressDetail1", userAddress.getUserAddressDetail1());
+
         }
+
     }
-}
+
+};

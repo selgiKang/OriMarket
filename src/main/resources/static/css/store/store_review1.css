@@ -1,0 +1,124 @@
+@font-face {
+    font-family: 'LINESeedKR-Bd';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/LINESeedKR-Bd.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+}
+
+#business_review_body {
+    font-family: "LINESeedKR-Bd", sans-serif;
+    width: 375px;
+    font-size: 16px;
+    margin: 0 auto;
+    margin-top: 10px;
+}
+
+#business_review_header > h3 {
+    text-align: center;
+}
+
+.review_table {
+    width: 100%;
+}
+
+.review_table_td_1 {
+    width: 100px;
+    text-align: center;
+}
+
+.rating[data-rating="1"]::before {
+    content: "★☆☆☆☆";
+    color: gold;
+}
+
+.rating[data-rating="2"]::before {
+    content: "★★☆☆☆";
+    color: gold;
+}
+
+.rating[data-rating="3"]::before {
+    content: "★★★☆☆";
+    color: gold;
+}
+
+.rating[data-rating="4"]::before {
+    content: "★★★★☆";
+    color: gold;
+}
+
+.rating[data-rating="5"]::before {
+    content: "★★★★★";
+    color: gold;
+}
+
+.rating::before {
+    content: "☆☆☆☆☆";
+    color: lightgray;
+}
+
+.rating[data-rating="1.0"]::before {
+    content: "★☆☆☆☆";
+    color: gold;
+}
+
+.rating[data-rating="2.0"]::before {
+    content: "★★☆☆☆";
+    color: gold;
+}
+
+.rating[data-rating="3.0"]::before {
+    content: "★★★☆☆";
+    color: gold;
+}
+
+.rating[data-rating="4.0"]::before {
+    content: "★★★★☆";
+    color: gold;
+}
+
+.rating[data-rating="5.0"]::before {
+    content: "★★★★★";
+    color: gold;
+}
+
+.rating[data-rating="1.5"]::before {
+    content: "★½☆☆☆";
+    color: gold;
+}
+
+.rating[data-rating="2.5"]::before {
+    content: "★★½☆☆";
+    color: gold;
+}
+
+.rating[data-rating="3.5"]::before {
+    content: "★★★½☆";
+    color: gold;
+}
+
+.rating[data-rating="4.5"]::before {
+    content: "★★★★½";
+    color: gold;
+}
+
+
+button.backbtn {
+    display: flex;
+    align-items: center;
+    font-size: 20px;
+    color: #999;
+
+    margin: 10px 0 0 10px;
+    width: 30px;
+    height: 30px;
+    background-color: #fff;
+    border-radius: 50%;
+    border: 1px solid #999;
+    cursor: pointer;
+    justify-content: center;
+}
+
+button.backbtn:hover {
+    background-color: #333;
+    color: #fff;
+}

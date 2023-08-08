@@ -10,7 +10,7 @@ import com.choongang.OriMarket.user.User;
 import com.choongang.OriMarket.user.UserService;
 import com.choongang.OriMarket.utill.ImageService;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.log4j.Log4j2;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,12 +24,13 @@ import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
-@Log4j2
+@Slf4j
 public class StoreController {
 
+    @Autowired
     private final StoreService storeService;
 
-    private final ItemService itemService;
+    private final  ItemService itemService;
 
     private final BusinessStoreRepository businessStoreRepository;
 
@@ -43,9 +44,16 @@ public class StoreController {
 
     private final UserService userService;
 
+//    @GetMapping("/detailmenu")
+//    public String store_detailmenu(){
+//        return "store/detailmenu";
+//    }
+
     // /store getMapping은 favController로 이동
     @GetMapping("/search_modal_popup")
     public String store_menu_search() {
+
+
         return "store/search_modal_popup";
     }
 
@@ -76,27 +84,27 @@ public class StoreController {
 
 
     @GetMapping("/s1/{buUserId}")
-    public String storenotice2(HttpSession session, Model model, @PathVariable("buUserId") String buUserId) {
+    public String storenotice2(HttpSession session,Model model,@PathVariable("buUserId")String buUserId) {
         BusinessUser buUserNumber = businessUserRepository.findById((Long) session.getAttribute("buUserNumber")).orElseThrow();
         List<Item> items1 = buUserNumber.getBusinessStores().get(0).getItems();
-        model.addAttribute("items", items1);
+        model.addAttribute("items",items1);
 
 
         BusinessUser businessUser = businessUserRepository.findByBuUserId(buUserId);
         BusinessStore businessStore = businessStoreRepository.findByBuStoreNumber(businessUser.getBusinessStores().get(0).getBuStoreNumber());
-        session.setAttribute("buUser", businessUser);
-        session.setAttribute("buUserId", businessUser.getBuUserId());
-        session.setAttribute("buStore", businessStore);
+        session.setAttribute("buUser",businessUser);
+        session.setAttribute("buUserId",businessUser.getBuUserId());
+        session.setAttribute("buStore",businessStore);
 
         return "store/seller_itemList";
     }
 
     @GetMapping("/s2/{buUserId}")
-    public String storenotice3(@PathVariable("buUserId") String buUserId, HttpSession session) {
+    public String storenotice3(@PathVariable("buUserId")String buUserId,HttpSession session) {
         BusinessUser businessUser = businessUserRepository.findByBuUserId(buUserId);
         BusinessStore businessStore = businessStoreRepository.findByBuStoreNumber(businessUser.getBusinessStores().get(0).getBuStoreNumber());
-        session.setAttribute("buUser", businessUser);
-        session.setAttribute("buStore", businessStore);
+        session.setAttribute("buUser",businessUser);
+        session.setAttribute("buStore",businessStore);
 
         return "store/seller_itemRegister";
     }
@@ -105,13 +113,15 @@ public class StoreController {
     public String storenotice31(@ModelAttribute Item item, HttpSession session, Model model, @RequestParam("pictureUrl") MultipartFile file) throws IOException {
 
         // 상품등록할때 등록한 이미지를 item 디렉토리에 저장
-        if (file.isEmpty()) {
+        if(file.isEmpty()){
             String s = "null";
-            itemService.save(item, session, model, s);
-        } else {
+            itemService.save(item,session,model,s);
+        }else {
             String s = imageService.saveItemImage(file);
-            itemService.save(item, session, model, s);
+            itemService.save(item,session,model,s);
         }
+        // 상품 저장
+
 
         return "store/seller_itemList";
     }
@@ -123,46 +133,55 @@ public class StoreController {
 
 
     @GetMapping("/store_menuedit")
-    public String store_menuedit() {
-        return "store/store_menuedit";
-    }
+    public String store_menuedit(){return "store/store_menuedit";}
 
     @PostMapping("/storenotice")
-    public String storenoticeStore(@ModelAttribute Store store, Model model) {
+    public String storenoticeStore(@ModelAttribute Store store,Model model){
+        System.out.println("가게이름: "+store.getStoreName());
         Store storeupdate = storeService.update(store);
 
-        if (storeupdate == null) {
+        System.out.println("가게이름: " +storeupdate.getStoreName());
+
+        if(storeupdate == null){
             return "store/store";
-        } else {
+        }else {
             return "store/storenotice";
         }
 
     }
 
     @GetMapping("/storenotice0")
-    public String storenotice0(Model model) {
+    public String storenotice0(Model model){
         List<Item> all = itemRepository.findAll();
-        model.addAttribute("al", all);
-
+        for(Item item: all){
+            System.out.println("zzz"+item.getItemName());
+        }
+            model.addAttribute("al",all);
         return "store/store";
     }
 
     @GetMapping("/detailmenu/{itemId}/{userId}")
-    public String store_detailmenu(@PathVariable("itemId") Long itemId, Model model, Item cartItem, @PathVariable("userId") String userId) {
+    public String store_detailmenu(@PathVariable("itemId")Long itemId,Model model,Item cartItem,@PathVariable("userId")String userId){
 
+        System.out.println("아이템 번호: "+itemId);
         Item item = itemService.getItem(itemId);
         cartItem.setItemId(itemId);
         User user = userService.getUser(userId);
 
 
-        CartItem cartItemResult = cartItemRepository.findByItem_ItemIdAndUser_UserSeq(itemId, user.getUserSeq());
+        CartItem cartItemResult = cartItemRepository.findByItem_ItemIdAndUser_UserSeq(itemId,user.getUserSeq());
 
         //카트 아이템에 있으면
-        if (cartItemResult != null) {
-            model.addAttribute("cartItem", cartItemResult.getCount());
-            model.addAttribute("item", item);
-        } else {
-            model.addAttribute("item", item);
+        if(cartItemResult != null){
+            System.out.println("아이템 수량! "+ cartItem.getItemCnt());
+
+            System.out.println("장바구니 가격! "+ cartItemResult.getItemPrice());
+            System.out.println("장바구니 수량! "+ cartItemResult.getCount());
+
+            model.addAttribute("cartItem",cartItemResult.getCount());
+            model.addAttribute("item",item);
+        }else{
+            model.addAttribute("item",item);
         }
         return "/store/detailmenu";
     }

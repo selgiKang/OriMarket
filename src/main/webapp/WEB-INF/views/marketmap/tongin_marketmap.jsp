@@ -7,27 +7,9 @@
     <title>시장 맵</title>
     <script src="https://kit.fontawesome.com/1cfe6d92db.js" crossorigin="anonymous"></script>
     <link rel= "stylesheet" href= "../../css/marketmap/marketmap.css">
-    <style>
-        button.backbtn {
-            display: flex;
-            align-items: center;
-            font-size: 14px;
-            color: #fff;
-            margin: 0 0 0 10px;
-            width: 35%;
-            height: 40px;
-            background-color: #46a973;
-            border-radius: 35px;
-            border: 1px solid #999;
-            cursor: pointer;
-            justify-content: center;
-            position: absolute;
-            z-index: 99999;
-            top: 320px;
-            left: 31%;
-        }
-        button.backbtn:hover {background-color:#333; color:#fff;}
-    </style>
+    <link rel= "stylesheet" href= "../../css/marketmap/tongin_marketmap.css">
+
+
 </head>
 <body>
 <jsp:include page="../header/header_search.jsp" />
@@ -53,7 +35,7 @@
         </div>
         <!--분할 지도-->
         <div class="map_bg_wrap">
-            <!--<img class="map_bg03" src="../../img/marketmap/marketmap_noicon_page_03.png" alt="신원시장3컷">-->
+
             <!--1번째 분할-->
             <div class="map_bg_content1_box"></div>
             <!--2번째 분할-->

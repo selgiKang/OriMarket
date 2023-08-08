@@ -1,65 +1,38 @@
 @font-face {
-    font-family: 'LINESeedKR-Bd';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/LINESeedKR-Bd.woff2') format('woff2');
-    font-weight: 700;
+    font-family: 'omyu_pretty';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-01@1.0/omyu_pretty.woff2') format('woff2');
+    font-weight: normal;
     font-style: normal;
 }
-#managerLogin_body{
-    font-family: "LINESeedKR-Bd",sans-serif;
-    margin: 0 auto;
-    width: 375px;
-    font-size: 16px;
-}
-#managerLogin_body>h2{
-    margin: 0 auto;
-    text-align: center;
-    margin-top: 30%;
-}
-.managerLogin_table{
-    width: 100%;
-    border-collapse: collapse;
-    height: 150px;
-}
-.managerLogin_table_border{
-    border: #46A973 1px solid;
-    border-radius: 10px;
-    width: 100%;
-}
-.managerLogin_td_1{
-    padding-left: 10px;
-}
-.managerLogin_td_2>input{
-    height: 10px;
-    width: 70%;
-}
-.managerLogin_td_3>input{
-    font-family: "LINESeedKR-Bd",sans-serif;
-    outline: none;
-    border: none;
-    background: #46A973;
-    color: white;
-    font-weight: bolder;
-    padding: 5px;
-    font-size: 16px;
-}
-.managerLogin_td_3>input:focus {
-    outline-color: #46A973;
-}
-.managerLogin_td_3>a{
-    outline: none;
-    border: none;
-    background: #46A973;
-    color: white;
-    padding: 5px;
-    height: 17px;
-    font-size: 16px;
-}
-.managerLogin_tr{
-    text-align: center;
-}
-.managerLogin_tr a{
-    text-decoration: none;
-}
-.managerLogin_tr a:hover{
-    opacity: 0.7;
-}
+
+
+*{margin: 0; padding: 0; box-sizing: border-box; font-family: 'omyu_pretty';}
+
+body{width: 375px; height: 812px; margin: 0 auto; }
+
+/* 230727 */
+#businesslogin_wrap{background-color:#46A973; width:375px; height:812px; margin:auto;}
+.businesslogin_wrapbox{width:375px; height:812px;}
+.businesslogin_wrapbox a{text-decoration: none; color:#333;}
+
+.businesslogin_title_wrap{width:375px; height:200px; margin:auto; padding: 20%; text-align: center;}
+.businesslogin_title_wrap>h1{font-size: 55px; color:#ffbf41; letter-spacing: 10px; text-align: center;}
+.businesslogin_title_wrap>h3{color:#fff}
+
+#container{width: 300px; height: 400px; padding:20px; text-align: center;
+    background-color:#fff; border-radius: 10px; box-shadow: 0 3px 6px 0 rgba(0,0,0, 0.4); margin: 0 10%;}
+
+h1.login_title{color: #333; letter-spacing: 5px; margin: 20px 20px 30px 20px;}
+div#login_box{margin:20px 0}
+div.login_box_wrap{margin-bottom:25px;}
+div.login_box_wrap p {margin-bottom:10px;}
+
+input[type=text] {width: 65%; height: 30px; font-size: 15px; border: 0; border-radius: 15px; outline: none; padding-left: 10px; background-color: rgb(233, 233, 233);}
+input[type=password] {width: 65%; height: 30px; font-size: 15px; border: 0; border-radius: 15px; outline: none; padding-left: 10px; background-color: rgb(233, 233, 233);}
+
+input.login_btn { width:80%; height:40px; background-color:#46A973; border:none; border-radius: 25px; color:#fff; font-weight: 700; font-size: 16px; font-family: 'omyu_pretty';}
+input.login_btn:hover{ background-color:#333; color:#ffbf41;}
+
+div.join_btn_wrap{width:100%;}
+a.join_btn{width:70%; height:40px; padding: 4% 32%; background-color:#ffbf41; border:none; border-radius: 25px; color:#333; font-weight: 700; font-size: 16px;}
+a.join_btn:hover {background-color: #333; color:#fff;}

@@ -161,10 +161,10 @@
     var phoneNumber = phoneInput.value;
     var numericPhoneNumber = phoneNumber.replace(/[^0-9]/g, "");
 
-    // Limit the numericPhoneNumber to 11 digits
+    // 11자리 제한
     numericPhoneNumber = numericPhoneNumber.slice(0, 11);
 
-    // Format the phone number with hyphens
+    // 번호 형식 - 추가
     if (numericPhoneNumber.length >= 3 && numericPhoneNumber.length <= 7) {
       numericPhoneNumber = numericPhoneNumber.slice(0, 3) + "-" + numericPhoneNumber.slice(3);
     } else if (numericPhoneNumber.length > 7) {
@@ -175,7 +175,7 @@
     }
     phoneInput.value = numericPhoneNumber;
 
-    // Check if the input value matches the numericPhoneNumber
+    // 번호 형식
     if (phoneNumber !== numericPhoneNumber) {
       phoneError.textContent = "휴대폰 번호는 숫자 11자리만 입력 가능합니다.";
       phoneError.style.color = "red";

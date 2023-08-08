@@ -9,17 +9,6 @@
   <%-- join js 적용 --%>
   <script src="../../js/user/join.js"></script>
 </head>
-<style>
-  /* 추가된 CSS 스타일 */
-  .container {
-    max-height: 100vh; /* 컨테이너의 최대 높이를 화면의 높이로 설정 */
-    overflow-y: auto;
-    box-sizing: border-box;
-  }
-  .container::-webkit-scrollbar {
-    display: none;
-  }
-</style>
 <body style="margin:0;">
   <div class="container">
       <div class="logo_container">

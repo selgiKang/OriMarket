@@ -1,18 +1,24 @@
 package com.choongang.OriMarket.user;
 
 import com.choongang.OriMarket.business.market.Market;
+import com.choongang.OriMarket.business.market.MarketRepository;
 import com.choongang.OriMarket.business.market.MarketService;
 import com.choongang.OriMarket.order.*;
 import com.choongang.OriMarket.review.Review;
+import com.choongang.OriMarket.review.ReviewRepository;
 import com.choongang.OriMarket.utill.DistanceUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
+import org.thymeleaf.model.IModel;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.*;
@@ -22,11 +28,14 @@ import java.util.*;
 @Log4j2
 public class UserController {
 
+    @Autowired
     private final UserService userService;
     private final UserRepository userRepository;
     private final UserMarketRepository userMarketRepository;
     private final MarketService marketService;
     private final NewOrderRepository newOrderRepository;
+    private final NewOrderDetailRepository newOrderDetailRepository;
+    private final ReviewRepository reviewRepository;
 
 
     // 로그인 get , post 매핑
@@ -34,7 +43,6 @@ public class UserController {
     public String login() {
         return "user/login";
     }
-
     @PostMapping("/login")
     public ResponseEntity<String> loginId(@RequestBody Map<String, String> loginData, HttpSession session, Model model) {
         String userId = loginData.get("userId");
@@ -43,7 +51,7 @@ public class UserController {
         user.setUserId(userId);
         user.setUserPassword(userPassword);
 
-        boolean isTrue = userService.login(user, session);
+        boolean isTrue = userService.login(user, session, model);
 
         if (isTrue) {
             User findUser = userRepository.findByUserId(String.valueOf(session.getAttribute("userId")));
@@ -70,7 +78,7 @@ public class UserController {
     @PostMapping("/join")
     public String joinUser(@ModelAttribute User user, HttpSession session) {
 
-        if (userService.join(user, session)) {
+        if(userService.join(user,session)){
             return "user/mypage";
         }
         return "user/join";
@@ -90,9 +98,9 @@ public class UserController {
     }
 
     @PostMapping("/update")
-    public String updateUser(@ModelAttribute User user, HttpSession session) {
+    public String updateUser(@ModelAttribute User user, HttpSession session){
 
-        if (userService.join(user, session)) {
+        if(userService.join(user,session)){
             return "user/user_infolist";
         }
         return "user/user_infolist_edit";
@@ -106,10 +114,10 @@ public class UserController {
 
 
     @GetMapping("/review")
-    public String review(HttpSession session, Model model) {
-        if (session.getAttribute("userSeq") == null) {
+    public String review(HttpSession session,Model model) {
+        if(session.getAttribute("userSeq")==null){
             return "error/login_error";
-        } else {
+        }else {
             User byId = userRepository.findById((Long) session.getAttribute("userSeq")).orElseThrow();
             List<NewOrder> newOrders = newOrderRepository.findByOrderStatusAndUserOrderByCreatedDateDesc("배달완료", byId);
             List<Review> reviews = byId.getReviews();
@@ -117,7 +125,7 @@ public class UserController {
             Collections.reverse(reviews);
 
             model.addAttribute("re", reviews);
-            model.addAttribute("newOrders", newOrders);
+            model.addAttribute("newOrders",newOrders);
 
             return "store/delivery_pickup";
         }
@@ -129,51 +137,47 @@ public class UserController {
     }
 
     @GetMapping("/findUserId")
-    public String findUserId() {
-        return "user/findID";
-    }
+    public String findUserId(){return "user/findID";}
 
     @PostMapping("/findUserId")
-    public String findUserIdResult(User user, Model model, HttpServletRequest request) {
+    public String findUserIdResult(User user, Model model, HttpServletRequest request){
         User userInfo = userService.getUser(user.getUserId());
 
-        if (userInfo != null) {
-            if (userInfo.getUserPhone().equals(user.getUserPhone())) {
-                model.addAttribute("userInfo", userInfo);
-            } else {
-                request.setAttribute("loginError", "정보가 틀려습니다. 다시 한번 확인해주세요.");
+        if(userInfo!=null){
+            if(userInfo.getUserPhone().equals(user.getUserPhone())){
+                model.addAttribute("userInfo",userInfo);
+            }else{
+                request.setAttribute("loginError","정보가 틀려습니다. 다시 한번 확인해주세요.");
             }
-        } else {
-            request.setAttribute("loginError", "정보가 틀려습니다. 다시 한번 확인해주세요.");
+        }else{
+            request.setAttribute("loginError","정보가 틀려습니다. 다시 한번 확인해주세요.");
         }
 
         return "user/findID";
     }
 
     @GetMapping("/findUserPw")
-    public String findUserPw() {
-        return "user/findID";
-    }
+    public String findUserPw(){return "user/findID";}
 
     @PostMapping("/findUserPw")
-    public String findUserPwResult(User user, Model model, HttpServletRequest request) {
+    public String findUserPwResult(User user, Model model, HttpServletRequest request){
         User userInfo = userService.getUser(user.getUserEmail());
 
-        if (userInfo != null) {
-            if (userInfo.getUserPhone().equals(user.getUserPhone())) {
-                model.addAttribute("userInfo", userInfo);
-            } else {
-                request.setAttribute("loginError", "정보가 틀려습니다. 다시 한번 확인해주세요.");
+        if(userInfo!=null){
+            if(userInfo.getUserPhone().equals(user.getUserPhone())){
+                model.addAttribute("userInfo",userInfo);
+            }else{
+                request.setAttribute("loginError","정보가 틀려습니다. 다시 한번 확인해주세요.");
             }
-        } else {
-            request.setAttribute("loginError", "정보가 틀려습니다. 다시 한번 확인해주세요.");
+        }else{
+            request.setAttribute("loginError","정보가 틀려습니다. 다시 한번 확인해주세요.");
         }
 
         return "user/findID";
     }
 
     @GetMapping("/logout")
-    public String logout(HttpSession session) {
+    public String logout(HttpSession session){
         session.invalidate();
         return "main/main";
 
@@ -182,40 +186,42 @@ public class UserController {
     //아이디 중복확인
     @GetMapping("/userId/{userId}/exists")
     @ResponseBody
-    public ResponseEntity<Boolean> checkUserIdDuplicate(@PathVariable String userId) {
+    public ResponseEntity<Boolean> checkUserIdDuplicate(@PathVariable String userId){
         return ResponseEntity.ok(userService.checkUserId(userId));
     }
 
     @GetMapping("/delete")
-    public String deleteUser(@RequestParam("userSeq") Long userSeq, Model model) {
+    public String deleteUser(@RequestParam("userSeq") Long userSeq,Model model){
+        System.out.println("번호: "+userSeq);
         boolean userDeleteResult = userService.delete(userSeq);
-        if (userDeleteResult == false) {
+        if(userDeleteResult==false){
             model.addAttribute("deleteError", "탈퇴에 실패했습니다. 다시 시도해주세요.");
-        } else {
+        }else{
             model.addAttribute("deleteError", "탈퇴가 완료되었습니다.");
         }
         return "main/main";
     }
 
     @PostMapping("/order_list")
-    public String order_list(@ModelAttribute User user) {
+    public String order_list(@ModelAttribute User user){
+        System.out.println(user.getUserSeq());
         userService.delete(user.getUserSeq());
         return "user/order_list";
     }
 
     @GetMapping("/deleteUserMarket")
-    public String deleteUserMarket(@RequestParam("userMarketSeq") String userMarketSeq, HttpSession session, Model model) {
+    public String deleteUserMarket(@RequestParam("userMarketSeq") String userMarketSeq,HttpSession session, Model model){
         UserMarket byId = userMarketRepository.findById(Long.valueOf(userMarketSeq)).orElseThrow();
         userMarketRepository.delete(byId);
 
-        if (session.getAttribute("userSeq") != null) {
+        if(session.getAttribute("userSeq") != null){
             //유저 번호 찾아서
             Long userSeq = Long.valueOf((session.getAttribute("userSeq")).toString());
-            User user = userRepository.findByUserSeq(userSeq);
+            User user= userRepository.findByUserSeq(userSeq);
             model.addAttribute("userMarket", user.getUserMarkets());
 
             return "main/main";
-        } else {
+        }else {
             return "main/main";
         }
     }
@@ -225,11 +231,11 @@ public class UserController {
     public ResponseEntity<List<Map<String, String>>> usermarketSearch(@RequestParam double latitude, @RequestParam double longitude, Model model, HttpSession session) {
 
         try {
-            List<Map<String, String>> tableData = new ArrayList<>();
+            List<Map<String,String>> tableData = new ArrayList<>();
             double radiusInKm = 5.0;
             List<Market> marketsWithinRadius = marketService.findMarketsWithinRadius(latitude, longitude, radiusInKm);
 
-            if (marketsWithinRadius.isEmpty()) {
+            if(marketsWithinRadius.isEmpty()){
                 return ResponseEntity.ok(tableData);
             } else {
                 for (Market a : marketsWithinRadius) {
@@ -240,6 +246,7 @@ public class UserController {
                     double distance = DistanceUtil.calculateDistance(latitude, longitude, a.getMarketLatitude(), a.getMarketLongitude());
                     allData.put("distance", String.format("%.2f km", distance));
 
+                    System.out.println(a.getMarketName());
                     tableData.add(allData);
                 }
                 model.addAttribute("tableData", tableData);
@@ -251,4 +258,5 @@ public class UserController {
 
     }
 
-}
+
+};
