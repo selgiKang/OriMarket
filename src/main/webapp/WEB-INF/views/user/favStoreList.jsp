@@ -5,7 +5,7 @@
   <title>Orimarket_단골가게</title>
   <link rel="stylesheet" type="text/css" href="../../css/user/favStoreList.css">
 </head>
-<body>
+<body style="margin: 0 auto;">
 
 <div class="main-container">
 
