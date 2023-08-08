@@ -6,19 +6,15 @@
     font-style: normal;
 }
 
-
-
-body{
-    margin:10px;
-
-
+body {
+    margin: 10px;
 }
-/* 메인 컨테이너 스타일 */
 
+/* 핸드폰 사이즈 및 스크롤 바 없애기*/
 .main-container {
     width: 375px;
-    height: 812px;
-    margin: 0 auto;
+    height: 712px;
+    margin: 10px auto;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -29,52 +25,17 @@ body{
     font-family: LINESeedKR-Bd;
 }
 
-
-
 .main-container::-webkit-scrollbar {
     display: none;
 }
 
-/* 헤더 스타일 */
-
-header {
-    text-align: center;
-}
-
-header h1{
-    text-align: left;
-}
-
-header p{
-    text-align: left;
-}
-
-header img {
-    max-width: 120%;
-    float: left;
-}
 
 /* 섹션 스타일 */
-
 section {
-    padding: 20px;
-}
-
-/* 버튼 스타일 */
-
-button {
-    display: block;
-    margin: 10px auto;
-    padding: 10px 20px;
-    background-color: #333;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
+    padding: 10px 20px 20px;
 }
 
 /* 링크 스타일 */
-
 a {
     display: inline-block;
     margin-left: 10px;
@@ -82,85 +43,68 @@ a {
     text-decoration: none;
 }
 
-/* 쿠폰 컨테이너 스타일 */
-.coupon-container {
-    display: flex;
-    padding: 10px 0;
-    overflow-x: hidden; /* 가로 스크롤 시, 쿠폰 이미지들을 숨김 */
-    cursor: pointer;
-    flex-wrap: nowrap; /* 이미지가 한 줄에 표시되도록 설정 */
-}
-
-
-
-.coupon-container::-webkit-scrollbar {
-    display: none;
-}
-
-/* 쿠폰 이미지 스타일 */
-
-.coupon {
-    max-width: 700px;
-    height: auto;
-    margin-right: 10px; /* 이미지 사이의 여백 추가 */
-    cursor: pointer;
-    width: 300px;
-    height: auto;
-}
-
-/* 모바일 버튼 스타일 */
-.notice-button {
-    width: 100%;
-    padding: 10px;
-    background-color: #333;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
 /* 메뉴 스타일 */
 .menu {
-    background-color: #fff;
-    border-radius: 25px;
-    height: 200px;
-    margin: 10px;
+    width: 300px;
+    height: 130px;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    border: 2px solid #ccc;
+    border-radius: 12px;
+    padding: 20px 15px 20px 5px;
+    margin-bottom: 15px;
+    background: white;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.menu:hover {
+    border: 2px solid #46A973;
 }
 
 .menu-content {
-    text-align: left;
-    padding: 20px;
+    /*flex: 1;*/
+    /* 230723 승원 */
+    width: 50%;
+    height: 100%;
+    padding: 0 15px 0 0;
 }
 
+.menu-content h2 {
+    font-size: 20px;
+    margin-top: 0;
+    margin-bottom: 5px;
+    width: 180px;
+}
 
-.menu-image {
-    text-align: right;
-    width: 200px;
-    height: 200px;
+.menu-content h6 {
+    width: 160px;
+    height: 40px;
+    font-size: 14px;
+    margin: 5px 0;
+    line-height: 1.4;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    word-break: break-all;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
     overflow: hidden;
-    margin-right: 10px;
 }
 
-.menu-image img {
-    width: 100%;
-    height: auto;
-}
-.menu span {
-    padding: 5px;
-    cursor: pointer;
+.menu-description.multiline {
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
 
-.mainslidemenu {
-    margin-bottom: 10px; /* 위쪽 간격 조절 */
-}
+/*.menu-image img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 4px;
+}*/
 
-
-
-/* 라인 스타일 */
-
+/* 라인 */
 .line {
     width: 0;
     height: 3px;
@@ -169,7 +113,6 @@ a {
 }
 
 /* 컨테이너 스타일 */
-
 .container {
     margin-top: -80px;
     text-align: center;
@@ -186,32 +129,15 @@ a {
     margin: 5px 0;
 }
 
-.container h5{
+.container h5 {
     font-size: 12px;
     color: gray;
     margin: 0;
 }
 
-.container h4{
+.container h4 {
     font-size: 16px;
     margin: 0;
-}
-
-
-
-
-/* 오른쪽 이미지 스타일 */
-
-.right-image {
-    max-width: 100%;
-    height: auto;
-    margin-top: 20px;
-}
-
-/* 별 이미지 스타일 */
-.star {
-    max-width: 30px;
-    height: auto;
 }
 
 /* 추가된 스타일 */
@@ -224,36 +150,53 @@ a {
     background-color: #0f0; /* 초록색으로 변경 */
 }
 
-
 .heart {
     width: 30px;
-    height: 30px;
-    float: right;
-    cursor: pointer;
-}
-
-.heart {
-    width: 30px;
-    height: 30px;
     position: absolute;
-    top: 10px;
-    right: 10px;
+    /*    top: 10px;
+        right: 10px;*/
     cursor: pointer;
-    z-index: 2;
+    z-index: 10;
 }
 
 .heart.filled {
     content: url('../../img/store/filled_heart.png');
 }
+
 .heart:hover {
     content: url('../../img/store/filled_heart.png');
 }
+
+/*메엔 가게 사진*/
 .like-container {
     position: relative;
     display: inline-block;
+    width: 355px;
+    height: 355px;
+}
+
+/*메엔 가게 사진 사이즈*/
+#like_container_img {
+    width: 100%;
+    height: 100%;
+}
+
+/*별(리뷰) 사진 사이즈*/
+.star {
+    width: 15px;
 }
 
 
+/*쿠폰 이미지 사이즈*/
+.coupon {
+    width: 180px;
+}
+
+/*쿠폰 이미지 가로정렬*/
+.coupon-container {
+    display: flex;
+    justify-content: flex-start;
+}
 
 /* 메뉴 */
 .clear {
@@ -279,7 +222,6 @@ a {
     opacity: 0.2;
     white-space: nowrap;
     width: calc(100% / 5);
-
 }
 
 .slidemenu label:hover {
@@ -291,7 +233,6 @@ a {
     display: block;
     padding: 10px;
     font-size: 14px;
-
 }
 
 .slidemenu label .icon {
@@ -304,15 +245,9 @@ a {
     margin: 0 auto;
     line-height: 50px;
     border-radius: 50%;
-
 }
 
-
-
-
-
 /* Bar Style */
-
 .slider {
     width: 100%;
     height: 5px;
@@ -329,7 +264,6 @@ a {
 }
 
 /* Animations */
-
 .slidemenu label,
 .slider .bar {
     transition: all 500ms ease-in-out;
@@ -338,7 +272,6 @@ a {
 }
 
 /* Toggle */
-
 .slidemenu .slide-toggle:checked + label {
     opacity: 1;
 }
@@ -369,3 +302,279 @@ a {
 }
 
 
+ul {
+    list-style: none;
+}
+
+.tabmenu {
+    width: 350px;
+    margin: 10px auto 0px;
+    position: relative;
+}
+
+.tabmenu ul {
+    display: flex;
+    justify-content: center;
+    padding: 0 20px 0 5px;
+    overflow-x: auto;
+    white-space: nowrap;
+
+}
+
+.tabmenu ul::-webkit-scrollbar {
+    display: none;
+}
+
+#tab1 {
+    margin-left: 13px;
+}
+
+#tab2 {
+}
+
+#tab3 {
+    margin-left: 10px;
+}
+
+#tab4 {
+    margin-right: 0;
+}
+
+#tab5 {
+    margin-right: 10px;
+}
+
+.tabmenu ul li {
+    display: inline-block;
+    text-align: center;
+    background: transparent;
+    line-height: 40px;
+    flex-shrink: 0;
+    margin-right: 10px;
+    /* width: calc((100% - 50px) / 4); !* 5개의 라벨이므로 5로 나눈 값으로 너비 설정 *!*/
+}
+
+.tabmenu label {
+    display: block;
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+}
+
+.tabmenu input {
+    display: none;
+}
+
+.tabCon {
+    display: none;
+    width: 100%;
+    text-align: left;
+    padding: 20px 15px;
+    position: absolute;
+    left: 0;
+    top: 20px;
+    box-sizing: border-box;
+    /*    border: 3px solid #f9f9f9;*/
+    margin-top: 30px;
+}
+
+.tabmenu input:checked ~ label {
+    position: relative;
+}
+
+.tabmenu input:checked ~ label::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: #ee9820;
+}
+
+.tabmenu input:checked ~ .tabCon {
+    display: block;
+}
+
+/* 추가된 스타일 */
+.menu-description {
+    white-space: pre-wrap;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    word-break: break-all;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    font-size: 12px;
+    margin: 5px 0;
+    line-height: 1.4;
+}
+
+
+.menu-description.multiline {
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.menu-content h5 {
+    margin-top: 25px;
+    font-size: 18px;
+    color: #333;
+}
+
+.menu-image img {
+    /*    width: 100px;
+        height: 100px;*/
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+.rating[data-rating="1"]::before {
+    content: "★☆☆☆☆";
+    color: gold;
+}
+
+.rating[data-rating="2"]::before {
+    content: "★★☆☆☆";
+    color: gold;
+}
+
+.rating[data-rating="3"]::before {
+    content: "★★★☆☆";
+    color: gold;
+}
+
+.rating[data-rating="4"]::before {
+    content: "★★★★☆";
+    color: gold;
+}
+
+.rating[data-rating="5"]::before {
+    content: "★★★★★";
+    color: gold;
+}
+
+.rating::before {
+    content: "☆☆☆☆☆";
+    color: lightgray;
+}
+
+.rating[data-rating="1.0"]::before {
+    content: "★☆☆☆☆";
+    color: gold;
+}
+
+.rating[data-rating="2.0"]::before {
+    content: "★★☆☆☆";
+    color: gold;
+}
+
+.rating[data-rating="3.0"]::before {
+    content: "★★★☆☆";
+    color: gold;
+}
+
+.rating[data-rating="4.0"]::before {
+    content: "★★★★☆";
+    color: gold;
+}
+
+.rating[data-rating="5.0"]::before {
+    content: "★★★★★";
+    color: gold;
+}
+
+.rating[data-rating="1.5"]::before {
+    content: "★½☆☆☆";
+    color: gold;
+}
+
+.rating[data-rating="2.5"]::before {
+    content: "★★½☆☆";
+    color: gold;
+}
+
+.rating[data-rating="3.5"]::before {
+    content: "★★★½☆";
+    color: gold;
+}
+
+.rating[data-rating="4.5"]::before {
+    content: "★★★★½";
+    color: gold;
+}
+
+/* 230728 승원 */
+.store_wrap {
+    width: 375px;
+    height: 812px;
+    margin: auto;
+    background-color: #eee;
+}
+
+.store_favheart_wrap {
+    width: 355px;
+    padding: 0 10px;
+    overflow: hidden;
+    box-sizing: border-box;
+    margin-top: 20px;
+}
+
+input.storename_txt {
+    width: 53%;
+    float: left;
+    border: none;
+    font-size: 25px;
+    background-color: transparent;
+    font-family: "LINESeedKR-Bd", sans-serif;
+}
+
+input.storename_txt:focus {
+    outline: none;
+}
+
+.favstoreheart {
+    width: 9%;
+    height: 50px;
+    position: relative;
+    float: right;
+}
+
+.review_wrap {
+    width: 355px;
+    display: flex;
+    justify-content: flex-start;
+}
+
+span.review_count {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+span.rating {
+    font-size: 20px;
+}
+
+.coupon_wrap {
+    padding: 0 20px;
+}
+
+/* 230730 안먹음 인라인ㄱㄱ*/
+button.notice-button {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #46d;
+}
+
+img.order_notice {
+    width: 10%;
+    padding: 3px;
+    margin-right: 2px;
+}

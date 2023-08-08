@@ -1,0 +1,22 @@
+hr {
+    width: 300px; /* 원하는 길이로 조정합니다. */
+    margin: 0 auto;
+    margin-top: 15px;
+    position: absolute;
+    top: 60px;
+    left: 22px;
+}
+#hr1 {
+    width: 300px; /* 원하는 길이로 조정합니다. */
+    margin: 0 auto;
+    margin-top: 15px;
+    position: absolute;
+    top: 59%;
+    left: 22px;
+}
+
+/* 230724 승원 */
+div.search_wrap{width: 90%; height:512px; position:relative; border-radius: 25px; border-radius: 25px; background-color:#fff; padding:20px 5px; margin:auto; box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.5);}
+
+button.backbtn { display: flex; align-items: center; font-size: 20px; color: #999; margin: 0 0 0 10px; width: 30px; height: 30px; background-color: #fff; border-radius: 50%; border: 1px solid #999; cursor: pointer; justify-content: center;}
+button.backbtn:hover {background-color:#333; color:#fff;}

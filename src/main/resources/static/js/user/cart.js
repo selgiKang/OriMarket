@@ -12,7 +12,63 @@ $(()=>{
 
 /*장바구니 상품 수량증가 감소*/
 
+function minusBtn(cartItemId,index) {
 
+    var currentCountElement = $("#currentCnt"+index);
+    var currentCount = parseInt(currentCountElement.val());
+
+    if (currentCount <= 0) {
+        return; // 수량이 0 이하이면 클릭을 막음
+    }
+
+    $.ajax({
+        type: 'put',
+        url: '/user/cart',
+        data: {"cartItemId": cartItemId, "type": "minus"},
+        dataType: "text",
+        success: function (result) {
+            console.log(result);
+            if (result === "ok") {
+                location.reload();
+            }
+        },
+        error: function () {
+            alert('ㅇㅔㄹㅓ');
+        }
+
+    });
+}
+
+function plusBtn(cartItemId,index){
+
+    var currentCountElement = $("#currentCnt"+index);
+    var currentCount = parseInt(currentCountElement.val());
+
+
+    var itemCntElement = $("#itemCnt"+index);
+    var itemCnt = parseInt(itemCntElement.val());
+
+    if (currentCount >= itemCnt) {
+        return; // 수량이 itemCnt 이상이면 클릭을 막음
+    }
+
+    $.ajax({
+        type: 'put',
+        url: '/user/cart',
+        data: {"cartItemId": cartItemId, "type": "plus"},
+        dataType: "text",
+        success: function (result) {
+            console.log(result);
+            if (result === "ok") {
+                location.reload();
+            }
+        },
+        error: function () {
+            alert('ㅇㅔㄹㅓ');
+        }
+
+    });
+}
 
 
 /*전체선택 및 해제*/
@@ -23,10 +79,12 @@ function  checkAll(){
     }else{
         $("input[name=cbox]").prop("checked",false);
     }
+    setTotalInfo($(".cart_info"));
 }
 
 /*
 전체선택이 된 상태에서 체크박스가 하나라도 체크해제될 경우 전체선택 체크가 해제되게.*/
+
 $(document).on("click","input:checkbox[name=cbox]",function (e){
 
     var chks = document.getElementsByName("cbox");
@@ -39,17 +97,35 @@ $(document).on("click","input:checkbox[name=cbox]",function (e){
             chksChecked++;
         }
     }
-    if(chks.length == chksChecked){
+    if(chks.length === chksChecked){
         $("#cboxAll").prop("checked",true);
     }else{
         $("#cboxAll").prop("checked",false);
     }
 });
 
-/*총 가격 산출*/
 
 /*선택아이템 삭제*/
+function deleteBtn(cartItemId){
+    $.ajax({
+        type:'delete',
+        url:"/user/cart",
+        data:{"cartItemId":cartItemId},
+        dataType:"text",
+        success:function (result){
+            console.log(result);
+            if(result==="ok"){
+                location.reload();
+            }
+        },
+        error:function (){
+            alert("에러");
+        }
+    })
+}
 
-/*장바구니 비우기*/
 
-/*전체,선택 상품 주문?*/
+/*checked된 값만 결제 넘어가게 만들어야함,,*/
+
+
+/*수량 1개 이하일때는 minus버튼 비활성화*/

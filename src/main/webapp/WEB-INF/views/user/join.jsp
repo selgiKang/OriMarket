@@ -4,130 +4,127 @@
 <html>
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <%-- join css 스타일 적용 --%>
   <link rel="stylesheet" type="text/css" href="../../css/user/join.css">
-
+  <%-- join js 적용 --%>
   <script src="../../js/user/join.js"></script>
 </head>
-<style>
-  /* 추가된 CSS 스타일 */
+<body style="margin:0;">
+  <div class="container">
+      <div class="logo_container">
+          <a href="/"><img src="../../img/user/ori.png" alt="logo"></a>
+          <img src="../../img/user/smoke.png" alt="smoke">
+          <span class="logo-text">Ori Market</span>
+      </div>
 
-  .container {
-    max-height: 100vh; /* 컨테이너의 최대 높이를 화면의 높이로 설정 */
-    overflow-y: auto; /* 컨테이너에 스크롤이 필요한 경우만 표시 */
-  }
-</style>
+      <form action="/join" method="post" onsubmit="return validateForm()">
+          <div class="form_field">
+              <label for="id">아이디</label>
+                <div class="input_container">
+                  <input type="text" id="id" name="userId" required>
+                  <div class="btn_container">
+                    <button type="button" class="btn_round" onclick="checkDuplicate()"
+                            style="border-radius: 20px; padding: 5px 10px; background-color: #ffbf41; color: white; border: none; font-size: 14px; cursor: pointer; font-family: 'omyu pretty', Arial, sans-serif;">중복확인
+                    </button>
+                  </div>
+                </div>
+              <div id="idError" class="error_message" style="display: none; color: red;"></div>
+          </div>
+
+          <div class="form_field">
+              <label for="password">비밀번호</label>
+              <input type="password" id="password" name="userPassword" required>
+              <div id="passwordError" class="error_message" style="display: none; color: red;"></div>
+          </div>
+
+          <div class="form_field">
+              <label for="password">비밀번호 확인</label>
+              <input type="password" id="passwordConfirm" required>
+              <div id="passwordMatchError" class="error_message" style="display: none; color: red;"></div>
+          </div>
+
+          <div class="form_field">
+              <label for="name">이름</label>
+              <input type="text" id="name" name="userName" required>
+          </div>
+
+          <div class="form_field">
+              <label for="name">닉네임</label>
+              <input type="text" id="nickname" name="userNickname" required>
+              <div id="nicknameError" class="error_message" style="display: none; color: red;"></div>
+          </div>
+
+          <div class="form_field">
+              <label for="phone">휴대폰</label>
+              <input type="tel" id="phone" name="userPhone" required>
+              <div id="phoneError" class="error_message" style="display: none; color: red;"></div>
+          </div>
+
+          <div class="form_field">
+              <label for="email">이메일</label>
+              <input type="email" id="email" name="userEmail" required>
+          </div>
 
 
-<body>
-<div class="container">
-  <div class="logo_container">
-    <img src="../../img/user/ori.png" alt="logo">
-    <img src="../../img/user/smoke.png" alt="smoke">
+          <div class="form_field">
+              <label for="address_kakao">주소</label>
+              <div class="input_container">
+              <input type="text" id="address_kakao" name="userAddress" readonly>
+              <div class="btn_container">
+                <button type="button" class="btn_round" onclick="searchAddress()"
+                        style="border-radius: 20px; padding: 5px 10px; background-color: #ffbf41; color: white; border: none; font-size: 14px; cursor: pointer; font-family: 'omyu pretty', Arial, sans-serif;">주소검색
+                </button>
+              </div>
+              </div>
+          </div>
 
-    <span class="logo-text">Ori Market</span>
+          <div class="form_field">
+              <label for="address_detail"></label>
+              <input type="text" id="address_detail" name="userAddressDetail" placeholder="상세주소를 입력해주세요" required>
+          </div>
+
+          <input type="submit" value="SIGN UP" class="submit_btn">
+      </form>
   </div>
-
-
-  <form action="/join" method="post" onsubmit="return validateForm()">
-    <div class="form_field">
-      <label for="id">아이디</label>
-      <div class="input_container">
-        <input type="text" id="id" name="userId" required>
-        <div class="btn_container">
-          <button type="button" class="btn_round" onclick="checkDuplicate()"
-                  style="border-radius: 20px; padding: 5px 10px; background-color: #ffbf41; color: white; border: none; font-size: 14px; cursor: pointer; font-family: 'omyu pretty', Arial, sans-serif;">중복확인
-          </button>
-        </div>
-      </div>
-      <div id="idError" class="error_message" style="display: none; color: red;"></div>
-    </div>
-    <div class="form_field">
-      <label for="password">비밀번호</label>
-      <input type="password" id="password" name="userPassword" required>
-      <div id="passwordError" class="error_message" style="display: none; color: red;"></div>
-    </div>
-    <div class="form_field">
-      <label for="password">비밀번호 확인</label>
-      <input type="password" id="passwordConfirm" required>
-      <div id="passwordMatchError" class="error_message" style="display: none; color: red;"></div>
-    </div>
-    <div class="form_field">
-      <label for="name">이름</label>
-      <input type="text" id="name" name="userName" required>
-
-    </div>
-    <div class="form_field">
-      <label for="name">닉네임</label>
-      <input type="text" id="nickname" name="userNickname" required>
-      <div id="nicknameError" class="error_message" style="display: none; color: red;"></div>
-    </div>
-    <div class="form_field">
-      <label for="phone">휴대폰</label>
-      <input type="tel" id="phone" name="userPhone" required>
-      <div id="phoneError" class="error_message" style="display: none; color: red;"></div>
-    </div>
-    <div class="form_field">
-      <label for="email">이메일</label>
-      <input type="email" id="email" name="userEmail" required>
-    </div>
-
-
-    <div class="form_field">
-      <label for="address_kakao">주소</label>
-      <div class="input_container">
-        <input type="text" id="address_kakao" name="userAddress" readonly>
-        <div class="btn_container">
-          <button type="button" class="btn_round" onclick="searchAddress()"
-                  style="border-radius: 20px; padding: 5px 10px; background-color: #ffbf41; color: white; border: none; font-size: 14px; cursor: pointer; font-family: 'omyu pretty', Arial, sans-serif;">주소검색
-          </button>
-
-        </div>
-      </div>
-    </div>
-
-    <div class="form_field">
-      <label for="address_detail"></label>
-      <input type="text" id="address_detail" name="userAddressDetail" placeholder="상세주소를 입력해주세요" required>
-    </div>
-    <input type="submit" value="SIGN UP" class="submit_btn">
-  </form>
-
-</div>
-
-<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-
+  <%-- 주소검색 apir --%>
+  <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+</body>
 <script>
+  // 잘못된 값을 제출했을 때 다시 값을 넘겨주지 않고 해당하는 오류 알림창을 띄어준다.
   function validateForm() {
     var password = document.getElementById("password").value;
     var passwordConfirm = document.getElementById("passwordConfirm").value;
     var nickname = document.getElementById("nickname").value;
 
-
+    // 비밀번호와, 비빌번호 확인이 일치하지 않으면 false
     if (password !== passwordConfirm) {
       alert("비밀번호가 일치하지 않습니다.");
       return false;
     }
 
+    // 비밀번호 형식이 숫자,특수문자,영어 가 포함되지 않으면 false
     if (!/^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@$!%*#?&])[a-zA-Z\d@$!%*#?&]{3,}$/.test(password)){
       alert("비밀번호 형식이 올바르지 않습니다.")
       return false;
     }
 
+    // 닉네임이 2자이상 8자 이하로 작성되지 않으면 false
     if (nickname.length < 2 || nickname.length > 8) {
       alert("닉네임은 2자 이상 8자 이하로 작성해야 합니다.");
       return false;
     }
 
     // 추가적인 유효성 검사 조건을 여기에 추가할 수 있습니다.
-
     return true;
-  }
-</script>
+  };
 
-<script>
+
+  // 아이디 중복 체크 유효성 검사
   function checkDuplicate() {
+    // 아이디의 값을 받아온다.
     var userId = document.getElementById("id").value;
-    var url = "/userId/" + userId + "/exists"; // API 엔드포인트 URL
+    // 아이디 받은 값을 userId에 값을 넣어가지고 userId/{userId}/exists 컨트롤러로 이동
+    var url = "/userId/" + userId + "/exists";
     var xhr = new XMLHttpRequest();
     var idError = document.getElementById("idError");
 
@@ -142,7 +139,7 @@
             idError.style.color = "red";
             idError.style.marginTop = "2px";
             idError.style.marginLeft = "3px";
-          } else {
+          }else {
             // 중복되지 않은 아이디 처리 로직
             idError.textContent = "사용 가능한 아이디입니다.";
             idError.style.display = "block";
@@ -159,9 +156,10 @@
 
     xhr.open("GET", url);
     xhr.send();
-  }
-</script>
-<script>
+  };
+
+
+  // input 이벤트가 발생했을때 실행 비밀번호 일치 유효성 검사
   var passwordInput = document.getElementById("password");
   var passwordConfirmInput = document.getElementById("passwordConfirm");
   var passwordMatchError = document.getElementById("passwordMatchError");
@@ -184,8 +182,9 @@
       passwordMatchError.style.marginLeft = "3px";
     }
   });
-</script>
-<script>
+
+
+  // input 이벤트가 발생했을때 닉네임 유효성 검사
   var nicknameInput = document.getElementById("nickname");
   var nicknameError = document.getElementById("nicknameError");
 
@@ -206,30 +205,43 @@
       nicknameError.style.marginLeft = "3px";
     }
   });
-</script>
-<script>
+
+  // input 이벤트 발생했을때 휴대폰 번호 형식 유효성 검사
   var phoneInput = document.getElementById("phone");
   var phoneError = document.getElementById("phoneError");
 
   phoneInput.addEventListener("input", function() {
-    var phoneNumber = phoneInput.value;
-    var numericPhoneNumber = phoneNumber.replace(/[^0-9]/g, "");
+      var phoneNumber = phoneInput.value;
+      var numericPhoneNumber = phoneNumber.replace(/[^0-9]/g, "");
 
-    phoneInput.value = numericPhoneNumber;
+      // Limit the numericPhoneNumber to 11 digits
+      numericPhoneNumber = numericPhoneNumber.slice(0, 11);
 
-    if (phoneNumber !== numericPhoneNumber) {
-      phoneError.textContent = "휴대폰 번호는 숫자만 입력 가능합니다.";
-      phoneError.style.color = "red";
-      phoneError.style.display = "block";
-      phoneError.style.marginTop = "2px";
-      phoneError.style.marginLeft = "3px";
-    } else {
-      phoneError.style.display = "none";
-    }
+      // Format the phone number with hyphens
+      if (numericPhoneNumber.length >= 3 && numericPhoneNumber.length <= 7) {
+          numericPhoneNumber = numericPhoneNumber.slice(0, 3) + "-" + numericPhoneNumber.slice(3);
+      } else if (numericPhoneNumber.length > 7) {
+          numericPhoneNumber =
+              numericPhoneNumber.slice(0, 3) + "-" +
+              numericPhoneNumber.slice(3, 7) + "-" +
+              numericPhoneNumber.slice(7);
+      }
+      phoneInput.value = numericPhoneNumber;
+
+      // Check if the input value matches the numericPhoneNumber
+      if (phoneNumber !== numericPhoneNumber) {
+          phoneError.textContent = "휴대폰 번호는 숫자 11자리만 입력 가능합니다.";
+          phoneError.style.color = "red";
+          phoneError.style.display = "block";
+          phoneError.style.marginTop = "2px";
+          phoneError.style.marginLeft = "3px";
+      } else {
+          phoneError.style.display = "none";
+      }
   });
-</script>
 
-<script>
+
+  // input 이벤트 발생했을때 비밀번호 형식 유효성 검사
   var passwordInput = document.getElementById("password");
   var passwordError = document.getElementById("passwordError");
 
@@ -254,8 +266,5 @@
     }
   });
 </script>
-</body>
-
-
 </html>
 

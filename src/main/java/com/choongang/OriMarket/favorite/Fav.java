@@ -24,4 +24,12 @@ public class Fav {
 
     @Column
     private String favStoreName;
+
+    @Transient
+    private String favNumber;
+
+    //8.3 테스트
+    @Column
+    private String favStoreImg;
+
 }

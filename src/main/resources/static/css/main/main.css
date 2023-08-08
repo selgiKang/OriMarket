@@ -1,23 +1,26 @@
 @charset "UTF-8";
 @font-face {
-    font-family: 'LINESeedKR-Bd';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/LINESeedKR-Bd.woff2') format('woff2');
-    font-weight: 700;
+    font-family: 'omyu_pretty';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-01@1.0/omyu_pretty.woff2') format('woff2');
+    font-weight: normal;
     font-style: normal;
 }
 
 *{
     margin: 0;
     padding: 0;
+    font-family: 'omyu_pretty';
+    font-size: 20px;
 }
 
 #main {
     margin: 0 auto;
     width: 375px;
-    height: 812px;
+    height: 100%;
     background-color: #eee;
     text-align: center;
 }
+
 #header{
     width: 100%;
     height: 100px;
@@ -43,19 +46,20 @@
 /*2023-07-12 메인페이지 수정 1차 */
 .clear:before{content:''; display:block; clear:both;}
 
-#main_wrap_box{width:375px; height:612px;}
-span.connextion_title{float:left; margin:10px 20px;}
-.connextion_title_img{width:28px; height:28px; text-align:left;}
-.connextion_marketbox{margin:10% auto;}
+#main_wrap_box{width:375px; height:612px; position: relative;}
+span.connextion_title{float:left; margin:20px; font-weight:bold; font-family: 'omyu pretty';}
+.connextion_title_img{width: 28px;height: 32px;text-align: left;margin-top: 10px;vertical-align: bottom;}
+.connextion_marketbox{margin: 0px auto;}
 
 /*단골시장box공통*/
 .connextion_mk1_wrap, .connextion_mk2_wrap, .connextion_mk3_wrap, .connextion_mk4_wrap{
-    display:inline-block; width:120px; height:100px; background-color:#eee; border-radius:3%; margin:10px; cursor:pointer;
+    display:inline-block; width:120px; height:100px; /*background-color:#eee;*/ border-radius:15%; margin:15px 10px; cursor:pointer;
 }
+.connextion_mk2_wrap, .connextion_mk3_wrap, .connextion_mk4_wrap{background-color:#eee; border-radius:15%;}
 .connextion_mk1, .connextion_mk2, .connextion_mk3, .connextion_mk4{
     width:35%; height:35%; text-decoration:none; color:#333;
 }
-.connextion_mk1_wrap:hover, .connextion_mk2_wrap:hover, .connextion_mk3_wrap:hover, .connextion_mk4_wrap:hover {box-shadow:1px 1px 10px #999; box-sizing:border-box;}
+/*.connextion_mk1_wrap:hover, .connextion_mk2_wrap:hover, .connextion_mk3_wrap:hover, .connextion_mk4_wrap:hover {box-shadow:1px 1px 10px #999; box-sizing:border-box;}*/
 a>p{text-align:center; vertical-align:center; margin-top:20px;}
 
 /*배너*/
@@ -68,4 +72,103 @@ a>p{text-align:center; vertical-align:center; margin-top:20px;}
 @keyframes fade {
     from {opacity: 0.4}
     to { opacity: 1}
+}
+
+
+/*8.7 분리*/
+div.connextion_mk1_wrap{position:relative;}
+.connexion_marketbox_wrap{display: flex; justify-items: center; align-items: center;}
+img.connexion_market_img{
+    width: 120px;
+    height: 65px;
+    position: absolute;
+    top: 42%;
+    left: 6%;}
+a.connextion_mk1{width:120px; height:120px; position:absolute; top:0%; left:8%;}
+.connextion_mk1 > p {
+    position: absolute;
+    width: 125px;
+    padding: 3px 0;
+    top: -10px;
+    left: -3%;
+    font-size: 20px;
+    background-color: #ffbf41;
+    border-radius: 10px;}
+
+/**/
+div.change_marketimg_wrap{position:relative;}
+.connexion_marketbox_wrap{display: flex; justify-items: center; align-items: center;}
+img.connexion_market_img{
+    width: 120px;
+    height: 65px;
+    position: absolute;
+    top: 42%;
+    left: 6%;}
+a.change_marketimg{position:absolute; width:120px; height:120px; top:-7%; left:7%;}
+.change_marketimg > p {
+    position: absolute;
+    width: 125px;
+    padding: 3px 0;
+    top: -2%;
+    left: -4%;
+    font-size: 20px;
+    background-color: #ffbf41;
+    border-radius: 10px;}
+
+.navicon{
+    font-size: 5em;
+    animation: motion 0.6s
+    linear 0s
+    infinite alternate;
+}
+@keyframes motion {
+    0% {margin-top: 0px;}
+    100% {margin-top: 8px;}
+}
+
+#orderReceipt_btn_cancel{
+    width:100%;
+    text-align: right;
+}
+#orderReceipt_btn_cancel>a:hover {
+    text-decoration: none;
+    cursor: pointer;
+    opacity: 0.7;
+}
+
+#orderReceipt_btn_cancel1{
+    width:100%;
+    text-align: right;
+}
+#orderReceipt_btn_cancel1>a:hover {
+    text-decoration: none;
+    cursor: pointer;
+    opacity: 0.7;
+}
+#orderReceipt_btn_cancel2{
+    width:100%;
+    text-align: right;
+}
+#orderReceipt_btn_cancel2>a:hover {
+    text-decoration: none;
+    cursor: pointer;
+    opacity: 0.7;
+}
+ul#marketList li {
+    margin-top: 5px;
+    list-style: none;
+    margin-left: 18px;
+    font-size: 16px;
+}
+ul#marketList li a{
+    text-decoration: none;
+    font-size: 16px;
+    margin-left: 10px;
+    color: #4caf50;
+}
+
+ul#marketList li.empty-market {
+    margin-top: 20px;
+    color: red;
+    font-style: italic;
 }

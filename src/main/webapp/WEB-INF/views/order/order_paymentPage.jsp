@@ -3,6 +3,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 		 pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"  %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%--특정 위치마다 , 넣도록--%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html style="width: 375px; margin: 0 auto;">
 <head>
@@ -21,65 +24,103 @@
 		String today = date1.format(date);
 	%>
 	<div id= "paymentpage_main">
-		<form action="/order_paymentPage" method="post">
+		<form action="/order_paymentPage1/${userId}" method="post">
 			<input type="hidden" name="orderNumber" value="<%=today%>${userId}">
-			<input type="hidden" name="orderUserId" value="1 ${userId}">
-			<input type="hidden" name="orderDate" value="<%=today%>">
+			<%--<input type="hidden" name="orderUserId" value="${userId}">--%>
+			<input type="hidden" name="createdDate" value="<%=today%>">
 			<div id="paymentpage_title">
-				<%-- 전 페이지 돌아가기--%>
-				<a href="#"><i class="fas fa-solid fa-arrow-left" style="color: #46a973;"></i></a>
-				<div id="paymentpage_title_inner">주문하기</div>
+				<%-- 전 페이지 돌아가기, (넘어올때 담겼던 orderItem은 여기서 삭제)--%>
+				<a href="/cart/order_renew/${userId}"><i class="fas fa-solid fa-arrow-left" style="color: #46a973;"></i></a>
+					&nbsp;&nbsp;<div id="paymentpage_title_inner">주문하기</div>
 			</div>
 			<div id= "paymentpage_section_1">
 				<div id= "paymentpage_address">
-					주소 출력 위치 >> 주소번호?
-					<input type="text" name="orderAddressNumber" value="2">
+					<input type="hidden" name="orderAddress" value="${userAddress1}">
+					${userAddress1}
 				</div>
-				<div id= "paymentpage_btn_address_edit"><a>수정</a></div>
+				<%--<div id= "paymentpage_btn_address_edit"><a>수정</a></div>--%>
 			</div>
 			<hr>
 			<div style="text-align: right;"><a class="order_paymentPage_btn_filter1"><i class="fa-solid fa-caret-up" style="color: #ee9820;"></i></a></div>
 			<div id= "paymentpage_section_2">
-				<table id= "paymentpage_table_1">
-					<tr class= "paymentpage_tr_1">
-						<th colspan= "3"><input type="text" name = "orderMarketName" value="카트 시장 이름 받기" readonly></th>
-					</tr>
 
+			<c:set var="processedStoreNames" value="" scope="page" />
+			<c:forEach var="cartItems" items="${cartItemList}" varStatus="status">
+			<input type="hidden" name="itemId1" id="itemId" value="${cartItems.item.itemId}">
+			<c:if test="${cartItems.item.businessStore eq cartItems.businessStore}">
+			<c:if test="${status.index eq 0}">
+				<input type="hidden" name = "orderMarketName" value="${cartItems.businessStore.market.marketName}" readonly>
+				<h3 style="text-align: center; margin-top: -20px;">${cartItems.businessStore.market.marketName}</h3>
+				<table id= "paymentpage_table_1" style="margin-top: -18px;">
+			</c:if>
 					<!-- 2023_07_02 같은 가게 물건이면?? 반복문 출력 고민 -->
 					<!-- 반복문 출력 위치 -->
+				<c:if test="${!processedStoreNames.contains(cartItems.businessStore.buStoreName)}">
+					<c:set var="processedStoreNames" value="${processedStoreNames},${cartItems.businessStore.buStoreName}" scope="page" />
 					<tr class= "paymentpage_tr_1">
-						<th colspan= "3"><input type="text" name = "orderStoreName" value="카트 가게 이름 받기" readonly></th>
+						<th colspan= "3">
+							${cartItems.businessStore.buStoreName}
+						</th>
 					</tr>
 					<tr class= "paymentpage_tr_2">
-						<td colspan="3" class= "paymentpage_td_1"><input type="text" name="orderGoodsName" value="카트 물건이름 받기" readonly></td>
+						<td colspan="3" class= "paymentpage_td_1">
+							<c:forEach var="cartItems1" items="${cartItemList}">
+								<c:forEach var="item1" items="${cartItems.businessStore.items}">
+									<c:if test="${cartItems1.item eq item1}">
+										<p style="text-align: left; padding-left: 5px; position: relative">
+										${cartItems1.item.itemName} &nbsp;&nbsp;&nbsp;
+										가격: <fmt:formatNumber value="${cartItems1.item.itemPrice}" pattern="#,###"/>원
+										<span style="position: absolute; right: 10px;"> 갯수: ${cartItems1.count}</span>
+										</p>
+									</c:if>
+								</c:forEach>
+							</c:forEach>
+						</td>
 					</tr>
+				</c:if>
+				</c:if>
+				<input type="hidden" name="orderGoodsNum" value="${cartItems.count}" readonly>
+			</c:forEach>
+
 					<tr>
-						<td colspan= "3" style= "text-align: center;"><input type="text" name="orderGoodsPrice" value="3000" readonly></td>
-					</tr>
-					<tr>
-						<td colspan= "3" style= "text-align: right;"><input type="text" name="orderGoodsNum" value="1" readonly></td>
+						<td style="color: #EE9820;">${cartItems.cart.deliveryType}</td>
 					</tr>
 					<!-- 반복문 출력 끝 -->
 					<tr align="center">
 						<td colspan="3" class= "paymentpage_td_2">
-							<a><img id="paymentpage_img_plus" src="../../img/order/paymentpage_img_plus_1.png"></a>
+							<a href="/cart/order_renew/${userId}"><img id="paymentpage_img_plus" src="../../img/order/paymentpage_img_plus_1.png"></a>
 						</td>
 					</tr>
 				</table>
 				<table id= "paymentpage_table_2">
+					<tr>
+						<td>
+							<input style="outline: none;border: none;" type="hidden" name="deliveryType" value="${cart.deliveryType}" readonly>
+							${cart.deliveryType}
+						</td>
+					</tr>
 					<tr class= "paymentpage_tr_3">
 						<th colspan= "2">물건 금액</th>
-						<td class= "paymentpage_td_3"><input type="text" name="orderGoodsTotalPrice" value="3 " readonly></td>
+						<td class= "paymentpage_td_3">
+							<input type="hidden" name="orderGoodsTotalPrice" value="${cart.cartTotalPrice}" readonly>
+							<fmt:formatNumber value="${cart.cartTotalPrice}" pattern="#,###"/>원
+						</td>
 					</tr>
 					<tr class= "paymentpage_tr_3" >
 						<th colspan= "2">배달비</th>
-						<td class= "paymentpage_td_3"><input type="text" name="orderDeliveryPrice" value="4" readonly></td>
+						<td class= "paymentpage_td_3">
+							<input type="hidden" name="orderDeliveryPrice" value="${cart.cartDeliveryPrice}" readonly>
+							<fmt:formatNumber value="${cart.cartDeliveryPrice}" pattern="#,###"/>원
+						</td>
 					</tr>
 				</table>
 				<table id= "paymentpage_table_3">
 					<tr class= "paymentpage_tr_4">
 						<th colspan= "2">총 결제 금액</th>
-						<td class= "paymentpage_td_4"><input type="text" value="3000" value="5" readonly></td>
+						<td class= "paymentpage_td_4">
+							<input type="hidden" name="orderTotalPrice" value="${cart.cartTotalPrice+cart.cartDeliveryPrice}" readonly>
+							<fmt:formatNumber value="${cart.cartTotalPrice+cart.cartDeliveryPrice}" pattern="#,###"/>원
+						</td>
 					</tr>
 				</table>
 			</div>
@@ -101,7 +142,7 @@
 				<table id="paymentpage_section_5">
 					<tr>
 						<td style="height: 40px;width: 50%">
-							<input id="paymentpage_radio_1" class="paymentpage_btn_section_5" type="radio" name="orderType" value="creditcard">
+							<input id="paymentpage_radio_1" class="paymentpage_btn_section_5" type="radio" name="orderType" value="creditcard" checked>
 							<label for="paymentpage_radio_1">신용카드</label>
 						</td>
 						<td style="height: 40px;width: 50%">
@@ -134,7 +175,7 @@
 					배송이 진행됩니다.
 				</div>
 			</div>
-			<button id="paymentpage_btn_pay" type="submit">총 6,500원 결제하기</button>
+			<button id="paymentpage_btn_pay" type="submit">총 <fmt:formatNumber value="${cart.cartTotalPrice+cart.cartDeliveryPrice}" pattern="#,###"/>원 결제하기</button>
 		</form>
 	</div>
 </body>

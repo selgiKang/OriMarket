@@ -24,13 +24,21 @@ a:hover {cursor: pointer;}
     color: #eeeeee;
     padding: 20px 0px 10px 10px;
 }
+
+/*날짜 테이블*/
+#calculate_date{
+    width: 100%;
+    text-align: center;
+}
+
 /*날짜*/
-#calculate_search_start_date,#calculate_search_end_date{
+#calculate_search_start_date{
     outline: none;
     border: none;
     background-color: #46A973;
     color: #eeeeee;
     font-weight: bolder;
+    text-align: center;
 }
 
 /* 오른쪽 화살표 */
@@ -46,3 +54,12 @@ a:hover {cursor: pointer;}
 #calculate_main_table_tr_1{text-align: center;}
 .calculate_main_table_td_1{text-align: left;}
 .calculate_main_table_td_2{text-align: right;}
+
+/* a태그 */
+.calculate_main_table_td_1>a{
+    text-decoration: none;
+    color: black;
+}
+.dateTag:hover {
+    opacity: 0.7;
+}

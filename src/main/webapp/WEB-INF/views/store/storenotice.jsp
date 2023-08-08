@@ -1,234 +1,12 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Page Title</title>
+    <link rel="stylesheet" type="text/css" href="../../css/store/storenotice.css">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <style>
-
-        @font-face {
-            font-family: 'LINESeedKR-Bd', sans-serif;
-            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/LINESeedKR-Bd.woff2') format('woff2');
-            font-weight: 700;
-            font-style: normal;
-        }
-
-        *{
-            margin: 0;
-            padding: 0;
-        }
-
-        body {
-            margin: 0 auto;
-        }
-
-        .line {
-            border-top: 1px solid #c4c4c4;
-            width: 330px;
-            margin: 30px auto;
-            position: relative;
-            right: 8px;
-        }
-
-        /* 메인 컨테이너 스타일 */
-
-        .main-container {
-            width: 375px;
-            height: 812px;
-            margin: 0 auto;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-start;
-            align-items: flex-start;
-            background-color: #eee;
-            overflow: auto; /* 스크롤 가능하도록 수정 */
-            overflow-x: hidden; /* 가로 스크롤 금지 */
-            font-family: 'LINESeedKR-Bd', sans-serif; /* 따옴표 추가 */
-        }
-
-        .main-container::-webkit-scrollbar {
-            display: none;
-        }
-
-        .store_time_container {
-            background-color: white;
-            border-radius: 25px;
-            margin: 10px;
-            width: 355px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
-        }
-
-        .store_time {
-            margin: 20px;
-        }
-
-        .store_time h6 {
-            margin-top: -5px;
-            color: gray;
-        }
-
-        /*버튼*/
-        .wrapper {
-            width: 50px;
-            height: 50px;
-            text-align: center;
-            position: relative;
-            bottom: 45px;
-            left: 265px;
-        }
-
-        #switch {
-            position: absolute;
-            /* hidden */
-            appearance: none;
-            -webkit-appearance: none;
-            -moz-appearance: none;
-        }
-
-        .switch_label {
-            position: relative;
-            cursor: pointer;
-            display: inline-block;
-            width: 48px;
-            height: 18px;
-            background: #fff;
-            border: 2px solid #daa;
-            border-radius: 20px;
-            transition: 0.2s;
-        }
-
-        .switch_label:hover {
-            background: #efefef;
-        }
-
-        .onf_btn {
-            position: absolute;
-            top: 4px;
-            left: 3px;
-            display: inline-block;
-            width: 10px;
-            height: 10px;
-            border-radius: 20px;
-            background: #daa;
-            transition: 0.2s;
-        }
-
-        /* checking style */
-        #switch:checked + .switch_label {
-            background: #c44;
-            border: 2px solid #c44;
-        }
-
-        #switch:checked + .switch_label:hover {
-            background: #e55;
-        }
-
-        /* move */
-        #switch:checked + .switch_label .onf_btn {
-            left: 34px;
-            background: #fff;
-            box-shadow: 1px 2px 3px #00000020;
-        }
-
-        .total_menu_container {
-            background-color: white;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
-            border-radius: 25px;
-            margin: 10px;
-            width: 355px;
-        }
-
-        .total_menu {
-            margin: 20px;
-        }
-
-        .first_menu {
-            margin-left: 10px;
-            flex: 1;
-            display: block;
-            clear: both;
-            flex-basis: calc(25% - 10px);
-        }
-
-        .first_menu img {
-            width: 50px;
-        }
-
-        .first_menu h5 {
-            margin-top: -2px;
-        }
-
-        .detail_total_menu {
-            display: flex;
-            flex-wrap: wrap;
-            margin-left: 5px;
-        }
-
-        .storecare_container {
-            background-color: white;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
-            border-radius: 25px;
-            margin: 10px;
-            width: 355px;
-        }
-
-        .storecare {
-            margin: 20px;
-        }
-
-        .board {
-            width: 270px;
-            background-color: #f0f8ff;
-            padding: 20px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            margin-top: 5px;
-        }
-
-
-
-
-        .board .content {
-            margin-top: 20px;
-            background-color: #fff;
-            padding: 10px;
-        }
-
-        .board .content img {
-            max-width: 100%;
-            height: auto;
-            margin-bottom: 10px;
-        }
-
-        .board .content textarea {
-            width: 100%;
-            height: 100px;
-            margin-bottom: 10px;
-            resize: vertical;
-        }
-
-        .board .buttons {
-            display: flex;
-            justify-content: space-between;
-        }
-
-        .board .buttons button {
-            padding: 10px 20px;
-            background-color: #333;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        .storecare_logo img{
-            width: 80px;
-        }
-
-    </style>
-
 </head>
 <body>
 
@@ -295,7 +73,6 @@
     </div>
 
 
-
     <div class="storecare_container">
         <div class="storecare">
             <div class="storecare_title">
@@ -306,47 +83,47 @@
 
             <div class="storecare_logo">
                 <h3>로고</h3>
-                <input type="file" accept="image/*" id="logo-upload" onchange="previewLogo(event)" />
+                <input type="file" accept="image/*" id="logo-upload" onchange="previewLogo(event)"/>
                 <div id="logo-preview"></div>
             </div>
 
             <div class="line"></div>
 
-            <form action="/storenotice" method="post">
-            <div class="storecare_name">
-                <h3>가게 이름</h3>
-                <input type="text" id="store-name-input" name="storeName" placeholder="가게 이름">
-                <h6>※변경이 필요한 경우 고객센터로 문의해주세요.</h6>
-            </div>
+            <form action="/storenotice1" method="post">
+                <input type="hidden" name="businessUser" placeholder="가게 이름">
+                <div class="storecare_name">
+                    <h3>가게 이름</h3>
+                    <input type="text" id="store-name-input" name="buStoreName" placeholder="가게 이름">
+                    <h6>※변경이 필요한 경우 고객센터로 문의해주세요.</h6>
+                </div>
 
-            <div class="line"></div>
+                <div class="line"></div>
 
-            <div class="storecare_storenumber">
-                <h3>가게 번호</h3>
-                <input type="text" id="store-number-input" name="storePnumber" placeholder="가게 번호"/>
-            </div>
+                <div class="storecare_storenumber">
+                    <h3>가게 번호</h3>
+                    <input type="text" id="store-number-input" name="buStorePhone" placeholder="가게 번호"/>
+                </div>
 
-            <div class="line"></div>
+                <div class="line"></div>
 
-            <div class="storecare_category">
-                <h3>가게 카테고리</h3>
-                <input type="text" id="store-category-input" name="storeCategory" placeholder="가게 카테고리"/>
-            </div>
+                <div class="storecare_category">
+                    <h3>가게 카테고리</h3>
+                    <input type="text" id="store-category-input" name="buStoreCategory" placeholder="가게 카테고리"/>
+                </div>
 
-            <div class="line"></div>
+                <div class="line"></div>
 
-            <div class="storecare_location">
-                <h3>실제 위치</h3>
-                <input type="text" id="store-location-input" name="storeAddress" placeholder="실제 위치">
-            </div>
-                <button type="submit" value="전송zz">
-            <!-- 수정 버튼으로 변경 -->
-            <div class="line"></div>
-            <button onclick="showInputData()">입력</button>
+                <div class="storecare_location">
+                    <h3>가게 위치 등록</h3>
+                    <input type="text" id="store-location-input" name="buStoreAddress" placeholder="가게를 위치를 지정해주세요.">
+                    <input type="text" name="buStoreAddressDetail" placeholder="상세위치를 적어주세요.">
+                </div>
+                <!-- 수정 버튼으로 변경 -->
+                <div class="line"></div>
+                <button type="submit">입력</button>
             </form>
         </div>
     </div>
-
 
 
     <div class="storecare_container">
@@ -356,7 +133,7 @@
             <h4>사장님 공지사항</h4>
             <div class="board">
                 <div class="content">
-                    <input type="file" accept="image/*" id="image-upload" onchange="previewImage(event)" />
+                    <input type="file" accept="image/*" id="image-upload" onchange="previewImage(event)"/>
                     <div id="image-preview"></div>
                     <textarea placeholder="게시글 내용"></textarea>
                 </div>
@@ -457,11 +234,6 @@
         }
 
 
-
-
-
-
-
         function showInputData() {
             var logoUpload = document.getElementById("logo-upload");
             var storeNameInput = document.getElementById("store-name-input");
@@ -529,11 +301,6 @@
 
 
     </script>
-
-
-
-
-
 
 
     <div class="storecare_container">
@@ -606,9 +373,6 @@
 
         </div>
     </div>
-
-
-
 
 
 </div>

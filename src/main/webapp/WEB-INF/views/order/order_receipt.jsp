@@ -13,7 +13,7 @@
 		<div id="orderReceipt_btn_cancel"><a href="#"><i class="fas fa-regular fa-xmark"></i></a></div>
 		<div id="orderReceipt_title"><h3>영 수 증</h3></div>
 		<table id="orderReceipt_table_1">
-			<tr id="orderReceipt_table1_tr_1"><td>오리 시장</td></tr>
+			<tr id="orderReceipt_table1_tr_1"><td>${marketName}</td></tr>
 			<tr id="orderReceipt_table1_tr_2"><td>주문번호: 202307040001</td></tr>
 			<tr id="orderReceipt_table1_tr_3"><td>2023-06-29 12:10</td></tr>
 		</table>

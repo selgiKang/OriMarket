@@ -17,7 +17,6 @@
     }
     
         .footer {
-        	position:fixed;
         	bottom:0;
             width: 375px;
             height: 200px;
@@ -26,7 +25,9 @@
             padding: 20px;
             box-sizing: border-box; 
             color: white;
-            
+            border-top-left-radius: 25px;
+            border-top-right-radius: 25px;
+            box-shadow: 0px -2px 6px rgba(0, 0, 0, 0.2);
         }
 
         .logo {
@@ -65,7 +66,7 @@
         .links a {
             color: white;
             text-decoration: none;
-            font-size: 14px;
+            font-size: 16px;
             margin-bottom: 5px;
             
            

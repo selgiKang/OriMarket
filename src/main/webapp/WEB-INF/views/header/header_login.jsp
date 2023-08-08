@@ -24,6 +24,5 @@
         <a href="#"><i class="fa-solid fa-circle-user"></i></a>
     </div>
 </div>
-
 </body>
 </html>
