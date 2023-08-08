@@ -13,7 +13,7 @@
     <script src="../../js/store/detailmenu.js"></script>
 </head>
 
-<body>
+<body style="margin: 0 auto">
 <div id="detailmenu_wrap">
     <div class="selected_menu">
         <div class="mainfood">
