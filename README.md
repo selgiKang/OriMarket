@@ -5,6 +5,7 @@ Spring Data JPA_전통 시장 배달
 ## 프로젝트 소개
 현재 위치 기반 가까운 전통 시장 내 가게들에서 다양한 물건을 한 번의 배달비로 집에서 받아보자!
 
+###### 이 프로젝트는 사용자의 위치 정보를 활용하여 가까운 전통 시장 내 가게들에서 다양한 상품들을 선택하여 배달 받을 수 있는 서비스를 제공합니다. <br>주문한 상품들은 한 번의 배달비로 편리하게 집으로 배달되며, 전통 시장의 다양한 맛과 상품을 직접 느끼면서도 편리한 배달 서비스를 즐길 수 있습니다. <br> 아래 PPT를 통해 더 자세한 내용을 확인하실 수 있습니다.
 [PPT 참조](https://docs.google.com/presentation/d/e/2PACX-1vRcu09h3-Z9pwHBeSAKwisxrpgAVIlceL65s4pws59pdqO7qdeR5oUJSoJhWo62Ag/pub?start=true&loop=false&delayms=3000)
 ## 주요기능
 #### 1. 시장 검색 및 상품 선택
