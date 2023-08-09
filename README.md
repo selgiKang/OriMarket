@@ -62,7 +62,7 @@ Spring Data JPA_전통 시장 배달
 1. Spring Boot
 2. Hibernate
 3. Spring Data JPA
-4. 스프링 MVC
+4. 스프링 MVC2
 5. 어노테이션
 
 
