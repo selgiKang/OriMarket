@@ -60,11 +60,25 @@ Spring Data JPA_전통 시장 배달
 ##### 이러한 특징을 통해 '오리마켓'은 사업자들에게도 간편한 가게 운영과 온라인 판매의 기회를 제공하여, 시장 내의 상호 협력을 촉진하고 상업 활동을 더욱 효율적으로 진행할 수 있도록 도와줍니다.
 
 ## 기술스택
-1. Spring Boot
+1. MySQL
 2. Hibernate
 3. Spring Data JPA
-4. 스프링 MVC2
-5. 어노테이션
+4. Spring Boot
+5. Java
+6. JSP (JavaServer Pages)
+7. CSS (Cascading Style Sheets)
+8. JavaScript
+9. JSTL (JavaServer Pages Standard Tag Library)
+10. Kakao 지도 API
+
+## 개발 환경 (Development Environment) 및 도구:
+1. IDE (Integrated Development Environment) - IntelliJ
+2. 데이터베이스 관리 시스템 - MySQL
+3. 웹 개발을 위한 프론트엔드 기술 - HTML, CSS, JavaScript
+4. 백엔드 개발 프레임워크 - Spring, Spring Boot
+5. 협업 도구 - Slack, GitHub, Git (버전 관리 시스템)
+6. ERD (Entity-Relationship Diagram)
+7. 어노테이션 (Annotation)
 
 ## 향후계획
 현재는 지식과 경험이 부족하여 실제 서비스 배포 및 모바일 앱화에는 도전하지 못한 아쉬움이 있습니다. 그러나 이러한 부족함을 극복하기 위해 끊임없이 공부하고 연습하며 나아가려고 합니다.
