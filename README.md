@@ -5,7 +5,7 @@ Spring Data Jpa_전통 시장 배달
 ## 프로젝트 소개
 현재 위치 기반 가까운 전통 시장 내 가게들에서 다양한 물건을 한 번의 배달비로 집에서 받아보자!
 
-[PPT 참조](https://docs.google.com/presentation/d/1aKvYUNm0w_0lpP4cXOAQdkKke1w2aPmF/edit?usp=drive_link&ouid=106098057099668862821&rtpof=true&sd=true)
+[PPT 참조](https://docs.google.com/presentation/d/e/2PACX-1vRcu09h3-Z9pwHBeSAKwisxrpgAVIlceL65s4pws59pdqO7qdeR5oUJSoJhWo62Ag/pub?start=true&loop=false&delayms=3000)
 
 ## 주요기능
 #### 1. 시장 검색 및 상품 선택
