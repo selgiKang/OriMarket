@@ -74,7 +74,7 @@ Spring Data JPA_전통 시장 배달
 ## 개발 환경 (Development Environment) 및 도구:
 1. IDE (Integrated Development Environment) - IntelliJ
 2. 데이터베이스 관리 시스템 - MySQL
-3. 웹 개발을 위한 프론트엔드 기술 - HTML, CSS, JavaScript
+3. 웹 개발을 위한 프론트엔드 기술 - HTML, CSS, JavaScript, Ajax
 4. 백엔드 개발 프레임워크 - Spring, Spring Boot
 5. 협업 도구 - Slack, GitHub, Git (버전 관리 시스템)
 6. ERD (Entity-Relationship Diagram)
